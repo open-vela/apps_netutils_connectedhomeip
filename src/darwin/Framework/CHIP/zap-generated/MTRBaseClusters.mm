@@ -83228,7 +83228,7 @@ using chip::System::Clock::Timeout;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = OccupancySensing::Attributes::Occupancy::TypeInfo;
-    return MTRReadAttribute<MTRInt8uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+    return MTRReadAttribute<MTROccupancySensingOccupancyAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -83237,8 +83237,8 @@ using chip::System::Clock::Timeout;
                                 reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = OccupancySensing::Attributes::Occupancy::TypeInfo;
-    MTRSubscribeAttribute<MTRInt8uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
-        subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
+    MTRSubscribeAttribute<MTROccupancySensingOccupancyAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(
+        params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
 }
 
@@ -83247,9 +83247,9 @@ using chip::System::Clock::Timeout;
                                               queue:(dispatch_queue_t)queue
                                          completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRInt8uAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTROccupancySensingOccupancyAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(
-        clusterStateCacheContainer.baseDevice, ^(Int8uAttributeCallback successCb, MTRErrorCallback failureCb) {
+        clusterStateCacheContainer.baseDevice, ^(OccupancySensingOccupancyAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = OccupancySensing::Attributes::Occupancy::TypeInfo;
@@ -83271,7 +83271,8 @@ using chip::System::Clock::Timeout;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = OccupancySensing::Attributes::OccupancySensorType::TypeInfo;
-    return MTRReadAttribute<MTRInt8uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+    return MTRReadAttribute<MTROccupancySensingClusterOccupancySensorTypeEnumAttributeCallbackBridge, NSNumber,
+        TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -83281,9 +83282,9 @@ using chip::System::Clock::Timeout;
                                               (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = OccupancySensing::Attributes::OccupancySensorType::TypeInfo;
-    MTRSubscribeAttribute<MTRInt8uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
-        subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
-        TypeInfo::GetAttributeId());
+    MTRSubscribeAttribute<MTROccupancySensingClusterOccupancySensorTypeEnumAttributeCallbackSubscriptionBridge, NSNumber,
+        TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
+        TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
 + (void)readAttributeOccupancySensorTypeWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
@@ -83292,9 +83293,9 @@ using chip::System::Clock::Timeout;
                                                    completion:
                                                        (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRInt8uAttributeCallbackBridge(queue, completion);
-    std::move(*bridge).DispatchLocalAction(
-        clusterStateCacheContainer.baseDevice, ^(Int8uAttributeCallback successCb, MTRErrorCallback failureCb) {
+    auto * bridge = new MTROccupancySensingClusterOccupancySensorTypeEnumAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
+        ^(OccupancySensingClusterOccupancySensorTypeEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = OccupancySensing::Attributes::OccupancySensorType::TypeInfo;
@@ -83317,7 +83318,7 @@ using chip::System::Clock::Timeout;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = OccupancySensing::Attributes::OccupancySensorTypeBitmap::TypeInfo;
-    return MTRReadAttribute<MTRInt8uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+    return MTRReadAttribute<MTROccupancySensingOccupancySensorTypeBitmapAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -83327,9 +83328,9 @@ using chip::System::Clock::Timeout;
                                                     (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = OccupancySensing::Attributes::OccupancySensorTypeBitmap::TypeInfo;
-    MTRSubscribeAttribute<MTRInt8uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
-        subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
-        TypeInfo::GetAttributeId());
+    MTRSubscribeAttribute<MTROccupancySensingOccupancySensorTypeBitmapAttributeCallbackSubscriptionBridge, NSNumber,
+        TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
+        TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
 + (void)readAttributeOccupancySensorTypeBitmapWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
@@ -83338,9 +83339,9 @@ using chip::System::Clock::Timeout;
                                                          completion:(void (^)(NSNumber * _Nullable value,
                                                                         NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRInt8uAttributeCallbackBridge(queue, completion);
-    std::move(*bridge).DispatchLocalAction(
-        clusterStateCacheContainer.baseDevice, ^(Int8uAttributeCallback successCb, MTRErrorCallback failureCb) {
+    auto * bridge = new MTROccupancySensingOccupancySensorTypeBitmapAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
+        ^(OccupancySensingOccupancySensorTypeBitmapAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = OccupancySensing::Attributes::OccupancySensorTypeBitmap::TypeInfo;
