@@ -41905,7 +41905,7 @@ private:
 class Test_TC_SC_5_2Suite : public TestCommand
 {
 public:
-    Test_TC_SC_5_2Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_SC_5_2", 12, credsIssuerConfig)
+    Test_TC_SC_5_2Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_SC_5_2", 14, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -41970,35 +41970,48 @@ private:
             {
                 chip::app::Clusters::Groups::Commands::AddGroupResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, 259U));
             }
             break;
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::Groups::Commands::ViewGroupResponse::DecodableType value;
+                chip::app::Clusters::Groups::Commands::AddGroupResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, 259U));
-                VerifyOrReturn(CheckValueAsString("groupName", value.groupName, chip::CharSpan("Test Group", 10)));
             }
             break;
         case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::Groups::Commands::ViewGroupResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, 259U));
-                VerifyOrReturn(CheckValueAsString("groupName", value.groupName, chip::CharSpan("", 0)));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, 257U));
+                VerifyOrReturn(CheckValueAsString("groupName", value.groupName, chip::CharSpan("Test Group 0101", 15)));
             }
-            break;
-        case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Groups::Commands::ViewGroupResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, 257U));
+                VerifyOrReturn(CheckValueAsString("groupName", value.groupName, chip::CharSpan("", 0)));
+            }
             break;
         case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         default:
@@ -42085,17 +42098,23 @@ private:
                 static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicy>(0);
             value.groupKeySet.epochKey0.SetNonNull();
             value.groupKeySet.epochKey0.Value() = chip::ByteSpan(
-                chip::Uint8::from_const_char("0xd0d1d2d3d4d5d6d7d8d9dadbdcdddedfgarbage: not in length on purpose"), 34);
+                chip::Uint8::from_const_char(
+                    "\xd0\xd1\xd2\xd3\xd4\xd5\xd6\xd7\xd8\xd9\xda\xdb\xdc\xdd\xde\xdfgarbage: not in length on purpose"),
+                16);
             value.groupKeySet.epochStartTime0.SetNonNull();
             value.groupKeySet.epochStartTime0.Value() = 2220000ULL;
             value.groupKeySet.epochKey1.SetNonNull();
             value.groupKeySet.epochKey1.Value() = chip::ByteSpan(
-                chip::Uint8::from_const_char("0xd1d1d2d3d4d5d6d7d8d9dadbdcdddedfgarbage: not in length on purpose"), 34);
+                chip::Uint8::from_const_char(
+                    "\xd1\xd1\xd2\xd3\xd4\xd5\xd6\xd7\xd8\xd9\xda\xdb\xdc\xdd\xde\xdfgarbage: not in length on purpose"),
+                16);
             value.groupKeySet.epochStartTime1.SetNonNull();
             value.groupKeySet.epochStartTime1.Value() = 2220001ULL;
             value.groupKeySet.epochKey2.SetNonNull();
             value.groupKeySet.epochKey2.Value() = chip::ByteSpan(
-                chip::Uint8::from_const_char("0xd2d1d2d3d4d5d6d7d8d9dadbdcdddedfgarbage: not in length on purpose"), 34);
+                chip::Uint8::from_const_char(
+                    "\xd2\xd1\xd2\xd3\xd4\xd5\xd6\xd7\xd8\xd9\xda\xdb\xdc\xdd\xde\xdfgarbage: not in length on purpose"),
+                16);
             value.groupKeySet.epochStartTime2.SetNonNull();
             value.groupKeySet.epochStartTime2.Value() = 2220002ULL;
 
@@ -42110,15 +42129,19 @@ private:
             chip::app::DataModel::List<const chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>(1);
+                auto * listHolder_0 = new ListHolder<chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>(2);
                 listFreer.add(listHolder_0);
 
-                listHolder_0->mList[0].groupId       = 259U;
+                listHolder_0->mList[0].groupId       = 257U;
                 listHolder_0->mList[0].groupKeySetID = 419U;
                 listHolder_0->mList[0].fabricIndex   = 1U;
 
+                listHolder_0->mList[1].groupId       = 259U;
+                listHolder_0->mList[1].groupKeySetID = 419U;
+                listHolder_0->mList[1].fabricIndex   = 1U;
+
                 value = chip::app::DataModel::List<chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>(
-                    listHolder_0->mList, 1);
+                    listHolder_0->mList, 2);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                   GroupKeyManagement::Attributes::GroupKeyMap::Id, value, chip::NullOptional, chip::NullOptional);
@@ -42137,29 +42160,50 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::Groups::Commands::AddGroup::Type value;
             value.groupID   = 259U;
-            value.groupName = chip::Span<const char>("Test Groupgarbage: not in length on purpose", 10);
+            value.groupName = chip::Span<const char>("Test Group 0103garbage: not in length on purpose", 15);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), Groups::Id, Groups::Commands::AddGroup::Id, value, chip::NullOptional
 
             );
         }
         case 7: {
-            LogStep(7, "TH sends ViewGroup command using group messaging");
+            LogStep(7, "TH sends AddGroup command again but using group messaging (0x0103)");
+            ListFreer listFreer;
+            chip::app::Clusters::Groups::Commands::AddGroup::Type value;
+            value.groupID   = 257U;
+            value.groupName = chip::Span<const char>("Test Group 0101garbage: not in length on purpose", 15);
+            return SendGroupCommand(kIdentityAlpha, 259, Groups::Id, Groups::Commands::AddGroup::Id, value);
+        }
+        case 8: {
+            LogStep(8, "Wait for AddGroup");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = 1000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 9: {
+            LogStep(9, "TH sends ViewGroup command");
             VerifyOrDo(!ShouldSkip("G.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::Groups::Commands::ViewGroup::Type value;
-            value.groupID = 259U;
-            return SendGroupCommand(kIdentityAlpha, 259, Groups::Id, Groups::Commands::ViewGroup::Id, value);
+            value.groupID = 257U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Groups::Id, Groups::Commands::ViewGroup::Id, value,
+                               chip::NullOptional
+
+            );
         }
-        case 8: {
-            LogStep(8, "TH sends ViewGroup command using group messaging");
+        case 10: {
+            LogStep(10, "TH sends ViewGroup command");
             VerifyOrDo(!ShouldSkip("!(G.S.F00)"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::Groups::Commands::ViewGroup::Type value;
-            value.groupID = 259U;
-            return SendGroupCommand(kIdentityAlpha, 259, Groups::Id, Groups::Commands::ViewGroup::Id, value);
+            value.groupID = 257U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Groups::Id, Groups::Commands::ViewGroup::Id, value,
+                               chip::NullOptional
+
+            );
         }
-        case 9: {
-            LogStep(9, "TH removes the GroupKeySet");
+        case 11: {
+            LogStep(11, "TH removes the GroupKeySet");
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetRemove::Type value;
             value.groupKeySetID = 419U;
@@ -42168,8 +42212,8 @@ private:
 
             );
         }
-        case 10: {
-            LogStep(10, "TH cleans up groups using RemoveAllGroups command");
+        case 12: {
+            LogStep(12, "TH cleans up groups using RemoveAllGroups command");
             ListFreer listFreer;
             chip::app::Clusters::Groups::Commands::RemoveAllGroups::Type value;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), Groups::Id, Groups::Commands::RemoveAllGroups::Id, value,
@@ -42177,8 +42221,8 @@ private:
 
             );
         }
-        case 11: {
-            LogStep(11, "TH removes ACL Operate privileges for Group 0x0103");
+        case 13: {
+            LogStep(13, "TH removes ACL Operate privileges for Group 0x0103");
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
