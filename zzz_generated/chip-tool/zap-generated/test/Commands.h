@@ -36399,7 +36399,7 @@ private:
         case 1:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::BitMask<chip::app::Clusters::OccupancySensing::OccupancyBitmap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap8", "bitmap8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
@@ -36409,7 +36409,7 @@ private:
         case 2:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::Clusters::OccupancySensing::OccupancySensorTypeEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
@@ -36419,7 +36419,7 @@ private:
         case 3:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::BitMask<chip::app::Clusters::OccupancySensing::OccupancySensorTypeBitmap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap8", "bitmap8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
@@ -36662,7 +36662,7 @@ private:
         case 1:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::Clusters::OccupancySensing::OccupancySensorTypeEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
@@ -36672,7 +36672,7 @@ private:
         case 2:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::BitMask<chip::app::Clusters::OccupancySensing::OccupancySensorTypeBitmap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap8", "bitmap8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
@@ -104545,7 +104545,7 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    uint8_t OccupancyValue;
+    chip::BitMask<chip::app::Clusters::OccupancySensing::OccupancyBitmap> OccupancyValue;
 
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
 
@@ -104566,7 +104566,7 @@ private:
         case 1:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::BitMask<chip::app::Clusters::OccupancySensing::OccupancyBitmap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 OccupancyValue = value;
             }
@@ -104578,7 +104578,7 @@ private:
         case 3:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::BitMask<chip::app::Clusters::OccupancySensing::OccupancyBitmap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintNotValue("value", value, OccupancyValue));
             }
