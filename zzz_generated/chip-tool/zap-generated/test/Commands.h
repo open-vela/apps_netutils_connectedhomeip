@@ -110908,7 +110908,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::OnOff::Commands::OffWithEffect::Type value;
             value.effectIdentifier = static_cast<chip::app::Clusters::OnOff::OnOffEffectIdentifier>(0);
-            value.effectVariant    = static_cast<chip::app::Clusters::OnOff::OnOffDelayedAllOffEffectVariant>(0);
+            value.effectVariant    = 0U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), OnOff::Id, OnOff::Commands::OffWithEffect::Id, value,
                                chip::NullOptional
 
@@ -110966,7 +110966,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::OnOff::Commands::OffWithEffect::Type value;
             value.effectIdentifier = static_cast<chip::app::Clusters::OnOff::OnOffEffectIdentifier>(0);
-            value.effectVariant    = static_cast<chip::app::Clusters::OnOff::OnOffDelayedAllOffEffectVariant>(0);
+            value.effectVariant    = 0U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), OnOff::Id, OnOff::Commands::OffWithEffect::Id, value,
                                chip::NullOptional
 
@@ -111023,7 +111023,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::OnOff::Commands::OffWithEffect::Type value;
             value.effectIdentifier = static_cast<chip::app::Clusters::OnOff::OnOffEffectIdentifier>(1);
-            value.effectVariant    = static_cast<chip::app::Clusters::OnOff::OnOffDelayedAllOffEffectVariant>(0);
+            value.effectVariant    = 0U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), OnOff::Id, OnOff::Commands::OffWithEffect::Id, value,
                                chip::NullOptional
 
@@ -111247,7 +111247,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::OnOff::Commands::OffWithEffect::Type value;
             value.effectIdentifier = static_cast<chip::app::Clusters::OnOff::OnOffEffectIdentifier>(0);
-            value.effectVariant    = static_cast<chip::app::Clusters::OnOff::OnOffDelayedAllOffEffectVariant>(0);
+            value.effectVariant    = 0U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), OnOff::Id, OnOff::Commands::OffWithEffect::Id, value,
                                chip::NullOptional
 

@@ -3537,8 +3537,7 @@ using chip::System::Clock::Timeout;
             }
             request.effectIdentifier = static_cast<std::remove_reference_t<decltype(request.effectIdentifier)>>(
                 params.effectIdentifier.unsignedCharValue);
-            request.effectVariant
-                = static_cast<std::remove_reference_t<decltype(request.effectVariant)>>(params.effectVariant.unsignedCharValue);
+            request.effectVariant = params.effectVariant.unsignedCharValue;
 
             return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
                 timedInvokeTimeoutMs, invokeTimeout);

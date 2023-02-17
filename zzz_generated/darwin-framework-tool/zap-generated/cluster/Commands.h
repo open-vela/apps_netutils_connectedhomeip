@@ -3125,7 +3125,7 @@ public:
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.effectIdentifier = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.effectIdentifier)];
-        params.effectVariant = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.effectVariant)];
+        params.effectVariant = [NSNumber numberWithUnsignedChar:mRequest.effectVariant];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
