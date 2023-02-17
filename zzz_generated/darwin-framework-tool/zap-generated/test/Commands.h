@@ -5562,6 +5562,7 @@ public:
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
         AddArgument("payload", &mPayload);
         AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
+        AddArgument("waitAfterCommissioning", 0, UINT16_MAX, &mWaitAfterCommissioning);
         AddArgument("PakeVerifier", &mPakeVerifier);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
@@ -5604,56 +5605,60 @@ public:
             err = TestOpenCommissioningWindowFromAlpha_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Commission from TH2\n");
-            err = TestCommissionFromTh2_3();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Waiting after opening commissioning window\n");
+            err = TestWaitingAfterOpeningCommissioningWindow_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Wait for the commissioned device to be retrieved for TH2\n");
-            err = TestWaitForTheCommissionedDeviceToBeRetrievedForTh2_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Commission from TH2\n");
+            err = TestCommissionFromTh2_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : TH2 reads the fabric index\n");
-            err = TestTh2ReadsTheFabricIndex_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Wait for the commissioned device to be retrieved for TH2\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrievedForTh2_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Read the commissioner node ID from the alpha fabric\n");
-            err = TestReadTheCommissionerNodeIdFromTheAlphaFabric_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH2 reads the fabric index\n");
+            err = TestTh2ReadsTheFabricIndex_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : TH1 writes ACL giving view privilege for descriptor cluster\n");
-            err = TestTh1WritesAclGivingViewPrivilegeForDescriptorCluster_7();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Read the commissioner node ID from the alpha fabric\n");
+            err = TestReadTheCommissionerNodeIdFromTheAlphaFabric_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Read the commissioner node ID from the beta fabric\n");
-            err = TestReadTheCommissionerNodeIdFromTheBetaFabric_8();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : TH1 writes ACL giving view privilege for descriptor cluster\n");
+            err = TestTh1WritesAclGivingViewPrivilegeForDescriptorCluster_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : TH2 writes ACL giving view privilge for basic cluster\n");
-            err = TestTh2WritesAclGivingViewPrivilgeForBasicCluster_9();
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Read the commissioner node ID from the beta fabric\n");
+            err = TestReadTheCommissionerNodeIdFromTheBetaFabric_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : TH1 reads descriptor cluster - expect SUCCESS\n");
-            err = TestTh1ReadsDescriptorClusterExpectSuccess_10();
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH2 writes ACL giving view privilge for basic cluster\n");
+            err = TestTh2WritesAclGivingViewPrivilgeForBasicCluster_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : TH1 reads basic cluster - expect UNSUPPORTED_ACCESS\n");
-            err = TestTh1ReadsBasicClusterExpectUnsupportedAccess_11();
+            ChipLogProgress(chipTool, " ***** Test Step 11 : TH1 reads descriptor cluster - expect SUCCESS\n");
+            err = TestTh1ReadsDescriptorClusterExpectSuccess_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : TH2 reads descriptor cluster - expect UNSUPPORTED_ACCESS\n");
-            err = TestTh2ReadsDescriptorClusterExpectUnsupportedAccess_12();
+            ChipLogProgress(chipTool, " ***** Test Step 12 : TH1 reads basic cluster - expect UNSUPPORTED_ACCESS\n");
+            err = TestTh1ReadsBasicClusterExpectUnsupportedAccess_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : TH2 reads basic cluster - expect SUCCESS\n");
-            err = TestTh2ReadsBasicClusterExpectSuccess_13();
+            ChipLogProgress(chipTool, " ***** Test Step 13 : TH2 reads descriptor cluster - expect UNSUPPORTED_ACCESS\n");
+            err = TestTh2ReadsDescriptorClusterExpectUnsupportedAccess_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : TH1 resets ACL to default\n");
-            err = TestTh1ResetsAclToDefault_14();
+            ChipLogProgress(chipTool, " ***** Test Step 14 : TH2 reads basic cluster - expect SUCCESS\n");
+            err = TestTh2ReadsBasicClusterExpectSuccess_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : TH1 sends RemoveFabric command for TH2\n");
-            err = TestTh1SendsRemoveFabricCommandForTh2_15();
+            ChipLogProgress(chipTool, " ***** Test Step 15 : TH1 resets ACL to default\n");
+            err = TestTh1ResetsAclToDefault_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : TH1 sends RemoveFabric command for TH2\n");
+            err = TestTh1SendsRemoveFabricCommandForTh2_16();
             break;
         }
 
@@ -5700,18 +5705,21 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
             break;
         case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
             break;
         case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         }
@@ -5727,13 +5735,14 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 16;
+    const uint16_t mTestCount = 17;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<chip::CharSpan> mPayload;
     chip::Optional<uint16_t> mDiscriminator;
+    chip::Optional<uint16_t> mWaitAfterCommissioning;
     chip::Optional<chip::ByteSpan> mPakeVerifier;
     chip::Optional<uint16_t> mTimeout;
 
@@ -5805,7 +5814,15 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCommissionFromTh2_3()
+    CHIP_ERROR TestWaitingAfterOpeningCommissioningWindow_3()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+        value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
+        return WaitForMs("alpha", value);
+    }
+
+    CHIP_ERROR TestCommissionFromTh2_4()
     {
 
         chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
@@ -5814,7 +5831,7 @@ private:
         return PairWithCode("beta", value);
     }
 
-    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrievedForTh2_4()
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrievedForTh2_5()
     {
 
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
@@ -5823,7 +5840,7 @@ private:
     }
     NSNumber * _Nonnull th2FabricIndex;
 
-    CHIP_ERROR TestTh2ReadsTheFabricIndex_5()
+    CHIP_ERROR TestTh2ReadsTheFabricIndex_6()
     {
 
         MTRBaseDevice * device = GetDevice("beta");
@@ -5848,7 +5865,7 @@ private:
     }
     NSNumber * _Nonnull commissionerNodeIdAlpha;
 
-    CHIP_ERROR TestReadTheCommissionerNodeIdFromTheAlphaFabric_6()
+    CHIP_ERROR TestReadTheCommissionerNodeIdFromTheAlphaFabric_7()
     {
 
         chip::app::Clusters::CommissionerCommands::Commands::GetCommissionerNodeId::Type value;
@@ -5860,7 +5877,7 @@ private:
         });
     }
 
-    CHIP_ERROR TestTh1WritesAclGivingViewPrivilegeForDescriptorCluster_7()
+    CHIP_ERROR TestTh1WritesAclGivingViewPrivilegeForDescriptorCluster_8()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -5919,7 +5936,7 @@ private:
     }
     NSNumber * _Nonnull commissionerNodeIdBeta;
 
-    CHIP_ERROR TestReadTheCommissionerNodeIdFromTheBetaFabric_8()
+    CHIP_ERROR TestReadTheCommissionerNodeIdFromTheBetaFabric_9()
     {
 
         chip::app::Clusters::CommissionerCommands::Commands::GetCommissionerNodeId::Type value;
@@ -5931,7 +5948,7 @@ private:
         });
     }
 
-    CHIP_ERROR TestTh2WritesAclGivingViewPrivilgeForBasicCluster_9()
+    CHIP_ERROR TestTh2WritesAclGivingViewPrivilgeForBasicCluster_10()
     {
 
         MTRBaseDevice * device = GetDevice("beta");
@@ -5989,7 +6006,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestTh1ReadsDescriptorClusterExpectSuccess_10()
+    CHIP_ERROR TestTh1ReadsDescriptorClusterExpectSuccess_11()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -6007,7 +6024,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestTh1ReadsBasicClusterExpectUnsupportedAccess_11()
+    CHIP_ERROR TestTh1ReadsBasicClusterExpectUnsupportedAccess_12()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -6026,7 +6043,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestTh2ReadsDescriptorClusterExpectUnsupportedAccess_12()
+    CHIP_ERROR TestTh2ReadsDescriptorClusterExpectUnsupportedAccess_13()
     {
 
         MTRBaseDevice * device = GetDevice("beta");
@@ -6045,7 +6062,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestTh2ReadsBasicClusterExpectSuccess_13()
+    CHIP_ERROR TestTh2ReadsBasicClusterExpectSuccess_14()
     {
 
         MTRBaseDevice * device = GetDevice("beta");
@@ -6063,7 +6080,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestTh1ResetsAclToDefault_14()
+    CHIP_ERROR TestTh1ResetsAclToDefault_15()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -6098,7 +6115,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestTh1SendsRemoveFabricCommandForTh2_15()
+    CHIP_ERROR TestTh1SendsRemoveFabricCommandForTh2_16()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -24851,7 +24868,7 @@ public:
             break;
         case 17:
             ChipLogProgress(chipTool, " ***** Test Step 17 : TH reads PacketRxCount attribute value from DUT\n");
-            if (ShouldSkip("DGETH.S.A0002")) {
+            if (ShouldSkip("DGETH.S.A0002 && PICS_SKIP_SAMPLE_APP")) {
                 NextTest();
                 return;
             }
@@ -24859,7 +24876,7 @@ public:
             break;
         case 18:
             ChipLogProgress(chipTool, " ***** Test Step 18 : TH reads PacketTxCount attribute value from DUT\n");
-            if (ShouldSkip("DGETH.S.A0003")) {
+            if (ShouldSkip("DGETH.S.A0003 && PICS_SKIP_SAMPLE_APP")) {
                 NextTest();
                 return;
             }
@@ -25412,45 +25429,21 @@ private:
     CHIP_ERROR TestThReadsPacketRxCountAttributeValueFromDut_17()
     {
 
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterEthernetNetworkDiagnostics alloc] initWithDevice:device
-                                                                                      endpointID:@(0)
-                                                                                           queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributePacketRxCountWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads PacketRxCount attribute value from DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintMaxValue<uint64_t>("packetRxCount", [value unsignedLongLongValue], PacketRxCount));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestThReadsPacketTxCountAttributeValueFromDut_18()
     {
 
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterEthernetNetworkDiagnostics alloc] initWithDevice:device
-                                                                                      endpointID:@(0)
-                                                                                           queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributePacketTxCountWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads PacketTxCount attribute value from DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintMaxValue<uint64_t>("packetTxCount", [value unsignedLongLongValue], PacketTxCount));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestThReadsTxErrCountAttributeValueFromDut_19()
