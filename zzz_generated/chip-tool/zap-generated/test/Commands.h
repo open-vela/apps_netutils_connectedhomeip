@@ -74772,7 +74772,11 @@ private:
                 VerifyOrReturn(CheckValue("userType.Value()", value.userType.Value(), 0U));
                 VerifyOrReturn(CheckValueNonNull("credentialRule", value.credentialRule));
                 VerifyOrReturn(CheckValue("credentialRule.Value()", value.credentialRule.Value(), 0U));
-                VerifyOrReturn(CheckValueNull("credentials", value.credentials));
+                VerifyOrReturn(CheckValueNonNull("credentials", value.credentials));
+                {
+                    auto iter_1 = value.credentials.Value().begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value.credentials.Value())>("credentials.Value()", iter_1, 0));
+                }
                 VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", value.creatorFabricIndex));
                 VerifyOrReturn(CheckValue("creatorFabricIndex.Value()", value.creatorFabricIndex.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", value.lastModifiedFabricIndex));
@@ -74801,7 +74805,11 @@ private:
                 VerifyOrReturn(CheckValue("userType.Value()", value.userType.Value(), 0U));
                 VerifyOrReturn(CheckValueNonNull("credentialRule", value.credentialRule));
                 VerifyOrReturn(CheckValue("credentialRule.Value()", value.credentialRule.Value(), 0U));
-                VerifyOrReturn(CheckValueNull("credentials", value.credentials));
+                VerifyOrReturn(CheckValueNonNull("credentials", value.credentials));
+                {
+                    auto iter_1 = value.credentials.Value().begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value.credentials.Value())>("credentials.Value()", iter_1, 0));
+                }
                 VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", value.creatorFabricIndex));
                 VerifyOrReturn(CheckValue("creatorFabricIndex.Value()", value.creatorFabricIndex.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", value.lastModifiedFabricIndex));
@@ -74828,7 +74836,11 @@ private:
                 VerifyOrReturn(CheckValue("userType.Value()", value.userType.Value(), 0U));
                 VerifyOrReturn(CheckValueNonNull("credentialRule", value.credentialRule));
                 VerifyOrReturn(CheckValue("credentialRule.Value()", value.credentialRule.Value(), 0U));
-                VerifyOrReturn(CheckValueNull("credentials", value.credentials));
+                VerifyOrReturn(CheckValueNonNull("credentials", value.credentials));
+                {
+                    auto iter_1 = value.credentials.Value().begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value.credentials.Value())>("credentials.Value()", iter_1, 0));
+                }
                 VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", value.creatorFabricIndex));
                 VerifyOrReturn(CheckValue("creatorFabricIndex.Value()", value.creatorFabricIndex.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", value.lastModifiedFabricIndex));
@@ -74855,7 +74867,11 @@ private:
                 VerifyOrReturn(CheckValue("userType.Value()", value.userType.Value(), 0U));
                 VerifyOrReturn(CheckValueNonNull("credentialRule", value.credentialRule));
                 VerifyOrReturn(CheckValue("credentialRule.Value()", value.credentialRule.Value(), 0U));
-                VerifyOrReturn(CheckValueNull("credentials", value.credentials));
+                VerifyOrReturn(CheckValueNonNull("credentials", value.credentials));
+                {
+                    auto iter_1 = value.credentials.Value().begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value.credentials.Value())>("credentials.Value()", iter_1, 0));
+                }
                 VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", value.creatorFabricIndex));
                 VerifyOrReturn(CheckValue("creatorFabricIndex.Value()", value.creatorFabricIndex.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", value.lastModifiedFabricIndex));
@@ -74882,7 +74898,11 @@ private:
                 VerifyOrReturn(CheckValue("userType.Value()", value.userType.Value(), 6U));
                 VerifyOrReturn(CheckValueNonNull("credentialRule", value.credentialRule));
                 VerifyOrReturn(CheckValue("credentialRule.Value()", value.credentialRule.Value(), 0U));
-                VerifyOrReturn(CheckValueNull("credentials", value.credentials));
+                VerifyOrReturn(CheckValueNonNull("credentials", value.credentials));
+                {
+                    auto iter_1 = value.credentials.Value().begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value.credentials.Value())>("credentials.Value()", iter_1, 0));
+                }
                 VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", value.creatorFabricIndex));
                 VerifyOrReturn(CheckValue("creatorFabricIndex.Value()", value.creatorFabricIndex.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", value.lastModifiedFabricIndex));
@@ -74909,7 +74929,11 @@ private:
                 VerifyOrReturn(CheckValue("userType.Value()", value.userType.Value(), 6U));
                 VerifyOrReturn(CheckValueNonNull("credentialRule", value.credentialRule));
                 VerifyOrReturn(CheckValue("credentialRule.Value()", value.credentialRule.Value(), 2U));
-                VerifyOrReturn(CheckValueNull("credentials", value.credentials));
+                VerifyOrReturn(CheckValueNonNull("credentials", value.credentials));
+                {
+                    auto iter_1 = value.credentials.Value().begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value.credentials.Value())>("credentials.Value()", iter_1, 0));
+                }
                 VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", value.creatorFabricIndex));
                 VerifyOrReturn(CheckValue("creatorFabricIndex.Value()", value.creatorFabricIndex.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", value.lastModifiedFabricIndex));
@@ -74936,7 +74960,11 @@ private:
                 VerifyOrReturn(CheckValue("userType.Value()", value.userType.Value(), 0U));
                 VerifyOrReturn(CheckValueNonNull("credentialRule", value.credentialRule));
                 VerifyOrReturn(CheckValue("credentialRule.Value()", value.credentialRule.Value(), 1U));
-                VerifyOrReturn(CheckValueNull("credentials", value.credentials));
+                VerifyOrReturn(CheckValueNonNull("credentials", value.credentials));
+                {
+                    auto iter_1 = value.credentials.Value().begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value.credentials.Value())>("credentials.Value()", iter_1, 0));
+                }
                 VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", value.creatorFabricIndex));
                 VerifyOrReturn(CheckValue("creatorFabricIndex.Value()", value.creatorFabricIndex.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", value.lastModifiedFabricIndex));
@@ -74963,7 +74991,11 @@ private:
                 VerifyOrReturn(CheckValue("userType.Value()", value.userType.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("credentialRule", value.credentialRule));
                 VerifyOrReturn(CheckValue("credentialRule.Value()", value.credentialRule.Value(), 2U));
-                VerifyOrReturn(CheckValueNull("credentials", value.credentials));
+                VerifyOrReturn(CheckValueNonNull("credentials", value.credentials));
+                {
+                    auto iter_1 = value.credentials.Value().begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value.credentials.Value())>("credentials.Value()", iter_1, 0));
+                }
                 VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", value.creatorFabricIndex));
                 VerifyOrReturn(CheckValue("creatorFabricIndex.Value()", value.creatorFabricIndex.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", value.lastModifiedFabricIndex));
@@ -75030,7 +75062,11 @@ private:
                 VerifyOrReturn(CheckValue("userType.Value()", value.userType.Value(), 0U));
                 VerifyOrReturn(CheckValueNonNull("credentialRule", value.credentialRule));
                 VerifyOrReturn(CheckValue("credentialRule.Value()", value.credentialRule.Value(), 0U));
-                VerifyOrReturn(CheckValueNull("credentials", value.credentials));
+                VerifyOrReturn(CheckValueNonNull("credentials", value.credentials));
+                {
+                    auto iter_1 = value.credentials.Value().begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value.credentials.Value())>("credentials.Value()", iter_1, 0));
+                }
                 VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", value.creatorFabricIndex));
                 VerifyOrReturn(CheckValue("creatorFabricIndex.Value()", value.creatorFabricIndex.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", value.lastModifiedFabricIndex));
@@ -75056,7 +75092,11 @@ private:
                 VerifyOrReturn(CheckValue("userType.Value()", value.userType.Value(), 0U));
                 VerifyOrReturn(CheckValueNonNull("credentialRule", value.credentialRule));
                 VerifyOrReturn(CheckValue("credentialRule.Value()", value.credentialRule.Value(), 0U));
-                VerifyOrReturn(CheckValueNull("credentials", value.credentials));
+                VerifyOrReturn(CheckValueNonNull("credentials", value.credentials));
+                {
+                    auto iter_1 = value.credentials.Value().begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value.credentials.Value())>("credentials.Value()", iter_1, 0));
+                }
                 VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", value.creatorFabricIndex));
                 VerifyOrReturn(CheckValue("creatorFabricIndex.Value()", value.creatorFabricIndex.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", value.lastModifiedFabricIndex));
@@ -75109,7 +75149,11 @@ private:
                 VerifyOrReturn(CheckValue("userType.Value()", value.userType.Value(), 0U));
                 VerifyOrReturn(CheckValueNonNull("credentialRule", value.credentialRule));
                 VerifyOrReturn(CheckValue("credentialRule.Value()", value.credentialRule.Value(), 0U));
-                VerifyOrReturn(CheckValueNull("credentials", value.credentials));
+                VerifyOrReturn(CheckValueNonNull("credentials", value.credentials));
+                {
+                    auto iter_1 = value.credentials.Value().begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value.credentials.Value())>("credentials.Value()", iter_1, 0));
+                }
                 VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", value.creatorFabricIndex));
                 VerifyOrReturn(CheckValue("creatorFabricIndex.Value()", value.creatorFabricIndex.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", value.lastModifiedFabricIndex));
@@ -82064,7 +82108,11 @@ private:
                 VerifyOrReturn(CheckValue("userType.Value()", value.userType.Value(), 0U));
                 VerifyOrReturn(CheckValueNonNull("credentialRule", value.credentialRule));
                 VerifyOrReturn(CheckValue("credentialRule.Value()", value.credentialRule.Value(), 0U));
-                VerifyOrReturn(CheckValueNull("credentials", value.credentials));
+                VerifyOrReturn(CheckValueNonNull("credentials", value.credentials));
+                {
+                    auto iter_1 = value.credentials.Value().begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value.credentials.Value())>("credentials.Value()", iter_1, 0));
+                }
                 VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", value.creatorFabricIndex));
                 VerifyOrReturn(CheckValue("creatorFabricIndex.Value()", value.creatorFabricIndex.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", value.lastModifiedFabricIndex));
@@ -82564,7 +82612,11 @@ private:
                 VerifyOrReturn(CheckValue("userType.Value()", value.userType.Value(), 0U));
                 VerifyOrReturn(CheckValueNonNull("credentialRule", value.credentialRule));
                 VerifyOrReturn(CheckValue("credentialRule.Value()", value.credentialRule.Value(), 0U));
-                VerifyOrReturn(CheckValueNull("credentials", value.credentials));
+                VerifyOrReturn(CheckValueNonNull("credentials", value.credentials));
+                {
+                    auto iter_1 = value.credentials.Value().begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value.credentials.Value())>("credentials.Value()", iter_1, 0));
+                }
                 VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", value.creatorFabricIndex));
                 VerifyOrReturn(CheckValue("creatorFabricIndex.Value()", value.creatorFabricIndex.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", value.lastModifiedFabricIndex));
@@ -83184,7 +83236,11 @@ private:
                 VerifyOrReturn(CheckValue("userType.Value()", value.userType.Value(), 0U));
                 VerifyOrReturn(CheckValueNonNull("credentialRule", value.credentialRule));
                 VerifyOrReturn(CheckValue("credentialRule.Value()", value.credentialRule.Value(), 0U));
-                VerifyOrReturn(CheckValueNull("credentials", value.credentials));
+                VerifyOrReturn(CheckValueNonNull("credentials", value.credentials));
+                {
+                    auto iter_1 = value.credentials.Value().begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value.credentials.Value())>("credentials.Value()", iter_1, 0));
+                }
                 VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", value.creatorFabricIndex));
                 VerifyOrReturn(CheckValue("creatorFabricIndex.Value()", value.creatorFabricIndex.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", value.lastModifiedFabricIndex));
@@ -83468,7 +83524,11 @@ private:
                 VerifyOrReturn(CheckValue("userType.Value()", value.userType.Value(), 0U));
                 VerifyOrReturn(CheckValueNonNull("credentialRule", value.credentialRule));
                 VerifyOrReturn(CheckValue("credentialRule.Value()", value.credentialRule.Value(), 0U));
-                VerifyOrReturn(CheckValueNull("credentials", value.credentials));
+                VerifyOrReturn(CheckValueNonNull("credentials", value.credentials));
+                {
+                    auto iter_1 = value.credentials.Value().begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value.credentials.Value())>("credentials.Value()", iter_1, 0));
+                }
                 VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", value.creatorFabricIndex));
                 VerifyOrReturn(CheckValue("creatorFabricIndex.Value()", value.creatorFabricIndex.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", value.lastModifiedFabricIndex));
@@ -84025,7 +84085,11 @@ private:
                 VerifyOrReturn(CheckValue("userType.Value()", value.userType.Value(), 0U));
                 VerifyOrReturn(CheckValueNonNull("credentialRule", value.credentialRule));
                 VerifyOrReturn(CheckValue("credentialRule.Value()", value.credentialRule.Value(), 0U));
-                VerifyOrReturn(CheckValueNull("credentials", value.credentials));
+                VerifyOrReturn(CheckValueNonNull("credentials", value.credentials));
+                {
+                    auto iter_1 = value.credentials.Value().begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value.credentials.Value())>("credentials.Value()", iter_1, 0));
+                }
                 VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", value.creatorFabricIndex));
                 VerifyOrReturn(CheckValue("creatorFabricIndex.Value()", value.creatorFabricIndex.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", value.lastModifiedFabricIndex));
@@ -84454,7 +84518,11 @@ private:
                 VerifyOrReturn(CheckValue("userType.Value()", value.userType.Value(), 0U));
                 VerifyOrReturn(CheckValueNonNull("credentialRule", value.credentialRule));
                 VerifyOrReturn(CheckValue("credentialRule.Value()", value.credentialRule.Value(), 0U));
-                VerifyOrReturn(CheckValueNull("credentials", value.credentials));
+                VerifyOrReturn(CheckValueNonNull("credentials", value.credentials));
+                {
+                    auto iter_1 = value.credentials.Value().begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value.credentials.Value())>("credentials.Value()", iter_1, 0));
+                }
                 VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", value.creatorFabricIndex));
                 VerifyOrReturn(CheckValue("creatorFabricIndex.Value()", value.creatorFabricIndex.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", value.lastModifiedFabricIndex));
@@ -84990,7 +85058,11 @@ private:
                 VerifyOrReturn(CheckValue("userType.Value()", value.userType.Value(), 0U));
                 VerifyOrReturn(CheckValueNonNull("credentialRule", value.credentialRule));
                 VerifyOrReturn(CheckValue("credentialRule.Value()", value.credentialRule.Value(), 0U));
-                VerifyOrReturn(CheckValueNull("credentials", value.credentials));
+                VerifyOrReturn(CheckValueNonNull("credentials", value.credentials));
+                {
+                    auto iter_1 = value.credentials.Value().begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value.credentials.Value())>("credentials.Value()", iter_1, 0));
+                }
                 VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", value.creatorFabricIndex));
                 VerifyOrReturn(CheckValue("creatorFabricIndex.Value()", value.creatorFabricIndex.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", value.lastModifiedFabricIndex));

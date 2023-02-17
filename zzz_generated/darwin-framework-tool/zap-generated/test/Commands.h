@@ -110875,7 +110875,8 @@ private:
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValueNonNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValue("Credentials", [actualValue count], static_cast<uint32_t>(0)));
                             }
 
                             {
@@ -111008,7 +111009,8 @@ private:
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValueNonNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValue("Credentials", [actualValue count], static_cast<uint32_t>(0)));
                             }
 
                             {
@@ -111113,7 +111115,8 @@ private:
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValueNonNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValue("Credentials", [actualValue count], static_cast<uint32_t>(0)));
                             }
 
                             {
@@ -111218,7 +111221,8 @@ private:
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValueNonNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValue("Credentials", [actualValue count], static_cast<uint32_t>(0)));
                             }
 
                             {
@@ -111323,7 +111327,8 @@ private:
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValueNonNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValue("Credentials", [actualValue count], static_cast<uint32_t>(0)));
                             }
 
                             {
@@ -111428,7 +111433,8 @@ private:
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValueNonNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValue("Credentials", [actualValue count], static_cast<uint32_t>(0)));
                             }
 
                             {
@@ -111533,7 +111539,8 @@ private:
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValueNonNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValue("Credentials", [actualValue count], static_cast<uint32_t>(0)));
                             }
 
                             {
@@ -111638,7 +111645,8 @@ private:
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValueNonNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValue("Credentials", [actualValue count], static_cast<uint32_t>(0)));
                             }
 
                             {
@@ -111943,7 +111951,8 @@ private:
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValueNonNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValue("Credentials", [actualValue count], static_cast<uint32_t>(0)));
                             }
 
                             {
@@ -112047,7 +112056,8 @@ private:
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValueNonNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValue("Credentials", [actualValue count], static_cast<uint32_t>(0)));
                             }
 
                             {
@@ -112302,7 +112312,8 @@ private:
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValueNonNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValue("Credentials", [actualValue count], static_cast<uint32_t>(0)));
                             }
 
                             {
@@ -123949,7 +123960,8 @@ private:
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValueNonNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValue("Credentials", [actualValue count], static_cast<uint32_t>(0)));
                             }
 
                             {
@@ -125102,7 +125114,8 @@ private:
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValueNonNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValue("Credentials", [actualValue count], static_cast<uint32_t>(0)));
                             }
 
                             {
@@ -126208,7 +126221,8 @@ private:
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValueNonNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValue("Credentials", [actualValue count], static_cast<uint32_t>(0)));
                             }
 
                             {
@@ -126755,7 +126769,8 @@ private:
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValueNonNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValue("Credentials", [actualValue count], static_cast<uint32_t>(0)));
                             }
 
                             {
@@ -127902,7 +127917,8 @@ private:
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValueNonNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValue("Credentials", [actualValue count], static_cast<uint32_t>(0)));
                             }
 
                             {
@@ -128796,7 +128812,8 @@ private:
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValueNonNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValue("Credentials", [actualValue count], static_cast<uint32_t>(0)));
                             }
 
                             {
@@ -129750,7 +129767,8 @@ private:
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValueNonNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValue("Credentials", [actualValue count], static_cast<uint32_t>(0)));
                             }
 
                             {
