@@ -35603,7 +35603,7 @@ using chip::System::Clock::Timeout;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = WiFiNetworkDiagnostics::Attributes::SecurityType::TypeInfo;
-    return MTRReadAttribute<MTRNullableWiFiNetworkDiagnosticsClusterSecurityTypeAttributeCallbackBridge, NSNumber,
+    return MTRReadAttribute<MTRNullableWiFiNetworkDiagnosticsClusterSecurityTypeEnumAttributeCallbackBridge, NSNumber,
         TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -35613,7 +35613,7 @@ using chip::System::Clock::Timeout;
                                    reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = WiFiNetworkDiagnostics::Attributes::SecurityType::TypeInfo;
-    MTRSubscribeAttribute<MTRNullableWiFiNetworkDiagnosticsClusterSecurityTypeAttributeCallbackSubscriptionBridge, NSNumber,
+    MTRSubscribeAttribute<MTRNullableWiFiNetworkDiagnosticsClusterSecurityTypeEnumAttributeCallbackSubscriptionBridge, NSNumber,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -35623,9 +35623,9 @@ using chip::System::Clock::Timeout;
                                                  queue:(dispatch_queue_t)queue
                                             completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRNullableWiFiNetworkDiagnosticsClusterSecurityTypeAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRNullableWiFiNetworkDiagnosticsClusterSecurityTypeEnumAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(NullableWiFiNetworkDiagnosticsClusterSecurityTypeAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(NullableWiFiNetworkDiagnosticsClusterSecurityTypeEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = WiFiNetworkDiagnostics::Attributes::SecurityType::TypeInfo;
@@ -35647,7 +35647,7 @@ using chip::System::Clock::Timeout;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = WiFiNetworkDiagnostics::Attributes::WiFiVersion::TypeInfo;
-    return MTRReadAttribute<MTRNullableWiFiNetworkDiagnosticsClusterWiFiVersionTypeAttributeCallbackBridge, NSNumber,
+    return MTRReadAttribute<MTRNullableWiFiNetworkDiagnosticsClusterWiFiVersionEnumAttributeCallbackBridge, NSNumber,
         TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -35657,7 +35657,7 @@ using chip::System::Clock::Timeout;
                                   reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = WiFiNetworkDiagnostics::Attributes::WiFiVersion::TypeInfo;
-    MTRSubscribeAttribute<MTRNullableWiFiNetworkDiagnosticsClusterWiFiVersionTypeAttributeCallbackSubscriptionBridge, NSNumber,
+    MTRSubscribeAttribute<MTRNullableWiFiNetworkDiagnosticsClusterWiFiVersionEnumAttributeCallbackSubscriptionBridge, NSNumber,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -35667,9 +35667,9 @@ using chip::System::Clock::Timeout;
                                                 queue:(dispatch_queue_t)queue
                                            completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRNullableWiFiNetworkDiagnosticsClusterWiFiVersionTypeAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRNullableWiFiNetworkDiagnosticsClusterWiFiVersionEnumAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(NullableWiFiNetworkDiagnosticsClusterWiFiVersionTypeAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(NullableWiFiNetworkDiagnosticsClusterWiFiVersionEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = WiFiNetworkDiagnostics::Attributes::WiFiVersion::TypeInfo;
