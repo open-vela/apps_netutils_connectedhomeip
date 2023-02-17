@@ -5594,7 +5594,7 @@ private:
 class Test_TC_ACL_2_7Suite : public TestCommand
 {
 public:
-    Test_TC_ACL_2_7Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_ACL_2_7", 14, credsIssuerConfig)
+    Test_TC_ACL_2_7Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_ACL_2_7", 15, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -5602,6 +5602,7 @@ public:
         AddArgument("nodeId2", 0, UINT64_MAX, &mNodeId2);
         AddArgument("payload", &mPayload);
         AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
+        AddArgument("waitAfterCommissioning", 0, UINT16_MAX, &mWaitAfterCommissioning);
         AddArgument("PakeVerifier", &mPakeVerifier);
         AddArgument("D_OK_EMPTY", &mDOkEmpty);
         AddArgument("D_OK_SINGLE", &mDOkSingle);
@@ -5622,6 +5623,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId2;
     chip::Optional<chip::CharSpan> mPayload;
     chip::Optional<uint16_t> mDiscriminator;
+    chip::Optional<uint16_t> mWaitAfterCommissioning;
     chip::Optional<chip::ByteSpan> mPakeVerifier;
     chip::Optional<chip::ByteSpan> mDOkEmpty;
     chip::Optional<chip::ByteSpan> mDOkSingle;
@@ -5678,6 +5680,10 @@ private:
             break;
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::CommissionerCommands::Commands::GetCommissionerNodeIdResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
@@ -5685,7 +5691,7 @@ private:
             }
             shouldContinue = true;
             break;
-        case 7:
+        case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint8_t value;
@@ -5693,13 +5699,13 @@ private:
                 TH2FabricIndex = value;
             }
             break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -5717,7 +5723,7 @@ private:
                 }
             }
             break;
-        case 11:
+        case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -5742,7 +5748,7 @@ private:
                 }
             }
             break;
-        case 12:
+        case 13:
             switch (mTestSubStepIndex)
             {
             case 0:
@@ -5770,7 +5776,7 @@ private:
                 break;
             }
             break;
-        case 13:
+        case 14:
             switch (mTestSubStepIndex)
             {
             case 0:
@@ -5862,33 +5868,40 @@ private:
             );
         }
         case 4: {
-            LogStep(4, "Step 4:TH2 starts a commissioning process with DUT");
+            LogStep(4, "Waiting after opening commissioning window");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 5: {
+            LogStep(5, "Step 4:TH2 starts a commissioning process with DUT");
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
-        case 5: {
-            LogStep(5, "DUT is commissioned by TH2 on Fabric ID2 ");
+        case 6: {
+            LogStep(6, "DUT is commissioned by TH2 on Fabric ID2 ");
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
             value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             return WaitForCommissionee(kIdentityBeta, value);
         }
-        case 6: {
-            LogStep(6, "Read the TH2 commissioner node ID");
+        case 7: {
+            LogStep(7, "Read the TH2 commissioner node ID");
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::GetCommissionerNodeId::Type value;
             return GetCommissionerNodeId(kIdentityBeta, value);
         }
-        case 7: {
-            LogStep(7, "Step 5:TH2 reads OperationalCredentials cluster CurrentFabricIndex attribute");
+        case 8: {
+            LogStep(8, "Step 5:TH2 reads OperationalCredentials cluster CurrentFabricIndex attribute");
             return ReadAttribute(kIdentityBeta, GetEndpoint(0), OperationalCredentials::Id,
                                  OperationalCredentials::Attributes::CurrentFabricIndex::Id, true, chip::NullOptional);
         }
-        case 8: {
-            LogStep(8,
+        case 9: {
+            LogStep(9,
                     "Step 6:TH1 writes DUT Endpoint 0 AccessControl cluster Extension attribute, value is list of "
                     "AccessControlExtensionStruct containing 1 element");
             VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
@@ -5910,8 +5923,8 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
-        case 9: {
-            LogStep(9,
+        case 10: {
+            LogStep(10,
                     "Step 7:TH2 writes DUT Endpoint 0 AccessControl cluster Extension attribute, value is list of "
                     "AccessControlExtensionStruct containing 1 element");
             VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
@@ -5939,27 +5952,27 @@ private:
             return WriteAttribute(kIdentityBeta, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 10: {
-            LogStep(10, "Step 8:TH1 reads AccessControl cluster Extension attribute");
+        case 11: {
+            LogStep(11, "Step 8:TH1 reads AccessControl cluster Extension attribute");
             VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id, true,
                                  chip::NullOptional);
         }
-        case 11: {
-            LogStep(11, "Step 9:TH2 reads AccessControl cluster Extension attribute");
+        case 12: {
+            LogStep(12, "Step 9:TH2 reads AccessControl cluster Extension attribute");
             VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityBeta, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id, true,
                                  chip::NullOptional);
         }
-        case 12: {
-            LogStep(12, "Step 10:TH1 reads DUT Endpoint 0 AccessControl cluster AccessControlExtensionChanged event");
+        case 13: {
+            LogStep(13, "Step 10:TH1 reads DUT Endpoint 0 AccessControl cluster AccessControlExtensionChanged event");
             VerifyOrDo(!ShouldSkip("ACL.S.E01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             mTestSubStepCount = 1;
             return ReadEvent(kIdentityAlpha, GetEndpoint(0), AccessControl::Id,
                              AccessControl::Events::AccessControlExtensionChanged::Id, false, chip::NullOptional);
         }
-        case 13: {
-            LogStep(13, "Step 11:TH2 reads DUT Endpoint 0 AccessControl cluster AccessControlExtensionChanged event");
+        case 14: {
+            LogStep(14, "Step 11:TH2 reads DUT Endpoint 0 AccessControl cluster AccessControlExtensionChanged event");
             VerifyOrDo(!ShouldSkip("ACL.S.E01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             mTestSubStepCount = 1;
             return ReadEvent(kIdentityBeta, GetEndpoint(0), AccessControl::Id,
@@ -5973,12 +5986,13 @@ private:
 class Test_TC_ACL_2_8Suite : public TestCommand
 {
 public:
-    Test_TC_ACL_2_8Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_ACL_2_8", 14, credsIssuerConfig)
+    Test_TC_ACL_2_8Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_ACL_2_8", 15, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
         AddArgument("nodeId2", 0, UINT64_MAX, &mNodeId2);
+        AddArgument("waitAfterCommissioning", 0, UINT16_MAX, &mWaitAfterCommissioning);
         AddArgument("payload", &mPayload);
         AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
         AddArgument("PakeVerifier", &mPakeVerifier);
@@ -5997,6 +6011,7 @@ private:
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<chip::NodeId> mNodeId2;
+    chip::Optional<uint16_t> mWaitAfterCommissioning;
     chip::Optional<chip::CharSpan> mPayload;
     chip::Optional<uint16_t> mDiscriminator;
     chip::Optional<chip::ByteSpan> mPakeVerifier;
@@ -6053,6 +6068,10 @@ private:
             break;
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::CommissionerCommands::Commands::GetCommissionerNodeIdResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
@@ -6060,7 +6079,7 @@ private:
             }
             shouldContinue = true;
             break;
-        case 7:
+        case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint8_t value;
@@ -6068,13 +6087,13 @@ private:
                 TH2FabricIndex = value;
             }
             break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -6104,7 +6123,7 @@ private:
                 }
             }
             break;
-        case 11:
+        case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -6134,7 +6153,7 @@ private:
                 }
             }
             break;
-        case 12:
+        case 13:
             switch (mTestSubStepIndex)
             {
             case 0:
@@ -6248,7 +6267,7 @@ private:
                 break;
             }
             break;
-        case 13:
+        case 14:
             switch (mTestSubStepIndex)
             {
             case 0:
@@ -6419,33 +6438,40 @@ private:
             );
         }
         case 4: {
-            LogStep(4, "TH2 starts a commissioning process with DUT");
+            LogStep(4, "Waiting after opening commissioning window");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 5: {
+            LogStep(5, "TH2 starts a commissioning process with DUT");
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
-        case 5: {
-            LogStep(5, "DUT is commissioned by TH2 on Fabric ID2 ");
+        case 6: {
+            LogStep(6, "DUT is commissioned by TH2 on Fabric ID2 ");
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
             value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             return WaitForCommissionee(kIdentityBeta, value);
         }
-        case 6: {
-            LogStep(6, "Read the TH2 commissioner node ID");
+        case 7: {
+            LogStep(7, "Read the TH2 commissioner node ID");
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::GetCommissionerNodeId::Type value;
             return GetCommissionerNodeId(kIdentityBeta, value);
         }
-        case 7: {
-            LogStep(7, "TH2 reads OperationalCredentials cluster CurrentFabricIndex attribute");
+        case 8: {
+            LogStep(8, "TH2 reads OperationalCredentials cluster CurrentFabricIndex attribute");
             return ReadAttribute(kIdentityBeta, GetEndpoint(0), OperationalCredentials::Id,
                                  OperationalCredentials::Attributes::CurrentFabricIndex::Id, true, chip::NullOptional);
         }
-        case 8: {
-            LogStep(8, "TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute");
+        case 9: {
+            LogStep(9, "TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute");
             VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
@@ -6477,8 +6503,8 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 9: {
-            LogStep(9, "TH2 writes DUT Endpoint 0 AccessControl cluster ACL attribute");
+        case 10: {
+            LogStep(10, "TH2 writes DUT Endpoint 0 AccessControl cluster ACL attribute");
             VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
@@ -6510,27 +6536,27 @@ private:
             return WriteAttribute(kIdentityBeta, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 10: {
-            LogStep(10, "TH1 reads DUT Endpoint 0 AccessControl cluster ACL attribute");
+        case 11: {
+            LogStep(11, "TH1 reads DUT Endpoint 0 AccessControl cluster ACL attribute");
             VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, true,
                                  chip::NullOptional);
         }
-        case 11: {
-            LogStep(11, "TH2 reads DUT Endpoint 0 AccessControl cluster ACL attribute");
+        case 12: {
+            LogStep(12, "TH2 reads DUT Endpoint 0 AccessControl cluster ACL attribute");
             VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityBeta, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, true,
                                  chip::NullOptional);
         }
-        case 12: {
-            LogStep(12, "TH1 reads DUT Endpoint 0 AccessControl cluster AccessControlEntryChanged event");
+        case 13: {
+            LogStep(13, "TH1 reads DUT Endpoint 0 AccessControl cluster AccessControlEntryChanged event");
             VerifyOrDo(!ShouldSkip("ACL.S.E00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             mTestSubStepCount = 3;
             return ReadEvent(kIdentityAlpha, GetEndpoint(0), AccessControl::Id,
                              AccessControl::Events::AccessControlEntryChanged::Id, false, chip::NullOptional);
         }
-        case 13: {
-            LogStep(13, "TH2 reads DUT Endpoint 0 AccessControl cluster AccessControlEntryChanged event");
+        case 14: {
+            LogStep(14, "TH2 reads DUT Endpoint 0 AccessControl cluster AccessControlEntryChanged event");
             VerifyOrDo(!ShouldSkip("ACL.S.E00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             mTestSubStepCount = 3;
             return ReadEvent(kIdentityBeta, GetEndpoint(0), AccessControl::Id, AccessControl::Events::AccessControlEntryChanged::Id,
@@ -6827,13 +6853,14 @@ private:
 class Test_TC_ACL_2_10Suite : public TestCommand
 {
 public:
-    Test_TC_ACL_2_10Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_ACL_2_10", 25, credsIssuerConfig)
+    Test_TC_ACL_2_10Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_ACL_2_10", 26, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
         AddArgument("nodeId2", 0, UINT64_MAX, &mNodeId2);
         AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
+        AddArgument("waitAfterCommissioning", 0, UINT16_MAX, &mWaitAfterCommissioning);
         AddArgument("payload", &mPayload);
         AddArgument("PakeVerifier", &mPakeVerifier);
         AddArgument("D_OK_EMPTY", &mDOkEmpty);
@@ -6854,6 +6881,7 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<chip::NodeId> mNodeId2;
     chip::Optional<uint16_t> mDiscriminator;
+    chip::Optional<uint16_t> mWaitAfterCommissioning;
     chip::Optional<chip::CharSpan> mPayload;
     chip::Optional<chip::ByteSpan> mPakeVerifier;
     chip::Optional<chip::ByteSpan> mDOkEmpty;
@@ -6911,6 +6939,10 @@ private:
             break;
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::CommissionerCommands::Commands::GetCommissionerNodeIdResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
@@ -6918,16 +6950,13 @@ private:
             }
             shouldContinue = true;
             break;
-        case 7:
+        case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 TH2FabricIndex = value;
             }
-            break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -6940,7 +6969,6 @@ private:
             break;
         case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
             break;
         case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -6956,8 +6984,12 @@ private:
             break;
         case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -6975,7 +7007,7 @@ private:
                 }
             }
             break;
-        case 18:
+        case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -7019,24 +7051,24 @@ private:
                 }
             }
             break;
-        case 19:
+        case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 20:
+        case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             shouldContinue = true;
             break;
-        case 21:
+        case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::OperationalCredentials::Commands::NOCResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
             }
             break;
-        case 22:
+        case 23:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 23:
+        case 24:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -7054,7 +7086,7 @@ private:
                 }
             }
             break;
-        case 24:
+        case 25:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             shouldContinue = true;
             break;
@@ -7115,33 +7147,40 @@ private:
             );
         }
         case 4: {
-            LogStep(4, "TH2 starts a commissioning process with DUT");
+            LogStep(4, "Waiting after opening commissioning window");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 5: {
+            LogStep(5, "TH2 starts a commissioning process with DUT");
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
-        case 5: {
-            LogStep(5, "DUT is commissioned by TH2 on Fabric ID2 ");
+        case 6: {
+            LogStep(6, "DUT is commissioned by TH2 on Fabric ID2 ");
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
             value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             return WaitForCommissionee(kIdentityBeta, value);
         }
-        case 6: {
-            LogStep(6, "Read the TH2 commissioner node ID");
+        case 7: {
+            LogStep(7, "Read the TH2 commissioner node ID");
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::GetCommissionerNodeId::Type value;
             return GetCommissionerNodeId(kIdentityBeta, value);
         }
-        case 7: {
-            LogStep(7, "Step 4:TH2 reads OperationalCredentials cluster CurrentFabricIndex attribute");
+        case 8: {
+            LogStep(8, "Step 4:TH2 reads OperationalCredentials cluster CurrentFabricIndex attribute");
             return ReadAttribute(kIdentityBeta, GetEndpoint(0), OperationalCredentials::Id,
                                  OperationalCredentials::Attributes::CurrentFabricIndex::Id, true, chip::NullOptional);
         }
-        case 8: {
-            LogStep(8, "Step 5:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute");
+        case 9: {
+            LogStep(9, "Step 5:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute");
             VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
@@ -7188,8 +7227,8 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 9: {
-            LogStep(9, "Step 6:TH2 writes DUT Endpoint 0 AccessControl cluster ACL attribute");
+        case 10: {
+            LogStep(10, "Step 6:TH2 writes DUT Endpoint 0 AccessControl cluster ACL attribute");
             VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
@@ -7236,8 +7275,8 @@ private:
             return WriteAttribute(kIdentityBeta, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 10: {
-            LogStep(10,
+        case 11: {
+            LogStep(11,
                     "Step 7:TH1 writes DUT Endpoint 0 AccessControl cluster Extension attribute, value is list of "
                     "AccessControlExtensionStruct containing 1 element 1.struct, Data field: D_OK_EMPTY");
             VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
@@ -7259,8 +7298,8 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
-        case 11: {
-            LogStep(11,
+        case 12: {
+            LogStep(12,
                     "Step 8:TH2 writes DUT Endpoint 0 AccessControl cluster Extension attribute, value is list of "
                     "AccessControlExtensionStruct containing 1 element 1.struct, Data field: D_OK_SINGLE");
             VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
@@ -7288,15 +7327,15 @@ private:
             return WriteAttribute(kIdentityBeta, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 12: {
-            LogStep(12, "Step 9: Reboot DUT");
+        case 13: {
+            LogStep(13, "Step 9: Reboot DUT");
             VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
             return Reboot(kIdentityAlpha, value);
         }
-        case 13: {
-            LogStep(13, "Step 9: Reboot DUT");
+        case 14: {
+            LogStep(14, "Step 9: Reboot DUT");
             VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
@@ -7306,22 +7345,22 @@ private:
             value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
             return UserPrompt(kIdentityAlpha, value);
         }
-        case 14: {
-            LogStep(14, "TH1 Connects to the device again");
+        case 15: {
+            LogStep(15, "TH1 Connects to the device again");
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
             value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
             return WaitForCommissionee(kIdentityAlpha, value);
         }
-        case 15: {
-            LogStep(15, "TH2 Connects to the device again");
+        case 16: {
+            LogStep(16, "TH2 Connects to the device again");
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
             value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             return WaitForCommissionee(kIdentityBeta, value);
         }
-        case 16: {
-            LogStep(16, "Step 10:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute");
+        case 17: {
+            LogStep(17, "Step 10:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute");
             VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
@@ -7368,22 +7407,22 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 17: {
-            LogStep(17,
+        case 18: {
+            LogStep(18,
                     "Step 11:TH1 reads DUT Endpoint 0 AccessControl cluster Extension attribute, value is list of "
                     "AccessControlExtensionStruct containing 1 element");
             VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id, true,
                                  chip::NullOptional);
         }
-        case 18: {
-            LogStep(18, "Step 12:TH2 reads DUT Endpoint 0 AccessControl cluster ACL attribute");
+        case 19: {
+            LogStep(19, "Step 12:TH2 reads DUT Endpoint 0 AccessControl cluster ACL attribute");
             VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityBeta, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, true,
                                  chip::NullOptional);
         }
-        case 19: {
-            LogStep(19, "Step 13:TH2 reads DUT Endpoint 0 AccessControl cluster Extension attribute");
+        case 20: {
+            LogStep(20, "Step 13:TH2 reads DUT Endpoint 0 AccessControl cluster Extension attribute");
             VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type> value;
@@ -7409,8 +7448,8 @@ private:
             return WriteAttribute(kIdentityBeta, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 20: {
-            LogStep(20, "Step 14: If DUT is an app on host, examine persistent storage in /tmp/chip_kvs text file");
+        case 21: {
+            LogStep(21, "Step 14: If DUT is an app on host, examine persistent storage in /tmp/chip_kvs text file");
             VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
@@ -7419,8 +7458,8 @@ private:
             value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
             return UserPrompt(kIdentityAlpha, value);
         }
-        case 21: {
-            LogStep(21, "Step 15:TH1 removes fabric F2 from DUT");
+        case 22: {
+            LogStep(22, "Step 15:TH1 removes fabric F2 from DUT");
             VerifyOrDo(!ShouldSkip("OPCREDS.S.C0a.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::OperationalCredentials::Commands::RemoveFabric::Type value;
@@ -7431,8 +7470,8 @@ private:
 
             );
         }
-        case 22: {
-            LogStep(22, "Step 16:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute");
+        case 23: {
+            LogStep(23, "Step 16:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute");
             VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
@@ -7479,16 +7518,16 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 23: {
-            LogStep(23,
+        case 24: {
+            LogStep(24,
                     "Step 17:TH1 reads DUT Endpoint 0 AccessControl cluster Extension attribute, value is list of "
                     "AccessControlExtensionStruct containing 1 element");
             VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id, true,
                                  chip::NullOptional);
         }
-        case 24: {
-            LogStep(24, "Step 18: If DUT is an app on host, examine persistent storage in /tmp/chip_kvs text file");
+        case 25: {
+            LogStep(25, "Step 18: If DUT is an app on host, examine persistent storage in /tmp/chip_kvs text file");
             VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
@@ -8306,13 +8345,14 @@ private:
 class Test_TC_ACE_1_5Suite : public TestCommand
 {
 public:
-    Test_TC_ACE_1_5Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_ACE_1_5", 16, credsIssuerConfig)
+    Test_TC_ACE_1_5Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_ACE_1_5", 17, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
         AddArgument("payload", &mPayload);
         AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
+        AddArgument("waitAfterCommissioning", 0, UINT16_MAX, &mWaitAfterCommissioning);
         AddArgument("PakeVerifier", &mPakeVerifier);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
@@ -8330,6 +8370,7 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<chip::CharSpan> mPayload;
     chip::Optional<uint16_t> mDiscriminator;
+    chip::Optional<uint16_t> mWaitAfterCommissioning;
     chip::Optional<chip::ByteSpan> mPakeVerifier;
     chip::Optional<uint16_t> mTimeout;
 
@@ -8375,13 +8416,17 @@ private:
             break;
         case 5:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 th2FabricIndex = value;
             }
             break;
-        case 6:
+        case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::CommissionerCommands::Commands::GetCommissionerNodeIdResponse::DecodableType value;
@@ -8390,10 +8435,10 @@ private:
             }
             shouldContinue = true;
             break;
-        case 7:
+        case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 8:
+        case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::CommissionerCommands::Commands::GetCommissionerNodeIdResponse::DecodableType value;
@@ -8402,10 +8447,10 @@ private:
             }
             shouldContinue = true;
             break;
-        case 9:
+        case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 10:
+        case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::app::Clusters::Descriptor::Structs::DeviceTypeStruct::DecodableType>
@@ -8413,23 +8458,23 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
             }
             break;
-        case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
-            break;
         case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
             break;
         case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::VendorId value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
             }
             break;
-        case 14:
+        case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 15:
+        case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::OperationalCredentials::Commands::NOCResponse::DecodableType value;
@@ -8487,33 +8532,40 @@ private:
             );
         }
         case 3: {
-            LogStep(3, "Commission from TH2");
+            LogStep(3, "Waiting after opening commissioning window");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 4: {
+            LogStep(4, "Commission from TH2");
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
             value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
-        case 4: {
-            LogStep(4, "Wait for the commissioned device to be retrieved for TH2");
+        case 5: {
+            LogStep(5, "Wait for the commissioned device to be retrieved for TH2");
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
             value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
             return WaitForCommissionee(kIdentityBeta, value);
         }
-        case 5: {
-            LogStep(5, "TH2 reads the fabric index");
+        case 6: {
+            LogStep(6, "TH2 reads the fabric index");
             return ReadAttribute(kIdentityBeta, GetEndpoint(0), OperationalCredentials::Id,
                                  OperationalCredentials::Attributes::CurrentFabricIndex::Id, true, chip::NullOptional);
         }
-        case 6: {
-            LogStep(6, "Read the commissioner node ID from the alpha fabric");
+        case 7: {
+            LogStep(7, "Read the commissioner node ID from the alpha fabric");
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::GetCommissionerNodeId::Type value;
             return GetCommissionerNodeId(kIdentityAlpha, value);
         }
-        case 7: {
-            LogStep(7, "TH1 writes ACL giving view privilege for descriptor cluster");
+        case 8: {
+            LogStep(8, "TH1 writes ACL giving view privilege for descriptor cluster");
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
@@ -8581,14 +8633,14 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 8: {
-            LogStep(8, "Read the commissioner node ID from the beta fabric");
+        case 9: {
+            LogStep(9, "Read the commissioner node ID from the beta fabric");
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::GetCommissionerNodeId::Type value;
             return GetCommissionerNodeId(kIdentityBeta, value);
         }
-        case 9: {
-            LogStep(9, "TH2 writes ACL giving view privilge for basic cluster");
+        case 10: {
+            LogStep(10, "TH2 writes ACL giving view privilge for basic cluster");
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
@@ -8656,28 +8708,28 @@ private:
             return WriteAttribute(kIdentityBeta, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 10: {
-            LogStep(10, "TH1 reads descriptor cluster - expect SUCCESS");
+        case 11: {
+            LogStep(11, "TH1 reads descriptor cluster - expect SUCCESS");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Descriptor::Id, Descriptor::Attributes::DeviceTypeList::Id, true,
                                  chip::NullOptional);
         }
-        case 11: {
-            LogStep(11, "TH1 reads basic cluster - expect UNSUPPORTED_ACCESS");
+        case 12: {
+            LogStep(12, "TH1 reads basic cluster - expect UNSUPPORTED_ACCESS");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::VendorID::Id,
                                  true, chip::NullOptional);
         }
-        case 12: {
-            LogStep(12, "TH2 reads descriptor cluster - expect UNSUPPORTED_ACCESS");
+        case 13: {
+            LogStep(13, "TH2 reads descriptor cluster - expect UNSUPPORTED_ACCESS");
             return ReadAttribute(kIdentityBeta, GetEndpoint(0), Descriptor::Id, Descriptor::Attributes::DeviceTypeList::Id, true,
                                  chip::NullOptional);
         }
-        case 13: {
-            LogStep(13, "TH2 reads basic cluster - expect SUCCESS");
+        case 14: {
+            LogStep(14, "TH2 reads basic cluster - expect SUCCESS");
             return ReadAttribute(kIdentityBeta, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::VendorID::Id,
                                  true, chip::NullOptional);
         }
-        case 14: {
-            LogStep(14, "TH1 resets ACL to default");
+        case 15: {
+            LogStep(15, "TH1 resets ACL to default");
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
@@ -8707,8 +8759,8 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 15: {
-            LogStep(15, "TH1 sends RemoveFabric command for TH2");
+        case 16: {
+            LogStep(16, "TH1 sends RemoveFabric command for TH2");
             ListFreer listFreer;
             chip::app::Clusters::OperationalCredentials::Commands::RemoveFabric::Type value;
             value.fabricIndex = th2FabricIndex;
@@ -17455,8 +17507,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("colorTemperatureMireds", value, ColorTempPhysicalMaxMiredsValue));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, ColorTempPhysicalMinMiredsValue));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, ColorTempPhysicalMaxMiredsValue - 1));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, ColorTempPhysicalMaxMiredsValue));
             }
             break;
@@ -22744,19 +22795,11 @@ private:
             break;
         case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                uint64_t value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, PacketRxCount));
-            }
+            shouldContinue = true;
             break;
         case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                uint64_t value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, PacketTxCount));
-            }
+            shouldContinue = true;
             break;
         case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -22906,15 +22949,23 @@ private:
         }
         case 17: {
             LogStep(17, "TH reads PacketRxCount attribute value from DUT");
-            VerifyOrDo(!ShouldSkip("DGETH.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), EthernetNetworkDiagnostics::Id,
-                                 EthernetNetworkDiagnostics::Attributes::PacketRxCount::Id, true, chip::NullOptional);
+            VerifyOrDo(!ShouldSkip("DGETH.S.A0002 && PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
         }
         case 18: {
             LogStep(18, "TH reads PacketTxCount attribute value from DUT");
-            VerifyOrDo(!ShouldSkip("DGETH.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), EthernetNetworkDiagnostics::Id,
-                                 EthernetNetworkDiagnostics::Attributes::PacketTxCount::Id, true, chip::NullOptional);
+            VerifyOrDo(!ShouldSkip("DGETH.S.A0003 && PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
         }
         case 19: {
             LogStep(19, "TH reads TxErrCount attribute value from DUT");
@@ -96241,13 +96292,14 @@ class Test_TC_CADMIN_1_11Suite : public TestCommand
 {
 public:
     Test_TC_CADMIN_1_11Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_CADMIN_1_11", 21, credsIssuerConfig)
+        TestCommand("Test_TC_CADMIN_1_11", 26, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
         AddArgument("nodeId2", 0, UINT64_MAX, &mNodeId2);
         AddArgument("nodeId3", 0, UINT64_MAX, &mNodeId3);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("waitAfterCommissioning", 0, UINT16_MAX, &mWaitAfterCommissioning);
         AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
         AddArgument("payload", &mPayload);
         AddArgument("PakeVerifier", &mPakeVerifier);
@@ -96263,6 +96315,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId2;
     chip::Optional<chip::NodeId> mNodeId3;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mWaitAfterCommissioning;
     chip::Optional<uint16_t> mDiscriminator;
     chip::Optional<chip::CharSpan> mPayload;
     chip::Optional<chip::ByteSpan> mPakeVerifier;
@@ -96308,10 +96361,10 @@ private:
             break;
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
             break;
         case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -96319,59 +96372,25 @@ private:
             break;
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.HasValue(), true));
-            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.Value(), 2));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
-                    value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                {
-                    auto iter_0 = value.begin();
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
-                    VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
-                    VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 2));
-                    VerifyOrReturn(CheckValue("fabrics[2].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[2].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 3));
-                }
-                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
-            }
             break;
         case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             shouldContinue = true;
             break;
         case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.HasValue(), true));
             VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.Value(), 2));
             break;
-        case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 18:
+        case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -96397,10 +96416,64 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 19:
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
         case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.HasValue(), true));
+            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.Value(), 2));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
+                    VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
+                                              mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
+                    VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
+                    VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
+                                              mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL));
+                    VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 2));
+                    VerifyOrReturn(CheckValue("fabrics[2].nodeID", iter_0.GetValue().nodeID,
+                                              mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL));
+                    VerifyOrReturn(CheckValueAsString("fabrics[2].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 3));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 25:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.HasValue(), true));
             VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.Value(), 2));
@@ -96471,7 +96544,14 @@ private:
             );
         }
         case 4: {
-            LogStep(4, "Verify that the DNS-SD advertisement shows CM=2");
+            LogStep(4, "Waiting after opening commissioning window");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 5: {
+            LogStep(5, "Verify that the DNS-SD advertisement shows CM=2");
             VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
@@ -96480,8 +96560,8 @@ private:
             value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
             return UserPrompt(kIdentityAlpha, value);
         }
-        case 5: {
-            LogStep(5, "TH_CR3 starts a commissioning process with DUT_CE");
+        case 6: {
+            LogStep(6, "TH_CR3 starts a commissioning process with DUT_CE");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
@@ -96489,16 +96569,16 @@ private:
             value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
             return PairWithCode(kIdentityGamma, value);
         }
-        case 6: {
-            LogStep(6, "DUT_CE is commissioned to TH_CR3 on Fabric ID3 with Node ID3");
+        case 7: {
+            LogStep(7, "DUT_CE is commissioned to TH_CR3 on Fabric ID3 with Node ID3");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
             value.nodeId = mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL;
             return WaitForCommissionee(kIdentityGamma, value);
         }
-        case 7: {
-            LogStep(7, "TH_CR1 opens a commissioning window on DUT_CE using ECM");
+        case 8: {
+            LogStep(8, "TH_CR1 opens a commissioning window on DUT_CE using ECM");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
@@ -96521,8 +96601,15 @@ private:
 
             );
         }
-        case 8: {
-            LogStep(8, "TH_CR2 starts a commissioning process with DUT_CE");
+        case 9: {
+            LogStep(9, "Waiting after opening commissioning window");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 10: {
+            LogStep(10, "TH_CR2 starts a commissioning process with DUT_CE");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
@@ -96530,16 +96617,16 @@ private:
             value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
-        case 9: {
-            LogStep(9, "DUT_CE is commissioned to TH_CR2");
+        case 11: {
+            LogStep(11, "DUT_CE is commissioned to TH_CR2");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
             value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             return WaitForCommissionee(kIdentityBeta, value);
         }
-        case 10: {
-            LogStep(10, "TH_CR1 opens a commissioning window on DUT_CE using ECM");
+        case 12: {
+            LogStep(12, "TH_CR1 opens a commissioning window on DUT_CE using ECM");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
@@ -96562,8 +96649,15 @@ private:
 
             );
         }
-        case 11: {
-            LogStep(11,
+        case 13: {
+            LogStep(13, "Waiting after opening commissioning window");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 14: {
+            LogStep(14,
                     "Before the expiration of PIXIT.CADMIN.CwDuration seconds which was set in step 5, TH_CR1 opens a 2nd "
                     "commissioning window on DUT_CE using a commissioning timeout of PIXIT.CADMIN.CwDuration seconds using ECM");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
@@ -96588,21 +96682,21 @@ private:
 
             );
         }
-        case 12: {
-            LogStep(12, "TH_CR1 reads the list of Fabrics on DUT_CE");
+        case 15: {
+            LogStep(15, "TH_CR1 reads the list of Fabrics on DUT_CE");
             VerifyOrDo(!ShouldSkip("OPCREDS.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
                                  OperationalCredentials::Attributes::Fabrics::Id, false, chip::NullOptional);
         }
-        case 13: {
-            LogStep(13, "Wait for the expiration of PIXIT.CADMIN.CwDuration seconds that was set in step 6");
+        case 16: {
+            LogStep(16, "Wait for the expiration of PIXIT.CADMIN.CwDuration seconds that was set in step 6");
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 180000UL;
             return WaitForMs(kIdentityAlpha, value);
         }
-        case 14: {
-            LogStep(14,
+        case 17: {
+            LogStep(17,
                     "TH_CR1 re-opens a commissioning window on DUT_CE using a commissioning timeout of PIXIT.CADMIN.CwDuration "
                     "seconds using BCM");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
@@ -96615,8 +96709,15 @@ private:
 
             );
         }
-        case 15: {
-            LogStep(15, "Verify that the DNS-SD advertisement shows CM=1");
+        case 18: {
+            LogStep(18, "Waiting after opening commissioning window");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 19: {
+            LogStep(19, "Verify that the DNS-SD advertisement shows CM=1");
             VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
@@ -96625,8 +96726,8 @@ private:
             value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
             return UserPrompt(kIdentityAlpha, value);
         }
-        case 16: {
-            LogStep(16,
+        case 20: {
+            LogStep(20,
                     "Before the expiration of PIXIT.CADMIN.CwDuration seconds that was set in step 10, TH_CR3 opens a 2nd "
                     "commissioning window on DUT_CE using a commissioning timeout of PIXIT.CADMIN.CwDuration seconds using BCM");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
@@ -96639,21 +96740,21 @@ private:
 
             );
         }
-        case 17: {
-            LogStep(17, "Wait for the expiration of PIXIT.CADMIN.CwDuration seconds that was set in step 11");
+        case 21: {
+            LogStep(21, "Wait for the expiration of PIXIT.CADMIN.CwDuration seconds that was set in step 11");
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 180000UL;
             return WaitForMs(kIdentityAlpha, value);
         }
-        case 18: {
-            LogStep(18, "TH_CR1 reads the list of Fabrics on DUT_CE");
+        case 22: {
+            LogStep(22, "TH_CR1 reads the list of Fabrics on DUT_CE");
             VerifyOrDo(!ShouldSkip("OPCREDS.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
                                  OperationalCredentials::Attributes::Fabrics::Id, false, chip::NullOptional);
         }
-        case 19: {
-            LogStep(19, "TH_CR1 opens a commissioning window on DUT_CE using BCM");
+        case 23: {
+            LogStep(23, "TH_CR1 opens a commissioning window on DUT_CE using BCM");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type value;
@@ -96664,8 +96765,15 @@ private:
 
             );
         }
-        case 20: {
-            LogStep(20,
+        case 24: {
+            LogStep(24, "Waiting after opening commissioning window");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 25: {
+            LogStep(25,
                     "Before the expiration of PIXIT.CADMIN.CwDuration seconds that was set in step 14, TH_CR2 opens a second "
                     "commissioning window on DUT_CE using a commissioning timeout of PIXIT.CADMIN.CwDuration seconds using BCM");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
@@ -96799,12 +96907,13 @@ class Test_TC_CADMIN_1_15Suite : public TestCommand
 {
 public:
     Test_TC_CADMIN_1_15Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_CADMIN_1_15", 19, credsIssuerConfig)
+        TestCommand("Test_TC_CADMIN_1_15", 22, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("nodeId2", 0, UINT64_MAX, &mNodeId2);
         AddArgument("nodeId3", 0, UINT64_MAX, &mNodeId3);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("waitAfterCommissioning", 0, UINT16_MAX, &mWaitAfterCommissioning);
         AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
         AddArgument("payload", &mPayload);
         AddArgument("PakeVerifier", &mPakeVerifier);
@@ -96823,6 +96932,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId2;
     chip::Optional<chip::NodeId> mNodeId3;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mWaitAfterCommissioning;
     chip::Optional<uint16_t> mDiscriminator;
     chip::Optional<chip::CharSpan> mPayload;
     chip::Optional<chip::ByteSpan> mPakeVerifier;
@@ -96865,16 +96975,24 @@ private:
             break;
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
             break;
         case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             shouldContinue = true;
             break;
         case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -96903,21 +97021,21 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 10:
+        case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::OperationalCredentials::Commands::NOCResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
             }
             break;
-        case 11:
+        case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
-        case 12:
+        case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             shouldContinue = true;
             break;
-        case 13:
+        case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -96941,22 +97059,26 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             shouldContinue = true;
             break;
         case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
             break;
         case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -97051,7 +97173,14 @@ private:
             );
         }
         case 4: {
-            LogStep(4, "TH_CR2 starts a commissioning process with DUT_CE");
+            LogStep(4, "Waiting after opening commissioning window");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 5: {
+            LogStep(5, "TH_CR2 starts a commissioning process with DUT_CE");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
@@ -97059,16 +97188,16 @@ private:
             value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
-        case 5: {
-            LogStep(5, "DUT_CE is commissioned to TH_CR2");
+        case 6: {
+            LogStep(6, "DUT_CE is commissioned to TH_CR2");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
             value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             return WaitForCommissionee(kIdentityBeta, value);
         }
-        case 6: {
-            LogStep(6, "TH_CR1 opens a commissioning window on DUT_CE using ECM");
+        case 7: {
+            LogStep(7, "TH_CR1 opens a commissioning window on DUT_CE using ECM");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
@@ -97091,8 +97220,15 @@ private:
 
             );
         }
-        case 7: {
-            LogStep(7, "TH_CR3 Commissions with DUT_CE");
+        case 8: {
+            LogStep(8, "Waiting after opening commissioning window");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 9: {
+            LogStep(9, "TH_CR3 Commissions with DUT_CE");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
@@ -97100,22 +97236,22 @@ private:
             value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
             return PairWithCode(kIdentityGamma, value);
         }
-        case 8: {
-            LogStep(8, "DUT_CE is commissioned to TH_CR3");
+        case 10: {
+            LogStep(10, "DUT_CE is commissioned to TH_CR3");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
             value.nodeId = mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL;
             return WaitForCommissionee(kIdentityGamma, value);
         }
-        case 9: {
-            LogStep(9, "TH_CR2 reads the list of Fabrics on DUT_CE");
+        case 11: {
+            LogStep(11, "TH_CR2 reads the list of Fabrics on DUT_CE");
             VerifyOrDo(!ShouldSkip("OPCREDS.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityBeta, GetEndpoint(0), OperationalCredentials::Id,
                                  OperationalCredentials::Attributes::Fabrics::Id, false, chip::NullOptional);
         }
-        case 10: {
-            LogStep(10, "TH_CR2 sends RemoveFabric with FabricIndex = 2 command to DUT_CE");
+        case 12: {
+            LogStep(12, "TH_CR2 sends RemoveFabric with FabricIndex = 2 command to DUT_CE");
             VerifyOrDo(!ShouldSkip("OPCREDS.S.C0a.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::OperationalCredentials::Commands::RemoveFabric::Type value;
@@ -97126,8 +97262,8 @@ private:
 
             );
         }
-        case 11: {
-            LogStep(11, "TH_CR2 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
+        case 13: {
+            LogStep(13, "TH_CR2 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::CharSpan value;
@@ -97135,8 +97271,8 @@ private:
             return WriteAttribute(kIdentityBeta, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
-        case 12: {
-            LogStep(12, "TH_CR2 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
+        case 14: {
+            LogStep(14, "TH_CR2 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005 && PICS_USER_PROMPT"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
@@ -97145,14 +97281,14 @@ private:
             value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
             return UserPrompt(kIdentityAlpha, value);
         }
-        case 13: {
-            LogStep(13, "TH_CR1 reads the list of Fabrics on DUT_CE");
+        case 15: {
+            LogStep(15, "TH_CR1 reads the list of Fabrics on DUT_CE");
             VerifyOrDo(!ShouldSkip("OPCREDS.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
                                  OperationalCredentials::Attributes::Fabrics::Id, false, chip::NullOptional);
         }
-        case 14: {
-            LogStep(14,
+        case 16: {
+            LogStep(16,
                     "Verify DUT_CE is now discoverable over DNS-SD with 2 Operational service records (_matter._tcp SRV records).");
             VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -97162,8 +97298,8 @@ private:
             value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
             return UserPrompt(kIdentityAlpha, value);
         }
-        case 15: {
-            LogStep(15, "TH_CR1 opens a commissioning window on DUT_CE using ECM");
+        case 17: {
+            LogStep(17, "TH_CR1 opens a commissioning window on DUT_CE using ECM");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
@@ -97186,8 +97322,15 @@ private:
 
             );
         }
-        case 16: {
-            LogStep(16, "TH_CR2 starts a commissioning process with DUT_CE");
+        case 18: {
+            LogStep(18, "Waiting after opening commissioning window");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 19: {
+            LogStep(19, "TH_CR2 starts a commissioning process with DUT_CE");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
@@ -97195,16 +97338,16 @@ private:
             value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
-        case 17: {
-            LogStep(17, "DUT_CE is commissioned to TH_CR2");
+        case 20: {
+            LogStep(20, "DUT_CE is commissioned to TH_CR2");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
             value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             return WaitForCommissionee(kIdentityBeta, value);
         }
-        case 18: {
-            LogStep(18, "TH_CR1 reads the list of Fabrics on DUT_CE");
+        case 21: {
+            LogStep(21, "TH_CR1 reads the list of Fabrics on DUT_CE");
             VerifyOrDo(!ShouldSkip("OPCREDS.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
                                  OperationalCredentials::Attributes::Fabrics::Id, false, chip::NullOptional);
@@ -97218,12 +97361,13 @@ class Test_TC_CADMIN_1_16Suite : public TestCommand
 {
 public:
     Test_TC_CADMIN_1_16Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_CADMIN_1_16", 18, credsIssuerConfig)
+        TestCommand("Test_TC_CADMIN_1_16", 21, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("nodeId2", 0, UINT64_MAX, &mNodeId2);
         AddArgument("nodeId3", 0, UINT64_MAX, &mNodeId3);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("waitAfterCommissioning", 0, UINT16_MAX, &mWaitAfterCommissioning);
         AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
         AddArgument("payload", &mPayload);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
@@ -97241,6 +97385,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId2;
     chip::Optional<chip::NodeId> mNodeId3;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mWaitAfterCommissioning;
     chip::Optional<uint16_t> mDiscriminator;
     chip::Optional<chip::CharSpan> mPayload;
     chip::Optional<uint16_t> mTimeout;
@@ -97282,16 +97427,24 @@ private:
             break;
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
             break;
         case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             shouldContinue = true;
             break;
         case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -97320,21 +97473,21 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 10:
+        case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::OperationalCredentials::Commands::NOCResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
             }
             break;
-        case 11:
+        case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
-        case 12:
+        case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             shouldContinue = true;
             break;
-        case 13:
+        case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -97358,18 +97511,22 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
         case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
             break;
         case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -97452,7 +97609,14 @@ private:
             );
         }
         case 4: {
-            LogStep(4, "TH_CR2 starts a commissioning process with DUT_CE");
+            LogStep(4, "Waiting after opening commissioning window");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 5: {
+            LogStep(5, "TH_CR2 starts a commissioning process with DUT_CE");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
@@ -97460,16 +97624,16 @@ private:
             value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
-        case 5: {
-            LogStep(5, "DUT_CE is commissioned to TH_CR2");
+        case 6: {
+            LogStep(6, "DUT_CE is commissioned to TH_CR2");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
             value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             return WaitForCommissionee(kIdentityBeta, value);
         }
-        case 6: {
-            LogStep(6, "TH_CR1 opens a commissioning window on DUT_CE");
+        case 7: {
+            LogStep(7, "TH_CR1 opens a commissioning window on DUT_CE");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type value;
@@ -97480,8 +97644,15 @@ private:
 
             );
         }
-        case 7: {
-            LogStep(7, "TH_CR3 Commissions with DUT_CE");
+        case 8: {
+            LogStep(8, "Waiting after opening commissioning window");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 9: {
+            LogStep(9, "TH_CR3 Commissions with DUT_CE");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
@@ -97489,22 +97660,22 @@ private:
             value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
             return PairWithCode(kIdentityGamma, value);
         }
-        case 8: {
-            LogStep(8, "DUT_CE is commissioned to TH_CR3");
+        case 10: {
+            LogStep(10, "DUT_CE is commissioned to TH_CR3");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
             value.nodeId = mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL;
             return WaitForCommissionee(kIdentityGamma, value);
         }
-        case 9: {
-            LogStep(9, "TH_CR2 reads the list of Fabrics on DUT_CE");
+        case 11: {
+            LogStep(11, "TH_CR2 reads the list of Fabrics on DUT_CE");
             VerifyOrDo(!ShouldSkip("OPCREDS.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityBeta, GetEndpoint(0), OperationalCredentials::Id,
                                  OperationalCredentials::Attributes::Fabrics::Id, false, chip::NullOptional);
         }
-        case 10: {
-            LogStep(10, "TH_CR2 sends RemoveFabric with FabricIndex = 2 command to DUT_CE");
+        case 12: {
+            LogStep(12, "TH_CR2 sends RemoveFabric with FabricIndex = 2 command to DUT_CE");
             VerifyOrDo(!ShouldSkip("OPCREDS.S.C0a.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::OperationalCredentials::Commands::RemoveFabric::Type value;
@@ -97515,8 +97686,8 @@ private:
 
             );
         }
-        case 11: {
-            LogStep(11, "TH_CR2 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
+        case 13: {
+            LogStep(13, "TH_CR2 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::CharSpan value;
@@ -97524,8 +97695,8 @@ private:
             return WriteAttribute(kIdentityBeta, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
-        case 12: {
-            LogStep(12, "TH_CR2 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
+        case 14: {
+            LogStep(14, "TH_CR2 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005 && PICS_USER_PROMPT"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
@@ -97534,14 +97705,14 @@ private:
             value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
             return UserPrompt(kIdentityAlpha, value);
         }
-        case 13: {
-            LogStep(13, "TH_CR1 reads the list of Fabrics on DUT_CE");
+        case 15: {
+            LogStep(15, "TH_CR1 reads the list of Fabrics on DUT_CE");
             VerifyOrDo(!ShouldSkip("OPCREDS.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
                                  OperationalCredentials::Attributes::Fabrics::Id, false, chip::NullOptional);
         }
-        case 14: {
-            LogStep(14, "TH_CR1 opens a commissioning window on DUT_CE using BCM");
+        case 16: {
+            LogStep(16, "TH_CR1 opens a commissioning window on DUT_CE using BCM");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type value;
@@ -97552,8 +97723,15 @@ private:
 
             );
         }
-        case 15: {
-            LogStep(15, "TH_CR2 starts a commissioning process with DUT_CE");
+        case 17: {
+            LogStep(17, "Waiting after opening commissioning window");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 18: {
+            LogStep(18, "TH_CR2 starts a commissioning process with DUT_CE");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
@@ -97561,16 +97739,16 @@ private:
             value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
-        case 16: {
-            LogStep(16, "DUT_CE is commissioned to TH_CR2");
+        case 19: {
+            LogStep(19, "DUT_CE is commissioned to TH_CR2");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
             value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             return WaitForCommissionee(kIdentityBeta, value);
         }
-        case 17: {
-            LogStep(17, "TH_CR1 reads the list of Fabrics on DUT_CE");
+        case 20: {
+            LogStep(20, "TH_CR1 reads the list of Fabrics on DUT_CE");
             VerifyOrDo(!ShouldSkip("OPCREDS.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
                                  OperationalCredentials::Attributes::Fabrics::Id, false, chip::NullOptional);
@@ -98155,7 +98333,7 @@ private:
 class Test_TC_CADMIN_1_3Suite : public TestCommand
 {
 public:
-    Test_TC_CADMIN_1_3Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_CADMIN_1_3", 21, credsIssuerConfig)
+    Test_TC_CADMIN_1_3Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_CADMIN_1_3", 23, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
@@ -98164,6 +98342,7 @@ public:
         AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
         AddArgument("payload", &mPayload);
         AddArgument("PakeVerifier", &mPakeVerifier);
+        AddArgument("waitAfterCommissioning", 0, UINT16_MAX, &mWaitAfterCommissioning);
     }
 
     ~Test_TC_CADMIN_1_3Suite() {}
@@ -98178,6 +98357,7 @@ private:
     chip::Optional<uint16_t> mDiscriminator;
     chip::Optional<chip::CharSpan> mPayload;
     chip::Optional<chip::ByteSpan> mPakeVerifier;
+    chip::Optional<uint16_t> mWaitAfterCommissioning;
 
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
 
@@ -98212,8 +98392,12 @@ private:
             break;
         case 5:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::CharSpan value;
@@ -98222,10 +98406,6 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
             }
-            break;
-        case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
             break;
         case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -98237,25 +98417,7 @@ private:
             break;
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
-                    value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                {
-                    auto iter_0 = value.begin();
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
-                    VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
-                    VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 2));
-                }
-                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
-            }
+            shouldContinue = true;
             break;
         case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -98281,8 +98443,30 @@ private:
             break;
         case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
+                    VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
+                                              mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
+                    VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
+                    VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
+                                              mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL));
+                    VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 2));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
             break;
         case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::CharSpan value;
@@ -98292,10 +98476,10 @@ private:
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
             }
             break;
-        case 14:
+        case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 15:
+        case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::CharSpan value;
@@ -98305,14 +98489,14 @@ private:
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
             }
             break;
-        case 16:
+        case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 17:
+        case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             shouldContinue = true;
             break;
-        case 18:
+        case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
@@ -98320,10 +98504,14 @@ private:
                 VerifyOrReturn(CheckValue("windowStatus", value, 0U));
             }
             break;
-        case 19:
+        case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 20:
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.HasValue(), true));
             VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.Value(), 9));
@@ -98395,7 +98583,14 @@ private:
             );
         }
         case 4: {
-            LogStep(4, "Verify that the DNS-SD advertisement shows CM=2");
+            LogStep(4, "Waiting after opening commissioning window");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 5: {
+            LogStep(5, "Verify that the DNS-SD advertisement shows CM=2");
             VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
@@ -98404,8 +98599,8 @@ private:
             value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
             return UserPrompt(kIdentityAlpha, value);
         }
-        case 5: {
-            LogStep(5, "TH_CR1 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
+        case 6: {
+            LogStep(6, "TH_CR1 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::CharSpan value;
@@ -98413,14 +98608,14 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
-        case 6: {
-            LogStep(6, "TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
+        case 7: {
+            LogStep(7, "TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
                                  true, chip::NullOptional);
         }
-        case 7: {
-            LogStep(7, "TH_CR2 starts a commissioning process with DUT_CE");
+        case 8: {
+            LogStep(8, "TH_CR2 starts a commissioning process with DUT_CE");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
@@ -98428,16 +98623,16 @@ private:
             value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
-        case 8: {
-            LogStep(8, "DUT_CE is commissioned by TH_CR2 on Fabric ID2");
+        case 9: {
+            LogStep(9, "DUT_CE is commissioned by TH_CR2 on Fabric ID2");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
             value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             return WaitForCommissionee(kIdentityBeta, value);
         }
-        case 9: {
-            LogStep(9, "Verify DUT_CE is now discoverable over DNS-SD with two SRV Records");
+        case 10: {
+            LogStep(10, "Verify DUT_CE is now discoverable over DNS-SD with two SRV Records");
             VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
@@ -98446,20 +98641,20 @@ private:
             value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
             return UserPrompt(kIdentityAlpha, value);
         }
-        case 10: {
-            LogStep(10, "TH_CR1 reads the list of Fabrics on DUT_CE");
+        case 11: {
+            LogStep(11, "TH_CR1 reads the list of Fabrics on DUT_CE");
             VerifyOrDo(!ShouldSkip("OPCREDS.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
                                  OperationalCredentials::Attributes::Fabrics::Id, false, chip::NullOptional);
         }
-        case 11: {
-            LogStep(11, "TH_CR2 reads the list of Fabrics on DUT_CE");
+        case 12: {
+            LogStep(12, "TH_CR2 reads the list of Fabrics on DUT_CE");
             VerifyOrDo(!ShouldSkip("OPCREDS.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityBeta, GetEndpoint(0), OperationalCredentials::Id,
                                  OperationalCredentials::Attributes::Fabrics::Id, false, chip::NullOptional);
         }
-        case 12: {
-            LogStep(12, "TH_CR1 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
+        case 13: {
+            LogStep(13, "TH_CR1 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::CharSpan value;
@@ -98467,14 +98662,14 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
-        case 13: {
-            LogStep(13, "TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
+        case 14: {
+            LogStep(14, "TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
                                  true, chip::NullOptional);
         }
-        case 14: {
-            LogStep(14, "TH_CR2 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
+        case 15: {
+            LogStep(15, "TH_CR2 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::CharSpan value;
@@ -98482,14 +98677,14 @@ private:
             return WriteAttribute(kIdentityBeta, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
-        case 15: {
-            LogStep(15, "TH_CR2 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
+        case 16: {
+            LogStep(16, "TH_CR2 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityBeta, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
                                  true, chip::NullOptional);
         }
-        case 16: {
-            LogStep(16, "TH_CR2 opens a commissioning window on DUT_CE using ECM");
+        case 17: {
+            LogStep(17, "TH_CR2 opens a commissioning window on DUT_CE using ECM");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
@@ -98512,21 +98707,21 @@ private:
 
             );
         }
-        case 17: {
-            LogStep(17, "Wait for the commissioning window in step 13 to timeout");
+        case 18: {
+            LogStep(18, "Wait for the commissioning window in step 13 to timeout");
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 180000UL;
             return WaitForMs(kIdentityAlpha, value);
         }
-        case 18: {
-            LogStep(18, "TH_CR2 reads the window status to verify the DUT_CE window is closed");
+        case 19: {
+            LogStep(19, "TH_CR2 reads the window status to verify the DUT_CE window is closed");
             VerifyOrDo(!ShouldSkip("CADMIN.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
                                  AdministratorCommissioning::Attributes::WindowStatus::Id, true, chip::NullOptional);
         }
-        case 19: {
-            LogStep(19, "TH_CR2 opens a commissioning window on DUT_CE using ECM");
+        case 20: {
+            LogStep(20, "TH_CR2 opens a commissioning window on DUT_CE using ECM");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
@@ -98549,8 +98744,15 @@ private:
 
             );
         }
-        case 20: {
-            LogStep(20, "TH_CR1 starts a commissioning process with DUT_CE before the timeout from step 12");
+        case 21: {
+            LogStep(21, "Waiting after opening commissioning window");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 22: {
+            LogStep(22, "TH_CR1 starts a commissioning process with DUT_CE before the timeout from step 12");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
@@ -98566,7 +98768,7 @@ private:
 class Test_TC_CADMIN_1_4Suite : public TestCommand
 {
 public:
-    Test_TC_CADMIN_1_4Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_CADMIN_1_4", 21, credsIssuerConfig)
+    Test_TC_CADMIN_1_4Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_CADMIN_1_4", 23, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
@@ -98574,6 +98776,7 @@ public:
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
         AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
         AddArgument("payload", &mPayload);
+        AddArgument("waitAfterCommissioning", 0, UINT16_MAX, &mWaitAfterCommissioning);
     }
 
     ~Test_TC_CADMIN_1_4Suite() {}
@@ -98587,6 +98790,7 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mDiscriminator;
     chip::Optional<chip::CharSpan> mPayload;
+    chip::Optional<uint16_t> mWaitAfterCommissioning;
 
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
 
@@ -98621,8 +98825,12 @@ private:
             break;
         case 5:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::CharSpan value;
@@ -98630,10 +98838,6 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
             }
-            break;
-        case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
             break;
         case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -98645,25 +98849,7 @@ private:
             break;
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
-                    value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                {
-                    auto iter_0 = value.begin();
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
-                    VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
-                    VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 2));
-                }
-                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
-            }
+            shouldContinue = true;
             break;
         case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -98689,21 +98875,43 @@ private:
             break;
         case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
+                    VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
+                                              mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
+                    VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
+                    VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
+                                              mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL));
+                    VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 2));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
             break;
         case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::CharSpan value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValueAsString("nodeLabel", value, chip::CharSpan("chiptest", 8)));
-                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
-            }
             break;
         case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::CharSpan value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueAsString("nodeLabel", value, chip::CharSpan("chiptest", 8)));
+                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
+                VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
+            }
             break;
         case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::CharSpan value;
@@ -98713,14 +98921,14 @@ private:
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
             }
             break;
-        case 16:
+        case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 17:
+        case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             shouldContinue = true;
             break;
-        case 18:
+        case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
@@ -98728,10 +98936,14 @@ private:
                 VerifyOrReturn(CheckValue("windowStatus", value, 0U));
             }
             break;
-        case 19:
+        case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 20:
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.HasValue(), true));
             VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.Value(), 9));
@@ -98791,7 +99003,14 @@ private:
             );
         }
         case 4: {
-            LogStep(4, "Verify that the DNS-SD advertisement shows CM=1");
+            LogStep(4, "Waiting after opening commissioning window");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 5: {
+            LogStep(5, "Verify that the DNS-SD advertisement shows CM=1");
             VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
@@ -98800,8 +99019,8 @@ private:
             value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
             return UserPrompt(kIdentityAlpha, value);
         }
-        case 5: {
-            LogStep(5, "TH_CR1 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
+        case 6: {
+            LogStep(6, "TH_CR1 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::CharSpan value;
@@ -98809,14 +99028,14 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
-        case 6: {
-            LogStep(6, "TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
+        case 7: {
+            LogStep(7, "TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
                                  true, chip::NullOptional);
         }
-        case 7: {
-            LogStep(7, "TH_CR2 starts a commissioning process with DUT_CE");
+        case 8: {
+            LogStep(8, "TH_CR2 starts a commissioning process with DUT_CE");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
@@ -98824,16 +99043,16 @@ private:
             value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
-        case 8: {
-            LogStep(8, "DUT_CE is commissioned by TH_CR2 on Fabric ID2 ");
+        case 9: {
+            LogStep(9, "DUT_CE is commissioned by TH_CR2 on Fabric ID2 ");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
             value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             return WaitForCommissionee(kIdentityBeta, value);
         }
-        case 9: {
-            LogStep(9, "Verify DUT_CE is now discoverable over DNS-SD with two SRV Records");
+        case 10: {
+            LogStep(10, "Verify DUT_CE is now discoverable over DNS-SD with two SRV Records");
             VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
@@ -98842,20 +99061,20 @@ private:
             value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
             return UserPrompt(kIdentityAlpha, value);
         }
-        case 10: {
-            LogStep(10, "TH_CR1 reads the list of Fabrics on DUT_CE");
+        case 11: {
+            LogStep(11, "TH_CR1 reads the list of Fabrics on DUT_CE");
             VerifyOrDo(!ShouldSkip("OPCREDS.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
                                  OperationalCredentials::Attributes::Fabrics::Id, false, chip::NullOptional);
         }
-        case 11: {
-            LogStep(11, "TH_CR2 reads the list of Fabrics on DUT_CE");
+        case 12: {
+            LogStep(12, "TH_CR2 reads the list of Fabrics on DUT_CE");
             VerifyOrDo(!ShouldSkip("OPCREDS.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityBeta, GetEndpoint(0), OperationalCredentials::Id,
                                  OperationalCredentials::Attributes::Fabrics::Id, false, chip::NullOptional);
         }
-        case 12: {
-            LogStep(12, "TH_CR1 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
+        case 13: {
+            LogStep(13, "TH_CR1 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::CharSpan value;
@@ -98863,14 +99082,14 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
-        case 13: {
-            LogStep(13, "TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
+        case 14: {
+            LogStep(14, "TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
                                  true, chip::NullOptional);
         }
-        case 14: {
-            LogStep(14, "TH_CR2 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
+        case 15: {
+            LogStep(15, "TH_CR2 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::CharSpan value;
@@ -98878,14 +99097,14 @@ private:
             return WriteAttribute(kIdentityBeta, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
-        case 15: {
-            LogStep(15, "TH_CR2 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
+        case 16: {
+            LogStep(16, "TH_CR2 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityBeta, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
                                  true, chip::NullOptional);
         }
-        case 16: {
-            LogStep(16, "TH_CR2 opens a commissioning window on DUT_CE using BCM");
+        case 17: {
+            LogStep(17, "TH_CR2 opens a commissioning window on DUT_CE using BCM");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type value;
@@ -98896,21 +99115,21 @@ private:
 
             );
         }
-        case 17: {
-            LogStep(17, "Wait for the commissioning window in step 13 to timeout");
+        case 18: {
+            LogStep(18, "Wait for the commissioning window in step 13 to timeout");
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 180000UL;
             return WaitForMs(kIdentityAlpha, value);
         }
-        case 18: {
-            LogStep(18, "TH_CR2 reads the window status to verify the DUT_CE window is closed");
+        case 19: {
+            LogStep(19, "TH_CR2 reads the window status to verify the DUT_CE window is closed");
             VerifyOrDo(!ShouldSkip("CADMIN.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
                                  AdministratorCommissioning::Attributes::WindowStatus::Id, true, chip::NullOptional);
         }
-        case 19: {
-            LogStep(19, "TH_CR2 opens a commissioning window on DUT_CE using BCM");
+        case 20: {
+            LogStep(20, "TH_CR2 opens a commissioning window on DUT_CE using BCM");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type value;
@@ -98921,8 +99140,15 @@ private:
 
             );
         }
-        case 20: {
-            LogStep(20, "TH_CR1 starts a commissioning process with DUT_CE before the timeout from step 12");
+        case 21: {
+            LogStep(21, "Waiting after opening commissioning window");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 22: {
+            LogStep(22, "TH_CR1 starts a commissioning process with DUT_CE before the timeout from step 12");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
@@ -98938,7 +99164,7 @@ private:
 class Test_TC_CADMIN_1_5Suite : public TestCommand
 {
 public:
-    Test_TC_CADMIN_1_5Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_CADMIN_1_5", 20, credsIssuerConfig)
+    Test_TC_CADMIN_1_5Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_CADMIN_1_5", 22, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
@@ -98946,6 +99172,7 @@ public:
         AddArgument("nodeId2", 0, UINT64_MAX, &mNodeId2);
         AddArgument("nodeId3", 0, UINT64_MAX, &mNodeId3);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("waitAfterCommissioning", 0, UINT16_MAX, &mWaitAfterCommissioning);
         AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
         AddArgument("payload", &mPayload);
         AddArgument("PakeVerifier", &mPakeVerifier);
@@ -98963,6 +99190,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId2;
     chip::Optional<chip::NodeId> mNodeId3;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mWaitAfterCommissioning;
     chip::Optional<uint16_t> mDiscriminator;
     chip::Optional<chip::CharSpan> mPayload;
     chip::Optional<chip::ByteSpan> mPakeVerifier;
@@ -99012,18 +99240,22 @@ private:
             break;
         case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            shouldContinue = true;
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            shouldContinue = true;
             break;
         case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::CharSpan value;
@@ -99031,33 +99263,37 @@ private:
                 VerifyOrReturn(CheckValueAsString("nodeLabel", value, chip::CharSpan("chiptest", 8)));
             }
             break;
-        case 13:
+        case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.HasValue(), true));
             VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.Value(), 3));
             break;
-        case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.HasValue(), true));
-            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.Value(), 2));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             shouldContinue = true;
             break;
         case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.HasValue(), true));
+            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.Value(), 2));
+            break;
+        case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             shouldContinue = true;
             break;
-        case 18:
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.HasValue(), true));
             VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.Value(), 4));
             break;
-        case 19:
+        case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             shouldContinue = true;
             break;
@@ -99177,7 +99413,14 @@ private:
             );
         }
         case 8: {
-            LogStep(8, "TH_CR1 revokes the commissioning window on DUT_CE");
+            LogStep(8, "Waiting after opening commissioning window");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 9: {
+            LogStep(9, "TH_CR1 revokes the commissioning window on DUT_CE");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C02.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::RevokeCommissioning::Type value;
@@ -99187,8 +99430,8 @@ private:
 
             );
         }
-        case 9: {
-            LogStep(9, "TH_CR2 starts a commissioning process with DUT_CE");
+        case 10: {
+            LogStep(10, "TH_CR2 starts a commissioning process with DUT_CE");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
@@ -99196,8 +99439,8 @@ private:
             value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
-        case 10: {
-            LogStep(10, "TH_CR1 revokes the commissioning window on DUT_CE");
+        case 11: {
+            LogStep(11, "TH_CR1 revokes the commissioning window on DUT_CE");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C02.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::RevokeCommissioning::Type value;
@@ -99207,8 +99450,8 @@ private:
 
             );
         }
-        case 11: {
-            LogStep(11, "TH_CR1 writes the mandatory attribute NodeLabel of DUT_CE");
+        case 12: {
+            LogStep(12, "TH_CR1 writes the mandatory attribute NodeLabel of DUT_CE");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::CharSpan value;
@@ -99216,14 +99459,14 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
-        case 12: {
-            LogStep(12, "TH_CR1 read the mandatory attribute NodeLabel of DUT_CE");
+        case 13: {
+            LogStep(13, "TH_CR1 read the mandatory attribute NodeLabel of DUT_CE");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
                                  true, chip::NullOptional);
         }
-        case 13: {
-            LogStep(13, "TH_CR1 opens a new commissioning window on DUT_CE using wrong PakeVerifier value using ECM");
+        case 14: {
+            LogStep(14, "TH_CR1 opens a new commissioning window on DUT_CE using wrong PakeVerifier value using ECM");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
@@ -99245,32 +99488,8 @@ private:
 
             );
         }
-        case 14: {
-            LogStep(14, "TH_CR1 opens a new commissioning window on DUT_CE using ECM");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
-            value.commissioningTimeout = 180U;
-            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
-                ? mPakeVerifier.Value()
-                : chip::ByteSpan(
-                      chip::Uint8::from_const_char(
-                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
-                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
-                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
-                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
-                      97);
-            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations           = 1000UL;
-            value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
-            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
         case 15: {
-            LogStep(15, "TH_CR1 opens another commissioning window on DUT_CE using ECM");
+            LogStep(15, "TH_CR1 opens a new commissioning window on DUT_CE using ECM");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
@@ -99294,7 +99513,38 @@ private:
             );
         }
         case 16: {
-            LogStep(16, "TH_CR2 starts a commissioning process with DUT_CE");
+            LogStep(16, "Waiting after opening commissioning window");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 17: {
+            LogStep(17, "TH_CR1 opens another commissioning window on DUT_CE using ECM");
+            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
+            value.commissioningTimeout = 180U;
+            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
+                ? mPakeVerifier.Value()
+                : chip::ByteSpan(
+                      chip::Uint8::from_const_char(
+                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
+                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
+                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
+                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
+                      97);
+            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
+            value.iterations           = 1000UL;
+            value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
+                               AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
+                               chip::Optional<uint16_t>(10000), chip::NullOptional
+
+            );
+        }
+        case 18: {
+            LogStep(18, "TH_CR2 starts a commissioning process with DUT_CE");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
@@ -99302,16 +99552,16 @@ private:
             value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
-        case 17: {
-            LogStep(17, "DUT_CE is commissioned by TH_CR2");
+        case 19: {
+            LogStep(19, "DUT_CE is commissioned by TH_CR2");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
             value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             return WaitForCommissionee(kIdentityBeta, value);
         }
-        case 18: {
-            LogStep(18, "TH_CR1 tries to revoke the commissioning window on DUT_CE using RevokeCommissioning command");
+        case 20: {
+            LogStep(20, "TH_CR1 tries to revoke the commissioning window on DUT_CE using RevokeCommissioning command");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C02.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::RevokeCommissioning::Type value;
@@ -99321,8 +99571,8 @@ private:
 
             );
         }
-        case 19: {
-            LogStep(19, "TH_CR3 starts a commissioning process with DUT_CE");
+        case 21: {
+            LogStep(21, "TH_CR3 starts a commissioning process with DUT_CE");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
@@ -99338,7 +99588,7 @@ private:
 class Test_TC_CADMIN_1_6Suite : public TestCommand
 {
 public:
-    Test_TC_CADMIN_1_6Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_CADMIN_1_6", 19, credsIssuerConfig)
+    Test_TC_CADMIN_1_6Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_CADMIN_1_6", 21, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
@@ -99346,6 +99596,7 @@ public:
         AddArgument("nodeId2", 0, UINT64_MAX, &mNodeId2);
         AddArgument("nodeId3", 0, UINT64_MAX, &mNodeId3);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("waitAfterCommissioning", 0, UINT16_MAX, &mWaitAfterCommissioning);
         AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
         AddArgument("payload", &mPayload);
     }
@@ -99361,6 +99612,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId2;
     chip::Optional<chip::NodeId> mNodeId3;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mWaitAfterCommissioning;
     chip::Optional<uint16_t> mDiscriminator;
     chip::Optional<chip::CharSpan> mPayload;
 
@@ -99408,18 +99660,22 @@ private:
             break;
         case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            shouldContinue = true;
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            shouldContinue = true;
             break;
         case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::CharSpan value;
@@ -99427,28 +99683,32 @@ private:
                 VerifyOrReturn(CheckValueAsString("nodeLabel", value, chip::CharSpan("chiptest", 8)));
             }
             break;
-        case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.HasValue(), true));
-            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.Value(), 2));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             shouldContinue = true;
             break;
         case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.HasValue(), true));
+            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.Value(), 2));
+            break;
+        case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             shouldContinue = true;
             break;
-        case 17:
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.HasValue(), true));
             VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.Value(), 4));
             break;
-        case 18:
+        case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             shouldContinue = true;
             break;
@@ -99544,7 +99804,14 @@ private:
             );
         }
         case 8: {
-            LogStep(8, "TH_CR1 revokes the commissioning window on DUT_CE");
+            LogStep(8, "Waiting after opening commissioning window");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 9: {
+            LogStep(9, "TH_CR1 revokes the commissioning window on DUT_CE");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C02.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::RevokeCommissioning::Type value;
@@ -99554,16 +99821,16 @@ private:
 
             );
         }
-        case 9: {
-            LogStep(9, "TH_CR2 starts a commissioning process with DUT_CE");
+        case 10: {
+            LogStep(10, "TH_CR2 starts a commissioning process with DUT_CE");
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
-        case 10: {
-            LogStep(10, "TH_CR1 revokes the commissioning window on DUT_CE");
+        case 11: {
+            LogStep(11, "TH_CR1 revokes the commissioning window on DUT_CE");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C02.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::RevokeCommissioning::Type value;
@@ -99573,8 +99840,8 @@ private:
 
             );
         }
-        case 11: {
-            LogStep(11, "TH_CR1 writes the mandatory attribute NodeLabel of DUT_CE");
+        case 12: {
+            LogStep(12, "TH_CR1 writes the mandatory attribute NodeLabel of DUT_CE");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::CharSpan value;
@@ -99582,26 +99849,14 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
-        case 12: {
-            LogStep(12, "TH_CR1 read the mandatory attribute NodeLabel of DUT_CE");
+        case 13: {
+            LogStep(13, "TH_CR1 read the mandatory attribute NodeLabel of DUT_CE");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
                                  true, chip::NullOptional);
         }
-        case 13: {
-            LogStep(13, "TH_CR1 opens a commissioning window on DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type value;
-            value.commissioningTimeout = 180U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
         case 14: {
-            LogStep(14, "TH_CR1 opens another commissioning window on DUT_CE");
+            LogStep(14, "TH_CR1 opens a commissioning window on DUT_CE");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type value;
@@ -99613,23 +99868,42 @@ private:
             );
         }
         case 15: {
-            LogStep(15, "TH_CR2 starts a commissioning process on DUT_CE");
+            LogStep(15, "Waiting after opening commissioning window");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 16: {
+            LogStep(16, "TH_CR1 opens another commissioning window on DUT_CE");
+            VerifyOrDo(!ShouldSkip("CADMIN.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type value;
+            value.commissioningTimeout = 180U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
+                               AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Id, value,
+                               chip::Optional<uint16_t>(10000), chip::NullOptional
+
+            );
+        }
+        case 17: {
+            LogStep(17, "TH_CR2 starts a commissioning process on DUT_CE");
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
-        case 16: {
-            LogStep(16, "DUT_CE is commissioned by TH_CR2");
+        case 18: {
+            LogStep(18, "DUT_CE is commissioned by TH_CR2");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
             value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             return WaitForCommissionee(kIdentityBeta, value);
         }
-        case 17: {
-            LogStep(17, "TH_CR1 tries to revoke the commissioning window on DUT_CE using RevokeCommissioning command");
+        case 19: {
+            LogStep(19, "TH_CR1 tries to revoke the commissioning window on DUT_CE using RevokeCommissioning command");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C02.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::RevokeCommissioning::Type value;
@@ -99639,8 +99913,8 @@ private:
 
             );
         }
-        case 18: {
-            LogStep(18, "TH_CR3 starts a commissioning process with DUT_CE");
+        case 20: {
+            LogStep(20, "TH_CR3 starts a commissioning process with DUT_CE");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
@@ -99656,7 +99930,7 @@ private:
 class Test_TC_CADMIN_1_9Suite : public TestCommand
 {
 public:
-    Test_TC_CADMIN_1_9Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_CADMIN_1_9", 27, credsIssuerConfig)
+    Test_TC_CADMIN_1_9Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_CADMIN_1_9", 28, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
@@ -99664,6 +99938,7 @@ public:
         AddArgument("nodeId2", 0, UINT64_MAX, &mNodeId2);
         AddArgument("nodeId3", 0, UINT64_MAX, &mNodeId3);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("waitAfterCommissioning", 0, UINT16_MAX, &mWaitAfterCommissioning);
         AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
         AddArgument("correctPayload", &mCorrectPayload);
         AddArgument("incorrectSetupCodePayload", &mIncorrectSetupCodePayload);
@@ -99681,6 +99956,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId2;
     chip::Optional<chip::NodeId> mNodeId3;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mWaitAfterCommissioning;
     chip::Optional<uint16_t> mDiscriminator;
     chip::Optional<chip::CharSpan> mCorrectPayload;
     chip::Optional<chip::CharSpan> mIncorrectSetupCodePayload;
@@ -99718,7 +99994,7 @@ private:
             shouldContinue = true;
             break;
         case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             shouldContinue = true;
             break;
         case 6:
@@ -99802,6 +100078,10 @@ private:
             shouldContinue = true;
             break;
         case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            shouldContinue = true;
+            break;
+        case 27:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             shouldContinue = true;
             break;
@@ -99871,7 +100151,14 @@ private:
             );
         }
         case 4: {
-            LogStep(4, "Verify that the DNS-SD advertisement shows CM=2");
+            LogStep(4, "Waiting after opening commissioning window");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 5: {
+            LogStep(5, "Verify that the DNS-SD advertisement shows CM=2");
             VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
@@ -99879,16 +100166,6 @@ private:
             value.expectedValue.Emplace();
             value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
             return UserPrompt(kIdentityAlpha, value);
-        }
-        case 5: {
-            LogStep(5, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
-                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
-            return PairWithCode(kIdentityBeta, value);
         }
         case 6: {
             LogStep(6, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
@@ -100081,7 +100358,17 @@ private:
             return PairWithCode(kIdentityBeta, value);
         }
         case 25: {
-            LogStep(25, "TH_CR2 starts a commissioning process with DUT_CE using valid setup code");
+            LogStep(25, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
+            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
+            return PairWithCode(kIdentityBeta, value);
+        }
+        case 26: {
+            LogStep(26, "TH_CR2 starts a commissioning process with DUT_CE using valid setup code");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
@@ -100090,8 +100377,8 @@ private:
                 mCorrectPayload.HasValue() ? mCorrectPayload.Value() : chip::Span<const char>("MT:-24J0AFN00I31506010", 22);
             return PairWithCode(kIdentityBeta, value);
         }
-        case 26: {
-            LogStep(26, "TH_CR3 starts a commissioning process with DUT_CE");
+        case 27: {
+            LogStep(27, "TH_CR3 starts a commissioning process with DUT_CE");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
@@ -100109,7 +100396,7 @@ class Test_TC_CADMIN_1_10Suite : public TestCommand
 {
 public:
     Test_TC_CADMIN_1_10Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_CADMIN_1_10", 26, credsIssuerConfig)
+        TestCommand("Test_TC_CADMIN_1_10", 28, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
@@ -100117,6 +100404,7 @@ public:
         AddArgument("nodeId2", 0, UINT64_MAX, &mNodeId2);
         AddArgument("nodeId3", 0, UINT64_MAX, &mNodeId3);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("waitAfterCommissioning", 0, UINT16_MAX, &mWaitAfterCommissioning);
         AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
         AddArgument("correctPayload", &mCorrectPayload);
         AddArgument("incorrectSetupCodePayload", &mIncorrectSetupCodePayload);
@@ -100133,6 +100421,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId2;
     chip::Optional<chip::NodeId> mNodeId3;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mWaitAfterCommissioning;
     chip::Optional<uint16_t> mDiscriminator;
     chip::Optional<chip::CharSpan> mCorrectPayload;
     chip::Optional<chip::CharSpan> mIncorrectSetupCodePayload;
@@ -100169,7 +100458,7 @@ private:
             shouldContinue = true;
             break;
         case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             shouldContinue = true;
             break;
         case 6:
@@ -100249,6 +100538,14 @@ private:
             shouldContinue = true;
             break;
         case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            shouldContinue = true;
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            shouldContinue = true;
+            break;
+        case 27:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             shouldContinue = true;
             break;
@@ -100306,7 +100603,14 @@ private:
             );
         }
         case 4: {
-            LogStep(4, "Verify that the DNS-SD advertisement shows CM=1");
+            LogStep(4, "Waiting after opening commissioning window");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 5: {
+            LogStep(5, "Verify that the DNS-SD advertisement shows CM=1");
             VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
@@ -100314,16 +100618,6 @@ private:
             value.expectedValue.Emplace();
             value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
             return UserPrompt(kIdentityAlpha, value);
-        }
-        case 5: {
-            LogStep(5, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
-                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
-            return PairWithCode(kIdentityBeta, value);
         }
         case 6: {
             LogStep(6, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
@@ -100407,6 +100701,7 @@ private:
         }
         case 14: {
             LogStep(14, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
+            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
@@ -100416,7 +100711,6 @@ private:
         }
         case 15: {
             LogStep(15, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
@@ -100515,7 +100809,17 @@ private:
             return PairWithCode(kIdentityBeta, value);
         }
         case 25: {
-            LogStep(25, "TH_CR2 attempts to do PASE to DUT_CE using the correct onboarding payload");
+            LogStep(25, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
+            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
+            return PairWithCode(kIdentityBeta, value);
+        }
+        case 26: {
+            LogStep(26, "TH_CR2 attempts to do PASE to DUT_CE using the correct onboarding payload");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
@@ -100523,6 +100827,16 @@ private:
             value.payload =
                 mCorrectPayload.HasValue() ? mCorrectPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
+        }
+        case 27: {
+            LogStep(27, "TH_CR3 starts a commissioning process with DUT_CE");
+            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+            value.nodeId = mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL;
+            value.payload =
+                mCorrectPayload.HasValue() ? mCorrectPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
+            return PairWithCode(kIdentityGamma, value);
         }
         }
         return CHIP_NO_ERROR;
@@ -100533,7 +100847,7 @@ class Test_TC_CADMIN_1_13Suite : public TestCommand
 {
 public:
     Test_TC_CADMIN_1_13Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_CADMIN_1_13", 29, credsIssuerConfig)
+        TestCommand("Test_TC_CADMIN_1_13", 34, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
@@ -100541,6 +100855,7 @@ public:
         AddArgument("nodeId2", 0, UINT64_MAX, &mNodeId2);
         AddArgument("nodeId3", 0, UINT64_MAX, &mNodeId3);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("waitAfterCommissioning", 0, UINT16_MAX, &mWaitAfterCommissioning);
         AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
         AddArgument("payload", &mPayload);
         AddArgument("PakeVerifier", &mPakeVerifier);
@@ -100557,6 +100872,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId2;
     chip::Optional<chip::NodeId> mNodeId3;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mWaitAfterCommissioning;
     chip::Optional<uint16_t> mDiscriminator;
     chip::Optional<chip::CharSpan> mPayload;
     chip::Optional<chip::ByteSpan> mPakeVerifier;
@@ -100590,15 +100906,15 @@ private:
             break;
         case 4:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("windowStatus", value, 2U));
             }
-            break;
-        case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
             break;
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -100618,10 +100934,10 @@ private:
             break;
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
             break;
         case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -100629,13 +100945,25 @@ private:
             break;
         case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.HasValue(), true));
             VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.Value(), 2));
             break;
-        case 15:
+        case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -100659,21 +100987,6 @@ private:
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 3));
                 }
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
-            }
-            break;
-        case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 18:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("windowStatus", value, 1U));
             }
             break;
         case 19:
@@ -100681,42 +100994,23 @@ private:
             shouldContinue = true;
             break;
         case 20:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.HasValue(), true));
-            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.Value(), 2));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
-                    value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                {
-                    auto iter_0 = value.begin();
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
-                    VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
-                    VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 2));
-                    VerifyOrReturn(CheckValue("fabrics[2].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[2].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 3));
-                }
-                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
-            }
+            shouldContinue = true;
             break;
         case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
+            {
+                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("windowStatus", value, 1U));
+            }
             break;
         case 23:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         case 24:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
@@ -100725,9 +101019,51 @@ private:
             break;
         case 25:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
+                    VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
+                                              mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
+                    VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
+                    VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
+                                              mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL));
+                    VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 2));
+                    VerifyOrReturn(CheckValue("fabrics[2].nodeID", iter_0.GetValue().nodeID,
+                                              mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL));
+                    VerifyOrReturn(CheckValueAsString("fabrics[2].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 3));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
             break;
         case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 28:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 29:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.HasValue(), true));
+            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.Value(), 2));
+            break;
+        case 30:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 31:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
@@ -100735,7 +101071,7 @@ private:
                 VerifyOrReturn(CheckValue("windowStatus", value, 0U));
             }
             break;
-        case 27:
+        case 32:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::Nullable<chip::FabricIndex> value;
@@ -100743,7 +101079,7 @@ private:
                 VerifyOrReturn(CheckValueNull("adminFabricIndex", value));
             }
             break;
-        case 28:
+        case 33:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::Nullable<uint16_t> value;
@@ -100805,13 +101141,20 @@ private:
             );
         }
         case 4: {
-            LogStep(4, "TH_CR1 reads WindowStatus attribute from DUT_CE");
+            LogStep(4, "Waiting after opening commissioning window");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 5: {
+            LogStep(5, "TH_CR1 reads WindowStatus attribute from DUT_CE");
             VerifyOrDo(!ShouldSkip("CADMIN.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
                                  AdministratorCommissioning::Attributes::WindowStatus::Id, true, chip::NullOptional);
         }
-        case 5: {
-            LogStep(5,
+        case 6: {
+            LogStep(6,
                     "TH_CR1 reads AdminFabricIndex attribute from DUT_CE and Verify TH_CR1 reads the AdminFabricIndex value "
                     "successfully and verify the value to be the same as the Fabric Index of the Fabrics attribute list entry in "
                     "TH_CR1");
@@ -100823,8 +101166,8 @@ private:
             value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
             return UserPrompt(kIdentityAlpha, value);
         }
-        case 6: {
-            LogStep(6,
+        case 7: {
+            LogStep(7,
                     "TH_CR1 reads AdminVendorId attribute from DUT_CE and Verify TH_CR1 reads the AdminVendorId value successfully "
                     "and verify this value to be the same as the Vendor ID field of Fabrics attribute list entry in TH_CR1");
             VerifyOrDo(!ShouldSkip("CADMIN.S.A0002 && PICS_USER_PROMPT"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
@@ -100835,8 +101178,8 @@ private:
             value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
             return UserPrompt(kIdentityAlpha, value);
         }
-        case 7: {
-            LogStep(7, "Verify that the DNS-SD advertisement shows CM=1");
+        case 8: {
+            LogStep(8, "Verify that the DNS-SD advertisement shows CM=1");
             VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
@@ -100845,24 +101188,24 @@ private:
             value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
             return UserPrompt(kIdentityAlpha, value);
         }
-        case 8: {
-            LogStep(8, "TH_CR3 starts a commissioning process with DUT_CE");
+        case 9: {
+            LogStep(9, "TH_CR3 starts a commissioning process with DUT_CE");
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL;
             value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
             return PairWithCode(kIdentityGamma, value);
         }
-        case 9: {
-            LogStep(9, "DUT_CE is commissioned to TH_CR3 on Fabric ID3 with Node ID3");
+        case 10: {
+            LogStep(10, "DUT_CE is commissioned to TH_CR3 on Fabric ID3 with Node ID3");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
             value.nodeId = mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL;
             return WaitForCommissionee(kIdentityGamma, value);
         }
-        case 10: {
-            LogStep(10, "TH_CR1 opens a commissioning window on DUT_CE");
+        case 11: {
+            LogStep(11, "TH_CR1 opens a commissioning window on DUT_CE");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type value;
@@ -100873,23 +101216,30 @@ private:
 
             );
         }
-        case 11: {
-            LogStep(11, "TH_CR2 starts a commissioning process with DUT_CE");
+        case 12: {
+            LogStep(12, "Waiting after opening commissioning window");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 13: {
+            LogStep(13, "TH_CR2 starts a commissioning process with DUT_CE");
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
-        case 12: {
-            LogStep(12, "DUT_CE is commissioned to TH_CR2 on Fabric ID2 with Node ID2");
+        case 14: {
+            LogStep(14, "DUT_CE is commissioned to TH_CR2 on Fabric ID2 with Node ID2");
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
             value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             return WaitForCommissionee(kIdentityBeta, value);
         }
-        case 13: {
-            LogStep(13, "TH_CR1 opens a commissioning window on DUT_CE");
+        case 15: {
+            LogStep(15, "TH_CR1 opens a commissioning window on DUT_CE");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type value;
@@ -100900,45 +101250,15 @@ private:
 
             );
         }
-        case 14: {
-            LogStep(14, "TH_CR1 opens a 2nd commissioning window on DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
-            value.commissioningTimeout = 180U;
-            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
-                ? mPakeVerifier.Value()
-                : chip::ByteSpan(
-                      chip::Uint8::from_const_char(
-                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
-                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
-                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
-                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
-                      97);
-            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations           = 1000UL;
-            value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
-            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 15: {
-            LogStep(15, "TH_CR1 reads the list of Fabrics on DUT_CE");
-            VerifyOrDo(!ShouldSkip("OPCREDS.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
-                                 OperationalCredentials::Attributes::Fabrics::Id, false, chip::NullOptional);
-        }
         case 16: {
-            LogStep(16, "Wait for the expiration of PIXIT.CADMIN.CwDuration seconds");
+            LogStep(16, "Waiting after opening commissioning window");
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-            value.ms = 180000UL;
+            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
             return WaitForMs(kIdentityAlpha, value);
         }
         case 17: {
-            LogStep(17, "TH_CR1 re-opens new commissioning window on DUT_CE using ECM");
+            LogStep(17, "TH_CR1 opens a 2nd commissioning window on DUT_CE");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
@@ -100962,60 +101282,20 @@ private:
             );
         }
         case 18: {
-            LogStep(18, "TH_CR1 reads WindowStatus attribute from DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                                 AdministratorCommissioning::Attributes::WindowStatus::Id, true, chip::NullOptional);
-        }
-        case 19: {
-            LogStep(19, "Verify that the DNS-SD advertisement shows CM=2");
-            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>("enter 'y' after successgarbage: not in length on purpose", 23);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 20: {
-            LogStep(20, "TH_CR3 opens a 2nd commissioning window on DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
-            value.commissioningTimeout = 180U;
-            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
-                ? mPakeVerifier.Value()
-                : chip::ByteSpan(
-                      chip::Uint8::from_const_char(
-                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
-                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
-                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
-                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
-                      97);
-            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations           = 1000UL;
-            value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
-            return SendCommand(kIdentityGamma, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 21: {
-            LogStep(21, "TH_CR1 reads the list of Fabrics on DUT_CE");
+            LogStep(18, "TH_CR1 reads the list of Fabrics on DUT_CE");
             VerifyOrDo(!ShouldSkip("OPCREDS.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
                                  OperationalCredentials::Attributes::Fabrics::Id, false, chip::NullOptional);
         }
-        case 22: {
-            LogStep(22, "Wait for the expiration of PIXIT_COMM_WIN seconds");
+        case 19: {
+            LogStep(19, "Wait for the expiration of PIXIT.CADMIN.CwDuration seconds");
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 180000UL;
             return WaitForMs(kIdentityAlpha, value);
         }
-        case 23: {
-            LogStep(23, "TH_CR1 opens a new commissioning window on DUT_CE");
+        case 20: {
+            LogStep(20, "TH_CR1 re-opens new commissioning window on DUT_CE using ECM");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
@@ -101038,8 +101318,99 @@ private:
 
             );
         }
+        case 21: {
+            LogStep(21, "Waiting after opening commissioning window");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 22: {
+            LogStep(22, "TH_CR1 reads WindowStatus attribute from DUT_CE");
+            VerifyOrDo(!ShouldSkip("CADMIN.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
+                                 AdministratorCommissioning::Attributes::WindowStatus::Id, true, chip::NullOptional);
+        }
+        case 23: {
+            LogStep(23, "Verify that the DNS-SD advertisement shows CM=2");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
         case 24: {
-            LogStep(24, "TH_CR2 opens a 2nd commissioning window on DUT_CE using ECM");
+            LogStep(24, "TH_CR3 opens a 2nd commissioning window on DUT_CE");
+            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
+            value.commissioningTimeout = 180U;
+            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
+                ? mPakeVerifier.Value()
+                : chip::ByteSpan(
+                      chip::Uint8::from_const_char(
+                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
+                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
+                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
+                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
+                      97);
+            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
+            value.iterations           = 1000UL;
+            value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
+            return SendCommand(kIdentityGamma, GetEndpoint(0), AdministratorCommissioning::Id,
+                               AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
+                               chip::Optional<uint16_t>(10000), chip::NullOptional
+
+            );
+        }
+        case 25: {
+            LogStep(25, "TH_CR1 reads the list of Fabrics on DUT_CE");
+            VerifyOrDo(!ShouldSkip("OPCREDS.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
+                                 OperationalCredentials::Attributes::Fabrics::Id, false, chip::NullOptional);
+        }
+        case 26: {
+            LogStep(26, "Wait for the expiration of PIXIT_COMM_WIN seconds");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = 180000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 27: {
+            LogStep(27, "TH_CR1 opens a new commissioning window on DUT_CE");
+            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
+            value.commissioningTimeout = 180U;
+            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
+                ? mPakeVerifier.Value()
+                : chip::ByteSpan(
+                      chip::Uint8::from_const_char(
+                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
+                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
+                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
+                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
+                      97);
+            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
+            value.iterations           = 1000UL;
+            value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
+                               AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
+                               chip::Optional<uint16_t>(10000), chip::NullOptional
+
+            );
+        }
+        case 28: {
+            LogStep(28, "Waiting after opening commissioning window");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 29: {
+            LogStep(29, "TH_CR2 opens a 2nd commissioning window on DUT_CE using ECM");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
@@ -101062,27 +101433,27 @@ private:
 
             );
         }
-        case 25: {
-            LogStep(25, "Wait for the expiration of PIXIT.CADMIN.CwDuration seconds");
+        case 30: {
+            LogStep(30, "Wait for the expiration of PIXIT.CADMIN.CwDuration seconds");
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 180000UL;
             return WaitForMs(kIdentityAlpha, value);
         }
-        case 26: {
-            LogStep(26, "TH_CR1 reads WindowStatus attribute from DUT_CE");
+        case 31: {
+            LogStep(31, "TH_CR1 reads WindowStatus attribute from DUT_CE");
             VerifyOrDo(!ShouldSkip("CADMIN.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
                                  AdministratorCommissioning::Attributes::WindowStatus::Id, true, chip::NullOptional);
         }
-        case 27: {
-            LogStep(27, "TH_CR1 reads AdminFabricIndex attribute from DUT_CE");
+        case 32: {
+            LogStep(32, "TH_CR1 reads AdminFabricIndex attribute from DUT_CE");
             VerifyOrDo(!ShouldSkip("CADMIN.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
                                  AdministratorCommissioning::Attributes::AdminFabricIndex::Id, true, chip::NullOptional);
         }
-        case 28: {
-            LogStep(28, "TH_CR1 reads AdminVendorId attribute from DUT_CE");
+        case 33: {
+            LogStep(33, "TH_CR1 reads AdminVendorId attribute from DUT_CE");
             VerifyOrDo(!ShouldSkip("CADMIN.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
                                  AdministratorCommissioning::Attributes::AdminVendorId::Id, true, chip::NullOptional);
@@ -105372,12 +105743,7 @@ private:
             break;
         case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                uint8_t value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 166U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 224U));
-            }
+            shouldContinue = true;
             break;
         case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -105385,12 +105751,7 @@ private:
             break;
         case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                uint8_t value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 115U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 155U));
-            }
+            shouldContinue = true;
             break;
         case 23:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -105769,9 +106130,14 @@ private:
         }
         case 20: {
             LogStep(20, "TH reads CurrentHue attribute from DUT");
-            VerifyOrDo(!ShouldSkip("CC.S.F00 && CC.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::CurrentHue::Id, true,
-                                 chip::NullOptional);
+            VerifyOrDo(!ShouldSkip("CC.S.F00 && CC.S.A0000 && PICS_SKIP_SAMPLE_APP"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
         }
         case 21: {
             LogStep(21, "Wait 10s");
@@ -105783,9 +106149,14 @@ private:
         }
         case 22: {
             LogStep(22, "TH reads CurrentHue attribute from DUT");
-            VerifyOrDo(!ShouldSkip("CC.S.F00 && CC.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::CurrentHue::Id, true,
-                                 chip::NullOptional);
+            VerifyOrDo(!ShouldSkip("CC.S.F00 && CC.S.A0000 && PICS_SKIP_SAMPLE_APP"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
         }
         case 23: {
             LogStep(23, "Wait 5s");
