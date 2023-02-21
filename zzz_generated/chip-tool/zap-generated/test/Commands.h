@@ -39988,7 +39988,7 @@ private:
         case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::BitMask<chip::app::Clusters::PumpConfigurationAndControl::PumpStatus> value;
+                chip::BitMask<chip::app::Clusters::PumpConfigurationAndControl::PumpStatusBitmap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap16", "bitmap16"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
@@ -39998,7 +39998,7 @@ private:
         case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode value;
+                chip::app::Clusters::PumpConfigurationAndControl::OperationModeEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
@@ -40008,7 +40008,7 @@ private:
         case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode value;
+                chip::app::Clusters::PumpConfigurationAndControl::ControlModeEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
@@ -40068,7 +40068,7 @@ private:
         case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode value;
+                chip::app::Clusters::PumpConfigurationAndControl::OperationModeEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
@@ -40078,7 +40078,7 @@ private:
         case 23:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode value;
+                chip::app::Clusters::PumpConfigurationAndControl::ControlModeEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
@@ -40296,7 +40296,7 @@ private:
         case 2:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode value;
+                chip::app::Clusters::PumpConfigurationAndControl::OperationModeEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("effectiveOperationMode", value, 0U));
             }
@@ -40307,7 +40307,7 @@ private:
         case 4:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode value;
+                chip::app::Clusters::PumpConfigurationAndControl::OperationModeEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("effectiveOperationMode", value, 1U));
             }
@@ -40318,7 +40318,7 @@ private:
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode value;
+                chip::app::Clusters::PumpConfigurationAndControl::OperationModeEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("effectiveOperationMode", value, 2U));
             }
@@ -40329,7 +40329,7 @@ private:
         case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode value;
+                chip::app::Clusters::PumpConfigurationAndControl::OperationModeEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("effectiveOperationMode", value, 3U));
             }
@@ -40360,8 +40360,8 @@ private:
             LogStep(1, "TH write 0 (Normal) to the OperationMode attribute to DUT");
             VerifyOrDo(!ShouldSkip("PCC.S.A0020"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode value;
-            value = static_cast<chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode>(0);
+            chip::app::Clusters::PumpConfigurationAndControl::OperationModeEnum value;
+            value = static_cast<chip::app::Clusters::PumpConfigurationAndControl::OperationModeEnum>(0);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
                                   PumpConfigurationAndControl::Attributes::OperationMode::Id, value, chip::NullOptional,
                                   chip::NullOptional);
@@ -40376,8 +40376,8 @@ private:
             LogStep(3, "TH write 1 (Minimum) to the OperationMode attribute to DUT");
             VerifyOrDo(!ShouldSkip("PCC.S.F03 && PCC.S.A0020"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode value;
-            value = static_cast<chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode>(1);
+            chip::app::Clusters::PumpConfigurationAndControl::OperationModeEnum value;
+            value = static_cast<chip::app::Clusters::PumpConfigurationAndControl::OperationModeEnum>(1);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
                                   PumpConfigurationAndControl::Attributes::OperationMode::Id, value, chip::NullOptional,
                                   chip::NullOptional);
@@ -40392,8 +40392,8 @@ private:
             LogStep(5, "TH write 2 (Maximum) to the OperationMode attribute to DUT one at a time.");
             VerifyOrDo(!ShouldSkip("PCC.S.F03 && PCC.S.A0020"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode value;
-            value = static_cast<chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode>(2);
+            chip::app::Clusters::PumpConfigurationAndControl::OperationModeEnum value;
+            value = static_cast<chip::app::Clusters::PumpConfigurationAndControl::OperationModeEnum>(2);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
                                   PumpConfigurationAndControl::Attributes::OperationMode::Id, value, chip::NullOptional,
                                   chip::NullOptional);
@@ -40408,8 +40408,8 @@ private:
             LogStep(7, "TH write 3 (Local) to the OperationMode attribute to DUT");
             VerifyOrDo(!ShouldSkip("PCC.S.F06 && PCC.S.A0020"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode value;
-            value = static_cast<chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode>(3);
+            chip::app::Clusters::PumpConfigurationAndControl::OperationModeEnum value;
+            value = static_cast<chip::app::Clusters::PumpConfigurationAndControl::OperationModeEnum>(3);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
                                   PumpConfigurationAndControl::Attributes::OperationMode::Id, value, chip::NullOptional,
                                   chip::NullOptional);
@@ -40471,7 +40471,7 @@ private:
         case 2:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode value;
+                chip::app::Clusters::PumpConfigurationAndControl::OperationModeEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("effectiveOperationMode", value, 0U));
             }
@@ -40482,7 +40482,7 @@ private:
         case 4:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode value;
+                chip::app::Clusters::PumpConfigurationAndControl::ControlModeEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("effectiveControlMode", value, 0U));
             }
@@ -40493,7 +40493,7 @@ private:
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode value;
+                chip::app::Clusters::PumpConfigurationAndControl::ControlModeEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("effectiveControlMode", value, 1U));
             }
@@ -40504,7 +40504,7 @@ private:
         case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode value;
+                chip::app::Clusters::PumpConfigurationAndControl::ControlModeEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("effectiveControlMode", value, 2U));
             }
@@ -40515,7 +40515,7 @@ private:
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode value;
+                chip::app::Clusters::PumpConfigurationAndControl::ControlModeEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("effectiveControlMode", value, 3U));
             }
@@ -40526,7 +40526,7 @@ private:
         case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode value;
+                chip::app::Clusters::PumpConfigurationAndControl::ControlModeEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("effectiveControlMode", value, 5U));
             }
@@ -40537,7 +40537,7 @@ private:
         case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode value;
+                chip::app::Clusters::PumpConfigurationAndControl::ControlModeEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("effectiveControlMode", value, 7U));
             }
@@ -40568,8 +40568,8 @@ private:
             LogStep(1, "Write 0 to the OperationMode attribute to DUT");
             VerifyOrDo(!ShouldSkip("PCC.S.A0020"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode value;
-            value = static_cast<chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode>(0);
+            chip::app::Clusters::PumpConfigurationAndControl::OperationModeEnum value;
+            value = static_cast<chip::app::Clusters::PumpConfigurationAndControl::OperationModeEnum>(0);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
                                   PumpConfigurationAndControl::Attributes::OperationMode::Id, value, chip::NullOptional,
                                   chip::NullOptional);
@@ -40584,8 +40584,8 @@ private:
             LogStep(3, "Write 0 to the ControlMode attribute to DUT");
             VerifyOrDo(!ShouldSkip("PCC.S.F03 && PCC.S.A0021"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode value;
-            value = static_cast<chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode>(0);
+            chip::app::Clusters::PumpConfigurationAndControl::ControlModeEnum value;
+            value = static_cast<chip::app::Clusters::PumpConfigurationAndControl::ControlModeEnum>(0);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
                                   PumpConfigurationAndControl::Attributes::ControlMode::Id, value, chip::NullOptional,
                                   chip::NullOptional);
@@ -40600,8 +40600,8 @@ private:
             LogStep(5, "Write 1 to the ControlMode attribute to DUT");
             VerifyOrDo(!ShouldSkip("PCC.S.F00 && PCC.S.A0021"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode value;
-            value = static_cast<chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode>(1);
+            chip::app::Clusters::PumpConfigurationAndControl::ControlModeEnum value;
+            value = static_cast<chip::app::Clusters::PumpConfigurationAndControl::ControlModeEnum>(1);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
                                   PumpConfigurationAndControl::Attributes::ControlMode::Id, value, chip::NullOptional,
                                   chip::NullOptional);
@@ -40616,8 +40616,8 @@ private:
             LogStep(7, "Write 2 to the ControlMode attribute to DUT");
             VerifyOrDo(!ShouldSkip("PCC.S.F01 && PCC.S.A0021"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode value;
-            value = static_cast<chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode>(2);
+            chip::app::Clusters::PumpConfigurationAndControl::ControlModeEnum value;
+            value = static_cast<chip::app::Clusters::PumpConfigurationAndControl::ControlModeEnum>(2);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
                                   PumpConfigurationAndControl::Attributes::ControlMode::Id, value, chip::NullOptional,
                                   chip::NullOptional);
@@ -40632,8 +40632,8 @@ private:
             LogStep(9, "Write 3 to the ControlMode attribute to DUT");
             VerifyOrDo(!ShouldSkip("PCC.S.F02 && PCC.S.A0021"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode value;
-            value = static_cast<chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode>(3);
+            chip::app::Clusters::PumpConfigurationAndControl::ControlModeEnum value;
+            value = static_cast<chip::app::Clusters::PumpConfigurationAndControl::ControlModeEnum>(3);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
                                   PumpConfigurationAndControl::Attributes::ControlMode::Id, value, chip::NullOptional,
                                   chip::NullOptional);
@@ -40648,8 +40648,8 @@ private:
             LogStep(11, "Write 5 to the ControlMode attribute to DUT");
             VerifyOrDo(!ShouldSkip("PCC.S.F04 && PCC.S.A0021"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode value;
-            value = static_cast<chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode>(5);
+            chip::app::Clusters::PumpConfigurationAndControl::ControlModeEnum value;
+            value = static_cast<chip::app::Clusters::PumpConfigurationAndControl::ControlModeEnum>(5);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
                                   PumpConfigurationAndControl::Attributes::ControlMode::Id, value, chip::NullOptional,
                                   chip::NullOptional);
@@ -40664,8 +40664,8 @@ private:
             LogStep(13, "Write 7 to the ControlMode attribute to DUT");
             VerifyOrDo(!ShouldSkip("PCC.S.F05 && PCC.S.A0021"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode value;
-            value = static_cast<chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode>(7);
+            chip::app::Clusters::PumpConfigurationAndControl::ControlModeEnum value;
+            value = static_cast<chip::app::Clusters::PumpConfigurationAndControl::ControlModeEnum>(7);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
                                   PumpConfigurationAndControl::Attributes::ControlMode::Id, value, chip::NullOptional,
                                   chip::NullOptional);
