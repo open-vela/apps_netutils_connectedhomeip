@@ -41956,7 +41956,7 @@ private:
 class Test_TC_SC_5_2Suite : public TestCommand
 {
 public:
-    Test_TC_SC_5_2Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_SC_5_2", 14, credsIssuerConfig)
+    Test_TC_SC_5_2Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_SC_5_2", 15, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -42038,6 +42038,10 @@ private:
             break;
         case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::Groups::Commands::ViewGroupResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
@@ -42046,7 +42050,7 @@ private:
                 VerifyOrReturn(CheckValueAsString("groupName", value.groupName, chip::CharSpan("Test Group 0101", 15)));
             }
             break;
-        case 10:
+        case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::Groups::Commands::ViewGroupResponse::DecodableType value;
@@ -42056,13 +42060,13 @@ private:
                 VerifyOrReturn(CheckValueAsString("groupName", value.groupName, chip::CharSpan("", 0)));
             }
             break;
-        case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         default:
@@ -42232,7 +42236,18 @@ private:
             return WaitForMs(kIdentityAlpha, value);
         }
         case 9: {
-            LogStep(9, "TH sends ViewGroup command");
+            LogStep(9, "Verify there is no response from DUT");
+            VerifyOrDo(!ShouldSkip("!PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message =
+                chip::Span<const char>("Verify that there is no response from DUTgarbage: not in length on purpose", 41);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 10: {
+            LogStep(10, "TH sends ViewGroup command");
             VerifyOrDo(!ShouldSkip("G.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::Groups::Commands::ViewGroup::Type value;
@@ -42242,8 +42257,8 @@ private:
 
             );
         }
-        case 10: {
-            LogStep(10, "TH sends ViewGroup command");
+        case 11: {
+            LogStep(11, "TH sends ViewGroup command");
             VerifyOrDo(!ShouldSkip("!(G.S.F00)"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::Groups::Commands::ViewGroup::Type value;
@@ -42253,8 +42268,8 @@ private:
 
             );
         }
-        case 11: {
-            LogStep(11, "TH removes the GroupKeySet");
+        case 12: {
+            LogStep(12, "TH removes the GroupKeySet");
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetRemove::Type value;
             value.groupKeySetID = 419U;
@@ -42263,8 +42278,8 @@ private:
 
             );
         }
-        case 12: {
-            LogStep(12, "TH cleans up groups using RemoveAllGroups command");
+        case 13: {
+            LogStep(13, "TH cleans up groups using RemoveAllGroups command");
             ListFreer listFreer;
             chip::app::Clusters::Groups::Commands::RemoveAllGroups::Type value;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), Groups::Id, Groups::Commands::RemoveAllGroups::Id, value,
@@ -42272,8 +42287,8 @@ private:
 
             );
         }
-        case 13: {
-            LogStep(13, "TH removes ACL Operate privileges for Group 0x0103");
+        case 14: {
+            LogStep(14, "TH removes ACL Operate privileges for Group 0x0103");
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
