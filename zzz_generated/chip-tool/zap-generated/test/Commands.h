@@ -41750,7 +41750,7 @@ private:
 
             value.groupKeySet.groupKeySetID = 419U;
             value.groupKeySet.groupKeySecurityPolicy =
-                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicy>(0);
+                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicyEnum>(0);
             value.groupKeySet.epochKey0.SetNonNull();
             value.groupKeySet.epochKey0.Value() = chip::ByteSpan(
                 chip::Uint8::from_const_char("0x00000000000000000000000000000001garbage: not in length on purpose"), 34);
@@ -41779,7 +41779,7 @@ private:
 
             value.groupKeySet.groupKeySetID = 419U;
             value.groupKeySet.groupKeySecurityPolicy =
-                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicy>(0);
+                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicyEnum>(0);
             value.groupKeySet.epochKey0.SetNonNull();
             value.groupKeySet.epochKey0.Value() = chip::ByteSpan(
                 chip::Uint8::from_const_char("0xd0d1d2d3d4d5d6d7d8d9dadbdcdddedfgarbage: not in length on purpose"), 34);
@@ -42150,7 +42150,7 @@ private:
 
             value.groupKeySet.groupKeySetID = 419U;
             value.groupKeySet.groupKeySecurityPolicy =
-                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicy>(0);
+                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicyEnum>(0);
             value.groupKeySet.epochKey0.SetNonNull();
             value.groupKeySet.epochKey0.Value() = chip::ByteSpan(
                 chip::Uint8::from_const_char(
@@ -85889,7 +85889,7 @@ private:
 
             value.groupKeySet.groupKeySetID = 417U;
             value.groupKeySet.groupKeySecurityPolicy =
-                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicy>(0);
+                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicyEnum>(0);
             value.groupKeySet.epochKey0.SetNonNull();
             value.groupKeySet.epochKey0.Value() = chip::ByteSpan(
                 chip::Uint8::from_const_char(
@@ -85924,7 +85924,7 @@ private:
 
             value.groupKeySet.groupKeySetID = 418U;
             value.groupKeySet.groupKeySecurityPolicy =
-                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicy>(0);
+                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicyEnum>(0);
             value.groupKeySet.epochKey0.SetNonNull();
             value.groupKeySet.epochKey0.Value() = chip::ByteSpan(
                 chip::Uint8::from_const_char(
@@ -86158,7 +86158,7 @@ private:
 
             value.groupKeySet.groupKeySetID = 417U;
             value.groupKeySet.groupKeySecurityPolicy =
-                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicy>(0);
+                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicyEnum>(0);
             value.groupKeySet.epochKey0.SetNonNull();
             value.groupKeySet.epochKey0.Value() = chip::ByteSpan(
                 chip::Uint8::from_const_char(
@@ -86193,7 +86193,7 @@ private:
 
             value.groupKeySet.groupKeySetID = 418U;
             value.groupKeySet.groupKeySecurityPolicy =
-                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicy>(0);
+                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicyEnum>(0);
             value.groupKeySet.epochKey0.SetNonNull();
             value.groupKeySet.epochKey0.Value() = chip::ByteSpan(
                 chip::Uint8::from_const_char(
@@ -86729,7 +86729,7 @@ private:
 
             value.groupKeySet.groupKeySetID = 417U;
             value.groupKeySet.groupKeySecurityPolicy =
-                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicy>(0);
+                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicyEnum>(0);
             value.groupKeySet.epochKey0.SetNonNull();
             value.groupKeySet.epochKey0.Value() = chip::ByteSpan(
                 chip::Uint8::from_const_char(
@@ -87446,7 +87446,7 @@ private:
 
             value.groupKeySet.groupKeySetID = 417U;
             value.groupKeySet.groupKeySecurityPolicy =
-                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicy>(0);
+                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicyEnum>(0);
             value.groupKeySet.epochKey0.SetNonNull();
             value.groupKeySet.epochKey0.Value() = chip::ByteSpan(
                 chip::Uint8::from_const_char(
@@ -87481,7 +87481,7 @@ private:
 
             value.groupKeySet.groupKeySetID = 418U;
             value.groupKeySet.groupKeySecurityPolicy =
-                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicy>(1);
+                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicyEnum>(1);
             value.groupKeySet.epochKey0.SetNonNull();
             value.groupKeySet.epochKey0.Value() = chip::ByteSpan(
                 chip::Uint8::from_const_char(
@@ -87744,7 +87744,7 @@ private:
 
             value.groupKeySet.groupKeySetID = 417U;
             value.groupKeySet.groupKeySecurityPolicy =
-                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicy>(0);
+                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicyEnum>(0);
             value.groupKeySet.epochKey0.SetNonNull();
             value.groupKeySet.epochKey0.Value() = chip::ByteSpan(
                 chip::Uint8::from_const_char(
@@ -87779,7 +87779,7 @@ private:
 
             value.groupKeySet.groupKeySetID = 418U;
             value.groupKeySet.groupKeySecurityPolicy =
-                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicy>(1);
+                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicyEnum>(1);
             value.groupKeySet.epochKey0.SetNonNull();
             value.groupKeySet.epochKey0.Value() = chip::ByteSpan(
                 chip::Uint8::from_const_char(
@@ -90402,7 +90402,7 @@ private:
 
             value.groupKeySet.groupKeySetID = 417U;
             value.groupKeySet.groupKeySecurityPolicy =
-                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicy>(0);
+                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicyEnum>(0);
             value.groupKeySet.epochKey0.SetNonNull();
             value.groupKeySet.epochKey0.Value() = chip::ByteSpan(
                 chip::Uint8::from_const_char(
