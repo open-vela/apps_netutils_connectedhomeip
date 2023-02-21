@@ -58436,7 +58436,7 @@ using chip::System::Clock::Timeout;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = PumpConfigurationAndControl::Attributes::EffectiveOperationMode::TypeInfo;
-    return MTRReadAttribute<MTRPumpConfigurationAndControlClusterPumpOperationModeAttributeCallbackBridge, NSNumber,
+    return MTRReadAttribute<MTRPumpConfigurationAndControlClusterOperationModeEnumAttributeCallbackBridge, NSNumber,
         TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -58447,7 +58447,7 @@ using chip::System::Clock::Timeout;
                                                  (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = PumpConfigurationAndControl::Attributes::EffectiveOperationMode::TypeInfo;
-    MTRSubscribeAttribute<MTRPumpConfigurationAndControlClusterPumpOperationModeAttributeCallbackSubscriptionBridge, NSNumber,
+    MTRSubscribeAttribute<MTRPumpConfigurationAndControlClusterOperationModeEnumAttributeCallbackSubscriptionBridge, NSNumber,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -58458,9 +58458,9 @@ using chip::System::Clock::Timeout;
                                                       completion:(void (^)(NSNumber * _Nullable value,
                                                                      NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRPumpConfigurationAndControlClusterPumpOperationModeAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRPumpConfigurationAndControlClusterOperationModeEnumAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(PumpConfigurationAndControlClusterPumpOperationModeAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(PumpConfigurationAndControlClusterOperationModeEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = PumpConfigurationAndControl::Attributes::EffectiveOperationMode::TypeInfo;
@@ -58482,7 +58482,7 @@ using chip::System::Clock::Timeout;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = PumpConfigurationAndControl::Attributes::EffectiveControlMode::TypeInfo;
-    return MTRReadAttribute<MTRPumpConfigurationAndControlClusterPumpControlModeAttributeCallbackBridge, NSNumber,
+    return MTRReadAttribute<MTRPumpConfigurationAndControlClusterControlModeEnumAttributeCallbackBridge, NSNumber,
         TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -58493,7 +58493,7 @@ using chip::System::Clock::Timeout;
                                                (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = PumpConfigurationAndControl::Attributes::EffectiveControlMode::TypeInfo;
-    MTRSubscribeAttribute<MTRPumpConfigurationAndControlClusterPumpControlModeAttributeCallbackSubscriptionBridge, NSNumber,
+    MTRSubscribeAttribute<MTRPumpConfigurationAndControlClusterControlModeEnumAttributeCallbackSubscriptionBridge, NSNumber,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -58504,9 +58504,9 @@ using chip::System::Clock::Timeout;
                                                     completion:
                                                         (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRPumpConfigurationAndControlClusterPumpControlModeAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRPumpConfigurationAndControlClusterControlModeEnumAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(PumpConfigurationAndControlClusterPumpControlModeAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(PumpConfigurationAndControlClusterControlModeEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = PumpConfigurationAndControl::Attributes::EffectiveControlMode::TypeInfo;
@@ -58832,7 +58832,7 @@ using chip::System::Clock::Timeout;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = PumpConfigurationAndControl::Attributes::OperationMode::TypeInfo;
-    return MTRReadAttribute<MTRPumpConfigurationAndControlClusterPumpOperationModeAttributeCallbackBridge, NSNumber,
+    return MTRReadAttribute<MTRPumpConfigurationAndControlClusterOperationModeEnumAttributeCallbackBridge, NSNumber,
         TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -58879,7 +58879,7 @@ using chip::System::Clock::Timeout;
                                     reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = PumpConfigurationAndControl::Attributes::OperationMode::TypeInfo;
-    MTRSubscribeAttribute<MTRPumpConfigurationAndControlClusterPumpOperationModeAttributeCallbackSubscriptionBridge, NSNumber,
+    MTRSubscribeAttribute<MTRPumpConfigurationAndControlClusterOperationModeEnumAttributeCallbackSubscriptionBridge, NSNumber,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -58889,9 +58889,9 @@ using chip::System::Clock::Timeout;
                                                   queue:(dispatch_queue_t)queue
                                              completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRPumpConfigurationAndControlClusterPumpOperationModeAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRPumpConfigurationAndControlClusterOperationModeEnumAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(PumpConfigurationAndControlClusterPumpOperationModeAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(PumpConfigurationAndControlClusterOperationModeEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = PumpConfigurationAndControl::Attributes::OperationMode::TypeInfo;
@@ -58913,7 +58913,7 @@ using chip::System::Clock::Timeout;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = PumpConfigurationAndControl::Attributes::ControlMode::TypeInfo;
-    return MTRReadAttribute<MTRPumpConfigurationAndControlClusterPumpControlModeAttributeCallbackBridge, NSNumber,
+    return MTRReadAttribute<MTRPumpConfigurationAndControlClusterControlModeEnumAttributeCallbackBridge, NSNumber,
         TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -58960,7 +58960,7 @@ using chip::System::Clock::Timeout;
                                   reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = PumpConfigurationAndControl::Attributes::ControlMode::TypeInfo;
-    MTRSubscribeAttribute<MTRPumpConfigurationAndControlClusterPumpControlModeAttributeCallbackSubscriptionBridge, NSNumber,
+    MTRSubscribeAttribute<MTRPumpConfigurationAndControlClusterControlModeEnumAttributeCallbackSubscriptionBridge, NSNumber,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -58970,9 +58970,9 @@ using chip::System::Clock::Timeout;
                                                 queue:(dispatch_queue_t)queue
                                            completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRPumpConfigurationAndControlClusterPumpControlModeAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRPumpConfigurationAndControlClusterControlModeEnumAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(PumpConfigurationAndControlClusterPumpControlModeAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(PumpConfigurationAndControlClusterControlModeEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = PumpConfigurationAndControl::Attributes::ControlMode::TypeInfo;
