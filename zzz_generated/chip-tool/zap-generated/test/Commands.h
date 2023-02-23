@@ -74750,7 +74750,7 @@ class DL_UsersAndCredentialsSuite : public TestCommand
 {
 public:
     DL_UsersAndCredentialsSuite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("DL_UsersAndCredentials", 123, credsIssuerConfig)
+        TestCommand("DL_UsersAndCredentials", 128, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -75449,6 +75449,7 @@ private:
                 VerifyOrReturn(CheckValueNull("userIndex", value.userIndex));
                 VerifyOrReturn(CheckValueNull("creatorFabricIndex", value.creatorFabricIndex));
                 VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", value.lastModifiedFabricIndex));
+                VerifyOrReturn(CheckValueNull("nextCredentialIndex", value.nextCredentialIndex));
             }
             break;
         case 55:
@@ -75466,16 +75467,37 @@ private:
         case 56:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::DoorLock::Commands::GetCredentialStatusResponse::DecodableType value;
+                chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("credentialExists", value.credentialExists, false));
+                VerifyOrReturn(CheckValue("status", value.status, 133U));
                 VerifyOrReturn(CheckValueNull("userIndex", value.userIndex));
-                VerifyOrReturn(CheckValueNull("creatorFabricIndex", value.creatorFabricIndex));
-                VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", value.lastModifiedFabricIndex));
-                VerifyOrReturn(CheckValueNull("nextCredentialIndex", value.nextCredentialIndex));
+                VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", value.nextCredentialIndex));
+                VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 2U));
             }
             break;
         case 57:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 133U));
+                VerifyOrReturn(CheckValueNull("userIndex", value.userIndex));
+                VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", value.nextCredentialIndex));
+                VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 2U));
+            }
+            break;
+        case 58:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 133U));
+                VerifyOrReturn(CheckValueNull("userIndex", value.userIndex));
+                VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", value.nextCredentialIndex));
+                VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 2U));
+            }
+            break;
+        case 59:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
@@ -75486,7 +75508,7 @@ private:
                 VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 2U));
             }
             break;
-        case 58:
+        case 60:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::GetUserResponse::DecodableType value;
@@ -75519,7 +75541,7 @@ private:
                 VerifyOrReturn(CheckValueNull("nextUserIndex", value.nextUserIndex));
             }
             break;
-        case 59:
+        case 61:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::GetCredentialStatusResponse::DecodableType value;
@@ -75534,7 +75556,7 @@ private:
                 VerifyOrReturn(CheckValueNull("nextCredentialIndex", value.nextCredentialIndex));
             }
             break;
-        case 60:
+        case 62:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
@@ -75545,27 +75567,6 @@ private:
                 VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 2U));
             }
             break;
-        case 61:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 133U));
-                VerifyOrReturn(CheckValueNull("userIndex", value.userIndex));
-                VerifyOrReturn(CheckValueNull("nextCredentialIndex", value.nextCredentialIndex));
-            }
-            break;
-        case 62:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 133U));
-                VerifyOrReturn(CheckValueNull("userIndex", value.userIndex));
-                VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", value.nextCredentialIndex));
-                VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 3U));
-            }
-            break;
         case 63:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
@@ -75573,8 +75574,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("status", value.status, 133U));
                 VerifyOrReturn(CheckValueNull("userIndex", value.userIndex));
-                VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", value.nextCredentialIndex));
-                VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 3U));
+                VerifyOrReturn(CheckValueNull("nextCredentialIndex", value.nextCredentialIndex));
             }
             break;
         case 64:
@@ -75637,10 +75637,10 @@ private:
             {
                 chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 2U));
+                VerifyOrReturn(CheckValue("status", value.status, 133U));
                 VerifyOrReturn(CheckValueNull("userIndex", value.userIndex));
                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", value.nextCredentialIndex));
-                VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 4U));
+                VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 3U));
             }
             break;
         case 70:
@@ -75648,7 +75648,7 @@ private:
             {
                 chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 2U));
+                VerifyOrReturn(CheckValue("status", value.status, 133U));
                 VerifyOrReturn(CheckValueNull("userIndex", value.userIndex));
                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", value.nextCredentialIndex));
                 VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 3U));
@@ -75659,13 +75659,68 @@ private:
             {
                 chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 2U));
+                VerifyOrReturn(CheckValueNull("userIndex", value.userIndex));
+                VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", value.nextCredentialIndex));
+                VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 4U));
+            }
+            break;
+        case 72:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 2U));
+                VerifyOrReturn(CheckValueNull("userIndex", value.userIndex));
+                VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", value.nextCredentialIndex));
+                VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 3U));
+            }
+            break;
+        case 73:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 133U));
+                VerifyOrReturn(CheckValueNull("userIndex", value.userIndex));
+                VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", value.nextCredentialIndex));
+                VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 2U));
+            }
+            break;
+        case 74:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 133U));
+                VerifyOrReturn(CheckValueNull("userIndex", value.userIndex));
+                VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", value.nextCredentialIndex));
+                VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 2U));
+            }
+            break;
+        case 75:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 133U));
+                VerifyOrReturn(CheckValueNull("userIndex", value.userIndex));
+                VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", value.nextCredentialIndex));
+                VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 2U));
+            }
+            break;
+        case 76:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("status", value.status, 0U));
                 VerifyOrReturn(CheckValueNull("userIndex", value.userIndex));
                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", value.nextCredentialIndex));
                 VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 2U));
             }
             break;
-        case 72:
+        case 77:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
@@ -75677,7 +75732,7 @@ private:
                 VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 3U));
             }
             break;
-        case 73:
+        case 78:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
@@ -75688,7 +75743,7 @@ private:
                 VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 4U));
             }
             break;
-        case 74:
+        case 79:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
@@ -75699,7 +75754,7 @@ private:
                 VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 3U));
             }
             break;
-        case 75:
+        case 80:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::GetUserResponse::DecodableType value;
@@ -75736,7 +75791,7 @@ private:
                 VerifyOrReturn(CheckValue("nextUserIndex.Value()", value.nextUserIndex.Value(), 2U));
             }
             break;
-        case 76:
+        case 81:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
@@ -75747,7 +75802,7 @@ private:
                 VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 4U));
             }
             break;
-        case 77:
+        case 82:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::GetUserResponse::DecodableType value;
@@ -75787,10 +75842,10 @@ private:
                 VerifyOrReturn(CheckValue("nextUserIndex.Value()", value.nextUserIndex.Value(), 2U));
             }
             break;
-        case 78:
+        case 83:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 79:
+        case 84:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::GetCredentialStatusResponse::DecodableType value;
@@ -75803,7 +75858,7 @@ private:
                 VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 2U));
             }
             break;
-        case 80:
+        case 85:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::GetUserResponse::DecodableType value;
@@ -75840,10 +75895,10 @@ private:
                 VerifyOrReturn(CheckValue("nextUserIndex.Value()", value.nextUserIndex.Value(), 2U));
             }
             break;
-        case 81:
+        case 86:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 82:
+        case 87:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::GetCredentialStatusResponse::DecodableType value;
@@ -75856,7 +75911,7 @@ private:
                 VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 3U));
             }
             break;
-        case 83:
+        case 88:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::GetUserResponse::DecodableType value;
@@ -75873,7 +75928,7 @@ private:
                 VerifyOrReturn(CheckValueNull("nextUserIndex", value.nextUserIndex));
             }
             break;
-        case 84:
+        case 89:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
@@ -75885,22 +75940,10 @@ private:
                 VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 4U));
             }
             break;
-        case 85:
+        case 90:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 86:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::DoorLock::Commands::GetCredentialStatusResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("credentialExists", value.credentialExists, false));
-                VerifyOrReturn(CheckValueNull("userIndex", value.userIndex));
-                VerifyOrReturn(CheckValueNull("creatorFabricIndex", value.creatorFabricIndex));
-                VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", value.lastModifiedFabricIndex));
-                VerifyOrReturn(CheckValueNull("nextCredentialIndex", value.nextCredentialIndex));
-            }
-            break;
-        case 87:
+        case 91:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::GetCredentialStatusResponse::DecodableType value;
@@ -75912,7 +75955,7 @@ private:
                 VerifyOrReturn(CheckValueNull("nextCredentialIndex", value.nextCredentialIndex));
             }
             break;
-        case 88:
+        case 92:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::GetCredentialStatusResponse::DecodableType value;
@@ -75924,7 +75967,19 @@ private:
                 VerifyOrReturn(CheckValueNull("nextCredentialIndex", value.nextCredentialIndex));
             }
             break;
-        case 89:
+        case 93:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DoorLock::Commands::GetCredentialStatusResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("credentialExists", value.credentialExists, false));
+                VerifyOrReturn(CheckValueNull("userIndex", value.userIndex));
+                VerifyOrReturn(CheckValueNull("creatorFabricIndex", value.creatorFabricIndex));
+                VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", value.lastModifiedFabricIndex));
+                VerifyOrReturn(CheckValueNull("nextCredentialIndex", value.nextCredentialIndex));
+            }
+            break;
+        case 94:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::GetUserResponse::DecodableType value;
@@ -75954,7 +76009,7 @@ private:
                 VerifyOrReturn(CheckValueNull("nextUserIndex", value.nextUserIndex));
             }
             break;
-        case 90:
+        case 95:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::GetUserResponse::DecodableType value;
@@ -75971,7 +76026,7 @@ private:
                 VerifyOrReturn(CheckValueNull("nextUserIndex", value.nextUserIndex));
             }
             break;
-        case 91:
+        case 96:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
@@ -75983,7 +76038,7 @@ private:
                 VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 2U));
             }
             break;
-        case 92:
+        case 97:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
@@ -75995,7 +76050,7 @@ private:
                 VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 3U));
             }
             break;
-        case 93:
+        case 98:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
@@ -76007,22 +76062,10 @@ private:
                 VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 7U));
             }
             break;
-        case 94:
+        case 99:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 95:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::DoorLock::Commands::GetCredentialStatusResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("credentialExists", value.credentialExists, false));
-                VerifyOrReturn(CheckValueNull("userIndex", value.userIndex));
-                VerifyOrReturn(CheckValueNull("creatorFabricIndex", value.creatorFabricIndex));
-                VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", value.lastModifiedFabricIndex));
-                VerifyOrReturn(CheckValueNull("nextCredentialIndex", value.nextCredentialIndex));
-            }
-            break;
-        case 96:
+        case 100:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::GetCredentialStatusResponse::DecodableType value;
@@ -76034,7 +76077,7 @@ private:
                 VerifyOrReturn(CheckValueNull("nextCredentialIndex", value.nextCredentialIndex));
             }
             break;
-        case 97:
+        case 101:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::GetCredentialStatusResponse::DecodableType value;
@@ -76046,7 +76089,19 @@ private:
                 VerifyOrReturn(CheckValueNull("nextCredentialIndex", value.nextCredentialIndex));
             }
             break;
-        case 98:
+        case 102:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DoorLock::Commands::GetCredentialStatusResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("credentialExists", value.credentialExists, false));
+                VerifyOrReturn(CheckValueNull("userIndex", value.userIndex));
+                VerifyOrReturn(CheckValueNull("creatorFabricIndex", value.creatorFabricIndex));
+                VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", value.lastModifiedFabricIndex));
+                VerifyOrReturn(CheckValueNull("nextCredentialIndex", value.nextCredentialIndex));
+            }
+            break;
+        case 103:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::GetUserResponse::DecodableType value;
@@ -76063,7 +76118,7 @@ private:
                 VerifyOrReturn(CheckValueNull("nextUserIndex", value.nextUserIndex));
             }
             break;
-        case 99:
+        case 104:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::GetUserResponse::DecodableType value;
@@ -76080,7 +76135,7 @@ private:
                 VerifyOrReturn(CheckValueNull("nextUserIndex", value.nextUserIndex));
             }
             break;
-        case 100:
+        case 105:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::GetUserResponse::DecodableType value;
@@ -76097,7 +76152,7 @@ private:
                 VerifyOrReturn(CheckValueNull("nextUserIndex", value.nextUserIndex));
             }
             break;
-        case 101:
+        case 106:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::GetUserResponse::DecodableType value;
@@ -76114,7 +76169,7 @@ private:
                 VerifyOrReturn(CheckValueNull("nextUserIndex", value.nextUserIndex));
             }
             break;
-        case 102:
+        case 107:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
@@ -76124,7 +76179,7 @@ private:
                 VerifyOrReturn(CheckValueNull("nextCredentialIndex", value.nextCredentialIndex));
             }
             break;
-        case 103:
+        case 108:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
@@ -76135,7 +76190,7 @@ private:
                 VerifyOrReturn(CheckValueNull("nextCredentialIndex", value.nextCredentialIndex));
             }
             break;
-        case 104:
+        case 109:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::GetUserResponse::DecodableType value;
@@ -76165,7 +76220,7 @@ private:
                 VerifyOrReturn(CheckValueNull("nextUserIndex", value.nextUserIndex));
             }
             break;
-        case 105:
+        case 110:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::GetCredentialStatusResponse::DecodableType value;
@@ -76180,7 +76235,7 @@ private:
                 VerifyOrReturn(CheckValueNull("nextCredentialIndex", value.nextCredentialIndex));
             }
             break;
-        case 106:
+        case 111:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
@@ -76190,28 +76245,28 @@ private:
                 VerifyOrReturn(CheckValueNull("nextCredentialIndex", value.nextCredentialIndex));
             }
             break;
-        case 107:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
-            break;
-        case 108:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
-            break;
-        case 109:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
-            break;
-        case 110:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
-            break;
-        case 111:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
-            break;
         case 112:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 113:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 114:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 115:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 116:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 117:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 118:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 119:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::GetUserResponse::DecodableType value;
@@ -76228,7 +76283,7 @@ private:
                 VerifyOrReturn(CheckValueNull("nextUserIndex", value.nextUserIndex));
             }
             break;
-        case 115:
+        case 120:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::GetCredentialStatusResponse::DecodableType value;
@@ -76240,7 +76295,7 @@ private:
                 VerifyOrReturn(CheckValueNull("nextCredentialIndex", value.nextCredentialIndex));
             }
             break;
-        case 116:
+        case 121:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
@@ -76252,7 +76307,7 @@ private:
                 VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 2U));
             }
             break;
-        case 117:
+        case 122:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
@@ -76263,7 +76318,7 @@ private:
                 VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 3U));
             }
             break;
-        case 118:
+        case 123:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
@@ -76274,7 +76329,7 @@ private:
                 VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 4U));
             }
             break;
-        case 119:
+        case 124:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
@@ -76285,7 +76340,7 @@ private:
                 VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 5U));
             }
             break;
-        case 120:
+        case 125:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
@@ -76296,7 +76351,7 @@ private:
                 VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 6U));
             }
             break;
-        case 121:
+        case 126:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
@@ -76307,7 +76362,7 @@ private:
                 VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 7U));
             }
             break;
-        case 122:
+        case 127:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         default:
@@ -77026,20 +77081,7 @@ private:
             );
         }
         case 54: {
-            LogStep(54, "Reading RFID credential with index 0 returns no credential duplicate with bug workaround");
-            ListFreer listFreer;
-            chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
-
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(2);
-            value.credential.credentialIndex = 0U;
-
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::GetCredentialStatus::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 55: {
-            LogStep(55, "Reading RFID credential with out-of-bounds index returns no credential");
+            LogStep(54, "Reading RFID credential with out-of-bounds index returns no credential");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
@@ -77051,8 +77093,8 @@ private:
 
             );
         }
-        case 56: {
-            LogStep(56, "Check that RFID credential does not exist");
+        case 55: {
+            LogStep(55, "Check that RFID credential does not exist");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
@@ -77064,8 +77106,72 @@ private:
 
             );
         }
+        case 56: {
+            LogStep(56, "Create new RFID credential and add it to existing user with non-null UserStatus should fail");
+            ListFreer listFreer;
+            chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
+
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(2);
+            value.credential.credentialIndex = 1U;
+
+            value.credentialData =
+                chip::ByteSpan(chip::Uint8::from_const_char("rfid_data_123456garbage: not in length on purpose"), 16);
+            value.userIndex.SetNonNull();
+            value.userIndex.Value() = 1U;
+            value.userStatus.SetNonNull();
+            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::UserStatusEnum>(1);
+            value.userType.SetNull();
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetCredential::Id, value,
+                               chip::Optional<uint16_t>(10000), chip::NullOptional
+
+            );
+        }
         case 57: {
-            LogStep(57, "Create new RFID credential and add it to existing user");
+            LogStep(57, "Create new RFID credential and add it to existing user with non-null UserType should fail");
+            ListFreer listFreer;
+            chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
+
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(2);
+            value.credential.credentialIndex = 1U;
+
+            value.credentialData =
+                chip::ByteSpan(chip::Uint8::from_const_char("rfid_data_123456garbage: not in length on purpose"), 16);
+            value.userIndex.SetNonNull();
+            value.userIndex.Value() = 1U;
+            value.userStatus.SetNull();
+            value.userType.SetNonNull();
+            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::UserTypeEnum>(0);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetCredential::Id, value,
+                               chip::Optional<uint16_t>(10000), chip::NullOptional
+
+            );
+        }
+        case 58: {
+            LogStep(58, "Create new RFID credential and add it to existing user with non-null UserType and UserStatus should fail");
+            ListFreer listFreer;
+            chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
+
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(2);
+            value.credential.credentialIndex = 1U;
+
+            value.credentialData =
+                chip::ByteSpan(chip::Uint8::from_const_char("rfid_data_123456garbage: not in length on purpose"), 16);
+            value.userIndex.SetNonNull();
+            value.userIndex.Value() = 1U;
+            value.userStatus.SetNonNull();
+            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::UserStatusEnum>(1);
+            value.userType.SetNonNull();
+            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::UserTypeEnum>(0);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetCredential::Id, value,
+                               chip::Optional<uint16_t>(10000), chip::NullOptional
+
+            );
+        }
+        case 59: {
+            LogStep(59, "Create new RFID credential and add it to existing user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
             value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
@@ -77084,8 +77190,8 @@ private:
 
             );
         }
-        case 58: {
-            LogStep(58, "Verify modified user");
+        case 60: {
+            LogStep(60, "Verify modified user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetUser::Type value;
             value.userIndex = 1U;
@@ -77094,8 +77200,8 @@ private:
 
             );
         }
-        case 59: {
-            LogStep(59, "Verify created credential");
+        case 61: {
+            LogStep(61, "Verify created credential");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
@@ -77107,8 +77213,8 @@ private:
 
             );
         }
-        case 60: {
-            LogStep(60, "Create new RFID credential and user with index 0 fails");
+        case 62: {
+            LogStep(62, "Create new RFID credential and user with index 0 fails");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
             value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
@@ -77126,8 +77232,8 @@ private:
 
             );
         }
-        case 61: {
-            LogStep(61, "Create new RFID credential and user with out-of-bounds index fails");
+        case 63: {
+            LogStep(63, "Create new RFID credential and user with out-of-bounds index fails");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
             value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
@@ -77145,8 +77251,8 @@ private:
 
             );
         }
-        case 62: {
-            LogStep(62, "Create new credential and try to add it to 0 user");
+        case 64: {
+            LogStep(64, "Create new credential and try to add it to 0 user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
             value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
@@ -77164,8 +77270,8 @@ private:
 
             );
         }
-        case 63: {
-            LogStep(63, "Create new credential and try to add it to out-of-bounds user");
+        case 65: {
+            LogStep(65, "Create new credential and try to add it to out-of-bounds user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
             value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
@@ -77183,8 +77289,8 @@ private:
 
             );
         }
-        case 64: {
-            LogStep(64, "Create new PIN with too short data");
+        case 66: {
+            LogStep(66, "Create new PIN with too short data");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
             value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
@@ -77202,8 +77308,8 @@ private:
 
             );
         }
-        case 65: {
-            LogStep(65, "Create new PIN with too long data");
+        case 67: {
+            LogStep(67, "Create new PIN with too long data");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
             value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
@@ -77221,8 +77327,8 @@ private:
 
             );
         }
-        case 66: {
-            LogStep(66, "Create new RFID with too short data");
+        case 68: {
+            LogStep(68, "Create new RFID with too short data");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
             value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
@@ -77240,8 +77346,8 @@ private:
 
             );
         }
-        case 67: {
-            LogStep(67, "Create new PIN with Programming user type fails");
+        case 69: {
+            LogStep(69, "Create new PIN with Programming user type fails");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
             value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
@@ -77260,8 +77366,8 @@ private:
 
             );
         }
-        case 68: {
-            LogStep(68, "Create new RFID with too short data");
+        case 70: {
+            LogStep(70, "Create new RFID with too short data");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
             value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
@@ -77280,8 +77386,8 @@ private:
 
             );
         }
-        case 69: {
-            LogStep(69, "Create new PIN credential with data the would cause duplicate");
+        case 71: {
+            LogStep(71, "Create new PIN credential with data the would cause duplicate");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
             value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
@@ -77298,8 +77404,8 @@ private:
 
             );
         }
-        case 70: {
-            LogStep(70, "Create new RFID credential with data the would cause duplicate");
+        case 72: {
+            LogStep(72, "Create new RFID credential with data the would cause duplicate");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
             value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
@@ -77317,8 +77423,69 @@ private:
 
             );
         }
-        case 71: {
-            LogStep(71, "Modify credentialData of existing PIN credential");
+        case 73: {
+            LogStep(73, "Modify credentialData of existing PIN credential with non-null UserStatus should fail");
+            ListFreer listFreer;
+            chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(2);
+
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
+            value.credential.credentialIndex = 1U;
+
+            value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
+            value.userIndex.SetNonNull();
+            value.userIndex.Value() = 1U;
+            value.userStatus.SetNonNull();
+            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::UserStatusEnum>(1);
+            value.userType.SetNull();
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetCredential::Id, value,
+                               chip::Optional<uint16_t>(10000), chip::NullOptional
+
+            );
+        }
+        case 74: {
+            LogStep(74, "Modify credentialData of existing PIN credential with non-null UserType should fail");
+            ListFreer listFreer;
+            chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(2);
+
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
+            value.credential.credentialIndex = 1U;
+
+            value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
+            value.userIndex.SetNonNull();
+            value.userIndex.Value() = 1U;
+            value.userStatus.SetNull();
+            value.userType.SetNonNull();
+            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::UserTypeEnum>(0);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetCredential::Id, value,
+                               chip::Optional<uint16_t>(10000), chip::NullOptional
+
+            );
+        }
+        case 75: {
+            LogStep(75, "Modify credentialData of existing PIN credential with non-null UserStatus and UserType should fail");
+            ListFreer listFreer;
+            chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(2);
+
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
+            value.credential.credentialIndex = 1U;
+
+            value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
+            value.userIndex.SetNonNull();
+            value.userIndex.Value() = 1U;
+            value.userStatus.SetNonNull();
+            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::UserStatusEnum>(1);
+            value.userType.SetNonNull();
+            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::UserTypeEnum>(0);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetCredential::Id, value,
+                               chip::Optional<uint16_t>(10000), chip::NullOptional
+
+            );
+        }
+        case 76: {
+            LogStep(76, "Modify credentialData of existing PIN credential");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
             value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(2);
@@ -77336,8 +77503,8 @@ private:
 
             );
         }
-        case 72: {
-            LogStep(72, "Verify that credential was changed by creating new credential with old data");
+        case 77: {
+            LogStep(77, "Verify that credential was changed by creating new credential with old data");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
             value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
@@ -77354,8 +77521,8 @@ private:
 
             );
         }
-        case 73: {
-            LogStep(73, "Verify that credential was changed by creating new credential with new data");
+        case 78: {
+            LogStep(78, "Verify that credential was changed by creating new credential with new data");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
             value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
@@ -77372,8 +77539,8 @@ private:
 
             );
         }
-        case 74: {
-            LogStep(74, "Create new RFID credential and add it to existing user");
+        case 79: {
+            LogStep(79, "Create new RFID credential and add it to existing user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
             value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
@@ -77392,8 +77559,8 @@ private:
 
             );
         }
-        case 75: {
-            LogStep(75, "Verify modified user");
+        case 80: {
+            LogStep(80, "Verify modified user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetUser::Type value;
             value.userIndex = 1U;
@@ -77402,8 +77569,8 @@ private:
 
             );
         }
-        case 76: {
-            LogStep(76, "Create new RFID credential and add it to existing user");
+        case 81: {
+            LogStep(81, "Create new RFID credential and add it to existing user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
             value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
@@ -77421,8 +77588,8 @@ private:
 
             );
         }
-        case 77: {
-            LogStep(77, "Verify modified user");
+        case 82: {
+            LogStep(82, "Verify modified user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetUser::Type value;
             value.userIndex = 1U;
@@ -77431,8 +77598,8 @@ private:
 
             );
         }
-        case 78: {
-            LogStep(78, "Clear first PIN credential");
+        case 83: {
+            LogStep(83, "Clear first PIN credential");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::ClearCredential::Type value;
             value.credential.SetNonNull();
@@ -77445,8 +77612,8 @@ private:
 
             );
         }
-        case 79: {
-            LogStep(79, "Read back the credential and make sure it is deleted");
+        case 84: {
+            LogStep(84, "Read back the credential and make sure it is deleted");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
@@ -77458,8 +77625,8 @@ private:
 
             );
         }
-        case 80: {
-            LogStep(80, "Read the user back and make sure PIN credential is deleted");
+        case 85: {
+            LogStep(85, "Read the user back and make sure PIN credential is deleted");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetUser::Type value;
             value.userIndex = 1U;
@@ -77468,8 +77635,8 @@ private:
 
             );
         }
-        case 81: {
-            LogStep(81, "Clear the second PIN credential");
+        case 86: {
+            LogStep(86, "Clear the second PIN credential");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::ClearCredential::Type value;
             value.credential.SetNonNull();
@@ -77482,8 +77649,8 @@ private:
 
             );
         }
-        case 82: {
-            LogStep(82, "Read back the credential and make sure it is deleted");
+        case 87: {
+            LogStep(87, "Read back the credential and make sure it is deleted");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
@@ -77495,8 +77662,8 @@ private:
 
             );
         }
-        case 83: {
-            LogStep(83, "Read the user back and make sure related user is deleted");
+        case 88: {
+            LogStep(88, "Read the user back and make sure related user is deleted");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetUser::Type value;
             value.userIndex = 2U;
@@ -77505,8 +77672,8 @@ private:
 
             );
         }
-        case 84: {
-            LogStep(84, "Create new RFID credential with user");
+        case 89: {
+            LogStep(89, "Create new RFID credential with user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
             value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
@@ -77524,8 +77691,8 @@ private:
 
             );
         }
-        case 85: {
-            LogStep(85, "Clear all the RFID credentials");
+        case 90: {
+            LogStep(90, "Clear all the RFID credentials");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::ClearCredential::Type value;
             value.credential.SetNonNull();
@@ -77538,8 +77705,8 @@ private:
 
             );
         }
-        case 86: {
-            LogStep(86, "Read back the fist RFID credential and make sure it is deleted");
+        case 91: {
+            LogStep(91, "Read back the fist RFID credential and make sure it is deleted");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
@@ -77551,8 +77718,8 @@ private:
 
             );
         }
-        case 87: {
-            LogStep(87, "Read back the second RFID credential and make sure it is deleted");
+        case 92: {
+            LogStep(92, "Read back the second RFID credential and make sure it is deleted");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
@@ -77564,8 +77731,8 @@ private:
 
             );
         }
-        case 88: {
-            LogStep(88, "Read back the third RFID credential and make sure it is deleted");
+        case 93: {
+            LogStep(93, "Read back the third RFID credential and make sure it is deleted");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
@@ -77577,8 +77744,8 @@ private:
 
             );
         }
-        case 89: {
-            LogStep(89, "Read the user related with first RFID back and make sure it has only PIN credential");
+        case 94: {
+            LogStep(94, "Read the user related with first RFID back and make sure it has only PIN credential");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetUser::Type value;
             value.userIndex = 1U;
@@ -77587,8 +77754,8 @@ private:
 
             );
         }
-        case 90: {
-            LogStep(90, "Read the user related with second RFID back and make sure it is deleted");
+        case 95: {
+            LogStep(95, "Read the user related with second RFID back and make sure it is deleted");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetUser::Type value;
             value.userIndex = 2U;
@@ -77597,8 +77764,8 @@ private:
 
             );
         }
-        case 91: {
-            LogStep(91, "Create new PIN credential with user");
+        case 96: {
+            LogStep(96, "Create new PIN credential with user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
             value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
@@ -77615,8 +77782,8 @@ private:
 
             );
         }
-        case 92: {
-            LogStep(92, "Create new RFID credential with user");
+        case 97: {
+            LogStep(97, "Create new RFID credential with user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
             value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
@@ -77634,8 +77801,8 @@ private:
 
             );
         }
-        case 93: {
-            LogStep(93, "Create another RFID credential with user");
+        case 98: {
+            LogStep(98, "Create another RFID credential with user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
             value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
@@ -77653,8 +77820,8 @@ private:
 
             );
         }
-        case 94: {
-            LogStep(94, "Clear all the credentials");
+        case 99: {
+            LogStep(99, "Clear all the credentials");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::ClearCredential::Type value;
             value.credential.SetNull();
@@ -77663,8 +77830,8 @@ private:
 
             );
         }
-        case 95: {
-            LogStep(95, "Read back the first PIN credential and make sure it is deleted");
+        case 100: {
+            LogStep(100, "Read back the first PIN credential and make sure it is deleted");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
@@ -77676,8 +77843,8 @@ private:
 
             );
         }
-        case 96: {
-            LogStep(96, "Read back the first RFID credential and make sure it is deleted");
+        case 101: {
+            LogStep(101, "Read back the first RFID credential and make sure it is deleted");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
@@ -77689,8 +77856,8 @@ private:
 
             );
         }
-        case 97: {
-            LogStep(97, "Read back the second PIN credential and make sure it is deleted");
+        case 102: {
+            LogStep(102, "Read back the second PIN credential and make sure it is deleted");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
@@ -77702,8 +77869,8 @@ private:
 
             );
         }
-        case 98: {
-            LogStep(98, "Read the user related with first PIN back and make sure it is deleted");
+        case 103: {
+            LogStep(103, "Read the user related with first PIN back and make sure it is deleted");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetUser::Type value;
             value.userIndex = 1U;
@@ -77712,8 +77879,8 @@ private:
 
             );
         }
-        case 99: {
-            LogStep(99, "Read the user related with first RFID back and make sure it is deleted");
+        case 104: {
+            LogStep(104, "Read the user related with first RFID back and make sure it is deleted");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetUser::Type value;
             value.userIndex = 2U;
@@ -77722,8 +77889,8 @@ private:
 
             );
         }
-        case 100: {
-            LogStep(100, "Read the user related with second PIN back and make sure it is deleted");
+        case 105: {
+            LogStep(105, "Read the user related with second PIN back and make sure it is deleted");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetUser::Type value;
             value.userIndex = 3U;
@@ -77732,8 +77899,8 @@ private:
 
             );
         }
-        case 101: {
-            LogStep(101, "Read the user related with last RFID back and make sure it is deleted");
+        case 106: {
+            LogStep(106, "Read the user related with last RFID back and make sure it is deleted");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetUser::Type value;
             value.userIndex = 4U;
@@ -77742,8 +77909,8 @@ private:
 
             );
         }
-        case 102: {
-            LogStep(102, "Create new Programming PIN credential with invalid index");
+        case 107: {
+            LogStep(107, "Create new Programming PIN credential with invalid index");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
             value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
@@ -77760,8 +77927,8 @@ private:
 
             );
         }
-        case 103: {
-            LogStep(103, "Create new Programming PIN credential with valid index");
+        case 108: {
+            LogStep(108, "Create new Programming PIN credential with valid index");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
             value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
@@ -77778,8 +77945,8 @@ private:
 
             );
         }
-        case 104: {
-            LogStep(104, "Verify created user");
+        case 109: {
+            LogStep(109, "Verify created user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetUser::Type value;
             value.userIndex = 1U;
@@ -77788,8 +77955,8 @@ private:
 
             );
         }
-        case 105: {
-            LogStep(105, "Verify created programming PIN credential");
+        case 110: {
+            LogStep(110, "Verify created programming PIN credential");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
@@ -77801,8 +77968,8 @@ private:
 
             );
         }
-        case 106: {
-            LogStep(106, "Modify the Programming PIN credential");
+        case 111: {
+            LogStep(111, "Modify the Programming PIN credential");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
             value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(2);
@@ -77819,8 +77986,8 @@ private:
 
             );
         }
-        case 107: {
-            LogStep(107, "Clearing Programming PIN fails");
+        case 112: {
+            LogStep(112, "Clearing Programming PIN fails");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::ClearCredential::Type value;
             value.credential.SetNonNull();
@@ -77833,8 +78000,8 @@ private:
 
             );
         }
-        case 108: {
-            LogStep(108, "Clearing Programming PIN with invalid index fails");
+        case 113: {
+            LogStep(113, "Clearing Programming PIN with invalid index fails");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::ClearCredential::Type value;
             value.credential.SetNonNull();
@@ -77847,8 +78014,8 @@ private:
 
             );
         }
-        case 109: {
-            LogStep(109, "Clearing PIN credential with zero index fails");
+        case 114: {
+            LogStep(114, "Clearing PIN credential with zero index fails");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::ClearCredential::Type value;
             value.credential.SetNonNull();
@@ -77861,8 +78028,8 @@ private:
 
             );
         }
-        case 110: {
-            LogStep(110, "Clearing PIN credential with out-of-bound index fails");
+        case 115: {
+            LogStep(115, "Clearing PIN credential with out-of-bound index fails");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::ClearCredential::Type value;
             value.credential.SetNonNull();
@@ -77875,8 +78042,8 @@ private:
 
             );
         }
-        case 111: {
-            LogStep(111, "Clearing RFID credential with zero index fails");
+        case 116: {
+            LogStep(116, "Clearing RFID credential with zero index fails");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::ClearCredential::Type value;
             value.credential.SetNonNull();
@@ -77889,8 +78056,8 @@ private:
 
             );
         }
-        case 112: {
-            LogStep(112, "Clearing RFID credential with out-of-bound index fails");
+        case 117: {
+            LogStep(117, "Clearing RFID credential with out-of-bound index fails");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::ClearCredential::Type value;
             value.credential.SetNonNull();
@@ -77903,8 +78070,8 @@ private:
 
             );
         }
-        case 113: {
-            LogStep(113, "Clear the Programming PIN user");
+        case 118: {
+            LogStep(118, "Clear the Programming PIN user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::ClearUser::Type value;
             value.userIndex = 1U;
@@ -77913,8 +78080,8 @@ private:
 
             );
         }
-        case 114: {
-            LogStep(114, "Make sure Programming PIN user is deleted");
+        case 119: {
+            LogStep(119, "Make sure Programming PIN user is deleted");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetUser::Type value;
             value.userIndex = 1U;
@@ -77923,8 +78090,8 @@ private:
 
             );
         }
-        case 115: {
-            LogStep(115, "Make sure programming PIN credential is deleted");
+        case 120: {
+            LogStep(120, "Make sure programming PIN credential is deleted");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
@@ -77936,8 +78103,8 @@ private:
 
             );
         }
-        case 116: {
-            LogStep(116, "Create new PIN credential and user");
+        case 121: {
+            LogStep(121, "Create new PIN credential and user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
             value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
@@ -77954,8 +78121,8 @@ private:
 
             );
         }
-        case 117: {
-            LogStep(117, "Create second PIN credential and add it to existing user");
+        case 122: {
+            LogStep(122, "Create second PIN credential and add it to existing user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
             value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
@@ -77973,8 +78140,8 @@ private:
 
             );
         }
-        case 118: {
-            LogStep(118, "Create third PIN credential and add it to existing user");
+        case 123: {
+            LogStep(123, "Create third PIN credential and add it to existing user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
             value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
@@ -77992,8 +78159,8 @@ private:
 
             );
         }
-        case 119: {
-            LogStep(119, "Create fourth PIN credential and add it to existing user");
+        case 124: {
+            LogStep(124, "Create fourth PIN credential and add it to existing user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
             value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
@@ -78011,8 +78178,8 @@ private:
 
             );
         }
-        case 120: {
-            LogStep(120, "Create fifth PIN credential and add it to existing user");
+        case 125: {
+            LogStep(125, "Create fifth PIN credential and add it to existing user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
             value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
@@ -78030,8 +78197,8 @@ private:
 
             );
         }
-        case 121: {
-            LogStep(121, "Try to create sixth PIN credential and make sure it fails");
+        case 126: {
+            LogStep(126, "Try to create sixth PIN credential and make sure it fails");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
             value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
@@ -78049,8 +78216,8 @@ private:
 
             );
         }
-        case 122: {
-            LogStep(122, "Final clean-up");
+        case 127: {
+            LogStep(127, "Final clean-up");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::ClearUser::Type value;
             value.userIndex = 1U;

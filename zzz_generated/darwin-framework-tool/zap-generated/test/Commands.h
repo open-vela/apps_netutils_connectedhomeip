@@ -109953,290 +109953,319 @@ public:
             err = TestReadingRfidCredentialWithIndex0ReturnsNoCredential_53();
             break;
         case 54:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 54 : Reading RFID credential with index 0 returns no credential duplicate with bug workaround\n");
-            err = TestReadingRfidCredentialWithIndex0ReturnsNoCredentialDuplicateWithBugWorkaround_54();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 54 : Reading RFID credential with out-of-bounds index returns no credential\n");
+            err = TestReadingRfidCredentialWithOutOfBoundsIndexReturnsNoCredential_54();
             break;
         case 55:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 55 : Reading RFID credential with out-of-bounds index returns no credential\n");
-            err = TestReadingRfidCredentialWithOutOfBoundsIndexReturnsNoCredential_55();
+            ChipLogProgress(chipTool, " ***** Test Step 55 : Check that RFID credential does not exist\n");
+            err = TestCheckThatRfidCredentialDoesNotExist_55();
             break;
         case 56:
-            ChipLogProgress(chipTool, " ***** Test Step 56 : Check that RFID credential does not exist\n");
-            err = TestCheckThatRfidCredentialDoesNotExist_56();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 56 : Create new RFID credential and add it to existing user with non-null UserStatus should "
+                "fail\n");
+            err = TestCreateNewRfidCredentialAndAddItToExistingUserWithNonNullUserStatusShouldFail_56();
             break;
         case 57:
-            ChipLogProgress(chipTool, " ***** Test Step 57 : Create new RFID credential and add it to existing user\n");
-            err = TestCreateNewRfidCredentialAndAddItToExistingUser_57();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 57 : Create new RFID credential and add it to existing user with non-null UserType should "
+                "fail\n");
+            err = TestCreateNewRfidCredentialAndAddItToExistingUserWithNonNullUserTypeShouldFail_57();
             break;
         case 58:
-            ChipLogProgress(chipTool, " ***** Test Step 58 : Verify modified user\n");
-            err = TestVerifyModifiedUser_58();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 58 : Create new RFID credential and add it to existing user with non-null UserType and "
+                "UserStatus should fail\n");
+            err = TestCreateNewRfidCredentialAndAddItToExistingUserWithNonNullUserTypeAndUserStatusShouldFail_58();
             break;
         case 59:
-            ChipLogProgress(chipTool, " ***** Test Step 59 : Verify created credential\n");
-            err = TestVerifyCreatedCredential_59();
+            ChipLogProgress(chipTool, " ***** Test Step 59 : Create new RFID credential and add it to existing user\n");
+            err = TestCreateNewRfidCredentialAndAddItToExistingUser_59();
             break;
         case 60:
-            ChipLogProgress(chipTool, " ***** Test Step 60 : Create new RFID credential and user with index 0 fails\n");
-            err = TestCreateNewRfidCredentialAndUserWithIndex0Fails_60();
+            ChipLogProgress(chipTool, " ***** Test Step 60 : Verify modified user\n");
+            err = TestVerifyModifiedUser_60();
             break;
         case 61:
-            ChipLogProgress(chipTool, " ***** Test Step 61 : Create new RFID credential and user with out-of-bounds index fails\n");
-            err = TestCreateNewRfidCredentialAndUserWithOutOfBoundsIndexFails_61();
+            ChipLogProgress(chipTool, " ***** Test Step 61 : Verify created credential\n");
+            err = TestVerifyCreatedCredential_61();
             break;
         case 62:
-            ChipLogProgress(chipTool, " ***** Test Step 62 : Create new credential and try to add it to 0 user\n");
-            err = TestCreateNewCredentialAndTryToAddItTo0User_62();
+            ChipLogProgress(chipTool, " ***** Test Step 62 : Create new RFID credential and user with index 0 fails\n");
+            err = TestCreateNewRfidCredentialAndUserWithIndex0Fails_62();
             break;
         case 63:
-            ChipLogProgress(chipTool, " ***** Test Step 63 : Create new credential and try to add it to out-of-bounds user\n");
-            err = TestCreateNewCredentialAndTryToAddItToOutOfBoundsUser_63();
+            ChipLogProgress(chipTool, " ***** Test Step 63 : Create new RFID credential and user with out-of-bounds index fails\n");
+            err = TestCreateNewRfidCredentialAndUserWithOutOfBoundsIndexFails_63();
             break;
         case 64:
-            ChipLogProgress(chipTool, " ***** Test Step 64 : Create new PIN with too short data\n");
-            err = TestCreateNewPinWithTooShortData_64();
+            ChipLogProgress(chipTool, " ***** Test Step 64 : Create new credential and try to add it to 0 user\n");
+            err = TestCreateNewCredentialAndTryToAddItTo0User_64();
             break;
         case 65:
-            ChipLogProgress(chipTool, " ***** Test Step 65 : Create new PIN with too long data\n");
-            err = TestCreateNewPinWithTooLongData_65();
+            ChipLogProgress(chipTool, " ***** Test Step 65 : Create new credential and try to add it to out-of-bounds user\n");
+            err = TestCreateNewCredentialAndTryToAddItToOutOfBoundsUser_65();
             break;
         case 66:
-            ChipLogProgress(chipTool, " ***** Test Step 66 : Create new RFID with too short data\n");
-            err = TestCreateNewRfidWithTooShortData_66();
+            ChipLogProgress(chipTool, " ***** Test Step 66 : Create new PIN with too short data\n");
+            err = TestCreateNewPinWithTooShortData_66();
             break;
         case 67:
-            ChipLogProgress(chipTool, " ***** Test Step 67 : Create new PIN with Programming user type fails\n");
-            err = TestCreateNewPinWithProgrammingUserTypeFails_67();
+            ChipLogProgress(chipTool, " ***** Test Step 67 : Create new PIN with too long data\n");
+            err = TestCreateNewPinWithTooLongData_67();
             break;
         case 68:
             ChipLogProgress(chipTool, " ***** Test Step 68 : Create new RFID with too short data\n");
             err = TestCreateNewRfidWithTooShortData_68();
             break;
         case 69:
-            ChipLogProgress(chipTool, " ***** Test Step 69 : Create new PIN credential with data the would cause duplicate\n");
-            err = TestCreateNewPinCredentialWithDataTheWouldCauseDuplicate_69();
+            ChipLogProgress(chipTool, " ***** Test Step 69 : Create new PIN with Programming user type fails\n");
+            err = TestCreateNewPinWithProgrammingUserTypeFails_69();
             break;
         case 70:
-            ChipLogProgress(chipTool, " ***** Test Step 70 : Create new RFID credential with data the would cause duplicate\n");
-            err = TestCreateNewRfidCredentialWithDataTheWouldCauseDuplicate_70();
+            ChipLogProgress(chipTool, " ***** Test Step 70 : Create new RFID with too short data\n");
+            err = TestCreateNewRfidWithTooShortData_70();
             break;
         case 71:
-            ChipLogProgress(chipTool, " ***** Test Step 71 : Modify credentialData of existing PIN credential\n");
-            err = TestModifyCredentialDataOfExistingPinCredential_71();
+            ChipLogProgress(chipTool, " ***** Test Step 71 : Create new PIN credential with data the would cause duplicate\n");
+            err = TestCreateNewPinCredentialWithDataTheWouldCauseDuplicate_71();
             break;
         case 72:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 72 : Verify that credential was changed by creating new credential with old data\n");
-            err = TestVerifyThatCredentialWasChangedByCreatingNewCredentialWithOldData_72();
+            ChipLogProgress(chipTool, " ***** Test Step 72 : Create new RFID credential with data the would cause duplicate\n");
+            err = TestCreateNewRfidCredentialWithDataTheWouldCauseDuplicate_72();
             break;
         case 73:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 73 : Verify that credential was changed by creating new credential with new data\n");
-            err = TestVerifyThatCredentialWasChangedByCreatingNewCredentialWithNewData_73();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 73 : Modify credentialData of existing PIN credential with non-null UserStatus should fail\n");
+            err = TestModifyCredentialDataOfExistingPinCredentialWithNonNullUserStatusShouldFail_73();
             break;
         case 74:
-            ChipLogProgress(chipTool, " ***** Test Step 74 : Create new RFID credential and add it to existing user\n");
-            err = TestCreateNewRfidCredentialAndAddItToExistingUser_74();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 74 : Modify credentialData of existing PIN credential with non-null UserType should fail\n");
+            err = TestModifyCredentialDataOfExistingPinCredentialWithNonNullUserTypeShouldFail_74();
             break;
         case 75:
-            ChipLogProgress(chipTool, " ***** Test Step 75 : Verify modified user\n");
-            err = TestVerifyModifiedUser_75();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 75 : Modify credentialData of existing PIN credential with non-null UserStatus and UserType "
+                "should fail\n");
+            err = TestModifyCredentialDataOfExistingPinCredentialWithNonNullUserStatusAndUserTypeShouldFail_75();
             break;
         case 76:
-            ChipLogProgress(chipTool, " ***** Test Step 76 : Create new RFID credential and add it to existing user\n");
-            err = TestCreateNewRfidCredentialAndAddItToExistingUser_76();
+            ChipLogProgress(chipTool, " ***** Test Step 76 : Modify credentialData of existing PIN credential\n");
+            err = TestModifyCredentialDataOfExistingPinCredential_76();
             break;
         case 77:
-            ChipLogProgress(chipTool, " ***** Test Step 77 : Verify modified user\n");
-            err = TestVerifyModifiedUser_77();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 77 : Verify that credential was changed by creating new credential with old data\n");
+            err = TestVerifyThatCredentialWasChangedByCreatingNewCredentialWithOldData_77();
             break;
         case 78:
-            ChipLogProgress(chipTool, " ***** Test Step 78 : Clear first PIN credential\n");
-            err = TestClearFirstPinCredential_78();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 78 : Verify that credential was changed by creating new credential with new data\n");
+            err = TestVerifyThatCredentialWasChangedByCreatingNewCredentialWithNewData_78();
             break;
         case 79:
-            ChipLogProgress(chipTool, " ***** Test Step 79 : Read back the credential and make sure it is deleted\n");
-            err = TestReadBackTheCredentialAndMakeSureItIsDeleted_79();
+            ChipLogProgress(chipTool, " ***** Test Step 79 : Create new RFID credential and add it to existing user\n");
+            err = TestCreateNewRfidCredentialAndAddItToExistingUser_79();
             break;
         case 80:
-            ChipLogProgress(chipTool, " ***** Test Step 80 : Read the user back and make sure PIN credential is deleted\n");
-            err = TestReadTheUserBackAndMakeSurePinCredentialIsDeleted_80();
+            ChipLogProgress(chipTool, " ***** Test Step 80 : Verify modified user\n");
+            err = TestVerifyModifiedUser_80();
             break;
         case 81:
-            ChipLogProgress(chipTool, " ***** Test Step 81 : Clear the second PIN credential\n");
-            err = TestClearTheSecondPinCredential_81();
+            ChipLogProgress(chipTool, " ***** Test Step 81 : Create new RFID credential and add it to existing user\n");
+            err = TestCreateNewRfidCredentialAndAddItToExistingUser_81();
             break;
         case 82:
-            ChipLogProgress(chipTool, " ***** Test Step 82 : Read back the credential and make sure it is deleted\n");
-            err = TestReadBackTheCredentialAndMakeSureItIsDeleted_82();
+            ChipLogProgress(chipTool, " ***** Test Step 82 : Verify modified user\n");
+            err = TestVerifyModifiedUser_82();
             break;
         case 83:
-            ChipLogProgress(chipTool, " ***** Test Step 83 : Read the user back and make sure related user is deleted\n");
-            err = TestReadTheUserBackAndMakeSureRelatedUserIsDeleted_83();
+            ChipLogProgress(chipTool, " ***** Test Step 83 : Clear first PIN credential\n");
+            err = TestClearFirstPinCredential_83();
             break;
         case 84:
-            ChipLogProgress(chipTool, " ***** Test Step 84 : Create new RFID credential with user\n");
-            err = TestCreateNewRfidCredentialWithUser_84();
+            ChipLogProgress(chipTool, " ***** Test Step 84 : Read back the credential and make sure it is deleted\n");
+            err = TestReadBackTheCredentialAndMakeSureItIsDeleted_84();
             break;
         case 85:
-            ChipLogProgress(chipTool, " ***** Test Step 85 : Clear all the RFID credentials\n");
-            err = TestClearAllTheRfidCredentials_85();
+            ChipLogProgress(chipTool, " ***** Test Step 85 : Read the user back and make sure PIN credential is deleted\n");
+            err = TestReadTheUserBackAndMakeSurePinCredentialIsDeleted_85();
             break;
         case 86:
-            ChipLogProgress(chipTool, " ***** Test Step 86 : Read back the fist RFID credential and make sure it is deleted\n");
-            err = TestReadBackTheFistRfidCredentialAndMakeSureItIsDeleted_86();
+            ChipLogProgress(chipTool, " ***** Test Step 86 : Clear the second PIN credential\n");
+            err = TestClearTheSecondPinCredential_86();
             break;
         case 87:
-            ChipLogProgress(chipTool, " ***** Test Step 87 : Read back the second RFID credential and make sure it is deleted\n");
-            err = TestReadBackTheSecondRfidCredentialAndMakeSureItIsDeleted_87();
+            ChipLogProgress(chipTool, " ***** Test Step 87 : Read back the credential and make sure it is deleted\n");
+            err = TestReadBackTheCredentialAndMakeSureItIsDeleted_87();
             break;
         case 88:
-            ChipLogProgress(chipTool, " ***** Test Step 88 : Read back the third RFID credential and make sure it is deleted\n");
-            err = TestReadBackTheThirdRfidCredentialAndMakeSureItIsDeleted_88();
+            ChipLogProgress(chipTool, " ***** Test Step 88 : Read the user back and make sure related user is deleted\n");
+            err = TestReadTheUserBackAndMakeSureRelatedUserIsDeleted_88();
             break;
         case 89:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 89 : Read the user related with first RFID back and make sure it has only PIN credential\n");
-            err = TestReadTheUserRelatedWithFirstRfidBackAndMakeSureItHasOnlyPinCredential_89();
+            ChipLogProgress(chipTool, " ***** Test Step 89 : Create new RFID credential with user\n");
+            err = TestCreateNewRfidCredentialWithUser_89();
             break;
         case 90:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 90 : Read the user related with second RFID back and make sure it is deleted\n");
-            err = TestReadTheUserRelatedWithSecondRfidBackAndMakeSureItIsDeleted_90();
+            ChipLogProgress(chipTool, " ***** Test Step 90 : Clear all the RFID credentials\n");
+            err = TestClearAllTheRfidCredentials_90();
             break;
         case 91:
-            ChipLogProgress(chipTool, " ***** Test Step 91 : Create new PIN credential with user\n");
-            err = TestCreateNewPinCredentialWithUser_91();
+            ChipLogProgress(chipTool, " ***** Test Step 91 : Read back the fist RFID credential and make sure it is deleted\n");
+            err = TestReadBackTheFistRfidCredentialAndMakeSureItIsDeleted_91();
             break;
         case 92:
-            ChipLogProgress(chipTool, " ***** Test Step 92 : Create new RFID credential with user\n");
-            err = TestCreateNewRfidCredentialWithUser_92();
+            ChipLogProgress(chipTool, " ***** Test Step 92 : Read back the second RFID credential and make sure it is deleted\n");
+            err = TestReadBackTheSecondRfidCredentialAndMakeSureItIsDeleted_92();
             break;
         case 93:
-            ChipLogProgress(chipTool, " ***** Test Step 93 : Create another RFID credential with user\n");
-            err = TestCreateAnotherRfidCredentialWithUser_93();
+            ChipLogProgress(chipTool, " ***** Test Step 93 : Read back the third RFID credential and make sure it is deleted\n");
+            err = TestReadBackTheThirdRfidCredentialAndMakeSureItIsDeleted_93();
             break;
         case 94:
-            ChipLogProgress(chipTool, " ***** Test Step 94 : Clear all the credentials\n");
-            err = TestClearAllTheCredentials_94();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 94 : Read the user related with first RFID back and make sure it has only PIN credential\n");
+            err = TestReadTheUserRelatedWithFirstRfidBackAndMakeSureItHasOnlyPinCredential_94();
             break;
         case 95:
-            ChipLogProgress(chipTool, " ***** Test Step 95 : Read back the first PIN credential and make sure it is deleted\n");
-            err = TestReadBackTheFirstPinCredentialAndMakeSureItIsDeleted_95();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 95 : Read the user related with second RFID back and make sure it is deleted\n");
+            err = TestReadTheUserRelatedWithSecondRfidBackAndMakeSureItIsDeleted_95();
             break;
         case 96:
-            ChipLogProgress(chipTool, " ***** Test Step 96 : Read back the first RFID credential and make sure it is deleted\n");
-            err = TestReadBackTheFirstRfidCredentialAndMakeSureItIsDeleted_96();
+            ChipLogProgress(chipTool, " ***** Test Step 96 : Create new PIN credential with user\n");
+            err = TestCreateNewPinCredentialWithUser_96();
             break;
         case 97:
-            ChipLogProgress(chipTool, " ***** Test Step 97 : Read back the second PIN credential and make sure it is deleted\n");
-            err = TestReadBackTheSecondPinCredentialAndMakeSureItIsDeleted_97();
+            ChipLogProgress(chipTool, " ***** Test Step 97 : Create new RFID credential with user\n");
+            err = TestCreateNewRfidCredentialWithUser_97();
             break;
         case 98:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 98 : Read the user related with first PIN back and make sure it is deleted\n");
-            err = TestReadTheUserRelatedWithFirstPinBackAndMakeSureItIsDeleted_98();
+            ChipLogProgress(chipTool, " ***** Test Step 98 : Create another RFID credential with user\n");
+            err = TestCreateAnotherRfidCredentialWithUser_98();
             break;
         case 99:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 99 : Read the user related with first RFID back and make sure it is deleted\n");
-            err = TestReadTheUserRelatedWithFirstRfidBackAndMakeSureItIsDeleted_99();
+            ChipLogProgress(chipTool, " ***** Test Step 99 : Clear all the credentials\n");
+            err = TestClearAllTheCredentials_99();
             break;
         case 100:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 100 : Read the user related with second PIN back and make sure it is deleted\n");
-            err = TestReadTheUserRelatedWithSecondPinBackAndMakeSureItIsDeleted_100();
+            ChipLogProgress(chipTool, " ***** Test Step 100 : Read back the first PIN credential and make sure it is deleted\n");
+            err = TestReadBackTheFirstPinCredentialAndMakeSureItIsDeleted_100();
             break;
         case 101:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 101 : Read the user related with last RFID back and make sure it is deleted\n");
-            err = TestReadTheUserRelatedWithLastRfidBackAndMakeSureItIsDeleted_101();
+            ChipLogProgress(chipTool, " ***** Test Step 101 : Read back the first RFID credential and make sure it is deleted\n");
+            err = TestReadBackTheFirstRfidCredentialAndMakeSureItIsDeleted_101();
             break;
         case 102:
-            ChipLogProgress(chipTool, " ***** Test Step 102 : Create new Programming PIN credential with invalid index\n");
-            err = TestCreateNewProgrammingPinCredentialWithInvalidIndex_102();
+            ChipLogProgress(chipTool, " ***** Test Step 102 : Read back the second PIN credential and make sure it is deleted\n");
+            err = TestReadBackTheSecondPinCredentialAndMakeSureItIsDeleted_102();
             break;
         case 103:
-            ChipLogProgress(chipTool, " ***** Test Step 103 : Create new Programming PIN credential with valid index\n");
-            err = TestCreateNewProgrammingPinCredentialWithValidIndex_103();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 103 : Read the user related with first PIN back and make sure it is deleted\n");
+            err = TestReadTheUserRelatedWithFirstPinBackAndMakeSureItIsDeleted_103();
             break;
         case 104:
-            ChipLogProgress(chipTool, " ***** Test Step 104 : Verify created user\n");
-            err = TestVerifyCreatedUser_104();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 104 : Read the user related with first RFID back and make sure it is deleted\n");
+            err = TestReadTheUserRelatedWithFirstRfidBackAndMakeSureItIsDeleted_104();
             break;
         case 105:
-            ChipLogProgress(chipTool, " ***** Test Step 105 : Verify created programming PIN credential\n");
-            err = TestVerifyCreatedProgrammingPinCredential_105();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 105 : Read the user related with second PIN back and make sure it is deleted\n");
+            err = TestReadTheUserRelatedWithSecondPinBackAndMakeSureItIsDeleted_105();
             break;
         case 106:
-            ChipLogProgress(chipTool, " ***** Test Step 106 : Modify the Programming PIN credential\n");
-            err = TestModifyTheProgrammingPinCredential_106();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 106 : Read the user related with last RFID back and make sure it is deleted\n");
+            err = TestReadTheUserRelatedWithLastRfidBackAndMakeSureItIsDeleted_106();
             break;
         case 107:
-            ChipLogProgress(chipTool, " ***** Test Step 107 : Clearing Programming PIN fails\n");
-            err = TestClearingProgrammingPinFails_107();
+            ChipLogProgress(chipTool, " ***** Test Step 107 : Create new Programming PIN credential with invalid index\n");
+            err = TestCreateNewProgrammingPinCredentialWithInvalidIndex_107();
             break;
         case 108:
-            ChipLogProgress(chipTool, " ***** Test Step 108 : Clearing Programming PIN with invalid index fails\n");
-            err = TestClearingProgrammingPinWithInvalidIndexFails_108();
+            ChipLogProgress(chipTool, " ***** Test Step 108 : Create new Programming PIN credential with valid index\n");
+            err = TestCreateNewProgrammingPinCredentialWithValidIndex_108();
             break;
         case 109:
-            ChipLogProgress(chipTool, " ***** Test Step 109 : Clearing PIN credential with zero index fails\n");
-            err = TestClearingPinCredentialWithZeroIndexFails_109();
+            ChipLogProgress(chipTool, " ***** Test Step 109 : Verify created user\n");
+            err = TestVerifyCreatedUser_109();
             break;
         case 110:
-            ChipLogProgress(chipTool, " ***** Test Step 110 : Clearing PIN credential with out-of-bound index fails\n");
-            err = TestClearingPinCredentialWithOutOfBoundIndexFails_110();
+            ChipLogProgress(chipTool, " ***** Test Step 110 : Verify created programming PIN credential\n");
+            err = TestVerifyCreatedProgrammingPinCredential_110();
             break;
         case 111:
-            ChipLogProgress(chipTool, " ***** Test Step 111 : Clearing RFID credential with zero index fails\n");
-            err = TestClearingRfidCredentialWithZeroIndexFails_111();
+            ChipLogProgress(chipTool, " ***** Test Step 111 : Modify the Programming PIN credential\n");
+            err = TestModifyTheProgrammingPinCredential_111();
             break;
         case 112:
-            ChipLogProgress(chipTool, " ***** Test Step 112 : Clearing RFID credential with out-of-bound index fails\n");
-            err = TestClearingRfidCredentialWithOutOfBoundIndexFails_112();
+            ChipLogProgress(chipTool, " ***** Test Step 112 : Clearing Programming PIN fails\n");
+            err = TestClearingProgrammingPinFails_112();
             break;
         case 113:
-            ChipLogProgress(chipTool, " ***** Test Step 113 : Clear the Programming PIN user\n");
-            err = TestClearTheProgrammingPinUser_113();
+            ChipLogProgress(chipTool, " ***** Test Step 113 : Clearing Programming PIN with invalid index fails\n");
+            err = TestClearingProgrammingPinWithInvalidIndexFails_113();
             break;
         case 114:
-            ChipLogProgress(chipTool, " ***** Test Step 114 : Make sure Programming PIN user is deleted\n");
-            err = TestMakeSureProgrammingPinUserIsDeleted_114();
+            ChipLogProgress(chipTool, " ***** Test Step 114 : Clearing PIN credential with zero index fails\n");
+            err = TestClearingPinCredentialWithZeroIndexFails_114();
             break;
         case 115:
-            ChipLogProgress(chipTool, " ***** Test Step 115 : Make sure programming PIN credential is deleted\n");
-            err = TestMakeSureProgrammingPinCredentialIsDeleted_115();
+            ChipLogProgress(chipTool, " ***** Test Step 115 : Clearing PIN credential with out-of-bound index fails\n");
+            err = TestClearingPinCredentialWithOutOfBoundIndexFails_115();
             break;
         case 116:
-            ChipLogProgress(chipTool, " ***** Test Step 116 : Create new PIN credential and user\n");
-            err = TestCreateNewPinCredentialAndUser_116();
+            ChipLogProgress(chipTool, " ***** Test Step 116 : Clearing RFID credential with zero index fails\n");
+            err = TestClearingRfidCredentialWithZeroIndexFails_116();
             break;
         case 117:
-            ChipLogProgress(chipTool, " ***** Test Step 117 : Create second PIN credential and add it to existing user\n");
-            err = TestCreateSecondPinCredentialAndAddItToExistingUser_117();
+            ChipLogProgress(chipTool, " ***** Test Step 117 : Clearing RFID credential with out-of-bound index fails\n");
+            err = TestClearingRfidCredentialWithOutOfBoundIndexFails_117();
             break;
         case 118:
-            ChipLogProgress(chipTool, " ***** Test Step 118 : Create third PIN credential and add it to existing user\n");
-            err = TestCreateThirdPinCredentialAndAddItToExistingUser_118();
+            ChipLogProgress(chipTool, " ***** Test Step 118 : Clear the Programming PIN user\n");
+            err = TestClearTheProgrammingPinUser_118();
             break;
         case 119:
-            ChipLogProgress(chipTool, " ***** Test Step 119 : Create fourth PIN credential and add it to existing user\n");
-            err = TestCreateFourthPinCredentialAndAddItToExistingUser_119();
+            ChipLogProgress(chipTool, " ***** Test Step 119 : Make sure Programming PIN user is deleted\n");
+            err = TestMakeSureProgrammingPinUserIsDeleted_119();
             break;
         case 120:
-            ChipLogProgress(chipTool, " ***** Test Step 120 : Create fifth PIN credential and add it to existing user\n");
-            err = TestCreateFifthPinCredentialAndAddItToExistingUser_120();
+            ChipLogProgress(chipTool, " ***** Test Step 120 : Make sure programming PIN credential is deleted\n");
+            err = TestMakeSureProgrammingPinCredentialIsDeleted_120();
             break;
         case 121:
-            ChipLogProgress(chipTool, " ***** Test Step 121 : Try to create sixth PIN credential and make sure it fails\n");
-            err = TestTryToCreateSixthPinCredentialAndMakeSureItFails_121();
+            ChipLogProgress(chipTool, " ***** Test Step 121 : Create new PIN credential and user\n");
+            err = TestCreateNewPinCredentialAndUser_121();
             break;
         case 122:
-            ChipLogProgress(chipTool, " ***** Test Step 122 : Final clean-up\n");
-            err = TestFinalCleanUp_122();
+            ChipLogProgress(chipTool, " ***** Test Step 122 : Create second PIN credential and add it to existing user\n");
+            err = TestCreateSecondPinCredentialAndAddItToExistingUser_122();
+            break;
+        case 123:
+            ChipLogProgress(chipTool, " ***** Test Step 123 : Create third PIN credential and add it to existing user\n");
+            err = TestCreateThirdPinCredentialAndAddItToExistingUser_123();
+            break;
+        case 124:
+            ChipLogProgress(chipTool, " ***** Test Step 124 : Create fourth PIN credential and add it to existing user\n");
+            err = TestCreateFourthPinCredentialAndAddItToExistingUser_124();
+            break;
+        case 125:
+            ChipLogProgress(chipTool, " ***** Test Step 125 : Create fifth PIN credential and add it to existing user\n");
+            err = TestCreateFifthPinCredentialAndAddItToExistingUser_125();
+            break;
+        case 126:
+            ChipLogProgress(chipTool, " ***** Test Step 126 : Try to create sixth PIN credential and make sure it fails\n");
+            err = TestTryToCreateSixthPinCredentialAndMakeSureItFails_126();
+            break;
+        case 127:
+            ChipLogProgress(chipTool, " ***** Test Step 127 : Final clean-up\n");
+            err = TestFinalCleanUp_127();
             break;
         }
 
@@ -110571,37 +110600,37 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 107:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 108:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 109:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 110:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 111:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 112:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 113:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 114:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 115:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 116:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 117:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 118:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -110618,6 +110647,21 @@ public:
         case 122:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 123:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 124:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 125:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 126:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 127:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -110631,7 +110675,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 123;
+    const uint16_t mTestCount = 128;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -113166,54 +113210,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadingRfidCredentialWithIndex0ReturnsNoCredentialDuplicateWithBugWorkaround_54()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
-        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
-        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
-        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
-
-        [cluster getCredentialStatusWithParams:params
-                                    completion:^(MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values,
-                                        NSError * _Nullable err) {
-                                        NSLog(@"Reading RFID credential with index 0 returns no credential duplicate with bug "
-                                              @"workaround Error: %@",
-                                            err);
-
-                                        VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                        {
-                                            id actualValue = values.credentialExists;
-                                            VerifyOrReturn(CheckValue("CredentialExists", actualValue, false));
-                                        }
-
-                                        {
-                                            id actualValue = values.userIndex;
-                                            VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
-                                        }
-
-                                        {
-                                            id actualValue = values.creatorFabricIndex;
-                                            VerifyOrReturn(CheckValueNull("CreatorFabricIndex", actualValue));
-                                        }
-
-                                        {
-                                            id actualValue = values.lastModifiedFabricIndex;
-                                            VerifyOrReturn(CheckValueNull("LastModifiedFabricIndex", actualValue));
-                                        }
-
-                                        NextTest();
-                                    }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadingRfidCredentialWithOutOfBoundsIndexReturnsNoCredential_55()
+    CHIP_ERROR TestReadingRfidCredentialWithOutOfBoundsIndexReturnsNoCredential_54()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -113265,7 +113262,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCheckThatRfidCredentialDoesNotExist_56()
+    CHIP_ERROR TestCheckThatRfidCredentialDoesNotExist_55()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -113315,7 +113312,151 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateNewRfidCredentialAndAddItToExistingUser_57()
+    CHIP_ERROR TestCreateNewRfidCredentialAndAddItToExistingUserWithNonNullUserStatusShouldFail_56()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"rfid_data_123456" length:16];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userStatus = [NSNumber numberWithUnsignedChar:1U];
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                         completion:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                             NSLog(@"Create new RFID credential and add it to existing user with non-null UserStatus should fail "
+                                   @"Error: %@",
+                                 err);
+
+                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                             {
+                                 id actualValue = values.status;
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 133U));
+                             }
+
+                             {
+                                 id actualValue = values.userIndex;
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
+                             }
+
+                             {
+                                 id actualValue = values.nextCredentialIndex;
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 2U));
+                             }
+
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewRfidCredentialAndAddItToExistingUserWithNonNullUserTypeShouldFail_57()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"rfid_data_123456" length:16];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userStatus = nil;
+        params.userType = [NSNumber numberWithUnsignedChar:0U];
+        [cluster
+            setCredentialWithParams:params
+                         completion:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                             NSLog(@"Create new RFID credential and add it to existing user with non-null UserType should fail "
+                                   @"Error: %@",
+                                 err);
+
+                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                             {
+                                 id actualValue = values.status;
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 133U));
+                             }
+
+                             {
+                                 id actualValue = values.userIndex;
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
+                             }
+
+                             {
+                                 id actualValue = values.nextCredentialIndex;
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 2U));
+                             }
+
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewRfidCredentialAndAddItToExistingUserWithNonNullUserTypeAndUserStatusShouldFail_58()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"rfid_data_123456" length:16];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userStatus = [NSNumber numberWithUnsignedChar:1U];
+        params.userType = [NSNumber numberWithUnsignedChar:0U];
+        [cluster
+            setCredentialWithParams:params
+                         completion:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                             NSLog(@"Create new RFID credential and add it to existing user with non-null UserType and UserStatus "
+                                   @"should fail Error: %@",
+                                 err);
+
+                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                             {
+                                 id actualValue = values.status;
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 133U));
+                             }
+
+                             {
+                                 id actualValue = values.userIndex;
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
+                             }
+
+                             {
+                                 id actualValue = values.nextCredentialIndex;
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 2U));
+                             }
+
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewRfidCredentialAndAddItToExistingUser_59()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -113361,7 +113502,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyModifiedUser_58()
+    CHIP_ERROR TestVerifyModifiedUser_60()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -113447,7 +113588,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyCreatedCredential_59()
+    CHIP_ERROR TestVerifyCreatedCredential_61()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -113500,7 +113641,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateNewRfidCredentialAndUserWithIndex0Fails_60()
+    CHIP_ERROR TestCreateNewRfidCredentialAndUserWithIndex0Fails_62()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -113546,7 +113687,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateNewRfidCredentialAndUserWithOutOfBoundsIndexFails_61()
+    CHIP_ERROR TestCreateNewRfidCredentialAndUserWithOutOfBoundsIndexFails_63()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -113592,7 +113733,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateNewCredentialAndTryToAddItTo0User_62()
+    CHIP_ERROR TestCreateNewCredentialAndTryToAddItTo0User_64()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -113638,7 +113779,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateNewCredentialAndTryToAddItToOutOfBoundsUser_63()
+    CHIP_ERROR TestCreateNewCredentialAndTryToAddItToOutOfBoundsUser_65()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -113684,7 +113825,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateNewPinWithTooShortData_64()
+    CHIP_ERROR TestCreateNewPinWithTooShortData_66()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -113730,7 +113871,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateNewPinWithTooLongData_65()
+    CHIP_ERROR TestCreateNewPinWithTooLongData_67()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -113776,7 +113917,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateNewRfidWithTooShortData_66()
+    CHIP_ERROR TestCreateNewRfidWithTooShortData_68()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -113822,7 +113963,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateNewPinWithProgrammingUserTypeFails_67()
+    CHIP_ERROR TestCreateNewPinWithProgrammingUserTypeFails_69()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -113868,7 +114009,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateNewRfidWithTooShortData_68()
+    CHIP_ERROR TestCreateNewRfidWithTooShortData_70()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -113914,7 +114055,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateNewPinCredentialWithDataTheWouldCauseDuplicate_69()
+    CHIP_ERROR TestCreateNewPinCredentialWithDataTheWouldCauseDuplicate_71()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -113960,7 +114101,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateNewRfidCredentialWithDataTheWouldCauseDuplicate_70()
+    CHIP_ERROR TestCreateNewRfidCredentialWithDataTheWouldCauseDuplicate_72()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -114006,7 +114147,150 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestModifyCredentialDataOfExistingPinCredential_71()
+    CHIP_ERROR TestModifyCredentialDataOfExistingPinCredentialWithNonNullUserStatusShouldFail_73()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:2U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userStatus = [NSNumber numberWithUnsignedChar:1U];
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                         completion:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                             NSLog(
+                                 @"Modify credentialData of existing PIN credential with non-null UserStatus should fail Error: %@",
+                                 err);
+
+                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                             {
+                                 id actualValue = values.status;
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 133U));
+                             }
+
+                             {
+                                 id actualValue = values.userIndex;
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
+                             }
+
+                             {
+                                 id actualValue = values.nextCredentialIndex;
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 2U));
+                             }
+
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestModifyCredentialDataOfExistingPinCredentialWithNonNullUserTypeShouldFail_74()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:2U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userStatus = nil;
+        params.userType = [NSNumber numberWithUnsignedChar:0U];
+        [cluster
+            setCredentialWithParams:params
+                         completion:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                             NSLog(@"Modify credentialData of existing PIN credential with non-null UserType should fail Error: %@",
+                                 err);
+
+                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                             {
+                                 id actualValue = values.status;
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 133U));
+                             }
+
+                             {
+                                 id actualValue = values.userIndex;
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
+                             }
+
+                             {
+                                 id actualValue = values.nextCredentialIndex;
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 2U));
+                             }
+
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestModifyCredentialDataOfExistingPinCredentialWithNonNullUserStatusAndUserTypeShouldFail_75()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:2U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userStatus = [NSNumber numberWithUnsignedChar:1U];
+        params.userType = [NSNumber numberWithUnsignedChar:0U];
+        [cluster
+            setCredentialWithParams:params
+                         completion:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                             NSLog(@"Modify credentialData of existing PIN credential with non-null UserStatus and UserType should "
+                                   @"fail Error: %@",
+                                 err);
+
+                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                             {
+                                 id actualValue = values.status;
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 133U));
+                             }
+
+                             {
+                                 id actualValue = values.userIndex;
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
+                             }
+
+                             {
+                                 id actualValue = values.nextCredentialIndex;
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 2U));
+                             }
+
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestModifyCredentialDataOfExistingPinCredential_76()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -114052,7 +114336,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyThatCredentialWasChangedByCreatingNewCredentialWithOldData_72()
+    CHIP_ERROR TestVerifyThatCredentialWasChangedByCreatingNewCredentialWithOldData_77()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -114099,7 +114383,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyThatCredentialWasChangedByCreatingNewCredentialWithNewData_73()
+    CHIP_ERROR TestVerifyThatCredentialWasChangedByCreatingNewCredentialWithNewData_78()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -114145,7 +114429,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateNewRfidCredentialAndAddItToExistingUser_74()
+    CHIP_ERROR TestCreateNewRfidCredentialAndAddItToExistingUser_79()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -114191,7 +114475,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyModifiedUser_75()
+    CHIP_ERROR TestVerifyModifiedUser_80()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -114282,7 +114566,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateNewRfidCredentialAndAddItToExistingUser_76()
+    CHIP_ERROR TestCreateNewRfidCredentialAndAddItToExistingUser_81()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -114328,7 +114612,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyModifiedUser_77()
+    CHIP_ERROR TestVerifyModifiedUser_82()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -114423,7 +114707,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestClearFirstPinCredential_78()
+    CHIP_ERROR TestClearFirstPinCredential_83()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -114447,7 +114731,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadBackTheCredentialAndMakeSureItIsDeleted_79()
+    CHIP_ERROR TestReadBackTheCredentialAndMakeSureItIsDeleted_84()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -114498,7 +114782,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheUserBackAndMakeSurePinCredentialIsDeleted_80()
+    CHIP_ERROR TestReadTheUserBackAndMakeSurePinCredentialIsDeleted_85()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -114589,7 +114873,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestClearTheSecondPinCredential_81()
+    CHIP_ERROR TestClearTheSecondPinCredential_86()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -114613,7 +114897,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadBackTheCredentialAndMakeSureItIsDeleted_82()
+    CHIP_ERROR TestReadBackTheCredentialAndMakeSureItIsDeleted_87()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -114664,7 +114948,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheUserBackAndMakeSureRelatedUserIsDeleted_83()
+    CHIP_ERROR TestReadTheUserBackAndMakeSureRelatedUserIsDeleted_88()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -114735,7 +115019,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateNewRfidCredentialWithUser_84()
+    CHIP_ERROR TestCreateNewRfidCredentialWithUser_89()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -114782,7 +115066,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestClearAllTheRfidCredentials_85()
+    CHIP_ERROR TestClearAllTheRfidCredentials_90()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -114806,7 +115090,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadBackTheFistRfidCredentialAndMakeSureItIsDeleted_86()
+    CHIP_ERROR TestReadBackTheFistRfidCredentialAndMakeSureItIsDeleted_91()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -114856,7 +115140,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadBackTheSecondRfidCredentialAndMakeSureItIsDeleted_87()
+    CHIP_ERROR TestReadBackTheSecondRfidCredentialAndMakeSureItIsDeleted_92()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -114906,7 +115190,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadBackTheThirdRfidCredentialAndMakeSureItIsDeleted_88()
+    CHIP_ERROR TestReadBackTheThirdRfidCredentialAndMakeSureItIsDeleted_93()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -114956,7 +115240,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheUserRelatedWithFirstRfidBackAndMakeSureItHasOnlyPinCredential_89()
+    CHIP_ERROR TestReadTheUserRelatedWithFirstRfidBackAndMakeSureItHasOnlyPinCredential_94()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -115039,7 +115323,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheUserRelatedWithSecondRfidBackAndMakeSureItIsDeleted_90()
+    CHIP_ERROR TestReadTheUserRelatedWithSecondRfidBackAndMakeSureItIsDeleted_95()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -115110,7 +115394,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateNewPinCredentialWithUser_91()
+    CHIP_ERROR TestCreateNewPinCredentialWithUser_96()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -115157,7 +115441,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateNewRfidCredentialWithUser_92()
+    CHIP_ERROR TestCreateNewRfidCredentialWithUser_97()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -115204,7 +115488,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateAnotherRfidCredentialWithUser_93()
+    CHIP_ERROR TestCreateAnotherRfidCredentialWithUser_98()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -115251,7 +115535,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestClearAllTheCredentials_94()
+    CHIP_ERROR TestClearAllTheCredentials_99()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -115272,7 +115556,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadBackTheFirstPinCredentialAndMakeSureItIsDeleted_95()
+    CHIP_ERROR TestReadBackTheFirstPinCredentialAndMakeSureItIsDeleted_100()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -115322,7 +115606,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadBackTheFirstRfidCredentialAndMakeSureItIsDeleted_96()
+    CHIP_ERROR TestReadBackTheFirstRfidCredentialAndMakeSureItIsDeleted_101()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -115372,7 +115656,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadBackTheSecondPinCredentialAndMakeSureItIsDeleted_97()
+    CHIP_ERROR TestReadBackTheSecondPinCredentialAndMakeSureItIsDeleted_102()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -115422,7 +115706,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheUserRelatedWithFirstPinBackAndMakeSureItIsDeleted_98()
+    CHIP_ERROR TestReadTheUserRelatedWithFirstPinBackAndMakeSureItIsDeleted_103()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -115493,7 +115777,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheUserRelatedWithFirstRfidBackAndMakeSureItIsDeleted_99()
+    CHIP_ERROR TestReadTheUserRelatedWithFirstRfidBackAndMakeSureItIsDeleted_104()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -115564,7 +115848,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheUserRelatedWithSecondPinBackAndMakeSureItIsDeleted_100()
+    CHIP_ERROR TestReadTheUserRelatedWithSecondPinBackAndMakeSureItIsDeleted_105()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -115635,7 +115919,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheUserRelatedWithLastRfidBackAndMakeSureItIsDeleted_101()
+    CHIP_ERROR TestReadTheUserRelatedWithLastRfidBackAndMakeSureItIsDeleted_106()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -115706,7 +115990,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateNewProgrammingPinCredentialWithInvalidIndex_102()
+    CHIP_ERROR TestCreateNewProgrammingPinCredentialWithInvalidIndex_107()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -115751,7 +116035,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateNewProgrammingPinCredentialWithValidIndex_103()
+    CHIP_ERROR TestCreateNewProgrammingPinCredentialWithValidIndex_108()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -115797,7 +116081,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyCreatedUser_104()
+    CHIP_ERROR TestVerifyCreatedUser_109()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -115879,7 +116163,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyCreatedProgrammingPinCredential_105()
+    CHIP_ERROR TestVerifyCreatedProgrammingPinCredential_110()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -115932,7 +116216,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestModifyTheProgrammingPinCredential_106()
+    CHIP_ERROR TestModifyTheProgrammingPinCredential_111()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -115977,7 +116261,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestClearingProgrammingPinFails_107()
+    CHIP_ERROR TestClearingProgrammingPinFails_112()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -116004,7 +116288,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestClearingProgrammingPinWithInvalidIndexFails_108()
+    CHIP_ERROR TestClearingProgrammingPinWithInvalidIndexFails_113()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -116031,7 +116315,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestClearingPinCredentialWithZeroIndexFails_109()
+    CHIP_ERROR TestClearingPinCredentialWithZeroIndexFails_114()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -116058,7 +116342,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestClearingPinCredentialWithOutOfBoundIndexFails_110()
+    CHIP_ERROR TestClearingPinCredentialWithOutOfBoundIndexFails_115()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -116086,7 +116370,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestClearingRfidCredentialWithZeroIndexFails_111()
+    CHIP_ERROR TestClearingRfidCredentialWithZeroIndexFails_116()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -116113,7 +116397,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestClearingRfidCredentialWithOutOfBoundIndexFails_112()
+    CHIP_ERROR TestClearingRfidCredentialWithOutOfBoundIndexFails_117()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -116141,7 +116425,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestClearTheProgrammingPinUser_113()
+    CHIP_ERROR TestClearTheProgrammingPinUser_118()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -116162,7 +116446,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestMakeSureProgrammingPinUserIsDeleted_114()
+    CHIP_ERROR TestMakeSureProgrammingPinUserIsDeleted_119()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -116233,7 +116517,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestMakeSureProgrammingPinCredentialIsDeleted_115()
+    CHIP_ERROR TestMakeSureProgrammingPinCredentialIsDeleted_120()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -116283,7 +116567,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateNewPinCredentialAndUser_116()
+    CHIP_ERROR TestCreateNewPinCredentialAndUser_121()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -116330,7 +116614,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateSecondPinCredentialAndAddItToExistingUser_117()
+    CHIP_ERROR TestCreateSecondPinCredentialAndAddItToExistingUser_122()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -116376,7 +116660,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateThirdPinCredentialAndAddItToExistingUser_118()
+    CHIP_ERROR TestCreateThirdPinCredentialAndAddItToExistingUser_123()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -116422,7 +116706,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateFourthPinCredentialAndAddItToExistingUser_119()
+    CHIP_ERROR TestCreateFourthPinCredentialAndAddItToExistingUser_124()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -116468,7 +116752,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateFifthPinCredentialAndAddItToExistingUser_120()
+    CHIP_ERROR TestCreateFifthPinCredentialAndAddItToExistingUser_125()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -116514,7 +116798,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestTryToCreateSixthPinCredentialAndMakeSureItFails_121()
+    CHIP_ERROR TestTryToCreateSixthPinCredentialAndMakeSureItFails_126()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -116560,7 +116844,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestFinalCleanUp_122()
+    CHIP_ERROR TestFinalCleanUp_127()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
