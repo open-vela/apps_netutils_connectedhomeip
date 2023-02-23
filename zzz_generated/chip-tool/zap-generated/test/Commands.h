@@ -38222,7 +38222,7 @@ private:
         case 1:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::PowerSource::PowerSourceStatus value;
+                chip::app::Clusters::PowerSource::PowerSourceStatusEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
@@ -38270,7 +38270,7 @@ private:
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::PowerSource::WiredCurrentType value;
+                chip::app::Clusters::PowerSource::WiredCurrentTypeEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
@@ -38318,7 +38318,7 @@ private:
         case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::DecodableList<chip::app::Clusters::PowerSource::WiredFault> value;
+                chip::app::DataModel::DecodableList<chip::app::Clusters::PowerSource::WiredFaultEnum> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 8));
@@ -38357,7 +38357,7 @@ private:
         case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::PowerSource::BatChargeLevel value;
+                chip::app::Clusters::PowerSource::BatChargeLevelEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
@@ -38375,7 +38375,7 @@ private:
         case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::PowerSource::BatReplaceability value;
+                chip::app::Clusters::PowerSource::BatReplaceabilityEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
@@ -38393,7 +38393,7 @@ private:
         case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::DecodableList<chip::app::Clusters::PowerSource::BatFault> value;
+                chip::app::DataModel::DecodableList<chip::app::Clusters::PowerSource::BatFaultEnum> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 8));
@@ -38411,11 +38411,11 @@ private:
         case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint32_t value;
+                chip::app::Clusters::PowerSource::BatCommonDesignationEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 80UL));
+                VerifyOrReturn(CheckConstraintType("value", "enum16", "int32u"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 80U));
             }
             break;
         case 22:
@@ -38439,11 +38439,11 @@ private:
         case 24:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint32_t value;
+                chip::app::Clusters::PowerSource::BatApprovedChemistryEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 32UL));
+                VerifyOrReturn(CheckConstraintType("value", "enum16", "int32u"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 32U));
             }
             break;
         case 25:
@@ -38469,7 +38469,7 @@ private:
         case 27:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::PowerSource::BatChargeState value;
+                chip::app::Clusters::PowerSource::BatChargeStateEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
@@ -38507,7 +38507,7 @@ private:
         case 31:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::DecodableList<chip::app::Clusters::PowerSource::BatChargeFault> value;
+                chip::app::DataModel::DecodableList<chip::app::Clusters::PowerSource::BatChargeFaultEnum> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
