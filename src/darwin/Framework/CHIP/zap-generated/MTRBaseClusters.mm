@@ -20550,7 +20550,7 @@ using chip::System::Clock::Timeout;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = PowerSource::Attributes::Status::TypeInfo;
-    return MTRReadAttribute<MTRPowerSourceClusterPowerSourceStatusAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+    return MTRReadAttribute<MTRPowerSourceClusterPowerSourceStatusEnumAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -20559,7 +20559,7 @@ using chip::System::Clock::Timeout;
                              reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = PowerSource::Attributes::Status::TypeInfo;
-    MTRSubscribeAttribute<MTRPowerSourceClusterPowerSourceStatusAttributeCallbackSubscriptionBridge, NSNumber,
+    MTRSubscribeAttribute<MTRPowerSourceClusterPowerSourceStatusEnumAttributeCallbackSubscriptionBridge, NSNumber,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -20569,9 +20569,9 @@ using chip::System::Clock::Timeout;
                                            queue:(dispatch_queue_t)queue
                                       completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRPowerSourceClusterPowerSourceStatusAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRPowerSourceClusterPowerSourceStatusEnumAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(PowerSourceClusterPowerSourceStatusAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(PowerSourceClusterPowerSourceStatusEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = PowerSource::Attributes::Status::TypeInfo;
@@ -20771,7 +20771,7 @@ using chip::System::Clock::Timeout;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = PowerSource::Attributes::WiredCurrentType::TypeInfo;
-    return MTRReadAttribute<MTRPowerSourceClusterWiredCurrentTypeAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+    return MTRReadAttribute<MTRPowerSourceClusterWiredCurrentTypeEnumAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -20780,7 +20780,7 @@ using chip::System::Clock::Timeout;
                                        reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = PowerSource::Attributes::WiredCurrentType::TypeInfo;
-    MTRSubscribeAttribute<MTRPowerSourceClusterWiredCurrentTypeAttributeCallbackSubscriptionBridge, NSNumber,
+    MTRSubscribeAttribute<MTRPowerSourceClusterWiredCurrentTypeEnumAttributeCallbackSubscriptionBridge, NSNumber,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -20791,9 +20791,9 @@ using chip::System::Clock::Timeout;
                                                 completion:
                                                     (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRPowerSourceClusterWiredCurrentTypeAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRPowerSourceClusterWiredCurrentTypeEnumAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(PowerSourceClusterWiredCurrentTypeAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(PowerSourceClusterWiredCurrentTypeEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = PowerSource::Attributes::WiredCurrentType::TypeInfo;
@@ -21169,7 +21169,7 @@ using chip::System::Clock::Timeout;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = PowerSource::Attributes::BatChargeLevel::TypeInfo;
-    return MTRReadAttribute<MTRPowerSourceClusterBatChargeLevelAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+    return MTRReadAttribute<MTRPowerSourceClusterBatChargeLevelEnumAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -21178,7 +21178,7 @@ using chip::System::Clock::Timeout;
                                      reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = PowerSource::Attributes::BatChargeLevel::TypeInfo;
-    MTRSubscribeAttribute<MTRPowerSourceClusterBatChargeLevelAttributeCallbackSubscriptionBridge, NSNumber,
+    MTRSubscribeAttribute<MTRPowerSourceClusterBatChargeLevelEnumAttributeCallbackSubscriptionBridge, NSNumber,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -21188,9 +21188,9 @@ using chip::System::Clock::Timeout;
                                                    queue:(dispatch_queue_t)queue
                                               completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRPowerSourceClusterBatChargeLevelAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRPowerSourceClusterBatChargeLevelEnumAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(PowerSourceClusterBatChargeLevelAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(PowerSourceClusterBatChargeLevelEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = PowerSource::Attributes::BatChargeLevel::TypeInfo;
@@ -21257,7 +21257,7 @@ using chip::System::Clock::Timeout;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = PowerSource::Attributes::BatReplaceability::TypeInfo;
-    return MTRReadAttribute<MTRPowerSourceClusterBatReplaceabilityAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+    return MTRReadAttribute<MTRPowerSourceClusterBatReplaceabilityEnumAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -21266,7 +21266,7 @@ using chip::System::Clock::Timeout;
                                         reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = PowerSource::Attributes::BatReplaceability::TypeInfo;
-    MTRSubscribeAttribute<MTRPowerSourceClusterBatReplaceabilityAttributeCallbackSubscriptionBridge, NSNumber,
+    MTRSubscribeAttribute<MTRPowerSourceClusterBatReplaceabilityEnumAttributeCallbackSubscriptionBridge, NSNumber,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -21277,9 +21277,9 @@ using chip::System::Clock::Timeout;
                                                  completion:
                                                      (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRPowerSourceClusterBatReplaceabilityAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRPowerSourceClusterBatReplaceabilityEnumAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(PowerSourceClusterBatReplaceabilityAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(PowerSourceClusterBatReplaceabilityEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = PowerSource::Attributes::BatReplaceability::TypeInfo;
@@ -21433,7 +21433,8 @@ using chip::System::Clock::Timeout;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = PowerSource::Attributes::BatCommonDesignation::TypeInfo;
-    return MTRReadAttribute<MTRInt32uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+    return MTRReadAttribute<MTRPowerSourceClusterBatCommonDesignationEnumAttributeCallbackBridge, NSNumber,
+        TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -21443,9 +21444,9 @@ using chip::System::Clock::Timeout;
                                                (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = PowerSource::Attributes::BatCommonDesignation::TypeInfo;
-    MTRSubscribeAttribute<MTRInt32uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
-        subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
-        TypeInfo::GetAttributeId());
+    MTRSubscribeAttribute<MTRPowerSourceClusterBatCommonDesignationEnumAttributeCallbackSubscriptionBridge, NSNumber,
+        TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
+        TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
 + (void)readAttributeBatCommonDesignationWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
@@ -21454,9 +21455,9 @@ using chip::System::Clock::Timeout;
                                                     completion:
                                                         (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRInt32uAttributeCallbackBridge(queue, completion);
-    std::move(*bridge).DispatchLocalAction(
-        clusterStateCacheContainer.baseDevice, ^(Int32uAttributeCallback successCb, MTRErrorCallback failureCb) {
+    auto * bridge = new MTRPowerSourceClusterBatCommonDesignationEnumAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
+        ^(PowerSourceClusterBatCommonDesignationEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = PowerSource::Attributes::BatCommonDesignation::TypeInfo;
@@ -21567,7 +21568,8 @@ using chip::System::Clock::Timeout;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = PowerSource::Attributes::BatApprovedChemistry::TypeInfo;
-    return MTRReadAttribute<MTRInt32uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+    return MTRReadAttribute<MTRPowerSourceClusterBatApprovedChemistryEnumAttributeCallbackBridge, NSNumber,
+        TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -21577,9 +21579,9 @@ using chip::System::Clock::Timeout;
                                                (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = PowerSource::Attributes::BatApprovedChemistry::TypeInfo;
-    MTRSubscribeAttribute<MTRInt32uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
-        subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
-        TypeInfo::GetAttributeId());
+    MTRSubscribeAttribute<MTRPowerSourceClusterBatApprovedChemistryEnumAttributeCallbackSubscriptionBridge, NSNumber,
+        TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
+        TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
 + (void)readAttributeBatApprovedChemistryWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
@@ -21588,9 +21590,9 @@ using chip::System::Clock::Timeout;
                                                     completion:
                                                         (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRInt32uAttributeCallbackBridge(queue, completion);
-    std::move(*bridge).DispatchLocalAction(
-        clusterStateCacheContainer.baseDevice, ^(Int32uAttributeCallback successCb, MTRErrorCallback failureCb) {
+    auto * bridge = new MTRPowerSourceClusterBatApprovedChemistryEnumAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
+        ^(PowerSourceClusterBatApprovedChemistryEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = PowerSource::Attributes::BatApprovedChemistry::TypeInfo;
@@ -21698,7 +21700,7 @@ using chip::System::Clock::Timeout;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = PowerSource::Attributes::BatChargeState::TypeInfo;
-    return MTRReadAttribute<MTRPowerSourceClusterBatChargeStateAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+    return MTRReadAttribute<MTRPowerSourceClusterBatChargeStateEnumAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -21707,7 +21709,7 @@ using chip::System::Clock::Timeout;
                                      reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = PowerSource::Attributes::BatChargeState::TypeInfo;
-    MTRSubscribeAttribute<MTRPowerSourceClusterBatChargeStateAttributeCallbackSubscriptionBridge, NSNumber,
+    MTRSubscribeAttribute<MTRPowerSourceClusterBatChargeStateEnumAttributeCallbackSubscriptionBridge, NSNumber,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -21717,9 +21719,9 @@ using chip::System::Clock::Timeout;
                                                    queue:(dispatch_queue_t)queue
                                               completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRPowerSourceClusterBatChargeStateAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRPowerSourceClusterBatChargeStateEnumAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(PowerSourceClusterBatChargeStateAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(PowerSourceClusterBatChargeStateEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = PowerSource::Attributes::BatChargeState::TypeInfo;

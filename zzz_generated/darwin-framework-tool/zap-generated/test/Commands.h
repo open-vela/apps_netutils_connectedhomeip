@@ -52728,9 +52728,9 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("batCommonDesignation", "int32u", "int32u"));
-            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("batCommonDesignation", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("batCommonDesignation", [value unsignedIntValue], 80UL));
+            VerifyOrReturn(CheckConstraintType("batCommonDesignation", "enum16", "int32u"));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("batCommonDesignation", [value unsignedShortValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("batCommonDesignation", [value unsignedShortValue], 80U));
 
             NextTest();
         }];
@@ -52790,9 +52790,9 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("batApprovedChemistry", "int32u", "int32u"));
-            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("batApprovedChemistry", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("batApprovedChemistry", [value unsignedIntValue], 32UL));
+            VerifyOrReturn(CheckConstraintType("batApprovedChemistry", "enum16", "int32u"));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("batApprovedChemistry", [value unsignedShortValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("batApprovedChemistry", [value unsignedShortValue], 32U));
 
             NextTest();
         }];
