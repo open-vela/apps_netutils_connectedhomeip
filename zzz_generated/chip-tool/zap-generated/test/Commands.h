@@ -65839,7 +65839,7 @@ private:
 class TestDiscoverySuite : public TestCommand
 {
 public:
-    TestDiscoverySuite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("TestDiscovery", 26, credsIssuerConfig)
+    TestDiscoverySuite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("TestDiscovery", 30, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
@@ -65935,6 +65935,10 @@ private:
             {
                 chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintMinLength("value.hostName", value.hostName, 12));
+                VerifyOrReturn(CheckConstraintMaxLength("value.hostName", value.hostName, 16));
+                VerifyOrReturn(CheckConstraintIsUpperCase("value.hostName", value.hostName, true));
+                VerifyOrReturn(CheckConstraintIsHexString("value.hostName", value.hostName, true));
             }
             shouldContinue = true;
             break;
@@ -65943,6 +65947,10 @@ private:
             {
                 chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintMinLength("value.hostName", value.hostName, 16));
+                VerifyOrReturn(CheckConstraintMaxLength("value.hostName", value.hostName, 16));
+                VerifyOrReturn(CheckConstraintIsUpperCase("value.hostName", value.hostName, true));
+                VerifyOrReturn(CheckConstraintIsHexString("value.hostName", value.hostName, true));
             }
             shouldContinue = true;
             break;
@@ -65967,10 +65975,6 @@ private:
             {
                 chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("longDiscriminator", value.longDiscriminator,
-                                          mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U));
-                VerifyOrReturn(CheckConstraintMinValue("value.longDiscriminator", value.longDiscriminator, 0U));
-                VerifyOrReturn(CheckConstraintMaxValue("value.longDiscriminator", value.longDiscriminator, 4096U));
             }
             shouldContinue = true;
             break;
@@ -65979,7 +65983,6 @@ private:
             {
                 chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("vendorId", value.vendorId, mVendorId.HasValue() ? mVendorId.Value() : 65521U));
             }
             shouldContinue = true;
             break;
@@ -65988,11 +65991,6 @@ private:
             {
                 chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                if (value.mrpRetryIntervalIdle.HasValue())
-                {
-                    VerifyOrReturn(CheckConstraintMaxValue("value.mrpRetryIntervalIdle.Value()", value.mrpRetryIntervalIdle.Value(),
-                                                           3600000UL));
-                }
             }
             shouldContinue = true;
             break;
@@ -66001,11 +65999,10 @@ private:
             {
                 chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                if (value.mrpRetryIntervalActive.HasValue())
-                {
-                    VerifyOrReturn(CheckConstraintMaxValue("value.mrpRetryIntervalActive.Value()",
-                                                           value.mrpRetryIntervalActive.Value(), 3600000UL));
-                }
+                VerifyOrReturn(CheckValue("longDiscriminator", value.longDiscriminator,
+                                          mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U));
+                VerifyOrReturn(CheckConstraintMinValue("value.longDiscriminator", value.longDiscriminator, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value.longDiscriminator", value.longDiscriminator, 4096U));
             }
             shouldContinue = true;
             break;
@@ -66014,7 +66011,7 @@ private:
             {
                 chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("commissioningMode", value.commissioningMode, 1U));
+                VerifyOrReturn(CheckValue("vendorId", value.vendorId, mVendorId.HasValue() ? mVendorId.Value() : 65521U));
             }
             shouldContinue = true;
             break;
@@ -66023,7 +66020,13 @@ private:
             {
                 chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMaxLength("value.deviceName", value.deviceName, 32));
+                if (value.mrpRetryIntervalIdle.HasValue())
+                {
+                    VerifyOrReturn(
+                        CheckConstraintMinValue("value.mrpRetryIntervalIdle.Value()", value.mrpRetryIntervalIdle.Value(), 0UL));
+                    VerifyOrReturn(CheckConstraintMaxValue("value.mrpRetryIntervalIdle.Value()", value.mrpRetryIntervalIdle.Value(),
+                                                           3600000UL));
+                }
             }
             shouldContinue = true;
             break;
@@ -66032,7 +66035,13 @@ private:
             {
                 chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMaxValue("value.rotatingIdLen", value.rotatingIdLen, 100ULL));
+                if (value.mrpRetryIntervalActive.HasValue())
+                {
+                    VerifyOrReturn(
+                        CheckConstraintMinValue("value.mrpRetryIntervalActive.Value()", value.mrpRetryIntervalActive.Value(), 0UL));
+                    VerifyOrReturn(CheckConstraintMaxValue("value.mrpRetryIntervalActive.Value()",
+                                                           value.mrpRetryIntervalActive.Value(), 3600000UL));
+                }
             }
             shouldContinue = true;
             break;
@@ -66041,7 +66050,7 @@ private:
             {
                 chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintNotValue("value.pairingHint", value.pairingHint, 0U));
+                VerifyOrReturn(CheckValue("commissioningMode", value.commissioningMode, 1U));
             }
             shouldContinue = true;
             break;
@@ -66050,7 +66059,7 @@ private:
             {
                 chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMaxLength("value.pairingInstruction", value.pairingInstruction, 128));
+                VerifyOrReturn(CheckValue("deviceType", value.deviceType, mDeviceType.HasValue() ? mDeviceType.Value() : 65535U));
             }
             shouldContinue = true;
             break;
@@ -66059,26 +66068,62 @@ private:
             {
                 chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value.numIPs", value.numIPs, 1U));
+                VerifyOrReturn(CheckConstraintMaxLength("value.deviceName", value.deviceName, 32));
             }
             shouldContinue = true;
             break;
         case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintMaxValue("value.rotatingIdLen", value.rotatingIdLen, 100ULL));
+            }
             shouldContinue = true;
             break;
         case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintNotValue("value.pairingHint", value.pairingHint, 0U));
+            }
             shouldContinue = true;
             break;
         case 23:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintMaxLength("value.pairingInstruction", value.pairingInstruction, 128));
+            }
             shouldContinue = true;
             break;
         case 24:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintMinValue("value.numIPs", value.numIPs, 1U));
+            }
+            shouldContinue = true;
             break;
         case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 28:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 29:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
@@ -66167,123 +66212,154 @@ private:
             return FindCommissionable(kIdentityAlpha, value);
         }
         case 7: {
-            LogStep(7, "Check Long Discriminator _L");
+            LogStep(7, "Check Hostname");
+            VerifyOrDo(!ShouldSkip("(MCORE.COM.WIFI || MCORE.COM.ETH) && !MCORE.COM.THR"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::DiscoveryCommands::Commands::FindCommissionable::Type value;
+            return FindCommissionable(kIdentityAlpha, value);
+        }
+        case 8: {
+            LogStep(8, "Check Hostname");
+            VerifyOrDo(!ShouldSkip("(!MCORE.COM.WIFI && !MCORE.COM.ETH) && MCORE.COM.THR"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::DiscoveryCommands::Commands::FindCommissionable::Type value;
+            return FindCommissionable(kIdentityAlpha, value);
+        }
+        case 9: {
+            LogStep(9, "Check Long Discriminator _L");
             ListFreer listFreer;
             chip::app::Clusters::DiscoveryCommands::Commands::FindCommissionableByLongDiscriminator::Type value;
             value.value = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840ULL;
             return FindCommissionableByLongDiscriminator(kIdentityAlpha, value);
         }
-        case 8: {
-            LogStep(8, "Check Short Discriminator (_S)");
+        case 10: {
+            LogStep(10, "Check Short Discriminator (_S)");
             ListFreer listFreer;
             chip::app::Clusters::DiscoveryCommands::Commands::FindCommissionableByShortDiscriminator::Type value;
             value.value = mShortDiscriminator.HasValue() ? mShortDiscriminator.Value() : 15ULL;
             return FindCommissionableByShortDiscriminator(kIdentityAlpha, value);
         }
-        case 9: {
-            LogStep(9, "Check Commissioning Mode (_CM)");
+        case 11: {
+            LogStep(11, "Check Commissioning Mode (_CM)");
             ListFreer listFreer;
             chip::app::Clusters::DiscoveryCommands::Commands::FindCommissionableByCommissioningMode::Type value;
             return FindCommissionableByCommissioningMode(kIdentityAlpha, value);
         }
-        case 10: {
-            LogStep(10, "Check Vendor ID (_V)");
+        case 12: {
+            LogStep(12, "Check Vendor ID (_V)");
             VerifyOrDo(!ShouldSkip("MCORE.SC.VENDOR_SUBTYPE"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DiscoveryCommands::Commands::FindCommissionableByVendorId::Type value;
             value.value = mVendorId.HasValue() ? mVendorId.Value() : 65521ULL;
             return FindCommissionableByVendorId(kIdentityAlpha, value);
         }
-        case 11: {
-            LogStep(11, "TXT key for discriminator (D)");
-            ListFreer listFreer;
-            chip::app::Clusters::DiscoveryCommands::Commands::FindCommissionable::Type value;
-            return FindCommissionable(kIdentityAlpha, value);
-        }
-        case 12: {
-            LogStep(12, "TXT key for Vendor ID and Product ID (VP)");
-            VerifyOrDo(!ShouldSkip("MCORE.SC.VP_KEY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::DiscoveryCommands::Commands::FindCommissionable::Type value;
-            return FindCommissionable(kIdentityAlpha, value);
-        }
         case 13: {
-            LogStep(13, "Optional TXT key for MRP Sleepy Idle Interval (SII)");
-            VerifyOrDo(!ShouldSkip("MCORE.SC.SII_COMM_DISCOVERY_KEY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(13, "Check Device Type ID (_T)");
+            VerifyOrDo(!ShouldSkip("MCORE.SC.DEVTYPE_SUBTYPE"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::Clusters::DiscoveryCommands::Commands::FindCommissionable::Type value;
-            return FindCommissionable(kIdentityAlpha, value);
+            chip::app::Clusters::DiscoveryCommands::Commands::FindCommissionableByDeviceType::Type value;
+            value.value = mDeviceType.HasValue() ? mDeviceType.Value() : 65535ULL;
+            return FindCommissionableByDeviceType(kIdentityAlpha, value);
         }
         case 14: {
-            LogStep(14, "Optional TXT key for MRP Sleepy Active Interval (SAI)");
-            VerifyOrDo(!ShouldSkip("MCORE.SC.SAI_COMM_DISCOVERY_KEY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(14, "TXT key for discriminator (D)");
             ListFreer listFreer;
             chip::app::Clusters::DiscoveryCommands::Commands::FindCommissionable::Type value;
             return FindCommissionable(kIdentityAlpha, value);
         }
         case 15: {
-            LogStep(15, "TXT key for commissioning mode (CM)");
+            LogStep(15, "TXT key for Vendor ID and Product ID (VP)");
+            VerifyOrDo(!ShouldSkip("MCORE.SC.VP_KEY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DiscoveryCommands::Commands::FindCommissionable::Type value;
             return FindCommissionable(kIdentityAlpha, value);
         }
         case 16: {
-            LogStep(16, "Optional TXT key for device name (DN)");
-            VerifyOrDo(!ShouldSkip("MCORE.SC.DN_KEY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(16, "Optional TXT key for MRP Sleepy Idle Interval (SII)");
+            VerifyOrDo(!ShouldSkip("MCORE.SC.SII_COMM_DISCOVERY_KEY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DiscoveryCommands::Commands::FindCommissionable::Type value;
             return FindCommissionable(kIdentityAlpha, value);
         }
         case 17: {
-            LogStep(17, "Optional TXT key for rotating device identifier (RI)");
-            VerifyOrDo(!ShouldSkip("MCORE.SC.RI_KEY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(17, "Optional TXT key for MRP Sleepy Active Interval (SAI)");
+            VerifyOrDo(!ShouldSkip("MCORE.SC.SAI_COMM_DISCOVERY_KEY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DiscoveryCommands::Commands::FindCommissionable::Type value;
             return FindCommissionable(kIdentityAlpha, value);
         }
         case 18: {
-            LogStep(18, "Optional TXT key for pairing hint (PH)");
-            VerifyOrDo(!ShouldSkip("MCORE.SC.PH_KEY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(18, "TXT key for commissioning mode (CM)");
             ListFreer listFreer;
             chip::app::Clusters::DiscoveryCommands::Commands::FindCommissionable::Type value;
             return FindCommissionable(kIdentityAlpha, value);
         }
         case 19: {
-            LogStep(19, "Optional TXT key for pairing instructions (PI)");
-            VerifyOrDo(!ShouldSkip("MCORE.SC.PI_KEY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(19, "Optional TXT key for device type (DT)");
+            VerifyOrDo(!ShouldSkip("MCORE.SC.DT_KEY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DiscoveryCommands::Commands::FindCommissionable::Type value;
             return FindCommissionable(kIdentityAlpha, value);
         }
         case 20: {
-            LogStep(20, "Check IPs");
+            LogStep(20, "Optional TXT key for device name (DN)");
+            VerifyOrDo(!ShouldSkip("MCORE.SC.DN_KEY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DiscoveryCommands::Commands::FindCommissionable::Type value;
             return FindCommissionable(kIdentityAlpha, value);
         }
         case 21: {
-            LogStep(21, "Stop target device");
+            LogStep(21, "Optional TXT key for rotating device identifier (RI)");
+            VerifyOrDo(!ShouldSkip("MCORE.SC.RI_KEY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::DiscoveryCommands::Commands::FindCommissionable::Type value;
+            return FindCommissionable(kIdentityAlpha, value);
+        }
+        case 22: {
+            LogStep(22, "Optional TXT key for pairing hint (PH)");
+            VerifyOrDo(!ShouldSkip("MCORE.SC.PH_KEY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::DiscoveryCommands::Commands::FindCommissionable::Type value;
+            return FindCommissionable(kIdentityAlpha, value);
+        }
+        case 23: {
+            LogStep(23, "Optional TXT key for pairing instructions (PI)");
+            VerifyOrDo(!ShouldSkip("MCORE.SC.PI_KEY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::DiscoveryCommands::Commands::FindCommissionable::Type value;
+            return FindCommissionable(kIdentityAlpha, value);
+        }
+        case 24: {
+            LogStep(24, "Check IPs");
+            ListFreer listFreer;
+            chip::app::Clusters::DiscoveryCommands::Commands::FindCommissionable::Type value;
+            return FindCommissionable(kIdentityAlpha, value);
+        }
+        case 25: {
+            LogStep(25, "Stop target device");
             ListFreer listFreer;
             chip::app::Clusters::SystemCommands::Commands::Stop::Type value;
             return Stop(kIdentityAlpha, value);
         }
-        case 22: {
-            LogStep(22, "Start target device with the provided discriminator for basic commissioning advertisement");
+        case 26: {
+            LogStep(26, "Start target device with the provided discriminator for basic commissioning advertisement");
             ListFreer listFreer;
             chip::app::Clusters::SystemCommands::Commands::Start::Type value;
             value.discriminator.Emplace();
             value.discriminator.Value() = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
             return Start(kIdentityAlpha, value);
         }
-        case 23: {
-            LogStep(23, "Wait for the commissioned device to be retrieved");
+        case 27: {
+            LogStep(27, "Wait for the commissioned device to be retrieved");
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
             value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
             return WaitForCommissionee(kIdentityAlpha, value);
         }
-        case 24: {
-            LogStep(24, "Open Commissioning Window");
+        case 28: {
+            LogStep(28, "Open Commissioning Window");
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type value;
             value.commissioningTimeout = 180U;
@@ -66293,8 +66369,8 @@ private:
 
             );
         }
-        case 25: {
-            LogStep(25, "Check Instance Name");
+        case 29: {
+            LogStep(29, "Check Instance Name");
             ListFreer listFreer;
             chip::app::Clusters::DiscoveryCommands::Commands::FindCommissionable::Type value;
             return FindCommissionable(kIdentityAlpha, value);
