@@ -2394,7 +2394,7 @@ private:
         }
         case 3: {
             LogStep(3, "TH reads AccessControlEntriesPerFabric attribute from DUT");
-            VerifyOrDo(!ShouldSkip("ACL.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("ACL.S.A0004"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id,
                                  AccessControl::Attributes::AccessControlEntriesPerFabric::Id, true, chip::NullOptional);
         }
