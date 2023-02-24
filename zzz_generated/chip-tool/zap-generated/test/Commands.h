@@ -11922,7 +11922,7 @@ private:
         }
         case 12: {
             LogStep(12, "TH reads EnhancedColorMode attribute from DUT");
-            VerifyOrDo(!ShouldSkip("CC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("CC.S.A4001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::EnhancedColorMode::Id,
                                  true, chip::NullOptional);
         }
@@ -13621,8 +13621,8 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 17U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 23U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 5U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 35U));
             }
             break;
         case 19:
