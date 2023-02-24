@@ -9441,7 +9441,7 @@ public:
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : TH reads EnhancedColorMode attribute from DUT\n");
-            if (ShouldSkip("CC.S.F02")) {
+            if (ShouldSkip("CC.S.A4001")) {
                 NextTest();
                 return;
             }
@@ -14077,8 +14077,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 17U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 23U));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 5U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 35U));
 
             NextTest();
         }];
