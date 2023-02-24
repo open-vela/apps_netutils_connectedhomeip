@@ -2756,7 +2756,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads AccessControlEntriesPerFabric attribute from DUT\n");
-            if (ShouldSkip("ACL.S.A0002")) {
+            if (ShouldSkip("ACL.S.A0004")) {
                 NextTest();
                 return;
             }
