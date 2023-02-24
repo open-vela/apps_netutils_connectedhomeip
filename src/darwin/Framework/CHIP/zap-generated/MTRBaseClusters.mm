@@ -19313,7 +19313,7 @@ using chip::System::Clock::Timeout;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = UnitLocalization::Attributes::TemperatureUnit::TypeInfo;
-    return MTRReadAttribute<MTRUnitLocalizationClusterTempUnitAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+    return MTRReadAttribute<MTRUnitLocalizationClusterTempUnitEnumAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -19359,9 +19359,9 @@ using chip::System::Clock::Timeout;
                                       reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = UnitLocalization::Attributes::TemperatureUnit::TypeInfo;
-    MTRSubscribeAttribute<MTRUnitLocalizationClusterTempUnitAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(
-        params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
-        TypeInfo::GetAttributeId());
+    MTRSubscribeAttribute<MTRUnitLocalizationClusterTempUnitEnumAttributeCallbackSubscriptionBridge, NSNumber,
+        TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
+        TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
 + (void)readAttributeTemperatureUnitWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
@@ -19370,9 +19370,9 @@ using chip::System::Clock::Timeout;
                                                completion:
                                                    (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRUnitLocalizationClusterTempUnitAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRUnitLocalizationClusterTempUnitEnumAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(UnitLocalizationClusterTempUnitAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(UnitLocalizationClusterTempUnitEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = UnitLocalization::Attributes::TemperatureUnit::TypeInfo;

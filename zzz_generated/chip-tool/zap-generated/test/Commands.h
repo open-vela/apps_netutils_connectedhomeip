@@ -29088,7 +29088,7 @@ private:
         case 1:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::UnitLocalization::TempUnit value;
+                chip::app::Clusters::UnitLocalization::TempUnitEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
             }
@@ -29099,7 +29099,7 @@ private:
         case 3:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::UnitLocalization::TempUnit value;
+                chip::app::Clusters::UnitLocalization::TempUnitEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("temperatureUnit", value, 0U));
             }
@@ -29110,7 +29110,7 @@ private:
         case 5:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::UnitLocalization::TempUnit value;
+                chip::app::Clusters::UnitLocalization::TempUnitEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("temperatureUnit", value, 1U));
             }
@@ -29121,7 +29121,7 @@ private:
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::UnitLocalization::TempUnit value;
+                chip::app::Clusters::UnitLocalization::TempUnitEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("temperatureUnit", value, 2U));
             }
@@ -29161,8 +29161,8 @@ private:
             LogStep(2, "TH writes 0 (Fahrenheit) to TemperatureUnit attribute");
             VerifyOrDo(!ShouldSkip("LUNIT.S.A0000 && LUNIT.TempUnit.Fahrenheit"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::Clusters::UnitLocalization::TempUnit value;
-            value = static_cast<chip::app::Clusters::UnitLocalization::TempUnit>(0);
+            chip::app::Clusters::UnitLocalization::TempUnitEnum value;
+            value = static_cast<chip::app::Clusters::UnitLocalization::TempUnitEnum>(0);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), UnitLocalization::Id,
                                   UnitLocalization::Attributes::TemperatureUnit::Id, value, chip::NullOptional, chip::NullOptional);
         }
@@ -29176,8 +29176,8 @@ private:
             LogStep(4, "TH writes 1 (Celsius) to TemperatureUnit attribute");
             VerifyOrDo(!ShouldSkip("LUNIT.S.A0000 && LUNIT.TempUnit.Celsius"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::Clusters::UnitLocalization::TempUnit value;
-            value = static_cast<chip::app::Clusters::UnitLocalization::TempUnit>(1);
+            chip::app::Clusters::UnitLocalization::TempUnitEnum value;
+            value = static_cast<chip::app::Clusters::UnitLocalization::TempUnitEnum>(1);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), UnitLocalization::Id,
                                   UnitLocalization::Attributes::TemperatureUnit::Id, value, chip::NullOptional, chip::NullOptional);
         }
@@ -29191,8 +29191,8 @@ private:
             LogStep(6, "TH writes 2 (Kelvin) to TemperatureUnit attribute");
             VerifyOrDo(!ShouldSkip("LUNIT.S.A0000 && LUNIT.TempUnit.Kelvin"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::Clusters::UnitLocalization::TempUnit value;
-            value = static_cast<chip::app::Clusters::UnitLocalization::TempUnit>(2);
+            chip::app::Clusters::UnitLocalization::TempUnitEnum value;
+            value = static_cast<chip::app::Clusters::UnitLocalization::TempUnitEnum>(2);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), UnitLocalization::Id,
                                   UnitLocalization::Attributes::TemperatureUnit::Id, value, chip::NullOptional, chip::NullOptional);
         }
@@ -29206,8 +29206,8 @@ private:
             LogStep(8, "TH writes 5 to TemperatureUnit attribute");
             VerifyOrDo(!ShouldSkip("LUNIT.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::Clusters::UnitLocalization::TempUnit value;
-            value = static_cast<chip::app::Clusters::UnitLocalization::TempUnit>(5);
+            chip::app::Clusters::UnitLocalization::TempUnitEnum value;
+            value = static_cast<chip::app::Clusters::UnitLocalization::TempUnitEnum>(5);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), UnitLocalization::Id,
                                   UnitLocalization::Attributes::TemperatureUnit::Id, value, chip::NullOptional, chip::NullOptional);
         }
