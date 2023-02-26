@@ -66010,7 +66010,7 @@ private:
             {
                 chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("deviceType", value.deviceType, mDeviceType.HasValue() ? mDeviceType.Value() : 65535U));
+                VerifyOrReturn(CheckValue("deviceType", value.deviceType, mDeviceType.HasValue() ? mDeviceType.Value() : 65535UL));
             }
             shouldContinue = true;
             break;
