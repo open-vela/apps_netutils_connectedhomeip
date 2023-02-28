@@ -17797,7 +17797,8 @@ using chip::System::Clock::Timeout;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = TimeFormatLocalization::Attributes::HourFormat::TypeInfo;
-    return MTRReadAttribute<MTRTimeFormatLocalizationClusterHourFormatAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+    return MTRReadAttribute<MTRTimeFormatLocalizationClusterHourFormatEnumAttributeCallbackBridge, NSNumber,
+        TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -17843,7 +17844,7 @@ using chip::System::Clock::Timeout;
                                  reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = TimeFormatLocalization::Attributes::HourFormat::TypeInfo;
-    MTRSubscribeAttribute<MTRTimeFormatLocalizationClusterHourFormatAttributeCallbackSubscriptionBridge, NSNumber,
+    MTRSubscribeAttribute<MTRTimeFormatLocalizationClusterHourFormatEnumAttributeCallbackSubscriptionBridge, NSNumber,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -17853,9 +17854,9 @@ using chip::System::Clock::Timeout;
                                                queue:(dispatch_queue_t)queue
                                           completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTimeFormatLocalizationClusterHourFormatAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRTimeFormatLocalizationClusterHourFormatEnumAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(TimeFormatLocalizationClusterHourFormatAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(TimeFormatLocalizationClusterHourFormatEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = TimeFormatLocalization::Attributes::HourFormat::TypeInfo;
@@ -17877,7 +17878,8 @@ using chip::System::Clock::Timeout;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = TimeFormatLocalization::Attributes::ActiveCalendarType::TypeInfo;
-    return MTRReadAttribute<MTRTimeFormatLocalizationClusterCalendarTypeAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+    return MTRReadAttribute<MTRTimeFormatLocalizationClusterCalendarTypeEnumAttributeCallbackBridge, NSNumber,
+        TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -17924,7 +17926,7 @@ using chip::System::Clock::Timeout;
                                              (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = TimeFormatLocalization::Attributes::ActiveCalendarType::TypeInfo;
-    MTRSubscribeAttribute<MTRTimeFormatLocalizationClusterCalendarTypeAttributeCallbackSubscriptionBridge, NSNumber,
+    MTRSubscribeAttribute<MTRTimeFormatLocalizationClusterCalendarTypeEnumAttributeCallbackSubscriptionBridge, NSNumber,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -17935,9 +17937,9 @@ using chip::System::Clock::Timeout;
                                                   completion:
                                                       (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTimeFormatLocalizationClusterCalendarTypeAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRTimeFormatLocalizationClusterCalendarTypeEnumAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(TimeFormatLocalizationClusterCalendarTypeAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(TimeFormatLocalizationClusterCalendarTypeEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = TimeFormatLocalization::Attributes::ActiveCalendarType::TypeInfo;
