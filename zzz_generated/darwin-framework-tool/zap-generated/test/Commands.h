@@ -50730,32 +50730,40 @@ public:
             err = TestThSendsOffCommandToDut_26();
             break;
         case 27:
-            ChipLogProgress(chipTool, " ***** Test Step 27 : Reboot target device\n");
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Wait for send Off command to take affect\n");
             if (ShouldSkip("PICS_SDK_CI_ONLY")) {
                 NextTest();
                 return;
             }
-            err = TestRebootTargetDevice_27();
+            err = TestWaitForSendOffCommandToTakeAffect_27();
             break;
         case 28:
-            ChipLogProgress(chipTool, " ***** Test Step 28 : Reboot target device(DUT)\n");
+            ChipLogProgress(chipTool, " ***** Test Step 28 : Reboot target device\n");
+            if (ShouldSkip("PICS_SDK_CI_ONLY")) {
+                NextTest();
+                return;
+            }
+            err = TestRebootTargetDevice_28();
+            break;
+        case 29:
+            ChipLogProgress(chipTool, " ***** Test Step 29 : Reboot target device(DUT)\n");
             if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
                 NextTest();
                 return;
             }
-            err = TestRebootTargetDeviceDUT_28();
-            break;
-        case 29:
-            ChipLogProgress(chipTool, " ***** Test Step 29 : Wait for the commissioned device to be retrieved\n");
-            err = TestWaitForTheCommissionedDeviceToBeRetrieved_29();
+            err = TestRebootTargetDeviceDUT_29();
             break;
         case 30:
-            ChipLogProgress(chipTool, " ***** Test Step 30 : TH reads the OnOff attribute from the DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 30 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_30();
+            break;
+        case 31:
+            ChipLogProgress(chipTool, " ***** Test Step 31 : TH reads the OnOff attribute from the DUT\n");
             if (ShouldSkip("OO.S.A0000")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsTheOnOffAttributeFromTheDut_30();
+            err = TestThReadsTheOnOffAttributeFromTheDut_31();
             break;
         }
 
@@ -50861,6 +50869,9 @@ public:
         case 30:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 31:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -50874,7 +50885,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 31;
+    const uint16_t mTestCount = 32;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -51254,14 +51265,22 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestRebootTargetDevice_27()
+    CHIP_ERROR TestWaitForSendOffCommandToTakeAffect_27()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+        value.ms = 10UL;
+        return WaitForMs("alpha", value);
+    }
+
+    CHIP_ERROR TestRebootTargetDevice_28()
     {
 
         chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
         return Reboot("alpha", value);
     }
 
-    CHIP_ERROR TestRebootTargetDeviceDUT_28()
+    CHIP_ERROR TestRebootTargetDeviceDUT_29()
     {
 
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
@@ -51272,7 +51291,7 @@ private:
         return UserPrompt("alpha", value);
     }
 
-    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_29()
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_30()
     {
 
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
@@ -51280,7 +51299,7 @@ private:
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestThReadsTheOnOffAttributeFromTheDut_30()
+    CHIP_ERROR TestThReadsTheOnOffAttributeFromTheDut_31()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
