@@ -37425,7 +37425,7 @@ private:
 class Test_TC_OO_2_4Suite : public TestCommand
 {
 public:
-    Test_TC_OO_2_4Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_OO_2_4", 31, credsIssuerConfig)
+    Test_TC_OO_2_4Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_OO_2_4", 32, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -37593,6 +37593,10 @@ private:
             shouldContinue = true;
             break;
         case 30:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 31:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 bool value;
@@ -37830,14 +37834,22 @@ private:
             );
         }
         case 27: {
-            LogStep(27, "Reboot target device");
+            LogStep(27, "Wait for send Off command to take affect");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = 10UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 28: {
+            LogStep(28, "Reboot target device");
             VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
             return Reboot(kIdentityAlpha, value);
         }
-        case 28: {
-            LogStep(28, "Reboot target device(DUT)");
+        case 29: {
+            LogStep(29, "Reboot target device(DUT)");
             VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
@@ -37847,15 +37859,15 @@ private:
             value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
             return UserPrompt(kIdentityAlpha, value);
         }
-        case 29: {
-            LogStep(29, "Wait for the commissioned device to be retrieved");
+        case 30: {
+            LogStep(30, "Wait for the commissioned device to be retrieved");
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
             value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
             return WaitForCommissionee(kIdentityAlpha, value);
         }
-        case 30: {
-            LogStep(30, "TH reads the OnOff attribute from the DUT");
+        case 31: {
+            LogStep(31, "TH reads the OnOff attribute from the DUT");
             VerifyOrDo(!ShouldSkip("OO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OnOff::Id, OnOff::Attributes::OnOff::Id, true, chip::NullOptional);
         }
