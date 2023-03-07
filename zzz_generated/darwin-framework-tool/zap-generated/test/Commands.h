@@ -131867,6 +131867,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("payload", &mPayload);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
@@ -131896,128 +131897,176 @@ public:
         // incorrect mTestIndex value observed when we get the response.
         switch (mTestIndex++) {
         case 0:
-            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
-            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved for alpha\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrievedForAlpha_0();
             break;
         case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : Read maxGroupsPerFabric\n");
-            err = TestReadMaxGroupsPerFabric_1();
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Open Commissioning Window from alpha\n");
+            err = TestOpenCommissioningWindowFromAlpha_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Read maxGroupKeysPerFabric\n");
-            err = TestReadMaxGroupKeysPerFabric_2();
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Commission from beta\n");
+            err = TestCommissionFromBeta_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : KeySet Write 1\n");
-            err = TestKeySetWrite1_3();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Wait for the commissioned device to be retrieved for beta\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrievedForBeta_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : KeySet Write 2\n");
-            err = TestKeySetWrite2_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Read maxGroupsPerFabric\n");
+            err = TestReadMaxGroupsPerFabric_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : KeySet Read\n");
-            err = TestKeySetRead_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Read maxGroupKeysPerFabric\n");
+            err = TestReadMaxGroupKeysPerFabric_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Write Group Keys (invalid)\n");
-            err = TestWriteGroupKeysInvalid_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : KeySet Write 1\n");
+            err = TestKeySetWrite1_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Write Group Keys (too many)\n");
-            err = TestWriteGroupKeysTooMany_7();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : KeySet Write 2\n");
+            err = TestKeySetWrite2_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Write Group Keys\n");
-            err = TestWriteGroupKeys_8();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : KeySet Write 3\n");
+            err = TestKeySetWrite3_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Read Group Keys\n");
-            err = TestReadGroupKeys_9();
+            ChipLogProgress(chipTool, " ***** Test Step 9 : KeySet Read\n");
+            err = TestKeySetRead_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Add Group 1\n");
-            err = TestAddGroup1_10();
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Write Group Keys (invalid)\n");
+            err = TestWriteGroupKeysInvalid_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Add Group 2\n");
-            err = TestAddGroup2_11();
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Write Group Keys (too many)\n");
+            err = TestWriteGroupKeysTooMany_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : Add Group 3\n");
-            err = TestAddGroup3_12();
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Write Group Keys on alpha\n");
+            err = TestWriteGroupKeysOnAlpha_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Add Group 4\n");
-            err = TestAddGroup4_13();
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Write Group Keys on beta\n");
+            err = TestWriteGroupKeysOnBeta_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : Read GroupTable\n");
-            err = TestReadGroupTable_14();
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Read Group Keys on alpha\n");
+            err = TestReadGroupKeysOnAlpha_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : KeySet Remove 1\n");
-            err = TestKeySetRemove1_15();
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Read Group Keys on alpha without fabric filtering\n");
+            err = TestReadGroupKeysOnAlphaWithoutFabricFiltering_15();
             break;
         case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : KeySet Read (removed)\n");
-            err = TestKeySetReadRemoved_16();
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Read Group Keys on beta\n");
+            err = TestReadGroupKeysOnBeta_16();
             break;
         case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : KeySet Read (not removed)\n");
-            err = TestKeySetReadNotRemoved_17();
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Read Group Keys on beta without fabric filtering\n");
+            err = TestReadGroupKeysOnBetaWithoutFabricFiltering_17();
             break;
         case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : Remove Group 1\n");
-            err = TestRemoveGroup1_18();
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Add Group 1\n");
+            err = TestAddGroup1_18();
             break;
         case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : Read GroupTable 2\n");
-            err = TestReadGroupTable2_19();
+            ChipLogProgress(chipTool, " ***** Test Step 19 : Add Group 2\n");
+            err = TestAddGroup2_19();
             break;
         case 20:
-            ChipLogProgress(chipTool, " ***** Test Step 20 : Remove All\n");
-            err = TestRemoveAll_20();
+            ChipLogProgress(chipTool, " ***** Test Step 20 : Add Group 3\n");
+            err = TestAddGroup3_20();
             break;
         case 21:
-            ChipLogProgress(chipTool, " ***** Test Step 21 : Read GroupTable 3\n");
-            err = TestReadGroupTable3_21();
+            ChipLogProgress(chipTool, " ***** Test Step 21 : Add Group 4\n");
+            err = TestAddGroup4_21();
             break;
         case 22:
-            ChipLogProgress(chipTool, " ***** Test Step 22 : KeySet Remove 2\n");
-            err = TestKeySetRemove2_22();
+            ChipLogProgress(chipTool, " ***** Test Step 22 : Add Group 5\n");
+            err = TestAddGroup5_22();
             break;
         case 23:
-            ChipLogProgress(chipTool, " ***** Test Step 23 : KeySet Read (also removed)\n");
-            err = TestKeySetReadAlsoRemoved_23();
+            ChipLogProgress(chipTool, " ***** Test Step 23 : Read GroupTable from alpha\n");
+            err = TestReadGroupTableFromAlpha_23();
             break;
         case 24:
-            ChipLogProgress(chipTool, " ***** Test Step 24 : KeySet Write 1\n");
-            err = TestKeySetWrite1_24();
+            ChipLogProgress(chipTool, " ***** Test Step 24 : Read GroupTable from alpha without fabric filtering\n");
+            err = TestReadGroupTableFromAlphaWithoutFabricFiltering_24();
             break;
         case 25:
-            ChipLogProgress(chipTool, " ***** Test Step 25 : KeySet Write 2\n");
-            err = TestKeySetWrite2_25();
+            ChipLogProgress(chipTool, " ***** Test Step 25 : Read GroupTable from beta\n");
+            err = TestReadGroupTableFromBeta_25();
             break;
         case 26:
-            ChipLogProgress(chipTool, " ***** Test Step 26 : Map Group 1 and Group 2 to KeySet 1 and group 2 to KeySet 2\n");
-            err = TestMapGroup1AndGroup2ToKeySet1AndGroup2ToKeySet2_26();
+            ChipLogProgress(chipTool, " ***** Test Step 26 : Read GroupTable from beta without fabric filtering\n");
+            err = TestReadGroupTableFromBetaWithoutFabricFiltering_26();
             break;
         case 27:
-            ChipLogProgress(chipTool, " ***** Test Step 27 : Remove keyset 1\n");
-            err = TestRemoveKeyset1_27();
+            ChipLogProgress(chipTool, " ***** Test Step 27 : KeySet Remove 1\n");
+            err = TestKeySetRemove1_27();
             break;
         case 28:
-            ChipLogProgress(chipTool, " ***** Test Step 28 : TH verifies GroupKeyMap entries for KeySet 1 have been removed\n");
-            err = TestThVerifiesGroupKeyMapEntriesForKeySet1HaveBeenRemoved_28();
+            ChipLogProgress(chipTool, " ***** Test Step 28 : KeySet Read (removed)\n");
+            err = TestKeySetReadRemoved_28();
             break;
         case 29:
-            ChipLogProgress(chipTool, " ***** Test Step 29 : Remove keyset 2\n");
-            err = TestRemoveKeyset2_29();
+            ChipLogProgress(chipTool, " ***** Test Step 29 : KeySet Read (not removed)\n");
+            err = TestKeySetReadNotRemoved_29();
             break;
         case 30:
-            ChipLogProgress(chipTool, " ***** Test Step 30 : TH verifies GroupKeyMap entries for KeySet 2 have been removed\n");
-            err = TestThVerifiesGroupKeyMapEntriesForKeySet2HaveBeenRemoved_30();
+            ChipLogProgress(chipTool, " ***** Test Step 30 : Remove Group 1\n");
+            err = TestRemoveGroup1_30();
+            break;
+        case 31:
+            ChipLogProgress(chipTool, " ***** Test Step 31 : Read GroupTable 2\n");
+            err = TestReadGroupTable2_31();
+            break;
+        case 32:
+            ChipLogProgress(chipTool, " ***** Test Step 32 : Remove All\n");
+            err = TestRemoveAll_32();
+            break;
+        case 33:
+            ChipLogProgress(chipTool, " ***** Test Step 33 : Read GroupTable 3\n");
+            err = TestReadGroupTable3_33();
+            break;
+        case 34:
+            ChipLogProgress(chipTool, " ***** Test Step 34 : KeySet Remove 2\n");
+            err = TestKeySetRemove2_34();
+            break;
+        case 35:
+            ChipLogProgress(chipTool, " ***** Test Step 35 : KeySet Read (also removed)\n");
+            err = TestKeySetReadAlsoRemoved_35();
+            break;
+        case 36:
+            ChipLogProgress(chipTool, " ***** Test Step 36 : KeySet Write 1\n");
+            err = TestKeySetWrite1_36();
+            break;
+        case 37:
+            ChipLogProgress(chipTool, " ***** Test Step 37 : KeySet Write 2\n");
+            err = TestKeySetWrite2_37();
+            break;
+        case 38:
+            ChipLogProgress(chipTool, " ***** Test Step 38 : Map Group 1 and Group 2 to KeySet 1 and group 2 to KeySet 2\n");
+            err = TestMapGroup1AndGroup2ToKeySet1AndGroup2ToKeySet2_38();
+            break;
+        case 39:
+            ChipLogProgress(chipTool, " ***** Test Step 39 : Remove keyset 1\n");
+            err = TestRemoveKeyset1_39();
+            break;
+        case 40:
+            ChipLogProgress(chipTool, " ***** Test Step 40 : TH verifies GroupKeyMap entries for KeySet 1 have been removed\n");
+            err = TestThVerifiesGroupKeyMapEntriesForKeySet1HaveBeenRemoved_40();
+            break;
+        case 41:
+            ChipLogProgress(chipTool, " ***** Test Step 41 : Remove keyset 2\n");
+            err = TestRemoveKeyset2_41();
+            break;
+        case 42:
+            ChipLogProgress(chipTool, " ***** Test Step 42 : TH verifies GroupKeyMap entries for KeySet 2 have been removed\n");
+            err = TestThVerifiesGroupKeyMapEntriesForKeySet2HaveBeenRemoved_42();
             break;
         }
 
@@ -132049,10 +132098,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -132061,10 +132110,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 10:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -132079,7 +132128,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -132100,7 +132149,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 23:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 24:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -132115,12 +132164,48 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 28:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
             break;
         case 29:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 30:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 31:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 32:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 33:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 34:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 35:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
+            break;
+        case 36:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 37:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 38:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 39:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 40:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 41:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 42:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         }
@@ -132136,14 +132221,15 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 31;
+    const uint16_t mTestCount = 43;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<chip::CharSpan> mPayload;
     chip::Optional<uint16_t> mTimeout;
 
-    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrievedForAlpha_0()
     {
 
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
@@ -132151,7 +132237,47 @@ private:
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestReadMaxGroupsPerFabric_1()
+    CHIP_ERROR TestOpenCommissioningWindowFromAlpha_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterAdministratorCommissioning alloc] initWithDevice:device
+                                                                                      endpointID:@(0)
+                                                                                           queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams alloc] init];
+        params.commissioningTimeout = [NSNumber numberWithUnsignedShort:180U];
+        [cluster openBasicCommissioningWindowWithParams:params
+                                             completion:^(NSError * _Nullable err) {
+                                                 NSLog(@"Open Commissioning Window from alpha Error: %@", err);
+
+                                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                 NextTest();
+                                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCommissionFromBeta_2()
+    {
+
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrievedForBeta_3()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("beta", value);
+    }
+
+    CHIP_ERROR TestReadMaxGroupsPerFabric_4()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -132173,7 +132299,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadMaxGroupKeysPerFabric_2()
+    CHIP_ERROR TestReadMaxGroupKeysPerFabric_5()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -132195,7 +132321,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetWrite1_3()
+    CHIP_ERROR TestKeySetWrite1_6()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -132235,7 +132361,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetWrite2_4()
+    CHIP_ERROR TestKeySetWrite2_7()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -132275,7 +132401,47 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetRead_5()
+    CHIP_ERROR TestKeySetWrite3_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("beta");
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupKeyManagementClusterKeySetWriteParams alloc] init];
+        params.groupKeySet = [[MTRGroupKeyManagementClusterGroupKeySetStruct alloc] init];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySetID =
+            [NSNumber numberWithUnsignedShort:419U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySecurityPolicy =
+            [NSNumber numberWithUnsignedChar:1U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey0 =
+            [[NSData alloc] initWithBytes:"\000\001\002\003\004\005\006\007\010\011\012\013\014\015\016\017" length:16];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime0 =
+            [NSNumber numberWithUnsignedLongLong:2110000ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey1 =
+            [[NSData alloc] initWithBytes:"\020\021\022\023\024\025\026\027\030\031\032\033\034\035\036\037" length:16];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime1 =
+            [NSNumber numberWithUnsignedLongLong:2110001ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey2 =
+            [[NSData alloc] initWithBytes:" !\042#$%&'()*+,-./" length:16];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime2 =
+            [NSNumber numberWithUnsignedLongLong:2110002ULL];
+
+        [cluster keySetWriteWithParams:params
+                            completion:^(NSError * _Nullable err) {
+                                NSLog(@"KeySet Write 3 Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestKeySetRead_9()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -132326,7 +132492,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteGroupKeysInvalid_6()
+    CHIP_ERROR TestWriteGroupKeysInvalid_10()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -132361,7 +132527,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteGroupKeysTooMany_7()
+    CHIP_ERROR TestWriteGroupKeysTooMany_11()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -132421,7 +132587,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteGroupKeys_8()
+    CHIP_ERROR TestWriteGroupKeysOnAlpha_12()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -132457,7 +132623,7 @@ private:
         }
         [cluster writeAttributeGroupKeyMapWithValue:groupKeyMapArgument
                                          completion:^(NSError * _Nullable err) {
-                                             NSLog(@"Write Group Keys Error: %@", err);
+                                             NSLog(@"Write Group Keys on alpha Error: %@", err);
 
                                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -132467,7 +132633,53 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadGroupKeys_9()
+    CHIP_ERROR TestWriteGroupKeysOnBeta_13()
+    {
+
+        MTRBaseDevice * device = GetDevice("beta");
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id groupKeyMapArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRGroupKeyManagementClusterGroupKeyMapStruct alloc] init];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[0]).groupId = [NSNumber numberWithUnsignedShort:258U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[0]).groupKeySetID = [NSNumber numberWithUnsignedShort:419U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            temp_0[1] = [[MTRGroupKeyManagementClusterGroupKeyMapStruct alloc] init];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[1]).groupId = [NSNumber numberWithUnsignedShort:259U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[1]).groupKeySetID = [NSNumber numberWithUnsignedShort:419U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            temp_0[2] = [[MTRGroupKeyManagementClusterGroupKeyMapStruct alloc] init];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[2]).groupId = [NSNumber numberWithUnsignedShort:260U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[2]).groupKeySetID = [NSNumber numberWithUnsignedShort:419U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[2]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            temp_0[3] = [[MTRGroupKeyManagementClusterGroupKeyMapStruct alloc] init];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[3]).groupId = [NSNumber numberWithUnsignedShort:261U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[3]).groupKeySetID = [NSNumber numberWithUnsignedShort:419U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[3]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            groupKeyMapArgument = temp_0;
+        }
+        [cluster writeAttributeGroupKeyMapWithValue:groupKeyMapArgument
+                                         completion:^(NSError * _Nullable err) {
+                                             NSLog(@"Write Group Keys on beta Error: %@", err);
+
+                                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                             NextTest();
+                                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadGroupKeysOnAlpha_14()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -132481,7 +132693,7 @@ private:
         [cluster
             readAttributeGroupKeyMapWithParams:params
                                     completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-                                        NSLog(@"Read Group Keys Error: %@", err);
+                                        NSLog(@"Read Group Keys on alpha Error: %@", err);
 
                                         VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -132529,7 +132741,257 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestAddGroup1_10()
+    CHIP_ERROR TestReadGroupKeysOnAlphaWithoutFabricFiltering_15()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRReadParams alloc] init];
+        params.filterByFabric = false;
+        [cluster
+            readAttributeGroupKeyMapWithParams:params
+                                    completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+                                        NSLog(@"Read Group Keys on alpha without fabric filtering Error: %@", err);
+
+                                        VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                        {
+                                            id actualValue = value;
+                                            VerifyOrReturn(
+                                                CheckValue("GroupKeyMap", [actualValue count], static_cast<uint32_t>(8)));
+                                            VerifyOrReturn(CheckValue("GroupId",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[0]).groupId, 257U));
+                                            VerifyOrReturn(CheckValue("GroupKeySetID",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[0]).groupKeySetID,
+                                                417U));
+                                            VerifyOrReturn(CheckValue("FabricIndex",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[0]).fabricIndex,
+                                                1U));
+                                            VerifyOrReturn(CheckValue("GroupId",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[1]).groupId, 258U));
+                                            VerifyOrReturn(CheckValue("GroupKeySetID",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[1]).groupKeySetID,
+                                                418U));
+                                            VerifyOrReturn(CheckValue("FabricIndex",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[1]).fabricIndex,
+                                                1U));
+                                            VerifyOrReturn(CheckValue("GroupId",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[2]).groupId, 259U));
+                                            VerifyOrReturn(CheckValue("GroupKeySetID",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[2]).groupKeySetID,
+                                                417U));
+                                            VerifyOrReturn(CheckValue("FabricIndex",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[2]).fabricIndex,
+                                                1U));
+                                            VerifyOrReturn(CheckValue("GroupId",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[3]).groupId, 260U));
+                                            VerifyOrReturn(CheckValue("GroupKeySetID",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[3]).groupKeySetID,
+                                                418U));
+                                            VerifyOrReturn(CheckValue("FabricIndex",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[3]).fabricIndex,
+                                                1U));
+                                            VerifyOrReturn(CheckValue("GroupId",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[4]).groupId, 258U));
+                                            VerifyOrReturn(CheckValue("GroupKeySetID",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[4]).groupKeySetID,
+                                                419U));
+                                            VerifyOrReturn(CheckValue("FabricIndex",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[4]).fabricIndex,
+                                                2U));
+                                            VerifyOrReturn(CheckValue("GroupId",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[5]).groupId, 259U));
+                                            VerifyOrReturn(CheckValue("GroupKeySetID",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[5]).groupKeySetID,
+                                                419U));
+                                            VerifyOrReturn(CheckValue("FabricIndex",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[5]).fabricIndex,
+                                                2U));
+                                            VerifyOrReturn(CheckValue("GroupId",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[6]).groupId, 260U));
+                                            VerifyOrReturn(CheckValue("GroupKeySetID",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[6]).groupKeySetID,
+                                                419U));
+                                            VerifyOrReturn(CheckValue("FabricIndex",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[6]).fabricIndex,
+                                                2U));
+                                            VerifyOrReturn(CheckValue("GroupId",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[7]).groupId, 261U));
+                                            VerifyOrReturn(CheckValue("GroupKeySetID",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[7]).groupKeySetID,
+                                                419U));
+                                            VerifyOrReturn(CheckValue("FabricIndex",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[7]).fabricIndex,
+                                                2U));
+                                        }
+
+                                        NextTest();
+                                    }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadGroupKeysOnBeta_16()
+    {
+
+        MTRBaseDevice * device = GetDevice("beta");
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRReadParams alloc] init];
+        params.filterByFabric = true;
+        [cluster
+            readAttributeGroupKeyMapWithParams:params
+                                    completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+                                        NSLog(@"Read Group Keys on beta Error: %@", err);
+
+                                        VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                        {
+                                            id actualValue = value;
+                                            VerifyOrReturn(
+                                                CheckValue("GroupKeyMap", [actualValue count], static_cast<uint32_t>(4)));
+                                            VerifyOrReturn(CheckValue("GroupId",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[0]).groupId, 258U));
+                                            VerifyOrReturn(CheckValue("GroupKeySetID",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[0]).groupKeySetID,
+                                                419U));
+                                            VerifyOrReturn(CheckValue("FabricIndex",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[0]).fabricIndex,
+                                                2U));
+                                            VerifyOrReturn(CheckValue("GroupId",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[1]).groupId, 259U));
+                                            VerifyOrReturn(CheckValue("GroupKeySetID",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[1]).groupKeySetID,
+                                                419U));
+                                            VerifyOrReturn(CheckValue("FabricIndex",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[1]).fabricIndex,
+                                                2U));
+                                            VerifyOrReturn(CheckValue("GroupId",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[2]).groupId, 260U));
+                                            VerifyOrReturn(CheckValue("GroupKeySetID",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[2]).groupKeySetID,
+                                                419U));
+                                            VerifyOrReturn(CheckValue("FabricIndex",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[2]).fabricIndex,
+                                                2U));
+                                            VerifyOrReturn(CheckValue("GroupId",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[3]).groupId, 261U));
+                                            VerifyOrReturn(CheckValue("GroupKeySetID",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[3]).groupKeySetID,
+                                                419U));
+                                            VerifyOrReturn(CheckValue("FabricIndex",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[3]).fabricIndex,
+                                                2U));
+                                        }
+
+                                        NextTest();
+                                    }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadGroupKeysOnBetaWithoutFabricFiltering_17()
+    {
+
+        MTRBaseDevice * device = GetDevice("beta");
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRReadParams alloc] init];
+        params.filterByFabric = false;
+        [cluster
+            readAttributeGroupKeyMapWithParams:params
+                                    completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+                                        NSLog(@"Read Group Keys on beta without fabric filtering Error: %@", err);
+
+                                        VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                        {
+                                            id actualValue = value;
+                                            VerifyOrReturn(
+                                                CheckValue("GroupKeyMap", [actualValue count], static_cast<uint32_t>(8)));
+                                            VerifyOrReturn(CheckValue("GroupId",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[0]).groupId, 257U));
+                                            VerifyOrReturn(CheckValue("GroupKeySetID",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[0]).groupKeySetID,
+                                                417U));
+                                            VerifyOrReturn(CheckValue("FabricIndex",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[0]).fabricIndex,
+                                                1U));
+                                            VerifyOrReturn(CheckValue("GroupId",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[1]).groupId, 258U));
+                                            VerifyOrReturn(CheckValue("GroupKeySetID",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[1]).groupKeySetID,
+                                                418U));
+                                            VerifyOrReturn(CheckValue("FabricIndex",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[1]).fabricIndex,
+                                                1U));
+                                            VerifyOrReturn(CheckValue("GroupId",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[2]).groupId, 259U));
+                                            VerifyOrReturn(CheckValue("GroupKeySetID",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[2]).groupKeySetID,
+                                                417U));
+                                            VerifyOrReturn(CheckValue("FabricIndex",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[2]).fabricIndex,
+                                                1U));
+                                            VerifyOrReturn(CheckValue("GroupId",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[3]).groupId, 260U));
+                                            VerifyOrReturn(CheckValue("GroupKeySetID",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[3]).groupKeySetID,
+                                                418U));
+                                            VerifyOrReturn(CheckValue("FabricIndex",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[3]).fabricIndex,
+                                                1U));
+                                            VerifyOrReturn(CheckValue("GroupId",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[4]).groupId, 258U));
+                                            VerifyOrReturn(CheckValue("GroupKeySetID",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[4]).groupKeySetID,
+                                                419U));
+                                            VerifyOrReturn(CheckValue("FabricIndex",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[4]).fabricIndex,
+                                                2U));
+                                            VerifyOrReturn(CheckValue("GroupId",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[5]).groupId, 259U));
+                                            VerifyOrReturn(CheckValue("GroupKeySetID",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[5]).groupKeySetID,
+                                                419U));
+                                            VerifyOrReturn(CheckValue("FabricIndex",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[5]).fabricIndex,
+                                                2U));
+                                            VerifyOrReturn(CheckValue("GroupId",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[6]).groupId, 260U));
+                                            VerifyOrReturn(CheckValue("GroupKeySetID",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[6]).groupKeySetID,
+                                                419U));
+                                            VerifyOrReturn(CheckValue("FabricIndex",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[6]).fabricIndex,
+                                                2U));
+                                            VerifyOrReturn(CheckValue("GroupId",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[7]).groupId, 261U));
+                                            VerifyOrReturn(CheckValue("GroupKeySetID",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[7]).groupKeySetID,
+                                                419U));
+                                            VerifyOrReturn(CheckValue("FabricIndex",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[7]).fabricIndex,
+                                                2U));
+                                        }
+
+                                        NextTest();
+                                    }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestAddGroup1_18()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -132561,7 +133023,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestAddGroup2_11()
+    CHIP_ERROR TestAddGroup2_19()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -132593,7 +133055,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestAddGroup3_12()
+    CHIP_ERROR TestAddGroup3_20()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -132625,7 +133087,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestAddGroup4_13()
+    CHIP_ERROR TestAddGroup4_21()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -132657,7 +133119,39 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadGroupTable_14()
+    CHIP_ERROR TestAddGroup5_22()
+    {
+
+        MTRBaseDevice * device = GetDevice("beta");
+        __auto_type * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupsClusterAddGroupParams alloc] init];
+        params.groupID = [NSNumber numberWithUnsignedShort:261U];
+        params.groupName = @"Group #5";
+        [cluster addGroupWithParams:params
+                         completion:^(MTRGroupsClusterAddGroupResponseParams * _Nullable values, NSError * _Nullable err) {
+                             NSLog(@"Add Group 5 Error: %@", err);
+
+                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                             {
+                                 id actualValue = values.status;
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
+                             }
+
+                             {
+                                 id actualValue = values.groupID;
+                                 VerifyOrReturn(CheckValue("GroupID", actualValue, 261U));
+                             }
+
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadGroupTableFromAlpha_23()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -132671,7 +133165,7 @@ private:
         [cluster
             readAttributeGroupTableWithParams:params
                                    completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-                                       NSLog(@"Read GroupTable Error: %@", err);
+                                       NSLog(@"Read GroupTable from alpha Error: %@", err);
 
                                        VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -132746,7 +133240,259 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetRemove1_15()
+    CHIP_ERROR TestReadGroupTableFromAlphaWithoutFabricFiltering_24()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRReadParams alloc] init];
+        params.filterByFabric = false;
+        [cluster
+            readAttributeGroupTableWithParams:params
+                                   completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+                                       NSLog(@"Read GroupTable from alpha without fabric filtering Error: %@", err);
+
+                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                       {
+                                           id actualValue = value;
+                                           VerifyOrReturn(CheckValue("GroupTable", [actualValue count], static_cast<uint32_t>(5)));
+                                           VerifyOrReturn(CheckValue("GroupId",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[0]).groupId, 257U));
+                                           VerifyOrReturn(CheckValue("Endpoints",
+                                               [((MTRGroupKeyManagementClusterGroupInfoMapStruct *)
+                                                       actualValue[0]).endpoints count],
+                                               static_cast<uint32_t>(1)));
+                                           VerifyOrReturn(CheckValue("",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[0]).endpoints[0],
+                                               1U));
+                                           VerifyOrReturn(CheckValueAsString("GroupName",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[0]).groupName,
+                                               @"Group #1"));
+                                           VerifyOrReturn(CheckValue("FabricIndex",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[0]).fabricIndex,
+                                               1U));
+                                           VerifyOrReturn(CheckValue("GroupId",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[1]).groupId, 258U));
+                                           VerifyOrReturn(CheckValue("Endpoints",
+                                               [((MTRGroupKeyManagementClusterGroupInfoMapStruct *)
+                                                       actualValue[1]).endpoints count],
+                                               static_cast<uint32_t>(1)));
+                                           VerifyOrReturn(CheckValue("",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[1]).endpoints[0],
+                                               1U));
+                                           VerifyOrReturn(CheckValueAsString("GroupName",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[1]).groupName,
+                                               @"Group #2"));
+                                           VerifyOrReturn(CheckValue("FabricIndex",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[1]).fabricIndex,
+                                               1U));
+                                           VerifyOrReturn(CheckValue("GroupId",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[2]).groupId, 259U));
+                                           VerifyOrReturn(CheckValue("Endpoints",
+                                               [((MTRGroupKeyManagementClusterGroupInfoMapStruct *)
+                                                       actualValue[2]).endpoints count],
+                                               static_cast<uint32_t>(1)));
+                                           VerifyOrReturn(CheckValue("",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[2]).endpoints[0],
+                                               1U));
+                                           VerifyOrReturn(CheckValueAsString("GroupName",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[2]).groupName,
+                                               @"Group #3"));
+                                           VerifyOrReturn(CheckValue("FabricIndex",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[2]).fabricIndex,
+                                               1U));
+                                           VerifyOrReturn(CheckValue("GroupId",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[3]).groupId, 260U));
+                                           VerifyOrReturn(CheckValue("Endpoints",
+                                               [((MTRGroupKeyManagementClusterGroupInfoMapStruct *)
+                                                       actualValue[3]).endpoints count],
+                                               static_cast<uint32_t>(1)));
+                                           VerifyOrReturn(CheckValue("",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[3]).endpoints[0],
+                                               1U));
+                                           VerifyOrReturn(CheckValueAsString("GroupName",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[3]).groupName,
+                                               @"Group #4"));
+                                           VerifyOrReturn(CheckValue("FabricIndex",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[3]).fabricIndex,
+                                               1U));
+                                           VerifyOrReturn(CheckValue("GroupId",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[4]).groupId, 261U));
+                                           VerifyOrReturn(CheckValue("Endpoints",
+                                               [((MTRGroupKeyManagementClusterGroupInfoMapStruct *)
+                                                       actualValue[4]).endpoints count],
+                                               static_cast<uint32_t>(1)));
+                                           VerifyOrReturn(CheckValue("",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[4]).endpoints[0],
+                                               1U));
+                                           VerifyOrReturn(CheckValueAsString("GroupName",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[4]).groupName,
+                                               @"Group #5"));
+                                           VerifyOrReturn(CheckValue("FabricIndex",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[4]).fabricIndex,
+                                               2U));
+                                       }
+
+                                       NextTest();
+                                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadGroupTableFromBeta_25()
+    {
+
+        MTRBaseDevice * device = GetDevice("beta");
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRReadParams alloc] init];
+        params.filterByFabric = true;
+        [cluster
+            readAttributeGroupTableWithParams:params
+                                   completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+                                       NSLog(@"Read GroupTable from beta Error: %@", err);
+
+                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                       {
+                                           id actualValue = value;
+                                           VerifyOrReturn(CheckValue("GroupTable", [actualValue count], static_cast<uint32_t>(1)));
+                                           VerifyOrReturn(CheckValue("GroupId",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[0]).groupId, 261U));
+                                           VerifyOrReturn(CheckValue("Endpoints",
+                                               [((MTRGroupKeyManagementClusterGroupInfoMapStruct *)
+                                                       actualValue[0]).endpoints count],
+                                               static_cast<uint32_t>(1)));
+                                           VerifyOrReturn(CheckValue("",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[0]).endpoints[0],
+                                               1U));
+                                           VerifyOrReturn(CheckValueAsString("GroupName",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[0]).groupName,
+                                               @"Group #5"));
+                                           VerifyOrReturn(CheckValue("FabricIndex",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[0]).fabricIndex,
+                                               2U));
+                                       }
+
+                                       NextTest();
+                                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadGroupTableFromBetaWithoutFabricFiltering_26()
+    {
+
+        MTRBaseDevice * device = GetDevice("beta");
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRReadParams alloc] init];
+        params.filterByFabric = false;
+        [cluster
+            readAttributeGroupTableWithParams:params
+                                   completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+                                       NSLog(@"Read GroupTable from beta without fabric filtering Error: %@", err);
+
+                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                       {
+                                           id actualValue = value;
+                                           VerifyOrReturn(CheckValue("GroupTable", [actualValue count], static_cast<uint32_t>(5)));
+                                           VerifyOrReturn(CheckValue("GroupId",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[0]).groupId, 257U));
+                                           VerifyOrReturn(CheckValue("Endpoints",
+                                               [((MTRGroupKeyManagementClusterGroupInfoMapStruct *)
+                                                       actualValue[0]).endpoints count],
+                                               static_cast<uint32_t>(1)));
+                                           VerifyOrReturn(CheckValue("",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[0]).endpoints[0],
+                                               1U));
+                                           VerifyOrReturn(CheckValueAsString("GroupName",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[0]).groupName,
+                                               @"Group #1"));
+                                           VerifyOrReturn(CheckValue("FabricIndex",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[0]).fabricIndex,
+                                               1U));
+                                           VerifyOrReturn(CheckValue("GroupId",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[1]).groupId, 258U));
+                                           VerifyOrReturn(CheckValue("Endpoints",
+                                               [((MTRGroupKeyManagementClusterGroupInfoMapStruct *)
+                                                       actualValue[1]).endpoints count],
+                                               static_cast<uint32_t>(1)));
+                                           VerifyOrReturn(CheckValue("",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[1]).endpoints[0],
+                                               1U));
+                                           VerifyOrReturn(CheckValueAsString("GroupName",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[1]).groupName,
+                                               @"Group #2"));
+                                           VerifyOrReturn(CheckValue("FabricIndex",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[1]).fabricIndex,
+                                               1U));
+                                           VerifyOrReturn(CheckValue("GroupId",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[2]).groupId, 259U));
+                                           VerifyOrReturn(CheckValue("Endpoints",
+                                               [((MTRGroupKeyManagementClusterGroupInfoMapStruct *)
+                                                       actualValue[2]).endpoints count],
+                                               static_cast<uint32_t>(1)));
+                                           VerifyOrReturn(CheckValue("",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[2]).endpoints[0],
+                                               1U));
+                                           VerifyOrReturn(CheckValueAsString("GroupName",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[2]).groupName,
+                                               @"Group #3"));
+                                           VerifyOrReturn(CheckValue("FabricIndex",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[2]).fabricIndex,
+                                               1U));
+                                           VerifyOrReturn(CheckValue("GroupId",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[3]).groupId, 260U));
+                                           VerifyOrReturn(CheckValue("Endpoints",
+                                               [((MTRGroupKeyManagementClusterGroupInfoMapStruct *)
+                                                       actualValue[3]).endpoints count],
+                                               static_cast<uint32_t>(1)));
+                                           VerifyOrReturn(CheckValue("",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[3]).endpoints[0],
+                                               1U));
+                                           VerifyOrReturn(CheckValueAsString("GroupName",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[3]).groupName,
+                                               @"Group #4"));
+                                           VerifyOrReturn(CheckValue("FabricIndex",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[3]).fabricIndex,
+                                               1U));
+                                           VerifyOrReturn(CheckValue("GroupId",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[4]).groupId, 261U));
+                                           VerifyOrReturn(CheckValue("Endpoints",
+                                               [((MTRGroupKeyManagementClusterGroupInfoMapStruct *)
+                                                       actualValue[4]).endpoints count],
+                                               static_cast<uint32_t>(1)));
+                                           VerifyOrReturn(CheckValue("",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[4]).endpoints[0],
+                                               1U));
+                                           VerifyOrReturn(CheckValueAsString("GroupName",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[4]).groupName,
+                                               @"Group #5"));
+                                           VerifyOrReturn(CheckValue("FabricIndex",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[4]).fabricIndex,
+                                               2U));
+                                       }
+
+                                       NextTest();
+                                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestKeySetRemove1_27()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -132769,7 +133515,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetReadRemoved_16()
+    CHIP_ERROR TestKeySetReadRemoved_28()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -132796,7 +133542,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetReadNotRemoved_17()
+    CHIP_ERROR TestKeySetReadNotRemoved_29()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -132847,7 +133593,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestRemoveGroup1_18()
+    CHIP_ERROR TestRemoveGroup1_30()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -132878,7 +133624,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadGroupTable2_19()
+    CHIP_ERROR TestReadGroupTable2_31()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -132952,7 +133698,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestRemoveAll_20()
+    CHIP_ERROR TestRemoveAll_32()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -132970,7 +133716,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadGroupTable3_21()
+    CHIP_ERROR TestReadGroupTable3_33()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -132999,7 +133745,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetRemove2_22()
+    CHIP_ERROR TestKeySetRemove2_34()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -133022,7 +133768,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetReadAlsoRemoved_23()
+    CHIP_ERROR TestKeySetReadAlsoRemoved_35()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -133049,7 +133795,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetWrite1_24()
+    CHIP_ERROR TestKeySetWrite1_36()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -133089,7 +133835,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetWrite2_25()
+    CHIP_ERROR TestKeySetWrite2_37()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -133129,7 +133875,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestMapGroup1AndGroup2ToKeySet1AndGroup2ToKeySet2_26()
+    CHIP_ERROR TestMapGroup1AndGroup2ToKeySet1AndGroup2ToKeySet2_38()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -133170,7 +133916,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestRemoveKeyset1_27()
+    CHIP_ERROR TestRemoveKeyset1_39()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -133193,7 +133939,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThVerifiesGroupKeyMapEntriesForKeySet1HaveBeenRemoved_28()
+    CHIP_ERROR TestThVerifiesGroupKeyMapEntriesForKeySet1HaveBeenRemoved_40()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -133231,7 +133977,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestRemoveKeyset2_29()
+    CHIP_ERROR TestRemoveKeyset2_41()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -133254,7 +134000,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThVerifiesGroupKeyMapEntriesForKeySet2HaveBeenRemoved_30()
+    CHIP_ERROR TestThVerifiesGroupKeyMapEntriesForKeySet2HaveBeenRemoved_42()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
