@@ -70473,7 +70473,7 @@ private:
 class TestBindingSuite : public TestCommand
 {
 public:
-    TestBindingSuite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("TestBinding", 9, credsIssuerConfig)
+    TestBindingSuite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("TestBinding", 10, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -70608,6 +70608,9 @@ private:
                 }
             }
             break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_RESOURCE_EXHAUSTED));
+            break;
         default:
             LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
         }
@@ -70739,6 +70742,109 @@ private:
             LogStep(8, "Verify endpoint 1 not changed");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Binding::Id, Binding::Attributes::Binding::Id, true,
                                  chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "Write over-long binding table on endpoint 1");
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::Binding::Structs::TargetStruct::Type> value;
+
+            {
+                auto * listHolder_0 = new ListHolder<chip::app::Clusters::Binding::Structs::TargetStruct::Type>(11);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].node.Emplace();
+                listHolder_0->mList[0].node.Value() = 1ULL;
+                listHolder_0->mList[0].endpoint.Emplace();
+                listHolder_0->mList[0].endpoint.Value() = 1U;
+                listHolder_0->mList[0].cluster.Emplace();
+                listHolder_0->mList[0].cluster.Value() = 6UL;
+                listHolder_0->mList[0].fabricIndex     = 0U;
+
+                listHolder_0->mList[1].node.Emplace();
+                listHolder_0->mList[1].node.Value() = 2ULL;
+                listHolder_0->mList[1].endpoint.Emplace();
+                listHolder_0->mList[1].endpoint.Value() = 2U;
+                listHolder_0->mList[1].cluster.Emplace();
+                listHolder_0->mList[1].cluster.Value() = 6UL;
+                listHolder_0->mList[1].fabricIndex     = 0U;
+
+                listHolder_0->mList[2].node.Emplace();
+                listHolder_0->mList[2].node.Value() = 3ULL;
+                listHolder_0->mList[2].endpoint.Emplace();
+                listHolder_0->mList[2].endpoint.Value() = 3U;
+                listHolder_0->mList[2].cluster.Emplace();
+                listHolder_0->mList[2].cluster.Value() = 6UL;
+                listHolder_0->mList[2].fabricIndex     = 0U;
+
+                listHolder_0->mList[3].node.Emplace();
+                listHolder_0->mList[3].node.Value() = 4ULL;
+                listHolder_0->mList[3].endpoint.Emplace();
+                listHolder_0->mList[3].endpoint.Value() = 4U;
+                listHolder_0->mList[3].cluster.Emplace();
+                listHolder_0->mList[3].cluster.Value() = 6UL;
+                listHolder_0->mList[3].fabricIndex     = 0U;
+
+                listHolder_0->mList[4].node.Emplace();
+                listHolder_0->mList[4].node.Value() = 5ULL;
+                listHolder_0->mList[4].endpoint.Emplace();
+                listHolder_0->mList[4].endpoint.Value() = 5U;
+                listHolder_0->mList[4].cluster.Emplace();
+                listHolder_0->mList[4].cluster.Value() = 6UL;
+                listHolder_0->mList[4].fabricIndex     = 0U;
+
+                listHolder_0->mList[5].node.Emplace();
+                listHolder_0->mList[5].node.Value() = 6ULL;
+                listHolder_0->mList[5].endpoint.Emplace();
+                listHolder_0->mList[5].endpoint.Value() = 6U;
+                listHolder_0->mList[5].cluster.Emplace();
+                listHolder_0->mList[5].cluster.Value() = 6UL;
+                listHolder_0->mList[5].fabricIndex     = 0U;
+
+                listHolder_0->mList[6].node.Emplace();
+                listHolder_0->mList[6].node.Value() = 7ULL;
+                listHolder_0->mList[6].endpoint.Emplace();
+                listHolder_0->mList[6].endpoint.Value() = 7U;
+                listHolder_0->mList[6].cluster.Emplace();
+                listHolder_0->mList[6].cluster.Value() = 6UL;
+                listHolder_0->mList[6].fabricIndex     = 0U;
+
+                listHolder_0->mList[7].node.Emplace();
+                listHolder_0->mList[7].node.Value() = 8ULL;
+                listHolder_0->mList[7].endpoint.Emplace();
+                listHolder_0->mList[7].endpoint.Value() = 8U;
+                listHolder_0->mList[7].cluster.Emplace();
+                listHolder_0->mList[7].cluster.Value() = 6UL;
+                listHolder_0->mList[7].fabricIndex     = 0U;
+
+                listHolder_0->mList[8].node.Emplace();
+                listHolder_0->mList[8].node.Value() = 9ULL;
+                listHolder_0->mList[8].endpoint.Emplace();
+                listHolder_0->mList[8].endpoint.Value() = 9U;
+                listHolder_0->mList[8].cluster.Emplace();
+                listHolder_0->mList[8].cluster.Value() = 6UL;
+                listHolder_0->mList[8].fabricIndex     = 0U;
+
+                listHolder_0->mList[9].node.Emplace();
+                listHolder_0->mList[9].node.Value() = 10ULL;
+                listHolder_0->mList[9].endpoint.Emplace();
+                listHolder_0->mList[9].endpoint.Value() = 10U;
+                listHolder_0->mList[9].cluster.Emplace();
+                listHolder_0->mList[9].cluster.Value() = 6UL;
+                listHolder_0->mList[9].fabricIndex     = 0U;
+
+                listHolder_0->mList[10].node.Emplace();
+                listHolder_0->mList[10].node.Value() = 11ULL;
+                listHolder_0->mList[10].endpoint.Emplace();
+                listHolder_0->mList[10].endpoint.Value() = 11U;
+                listHolder_0->mList[10].cluster.Emplace();
+                listHolder_0->mList[10].cluster.Value() = 6UL;
+                listHolder_0->mList[10].fabricIndex     = 0U;
+
+                value =
+                    chip::app::DataModel::List<chip::app::Clusters::Binding::Structs::TargetStruct::Type>(listHolder_0->mList, 11);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Binding::Id, Binding::Attributes::Binding::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
         }
         }
         return CHIP_NO_ERROR;
