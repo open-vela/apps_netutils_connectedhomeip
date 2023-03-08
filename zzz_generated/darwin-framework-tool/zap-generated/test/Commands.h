@@ -102449,6 +102449,10 @@ public:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Verify endpoint 1 not changed\n");
             err = TestVerifyEndpoint1NotChanged_8();
             break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Write over-long binding table on endpoint 1\n");
+            err = TestWriteOverLongBindingTableOnEndpoint1_9();
+            break;
         }
 
         if (CHIP_NO_ERROR != err) {
@@ -102487,6 +102491,9 @@ public:
         case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_RESOURCE_EXHAUSTED));
+            break;
         }
 
         // Go on to the next test.
@@ -102500,7 +102507,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 9;
+    const uint16_t mTestCount = 10;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -102787,6 +102794,100 @@ private:
 
                                          NextTest();
                                      }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWriteOverLongBindingTableOnEndpoint1_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterBinding alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id bindingArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRBindingClusterTargetStruct alloc] init];
+            ((MTRBindingClusterTargetStruct *) temp_0[0]).node = [NSNumber numberWithUnsignedLongLong:1ULL];
+            ((MTRBindingClusterTargetStruct *) temp_0[0]).endpoint = [NSNumber numberWithUnsignedShort:1U];
+            ((MTRBindingClusterTargetStruct *) temp_0[0]).cluster = [NSNumber numberWithUnsignedInt:6UL];
+            ((MTRBindingClusterTargetStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
+
+            temp_0[1] = [[MTRBindingClusterTargetStruct alloc] init];
+            ((MTRBindingClusterTargetStruct *) temp_0[1]).node = [NSNumber numberWithUnsignedLongLong:2ULL];
+            ((MTRBindingClusterTargetStruct *) temp_0[1]).endpoint = [NSNumber numberWithUnsignedShort:2U];
+            ((MTRBindingClusterTargetStruct *) temp_0[1]).cluster = [NSNumber numberWithUnsignedInt:6UL];
+            ((MTRBindingClusterTargetStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
+
+            temp_0[2] = [[MTRBindingClusterTargetStruct alloc] init];
+            ((MTRBindingClusterTargetStruct *) temp_0[2]).node = [NSNumber numberWithUnsignedLongLong:3ULL];
+            ((MTRBindingClusterTargetStruct *) temp_0[2]).endpoint = [NSNumber numberWithUnsignedShort:3U];
+            ((MTRBindingClusterTargetStruct *) temp_0[2]).cluster = [NSNumber numberWithUnsignedInt:6UL];
+            ((MTRBindingClusterTargetStruct *) temp_0[2]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
+
+            temp_0[3] = [[MTRBindingClusterTargetStruct alloc] init];
+            ((MTRBindingClusterTargetStruct *) temp_0[3]).node = [NSNumber numberWithUnsignedLongLong:4ULL];
+            ((MTRBindingClusterTargetStruct *) temp_0[3]).endpoint = [NSNumber numberWithUnsignedShort:4U];
+            ((MTRBindingClusterTargetStruct *) temp_0[3]).cluster = [NSNumber numberWithUnsignedInt:6UL];
+            ((MTRBindingClusterTargetStruct *) temp_0[3]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
+
+            temp_0[4] = [[MTRBindingClusterTargetStruct alloc] init];
+            ((MTRBindingClusterTargetStruct *) temp_0[4]).node = [NSNumber numberWithUnsignedLongLong:5ULL];
+            ((MTRBindingClusterTargetStruct *) temp_0[4]).endpoint = [NSNumber numberWithUnsignedShort:5U];
+            ((MTRBindingClusterTargetStruct *) temp_0[4]).cluster = [NSNumber numberWithUnsignedInt:6UL];
+            ((MTRBindingClusterTargetStruct *) temp_0[4]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
+
+            temp_0[5] = [[MTRBindingClusterTargetStruct alloc] init];
+            ((MTRBindingClusterTargetStruct *) temp_0[5]).node = [NSNumber numberWithUnsignedLongLong:6ULL];
+            ((MTRBindingClusterTargetStruct *) temp_0[5]).endpoint = [NSNumber numberWithUnsignedShort:6U];
+            ((MTRBindingClusterTargetStruct *) temp_0[5]).cluster = [NSNumber numberWithUnsignedInt:6UL];
+            ((MTRBindingClusterTargetStruct *) temp_0[5]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
+
+            temp_0[6] = [[MTRBindingClusterTargetStruct alloc] init];
+            ((MTRBindingClusterTargetStruct *) temp_0[6]).node = [NSNumber numberWithUnsignedLongLong:7ULL];
+            ((MTRBindingClusterTargetStruct *) temp_0[6]).endpoint = [NSNumber numberWithUnsignedShort:7U];
+            ((MTRBindingClusterTargetStruct *) temp_0[6]).cluster = [NSNumber numberWithUnsignedInt:6UL];
+            ((MTRBindingClusterTargetStruct *) temp_0[6]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
+
+            temp_0[7] = [[MTRBindingClusterTargetStruct alloc] init];
+            ((MTRBindingClusterTargetStruct *) temp_0[7]).node = [NSNumber numberWithUnsignedLongLong:8ULL];
+            ((MTRBindingClusterTargetStruct *) temp_0[7]).endpoint = [NSNumber numberWithUnsignedShort:8U];
+            ((MTRBindingClusterTargetStruct *) temp_0[7]).cluster = [NSNumber numberWithUnsignedInt:6UL];
+            ((MTRBindingClusterTargetStruct *) temp_0[7]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
+
+            temp_0[8] = [[MTRBindingClusterTargetStruct alloc] init];
+            ((MTRBindingClusterTargetStruct *) temp_0[8]).node = [NSNumber numberWithUnsignedLongLong:9ULL];
+            ((MTRBindingClusterTargetStruct *) temp_0[8]).endpoint = [NSNumber numberWithUnsignedShort:9U];
+            ((MTRBindingClusterTargetStruct *) temp_0[8]).cluster = [NSNumber numberWithUnsignedInt:6UL];
+            ((MTRBindingClusterTargetStruct *) temp_0[8]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
+
+            temp_0[9] = [[MTRBindingClusterTargetStruct alloc] init];
+            ((MTRBindingClusterTargetStruct *) temp_0[9]).node = [NSNumber numberWithUnsignedLongLong:10ULL];
+            ((MTRBindingClusterTargetStruct *) temp_0[9]).endpoint = [NSNumber numberWithUnsignedShort:10U];
+            ((MTRBindingClusterTargetStruct *) temp_0[9]).cluster = [NSNumber numberWithUnsignedInt:6UL];
+            ((MTRBindingClusterTargetStruct *) temp_0[9]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
+
+            temp_0[10] = [[MTRBindingClusterTargetStruct alloc] init];
+            ((MTRBindingClusterTargetStruct *) temp_0[10]).node = [NSNumber numberWithUnsignedLongLong:11ULL];
+            ((MTRBindingClusterTargetStruct *) temp_0[10]).endpoint = [NSNumber numberWithUnsignedShort:11U];
+            ((MTRBindingClusterTargetStruct *) temp_0[10]).cluster = [NSNumber numberWithUnsignedInt:6UL];
+            ((MTRBindingClusterTargetStruct *) temp_0[10]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
+
+            bindingArgument = temp_0;
+        }
+        [cluster
+            writeAttributeBindingWithValue:bindingArgument
+                                completion:^(NSError * _Nullable err) {
+                                    NSLog(@"Write over-long binding table on endpoint 1 Error: %@", err);
+
+                                    VerifyOrReturn(CheckValue("status",
+                                        err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                      : EMBER_ZCL_STATUS_FAILURE)
+                                            : 0,
+                                        EMBER_ZCL_STATUS_RESOURCE_EXHAUSTED));
+                                    NextTest();
+                                }];
 
         return CHIP_NO_ERROR;
     }
