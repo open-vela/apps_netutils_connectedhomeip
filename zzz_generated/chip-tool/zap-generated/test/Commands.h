@@ -78376,7 +78376,7 @@ private:
 class DL_LockUnlockSuite : public TestCommand
 {
 public:
-    DL_LockUnlockSuite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("DL_LockUnlock", 41, credsIssuerConfig)
+    DL_LockUnlockSuite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("DL_LockUnlock", 53, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -78605,35 +78605,17 @@ private:
             break;
         case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                uint8_t value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("userCodeTemporaryDisableTime", value, 10U));
-            }
             break;
         case 22:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 23:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 24:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 25:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            break;
-        case 26:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            break;
-        case 27:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 28:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 29:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::Nullable<chip::app::Clusters::DoorLock::DlLockState> value;
@@ -78642,23 +78624,38 @@ private:
                 VerifyOrReturn(CheckValue("lockState.Value()", value.Value(), 2U));
             }
             break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<chip::app::Clusters::DoorLock::DlLockState> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("lockState", value));
+                VerifyOrReturn(CheckValue("lockState.Value()", value.Value(), 1U));
+            }
+            break;
+        case 28:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 29:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
         case 30:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 31:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
+                chip::app::DataModel::Nullable<chip::app::Clusters::DoorLock::DlLockState> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValueNonNull("userIndex", value.userIndex));
-                VerifyOrReturn(CheckValue("userIndex.Value()", value.userIndex.Value(), 2U));
-                VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", value.nextCredentialIndex));
-                VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 4U));
+                VerifyOrReturn(CheckValueNonNull("lockState", value));
+                VerifyOrReturn(CheckValue("lockState.Value()", value.Value(), 2U));
             }
             break;
         case 32:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 33:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -78671,20 +78668,32 @@ private:
             break;
         case 34:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("userCodeTemporaryDisableTime", value, 10U));
+            }
             break;
         case 35:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::Nullable<chip::app::Clusters::DoorLock::DlLockState> value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValueNonNull("lockState", value));
-                VerifyOrReturn(CheckValue("lockState.Value()", value.Value(), 2U));
-            }
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 36:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 37:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 38:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 39:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 40:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 41:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::Nullable<chip::app::Clusters::DoorLock::DlLockState> value;
@@ -78693,10 +78702,25 @@ private:
                 VerifyOrReturn(CheckValue("lockState.Value()", value.Value(), 2U));
             }
             break;
-        case 38:
+        case 42:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 39:
+        case 43:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValueNonNull("userIndex", value.userIndex));
+                VerifyOrReturn(CheckValue("userIndex.Value()", value.userIndex.Value(), 2U));
+                VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", value.nextCredentialIndex));
+                VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 4U));
+            }
+            break;
+        case 44:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 45:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::Nullable<chip::app::Clusters::DoorLock::DlLockState> value;
@@ -78705,7 +78729,43 @@ private:
                 VerifyOrReturn(CheckValue("lockState.Value()", value.Value(), 1U));
             }
             break;
-        case 40:
+        case 46:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 47:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<chip::app::Clusters::DoorLock::DlLockState> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("lockState", value));
+                VerifyOrReturn(CheckValue("lockState.Value()", value.Value(), 2U));
+            }
+            break;
+        case 48:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 49:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<chip::app::Clusters::DoorLock::DlLockState> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("lockState", value));
+                VerifyOrReturn(CheckValue("lockState.Value()", value.Value(), 2U));
+            }
+            break;
+        case 50:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 51:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<chip::app::Clusters::DoorLock::DlLockState> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("lockState", value));
+                VerifyOrReturn(CheckValue("lockState.Value()", value.Value(), 1U));
+            }
+            break;
+        case 52:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         default:
@@ -78908,20 +78968,26 @@ private:
                                   chip::NullOptional, chip::NullOptional);
         }
         case 21: {
-            LogStep(21, "Read the lockout timeout");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id,
-                                 DoorLock::Attributes::UserCodeTemporaryDisableTime::Id, true, chip::NullOptional);
-        }
-        case 22: {
-            LogStep(22, "Set the WrongCodeEntryLimit to small value so we can test lockout");
+            LogStep(21, "Set the WrongCodeEntryLimit to small value so we can test lockout");
             ListFreer listFreer;
             uint8_t value;
             value = 3U;
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::WrongCodeEntryLimit::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
+        case 22: {
+            LogStep(22, "Try to unlock the door with invalid PIN for the first time");
+            ListFreer listFreer;
+            chip::app::Clusters::DoorLock::Commands::UnlockDoor::Type value;
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("000000garbage: not in length on purpose"), 6);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::UnlockDoor::Id, value,
+                               chip::Optional<uint16_t>(10000), chip::NullOptional
+
+            );
+        }
         case 23: {
-            LogStep(23, "Try to unlock the door with invalid PIN for the first time");
+            LogStep(23, "Try to unlock the door with invalid PIN for the second time");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::UnlockDoor::Type value;
             value.PINCode.Emplace();
@@ -78932,63 +78998,23 @@ private:
             );
         }
         case 24: {
-            LogStep(24, "Try to unlock the door with invalid PIN for the second time");
+            LogStep(24, "Try to unlock the door with valid PIN for the third time");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::UnlockDoor::Type value;
             value.PINCode.Emplace();
-            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("000000garbage: not in length on purpose"), 6);
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::UnlockDoor::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
             );
         }
         case 25: {
-            LogStep(25, "Try to unlock the door with invalid PIN for the third time");
-            ListFreer listFreer;
-            chip::app::Clusters::DoorLock::Commands::UnlockDoor::Type value;
-            value.PINCode.Emplace();
-            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("000000garbage: not in length on purpose"), 6);
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::UnlockDoor::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 26: {
-            LogStep(26, "Try to unlock the door with valid PIN and make sure it fails due to lockout");
-            ListFreer listFreer;
-            chip::app::Clusters::DoorLock::Commands::UnlockDoor::Type value;
-            value.PINCode.Emplace();
-            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::UnlockDoor::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 27: {
-            LogStep(27, "Wait for the lockout to end");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-            value.ms = 10000UL;
-            return WaitForMs(kIdentityAlpha, value);
-        }
-        case 28: {
-            LogStep(28, "Try to unlock the door with valid PIN and make sure it succeeds");
-            ListFreer listFreer;
-            chip::app::Clusters::DoorLock::Commands::UnlockDoor::Type value;
-            value.PINCode.Emplace();
-            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::UnlockDoor::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 29: {
-            LogStep(29, "Verify that lock state attribute value is set to Unlocked");
+            LogStep(25, "Verify that lock state attribute value is set to Unlocked");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::LockState::Id, true,
                                  chip::NullOptional);
         }
-        case 30: {
-            LogStep(30, "Lock the door back prior to next tests");
+        case 26: {
+            LogStep(26, "Lock the door back prior to next tests");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::LockDoor::Type value;
             value.PINCode.Emplace();
@@ -78998,8 +79024,150 @@ private:
 
             );
         }
+        case 27: {
+            LogStep(27, "Verify that lock state attribute value is set to Locked");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::LockState::Id, true,
+                                 chip::NullOptional);
+        }
+        case 28: {
+            LogStep(28, "Try to unlock the door with invalid PIN for the first time");
+            ListFreer listFreer;
+            chip::app::Clusters::DoorLock::Commands::UnlockDoor::Type value;
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("000000garbage: not in length on purpose"), 6);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::UnlockDoor::Id, value,
+                               chip::Optional<uint16_t>(10000), chip::NullOptional
+
+            );
+        }
+        case 29: {
+            LogStep(29, "Try to unlock the door with invalid PIN for the second time");
+            ListFreer listFreer;
+            chip::app::Clusters::DoorLock::Commands::UnlockDoor::Type value;
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("000000garbage: not in length on purpose"), 6);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::UnlockDoor::Id, value,
+                               chip::Optional<uint16_t>(10000), chip::NullOptional
+
+            );
+        }
+        case 30: {
+            LogStep(30, "Try to unlock the door with valid PIN for the third time");
+            ListFreer listFreer;
+            chip::app::Clusters::DoorLock::Commands::UnlockDoor::Type value;
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::UnlockDoor::Id, value,
+                               chip::Optional<uint16_t>(10000), chip::NullOptional
+
+            );
+        }
         case 31: {
-            LogStep(31, "Create a disabled user and credential");
+            LogStep(31, "Verify that lock state attribute value is set to Unlocked");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::LockState::Id, true,
+                                 chip::NullOptional);
+        }
+        case 32: {
+            LogStep(32, "Lock the door back prior to next tests");
+            ListFreer listFreer;
+            chip::app::Clusters::DoorLock::Commands::LockDoor::Type value;
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::LockDoor::Id, value,
+                               chip::Optional<uint16_t>(10000), chip::NullOptional
+
+            );
+        }
+        case 33: {
+            LogStep(33, "Verify that lock state attribute value is set to Locked");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::LockState::Id, true,
+                                 chip::NullOptional);
+        }
+        case 34: {
+            LogStep(34, "Read the lockout timeout");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id,
+                                 DoorLock::Attributes::UserCodeTemporaryDisableTime::Id, true, chip::NullOptional);
+        }
+        case 35: {
+            LogStep(35, "Try to unlock the door with invalid PIN for the first time");
+            ListFreer listFreer;
+            chip::app::Clusters::DoorLock::Commands::UnlockDoor::Type value;
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("000000garbage: not in length on purpose"), 6);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::UnlockDoor::Id, value,
+                               chip::Optional<uint16_t>(10000), chip::NullOptional
+
+            );
+        }
+        case 36: {
+            LogStep(36, "Try to unlock the door with invalid PIN for the second time");
+            ListFreer listFreer;
+            chip::app::Clusters::DoorLock::Commands::UnlockDoor::Type value;
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("000000garbage: not in length on purpose"), 6);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::UnlockDoor::Id, value,
+                               chip::Optional<uint16_t>(10000), chip::NullOptional
+
+            );
+        }
+        case 37: {
+            LogStep(37, "Try to unlock the door with invalid PIN for the third time");
+            ListFreer listFreer;
+            chip::app::Clusters::DoorLock::Commands::UnlockDoor::Type value;
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("000000garbage: not in length on purpose"), 6);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::UnlockDoor::Id, value,
+                               chip::Optional<uint16_t>(10000), chip::NullOptional
+
+            );
+        }
+        case 38: {
+            LogStep(38, "Try to unlock the door with valid PIN and make sure it fails due to lockout");
+            ListFreer listFreer;
+            chip::app::Clusters::DoorLock::Commands::UnlockDoor::Type value;
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::UnlockDoor::Id, value,
+                               chip::Optional<uint16_t>(10000), chip::NullOptional
+
+            );
+        }
+        case 39: {
+            LogStep(39, "Wait for the lockout to end");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = 10000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 40: {
+            LogStep(40, "Try to unlock the door with valid PIN and make sure it succeeds");
+            ListFreer listFreer;
+            chip::app::Clusters::DoorLock::Commands::UnlockDoor::Type value;
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::UnlockDoor::Id, value,
+                               chip::Optional<uint16_t>(10000), chip::NullOptional
+
+            );
+        }
+        case 41: {
+            LogStep(41, "Verify that lock state attribute value is set to Unlocked");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::LockState::Id, true,
+                                 chip::NullOptional);
+        }
+        case 42: {
+            LogStep(42, "Lock the door back prior to next tests");
+            ListFreer listFreer;
+            chip::app::Clusters::DoorLock::Commands::LockDoor::Type value;
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::LockDoor::Id, value,
+                               chip::Optional<uint16_t>(10000), chip::NullOptional
+
+            );
+        }
+        case 43: {
+            LogStep(43, "Create a disabled user and credential");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
             value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
@@ -79017,8 +79185,8 @@ private:
 
             );
         }
-        case 32: {
-            LogStep(32, "Try to unlock the door with disabled user PIN");
+        case 44: {
+            LogStep(44, "Try to unlock the door with disabled user PIN");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::UnlockDoor::Type value;
             value.PINCode.Emplace();
@@ -79028,13 +79196,13 @@ private:
 
             );
         }
-        case 33: {
-            LogStep(33, "Verify that lock state attribute value is set to Locked");
+        case 45: {
+            LogStep(45, "Verify that lock state attribute value is set to Locked");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::LockState::Id, true,
                                  chip::NullOptional);
         }
-        case 34: {
-            LogStep(34, "Unlock the door with enabled user PIN");
+        case 46: {
+            LogStep(46, "Unlock the door with enabled user PIN");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::UnlockDoor::Type value;
             value.PINCode.Emplace();
@@ -79044,13 +79212,13 @@ private:
 
             );
         }
-        case 35: {
-            LogStep(35, "Verify that lock state attribute value is set to Unlocked");
+        case 47: {
+            LogStep(47, "Verify that lock state attribute value is set to Unlocked");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::LockState::Id, true,
                                  chip::NullOptional);
         }
-        case 36: {
-            LogStep(36, "Try to lock the door with disabled user PIN");
+        case 48: {
+            LogStep(48, "Try to lock the door with disabled user PIN");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::LockDoor::Type value;
             value.PINCode.Emplace();
@@ -79060,13 +79228,13 @@ private:
 
             );
         }
-        case 37: {
-            LogStep(37, "Verify that lock state attribute value stays Unlocked");
+        case 49: {
+            LogStep(49, "Verify that lock state attribute value stays Unlocked");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::LockState::Id, true,
                                  chip::NullOptional);
         }
-        case 38: {
-            LogStep(38, "Lock the door with enabled user PIN");
+        case 50: {
+            LogStep(50, "Lock the door with enabled user PIN");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::LockDoor::Type value;
             value.PINCode.Emplace();
@@ -79076,13 +79244,13 @@ private:
 
             );
         }
-        case 39: {
-            LogStep(39, "Verify that lock state attribute value is set to Locked");
+        case 51: {
+            LogStep(51, "Verify that lock state attribute value is set to Locked");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::LockState::Id, true,
                                  chip::NullOptional);
         }
-        case 40: {
-            LogStep(40, "Clean all the users and credentials");
+        case 52: {
+            LogStep(52, "Clean all the users and credentials");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::ClearUser::Type value;
             value.userIndex = 65534U;
