@@ -49,8 +49,6 @@ public:
         printf("Test_TC_ACE_1_5\n");
         printf("Test_TC_BOOL_1_1\n");
         printf("Test_TC_BOOL_2_1\n");
-        printf("Test_TC_BRBINFO_1_1\n");
-        printf("Test_TC_BRBINFO_2_1\n");
         printf("Test_TC_ACT_1_1\n");
         printf("Test_TC_BIND_1_1\n");
         printf("Test_TC_CC_1_1\n");
@@ -119,7 +117,6 @@ public:
         printf("Test_TC_APBSC_1_10\n");
         printf("Test_TC_CONTENTLAUNCHER_1_11\n");
         printf("Test_TC_ALOGIN_1_12\n");
-        printf("Test_TC_ALOGIN_12_1\n");
         printf("Test_TC_LOWPOWER_2_1\n");
         printf("Test_TC_KEYPADINPUT_3_2\n");
         printf("Test_TC_KEYPADINPUT_3_3\n");
@@ -132,7 +129,6 @@ public:
         printf("Test_TC_MEDIAINPUT_3_11\n");
         printf("Test_TC_MEDIAINPUT_3_12\n");
         printf("Test_TC_MEDIAINPUT_3_13\n");
-        printf("Test_TC_WAKEONLAN_4_1\n");
         printf("Test_TC_CHANNEL_5_1\n");
         printf("Test_TC_CHANNEL_5_2\n");
         printf("Test_TC_CHANNEL_5_3\n");
@@ -379,6 +375,7 @@ public:
         printf("Test_TC_DGGEN_2_2\n");
         printf("Test_TC_DGGEN_2_3\n");
         printf("Test_TC_DGGEN_3_1\n");
+        printf("Test_TC_I_3_1\n");
         printf("Test_TC_I_3_2\n");
         printf("Test_TC_ILL_3_1\n");
         printf("Test_TC_IDM_1_1\n");
@@ -422,6 +419,8 @@ public:
         printf("Test_TC_MC_11_1\n");
         printf("Test_TC_MC_11_2\n");
         printf("Test_TC_ALOGIN_12_2\n");
+        printf("Test_TC_WAKEONLAN_4_1\n");
+        printf("Test_TC_ALOGIN_12_1\n");
         printf("Test_TC_CADMIN_1_1\n");
         printf("Test_TC_CADMIN_1_2\n");
         printf("Test_TC_CADMIN_1_7\n");
@@ -470,6 +469,8 @@ public:
         printf("Test_TC_SU_4_1\n");
         printf("Test_TC_SU_4_2\n");
         printf("Test_TC_PSCFG_2_2\n");
+        printf("Test_TC_PSCFG_3_1\n");
+        printf("Test_TC_PRS_3_1\n");
         printf("Test_TC_SC_1_1\n");
         printf("Test_TC_SC_1_2\n");
         printf("Test_TC_SC_1_3\n");
@@ -503,9 +504,12 @@ public:
         printf("Test_TC_WNCV_6_1\n");
         printf("Test_TC_WNCV_7_1\n");
         printf("Test_TC_FLW_2_2\n");
+        printf("Test_TC_FLW_3_1\n");
         printf("Test_TC_OCC_3_1\n");
         printf("Test_TC_PS_2_2\n");
+        printf("Test_TC_PS_3_1\n");
         printf("Test_TC_BOOL_2_2\n");
+        printf("Test_TC_BOOL_3_1\n");
         printf("Test_TC_CC_2_2\n");
         printf("Test_TC_CC_3_4\n");
         printf("Test_TC_CC_4_5\n");
@@ -533,6 +537,7 @@ public:
         printf("Test_TC_OO_3_2\n");
         printf("Test_TC_RH_2_2\n");
         printf("Test_TC_SWTCH_2_2\n");
+        printf("Test_TC_SWTCH_3_1\n");
         printf("Test_TC_SWTCH_3_2\n");
         printf("Test_TC_TMP_2_2\n");
         printf("Test_TC_TMP_3_1\n");
@@ -547,6 +552,7 @@ public:
         printf("Test_TC_DGTHREAD_3_5\n");
         printf("Test_TC_ACT_2_1\n");
         printf("Test_TC_ACT_2_2\n");
+        printf("Test_TC_ACT_3_1\n");
         printf("Test_TC_ACT_3_2\n");
         printf("Test_TC_LTIME_2_1\n");
         printf("Test_TC_LTIME_3_1\n");
@@ -561,6 +567,8 @@ public:
         printf("Test_TC_PCC_3_1\n");
         printf("Test_TC_ACL_2_5\n");
         printf("Test_TC_ACL_2_6\n");
+        printf("Test_TC_BRBINFO_1_1\n");
+        printf("Test_TC_BRBINFO_2_1\n");
         printf("Test_TC_BRBINFO_2_2\n");
         printf("Test_TC_BRBINFO_2_3\n");
         printf("Test_TC_ACE_1_2\n");
@@ -5596,7 +5604,7 @@ private:
 class Test_TC_ACL_2_7Suite : public TestCommand
 {
 public:
-    Test_TC_ACL_2_7Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_ACL_2_7", 15, credsIssuerConfig)
+    Test_TC_ACL_2_7Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_ACL_2_7", 18, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -5686,6 +5694,10 @@ private:
             break;
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::CommissionerCommands::Commands::GetCommissionerNodeIdResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
@@ -5693,7 +5705,7 @@ private:
             }
             shouldContinue = true;
             break;
-        case 8:
+        case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint8_t value;
@@ -5701,13 +5713,13 @@ private:
                 TH2FabricIndex = value;
             }
             break;
-        case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -5725,7 +5737,7 @@ private:
                 }
             }
             break;
-        case 12:
+        case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -5750,7 +5762,7 @@ private:
                 }
             }
             break;
-        case 13:
+        case 14:
             switch (mTestSubStepIndex)
             {
             case 0:
@@ -5778,7 +5790,7 @@ private:
                 break;
             }
             break;
-        case 14:
+        case 15:
             switch (mTestSubStepIndex)
             {
             case 0:
@@ -5812,6 +5824,12 @@ private:
                 LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
                 break;
             }
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         default:
             LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
@@ -5848,6 +5866,7 @@ private:
         }
         case 3: {
             LogStep(3, "Step 3:TH1 puts DUT into commissioning mode");
+            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp && PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 180U;
@@ -5870,40 +5889,53 @@ private:
             );
         }
         case 4: {
-            LogStep(4, "Waiting after opening commissioning window");
+            LogStep(4, "Step 3 & 4: TH1 puts DUT into commissioning mode, TH2 commissions DUT using admin node ID N2");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP && CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 5: {
+            LogStep(5, "Waiting after opening commissioning window");
+            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp && PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
             return WaitForMs(kIdentityAlpha, value);
         }
-        case 5: {
-            LogStep(5, "Step 4:TH2 starts a commissioning process with DUT");
+        case 6: {
+            LogStep(6, "Step 4:TH2 starts a commissioning process with DUT");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
-        case 6: {
-            LogStep(6, "DUT is commissioned by TH2 on Fabric ID2 ");
+        case 7: {
+            LogStep(7, "DUT is commissioned by TH2 on Fabric ID2 ");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
             value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             return WaitForCommissionee(kIdentityBeta, value);
         }
-        case 7: {
-            LogStep(7, "Read the TH2 commissioner node ID");
+        case 8: {
+            LogStep(8, "Read the TH2 commissioner node ID");
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::GetCommissionerNodeId::Type value;
             return GetCommissionerNodeId(kIdentityBeta, value);
         }
-        case 8: {
-            LogStep(8, "Step 5:TH2 reads OperationalCredentials cluster CurrentFabricIndex attribute");
+        case 9: {
+            LogStep(9, "Step 5:TH2 reads OperationalCredentials cluster CurrentFabricIndex attribute");
             return ReadAttribute(kIdentityBeta, GetEndpoint(0), OperationalCredentials::Id,
                                  OperationalCredentials::Attributes::CurrentFabricIndex::Id, true, chip::NullOptional);
         }
-        case 9: {
-            LogStep(9,
+        case 10: {
+            LogStep(10,
                     "Step 6:TH1 writes DUT Endpoint 0 AccessControl cluster Extension attribute, value is list of "
                     "AccessControlExtensionStruct containing 1 element");
             VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
@@ -5925,8 +5957,8 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
-        case 10: {
-            LogStep(10,
+        case 11: {
+            LogStep(11,
                     "Step 7:TH2 writes DUT Endpoint 0 AccessControl cluster Extension attribute, value is list of "
                     "AccessControlExtensionStruct containing 1 element");
             VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
@@ -5954,31 +5986,51 @@ private:
             return WriteAttribute(kIdentityBeta, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 11: {
-            LogStep(11, "Step 8:TH1 reads AccessControl cluster Extension attribute");
+        case 12: {
+            LogStep(12, "Step 8:TH1 reads AccessControl cluster Extension attribute");
             VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id, true,
                                  chip::NullOptional);
         }
-        case 12: {
-            LogStep(12, "Step 9:TH2 reads AccessControl cluster Extension attribute");
+        case 13: {
+            LogStep(13, "Step 9:TH2 reads AccessControl cluster Extension attribute");
             VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityBeta, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id, true,
                                  chip::NullOptional);
         }
-        case 13: {
-            LogStep(13, "Step 10:TH1 reads DUT Endpoint 0 AccessControl cluster AccessControlExtensionChanged event");
+        case 14: {
+            LogStep(14, "Step 10:TH1 reads DUT Endpoint 0 AccessControl cluster AccessControlExtensionChanged event");
             VerifyOrDo(!ShouldSkip("ACL.S.E01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             mTestSubStepCount = 1;
             return ReadEvent(kIdentityAlpha, GetEndpoint(0), AccessControl::Id,
                              AccessControl::Events::AccessControlExtensionChanged::Id, false, chip::NullOptional);
         }
-        case 14: {
-            LogStep(14, "Step 11:TH2 reads DUT Endpoint 0 AccessControl cluster AccessControlExtensionChanged event");
+        case 15: {
+            LogStep(15, "Step 11:TH2 reads DUT Endpoint 0 AccessControl cluster AccessControlExtensionChanged event");
             VerifyOrDo(!ShouldSkip("ACL.S.E01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             mTestSubStepCount = 1;
             return ReadEvent(kIdentityBeta, GetEndpoint(0), AccessControl::Id,
                              AccessControl::Events::AccessControlExtensionChanged::Id, false, chip::NullOptional);
+        }
+        case 16: {
+            LogStep(16, "TH1 writes Extension attribute value as empty list");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type> value;
+
+            value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>();
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
+        }
+        case 17: {
+            LogStep(17, "TH2 writes Extension attribute value as empty list");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type> value;
+
+            value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>();
+            return WriteAttribute(kIdentityBeta, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
         }
         }
         return CHIP_NO_ERROR;
@@ -5988,7 +6040,7 @@ private:
 class Test_TC_ACL_2_8Suite : public TestCommand
 {
 public:
-    Test_TC_ACL_2_8Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_ACL_2_8", 15, credsIssuerConfig)
+    Test_TC_ACL_2_8Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_ACL_2_8", 18, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -6074,6 +6126,10 @@ private:
             break;
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::CommissionerCommands::Commands::GetCommissionerNodeIdResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
@@ -6081,7 +6137,7 @@ private:
             }
             shouldContinue = true;
             break;
-        case 8:
+        case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint8_t value;
@@ -6089,13 +6145,13 @@ private:
                 TH2FabricIndex = value;
             }
             break;
-        case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -6125,7 +6181,7 @@ private:
                 }
             }
             break;
-        case 12:
+        case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -6155,7 +6211,7 @@ private:
                 }
             }
             break;
-        case 13:
+        case 14:
             switch (mTestSubStepIndex)
             {
             case 0:
@@ -6269,7 +6325,7 @@ private:
                 break;
             }
             break;
-        case 14:
+        case 15:
             switch (mTestSubStepIndex)
             {
             case 0:
@@ -6383,6 +6439,12 @@ private:
                 break;
             }
             break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         default:
             LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
         }
@@ -6418,6 +6480,7 @@ private:
         }
         case 3: {
             LogStep(3, "TH1 puts DUT into commissioning mode");
+            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp && PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 180U;
@@ -6441,39 +6504,52 @@ private:
         }
         case 4: {
             LogStep(4, "Waiting after opening commissioning window");
+            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp && PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
             return WaitForMs(kIdentityAlpha, value);
         }
         case 5: {
-            LogStep(5, "TH2 starts a commissioning process with DUT");
+            LogStep(5, "TH1 puts DUT into commissioning mode, TH2 commissions DUT using admin node ID N2");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP && CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 6: {
+            LogStep(6, "TH2 starts a commissioning process with DUT");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
-        case 6: {
-            LogStep(6, "DUT is commissioned by TH2 on Fabric ID2 ");
+        case 7: {
+            LogStep(7, "DUT is commissioned by TH2 on Fabric ID2 ");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
             value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             return WaitForCommissionee(kIdentityBeta, value);
         }
-        case 7: {
-            LogStep(7, "Read the TH2 commissioner node ID");
+        case 8: {
+            LogStep(8, "Read the TH2 commissioner node ID");
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::GetCommissionerNodeId::Type value;
             return GetCommissionerNodeId(kIdentityBeta, value);
         }
-        case 8: {
-            LogStep(8, "TH2 reads OperationalCredentials cluster CurrentFabricIndex attribute");
+        case 9: {
+            LogStep(9, "TH2 reads OperationalCredentials cluster CurrentFabricIndex attribute");
             return ReadAttribute(kIdentityBeta, GetEndpoint(0), OperationalCredentials::Id,
                                  OperationalCredentials::Attributes::CurrentFabricIndex::Id, true, chip::NullOptional);
         }
-        case 9: {
-            LogStep(9, "TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute");
+        case 10: {
+            LogStep(10, "TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute");
             VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
@@ -6505,8 +6581,8 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 10: {
-            LogStep(10, "TH2 writes DUT Endpoint 0 AccessControl cluster ACL attribute");
+        case 11: {
+            LogStep(11, "TH2 writes DUT Endpoint 0 AccessControl cluster ACL attribute");
             VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
@@ -6538,31 +6614,51 @@ private:
             return WriteAttribute(kIdentityBeta, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 11: {
-            LogStep(11, "TH1 reads DUT Endpoint 0 AccessControl cluster ACL attribute");
+        case 12: {
+            LogStep(12, "TH1 reads DUT Endpoint 0 AccessControl cluster ACL attribute");
             VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, true,
                                  chip::NullOptional);
         }
-        case 12: {
-            LogStep(12, "TH2 reads DUT Endpoint 0 AccessControl cluster ACL attribute");
+        case 13: {
+            LogStep(13, "TH2 reads DUT Endpoint 0 AccessControl cluster ACL attribute");
             VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityBeta, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, true,
                                  chip::NullOptional);
         }
-        case 13: {
-            LogStep(13, "TH1 reads DUT Endpoint 0 AccessControl cluster AccessControlEntryChanged event");
+        case 14: {
+            LogStep(14, "TH1 reads DUT Endpoint 0 AccessControl cluster AccessControlEntryChanged event");
             VerifyOrDo(!ShouldSkip("ACL.S.E00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             mTestSubStepCount = 3;
             return ReadEvent(kIdentityAlpha, GetEndpoint(0), AccessControl::Id,
                              AccessControl::Events::AccessControlEntryChanged::Id, false, chip::NullOptional);
         }
-        case 14: {
-            LogStep(14, "TH2 reads DUT Endpoint 0 AccessControl cluster AccessControlEntryChanged event");
+        case 15: {
+            LogStep(15, "TH2 reads DUT Endpoint 0 AccessControl cluster AccessControlEntryChanged event");
             VerifyOrDo(!ShouldSkip("ACL.S.E00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             mTestSubStepCount = 3;
             return ReadEvent(kIdentityBeta, GetEndpoint(0), AccessControl::Id, AccessControl::Events::AccessControlEntryChanged::Id,
                              false, chip::NullOptional);
+        }
+        case 16: {
+            LogStep(16, "TH1 writes ACL attribute value is an empty list");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>();
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 17: {
+            LogStep(17, "TH2 writes ACL attribute value is an empty list");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>();
+            return WriteAttribute(kIdentityBeta, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
         }
         }
         return CHIP_NO_ERROR;
@@ -6572,7 +6668,7 @@ private:
 class Test_TC_ACL_2_9Suite : public TestCommand
 {
 public:
-    Test_TC_ACL_2_9Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_ACL_2_9", 13, credsIssuerConfig)
+    Test_TC_ACL_2_9Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_ACL_2_9", 15, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -6695,6 +6791,14 @@ private:
                 LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
                 break;
             }
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         default:
             LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
@@ -6847,6 +6951,24 @@ private:
             return ReadEvent(kIdentityAlpha, GetEndpoint(0), AccessControl::Id,
                              AccessControl::Events::AccessControlExtensionChanged::Id, false, chip::NullOptional);
         }
+        case 13: {
+            LogStep(13, "Test cleanup: Reset Devices to factory defaults");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::SystemCommands::Commands::FactoryReset::Type value;
+            return FactoryReset(kIdentityAlpha, value);
+        }
+        case 14: {
+            LogStep(14, "Test cleanup: Reset Devices to factory defaults");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message =
+                chip::Span<const char>("Factory Reset the DUT and enter 'y' after successgarbage: not in length on purpose", 49);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
         }
         return CHIP_NO_ERROR;
     }
@@ -6855,7 +6977,7 @@ private:
 class Test_TC_ACL_2_10Suite : public TestCommand
 {
 public:
-    Test_TC_ACL_2_10Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_ACL_2_10", 26, credsIssuerConfig)
+    Test_TC_ACL_2_10Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_ACL_2_10", 31, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -6945,6 +7067,10 @@ private:
             break;
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::CommissionerCommands::Commands::GetCommissionerNodeIdResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
@@ -6952,16 +7078,13 @@ private:
             }
             shouldContinue = true;
             break;
-        case 8:
+        case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 TH2FabricIndex = value;
             }
-            break;
-        case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -6974,7 +7097,6 @@ private:
             break;
         case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
             break;
         case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -6990,8 +7112,12 @@ private:
             break;
         case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -7009,7 +7135,7 @@ private:
                 }
             }
             break;
-        case 19:
+        case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -7053,24 +7179,30 @@ private:
                 }
             }
             break;
-        case 20:
+        case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 21:
+        case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             shouldContinue = true;
             break;
-        case 22:
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 25:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::OperationalCredentials::Commands::NOCResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
             }
             break;
-        case 23:
+        case 26:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 24:
+        case 27:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -7088,9 +7220,15 @@ private:
                 }
             }
             break;
-        case 25:
+        case 28:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             shouldContinue = true;
+            break;
+        case 29:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 30:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         default:
             LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
@@ -7127,6 +7265,7 @@ private:
         }
         case 3: {
             LogStep(3, "Step 3:TH1 puts DUT into commissioning mode");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY && CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 180U;
@@ -7150,39 +7289,52 @@ private:
         }
         case 4: {
             LogStep(4, "Waiting after opening commissioning window");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY && CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
             return WaitForMs(kIdentityAlpha, value);
         }
         case 5: {
-            LogStep(5, "TH2 starts a commissioning process with DUT");
+            LogStep(5, "TH1 puts DUT into commissioning mode, TH2 commissions DUT using admin node ID N2");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP && CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 6: {
+            LogStep(6, "TH2 starts a commissioning process with DUT");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
-        case 6: {
-            LogStep(6, "DUT is commissioned by TH2 on Fabric ID2 ");
+        case 7: {
+            LogStep(7, "DUT is commissioned by TH2 on Fabric ID2");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
             value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             return WaitForCommissionee(kIdentityBeta, value);
         }
-        case 7: {
-            LogStep(7, "Read the TH2 commissioner node ID");
+        case 8: {
+            LogStep(8, "Read the TH2 commissioner node ID");
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::GetCommissionerNodeId::Type value;
             return GetCommissionerNodeId(kIdentityBeta, value);
         }
-        case 8: {
-            LogStep(8, "Step 4:TH2 reads OperationalCredentials cluster CurrentFabricIndex attribute");
+        case 9: {
+            LogStep(9, "Step 4:TH2 reads OperationalCredentials cluster CurrentFabricIndex attribute");
             return ReadAttribute(kIdentityBeta, GetEndpoint(0), OperationalCredentials::Id,
                                  OperationalCredentials::Attributes::CurrentFabricIndex::Id, true, chip::NullOptional);
         }
-        case 9: {
-            LogStep(9, "Step 5:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute");
+        case 10: {
+            LogStep(10, "Step 5:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute");
             VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
@@ -7229,8 +7381,8 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 10: {
-            LogStep(10, "Step 6:TH2 writes DUT Endpoint 0 AccessControl cluster ACL attribute");
+        case 11: {
+            LogStep(11, "Step 6:TH2 writes DUT Endpoint 0 AccessControl cluster ACL attribute");
             VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
@@ -7277,8 +7429,8 @@ private:
             return WriteAttribute(kIdentityBeta, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 11: {
-            LogStep(11,
+        case 12: {
+            LogStep(12,
                     "Step 7:TH1 writes DUT Endpoint 0 AccessControl cluster Extension attribute, value is list of "
                     "AccessControlExtensionStruct containing 1 element 1.struct, Data field: D_OK_EMPTY");
             VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
@@ -7300,8 +7452,8 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
-        case 12: {
-            LogStep(12,
+        case 13: {
+            LogStep(13,
                     "Step 8:TH2 writes DUT Endpoint 0 AccessControl cluster Extension attribute, value is list of "
                     "AccessControlExtensionStruct containing 1 element 1.struct, Data field: D_OK_SINGLE");
             VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
@@ -7329,15 +7481,15 @@ private:
             return WriteAttribute(kIdentityBeta, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 13: {
-            LogStep(13, "Step 9: Reboot DUT");
+        case 14: {
+            LogStep(14, "Step 9: Reboot DUT");
             VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
             return Reboot(kIdentityAlpha, value);
         }
-        case 14: {
-            LogStep(14, "Step 9: Reboot DUT");
+        case 15: {
+            LogStep(15, "Step 9: Reboot DUT");
             VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
@@ -7347,22 +7499,24 @@ private:
             value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
             return UserPrompt(kIdentityAlpha, value);
         }
-        case 15: {
-            LogStep(15, "TH1 Connects to the device again");
+        case 16: {
+            LogStep(16, "TH1 Connects to the device again");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
             value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
             return WaitForCommissionee(kIdentityAlpha, value);
         }
-        case 16: {
-            LogStep(16, "TH2 Connects to the device again");
+        case 17: {
+            LogStep(17, "TH2 Connects to the device again");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
             value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             return WaitForCommissionee(kIdentityBeta, value);
         }
-        case 17: {
-            LogStep(17, "Step 10:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute");
+        case 18: {
+            LogStep(18, "Step 10:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute");
             VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
@@ -7409,22 +7563,22 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 18: {
-            LogStep(18,
+        case 19: {
+            LogStep(19,
                     "Step 11:TH1 reads DUT Endpoint 0 AccessControl cluster Extension attribute, value is list of "
                     "AccessControlExtensionStruct containing 1 element");
             VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id, true,
                                  chip::NullOptional);
         }
-        case 19: {
-            LogStep(19, "Step 12:TH2 reads DUT Endpoint 0 AccessControl cluster ACL attribute");
+        case 20: {
+            LogStep(20, "Step 12:TH2 reads DUT Endpoint 0 AccessControl cluster ACL attribute");
             VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityBeta, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, true,
                                  chip::NullOptional);
         }
-        case 20: {
-            LogStep(20, "Step 13:TH2 reads DUT Endpoint 0 AccessControl cluster Extension attribute");
+        case 21: {
+            LogStep(21, "Step 13:TH2 reads DUT Endpoint 0 AccessControl cluster Extension attribute");
             VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type> value;
@@ -7450,8 +7604,8 @@ private:
             return WriteAttribute(kIdentityBeta, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 21: {
-            LogStep(21, "Step 14: If DUT is an app on host, examine persistent storage in /tmp/chip_kvs text file");
+        case 22: {
+            LogStep(22, "Step 14: If DUT is an app on host, examine persistent storage in /tmp/chip_kvs text file");
             VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
@@ -7460,8 +7614,28 @@ private:
             value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
             return UserPrompt(kIdentityAlpha, value);
         }
-        case 22: {
-            LogStep(22, "Step 15:TH1 removes fabric F2 from DUT");
+        case 23: {
+            LogStep(23, "TH2 writes Extension attibute value as empty list");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type> value;
+
+            value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>();
+            return WriteAttribute(kIdentityBeta, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 24: {
+            LogStep(24, "TH2 writes ACL attribute value is an empty list");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>();
+            return WriteAttribute(kIdentityBeta, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 25: {
+            LogStep(25, "Step 15:TH1 removes fabric F2 from DUT");
             VerifyOrDo(!ShouldSkip("OPCREDS.S.C0a.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::OperationalCredentials::Commands::RemoveFabric::Type value;
@@ -7472,8 +7646,8 @@ private:
 
             );
         }
-        case 23: {
-            LogStep(23, "Step 16:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute");
+        case 26: {
+            LogStep(26, "Step 16:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute");
             VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
@@ -7520,16 +7694,16 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 24: {
-            LogStep(24,
+        case 27: {
+            LogStep(27,
                     "Step 17:TH1 reads DUT Endpoint 0 AccessControl cluster Extension attribute, value is list of "
                     "AccessControlExtensionStruct containing 1 element");
             VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id, true,
                                  chip::NullOptional);
         }
-        case 25: {
-            LogStep(25, "Step 18: If DUT is an app on host, examine persistent storage in /tmp/chip_kvs text file");
+        case 28: {
+            LogStep(28, "Step 18: If DUT is an app on host, examine persistent storage in /tmp/chip_kvs text file");
             VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
@@ -7537,6 +7711,26 @@ private:
             value.expectedValue.Emplace();
             value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
             return UserPrompt(kIdentityAlpha, value);
+        }
+        case 29: {
+            LogStep(29, "TH1 writes Extension attribute value as empty list");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type> value;
+
+            value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>();
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
+        }
+        case 30: {
+            LogStep(30, "TH1 writes ACL attribute value is an empty list");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>();
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
         }
         }
         return CHIP_NO_ERROR;
@@ -8999,1290 +9193,6 @@ private:
             VerifyOrDo(!ShouldSkip("BOOL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), BooleanState::Id, BooleanState::Attributes::StateValue::Id, true,
                                  chip::NullOptional);
-        }
-        }
-        return CHIP_NO_ERROR;
-    }
-};
-
-class Test_TC_BRBINFO_1_1Suite : public TestCommand
-{
-public:
-    Test_TC_BRBINFO_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_BRBINFO_1_1", 20, credsIssuerConfig)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_BRBINFO_1_1Suite() {}
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
-
-    //
-    // Tests methods
-    //
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                uint16_t value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
-                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
-            }
-            break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                uint32_t value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("featureMap", value, 0UL));
-                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-            }
-            break;
-        case 3:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<chip::AttributeId> value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
-                VerifyOrReturn(CheckConstraintContains("value", value, 17UL));
-                VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
-                VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
-                VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
-                VerifyOrReturn(CheckConstraintContains("value", value, 65532UL));
-                VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
-            }
-            break;
-        case 4:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<chip::AttributeId> value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
-                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
-            }
-            break;
-        case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<chip::AttributeId> value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
-                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
-            }
-            break;
-        case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<chip::AttributeId> value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
-                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
-            }
-            break;
-        case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<chip::AttributeId> value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
-                VerifyOrReturn(CheckConstraintContains("value", value, 5UL));
-            }
-            break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<chip::AttributeId> value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
-                VerifyOrReturn(CheckConstraintContains("value", value, 7UL));
-            }
-            break;
-        case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<chip::AttributeId> value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
-                VerifyOrReturn(CheckConstraintContains("value", value, 8UL));
-            }
-            break;
-        case 10:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<chip::AttributeId> value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
-                VerifyOrReturn(CheckConstraintContains("value", value, 9UL));
-            }
-            break;
-        case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<chip::AttributeId> value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
-                VerifyOrReturn(CheckConstraintContains("value", value, 10UL));
-            }
-            break;
-        case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<chip::AttributeId> value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
-                VerifyOrReturn(CheckConstraintContains("value", value, 11UL));
-            }
-            break;
-        case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<chip::AttributeId> value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
-                VerifyOrReturn(CheckConstraintContains("value", value, 12UL));
-            }
-            break;
-        case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<chip::AttributeId> value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
-                VerifyOrReturn(CheckConstraintContains("value", value, 13UL));
-            }
-            break;
-        case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<chip::AttributeId> value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
-                VerifyOrReturn(CheckConstraintContains("value", value, 14UL));
-            }
-            break;
-        case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<chip::AttributeId> value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
-                VerifyOrReturn(CheckConstraintContains("value", value, 15UL));
-            }
-            break;
-        case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<chip::AttributeId> value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
-                VerifyOrReturn(CheckConstraintContains("value", value, 18UL));
-            }
-            break;
-        case 18:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<chip::CommandId> value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                {
-                    auto iter_0 = value.begin();
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acceptedCommandList", iter_0, 0));
-                }
-                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
-            }
-            break;
-        case 19:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<chip::CommandId> value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                {
-                    auto iter_0 = value.begin();
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
-                }
-                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
-            }
-            break;
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    CHIP_ERROR DoTestStep(uint16_t testIndex) override
-    {
-        using namespace chip::app::Clusters;
-        switch (testIndex)
-        {
-        case 0: {
-            LogStep(0, "Wait for the commissioned device to be retrieved");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-            return WaitForCommissionee(kIdentityAlpha, value);
-        }
-        case 1: {
-            LogStep(1, "TH reads the ClusterRevision from DUT");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::ClusterRevision::Id, true, chip::NullOptional);
-        }
-        case 2: {
-            LogStep(2, "TH reads the FeatureMap from DUT");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::FeatureMap::Id, true, chip::NullOptional);
-        }
-        case 3: {
-            LogStep(3, "TH reads AttributeList from DUT");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
-        }
-        case 4: {
-            LogStep(4, "TH reads optional attribute(VendorName) in AttributeList");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
-        }
-        case 5: {
-            LogStep(5, "TH reads optional attribute(VendorID) in AttributeList");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
-        }
-        case 6: {
-            LogStep(6, "TH reads optional attribute(ProductName) in AttributeList");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
-        }
-        case 7: {
-            LogStep(7, "TH reads optional attribute(NodeLabel) in AttributeList");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
-        }
-        case 8: {
-            LogStep(8, "TH reads optional attribute(HardwareVersion) in AttributeList");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
-        }
-        case 9: {
-            LogStep(9, "TH reads optional attribute(HardwareVersionString) in AttributeList");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
-        }
-        case 10: {
-            LogStep(10, "TH reads optional attribute(SoftwareVersion) in AttributeList");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A0009"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
-        }
-        case 11: {
-            LogStep(11, "TH reads optional attribute(SoftwareVersionString) in AttributeList");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A000a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
-        }
-        case 12: {
-            LogStep(12, "TH reads optional attribute(ManufacturingDate) in AttributeList");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A000b"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
-        }
-        case 13: {
-            LogStep(13, "TH reads optional attribute(PartNumber) in AttributeList");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A000c"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
-        }
-        case 14: {
-            LogStep(14, "TH reads optional attribute(ProductURL) in AttributeList");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A000d"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
-        }
-        case 15: {
-            LogStep(15, "TH reads optional attribute(ProductLabel) in AttributeList");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A000e"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
-        }
-        case 16: {
-            LogStep(16, "TH reads optional attribute(SerialNumber) in AttributeList");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A000f"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
-        }
-        case 17: {
-            LogStep(17, "TH reads optional attribute(UniqueID) in AttributeList");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A0012"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
-        }
-        case 18: {
-            LogStep(18, "TH1 reads AcceptedCommandList from DUT");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
-        }
-        case 19: {
-            LogStep(19, "TH1 reads GeneratedCommandList from DUT");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
-        }
-        }
-        return CHIP_NO_ERROR;
-    }
-};
-
-class Test_TC_BRBINFO_2_1Suite : public TestCommand
-{
-public:
-    Test_TC_BRBINFO_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_BRBINFO_2_1", 50, credsIssuerConfig)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_BRBINFO_2_1Suite()
-    {
-        if (VendorNameValueBuffer != nullptr)
-        {
-            chip::Platform::MemoryFree(VendorNameValueBuffer);
-            VendorNameValueBuffer = nullptr;
-        }
-        if (ProductNameValueBuffer != nullptr)
-        {
-            chip::Platform::MemoryFree(ProductNameValueBuffer);
-            ProductNameValueBuffer = nullptr;
-        }
-        if (NodeLabelValueBuffer != nullptr)
-        {
-            chip::Platform::MemoryFree(NodeLabelValueBuffer);
-            NodeLabelValueBuffer = nullptr;
-        }
-        if (HardwareVersionStringValueBuffer != nullptr)
-        {
-            chip::Platform::MemoryFree(HardwareVersionStringValueBuffer);
-            HardwareVersionStringValueBuffer = nullptr;
-        }
-        if (SoftwareVersionStringValueBuffer != nullptr)
-        {
-            chip::Platform::MemoryFree(SoftwareVersionStringValueBuffer);
-            SoftwareVersionStringValueBuffer = nullptr;
-        }
-        if (ManufacturingDateValueBuffer != nullptr)
-        {
-            chip::Platform::MemoryFree(ManufacturingDateValueBuffer);
-            ManufacturingDateValueBuffer = nullptr;
-        }
-        if (PartNumberValueBuffer != nullptr)
-        {
-            chip::Platform::MemoryFree(PartNumberValueBuffer);
-            PartNumberValueBuffer = nullptr;
-        }
-        if (ProductURLValueBuffer != nullptr)
-        {
-            chip::Platform::MemoryFree(ProductURLValueBuffer);
-            ProductURLValueBuffer = nullptr;
-        }
-        if (ProductLabelValueBuffer != nullptr)
-        {
-            chip::Platform::MemoryFree(ProductLabelValueBuffer);
-            ProductLabelValueBuffer = nullptr;
-        }
-        if (SerialNumberValueBuffer != nullptr)
-        {
-            chip::Platform::MemoryFree(SerialNumberValueBuffer);
-            SerialNumberValueBuffer = nullptr;
-        }
-        if (UniqueIDValueBuffer != nullptr)
-        {
-            chip::Platform::MemoryFree(UniqueIDValueBuffer);
-            UniqueIDValueBuffer = nullptr;
-        }
-    }
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    char * VendorNameValueBuffer = nullptr;
-    chip::CharSpan VendorNameValue;
-    chip::VendorId VendorIDValue;
-    char * ProductNameValueBuffer = nullptr;
-    chip::CharSpan ProductNameValue;
-    char * NodeLabelValueBuffer = nullptr;
-    chip::CharSpan NodeLabelValue;
-    uint16_t HardwareVersionValue;
-    char * HardwareVersionStringValueBuffer = nullptr;
-    chip::CharSpan HardwareVersionStringValue;
-    uint32_t SoftwareVersionValue;
-    char * SoftwareVersionStringValueBuffer = nullptr;
-    chip::CharSpan SoftwareVersionStringValue;
-    char * ManufacturingDateValueBuffer = nullptr;
-    chip::CharSpan ManufacturingDateValue;
-    char * PartNumberValueBuffer = nullptr;
-    chip::CharSpan PartNumberValue;
-    char * ProductURLValueBuffer = nullptr;
-    chip::CharSpan ProductURLValue;
-    char * ProductLabelValueBuffer = nullptr;
-    chip::CharSpan ProductLabelValue;
-    char * SerialNumberValueBuffer = nullptr;
-    chip::CharSpan SerialNumberValue;
-    char * UniqueIDValueBuffer = nullptr;
-    chip::CharSpan UniqueIDValue;
-
-    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
-
-    //
-    // Tests methods
-    //
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::CharSpan value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
-                if (VendorNameValueBuffer != nullptr)
-                {
-                    chip::Platform::MemoryFree(VendorNameValueBuffer);
-                }
-                VendorNameValueBuffer = static_cast<char *>(chip::Platform::MemoryAlloc(value.size()));
-                memcpy(VendorNameValueBuffer, value.data(), value.size());
-                VendorNameValue = chip::CharSpan(VendorNameValueBuffer, value.size());
-            }
-            break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-            break;
-        case 3:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::CharSpan value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValueAsString("vendorName", value, VendorNameValue));
-            }
-            break;
-        case 4:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::VendorId value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "vendor_id", "vendor_id"));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 65521U));
-                VendorIDValue = value;
-            }
-            break;
-        case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-            break;
-        case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::VendorId value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("vendorID", value, VendorIDValue));
-            }
-            break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::CharSpan value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
-                if (ProductNameValueBuffer != nullptr)
-                {
-                    chip::Platform::MemoryFree(ProductNameValueBuffer);
-                }
-                ProductNameValueBuffer = static_cast<char *>(chip::Platform::MemoryAlloc(value.size()));
-                memcpy(ProductNameValueBuffer, value.data(), value.size());
-                ProductNameValue = chip::CharSpan(ProductNameValueBuffer, value.size());
-            }
-            break;
-        case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-            break;
-        case 10:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::CharSpan value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValueAsString("productName", value, ProductNameValue));
-            }
-            break;
-        case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::CharSpan value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
-                if (NodeLabelValueBuffer != nullptr)
-                {
-                    chip::Platform::MemoryFree(NodeLabelValueBuffer);
-                }
-                NodeLabelValueBuffer = static_cast<char *>(chip::Platform::MemoryAlloc(value.size()));
-                memcpy(NodeLabelValueBuffer, value.data(), value.size());
-                NodeLabelValue = chip::CharSpan(NodeLabelValueBuffer, value.size());
-            }
-            break;
-        case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                uint16_t value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 65534U));
-                HardwareVersionValue = value;
-            }
-            break;
-        case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-            break;
-        case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                uint16_t value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("hardwareVersion", value, HardwareVersionValue));
-            }
-            break;
-        case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::CharSpan value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
-                VerifyOrReturn(CheckConstraintMinLength("value", value, 1));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value, 64));
-                if (HardwareVersionStringValueBuffer != nullptr)
-                {
-                    chip::Platform::MemoryFree(HardwareVersionStringValueBuffer);
-                }
-                HardwareVersionStringValueBuffer = static_cast<char *>(chip::Platform::MemoryAlloc(value.size()));
-                memcpy(HardwareVersionStringValueBuffer, value.data(), value.size());
-                HardwareVersionStringValue = chip::CharSpan(HardwareVersionStringValueBuffer, value.size());
-            }
-            break;
-        case 18:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-            break;
-        case 19:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::CharSpan value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValueAsString("hardwareVersionString", value, HardwareVersionStringValue));
-            }
-            break;
-        case 20:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                uint32_t value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967294UL));
-                SoftwareVersionValue = value;
-            }
-            break;
-        case 21:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-            break;
-        case 22:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                uint32_t value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("softwareVersion", value, SoftwareVersionValue));
-            }
-            break;
-        case 23:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::CharSpan value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinLength("value", value, 1));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value, 64));
-                if (SoftwareVersionStringValueBuffer != nullptr)
-                {
-                    chip::Platform::MemoryFree(SoftwareVersionStringValueBuffer);
-                }
-                SoftwareVersionStringValueBuffer = static_cast<char *>(chip::Platform::MemoryAlloc(value.size()));
-                memcpy(SoftwareVersionStringValueBuffer, value.data(), value.size());
-                SoftwareVersionStringValue = chip::CharSpan(SoftwareVersionStringValueBuffer, value.size());
-            }
-            break;
-        case 24:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-            break;
-        case 25:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::CharSpan value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValueAsString("softwareVersionString", value, SoftwareVersionStringValue));
-            }
-            break;
-        case 26:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::CharSpan value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
-                VerifyOrReturn(CheckConstraintMinLength("value", value, 8));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value, 16));
-                if (ManufacturingDateValueBuffer != nullptr)
-                {
-                    chip::Platform::MemoryFree(ManufacturingDateValueBuffer);
-                }
-                ManufacturingDateValueBuffer = static_cast<char *>(chip::Platform::MemoryAlloc(value.size()));
-                memcpy(ManufacturingDateValueBuffer, value.data(), value.size());
-                ManufacturingDateValue = chip::CharSpan(ManufacturingDateValueBuffer, value.size());
-            }
-            break;
-        case 27:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 28:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-            break;
-        case 29:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::CharSpan value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValueAsString("manufacturingDate", value, ManufacturingDateValue));
-            }
-            break;
-        case 30:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::CharSpan value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
-                if (PartNumberValueBuffer != nullptr)
-                {
-                    chip::Platform::MemoryFree(PartNumberValueBuffer);
-                }
-                PartNumberValueBuffer = static_cast<char *>(chip::Platform::MemoryAlloc(value.size()));
-                memcpy(PartNumberValueBuffer, value.data(), value.size());
-                PartNumberValue = chip::CharSpan(PartNumberValueBuffer, value.size());
-            }
-            break;
-        case 31:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-            break;
-        case 32:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::CharSpan value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValueAsString("partNumber", value, PartNumberValue));
-            }
-            break;
-        case 33:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::CharSpan value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "long_char_string", "long_char_string"));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value, 256));
-                if (ProductURLValueBuffer != nullptr)
-                {
-                    chip::Platform::MemoryFree(ProductURLValueBuffer);
-                }
-                ProductURLValueBuffer = static_cast<char *>(chip::Platform::MemoryAlloc(value.size()));
-                memcpy(ProductURLValueBuffer, value.data(), value.size());
-                ProductURLValue = chip::CharSpan(ProductURLValueBuffer, value.size());
-            }
-            break;
-        case 34:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 35:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-            break;
-        case 36:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::CharSpan value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValueAsString("productURL", value, ProductURLValue));
-            }
-            break;
-        case 37:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::CharSpan value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value, 64));
-                if (ProductLabelValueBuffer != nullptr)
-                {
-                    chip::Platform::MemoryFree(ProductLabelValueBuffer);
-                }
-                ProductLabelValueBuffer = static_cast<char *>(chip::Platform::MemoryAlloc(value.size()));
-                memcpy(ProductLabelValueBuffer, value.data(), value.size());
-                ProductLabelValue = chip::CharSpan(ProductLabelValueBuffer, value.size());
-            }
-            break;
-        case 38:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 39:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-            break;
-        case 40:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::CharSpan value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValueAsString("productLabel", value, ProductLabelValue));
-            }
-            break;
-        case 41:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::CharSpan value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
-                if (SerialNumberValueBuffer != nullptr)
-                {
-                    chip::Platform::MemoryFree(SerialNumberValueBuffer);
-                }
-                SerialNumberValueBuffer = static_cast<char *>(chip::Platform::MemoryAlloc(value.size()));
-                memcpy(SerialNumberValueBuffer, value.data(), value.size());
-                SerialNumberValue = chip::CharSpan(SerialNumberValueBuffer, value.size());
-            }
-            break;
-        case 42:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-            break;
-        case 43:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::CharSpan value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValueAsString("serialNumber", value, SerialNumberValue));
-            }
-            break;
-        case 44:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                bool value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("reachable", value, true));
-                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
-            }
-            break;
-        case 45:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-            break;
-        case 46:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                bool value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("reachable", value, true));
-                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
-            }
-            break;
-        case 47:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::CharSpan value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
-                if (UniqueIDValueBuffer != nullptr)
-                {
-                    chip::Platform::MemoryFree(UniqueIDValueBuffer);
-                }
-                UniqueIDValueBuffer = static_cast<char *>(chip::Platform::MemoryAlloc(value.size()));
-                memcpy(UniqueIDValueBuffer, value.data(), value.size());
-                UniqueIDValue = chip::CharSpan(UniqueIDValueBuffer, value.size());
-            }
-            break;
-        case 48:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-            break;
-        case 49:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::CharSpan value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValueAsString("uniqueID", value, UniqueIDValue));
-            }
-            break;
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    CHIP_ERROR DoTestStep(uint16_t testIndex) override
-    {
-        using namespace chip::app::Clusters;
-        switch (testIndex)
-        {
-        case 0: {
-            LogStep(0, "Wait for the commissioned device to be retrieved");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-            return WaitForCommissionee(kIdentityAlpha, value);
-        }
-        case 1: {
-            LogStep(1, "TH reads VendorName from the DUT.");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::VendorName::Id, true, chip::NullOptional);
-        }
-        case 2: {
-            LogStep(2, "TH writes VendorName from the DUT.");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::CharSpan value;
-            value = chip::Span<const char>("samplegarbage: not in length on purpose", 6);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                  BridgedDeviceBasicInformation::Attributes::VendorName::Id, value, chip::NullOptional,
-                                  chip::NullOptional);
-        }
-        case 3: {
-            LogStep(3, "TH reads VendorName from the DUT.");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::VendorName::Id, true, chip::NullOptional);
-        }
-        case 4: {
-            LogStep(4, "TH reads VendorID from the DUT.");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::VendorID::Id, true, chip::NullOptional);
-        }
-        case 5: {
-            LogStep(5, "Verify that VendorID matches the value assigned to this manufacturer");
-            VerifyOrDo(!ShouldSkip("PICS_USER_PROMPT && BRBINFO.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 6: {
-            LogStep(6, "TH writes VendorID from the DUT.");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::VendorId value;
-            value = static_cast<chip::VendorId>(17);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                  BridgedDeviceBasicInformation::Attributes::VendorID::Id, value, chip::NullOptional,
-                                  chip::NullOptional);
-        }
-        case 7: {
-            LogStep(7, "TH reads VendorID from the DUT.");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::VendorID::Id, true, chip::NullOptional);
-        }
-        case 8: {
-            LogStep(8, "TH reads ProductName from the DUT");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::ProductName::Id, true, chip::NullOptional);
-        }
-        case 9: {
-            LogStep(9, "TH writes ProductName from the DUT.");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::CharSpan value;
-            value = chip::Span<const char>("newproductgarbage: not in length on purpose", 10);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                  BridgedDeviceBasicInformation::Attributes::ProductName::Id, value, chip::NullOptional,
-                                  chip::NullOptional);
-        }
-        case 10: {
-            LogStep(10, "TH reads ProductName from the DUT");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::ProductName::Id, true, chip::NullOptional);
-        }
-        case 11: {
-            LogStep(11, "TH reads NodeLabel from the DUT");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::NodeLabel::Id, true, chip::NullOptional);
-        }
-        case 12: {
-            LogStep(12, "TH writes NodeLabel from the DUT.");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A0005 && PICS_USER_PROMPT"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>("Please enter 'y' after successgarbage: not in length on purpose", 30);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 13: {
-            LogStep(13, "TH reads NodeLabel from the DUT");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A0005 && PICS_USER_PROMPT"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>("Please enter 'y' after successgarbage: not in length on purpose", 30);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 14: {
-            LogStep(14, "TH reads HardwareVersion from the DUT");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::HardwareVersion::Id, true, chip::NullOptional);
-        }
-        case 15: {
-            LogStep(15, "TH writes HardwareVersion from the DUT.");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            uint16_t value;
-            value = 17713U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                  BridgedDeviceBasicInformation::Attributes::HardwareVersion::Id, value, chip::NullOptional,
-                                  chip::NullOptional);
-        }
-        case 16: {
-            LogStep(16, "TH reads HardwareVersion from the DUT");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::HardwareVersion::Id, true, chip::NullOptional);
-        }
-        case 17: {
-            LogStep(17, "TH reads HardwareVersionString from the DUT.");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::HardwareVersionString::Id, true, chip::NullOptional);
-        }
-        case 18: {
-            LogStep(18, "TH writes HardwareVersionString from the DUT.");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::CharSpan value;
-            value = chip::Span<const char>("newhardwareversiongarbage: not in length on purpose", 18);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                  BridgedDeviceBasicInformation::Attributes::HardwareVersionString::Id, value, chip::NullOptional,
-                                  chip::NullOptional);
-        }
-        case 19: {
-            LogStep(19, "TH reads HardwareVersionString from the DUT.");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::HardwareVersionString::Id, true, chip::NullOptional);
-        }
-        case 20: {
-            LogStep(20, "TH reads SoftwareVersion from the DUT");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A0009"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::SoftwareVersion::Id, true, chip::NullOptional);
-        }
-        case 21: {
-            LogStep(21, "TH writes SoftwareVersion from the DUT.");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A0009"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            uint32_t value;
-            value = 33299UL;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                  BridgedDeviceBasicInformation::Attributes::SoftwareVersion::Id, value, chip::NullOptional,
-                                  chip::NullOptional);
-        }
-        case 22: {
-            LogStep(22, "TH reads SoftwareVersion from the DUT");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A0009"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::SoftwareVersion::Id, true, chip::NullOptional);
-        }
-        case 23: {
-            LogStep(23, "TH reads SoftwareVersionString from the DUT");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A000a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::SoftwareVersionString::Id, true, chip::NullOptional);
-        }
-        case 24: {
-            LogStep(24, "TH writes SoftwareVersionString from the DUT.");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A000a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::CharSpan value;
-            value = chip::Span<const char>("1.0garbage: not in length on purpose", 3);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                  BridgedDeviceBasicInformation::Attributes::SoftwareVersionString::Id, value, chip::NullOptional,
-                                  chip::NullOptional);
-        }
-        case 25: {
-            LogStep(25, "TH reads SoftwareVersionString from the DUT");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A000a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::SoftwareVersionString::Id, true, chip::NullOptional);
-        }
-        case 26: {
-            LogStep(26, "TH reads ManufacturingDate from the DUT.");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A000b"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::ManufacturingDate::Id, true, chip::NullOptional);
-        }
-        case 27: {
-            LogStep(27, "Verify if the first 8 characters specify date according to ISO 8601, i.e, YYYYMMDD.");
-            VerifyOrDo(!ShouldSkip("PICS_USER_PROMPT && BRBINFO.S.A000b"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 28: {
-            LogStep(28, "TH writes ManufacturingDate from the DUT.");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A000b"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::CharSpan value;
-            value = chip::Span<const char>("20210814789452INgarbage: not in length on purpose", 16);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                  BridgedDeviceBasicInformation::Attributes::ManufacturingDate::Id, value, chip::NullOptional,
-                                  chip::NullOptional);
-        }
-        case 29: {
-            LogStep(29, "TH reads ManufacturingDate from the DUT.");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A000b"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::ManufacturingDate::Id, true, chip::NullOptional);
-        }
-        case 30: {
-            LogStep(30, "TH reads PartNumber from the DUT");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A000c"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::PartNumber::Id, true, chip::NullOptional);
-        }
-        case 31: {
-            LogStep(31, "TH writes PartNumber from the DUT.");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A000c"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::CharSpan value;
-            value = chip::Span<const char>("newpartgarbage: not in length on purpose", 7);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                  BridgedDeviceBasicInformation::Attributes::PartNumber::Id, value, chip::NullOptional,
-                                  chip::NullOptional);
-        }
-        case 32: {
-            LogStep(32, "TH reads PartNumber from the DUT");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A000c"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::PartNumber::Id, true, chip::NullOptional);
-        }
-        case 33: {
-            LogStep(33, "TH reads ProductURL from the DUT");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A000d"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::ProductURL::Id, true, chip::NullOptional);
-        }
-        case 34: {
-            LogStep(34,
-                    "Verify that it specifies a link to a specific web page, Verify that it follows the syntax rules specified in "
-                    "RFC 3986.");
-            VerifyOrDo(!ShouldSkip("PICS_USER_PROMPT && BRBINFO.S.A000d"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 35: {
-            LogStep(35, "TH writes ProductURL from the DUT.");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A000d"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::CharSpan value;
-            value = chip::Span<const char>("https://www.example.comgarbage: not in length on purpose", 23);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                  BridgedDeviceBasicInformation::Attributes::ProductURL::Id, value, chip::NullOptional,
-                                  chip::NullOptional);
-        }
-        case 36: {
-            LogStep(36, "TH reads ProductURL from the DUT");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A000d"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::ProductURL::Id, true, chip::NullOptional);
-        }
-        case 37: {
-            LogStep(37, "TH reads ProductLabel from the DUT.");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A000e"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::ProductLabel::Id, true, chip::NullOptional);
-        }
-        case 38: {
-            LogStep(38, "Verify that it does not include the name of the vendor as defined within the VendorName attribute");
-            VerifyOrDo(!ShouldSkip("PICS_USER_PROMPT && BRBINFO.S.A000e"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 39: {
-            LogStep(39, "TH writes ProductLabel from the DUT.");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A000e"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::CharSpan value;
-            value = chip::Span<const char>("newproductlabelgarbage: not in length on purpose", 15);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                  BridgedDeviceBasicInformation::Attributes::ProductLabel::Id, value, chip::NullOptional,
-                                  chip::NullOptional);
-        }
-        case 40: {
-            LogStep(40, "TH reads ProductLabel from the DUT.");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A000e"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::ProductLabel::Id, true, chip::NullOptional);
-        }
-        case 41: {
-            LogStep(41, "TH reads SerialNumber from the DUT.");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A000f"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::SerialNumber::Id, true, chip::NullOptional);
-        }
-        case 42: {
-            LogStep(42, "TH writes SerialNumber from the DUT.");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A000f"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::CharSpan value;
-            value = chip::Span<const char>("newserialnumbergarbage: not in length on purpose", 15);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                  BridgedDeviceBasicInformation::Attributes::SerialNumber::Id, value, chip::NullOptional,
-                                  chip::NullOptional);
-        }
-        case 43: {
-            LogStep(43, "TH reads SerialNumber from the DUT.");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A000f"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::SerialNumber::Id, true, chip::NullOptional);
-        }
-        case 44: {
-            LogStep(44, "TH reads Reachable from the DUT.");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A0011"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::Reachable::Id, true, chip::NullOptional);
-        }
-        case 45: {
-            LogStep(45, "TH sends Write request message to DUT to change value of Reachable to false");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A0011"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            bool value;
-            value = false;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                  BridgedDeviceBasicInformation::Attributes::Reachable::Id, value, chip::NullOptional,
-                                  chip::NullOptional);
-        }
-        case 46: {
-            LogStep(46, "TH reads Reachable from the DUT.");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A0011"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::Reachable::Id, true, chip::NullOptional);
-        }
-        case 47: {
-            LogStep(47, "TH reads UniqueID from the DUT.");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A0012"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::UniqueID::Id, true, chip::NullOptional);
-        }
-        case 48: {
-            LogStep(48, "TH writes UniqueID from the DUT.");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A0012"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::CharSpan value;
-            value = chip::Span<const char>("newidgarbage: not in length on purpose", 5);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                  BridgedDeviceBasicInformation::Attributes::UniqueID::Id, value, chip::NullOptional,
-                                  chip::NullOptional);
-        }
-        case 49: {
-            LogStep(49, "TH reads UniqueID from the DUT.");
-            VerifyOrDo(!ShouldSkip("BRBINFO.S.A0012"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::UniqueID::Id, true, chip::NullOptional);
         }
         }
         return CHIP_NO_ERROR;
@@ -11886,7 +10796,7 @@ private:
         }
         case 7: {
             LogStep(7, "TH reads CompensationText attribute from DUT");
-            VerifyOrDo(!ShouldSkip("CC.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("CC.S.A0006"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::CompensationText::Id,
                                  true, chip::NullOptional);
         }
@@ -14874,7 +13784,7 @@ private:
 class Test_TC_CC_5_1Suite : public TestCommand
 {
 public:
-    Test_TC_CC_5_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_CC_5_1", 59, credsIssuerConfig)
+    Test_TC_CC_5_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_CC_5_1", 61, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -15257,6 +14167,17 @@ private:
                 VerifyOrReturn(CheckValue("enhancedColorMode", value, 1U));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 3U));
+            }
+            break;
+        case 59:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 60:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                bool value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("onOff", value, 0));
             }
             break;
         default:
@@ -15786,6 +14707,20 @@ private:
             VerifyOrDo(!ShouldSkip("CC.S.F03 && CC.S.A4001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::EnhancedColorMode::Id,
                                  true, chip::NullOptional);
+        }
+        case 59: {
+            LogStep(59, "Turn off light that we turned on");
+            VerifyOrDo(!ShouldSkip("OO.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::OnOff::Commands::Off::Type value;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), OnOff::Id, OnOff::Commands::Off::Id, value, chip::NullOptional
+
+            );
+        }
+        case 60: {
+            LogStep(60, "Check on/off attribute value is false after off command");
+            VerifyOrDo(!ShouldSkip("OO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OnOff::Id, OnOff::Attributes::OnOff::Id, true, chip::NullOptional);
         }
         }
         return CHIP_NO_ERROR;
@@ -26873,7 +25808,7 @@ private:
 class Test_TC_LVL_3_1Suite : public TestCommand
 {
 public:
-    Test_TC_LVL_3_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_LVL_3_1", 46, credsIssuerConfig)
+    Test_TC_LVL_3_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_LVL_3_1", 47, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -26935,13 +25870,16 @@ private:
             break;
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 bool value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("onOff", value, 1));
             }
             break;
-        case 8:
+        case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
@@ -26949,15 +25887,15 @@ private:
                 VerifyOrReturn(CheckValueNonNull("currentLevel", value));
                 VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 50U));
             }
-            break;
-        case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
@@ -26965,14 +25903,14 @@ private:
                 VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 50U));
             }
             break;
-        case 12:
+        case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 13:
+        case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             shouldContinue = true;
             break;
-        case 14:
+        case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
@@ -26981,11 +25919,11 @@ private:
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 115U));
             }
             break;
-        case 15:
+        case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             shouldContinue = true;
             break;
-        case 16:
+        case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
@@ -26994,11 +25932,11 @@ private:
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 173U));
             }
             break;
-        case 17:
+        case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             shouldContinue = true;
             break;
-        case 18:
+        case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
@@ -27007,18 +25945,9 @@ private:
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 200U));
             }
             break;
-        case 19:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
         case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::Nullable<uint8_t> value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
-                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 200U));
-            }
+            shouldContinue = true;
             break;
         case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -27031,8 +25960,17 @@ private:
             break;
         case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<uint8_t> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
+                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 200U));
+            }
             break;
         case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 24:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions> value;
@@ -27040,13 +25978,13 @@ private:
                 VerifyOrReturn(CheckValue("options", value, 0U));
             }
             break;
-        case 24:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         case 25:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 27:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
@@ -27054,26 +25992,26 @@ private:
                 VerifyOrReturn(CheckValueNonNull("currentLevel", value));
                 VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 100U));
             }
-            break;
-        case 27:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 28:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 29:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::Nullable<uint8_t> value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
-                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 100U));
-            }
             break;
         case 30:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<uint8_t> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
+                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 100U));
+            }
             break;
         case 31:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 32:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
@@ -27082,10 +26020,10 @@ private:
                 VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 100U));
             }
             break;
-        case 32:
+        case 33:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 33:
+        case 34:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
@@ -27094,10 +26032,10 @@ private:
                 VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 160U));
             }
             break;
-        case 34:
+        case 35:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 35:
+        case 36:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions> value;
@@ -27105,13 +26043,13 @@ private:
                 VerifyOrReturn(CheckValue("options", value, 1U));
             }
             break;
-        case 36:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         case 37:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 38:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 39:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
@@ -27120,25 +26058,25 @@ private:
                 VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 100U));
             }
             break;
-        case 39:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         case 40:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 41:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::Nullable<uint8_t> value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
-                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 120U));
-            }
             break;
         case 42:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<uint8_t> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
+                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 120U));
+            }
             break;
         case 43:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 44:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
@@ -27147,10 +26085,10 @@ private:
                 VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 120U));
             }
             break;
-        case 44:
+        case 45:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 45:
+        case 46:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
@@ -27214,7 +26152,16 @@ private:
                                   chip::NullOptional, chip::NullOptional);
         }
         case 5: {
-            LogStep(5, "TH sends Off command to DUT");
+            LogStep(5, "TH writes NULL to the OnLevel attribute");
+            VerifyOrDo(!ShouldSkip("LVL.S.A0011"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::Nullable<uint8_t> value;
+            value.SetNull();
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::OnLevel::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "TH sends Off command to DUT");
             VerifyOrDo(!ShouldSkip("LVL.S.C04.Rsp && OO.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::OnOff::Commands::Off::Type value;
@@ -27222,8 +26169,8 @@ private:
 
             );
         }
-        case 6: {
-            LogStep(6, "TH sends a MoveToLevelWithOnOff command to DUT, with Level =50 and TransitionTime =0 (immediate)");
+        case 7: {
+            LogStep(7, "TH sends a MoveToLevelWithOnOff command to DUT, with Level =50 and TransitionTime =0 (immediate)");
             VerifyOrDo(!ShouldSkip("LVL.S.C04.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::MoveToLevelWithOnOff::Type value;
@@ -27237,19 +26184,19 @@ private:
 
             );
         }
-        case 7: {
-            LogStep(7, "TH reads OnOff attribute (On/Off cluster) from DUT");
+        case 8: {
+            LogStep(8, "TH reads OnOff attribute (On/Off cluster) from DUT");
             VerifyOrDo(!ShouldSkip("OO.S.A0000 && LVL.S.C04.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OnOff::Id, OnOff::Attributes::OnOff::Id, true, chip::NullOptional);
         }
-        case 8: {
-            LogStep(8, "TH reads CurrentLevel attribute from DUT");
+        case 9: {
+            LogStep(9, "TH reads CurrentLevel attribute from DUT");
             VerifyOrDo(!ShouldSkip("LVL.S.C04.Rsp && LVL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
                                  chip::NullOptional);
         }
-        case 9: {
-            LogStep(9, "TH sends On command to DUT");
+        case 10: {
+            LogStep(10, "TH sends On command to DUT");
             VerifyOrDo(!ShouldSkip("LVL.S.C04.Rsp && OO.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::OnOff::Commands::On::Type value;
@@ -27257,8 +26204,8 @@ private:
 
             );
         }
-        case 10: {
-            LogStep(10, "TH sends a MoveToLevel command to DUT, with Level =50 and TransitionTime =0 (immediate)");
+        case 11: {
+            LogStep(11, "TH sends a MoveToLevel command to DUT, with Level =50 and TransitionTime =0 (immediate)");
             VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::MoveToLevel::Type value;
@@ -27272,14 +26219,14 @@ private:
 
             );
         }
-        case 11: {
-            LogStep(11, "TH reads CurrentLevel attribute from DUT");
+        case 12: {
+            LogStep(12, "TH reads CurrentLevel attribute from DUT");
             VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
                                  chip::NullOptional);
         }
-        case 12: {
-            LogStep(12,
+        case 13: {
+            LogStep(13,
                     "TH sends a MoveToLevel command to the DUT with Level = 200 and TransitionTime = 300 (30 s). This means the "
                     "level should increase by 150 units in 30s, so 5 units/s");
             VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
@@ -27295,71 +26242,71 @@ private:
 
             );
         }
-        case 13: {
-            LogStep(13, "Wait 10000ms");
+        case 14: {
+            LogStep(14, "Wait 10000ms");
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
             return WaitForMs(kIdentityAlpha, value);
-        }
-        case 14: {
-            LogStep(14, "TH reads CurrentLevel attribute from DUT");
-            VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0000 && LVL.S.M.VarRate"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
-                                 chip::NullOptional);
         }
         case 15: {
-            LogStep(15, "Wait 10000ms");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-            value.ms = 10000UL;
-            return WaitForMs(kIdentityAlpha, value);
+            LogStep(15, "TH reads CurrentLevel attribute from DUT");
+            VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0000 && LVL.S.M.VarRate"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
+                                 chip::NullOptional);
         }
         case 16: {
-            LogStep(16, "TH reads CurrentLevel attribute from DUT");
-            VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0000 && LVL.S.M.VarRate"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
-                                 chip::NullOptional);
-        }
-        case 17: {
-            LogStep(17, "Wait 10000ms");
+            LogStep(16, "Wait 10000ms");
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
             return WaitForMs(kIdentityAlpha, value);
         }
-        case 18: {
-            LogStep(18, "TH reads CurrentLevel attribute from DUT");
+        case 17: {
+            LogStep(17, "TH reads CurrentLevel attribute from DUT");
             VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0000 && LVL.S.M.VarRate"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
                                  chip::NullOptional);
         }
+        case 18: {
+            LogStep(18, "Wait 10000ms");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = 10000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
         case 19: {
-            LogStep(19, "Wait 5000ms");
+            LogStep(19, "TH reads CurrentLevel attribute from DUT");
+            VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0000 && LVL.S.M.VarRate"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
+                                 chip::NullOptional);
+        }
+        case 20: {
+            LogStep(20, "Wait 5000ms");
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 5000UL;
             return WaitForMs(kIdentityAlpha, value);
         }
-        case 20: {
-            LogStep(20, "TH reads CurrentLevel attribute from DUT");
+        case 21: {
+            LogStep(21, "TH reads CurrentLevel attribute from DUT");
             VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0000 && LVL.S.M.VarRate"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
                                  chip::NullOptional);
         }
-        case 21: {
-            LogStep(21, "TH reads CurrentLevel attribute from DUT");
+        case 22: {
+            LogStep(22, "TH reads CurrentLevel attribute from DUT");
             VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0000 && !LVL.S.M.VarRate"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
                                  chip::NullOptional);
         }
-        case 22: {
-            LogStep(22, "TH writes 0 to the Options attribute");
+        case 23: {
+            LogStep(23, "TH writes 0 to the Options attribute");
             VerifyOrDo(!ShouldSkip("LVL.S.A000f"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions> value;
@@ -27367,14 +26314,14 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::Options::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 23: {
-            LogStep(23, "TH reads Options attribute");
+        case 24: {
+            LogStep(24, "TH reads Options attribute");
             VerifyOrDo(!ShouldSkip("LVL.S.A000f"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::Options::Id, true,
                                  chip::NullOptional);
         }
-        case 24: {
-            LogStep(24, "TH sends On command to DUT");
+        case 25: {
+            LogStep(25, "TH sends On command to DUT");
             VerifyOrDo(!ShouldSkip("OO.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::OnOff::Commands::On::Type value;
@@ -27382,8 +26329,8 @@ private:
 
             );
         }
-        case 25: {
-            LogStep(25, "TH sends a MoveToLevel command to the DUT with");
+        case 26: {
+            LogStep(26, "TH sends a MoveToLevel command to the DUT with");
             VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::MoveToLevel::Type value;
@@ -27397,14 +26344,14 @@ private:
 
             );
         }
-        case 26: {
-            LogStep(26, "TH reads CurrentLevel attribute from DUT");
+        case 27: {
+            LogStep(27, "TH reads CurrentLevel attribute from DUT");
             VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
                                  chip::NullOptional);
         }
-        case 27: {
-            LogStep(27, "TH sends Off command to DUT");
+        case 28: {
+            LogStep(28, "TH sends Off command to DUT");
             VerifyOrDo(!ShouldSkip("OO.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::OnOff::Commands::Off::Type value;
@@ -27412,8 +26359,8 @@ private:
 
             );
         }
-        case 28: {
-            LogStep(28, "TH sends a MoveToLevel command to the DUT with");
+        case 29: {
+            LogStep(29, "TH sends a MoveToLevel command to the DUT with");
             VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::MoveToLevel::Type value;
@@ -27427,14 +26374,14 @@ private:
 
             );
         }
-        case 29: {
-            LogStep(29, "TH reads CurrentLevel attribute from DUT");
+        case 30: {
+            LogStep(30, "TH reads CurrentLevel attribute from DUT");
             VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
                                  chip::NullOptional);
         }
-        case 30: {
-            LogStep(30, "TH sends a MoveToLevel command to the DUT with");
+        case 31: {
+            LogStep(31, "TH sends a MoveToLevel command to the DUT with");
             VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::MoveToLevel::Type value;
@@ -27448,14 +26395,14 @@ private:
 
             );
         }
-        case 31: {
-            LogStep(31, "TH reads CurrentLevel attribute from DUT");
+        case 32: {
+            LogStep(32, "TH reads CurrentLevel attribute from DUT");
             VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
                                  chip::NullOptional);
         }
-        case 32: {
-            LogStep(32, "TH sends a MoveToLevel command to the DUT with");
+        case 33: {
+            LogStep(33, "TH sends a MoveToLevel command to the DUT with");
             VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::MoveToLevel::Type value;
@@ -27469,14 +26416,14 @@ private:
 
             );
         }
-        case 33: {
-            LogStep(33, "TH reads CurrentLevel attribute from DUT");
+        case 34: {
+            LogStep(34, "TH reads CurrentLevel attribute from DUT");
             VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
                                  chip::NullOptional);
         }
-        case 34: {
-            LogStep(34, "TH writes 1 to the Options attribute");
+        case 35: {
+            LogStep(35, "TH writes 1 to the Options attribute");
             VerifyOrDo(!ShouldSkip("LVL.S.A000f"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions> value;
@@ -27484,14 +26431,14 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::Options::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 35: {
-            LogStep(35, "TH reads Options attribute");
+        case 36: {
+            LogStep(36, "TH reads Options attribute");
             VerifyOrDo(!ShouldSkip("LVL.S.A000f"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::Options::Id, true,
                                  chip::NullOptional);
         }
-        case 36: {
-            LogStep(36, "TH sends On command to DUT");
+        case 37: {
+            LogStep(37, "TH sends On command to DUT");
             VerifyOrDo(!ShouldSkip("OO.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::OnOff::Commands::On::Type value;
@@ -27499,8 +26446,8 @@ private:
 
             );
         }
-        case 37: {
-            LogStep(37, "TH sends a MoveToLevel command to the DUT with");
+        case 38: {
+            LogStep(38, "TH sends a MoveToLevel command to the DUT with");
             VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::MoveToLevel::Type value;
@@ -27514,14 +26461,14 @@ private:
 
             );
         }
-        case 38: {
-            LogStep(38, "TH reads CurrentLevel attribute from DUT");
+        case 39: {
+            LogStep(39, "TH reads CurrentLevel attribute from DUT");
             VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
                                  chip::NullOptional);
         }
-        case 39: {
-            LogStep(39, "TH sends Off command to DUT");
+        case 40: {
+            LogStep(40, "TH sends Off command to DUT");
             VerifyOrDo(!ShouldSkip("OO.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::OnOff::Commands::Off::Type value;
@@ -27529,8 +26476,8 @@ private:
 
             );
         }
-        case 40: {
-            LogStep(40, "TH sends a MoveToLevel command to the DUT with");
+        case 41: {
+            LogStep(41, "TH sends a MoveToLevel command to the DUT with");
             VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::MoveToLevel::Type value;
@@ -27544,14 +26491,14 @@ private:
 
             );
         }
-        case 41: {
-            LogStep(41, "TH reads CurrentLevel attribute from DUT");
+        case 42: {
+            LogStep(42, "TH reads CurrentLevel attribute from DUT");
             VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
                                  chip::NullOptional);
         }
-        case 42: {
-            LogStep(42, "TH sends a MoveToLevel command to the DUT with");
+        case 43: {
+            LogStep(43, "TH sends a MoveToLevel command to the DUT with");
             VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::MoveToLevel::Type value;
@@ -27565,14 +26512,14 @@ private:
 
             );
         }
-        case 43: {
-            LogStep(43, "TH reads CurrentLevel attribute from DUT");
+        case 44: {
+            LogStep(44, "TH reads CurrentLevel attribute from DUT");
             VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
                                  chip::NullOptional);
         }
-        case 44: {
-            LogStep(44, "TH sends a MoveToLevel command to the DUT with");
+        case 45: {
+            LogStep(45, "TH sends a MoveToLevel command to the DUT with");
             VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::MoveToLevel::Type value;
@@ -27586,8 +26533,8 @@ private:
 
             );
         }
-        case 45: {
-            LogStep(45, "TH reads CurrentLevel attribute from DUT");
+        case 46: {
+            LogStep(46, "TH reads CurrentLevel attribute from DUT");
             VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
                                  chip::NullOptional);
@@ -31851,171 +30798,6 @@ private:
     }
 };
 
-class Test_TC_ALOGIN_12_1Suite : public TestCommand
-{
-public:
-    Test_TC_ALOGIN_12_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_ALOGIN_12_1", 5, credsIssuerConfig)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("TempAccountIdentifier", &mTempAccountIdentifier);
-        AddArgument("catalogVendorId", 0, UINT16_MAX, &mCatalogVendorId);
-        AddArgument("applicationId", &mApplicationId);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_ALOGIN_12_1Suite()
-    {
-        if (setupPINBuffer != nullptr)
-        {
-            chip::Platform::MemoryFree(setupPINBuffer);
-            setupPINBuffer = nullptr;
-        }
-    }
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<chip::CharSpan> mTempAccountIdentifier;
-    chip::Optional<uint16_t> mCatalogVendorId;
-    chip::Optional<chip::CharSpan> mApplicationId;
-    chip::Optional<uint16_t> mTimeout;
-
-    char * setupPINBuffer = nullptr;
-    chip::CharSpan setupPIN;
-
-    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
-
-    //
-    // Tests methods
-    //
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::ApplicationLauncher::Commands::LauncherResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-            }
-            break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::AccountLogin::Commands::GetSetupPINResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                if (setupPINBuffer != nullptr)
-                {
-                    chip::Platform::MemoryFree(setupPINBuffer);
-                }
-                setupPINBuffer = static_cast<char *>(chip::Platform::MemoryAlloc(value.setupPIN.size()));
-                memcpy(setupPINBuffer, value.setupPIN.data(), value.setupPIN.size());
-                setupPIN = chip::CharSpan(setupPINBuffer, value.setupPIN.size());
-            }
-            break;
-        case 3:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 4:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    CHIP_ERROR DoTestStep(uint16_t testIndex) override
-    {
-        using namespace chip::app::Clusters;
-        switch (testIndex)
-        {
-        case 0: {
-            LogStep(0, "Wait for the commissioned device to be retrieved");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-            return WaitForCommissionee(kIdentityAlpha, value);
-        }
-        case 1: {
-            LogStep(1, "Launch an app with the provided a application ID");
-            VerifyOrDo(!ShouldSkip("APPLAUNCHER.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::ApplicationLauncher::Commands::LaunchApp::Type value;
-            value.application.Emplace();
-
-            value.application.Value().catalogVendorID = mCatalogVendorId.HasValue() ? mCatalogVendorId.Value() : 123U;
-            value.application.Value().applicationID =
-                mApplicationId.HasValue() ? mApplicationId.Value() : chip::Span<const char>("exampleid", 9);
-
-            value.data.Emplace();
-            value.data.Value() = chip::ByteSpan(chip::Uint8::from_const_char("Hello Worldgarbage: not in length on purpose"), 11);
-            return SendCommand(kIdentityAlpha, GetEndpoint(3), ApplicationLauncher::Id,
-                               ApplicationLauncher::Commands::LaunchApp::Id, value, chip::NullOptional
-
-            );
-        }
-        case 2: {
-            LogStep(2, "TH sends a GetSetupPIN command to the DUT with test values provided by the product maker.");
-            VerifyOrDo(!ShouldSkip("ALOGIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AccountLogin::Commands::GetSetupPIN::Type value;
-            value.tempAccountIdentifier =
-                mTempAccountIdentifier.HasValue() ? mTempAccountIdentifier.Value() : chip::Span<const char>("1111", 4);
-            return SendCommand(kIdentityAlpha, GetEndpoint(3), AccountLogin::Id, AccountLogin::Commands::GetSetupPIN::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 3: {
-            LogStep(3, "TH sends a Login command to the DUT with test values provided by the product maker.");
-            VerifyOrDo(!ShouldSkip("ALOGIN.S.C02.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AccountLogin::Commands::Login::Type value;
-            value.tempAccountIdentifier =
-                mTempAccountIdentifier.HasValue() ? mTempAccountIdentifier.Value() : chip::Span<const char>("1111", 4);
-            value.setupPIN = setupPIN;
-            return SendCommand(kIdentityAlpha, GetEndpoint(3), AccountLogin::Id, AccountLogin::Commands::Login::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 4: {
-            LogStep(4, "TH sends a Logout command to the DUT with test values provided by the product maker.");
-            VerifyOrDo(!ShouldSkip("ALOGIN.S.C03.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AccountLogin::Commands::Logout::Type value;
-            return SendCommand(kIdentityAlpha, GetEndpoint(3), AccountLogin::Id, AccountLogin::Commands::Logout::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        }
-        return CHIP_NO_ERROR;
-    }
-};
-
 class Test_TC_LOWPOWER_2_1Suite : public TestCommand
 {
 public:
@@ -33362,115 +32144,6 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
             value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        }
-        return CHIP_NO_ERROR;
-    }
-};
-
-class Test_TC_WAKEONLAN_4_1Suite : public TestCommand
-{
-public:
-    Test_TC_WAKEONLAN_4_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_WAKEONLAN_4_1", 4, credsIssuerConfig)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_WAKEONLAN_4_1Suite() {}
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
-
-    //
-    // Tests methods
-    //
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::CharSpan value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinLength("value", value, 12));
-            }
-            break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 3:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    CHIP_ERROR DoTestStep(uint16_t testIndex) override
-    {
-        using namespace chip::app::Clusters;
-        switch (testIndex)
-        {
-        case 0: {
-            LogStep(0, "Wait for the commissioned device to be retrieved");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-            return WaitForCommissionee(kIdentityAlpha, value);
-        }
-        case 1: {
-            LogStep(1, "TH reads the MACAddress attribute from the DUT");
-            VerifyOrDo(!ShouldSkip("WAKEONLAN.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WakeOnLan::Id, WakeOnLan::Attributes::MACAddress::Id, true,
-                                 chip::NullOptional);
-        }
-        case 2: {
-            LogStep(2, "TH sends a Sleep command to DUT");
-            VerifyOrDo(!ShouldSkip("LOWPOWER.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LowPower::Commands::Sleep::Type value;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), LowPower::Id, LowPower::Commands::Sleep::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 3: {
-            LogStep(3, "TH sends a Wake-On LAN magic packet containing the MAC address from step 1");
-            VerifyOrDo(!ShouldSkip("PICS_USER_PROMPT"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>("Please enter 'y' after successgarbage: not in length on purpose", 30);
             value.expectedValue.Emplace();
             value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
             return UserPrompt(kIdentityAlpha, value);
@@ -41426,7 +40099,7 @@ private:
 class Test_TC_SC_5_1Suite : public TestCommand
 {
 public:
-    Test_TC_SC_5_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_SC_5_1", 19, credsIssuerConfig)
+    Test_TC_SC_5_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_SC_5_1", 31, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -41479,24 +40152,40 @@ private:
             break;
         case 3:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         case 4:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 5:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::Groups::Commands::AddGroupResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
             }
             break;
-        case 8:
+        case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::Groups::Commands::ViewGroupResponse::DecodableType value;
@@ -41506,7 +40195,7 @@ private:
                 VerifyOrReturn(CheckValueAsString("groupName", value.groupName, chip::CharSpan("Test Group", 10)));
             }
             break;
-        case 9:
+        case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::Groups::Commands::ViewGroupResponse::DecodableType value;
@@ -41516,7 +40205,7 @@ private:
                 VerifyOrReturn(CheckValueAsString("groupName", value.groupName, chip::CharSpan("", 0)));
             }
             break;
-        case 10:
+        case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::GroupKeyManagement::Commands::KeySetReadResponse::DecodableType value;
@@ -41537,7 +40226,11 @@ private:
                     CheckValue("groupKeySet.epochStartTime2.Value()", value.groupKeySet.epochStartTime2.Value(), 2220002ULL));
             }
             break;
-        case 11:
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -41554,7 +40247,11 @@ private:
                 }
             }
             break;
-        case 12:
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -41581,7 +40278,11 @@ private:
                 }
             }
             break;
-        case 13:
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -41608,10 +40309,18 @@ private:
                 }
             }
             break;
-        case 14:
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 15:
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 24:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -41624,10 +40333,14 @@ private:
                 }
             }
             break;
-        case 16:
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 26:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 17:
+        case 27:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -41640,8 +40353,16 @@ private:
                 }
             }
             break;
-        case 18:
+        case 28:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 29:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 30:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         default:
             LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
@@ -41673,6 +40394,7 @@ private:
         }
         case 2: {
             LogStep(2, "TH adds ACL Operate privileges for Group 0x0103");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
@@ -41718,7 +40440,18 @@ private:
                                   chip::NullOptional, chip::NullOptional);
         }
         case 3: {
-            LogStep(3, "TH sends KeySetWrite command with incorrect key");
+            LogStep(3, "TH adds ACL Operate privileges for Group 0x0103");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 4: {
+            LogStep(4, "TH sends KeySetWrite command with incorrect key");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetWrite::Type value;
 
@@ -41746,8 +40479,19 @@ private:
 
             );
         }
-        case 4: {
-            LogStep(4, "TH sends KeySetWrite command with TH key");
+        case 5: {
+            LogStep(5, "TH sends KeySetWrite command with incorrect key");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 6: {
+            LogStep(6, "TH sends KeySetWrite command with TH key");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetWrite::Type value;
 
@@ -41775,8 +40519,19 @@ private:
 
             );
         }
-        case 5: {
-            LogStep(5, "TH binds GroupId to GroupKeySet");
+        case 7: {
+            LogStep(7, "TH sends KeySetWrite command with TH key");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 8: {
+            LogStep(8, "TH binds GroupId to GroupKeySet");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type> value;
 
@@ -41794,8 +40549,18 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                   GroupKeyManagement::Attributes::GroupKeyMap::Id, value, chip::NullOptional, chip::NullOptional);
         }
-        case 6: {
-            LogStep(6, "TH sends RemoveAllGroups command");
+        case 9: {
+            LogStep(9, "TH binds GroupId to GroupKeySet");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 10: {
+            LogStep(10, "TH sends RemoveAllGroups command");
             ListFreer listFreer;
             chip::app::Clusters::Groups::Commands::RemoveAllGroups::Type value;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), Groups::Id, Groups::Commands::RemoveAllGroups::Id, value,
@@ -41803,8 +40568,8 @@ private:
 
             );
         }
-        case 7: {
-            LogStep(7, "TH sends AddGroup command");
+        case 11: {
+            LogStep(11, "TH sends AddGroup command");
             ListFreer listFreer;
             chip::app::Clusters::Groups::Commands::AddGroup::Type value;
             value.groupID   = 259U;
@@ -41813,8 +40578,8 @@ private:
 
             );
         }
-        case 8: {
-            LogStep(8, "TH sends ViewGroup command");
+        case 12: {
+            LogStep(12, "TH sends ViewGroup command");
             VerifyOrDo(!ShouldSkip("G.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::Groups::Commands::ViewGroup::Type value;
@@ -41824,8 +40589,8 @@ private:
 
             );
         }
-        case 9: {
-            LogStep(9, "TH sends ViewGroup command");
+        case 13: {
+            LogStep(13, "TH sends ViewGroup command");
             VerifyOrDo(!ShouldSkip("!(G.S.F00)"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::Groups::Commands::ViewGroup::Type value;
@@ -41835,8 +40600,9 @@ private:
 
             );
         }
-        case 10: {
-            LogStep(10, "TH sends KeySetRead");
+        case 14: {
+            LogStep(14, "TH sends KeySetRead");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetRead::Type value;
             value.groupKeySetID = 419U;
@@ -41845,25 +40611,67 @@ private:
 
             );
         }
-        case 11: {
-            LogStep(11, "TH reads GroupKeyMap Attribute from the GroupKeyManagement cluster");
+        case 15: {
+            LogStep(15, "TH sends KeySetRead");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 16: {
+            LogStep(16, "TH reads GroupKeyMap Attribute from the GroupKeyManagement cluster");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                  GroupKeyManagement::Attributes::GroupKeyMap::Id, true, chip::NullOptional);
         }
-        case 12: {
-            LogStep(12, "TH reads GroupTable attribute");
-            VerifyOrDo(!ShouldSkip("G.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+        case 17: {
+            LogStep(17, "TH reads GroupKeyMap Attribute from the GroupKeyManagement cluster");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 18: {
+            LogStep(18, "TH reads GroupTable attribute");
+            VerifyOrDo(!ShouldSkip("G.S.F00 && PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                  GroupKeyManagement::Attributes::GroupTable::Id, true, chip::NullOptional);
         }
-        case 13: {
-            LogStep(13, "TH reads GroupTable attribute");
-            VerifyOrDo(!ShouldSkip("!(G.S.F00)"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+        case 19: {
+            LogStep(19, "TH reads GroupTable attribute");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP && G.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 20: {
+            LogStep(20, "TH reads GroupTable attribute");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY && !G.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                  GroupKeyManagement::Attributes::GroupTable::Id, true, chip::NullOptional);
         }
-        case 14: {
-            LogStep(14, "TH removes the GroupKeySet");
+        case 21: {
+            LogStep(21, "TH reads GroupTable attribute");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP && !G.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 22: {
+            LogStep(22, "TH removes the GroupKeySet");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetRemove::Type value;
             value.groupKeySetID = 419U;
@@ -41872,13 +40680,34 @@ private:
 
             );
         }
-        case 15: {
-            LogStep(15, "TH verifies the corresponding GroupKeyMap entry has been removed");
+        case 23: {
+            LogStep(23, "TH removes the GroupKeySet");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 24: {
+            LogStep(24, "TH verifies the corresponding GroupKeyMap entry has been removed");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                  GroupKeyManagement::Attributes::GroupKeyMap::Id, true, chip::NullOptional);
         }
-        case 16: {
-            LogStep(16, "TH cleans up groups using RemoveAllGroups command");
+        case 25: {
+            LogStep(25, "TH verifies the corresponding GroupKeyMap entry has been removed");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 26: {
+            LogStep(26, "TH cleans up groups using RemoveAllGroups command");
             ListFreer listFreer;
             chip::app::Clusters::Groups::Commands::RemoveAllGroups::Type value;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), Groups::Id, Groups::Commands::RemoveAllGroups::Id, value,
@@ -41886,13 +40715,25 @@ private:
 
             );
         }
-        case 17: {
-            LogStep(17, "TH verifies the group has been removed in the GroupTable");
+        case 27: {
+            LogStep(27, "TH verifies the group has been removed in the GroupTable");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                  GroupKeyManagement::Attributes::GroupTable::Id, true, chip::NullOptional);
         }
-        case 18: {
-            LogStep(18, "TH removes ACL Operate privileges for Group 0x0103");
+        case 28: {
+            LogStep(28, "TH verifies the group has been removed in the GroupTable");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 29: {
+            LogStep(29, "TH removes ACL Operate privileges for Group 0x0103");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
@@ -41922,6 +40763,16 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
+        case 30: {
+            LogStep(30, "TH removes ACL Operate privileges for Group 0x0103");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
         }
         return CHIP_NO_ERROR;
     }
@@ -41930,7 +40781,7 @@ private:
 class Test_TC_SC_5_2Suite : public TestCommand
 {
 public:
-    Test_TC_SC_5_2Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_SC_5_2", 15, credsIssuerConfig)
+    Test_TC_SC_5_2Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_SC_5_2", 20, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -41983,14 +40834,26 @@ private:
             break;
         case 3:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         case 4:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 5:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::Groups::Commands::AddGroupResponse::DecodableType value;
@@ -41999,22 +40862,22 @@ private:
                 VerifyOrReturn(CheckValue("groupID", value.groupID, 259U));
             }
             break;
-        case 7:
+        case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::Groups::Commands::AddGroupResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
             }
             break;
-        case 8:
+        case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             shouldContinue = true;
             break;
-        case 9:
+        case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             shouldContinue = true;
             break;
-        case 10:
+        case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::Groups::Commands::ViewGroupResponse::DecodableType value;
@@ -42024,7 +40887,7 @@ private:
                 VerifyOrReturn(CheckValueAsString("groupName", value.groupName, chip::CharSpan("Test Group 0101", 15)));
             }
             break;
-        case 11:
+        case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::Groups::Commands::ViewGroupResponse::DecodableType value;
@@ -42034,14 +40897,22 @@ private:
                 VerifyOrReturn(CheckValueAsString("groupName", value.groupName, chip::CharSpan("", 0)));
             }
             break;
-        case 12:
+        case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 13:
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 14:
+        case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         default:
             LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
@@ -42073,6 +40944,7 @@ private:
         }
         case 2: {
             LogStep(2, "TH adds ACL Operate privileges for Group 0x0103");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
@@ -42118,7 +40990,18 @@ private:
                                   chip::NullOptional, chip::NullOptional);
         }
         case 3: {
-            LogStep(3, "TH sends KeySetWrite command with TH key");
+            LogStep(3, "TH adds ACL Operate privileges for Group 0x0103");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 4: {
+            LogStep(4, "TH sends KeySetWrite command with TH key");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetWrite::Type value;
 
@@ -42152,8 +41035,19 @@ private:
 
             );
         }
-        case 4: {
-            LogStep(4, "TH binds GroupId to GroupKeySet");
+        case 5: {
+            LogStep(5, "TH sends KeySetWrite command with TH key");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 6: {
+            LogStep(6, "TH binds GroupId to GroupKeySet");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type> value;
 
@@ -42175,8 +41069,18 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                   GroupKeyManagement::Attributes::GroupKeyMap::Id, value, chip::NullOptional, chip::NullOptional);
         }
-        case 5: {
-            LogStep(5, "TH sends RemoveAllGroups command");
+        case 7: {
+            LogStep(7, "TH binds GroupId to GroupKeySet");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 8: {
+            LogStep(8, "TH sends RemoveAllGroups command");
             ListFreer listFreer;
             chip::app::Clusters::Groups::Commands::RemoveAllGroups::Type value;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), Groups::Id, Groups::Commands::RemoveAllGroups::Id, value,
@@ -42184,8 +41088,8 @@ private:
 
             );
         }
-        case 6: {
-            LogStep(6, "TH sends AddGroup command");
+        case 9: {
+            LogStep(9, "TH sends AddGroup command");
             ListFreer listFreer;
             chip::app::Clusters::Groups::Commands::AddGroup::Type value;
             value.groupID   = 259U;
@@ -42194,23 +41098,23 @@ private:
 
             );
         }
-        case 7: {
-            LogStep(7, "TH sends AddGroup command again but using group messaging (0x0103)");
+        case 10: {
+            LogStep(10, "TH sends AddGroup command again but using group messaging (0x0103)");
             ListFreer listFreer;
             chip::app::Clusters::Groups::Commands::AddGroup::Type value;
             value.groupID   = 257U;
             value.groupName = chip::Span<const char>("Test Group 0101garbage: not in length on purpose", 15);
             return SendGroupCommand(kIdentityAlpha, 259, Groups::Id, Groups::Commands::AddGroup::Id, value);
         }
-        case 8: {
-            LogStep(8, "Wait for AddGroup");
+        case 11: {
+            LogStep(11, "Wait for AddGroup");
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 1000UL;
             return WaitForMs(kIdentityAlpha, value);
         }
-        case 9: {
-            LogStep(9, "Verify there is no response from DUT");
+        case 12: {
+            LogStep(12, "Verify there is no response from DUT");
             VerifyOrDo(!ShouldSkip("!PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
@@ -42220,8 +41124,8 @@ private:
             value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
             return UserPrompt(kIdentityAlpha, value);
         }
-        case 10: {
-            LogStep(10, "TH sends ViewGroup command");
+        case 13: {
+            LogStep(13, "TH sends ViewGroup command");
             VerifyOrDo(!ShouldSkip("G.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::Groups::Commands::ViewGroup::Type value;
@@ -42231,8 +41135,8 @@ private:
 
             );
         }
-        case 11: {
-            LogStep(11, "TH sends ViewGroup command");
+        case 14: {
+            LogStep(14, "TH sends ViewGroup command");
             VerifyOrDo(!ShouldSkip("!(G.S.F00)"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::Groups::Commands::ViewGroup::Type value;
@@ -42242,8 +41146,8 @@ private:
 
             );
         }
-        case 12: {
-            LogStep(12, "TH removes the GroupKeySet");
+        case 15: {
+            LogStep(15, "TH removes the GroupKeySet");
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetRemove::Type value;
             value.groupKeySetID = 419U;
@@ -42252,8 +41156,18 @@ private:
 
             );
         }
-        case 13: {
-            LogStep(13, "TH cleans up groups using RemoveAllGroups command");
+        case 16: {
+            LogStep(16, "TH removes the GroupKeySet");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 17: {
+            LogStep(17, "TH cleans up groups using RemoveAllGroups command");
             ListFreer listFreer;
             chip::app::Clusters::Groups::Commands::RemoveAllGroups::Type value;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), Groups::Id, Groups::Commands::RemoveAllGroups::Id, value,
@@ -42261,8 +41175,9 @@ private:
 
             );
         }
-        case 14: {
-            LogStep(14, "TH removes ACL Operate privileges for Group 0x0103");
+        case 18: {
+            LogStep(18, "TH removes ACL Operate privileges for Group 0x0103");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
@@ -42291,6 +41206,16 @@ private:
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
                                   chip::NullOptional, chip::NullOptional);
+        }
+        case 19: {
+            LogStep(19, "TH removes ACL Operate privileges for Group 0x0103");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
         }
         }
         return CHIP_NO_ERROR;
@@ -45535,7 +44460,7 @@ private:
             LogStep(25,
                     "Writes If TSTAT.S.F05(AUTO) LowerLimit = Max(MinCoolSetpointLimit, (OccupiedHeatingSetpoint + "
                     "MinSetpointDeadBand)) to OccupiedCoolingSetpoint attribute when Auto is enabled");
-            VerifyOrDo(!ShouldSkip("TSTAT.S.F05 && TSTAT.S.A0012 && PICS_SKIP_SAMPLE_APP"),
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F05 && TSTAT.S.A0011 && PICS_SKIP_SAMPLE_APP"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
@@ -47966,7 +46891,7 @@ private:
         }
         case 8: {
             LogStep(8, "TH reads Feature dependent attribute(DGTHREAD.S.F01(ERRCNT)) in attributeList");
-            VerifyOrDo(!ShouldSkip("DGTHREAD.C.A0006 && DGTHREAD.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("DGTHREAD.S.A0006 && DGTHREAD.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), ThreadNetworkDiagnostics::Id,
                                  ThreadNetworkDiagnostics::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
@@ -48496,7 +47421,7 @@ private:
         }
         case 20: {
             LogStep(20, "TH reads ChildRoleCount attribute value from DUT");
-            VerifyOrDo(!ShouldSkip("DGTHREAD.S.A001f"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("DGTHREAD.S.A000f"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), ThreadNetworkDiagnostics::Id,
                                  ThreadNetworkDiagnostics::Attributes::ChildRoleCount::Id, true, chip::NullOptional);
         }
@@ -83437,7 +82362,7 @@ private:
             LogStep(6,
                     "TH writes the RequirePINforRemoteOperation attribute value as False on the DUT and Verify DUT responds with "
                     "UNSUPPORTED_WRITE");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F07 && DRLK.S.F00 && ! DRLK.S.A0033"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("DRLK.S.F07 && DRLK.S.F00 && !DRLK.S.A0033"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             bool value;
             value = false;
@@ -83487,7 +82412,7 @@ private:
             LogStep(11,
                     "TH writes the RequirePINforRemoteOperation attribute value as False on the DUT and Verify DUT responds with "
                     "UNSUPPORTED_WRITE");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F07 && DRLK.S.F00 && ! DRLK.S.A0033"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("DRLK.S.F07 && DRLK.S.F00 && !DRLK.S.A0033"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             bool value;
             value = true;
@@ -83629,7 +82554,7 @@ private:
         }
         case 24: {
             LogStep(24, "TH reads the UserCodeTemporaryDisableTime attribute from the DUT and check attribute is triggered");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F07 && DRLK.S.F00 && DRLK.S.A0031"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("DRLK.S.F00 && DRLK.S.F01 && DRLK.S.A0031"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id,
                                  DoorLock::Attributes::UserCodeTemporaryDisableTime::Id, true, chip::NullOptional);
         }
@@ -84594,7 +83519,7 @@ private:
 class Test_TC_DRLK_2_7Suite : public TestCommand
 {
 public:
-    Test_TC_DRLK_2_7Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_DRLK_2_7", 18, credsIssuerConfig)
+    Test_TC_DRLK_2_7Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_DRLK_2_7", 19, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -84779,6 +83704,9 @@ private:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         default:
@@ -85011,10 +83939,20 @@ private:
             );
         }
         case 17: {
-            LogStep(17, "Cleanup the created user");
+            LogStep(17, "Cleanup the created user with UserIndex 1");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::ClearUser::Type value;
             value.userIndex = 1U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::ClearUser::Id, value,
+                               chip::Optional<uint16_t>(10000), chip::NullOptional
+
+            );
+        }
+        case 18: {
+            LogStep(18, "Cleanup the created user with UserIndex 5");
+            ListFreer listFreer;
+            chip::app::Clusters::DoorLock::Commands::ClearUser::Type value;
+            value.userIndex = 5U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::ClearUser::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
@@ -85141,8 +84079,6 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("status", value.status, 133U));
                 VerifyOrReturn(CheckValueNull("userIndex", value.userIndex));
-                VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", value.nextCredentialIndex));
-                VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 3U));
             }
             break;
         case 7:
@@ -85152,8 +84088,6 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("status", value.status, 2U));
                 VerifyOrReturn(CheckValueNull("userIndex", value.userIndex));
-                VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", value.nextCredentialIndex));
-                VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 3U));
             }
             break;
         case 8:
@@ -85193,8 +84127,6 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("status", value.status, 0U));
                 VerifyOrReturn(CheckValueNull("userIndex", value.userIndex));
-                VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", value.nextCredentialIndex));
-                VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 2U));
             }
             break;
         case 15:
@@ -85570,11 +84502,14 @@ private:
 class Test_TC_DRLK_2_11Suite : public TestCommand
 {
 public:
-    Test_TC_DRLK_2_11Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_DRLK_2_11", 18, credsIssuerConfig)
+    Test_TC_DRLK_2_11Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_DRLK_2_11", 23, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("PINCredentialData", &mPINCredentialData);
+        AddArgument("RFIDCredentialData", &mRFIDCredentialData);
+        AddArgument("FingerVeinCredentialData", &mFingerVeinCredentialData);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
@@ -85589,6 +84524,9 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<chip::ByteSpan> mPINCredentialData;
+    chip::Optional<chip::ByteSpan> mRFIDCredentialData;
+    chip::Optional<chip::ByteSpan> mFingerVeinCredentialData;
     chip::Optional<uint16_t> mTimeout;
 
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
@@ -85641,28 +84579,51 @@ private:
         case 3:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
+                uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValueNull("userIndex", value.userIndex));
-                VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", value.nextCredentialIndex));
-                VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 2U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
             break;
         case 4:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
+                uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValueNull("userIndex", value.userIndex));
-                VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", value.nextCredentialIndex));
-                VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 2U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
             break;
         case 5:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
                 chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("status", value.status, 0U));
@@ -85671,71 +84632,26 @@ private:
                 VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 2U));
             }
             break;
-        case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::DoorLock::Commands::GetCredentialStatusResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("credentialExists", value.credentialExists, true));
-                VerifyOrReturn(CheckConstraintType("value.credentialExists", "boolean", "boolean"));
-                VerifyOrReturn(CheckValueNonNull("userIndex", value.userIndex));
-                VerifyOrReturn(CheckValue("userIndex.Value()", value.userIndex.Value(), 1U));
-                VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", value.creatorFabricIndex));
-                VerifyOrReturn(CheckValue("creatorFabricIndex.Value()", value.creatorFabricIndex.Value(), 1U));
-                VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", value.lastModifiedFabricIndex));
-                VerifyOrReturn(CheckValue("lastModifiedFabricIndex.Value()", value.lastModifiedFabricIndex.Value(), 1U));
-                VerifyOrReturn(CheckValueNull("nextCredentialIndex", value.nextCredentialIndex));
-            }
-            break;
-        case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::DoorLock::Commands::GetCredentialStatusResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("credentialExists", value.credentialExists, true));
-                VerifyOrReturn(CheckConstraintType("value.credentialExists", "boolean", "boolean"));
-                VerifyOrReturn(CheckValueNonNull("userIndex", value.userIndex));
-                VerifyOrReturn(CheckValue("userIndex.Value()", value.userIndex.Value(), 1U));
-                VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", value.creatorFabricIndex));
-                VerifyOrReturn(CheckValue("creatorFabricIndex.Value()", value.creatorFabricIndex.Value(), 1U));
-                VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", value.lastModifiedFabricIndex));
-                VerifyOrReturn(CheckValue("lastModifiedFabricIndex.Value()", value.lastModifiedFabricIndex.Value(), 1U));
-                VerifyOrReturn(CheckValueNull("nextCredentialIndex", value.nextCredentialIndex));
-            }
-            break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::DoorLock::Commands::GetCredentialStatusResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("credentialExists", value.credentialExists, true));
-                VerifyOrReturn(CheckConstraintType("value.credentialExists", "boolean", "boolean"));
-                VerifyOrReturn(CheckValueNonNull("userIndex", value.userIndex));
-                VerifyOrReturn(CheckValue("userIndex.Value()", value.userIndex.Value(), 1U));
-                VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", value.creatorFabricIndex));
-                VerifyOrReturn(CheckValue("creatorFabricIndex.Value()", value.creatorFabricIndex.Value(), 1U));
-                VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", value.lastModifiedFabricIndex));
-                VerifyOrReturn(CheckValue("lastModifiedFabricIndex.Value()", value.lastModifiedFabricIndex.Value(), 1U));
-                VerifyOrReturn(CheckValueNull("nextCredentialIndex", value.nextCredentialIndex));
-            }
-            break;
         case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValueNull("userIndex", value.userIndex));
+                VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", value.nextCredentialIndex));
+                VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 2U));
+            }
             break;
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::DoorLock::Commands::GetCredentialStatusResponse::DecodableType value;
+                chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("credentialExists", value.credentialExists, true));
-                VerifyOrReturn(CheckConstraintType("value.credentialExists", "boolean", "boolean"));
-                VerifyOrReturn(CheckValueNonNull("userIndex", value.userIndex));
-                VerifyOrReturn(CheckValue("userIndex.Value()", value.userIndex.Value(), 1U));
-                VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", value.creatorFabricIndex));
-                VerifyOrReturn(CheckValue("creatorFabricIndex.Value()", value.creatorFabricIndex.Value(), 1U));
-                VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", value.lastModifiedFabricIndex));
-                VerifyOrReturn(CheckValue("lastModifiedFabricIndex.Value()", value.lastModifiedFabricIndex.Value(), 1U));
-                VerifyOrReturn(CheckValueNull("nextCredentialIndex", value.nextCredentialIndex));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValueNull("userIndex", value.userIndex));
+                VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", value.nextCredentialIndex));
+                VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 2U));
             }
             break;
         case 11:
@@ -85756,6 +84672,19 @@ private:
             break;
         case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DoorLock::Commands::GetCredentialStatusResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("credentialExists", value.credentialExists, true));
+                VerifyOrReturn(CheckConstraintType("value.credentialExists", "boolean", "boolean"));
+                VerifyOrReturn(CheckValueNonNull("userIndex", value.userIndex));
+                VerifyOrReturn(CheckValue("userIndex.Value()", value.userIndex.Value(), 1U));
+                VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", value.creatorFabricIndex));
+                VerifyOrReturn(CheckValue("creatorFabricIndex.Value()", value.creatorFabricIndex.Value(), 1U));
+                VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", value.lastModifiedFabricIndex));
+                VerifyOrReturn(CheckValue("lastModifiedFabricIndex.Value()", value.lastModifiedFabricIndex.Value(), 1U));
+                VerifyOrReturn(CheckValueNull("nextCredentialIndex", value.nextCredentialIndex));
+            }
             break;
         case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -85781,14 +84710,56 @@ private:
             {
                 chip::app::Clusters::DoorLock::Commands::GetCredentialStatusResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("credentialExists", value.credentialExists, false));
-                VerifyOrReturn(CheckValueNull("userIndex", value.userIndex));
-                VerifyOrReturn(CheckValueNull("creatorFabricIndex", value.creatorFabricIndex));
-                VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", value.lastModifiedFabricIndex));
+                VerifyOrReturn(CheckValue("credentialExists", value.credentialExists, true));
+                VerifyOrReturn(CheckConstraintType("value.credentialExists", "boolean", "boolean"));
+                VerifyOrReturn(CheckValueNonNull("userIndex", value.userIndex));
+                VerifyOrReturn(CheckValue("userIndex.Value()", value.userIndex.Value(), 1U));
+                VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", value.creatorFabricIndex));
+                VerifyOrReturn(CheckValue("creatorFabricIndex.Value()", value.creatorFabricIndex.Value(), 1U));
+                VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", value.lastModifiedFabricIndex));
+                VerifyOrReturn(CheckValue("lastModifiedFabricIndex.Value()", value.lastModifiedFabricIndex.Value(), 1U));
                 VerifyOrReturn(CheckValueNull("nextCredentialIndex", value.nextCredentialIndex));
             }
             break;
         case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DoorLock::Commands::GetCredentialStatusResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("credentialExists", value.credentialExists, true));
+                VerifyOrReturn(CheckConstraintType("value.credentialExists", "boolean", "boolean"));
+                VerifyOrReturn(CheckValueNonNull("userIndex", value.userIndex));
+                VerifyOrReturn(CheckValue("userIndex.Value()", value.userIndex.Value(), 1U));
+                VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", value.creatorFabricIndex));
+                VerifyOrReturn(CheckValue("creatorFabricIndex.Value()", value.creatorFabricIndex.Value(), 1U));
+                VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", value.lastModifiedFabricIndex));
+                VerifyOrReturn(CheckValue("lastModifiedFabricIndex.Value()", value.lastModifiedFabricIndex.Value(), 1U));
+                VerifyOrReturn(CheckValueNull("nextCredentialIndex", value.nextCredentialIndex));
+            }
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DoorLock::Commands::GetCredentialStatusResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("credentialExists", value.credentialExists, true));
+                VerifyOrReturn(CheckConstraintType("value.credentialExists", "boolean", "boolean"));
+                VerifyOrReturn(CheckValueNonNull("userIndex", value.userIndex));
+                VerifyOrReturn(CheckValue("userIndex.Value()", value.userIndex.Value(), 1U));
+                VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", value.creatorFabricIndex));
+                VerifyOrReturn(CheckValue("creatorFabricIndex.Value()", value.creatorFabricIndex.Value(), 1U));
+                VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", value.lastModifiedFabricIndex));
+                VerifyOrReturn(CheckValue("lastModifiedFabricIndex.Value()", value.lastModifiedFabricIndex.Value(), 1U));
+                VerifyOrReturn(CheckValueNull("nextCredentialIndex", value.nextCredentialIndex));
+            }
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::GetCredentialStatusResponse::DecodableType value;
@@ -85800,7 +84771,19 @@ private:
                 VerifyOrReturn(CheckValueNull("nextCredentialIndex", value.nextCredentialIndex));
             }
             break;
-        case 17:
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DoorLock::Commands::GetCredentialStatusResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("credentialExists", value.credentialExists, false));
+                VerifyOrReturn(CheckValueNull("userIndex", value.userIndex));
+                VerifyOrReturn(CheckValueNull("creatorFabricIndex", value.creatorFabricIndex));
+                VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", value.lastModifiedFabricIndex));
+                VerifyOrReturn(CheckValueNull("nextCredentialIndex", value.nextCredentialIndex));
+            }
+            break;
+        case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::GetCredentialStatusResponse::DecodableType value;
@@ -85866,7 +84849,37 @@ private:
             );
         }
         case 3: {
-            LogStep(3, "TH sends Set Credential Command to DUT with type PIN");
+            LogStep(3, "TH reads NumberOfTotalUsersSupported and saves for future use.");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F08 && DRLK.S.A0011"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id,
+                                 DoorLock::Attributes::NumberOfTotalUsersSupported::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "TH reads MinPINCodeLength and saves for future use.");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F08 && DRLK.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::MinPINCodeLength::Id, true,
+                                 chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "TH reads MaxPINCodeLength and saves for future use.");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F08 && DRLK.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::MaxPINCodeLength::Id, true,
+                                 chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "TH reads MinRFIDCodeLength and saves for future use.");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F08 && DRLK.S.F01 && DRLK.S.A001a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::MinRFIDCodeLength::Id, true,
+                                 chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "TH reads MaxRFIDCodeLength and saves for future use.");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F08 && DRLK.S.F01 && DRLK.S.A0019"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::MaxRFIDCodeLength::Id, true,
+                                 chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "TH sends Set Credential Command to DUT with type PIN");
             VerifyOrDo(!ShouldSkip("DRLK.S.F00 && DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -85876,7 +84889,8 @@ private:
             value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 1U;
 
-            value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
+            value.credentialData = mPINCredentialData.HasValue() ? mPINCredentialData.Value()
+                                                                 : chip::ByteSpan(chip::Uint8::from_const_char("123456"), 6);
             value.userIndex.SetNonNull();
             value.userIndex.Value() = 1U;
             value.userStatus.SetNull();
@@ -85886,8 +84900,8 @@ private:
 
             );
         }
-        case 4: {
-            LogStep(4, "TH sends Set Credential Command to DUT with type RFID");
+        case 9: {
+            LogStep(9, "TH sends Set Credential Command to DUT with type RFID");
             VerifyOrDo(!ShouldSkip("DRLK.S.F01 && DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -85897,8 +84911,9 @@ private:
             value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(2);
             value.credential.credentialIndex = 1U;
 
-            value.credentialData =
-                chip::ByteSpan(chip::Uint8::from_const_char("RFIDTESTDATAgarbage: not in length on purpose"), 12);
+            value.credentialData = mRFIDCredentialData.HasValue()
+                ? mRFIDCredentialData.Value()
+                : chip::ByteSpan(chip::Uint8::from_const_char("RFIDTESTDATA"), 12);
             value.userIndex.SetNonNull();
             value.userIndex.Value() = 1U;
             value.userStatus.SetNull();
@@ -85908,8 +84923,8 @@ private:
 
             );
         }
-        case 5: {
-            LogStep(5, "TH sends Set Credential Command to DUT with type FingerVein");
+        case 10: {
+            LogStep(10, "TH sends Set Credential Command to DUT with type FingerVein");
             VerifyOrDo(!ShouldSkip("DRLK.S.F02 && DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -85919,7 +84934,8 @@ private:
             value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(4);
             value.credential.credentialIndex = 1U;
 
-            value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
+            value.credentialData = mFingerVeinCredentialData.HasValue() ? mFingerVeinCredentialData.Value()
+                                                                        : chip::ByteSpan(chip::Uint8::from_const_char("123456"), 6);
             value.userIndex.SetNonNull();
             value.userIndex.Value() = 1U;
             value.userStatus.SetNull();
@@ -85929,8 +84945,8 @@ private:
 
             );
         }
-        case 6: {
-            LogStep(6, "TH sends Get Credential Status Command with type PIN");
+        case 11: {
+            LogStep(11, "TH sends Get Credential Status Command with type PIN");
             VerifyOrDo(!ShouldSkip("DRLK.S.F00 && DRLK.S.F08 && DRLK.S.C24.Rsp && DRLK.S.C25.Tx"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -85944,99 +84960,24 @@ private:
 
             );
         }
-        case 7: {
-            LogStep(7, "TH sends Get Credential Status Command with type RFID");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F01 && DRLK.S.C24.Rsp && DRLK.S.C25.Tx"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
-
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(2);
-            value.credential.credentialIndex = 1U;
-
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::GetCredentialStatus::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 8: {
-            LogStep(8, "TH sends Get Credential Status Command with type FingerVein");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F02 && DRLK.S.C24.Rsp && DRLK.S.C25.Tx"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
-
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(4);
-            value.credential.credentialIndex = 1U;
-
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::GetCredentialStatus::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 9: {
-            LogStep(9, "TH sends Clear Credential Command to DUT with type PIN");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F00 && DRLK.S.F08 && DRLK.S.C26.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::DoorLock::Commands::ClearCredential::Type value;
-            value.credential.SetNonNull();
-
-            value.credential.Value().credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
-            value.credential.Value().credentialIndex = 1U;
-
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::ClearCredential::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 10: {
-            LogStep(10, "TH sends Get Credential Status Command with type RFID");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F01 && DRLK.S.C24.Rsp && DRLK.S.C25.Tx"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
-
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(2);
-            value.credential.credentialIndex = 1U;
-
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::GetCredentialStatus::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 11: {
-            LogStep(11, "TH sends Get Credential Status Command with type FingerVein");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F02 && DRLK.S.C24.Rsp && DRLK.S.C25.Tx"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
-
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(4);
-            value.credential.credentialIndex = 1U;
-
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::GetCredentialStatus::Id, value,
-                               chip::NullOptional
-
-            );
-        }
         case 12: {
-            LogStep(12, "TH sends Clear Credential Command to DUT with type RFID");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F01 && DRLK.S.F08 && DRLK.S.C26.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(12, "TH sends Get Credential Status Command with type RFID");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F08 && DRLK.S.F01 && DRLK.S.C24.Rsp && DRLK.S.C25.Tx"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::Clusters::DoorLock::Commands::ClearCredential::Type value;
-            value.credential.SetNonNull();
+            chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
-            value.credential.Value().credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(2);
-            value.credential.Value().credentialIndex = 1U;
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(2);
+            value.credential.credentialIndex = 1U;
 
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::ClearCredential::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::GetCredentialStatus::Id, value,
+                               chip::NullOptional
 
             );
         }
         case 13: {
             LogStep(13, "TH sends Get Credential Status Command with type FingerVein");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F02 && DRLK.S.C24.Rsp && DRLK.S.C25.Tx"),
+            VerifyOrDo(!ShouldSkip("DRLK.S.F08 && DRLK.S.F02 && DRLK.S.C24.Rsp && DRLK.S.C25.Tx"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
@@ -86050,7 +84991,82 @@ private:
             );
         }
         case 14: {
-            LogStep(14, "TH sends Clear Credential Command to DUT with type FingerVein");
+            LogStep(14, "TH sends Clear Credential Command to DUT with type PIN");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F00 && DRLK.S.F08 && DRLK.S.C26.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::DoorLock::Commands::ClearCredential::Type value;
+            value.credential.SetNonNull();
+
+            value.credential.Value().credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
+            value.credential.Value().credentialIndex = 1U;
+
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::ClearCredential::Id, value,
+                               chip::Optional<uint16_t>(10000), chip::NullOptional
+
+            );
+        }
+        case 15: {
+            LogStep(15, "TH sends Get Credential Status Command with type RFID");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F08 && DRLK.S.F01 && DRLK.S.C24.Rsp && DRLK.S.C25.Tx"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
+
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(2);
+            value.credential.credentialIndex = 1U;
+
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::GetCredentialStatus::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 16: {
+            LogStep(16, "TH sends Get Credential Status Command with type FingerVein");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F08 && DRLK.S.F02 && DRLK.S.C24.Rsp && DRLK.S.C25.Tx"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
+
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(4);
+            value.credential.credentialIndex = 1U;
+
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::GetCredentialStatus::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 17: {
+            LogStep(17, "TH sends Clear Credential Command to DUT with type RFID");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F01 && DRLK.S.F08 && DRLK.S.C26.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::DoorLock::Commands::ClearCredential::Type value;
+            value.credential.SetNonNull();
+
+            value.credential.Value().credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(2);
+            value.credential.Value().credentialIndex = 1U;
+
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::ClearCredential::Id, value,
+                               chip::Optional<uint16_t>(10000), chip::NullOptional
+
+            );
+        }
+        case 18: {
+            LogStep(18, "TH sends Get Credential Status Command with type FingerVein");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F08 && DRLK.S.F02 && DRLK.S.C24.Rsp && DRLK.S.C25.Tx"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
+
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(4);
+            value.credential.credentialIndex = 1U;
+
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::GetCredentialStatus::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 19: {
+            LogStep(19, "TH sends Clear Credential Command to DUT with type FingerVein");
             VerifyOrDo(!ShouldSkip("DRLK.S.F02 && DRLK.S.F08 && DRLK.S.C26.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::ClearCredential::Type value;
@@ -86064,8 +85080,8 @@ private:
 
             );
         }
-        case 15: {
-            LogStep(15, "TH sends Get Credential Status Command to DUT with type PIN");
+        case 20: {
+            LogStep(20, "TH sends Get Credential Status Command to DUT with type PIN");
             VerifyOrDo(!ShouldSkip("DRLK.S.F00 && DRLK.S.F08 && DRLK.S.C24.Rsp && DRLK.S.C25.Tx"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -86079,8 +85095,8 @@ private:
 
             );
         }
-        case 16: {
-            LogStep(16, "TH sends Get Credential Status Command to DUT with type RFID");
+        case 21: {
+            LogStep(21, "TH sends Get Credential Status Command to DUT with type RFID");
             VerifyOrDo(!ShouldSkip("DRLK.S.F01 && DRLK.S.F08 && DRLK.S.C24.Rsp && DRLK.S.C25.Tx"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -86094,8 +85110,8 @@ private:
 
             );
         }
-        case 17: {
-            LogStep(17, "TH sends Get Credential Status Command to DUT with type FingerVein");
+        case 22: {
+            LogStep(22, "TH sends Get Credential Status Command to DUT with type FingerVein");
             VerifyOrDo(!ShouldSkip("DRLK.S.F02 && DRLK.S.F08 && DRLK.S.C24.Rsp && DRLK.S.C25.Tx"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -94835,6 +93851,61 @@ private:
     }
 };
 
+class Test_TC_I_3_1Suite : public TestCommand
+{
+public:
+    Test_TC_I_3_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_I_3_1", 0, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_I_3_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {}
+        return CHIP_NO_ERROR;
+    }
+};
+
 class Test_TC_I_3_2Suite : public TestCommand
 {
 public:
@@ -97221,6 +96292,118 @@ private:
     }
 };
 
+class Test_TC_WAKEONLAN_4_1Suite : public TestCommand
+{
+public:
+    Test_TC_WAKEONLAN_4_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_WAKEONLAN_4_1", 0, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_WAKEONLAN_4_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {}
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_ALOGIN_12_1Suite : public TestCommand
+{
+public:
+    Test_TC_ALOGIN_12_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_ALOGIN_12_1", 0, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_ALOGIN_12_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {}
+        return CHIP_NO_ERROR;
+    }
+};
+
 class Test_TC_CADMIN_1_1Suite : public TestCommand
 {
 public:
@@ -97445,33 +96628,26 @@ class Test_TC_CADMIN_1_11Suite : public TestCommand
 {
 public:
     Test_TC_CADMIN_1_11Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_CADMIN_1_11", 26, credsIssuerConfig)
+        TestCommand("Test_TC_CADMIN_1_11", 0, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-        AddArgument("nodeId2", 0, UINT64_MAX, &mNodeId2);
-        AddArgument("nodeId3", 0, UINT64_MAX, &mNodeId3);
+        AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("waitAfterCommissioning", 0, UINT16_MAX, &mWaitAfterCommissioning);
-        AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
-        AddArgument("payload", &mPayload);
-        AddArgument("PakeVerifier", &mPakeVerifier);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_CADMIN_1_11Suite() {}
 
-    chip::System::Clock::Timeout GetWaitDuration() const override { return chip::System::Clock::Seconds16(mTimeout.ValueOr(400)); }
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
 
 private:
     chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<uint16_t> mTimeout;
-    chip::Optional<chip::NodeId> mNodeId2;
-    chip::Optional<chip::NodeId> mNodeId3;
+    chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mWaitAfterCommissioning;
-    chip::Optional<uint16_t> mDiscriminator;
-    chip::Optional<chip::CharSpan> mPayload;
-    chip::Optional<chip::ByteSpan> mPakeVerifier;
+    chip::Optional<uint16_t> mTimeout;
 
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
 
@@ -97485,152 +96661,6 @@ private:
 
         switch (mTestIndex - 1)
         {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 3:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 4:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 10:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.HasValue(), true));
-            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.Value(), 2));
-            break;
-        case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
-                    value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                {
-                    auto iter_0 = value.begin();
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
-                    VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
-                    VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 2));
-                    VerifyOrReturn(CheckValue("fabrics[2].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[2].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 3));
-                }
-                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
-            }
-            break;
-        case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 18:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 19:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 20:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.HasValue(), true));
-            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.Value(), 2));
-            break;
-        case 21:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 22:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
-                    value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                {
-                    auto iter_0 = value.begin();
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
-                    VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
-                    VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 2));
-                    VerifyOrReturn(CheckValue("fabrics[2].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[2].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 3));
-                }
-                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
-            }
-            break;
-        case 23:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 24:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 25:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.HasValue(), true));
-            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.Value(), 2));
-            break;
         default:
             LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
         }
@@ -97645,301 +96675,7 @@ private:
     {
         using namespace chip::app::Clusters;
         switch (testIndex)
-        {
-        case 0: {
-            LogStep(0, "Precondition: Reset Devices to factory defaults");
-            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::SystemCommands::Commands::FactoryReset::Type value;
-            return FactoryReset(kIdentityAlpha, value);
-        }
-        case 1: {
-            LogStep(1, "Precondition: Reset Devices to factory defaults");
-            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message =
-                chip::Span<const char>("Factory Reset the DUT and enter 'y' after successgarbage: not in length on purpose", 49);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 2: {
-            LogStep(2, "TH_CR1 starts a commissioning process with DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-            return WaitForCommissionee(kIdentityAlpha, value);
-        }
-        case 3: {
-            LogStep(3, "TH_CR1 opens a commissioning window on DUT_CE using ECM");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
-            value.commissioningTimeout = 180U;
-            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
-                ? mPakeVerifier.Value()
-                : chip::ByteSpan(
-                      chip::Uint8::from_const_char(
-                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
-                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
-                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
-                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
-                      97);
-            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations           = 1000UL;
-            value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
-            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 4: {
-            LogStep(4, "Waiting after opening commissioning window");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
-            return WaitForMs(kIdentityAlpha, value);
-        }
-        case 5: {
-            LogStep(5, "Verify that the DNS-SD advertisement shows CM=2");
-            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>("enter 'y' after successgarbage: not in length on purpose", 23);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 6: {
-            LogStep(6, "TH_CR3 starts a commissioning process with DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL;
-            value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-            return PairWithCode(kIdentityGamma, value);
-        }
-        case 7: {
-            LogStep(7, "DUT_CE is commissioned to TH_CR3 on Fabric ID3 with Node ID3");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-            value.nodeId = mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL;
-            return WaitForCommissionee(kIdentityGamma, value);
-        }
-        case 8: {
-            LogStep(8, "TH_CR1 opens a commissioning window on DUT_CE using ECM");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
-            value.commissioningTimeout = 180U;
-            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
-                ? mPakeVerifier.Value()
-                : chip::ByteSpan(
-                      chip::Uint8::from_const_char(
-                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
-                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
-                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
-                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
-                      97);
-            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations           = 1000UL;
-            value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
-            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 9: {
-            LogStep(9, "Waiting after opening commissioning window");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
-            return WaitForMs(kIdentityAlpha, value);
-        }
-        case 10: {
-            LogStep(10, "TH_CR2 starts a commissioning process with DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-            return PairWithCode(kIdentityBeta, value);
-        }
-        case 11: {
-            LogStep(11, "DUT_CE is commissioned to TH_CR2");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-            value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            return WaitForCommissionee(kIdentityBeta, value);
-        }
-        case 12: {
-            LogStep(12, "TH_CR1 opens a commissioning window on DUT_CE using ECM");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
-            value.commissioningTimeout = 180U;
-            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
-                ? mPakeVerifier.Value()
-                : chip::ByteSpan(
-                      chip::Uint8::from_const_char(
-                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
-                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
-                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
-                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
-                      97);
-            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations           = 1000UL;
-            value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
-            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 13: {
-            LogStep(13, "Waiting after opening commissioning window");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
-            return WaitForMs(kIdentityAlpha, value);
-        }
-        case 14: {
-            LogStep(14,
-                    "Before the expiration of PIXIT.CADMIN.CwDuration seconds which was set in step 5, TH_CR1 opens a 2nd "
-                    "commissioning window on DUT_CE using a commissioning timeout of PIXIT.CADMIN.CwDuration seconds using ECM");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
-            value.commissioningTimeout = 180U;
-            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
-                ? mPakeVerifier.Value()
-                : chip::ByteSpan(
-                      chip::Uint8::from_const_char(
-                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
-                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
-                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
-                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
-                      97);
-            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations           = 1000UL;
-            value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
-            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 15: {
-            LogStep(15, "TH_CR1 reads the list of Fabrics on DUT_CE");
-            VerifyOrDo(!ShouldSkip("OPCREDS.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
-                                 OperationalCredentials::Attributes::Fabrics::Id, false, chip::NullOptional);
-        }
-        case 16: {
-            LogStep(16, "Wait for the expiration of PIXIT.CADMIN.CwDuration seconds that was set in step 6");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-            value.ms = 180000UL;
-            return WaitForMs(kIdentityAlpha, value);
-        }
-        case 17: {
-            LogStep(17,
-                    "TH_CR1 re-opens a commissioning window on DUT_CE using a commissioning timeout of PIXIT.CADMIN.CwDuration "
-                    "seconds using BCM");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type value;
-            value.commissioningTimeout = 180U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 18: {
-            LogStep(18, "Waiting after opening commissioning window");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
-            return WaitForMs(kIdentityAlpha, value);
-        }
-        case 19: {
-            LogStep(19, "Verify that the DNS-SD advertisement shows CM=1");
-            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>("enter 'y' after successgarbage: not in length on purpose", 23);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 20: {
-            LogStep(20,
-                    "Before the expiration of PIXIT.CADMIN.CwDuration seconds that was set in step 10, TH_CR3 opens a 2nd "
-                    "commissioning window on DUT_CE using a commissioning timeout of PIXIT.CADMIN.CwDuration seconds using BCM");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type value;
-            value.commissioningTimeout = 180U;
-            return SendCommand(kIdentityGamma, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 21: {
-            LogStep(21, "Wait for the expiration of PIXIT.CADMIN.CwDuration seconds that was set in step 11");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-            value.ms = 180000UL;
-            return WaitForMs(kIdentityAlpha, value);
-        }
-        case 22: {
-            LogStep(22, "TH_CR1 reads the list of Fabrics on DUT_CE");
-            VerifyOrDo(!ShouldSkip("OPCREDS.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
-                                 OperationalCredentials::Attributes::Fabrics::Id, false, chip::NullOptional);
-        }
-        case 23: {
-            LogStep(23, "TH_CR1 opens a commissioning window on DUT_CE using BCM");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type value;
-            value.commissioningTimeout = 180U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 24: {
-            LogStep(24, "Waiting after opening commissioning window");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
-            return WaitForMs(kIdentityAlpha, value);
-        }
-        case 25: {
-            LogStep(25,
-                    "Before the expiration of PIXIT.CADMIN.CwDuration seconds that was set in step 14, TH_CR2 opens a second "
-                    "commissioning window on DUT_CE using a commissioning timeout of PIXIT.CADMIN.CwDuration seconds using BCM");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type value;
-            value.commissioningTimeout = 180U;
-            return SendCommand(kIdentityBeta, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -98060,16 +96796,11 @@ class Test_TC_CADMIN_1_15Suite : public TestCommand
 {
 public:
     Test_TC_CADMIN_1_15Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_CADMIN_1_15", 22, credsIssuerConfig)
+        TestCommand("Test_TC_CADMIN_1_15", 0, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("nodeId2", 0, UINT64_MAX, &mNodeId2);
-        AddArgument("nodeId3", 0, UINT64_MAX, &mNodeId3);
+        AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("waitAfterCommissioning", 0, UINT16_MAX, &mWaitAfterCommissioning);
-        AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
-        AddArgument("payload", &mPayload);
-        AddArgument("PakeVerifier", &mPakeVerifier);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
@@ -98082,13 +96813,8 @@ public:
 
 private:
     chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::NodeId> mNodeId2;
-    chip::Optional<chip::NodeId> mNodeId3;
+    chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mWaitAfterCommissioning;
-    chip::Optional<uint16_t> mDiscriminator;
-    chip::Optional<chip::CharSpan> mPayload;
-    chip::Optional<chip::ByteSpan> mPakeVerifier;
     chip::Optional<uint16_t> mTimeout;
 
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
@@ -98103,163 +96829,6 @@ private:
 
         switch (mTestIndex - 1)
         {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 3:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 4:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 10:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
-                    value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                {
-                    auto iter_0 = value.begin();
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
-                    VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckValue("fabrics[0].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
-                    VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckValue("fabrics[1].fabricIndex", iter_0.GetValue().fabricIndex, 2U));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 2));
-                    VerifyOrReturn(CheckValue("fabrics[2].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[2].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckValue("fabrics[2].fabricIndex", iter_0.GetValue().fabricIndex, 3U));
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 3));
-                }
-                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
-            }
-            break;
-        case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::OperationalCredentials::Commands::NOCResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-            }
-            break;
-        case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            break;
-        case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
-                    value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                {
-                    auto iter_0 = value.begin();
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
-                    VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckValue("fabrics[0].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
-                    VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckValue("fabrics[1].fabricIndex", iter_0.GetValue().fabricIndex, 3U));
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 2));
-                }
-                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
-            }
-            break;
-        case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 18:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 19:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 20:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 21:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
-                    value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                {
-                    auto iter_0 = value.begin();
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
-                    VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckValue("fabrics[0].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
-                    VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckValue("fabrics[1].fabricIndex", iter_0.GetValue().fabricIndex, 4U));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 2));
-                    VerifyOrReturn(CheckValue("fabrics[2].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[2].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckValue("fabrics[2].fabricIndex", iter_0.GetValue().fabricIndex, 3U));
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 3));
-                }
-                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
-            }
-            break;
         default:
             LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
         }
@@ -98274,238 +96843,7 @@ private:
     {
         using namespace chip::app::Clusters;
         switch (testIndex)
-        {
-        case 0: {
-            LogStep(0, "Precondition: Reset Devices to factory defaults");
-            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::SystemCommands::Commands::FactoryReset::Type value;
-            return FactoryReset(kIdentityAlpha, value);
-        }
-        case 1: {
-            LogStep(1, "Precondition: Reset Devices to factory defaults");
-            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message =
-                chip::Span<const char>("Factory Reset the DUT and enter 'y' after successgarbage: not in length on purpose", 49);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 2: {
-            LogStep(2, "TH_CR1 starts a commissioning process with DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-            return WaitForCommissionee(kIdentityAlpha, value);
-        }
-        case 3: {
-            LogStep(3, "TH_CR1 opens a commissioning window on DUT_CE using ECM");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
-            value.commissioningTimeout = 180U;
-            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
-                ? mPakeVerifier.Value()
-                : chip::ByteSpan(
-                      chip::Uint8::from_const_char(
-                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
-                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
-                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
-                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
-                      97);
-            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations           = 1000UL;
-            value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
-            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 4: {
-            LogStep(4, "Waiting after opening commissioning window");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
-            return WaitForMs(kIdentityAlpha, value);
-        }
-        case 5: {
-            LogStep(5, "TH_CR2 starts a commissioning process with DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-            return PairWithCode(kIdentityBeta, value);
-        }
-        case 6: {
-            LogStep(6, "DUT_CE is commissioned to TH_CR2");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-            value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            return WaitForCommissionee(kIdentityBeta, value);
-        }
-        case 7: {
-            LogStep(7, "TH_CR1 opens a commissioning window on DUT_CE using ECM");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
-            value.commissioningTimeout = 180U;
-            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
-                ? mPakeVerifier.Value()
-                : chip::ByteSpan(
-                      chip::Uint8::from_const_char(
-                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
-                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
-                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
-                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
-                      97);
-            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations           = 1000UL;
-            value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
-            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 8: {
-            LogStep(8, "Waiting after opening commissioning window");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
-            return WaitForMs(kIdentityAlpha, value);
-        }
-        case 9: {
-            LogStep(9, "TH_CR3 Commissions with DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL;
-            value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-            return PairWithCode(kIdentityGamma, value);
-        }
-        case 10: {
-            LogStep(10, "DUT_CE is commissioned to TH_CR3");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-            value.nodeId = mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL;
-            return WaitForCommissionee(kIdentityGamma, value);
-        }
-        case 11: {
-            LogStep(11, "TH_CR2 reads the list of Fabrics on DUT_CE");
-            VerifyOrDo(!ShouldSkip("OPCREDS.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityBeta, GetEndpoint(0), OperationalCredentials::Id,
-                                 OperationalCredentials::Attributes::Fabrics::Id, false, chip::NullOptional);
-        }
-        case 12: {
-            LogStep(12, "TH_CR2 sends RemoveFabric with FabricIndex = 2 command to DUT_CE");
-            VerifyOrDo(!ShouldSkip("OPCREDS.S.C0a.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::OperationalCredentials::Commands::RemoveFabric::Type value;
-            value.fabricIndex = 2U;
-            return SendCommand(kIdentityBeta, GetEndpoint(0), OperationalCredentials::Id,
-                               OperationalCredentials::Commands::RemoveFabric::Id, value, chip::Optional<uint16_t>(10000),
-                               chip::NullOptional
-
-            );
-        }
-        case 13: {
-            LogStep(13, "TH_CR2 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
-            VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::CharSpan value;
-            value = chip::Span<const char>("chiptestgarbage: not in length on purpose", 8);
-            return WriteAttribute(kIdentityBeta, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
-                                  value, chip::NullOptional, chip::NullOptional);
-        }
-        case 14: {
-            LogStep(14, "TH_CR2 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
-            VerifyOrDo(!ShouldSkip("BINFO.S.A0005 && PICS_USER_PROMPT"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 15: {
-            LogStep(15, "TH_CR1 reads the list of Fabrics on DUT_CE");
-            VerifyOrDo(!ShouldSkip("OPCREDS.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
-                                 OperationalCredentials::Attributes::Fabrics::Id, false, chip::NullOptional);
-        }
-        case 16: {
-            LogStep(16,
-                    "Verify DUT_CE is now discoverable over DNS-SD with 2 Operational service records (_matter._tcp SRV records).");
-            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>("enter 'y' after successgarbage: not in length on purpose", 23);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 17: {
-            LogStep(17, "TH_CR1 opens a commissioning window on DUT_CE using ECM");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
-            value.commissioningTimeout = 180U;
-            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
-                ? mPakeVerifier.Value()
-                : chip::ByteSpan(
-                      chip::Uint8::from_const_char(
-                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
-                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
-                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
-                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
-                      97);
-            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations           = 1000UL;
-            value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
-            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 18: {
-            LogStep(18, "Waiting after opening commissioning window");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
-            return WaitForMs(kIdentityAlpha, value);
-        }
-        case 19: {
-            LogStep(19, "TH_CR2 starts a commissioning process with DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-            return PairWithCode(kIdentityBeta, value);
-        }
-        case 20: {
-            LogStep(20, "DUT_CE is commissioned to TH_CR2");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-            value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            return WaitForCommissionee(kIdentityBeta, value);
-        }
-        case 21: {
-            LogStep(21, "TH_CR1 reads the list of Fabrics on DUT_CE");
-            VerifyOrDo(!ShouldSkip("OPCREDS.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
-                                 OperationalCredentials::Attributes::Fabrics::Id, false, chip::NullOptional);
-        }
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -98514,7 +96852,7 @@ class Test_TC_CADMIN_1_16Suite : public TestCommand
 {
 public:
     Test_TC_CADMIN_1_16Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_CADMIN_1_16", 21, credsIssuerConfig)
+        TestCommand("Test_TC_CADMIN_1_16", 25, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("nodeId2", 0, UINT64_MAX, &mNodeId2);
@@ -98543,6 +96881,9 @@ private:
     chip::Optional<chip::CharSpan> mPayload;
     chip::Optional<uint16_t> mTimeout;
 
+    uint8_t TH3FabricIndex;
+    uint8_t TH2FabricIndex;
+
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
 
     //
@@ -98600,6 +96941,14 @@ private:
         case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                TH3FabricIndex = value;
+            }
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
                 chip::app::DataModel::DecodableList<
                     chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
                     value;
@@ -98626,21 +96975,21 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 12:
+        case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::OperationalCredentials::Commands::NOCResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
             }
             break;
-        case 13:
+        case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
-        case 14:
+        case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             shouldContinue = true;
             break;
-        case 15:
+        case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -98664,12 +97013,8 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
             break;
         case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -98680,6 +97025,18 @@ private:
             shouldContinue = true;
             break;
         case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                TH2FabricIndex = value;
+            }
+            break;
+        case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -98706,6 +97063,20 @@ private:
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 3));
                 }
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::OperationalCredentials::Commands::NOCResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+            }
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::OperationalCredentials::Commands::NOCResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
             }
             break;
         default:
@@ -98822,13 +97193,18 @@ private:
             return WaitForCommissionee(kIdentityGamma, value);
         }
         case 11: {
-            LogStep(11, "TH_CR2 reads the list of Fabrics on DUT_CE");
+            LogStep(11, "TH3 reads CurrentFabricIndex attribute and save it for future use.");
+            return ReadAttribute(kIdentityGamma, GetEndpoint(0), OperationalCredentials::Id,
+                                 OperationalCredentials::Attributes::CurrentFabricIndex::Id, true, chip::NullOptional);
+        }
+        case 12: {
+            LogStep(12, "TH_CR2 reads the list of Fabrics on DUT_CE");
             VerifyOrDo(!ShouldSkip("OPCREDS.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityBeta, GetEndpoint(0), OperationalCredentials::Id,
                                  OperationalCredentials::Attributes::Fabrics::Id, false, chip::NullOptional);
         }
-        case 12: {
-            LogStep(12, "TH_CR2 sends RemoveFabric with FabricIndex = 2 command to DUT_CE");
+        case 13: {
+            LogStep(13, "TH_CR2 sends RemoveFabric with FabricIndex = 2 command to DUT_CE");
             VerifyOrDo(!ShouldSkip("OPCREDS.S.C0a.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::OperationalCredentials::Commands::RemoveFabric::Type value;
@@ -98839,8 +97215,8 @@ private:
 
             );
         }
-        case 13: {
-            LogStep(13, "TH_CR2 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
+        case 14: {
+            LogStep(14, "TH_CR2 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::CharSpan value;
@@ -98848,8 +97224,8 @@ private:
             return WriteAttribute(kIdentityBeta, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
-        case 14: {
-            LogStep(14, "TH_CR2 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
+        case 15: {
+            LogStep(15, "TH_CR2 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005 && PICS_USER_PROMPT"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
@@ -98858,14 +97234,14 @@ private:
             value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
             return UserPrompt(kIdentityAlpha, value);
         }
-        case 15: {
-            LogStep(15, "TH_CR1 reads the list of Fabrics on DUT_CE");
+        case 16: {
+            LogStep(16, "TH_CR1 reads the list of Fabrics on DUT_CE");
             VerifyOrDo(!ShouldSkip("OPCREDS.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
                                  OperationalCredentials::Attributes::Fabrics::Id, false, chip::NullOptional);
         }
-        case 16: {
-            LogStep(16, "TH_CR1 opens a commissioning window on DUT_CE using BCM");
+        case 17: {
+            LogStep(17, "TH_CR1 opens a commissioning window on DUT_CE using BCM");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type value;
@@ -98876,15 +97252,15 @@ private:
 
             );
         }
-        case 17: {
-            LogStep(17, "Waiting after opening commissioning window");
+        case 18: {
+            LogStep(18, "Waiting after opening commissioning window");
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
             return WaitForMs(kIdentityAlpha, value);
         }
-        case 18: {
-            LogStep(18, "TH_CR2 starts a commissioning process with DUT_CE");
+        case 19: {
+            LogStep(19, "TH_CR2 starts a commissioning process with DUT_CE");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
@@ -98892,19 +97268,48 @@ private:
             value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
-        case 19: {
-            LogStep(19, "DUT_CE is commissioned to TH_CR2");
+        case 20: {
+            LogStep(20, "DUT_CE is commissioned to TH_CR2");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
             value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             return WaitForCommissionee(kIdentityBeta, value);
         }
-        case 20: {
-            LogStep(20, "TH_CR1 reads the list of Fabrics on DUT_CE");
+        case 21: {
+            LogStep(21, "TH2 reads CurrentFabricIndex attribute and save it for future use.");
+            return ReadAttribute(kIdentityBeta, GetEndpoint(0), OperationalCredentials::Id,
+                                 OperationalCredentials::Attributes::CurrentFabricIndex::Id, true, chip::NullOptional);
+        }
+        case 22: {
+            LogStep(22, "TH_CR1 reads the list of Fabrics on DUT_CE");
             VerifyOrDo(!ShouldSkip("OPCREDS.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
                                  OperationalCredentials::Attributes::Fabrics::Id, false, chip::NullOptional);
+        }
+        case 23: {
+            LogStep(23, "Remove TH2 FabricIndex");
+            VerifyOrDo(!ShouldSkip("OPCREDS.S.C0a.Rsp && CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::OperationalCredentials::Commands::RemoveFabric::Type value;
+            value.fabricIndex = TH2FabricIndex;
+            return SendCommand(kIdentityBeta, GetEndpoint(0), OperationalCredentials::Id,
+                               OperationalCredentials::Commands::RemoveFabric::Id, value, chip::Optional<uint16_t>(10000),
+                               chip::NullOptional
+
+            );
+        }
+        case 24: {
+            LogStep(24, "Remove TH3 FabricIndex");
+            VerifyOrDo(!ShouldSkip("OPCREDS.S.C0a.Rsp && CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::OperationalCredentials::Commands::RemoveFabric::Type value;
+            value.fabricIndex = TH3FabricIndex;
+            return SendCommand(kIdentityGamma, GetEndpoint(0), OperationalCredentials::Id,
+                               OperationalCredentials::Commands::RemoveFabric::Id, value, chip::Optional<uint16_t>(10000),
+                               chip::NullOptional
+
+            );
         }
         }
         return CHIP_NO_ERROR;
@@ -99300,7 +97705,7 @@ class Test_TC_CADMIN_1_22Suite : public TestCommand
 {
 public:
     Test_TC_CADMIN_1_22Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_CADMIN_1_22", 8, credsIssuerConfig)
+        TestCommand("Test_TC_CADMIN_1_22", 10, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
@@ -99346,12 +97751,16 @@ private:
             break;
         case 3:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         case 4:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
             break;
         case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
@@ -99359,10 +97768,14 @@ private:
                 VerifyOrReturn(CheckValue("windowStatus", value, 0U));
             }
             break;
-        case 6:
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
-        case 7:
+        case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
@@ -99412,8 +97825,18 @@ private:
             return WaitForCommissionee(kIdentityAlpha, value);
         }
         case 3: {
-            LogStep(3, "TH_CR1 opens a commissioning window on DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(3, "TH_CR1 opens a commissioning window on DUT_CE using ECM with a value of 900 seconds");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP && CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 4: {
+            LogStep(4, "TH_CR1 opens a commissioning window on DUT_CE using ECM with a value of 900 seconds");
+            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp && PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 900U;
@@ -99435,22 +97858,32 @@ private:
 
             );
         }
-        case 4: {
-            LogStep(4, "Wait for commissioning Window to 901 seconds");
+        case 5: {
+            LogStep(5, "Wait for commissioning Window to 901 seconds");
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 901000UL;
             return WaitForMs(kIdentityAlpha, value);
         }
-        case 5: {
-            LogStep(5, "TH_CR1 reads the window status to verify the DUT_CE window is closed");
+        case 6: {
+            LogStep(6, "TH_CR1 reads the window status to verify the DUT_CE window is closed");
             VerifyOrDo(!ShouldSkip("CADMIN.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
                                  AdministratorCommissioning::Attributes::WindowStatus::Id, true, chip::NullOptional);
         }
-        case 6: {
-            LogStep(6, "TH_CR1 opens a commissioning window on DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+        case 7: {
+            LogStep(7, "TH_CR1 opens a commissioning window on DUT_CE using ECM with a value of 901 seconds");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP && CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 8: {
+            LogStep(8, "TH_CR1 opens a commissioning window on DUT_CE using ECM with a value of 901 seconds");
+            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp && PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 901U;
@@ -99472,8 +97905,8 @@ private:
 
             );
         }
-        case 7: {
-            LogStep(7, "TH_CR1 reads the window status to verify the DUT_CE window is closed");
+        case 9: {
+            LogStep(9, "TH_CR1 reads the window status to verify the DUT_CE window is closed");
             VerifyOrDo(!ShouldSkip("CADMIN.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
                                  AdministratorCommissioning::Attributes::WindowStatus::Id, true, chip::NullOptional);
@@ -99486,31 +97919,26 @@ private:
 class Test_TC_CADMIN_1_3Suite : public TestCommand
 {
 public:
-    Test_TC_CADMIN_1_3Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_CADMIN_1_3", 23, credsIssuerConfig)
+    Test_TC_CADMIN_1_3Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_CADMIN_1_3", 0, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-        AddArgument("nodeId2", 0, UINT64_MAX, &mNodeId2);
+        AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
-        AddArgument("payload", &mPayload);
-        AddArgument("PakeVerifier", &mPakeVerifier);
-        AddArgument("waitAfterCommissioning", 0, UINT16_MAX, &mWaitAfterCommissioning);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_CADMIN_1_3Suite() {}
 
-    chip::System::Clock::Timeout GetWaitDuration() const override { return chip::System::Clock::Seconds16(mTimeout.ValueOr(300)); }
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
 
 private:
     chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<uint16_t> mTimeout;
-    chip::Optional<chip::NodeId> mNodeId2;
+    chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mDiscriminator;
-    chip::Optional<chip::CharSpan> mPayload;
-    chip::Optional<chip::ByteSpan> mPakeVerifier;
-    chip::Optional<uint16_t> mWaitAfterCommissioning;
+    chip::Optional<uint16_t> mTimeout;
 
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
 
@@ -99524,152 +97952,6 @@ private:
 
         switch (mTestIndex - 1)
         {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 3:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 4:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::CharSpan value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValueAsString("nodeLabel", value, chip::CharSpan("chiptest", 8)));
-                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
-            }
-            break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 10:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
-                    value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                {
-                    auto iter_0 = value.begin();
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
-                    VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
-                    VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 2));
-                }
-                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
-            }
-            break;
-        case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
-                    value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                {
-                    auto iter_0 = value.begin();
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
-                    VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
-                    VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 2));
-                }
-                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
-            }
-            break;
-        case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::CharSpan value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValueAsString("nodeLabel", value, chip::CharSpan("chiptest1", 9)));
-                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
-            }
-            break;
-        case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::CharSpan value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValueAsString("nodeLabel", value, chip::CharSpan("chiptest2", 9)));
-                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
-            }
-            break;
-        case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 18:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 19:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("windowStatus", value, 0U));
-            }
-            break;
-        case 20:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 21:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 22:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.HasValue(), true));
-            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.Value(), 9));
-            shouldContinue = true;
-            break;
         default:
             LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
         }
@@ -99684,236 +97966,7 @@ private:
     {
         using namespace chip::app::Clusters;
         switch (testIndex)
-        {
-        case 0: {
-            LogStep(0, "Precondition: Reset Devices to factory defaults");
-            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::SystemCommands::Commands::FactoryReset::Type value;
-            return FactoryReset(kIdentityAlpha, value);
-        }
-        case 1: {
-            LogStep(1, "Precondition: Reset Devices to factory defaults");
-            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message =
-                chip::Span<const char>("Factory Reset the DUT and enter 'y' after successgarbage: not in length on purpose", 49);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 2: {
-            LogStep(2, "TH_CR1 starts a commissioning process with DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-            return WaitForCommissionee(kIdentityAlpha, value);
-        }
-        case 3: {
-            LogStep(3, "TH_CR1 opens a commissioning window on DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
-            value.commissioningTimeout = 180U;
-            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
-                ? mPakeVerifier.Value()
-                : chip::ByteSpan(
-                      chip::Uint8::from_const_char(
-                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
-                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
-                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
-                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
-                      97);
-            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations           = 1000UL;
-            value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
-            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 4: {
-            LogStep(4, "Waiting after opening commissioning window");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
-            return WaitForMs(kIdentityAlpha, value);
-        }
-        case 5: {
-            LogStep(5, "Verify that the DNS-SD advertisement shows CM=2");
-            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>("enter 'y' after successgarbage: not in length on purpose", 23);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 6: {
-            LogStep(6, "TH_CR1 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
-            VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::CharSpan value;
-            value = chip::Span<const char>("chiptestgarbage: not in length on purpose", 8);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
-                                  value, chip::NullOptional, chip::NullOptional);
-        }
-        case 7: {
-            LogStep(7, "TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
-            VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
-                                 true, chip::NullOptional);
-        }
-        case 8: {
-            LogStep(8, "TH_CR2 starts a commissioning process with DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-            return PairWithCode(kIdentityBeta, value);
-        }
-        case 9: {
-            LogStep(9, "DUT_CE is commissioned by TH_CR2 on Fabric ID2");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-            value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            return WaitForCommissionee(kIdentityBeta, value);
-        }
-        case 10: {
-            LogStep(10, "Verify DUT_CE is now discoverable over DNS-SD with two SRV Records");
-            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>("enter 'y' after successgarbage: not in length on purpose", 23);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 11: {
-            LogStep(11, "TH_CR1 reads the list of Fabrics on DUT_CE");
-            VerifyOrDo(!ShouldSkip("OPCREDS.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
-                                 OperationalCredentials::Attributes::Fabrics::Id, false, chip::NullOptional);
-        }
-        case 12: {
-            LogStep(12, "TH_CR2 reads the list of Fabrics on DUT_CE");
-            VerifyOrDo(!ShouldSkip("OPCREDS.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityBeta, GetEndpoint(0), OperationalCredentials::Id,
-                                 OperationalCredentials::Attributes::Fabrics::Id, false, chip::NullOptional);
-        }
-        case 13: {
-            LogStep(13, "TH_CR1 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
-            VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::CharSpan value;
-            value = chip::Span<const char>("chiptest1garbage: not in length on purpose", 9);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
-                                  value, chip::NullOptional, chip::NullOptional);
-        }
-        case 14: {
-            LogStep(14, "TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
-            VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
-                                 true, chip::NullOptional);
-        }
-        case 15: {
-            LogStep(15, "TH_CR2 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
-            VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::CharSpan value;
-            value = chip::Span<const char>("chiptest2garbage: not in length on purpose", 9);
-            return WriteAttribute(kIdentityBeta, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
-                                  value, chip::NullOptional, chip::NullOptional);
-        }
-        case 16: {
-            LogStep(16, "TH_CR2 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
-            VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityBeta, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
-                                 true, chip::NullOptional);
-        }
-        case 17: {
-            LogStep(17, "TH_CR2 opens a commissioning window on DUT_CE using ECM");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
-            value.commissioningTimeout = 180U;
-            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
-                ? mPakeVerifier.Value()
-                : chip::ByteSpan(
-                      chip::Uint8::from_const_char(
-                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
-                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
-                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
-                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
-                      97);
-            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations           = 1000UL;
-            value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
-            return SendCommand(kIdentityBeta, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 18: {
-            LogStep(18, "Wait for the commissioning window in step 13 to timeout");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-            value.ms = 180000UL;
-            return WaitForMs(kIdentityAlpha, value);
-        }
-        case 19: {
-            LogStep(19, "TH_CR2 reads the window status to verify the DUT_CE window is closed");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                                 AdministratorCommissioning::Attributes::WindowStatus::Id, true, chip::NullOptional);
-        }
-        case 20: {
-            LogStep(20, "TH_CR2 opens a commissioning window on DUT_CE using ECM");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
-            value.commissioningTimeout = 180U;
-            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
-                ? mPakeVerifier.Value()
-                : chip::ByteSpan(
-                      chip::Uint8::from_const_char(
-                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
-                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
-                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
-                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
-                      97);
-            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations           = 1000UL;
-            value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
-            return SendCommand(kIdentityBeta, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 21: {
-            LogStep(21, "Waiting after opening commissioning window");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
-            return WaitForMs(kIdentityAlpha, value);
-        }
-        case 22: {
-            LogStep(22, "TH_CR1 starts a commissioning process with DUT_CE before the timeout from step 12");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-            value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-            return PairWithCode(kIdentityAlpha, value);
-        }
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -99921,7 +97974,7 @@ private:
 class Test_TC_CADMIN_1_4Suite : public TestCommand
 {
 public:
-    Test_TC_CADMIN_1_4Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_CADMIN_1_4", 23, credsIssuerConfig)
+    Test_TC_CADMIN_1_4Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_CADMIN_1_4", 27, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
@@ -99945,6 +97998,9 @@ private:
     chip::Optional<chip::CharSpan> mPayload;
     chip::Optional<uint16_t> mWaitAfterCommissioning;
 
+    uint8_t TH1FabricIndex;
+    uint8_t TH2FabricIndex;
+
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
 
     //
@@ -99971,10 +98027,14 @@ private:
             break;
         case 3:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                TH1FabricIndex = value;
+            }
             break;
         case 4:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
             break;
         case 5:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -99982,8 +98042,12 @@ private:
             break;
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::CharSpan value;
@@ -99991,10 +98055,6 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
             }
-            break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
             break;
         case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -100007,27 +98067,17 @@ private:
         case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
-                    value;
+                uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                {
-                    auto iter_0 = value.begin();
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
-                    VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
-                    VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 2));
-                }
-                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                TH2FabricIndex = value;
             }
             break;
         case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
                     chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
@@ -100039,26 +98089,39 @@ private:
                     VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
+                    VerifyOrReturn(CheckValue("fabrics[0].fabricIndex", iter_0.GetValue().fabricIndex, TH1FabricIndex));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
                     VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
+                    VerifyOrReturn(CheckValue("fabrics[1].fabricIndex", iter_0.GetValue().fabricIndex, TH2FabricIndex));
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 2));
                 }
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::CharSpan value;
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
+                    value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValueAsString("nodeLabel", value, chip::CharSpan("chiptest", 8)));
-                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
+                    VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
+                                              mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
+                    VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
+                    VerifyOrReturn(CheckValue("fabrics[0].fabricIndex", iter_0.GetValue().fabricIndex, TH1FabricIndex));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
+                    VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
+                                              mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL));
+                    VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
+                    VerifyOrReturn(CheckValue("fabrics[1].fabricIndex", iter_0.GetValue().fabricIndex, TH2FabricIndex));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 2));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 15:
@@ -100079,9 +98142,22 @@ private:
             break;
         case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
+            {
+                chip::CharSpan value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueAsString("nodeLabel", value, chip::CharSpan("chiptest", 8)));
+                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
+                VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
+            }
             break;
         case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
@@ -100089,18 +98165,28 @@ private:
                 VerifyOrReturn(CheckValue("windowStatus", value, 0U));
             }
             break;
-        case 20:
+        case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 21:
+        case 23:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             shouldContinue = true;
             break;
-        case 22:
+        case 24:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.HasValue(), true));
             VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.Value(), 9));
             shouldContinue = true;
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::OperationalCredentials::Commands::NOCResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+            }
             break;
         default:
             LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
@@ -100144,7 +98230,12 @@ private:
             return WaitForCommissionee(kIdentityAlpha, value);
         }
         case 3: {
-            LogStep(3, "TH_CR1 opens a commissioning window on DUT_CE using BCM");
+            LogStep(3, "TH1 reads CurrentFabricIndex attribute and save it for future use.");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
+                                 OperationalCredentials::Attributes::CurrentFabricIndex::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "TH_CR1 opens a commissioning window on DUT_CE using BCM");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type value;
@@ -100155,15 +98246,15 @@ private:
 
             );
         }
-        case 4: {
-            LogStep(4, "Waiting after opening commissioning window");
+        case 5: {
+            LogStep(5, "Waiting after opening commissioning window");
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
             return WaitForMs(kIdentityAlpha, value);
         }
-        case 5: {
-            LogStep(5, "Verify that the DNS-SD advertisement shows CM=1");
+        case 6: {
+            LogStep(6, "Verify that the DNS-SD advertisement shows CM=1");
             VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
@@ -100172,8 +98263,8 @@ private:
             value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
             return UserPrompt(kIdentityAlpha, value);
         }
-        case 6: {
-            LogStep(6, "TH_CR1 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
+        case 7: {
+            LogStep(7, "TH_CR1 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::CharSpan value;
@@ -100181,14 +98272,14 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
-        case 7: {
-            LogStep(7, "TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
+        case 8: {
+            LogStep(8, "TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
                                  true, chip::NullOptional);
         }
-        case 8: {
-            LogStep(8, "TH_CR2 starts a commissioning process with DUT_CE");
+        case 9: {
+            LogStep(9, "TH_CR2 starts a commissioning process with DUT_CE");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
@@ -100196,16 +98287,21 @@ private:
             value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
-        case 9: {
-            LogStep(9, "DUT_CE is commissioned by TH_CR2 on Fabric ID2 ");
+        case 10: {
+            LogStep(10, "DUT_CE is commissioned by TH_CR2 on Fabric ID2 ");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
             value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             return WaitForCommissionee(kIdentityBeta, value);
         }
-        case 10: {
-            LogStep(10, "Verify DUT_CE is now discoverable over DNS-SD with two SRV Records");
+        case 11: {
+            LogStep(11, "TH2 reads CurrentFabricIndex attribute and save it for future use.");
+            return ReadAttribute(kIdentityBeta, GetEndpoint(0), OperationalCredentials::Id,
+                                 OperationalCredentials::Attributes::CurrentFabricIndex::Id, true, chip::NullOptional);
+        }
+        case 12: {
+            LogStep(12, "Verify DUT_CE is now discoverable over DNS-SD with two SRV Records");
             VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
@@ -100214,20 +98310,20 @@ private:
             value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
             return UserPrompt(kIdentityAlpha, value);
         }
-        case 11: {
-            LogStep(11, "TH_CR1 reads the list of Fabrics on DUT_CE");
+        case 13: {
+            LogStep(13, "TH_CR1 reads the list of Fabrics on DUT_CE");
             VerifyOrDo(!ShouldSkip("OPCREDS.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
                                  OperationalCredentials::Attributes::Fabrics::Id, false, chip::NullOptional);
         }
-        case 12: {
-            LogStep(12, "TH_CR2 reads the list of Fabrics on DUT_CE");
+        case 14: {
+            LogStep(14, "TH_CR2 reads the list of Fabrics on DUT_CE");
             VerifyOrDo(!ShouldSkip("OPCREDS.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityBeta, GetEndpoint(0), OperationalCredentials::Id,
                                  OperationalCredentials::Attributes::Fabrics::Id, false, chip::NullOptional);
         }
-        case 13: {
-            LogStep(13, "TH_CR1 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
+        case 15: {
+            LogStep(15, "TH_CR1 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::CharSpan value;
@@ -100235,14 +98331,14 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
-        case 14: {
-            LogStep(14, "TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
+        case 16: {
+            LogStep(16, "TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
                                  true, chip::NullOptional);
         }
-        case 15: {
-            LogStep(15, "TH_CR2 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
+        case 17: {
+            LogStep(17, "TH_CR2 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::CharSpan value;
@@ -100250,14 +98346,14 @@ private:
             return WriteAttribute(kIdentityBeta, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
-        case 16: {
-            LogStep(16, "TH_CR2 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
+        case 18: {
+            LogStep(18, "TH_CR2 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityBeta, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
                                  true, chip::NullOptional);
         }
-        case 17: {
-            LogStep(17, "TH_CR2 opens a commissioning window on DUT_CE using BCM");
+        case 19: {
+            LogStep(19, "TH_CR2 opens a commissioning window on DUT_CE using BCM");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type value;
@@ -100268,21 +98364,21 @@ private:
 
             );
         }
-        case 18: {
-            LogStep(18, "Wait for the commissioning window in step 13 to timeout");
+        case 20: {
+            LogStep(20, "Wait for the commissioning window in step 13 to timeout");
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 180000UL;
             return WaitForMs(kIdentityAlpha, value);
         }
-        case 19: {
-            LogStep(19, "TH_CR2 reads the window status to verify the DUT_CE window is closed");
+        case 21: {
+            LogStep(21, "TH_CR2 reads the window status to verify the DUT_CE window is closed");
             VerifyOrDo(!ShouldSkip("CADMIN.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
                                  AdministratorCommissioning::Attributes::WindowStatus::Id, true, chip::NullOptional);
         }
-        case 20: {
-            LogStep(20, "TH_CR2 opens a commissioning window on DUT_CE using BCM");
+        case 22: {
+            LogStep(22, "TH_CR2 opens a commissioning window on DUT_CE using BCM");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type value;
@@ -100293,21 +98389,44 @@ private:
 
             );
         }
-        case 21: {
-            LogStep(21, "Waiting after opening commissioning window");
+        case 23: {
+            LogStep(23, "Waiting after opening commissioning window");
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
             return WaitForMs(kIdentityAlpha, value);
         }
-        case 22: {
-            LogStep(22, "TH_CR1 starts a commissioning process with DUT_CE before the timeout from step 12");
+        case 24: {
+            LogStep(24, "TH_CR1 starts a commissioning process with DUT_CE before the timeout from step 12");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
             value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
             return PairWithCode(kIdentityAlpha, value);
+        }
+        case 25: {
+            LogStep(25, "TH_CR2 revokes the commissioning window");
+            VerifyOrDo(!ShouldSkip("CADMIN.S.C02.Rsp && CADMIN.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::AdministratorCommissioning::Commands::RevokeCommissioning::Type value;
+            return SendCommand(kIdentityBeta, GetEndpoint(0), AdministratorCommissioning::Id,
+                               AdministratorCommissioning::Commands::RevokeCommissioning::Id, value,
+                               chip::Optional<uint16_t>(10000), chip::NullOptional
+
+            );
+        }
+        case 26: {
+            LogStep(26, "Remove TH2 FabricIndex");
+            VerifyOrDo(!ShouldSkip("OPCREDS.S.C0a.Rsp && CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::OperationalCredentials::Commands::RemoveFabric::Type value;
+            value.fabricIndex = TH2FabricIndex;
+            return SendCommand(kIdentityBeta, GetEndpoint(0), OperationalCredentials::Id,
+                               OperationalCredentials::Commands::RemoveFabric::Id, value, chip::Optional<uint16_t>(10000),
+                               chip::NullOptional
+
+            );
         }
         }
         return CHIP_NO_ERROR;
@@ -100317,37 +98436,26 @@ private:
 class Test_TC_CADMIN_1_5Suite : public TestCommand
 {
 public:
-    Test_TC_CADMIN_1_5Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_CADMIN_1_5", 22, credsIssuerConfig)
+    Test_TC_CADMIN_1_5Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_CADMIN_1_5", 0, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-        AddArgument("nodeIdForDuplicateCommissioning", 0, UINT64_MAX, &mNodeIdForDuplicateCommissioning);
-        AddArgument("nodeId2", 0, UINT64_MAX, &mNodeId2);
-        AddArgument("nodeId3", 0, UINT64_MAX, &mNodeId3);
+        AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("waitAfterCommissioning", 0, UINT16_MAX, &mWaitAfterCommissioning);
-        AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
-        AddArgument("payload", &mPayload);
-        AddArgument("PakeVerifier", &mPakeVerifier);
-        AddArgument("IncorrectPakeVerifier", &mIncorrectPakeVerifier);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_CADMIN_1_5Suite() {}
 
-    chip::System::Clock::Timeout GetWaitDuration() const override { return chip::System::Clock::Seconds16(mTimeout.ValueOr(300)); }
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
 
 private:
     chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<uint16_t> mTimeout;
-    chip::Optional<chip::NodeId> mNodeIdForDuplicateCommissioning;
-    chip::Optional<chip::NodeId> mNodeId2;
-    chip::Optional<chip::NodeId> mNodeId3;
+    chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mWaitAfterCommissioning;
-    chip::Optional<uint16_t> mDiscriminator;
-    chip::Optional<chip::CharSpan> mPayload;
-    chip::Optional<chip::ByteSpan> mPakeVerifier;
-    chip::Optional<chip::ByteSpan> mIncorrectPakeVerifier;
+    chip::Optional<uint16_t> mTimeout;
 
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
 
@@ -100361,95 +98469,6 @@ private:
 
         switch (mTestIndex - 1)
         {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 3:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 4:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            shouldContinue = true;
-            break;
-        case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 10:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            shouldContinue = true;
-            break;
-        case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            break;
-        case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::CharSpan value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValueAsString("nodeLabel", value, chip::CharSpan("chiptest", 8)));
-            }
-            break;
-        case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.HasValue(), true));
-            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.Value(), 3));
-            break;
-        case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.HasValue(), true));
-            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.Value(), 2));
-            break;
-        case 18:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 19:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 20:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.HasValue(), true));
-            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.Value(), 4));
-            break;
-        case 21:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            shouldContinue = true;
-            break;
         default:
             LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
         }
@@ -100464,276 +98483,7 @@ private:
     {
         using namespace chip::app::Clusters;
         switch (testIndex)
-        {
-        case 0: {
-            LogStep(0, "Precondition: Reset Devices to factory defaults");
-            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::SystemCommands::Commands::FactoryReset::Type value;
-            return FactoryReset(kIdentityAlpha, value);
-        }
-        case 1: {
-            LogStep(1, "Precondition: Reset Devices to factory defaults");
-            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message =
-                chip::Span<const char>("Factory Reset the DUT and enter 'y' after successgarbage: not in length on purpose", 49);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 2: {
-            LogStep(2, "TH_CR1 starts a commissioning process with DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-            return WaitForCommissionee(kIdentityAlpha, value);
-        }
-        case 3: {
-            LogStep(3, "TH_CR1 opens a new commissioning window on DUT_CE using ECM");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
-            value.commissioningTimeout = 180U;
-            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
-                ? mPakeVerifier.Value()
-                : chip::ByteSpan(
-                      chip::Uint8::from_const_char(
-                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
-                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
-                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
-                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
-                      97);
-            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations           = 1000UL;
-            value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
-            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 4: {
-            LogStep(4, "Verify that the DNS-SD advertisement shows CM=2");
-            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>("enter 'y' after successgarbage: not in length on purpose", 23);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 5: {
-            LogStep(5, "Wait for PIXIT.CADMIN.CwDuration + 10 seconds");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-            value.ms = 190000UL;
-            return WaitForMs(kIdentityAlpha, value);
-        }
-        case 6: {
-            LogStep(6, "TH_CR2 starts a commissioning process with DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-            return PairWithCode(kIdentityBeta, value);
-        }
-        case 7: {
-            LogStep(7, "TH_CR1 opens a new commissioning window on DUT_CE using ECM");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
-            value.commissioningTimeout = 180U;
-            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
-                ? mPakeVerifier.Value()
-                : chip::ByteSpan(
-                      chip::Uint8::from_const_char(
-                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
-                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
-                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
-                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
-                      97);
-            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations           = 1000UL;
-            value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
-            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 8: {
-            LogStep(8, "Waiting after opening commissioning window");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
-            return WaitForMs(kIdentityAlpha, value);
-        }
-        case 9: {
-            LogStep(9, "TH_CR1 revokes the commissioning window on DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C02.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::RevokeCommissioning::Type value;
-            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::RevokeCommissioning::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 10: {
-            LogStep(10, "TH_CR2 starts a commissioning process with DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-            return PairWithCode(kIdentityBeta, value);
-        }
-        case 11: {
-            LogStep(11, "TH_CR1 revokes the commissioning window on DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C02.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::RevokeCommissioning::Type value;
-            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::RevokeCommissioning::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 12: {
-            LogStep(12, "TH_CR1 writes the mandatory attribute NodeLabel of DUT_CE");
-            VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::CharSpan value;
-            value = chip::Span<const char>("chiptestgarbage: not in length on purpose", 8);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
-                                  value, chip::NullOptional, chip::NullOptional);
-        }
-        case 13: {
-            LogStep(13, "TH_CR1 read the mandatory attribute NodeLabel of DUT_CE");
-            VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
-                                 true, chip::NullOptional);
-        }
-        case 14: {
-            LogStep(14, "TH_CR1 opens a new commissioning window on DUT_CE using wrong PakeVerifier value using ECM");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
-            value.commissioningTimeout = 180U;
-            value.PAKEPasscodeVerifier = mIncorrectPakeVerifier.HasValue()
-                ? mIncorrectPakeVerifier.Value()
-                : chip::ByteSpan(chip::Uint8::from_const_char(
-                                     "\x06\xc7\x56\xdf\xfc\xd7\x22\x65\x34\x52\xa1\x2d\xcd\x94\x5d\x8c\x54\xda\x2b\x0f\x3c\xbd\x1b"
-                                     "\x4d\xc3\xf1\xad\xb2\x23\xae\xb2\x6b\x04\x7c\xd2\x4c\x96\x86\x6f\x97\x9b\x1d\x83\xec\x50\xe2"
-                                     "\xb4\xae\x30\xcd\xf2\xfd\xb3\x2b\xd8\xa2\x11\xb8\x37\xdc\x94\xed\xcd\x56\xf4\xd1\x43\x77\x19"
-                                     "\x10\x76\xbf\xc5\x9d\x99\xb7\xdd\x30\x53\xef\xd6\xf0\x2c\x44\x34\xf2\xbd\xd2\x7a"),
-                                 89);
-            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations           = 1000UL;
-            value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
-            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 15: {
-            LogStep(15, "TH_CR1 opens a new commissioning window on DUT_CE using ECM");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
-            value.commissioningTimeout = 180U;
-            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
-                ? mPakeVerifier.Value()
-                : chip::ByteSpan(
-                      chip::Uint8::from_const_char(
-                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
-                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
-                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
-                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
-                      97);
-            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations           = 1000UL;
-            value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
-            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 16: {
-            LogStep(16, "Waiting after opening commissioning window");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
-            return WaitForMs(kIdentityAlpha, value);
-        }
-        case 17: {
-            LogStep(17, "TH_CR1 opens another commissioning window on DUT_CE using ECM");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
-            value.commissioningTimeout = 180U;
-            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
-                ? mPakeVerifier.Value()
-                : chip::ByteSpan(
-                      chip::Uint8::from_const_char(
-                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
-                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
-                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
-                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
-                      97);
-            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations           = 1000UL;
-            value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
-            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 18: {
-            LogStep(18, "TH_CR2 starts a commissioning process with DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-            return PairWithCode(kIdentityBeta, value);
-        }
-        case 19: {
-            LogStep(19, "DUT_CE is commissioned by TH_CR2");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-            value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            return WaitForCommissionee(kIdentityBeta, value);
-        }
-        case 20: {
-            LogStep(20, "TH_CR1 tries to revoke the commissioning window on DUT_CE using RevokeCommissioning command");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C02.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::RevokeCommissioning::Type value;
-            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::RevokeCommissioning::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 21: {
-            LogStep(21, "TH_CR3 starts a commissioning process with DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL;
-            value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-            return PairWithCode(kIdentityGamma, value);
-        }
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -100741,7 +98491,7 @@ private:
 class Test_TC_CADMIN_1_6Suite : public TestCommand
 {
 public:
-    Test_TC_CADMIN_1_6Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_CADMIN_1_6", 21, credsIssuerConfig)
+    Test_TC_CADMIN_1_6Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_CADMIN_1_6", 23, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
@@ -100769,6 +98519,8 @@ private:
     chip::Optional<uint16_t> mDiscriminator;
     chip::Optional<chip::CharSpan> mPayload;
 
+    uint8_t TH2FabricIndex;
+
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
 
     //
@@ -100857,13 +98609,28 @@ private:
             shouldContinue = true;
             break;
         case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                TH2FabricIndex = value;
+            }
+            break;
+        case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.HasValue(), true));
             VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.Value(), 4));
             break;
-        case 20:
+        case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             shouldContinue = true;
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::OperationalCredentials::Commands::NOCResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+            }
             break;
         default:
             LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
@@ -101056,7 +98823,12 @@ private:
             return WaitForCommissionee(kIdentityBeta, value);
         }
         case 19: {
-            LogStep(19, "TH_CR1 tries to revoke the commissioning window on DUT_CE using RevokeCommissioning command");
+            LogStep(19, "TH2 reads CurrentFabricIndex attribute and save it for future use.");
+            return ReadAttribute(kIdentityBeta, GetEndpoint(0), OperationalCredentials::Id,
+                                 OperationalCredentials::Attributes::CurrentFabricIndex::Id, true, chip::NullOptional);
+        }
+        case 20: {
+            LogStep(20, "TH_CR1 tries to revoke the commissioning window on DUT_CE using RevokeCommissioning command");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C02.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::RevokeCommissioning::Type value;
@@ -101066,14 +98838,26 @@ private:
 
             );
         }
-        case 20: {
-            LogStep(20, "TH_CR3 starts a commissioning process with DUT_CE");
+        case 21: {
+            LogStep(21, "TH_CR3 starts a commissioning process with DUT_CE");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL;
             value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
             return PairWithCode(kIdentityGamma, value);
+        }
+        case 22: {
+            LogStep(22, "Remove TH2 FabricIndex");
+            VerifyOrDo(!ShouldSkip("OPCREDS.S.C0a.Rsp && CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::OperationalCredentials::Commands::RemoveFabric::Type value;
+            value.fabricIndex = TH2FabricIndex;
+            return SendCommand(kIdentityBeta, GetEndpoint(0), OperationalCredentials::Id,
+                               OperationalCredentials::Commands::RemoveFabric::Id, value, chip::Optional<uint16_t>(10000),
+                               chip::NullOptional
+
+            );
         }
         }
         return CHIP_NO_ERROR;
@@ -101083,37 +98867,26 @@ private:
 class Test_TC_CADMIN_1_9Suite : public TestCommand
 {
 public:
-    Test_TC_CADMIN_1_9Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_CADMIN_1_9", 28, credsIssuerConfig)
+    Test_TC_CADMIN_1_9Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_CADMIN_1_9", 0, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-        AddArgument("nodeIdForDuplicateCommissioning", 0, UINT64_MAX, &mNodeIdForDuplicateCommissioning);
-        AddArgument("nodeId2", 0, UINT64_MAX, &mNodeId2);
-        AddArgument("nodeId3", 0, UINT64_MAX, &mNodeId3);
+        AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("waitAfterCommissioning", 0, UINT16_MAX, &mWaitAfterCommissioning);
-        AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
-        AddArgument("correctPayload", &mCorrectPayload);
-        AddArgument("incorrectSetupCodePayload", &mIncorrectSetupCodePayload);
-        AddArgument("PakeVerifier", &mPakeVerifier);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_CADMIN_1_9Suite() {}
 
-    chip::System::Clock::Timeout GetWaitDuration() const override { return chip::System::Clock::Seconds16(mTimeout.ValueOr(700)); }
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
 
 private:
     chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<uint16_t> mTimeout;
-    chip::Optional<chip::NodeId> mNodeIdForDuplicateCommissioning;
-    chip::Optional<chip::NodeId> mNodeId2;
-    chip::Optional<chip::NodeId> mNodeId3;
+    chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mWaitAfterCommissioning;
-    chip::Optional<uint16_t> mDiscriminator;
-    chip::Optional<chip::CharSpan> mCorrectPayload;
-    chip::Optional<chip::CharSpan> mIncorrectSetupCodePayload;
-    chip::Optional<chip::ByteSpan> mPakeVerifier;
+    chip::Optional<uint16_t> mTimeout;
 
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
 
@@ -101127,117 +98900,6 @@ private:
 
         switch (mTestIndex - 1)
         {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 3:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 4:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            shouldContinue = true;
-            break;
-        case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            shouldContinue = true;
-            break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            shouldContinue = true;
-            break;
-        case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            shouldContinue = true;
-            break;
-        case 10:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            shouldContinue = true;
-            break;
-        case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            shouldContinue = true;
-            break;
-        case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            shouldContinue = true;
-            break;
-        case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            shouldContinue = true;
-            break;
-        case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            shouldContinue = true;
-            break;
-        case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            shouldContinue = true;
-            break;
-        case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            shouldContinue = true;
-            break;
-        case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            shouldContinue = true;
-            break;
-        case 18:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            shouldContinue = true;
-            break;
-        case 19:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            shouldContinue = true;
-            break;
-        case 20:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            shouldContinue = true;
-            break;
-        case 21:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            shouldContinue = true;
-            break;
-        case 22:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            shouldContinue = true;
-            break;
-        case 23:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            shouldContinue = true;
-            break;
-        case 24:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            shouldContinue = true;
-            break;
-        case 25:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            shouldContinue = true;
-            break;
-        case 26:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            shouldContinue = true;
-            break;
-        case 27:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            shouldContinue = true;
-            break;
         default:
             LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
         }
@@ -101252,335 +98914,7 @@ private:
     {
         using namespace chip::app::Clusters;
         switch (testIndex)
-        {
-        case 0: {
-            LogStep(0, "Precondition: Reset Devices to factory defaults");
-            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::SystemCommands::Commands::FactoryReset::Type value;
-            return FactoryReset(kIdentityAlpha, value);
-        }
-        case 1: {
-            LogStep(1, "Precondition: Reset Devices to factory defaults");
-            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message =
-                chip::Span<const char>("Factory Reset the DUT and enter 'y' after successgarbage: not in length on purpose", 49);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 2: {
-            LogStep(2, "TH_CR1 starts a commissioning process with DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-            return WaitForCommissionee(kIdentityAlpha, value);
-        }
-        case 3: {
-            LogStep(3, "TH_CR1 opens a new commissioning window on DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
-            value.commissioningTimeout = 900U;
-            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
-                ? mPakeVerifier.Value()
-                : chip::ByteSpan(
-                      chip::Uint8::from_const_char(
-                          "\x06\xc7\x56\xdf\xfc\xd7\x22\x65\x34\x52\xa1\x2d\xcd\x94\x5d\x8c\x54\xda\x2b\x0f\x3c\xbd\x1b\x4d\xc3\xf1"
-                          "\xad\xb2\x23\xae\xb2\x6b\x04\x7c\xd2\x4c\x96\x86\x6f\x97\x9b\x1d\x83\xec\x50\xe2\xb4\xae\x30\xcd\xf2\xfd"
-                          "\xb3\x2b\xd8\xa2\x11\xb8\x37\xdc\x94\xed\xcd\x56\xf4\xd1\x43\x77\x19\x10\x76\xbf\xc5\x9d\x99\xb7\xdd\x30"
-                          "\x53\xef\xd6\xf0\x2c\x44\x34\xf2\xbd\xd2\x7a\xa4\xf9\xce\xa7\x0d\x73\x8e\x4c"),
-                      97);
-            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations           = 1000UL;
-            value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
-            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 4: {
-            LogStep(4, "Waiting after opening commissioning window");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
-            return WaitForMs(kIdentityAlpha, value);
-        }
-        case 5: {
-            LogStep(5, "Verify that the DNS-SD advertisement shows CM=2");
-            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>("enter 'y' after successgarbage: not in length on purpose", 23);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 6: {
-            LogStep(6, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
-                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
-            value.discoverOnce.Emplace();
-            value.discoverOnce.Value() = true;
-            return PairWithCode(kIdentityBeta, value);
-        }
-        case 7: {
-            LogStep(7, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
-                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
-            value.discoverOnce.Emplace();
-            value.discoverOnce.Value() = true;
-            return PairWithCode(kIdentityBeta, value);
-        }
-        case 8: {
-            LogStep(8, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
-                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
-            value.discoverOnce.Emplace();
-            value.discoverOnce.Value() = true;
-            return PairWithCode(kIdentityBeta, value);
-        }
-        case 9: {
-            LogStep(9, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
-                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
-            value.discoverOnce.Emplace();
-            value.discoverOnce.Value() = true;
-            return PairWithCode(kIdentityBeta, value);
-        }
-        case 10: {
-            LogStep(10, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
-                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
-            value.discoverOnce.Emplace();
-            value.discoverOnce.Value() = true;
-            return PairWithCode(kIdentityBeta, value);
-        }
-        case 11: {
-            LogStep(11, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
-                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
-            value.discoverOnce.Emplace();
-            value.discoverOnce.Value() = true;
-            return PairWithCode(kIdentityBeta, value);
-        }
-        case 12: {
-            LogStep(12, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
-                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
-            value.discoverOnce.Emplace();
-            value.discoverOnce.Value() = true;
-            return PairWithCode(kIdentityBeta, value);
-        }
-        case 13: {
-            LogStep(13, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
-                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
-            value.discoverOnce.Emplace();
-            value.discoverOnce.Value() = true;
-            return PairWithCode(kIdentityBeta, value);
-        }
-        case 14: {
-            LogStep(14, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
-                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
-            value.discoverOnce.Emplace();
-            value.discoverOnce.Value() = true;
-            return PairWithCode(kIdentityBeta, value);
-        }
-        case 15: {
-            LogStep(15, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
-                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
-            value.discoverOnce.Emplace();
-            value.discoverOnce.Value() = true;
-            return PairWithCode(kIdentityBeta, value);
-        }
-        case 16: {
-            LogStep(16, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
-                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
-            value.discoverOnce.Emplace();
-            value.discoverOnce.Value() = true;
-            return PairWithCode(kIdentityBeta, value);
-        }
-        case 17: {
-            LogStep(17, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
-                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
-            value.discoverOnce.Emplace();
-            value.discoverOnce.Value() = true;
-            return PairWithCode(kIdentityBeta, value);
-        }
-        case 18: {
-            LogStep(18, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
-                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
-            value.discoverOnce.Emplace();
-            value.discoverOnce.Value() = true;
-            return PairWithCode(kIdentityBeta, value);
-        }
-        case 19: {
-            LogStep(19, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
-                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
-            value.discoverOnce.Emplace();
-            value.discoverOnce.Value() = true;
-            return PairWithCode(kIdentityBeta, value);
-        }
-        case 20: {
-            LogStep(20, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
-                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
-            value.discoverOnce.Emplace();
-            value.discoverOnce.Value() = true;
-            return PairWithCode(kIdentityBeta, value);
-        }
-        case 21: {
-            LogStep(21, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
-                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
-            value.discoverOnce.Emplace();
-            value.discoverOnce.Value() = true;
-            return PairWithCode(kIdentityBeta, value);
-        }
-        case 22: {
-            LogStep(22, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
-                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
-            value.discoverOnce.Emplace();
-            value.discoverOnce.Value() = true;
-            return PairWithCode(kIdentityBeta, value);
-        }
-        case 23: {
-            LogStep(23, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
-                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
-            value.discoverOnce.Emplace();
-            value.discoverOnce.Value() = true;
-            return PairWithCode(kIdentityBeta, value);
-        }
-        case 24: {
-            LogStep(24, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
-                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
-            value.discoverOnce.Emplace();
-            value.discoverOnce.Value() = true;
-            return PairWithCode(kIdentityBeta, value);
-        }
-        case 25: {
-            LogStep(25, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
-                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
-            value.discoverOnce.Emplace();
-            value.discoverOnce.Value() = true;
-            return PairWithCode(kIdentityBeta, value);
-        }
-        case 26: {
-            LogStep(26, "TH_CR2 starts a commissioning process with DUT_CE using valid setup code");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload =
-                mCorrectPayload.HasValue() ? mCorrectPayload.Value() : chip::Span<const char>("MT:-24J0AFN00I31506010", 22);
-            return PairWithCode(kIdentityBeta, value);
-        }
-        case 27: {
-            LogStep(27, "TH_CR3 starts a commissioning process with DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId = mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL;
-            value.payload =
-                mCorrectPayload.HasValue() ? mCorrectPayload.Value() : chip::Span<const char>("MT:-24J0AFN00I31506010", 22);
-            return PairWithCode(kIdentityGamma, value);
-        }
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -101820,6 +99154,8 @@ private:
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
                                                                   : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
+            value.discoverOnce.Emplace();
+            value.discoverOnce.Value() = true;
             return PairWithCode(kIdentityBeta, value);
         }
         case 7: {
@@ -101830,6 +99166,8 @@ private:
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
                                                                   : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
+            value.discoverOnce.Emplace();
+            value.discoverOnce.Value() = true;
             return PairWithCode(kIdentityBeta, value);
         }
         case 8: {
@@ -101840,6 +99178,8 @@ private:
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
                                                                   : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
+            value.discoverOnce.Emplace();
+            value.discoverOnce.Value() = true;
             return PairWithCode(kIdentityBeta, value);
         }
         case 9: {
@@ -101850,6 +99190,8 @@ private:
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
                                                                   : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
+            value.discoverOnce.Emplace();
+            value.discoverOnce.Value() = true;
             return PairWithCode(kIdentityBeta, value);
         }
         case 10: {
@@ -101860,6 +99202,8 @@ private:
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
                                                                   : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
+            value.discoverOnce.Emplace();
+            value.discoverOnce.Value() = true;
             return PairWithCode(kIdentityBeta, value);
         }
         case 11: {
@@ -101870,6 +99214,8 @@ private:
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
                                                                   : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
+            value.discoverOnce.Emplace();
+            value.discoverOnce.Value() = true;
             return PairWithCode(kIdentityBeta, value);
         }
         case 12: {
@@ -101880,6 +99226,8 @@ private:
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
                                                                   : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
+            value.discoverOnce.Emplace();
+            value.discoverOnce.Value() = true;
             return PairWithCode(kIdentityBeta, value);
         }
         case 13: {
@@ -101890,6 +99238,8 @@ private:
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
                                                                   : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
+            value.discoverOnce.Emplace();
+            value.discoverOnce.Value() = true;
             return PairWithCode(kIdentityBeta, value);
         }
         case 14: {
@@ -101900,6 +99250,8 @@ private:
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
                                                                   : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
+            value.discoverOnce.Emplace();
+            value.discoverOnce.Value() = true;
             return PairWithCode(kIdentityBeta, value);
         }
         case 15: {
@@ -101909,6 +99261,8 @@ private:
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
                                                                   : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
+            value.discoverOnce.Emplace();
+            value.discoverOnce.Value() = true;
             return PairWithCode(kIdentityBeta, value);
         }
         case 16: {
@@ -101919,6 +99273,8 @@ private:
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
                                                                   : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
+            value.discoverOnce.Emplace();
+            value.discoverOnce.Value() = true;
             return PairWithCode(kIdentityBeta, value);
         }
         case 17: {
@@ -101929,6 +99285,8 @@ private:
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
                                                                   : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
+            value.discoverOnce.Emplace();
+            value.discoverOnce.Value() = true;
             return PairWithCode(kIdentityBeta, value);
         }
         case 18: {
@@ -101939,6 +99297,8 @@ private:
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
                                                                   : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
+            value.discoverOnce.Emplace();
+            value.discoverOnce.Value() = true;
             return PairWithCode(kIdentityBeta, value);
         }
         case 19: {
@@ -101949,6 +99309,8 @@ private:
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
                                                                   : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
+            value.discoverOnce.Emplace();
+            value.discoverOnce.Value() = true;
             return PairWithCode(kIdentityBeta, value);
         }
         case 20: {
@@ -101959,6 +99321,8 @@ private:
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
                                                                   : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
+            value.discoverOnce.Emplace();
+            value.discoverOnce.Value() = true;
             return PairWithCode(kIdentityBeta, value);
         }
         case 21: {
@@ -101969,6 +99333,8 @@ private:
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
                                                                   : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
+            value.discoverOnce.Emplace();
+            value.discoverOnce.Value() = true;
             return PairWithCode(kIdentityBeta, value);
         }
         case 22: {
@@ -101979,6 +99345,8 @@ private:
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
                                                                   : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
+            value.discoverOnce.Emplace();
+            value.discoverOnce.Value() = true;
             return PairWithCode(kIdentityBeta, value);
         }
         case 23: {
@@ -101989,6 +99357,8 @@ private:
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
                                                                   : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
+            value.discoverOnce.Emplace();
+            value.discoverOnce.Value() = true;
             return PairWithCode(kIdentityBeta, value);
         }
         case 24: {
@@ -101999,6 +99369,8 @@ private:
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
                                                                   : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
+            value.discoverOnce.Emplace();
+            value.discoverOnce.Value() = true;
             return PairWithCode(kIdentityBeta, value);
         }
         case 25: {
@@ -102009,6 +99381,8 @@ private:
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
             value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
                                                                   : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
+            value.discoverOnce.Emplace();
+            value.discoverOnce.Value() = true;
             return PairWithCode(kIdentityBeta, value);
         }
         case 26: {
@@ -102040,35 +99414,26 @@ class Test_TC_CADMIN_1_13Suite : public TestCommand
 {
 public:
     Test_TC_CADMIN_1_13Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_CADMIN_1_13", 34, credsIssuerConfig)
+        TestCommand("Test_TC_CADMIN_1_13", 0, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-        AddArgument("nodeIdForDuplicateCommissioning", 0, UINT64_MAX, &mNodeIdForDuplicateCommissioning);
-        AddArgument("nodeId2", 0, UINT64_MAX, &mNodeId2);
-        AddArgument("nodeId3", 0, UINT64_MAX, &mNodeId3);
+        AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("waitAfterCommissioning", 0, UINT16_MAX, &mWaitAfterCommissioning);
-        AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
-        AddArgument("payload", &mPayload);
-        AddArgument("PakeVerifier", &mPakeVerifier);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
     ~Test_TC_CADMIN_1_13Suite() {}
 
-    chip::System::Clock::Timeout GetWaitDuration() const override { return chip::System::Clock::Seconds16(mTimeout.ValueOr(600)); }
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
 
 private:
     chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<uint16_t> mTimeout;
-    chip::Optional<chip::NodeId> mNodeIdForDuplicateCommissioning;
-    chip::Optional<chip::NodeId> mNodeId2;
-    chip::Optional<chip::NodeId> mNodeId3;
+    chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mWaitAfterCommissioning;
-    chip::Optional<uint16_t> mDiscriminator;
-    chip::Optional<chip::CharSpan> mPayload;
-    chip::Optional<chip::ByteSpan> mPakeVerifier;
+    chip::Optional<uint16_t> mTimeout;
 
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
 
@@ -102082,204 +99447,6 @@ private:
 
         switch (mTestIndex - 1)
         {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 3:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 4:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("windowStatus", value, 2U));
-            }
-            break;
-        case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 10:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.HasValue(), true));
-            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.Value(), 2));
-            break;
-        case 18:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
-                    value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                {
-                    auto iter_0 = value.begin();
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
-                    VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
-                    VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 2));
-                    VerifyOrReturn(CheckValue("fabrics[2].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[2].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 3));
-                }
-                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
-            }
-            break;
-        case 19:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 20:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 21:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 22:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("windowStatus", value, 1U));
-            }
-            break;
-        case 23:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 24:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.HasValue(), true));
-            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.Value(), 2));
-            break;
-        case 25:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
-                    value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                {
-                    auto iter_0 = value.begin();
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
-                    VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
-                    VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 2));
-                    VerifyOrReturn(CheckValue("fabrics[2].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL));
-                    VerifyOrReturn(CheckValueAsString("fabrics[2].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 3));
-                }
-                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
-            }
-            break;
-        case 26:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 27:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 28:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 29:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.HasValue(), true));
-            VerifyOrReturn(CheckValue("clusterStatus", status.mClusterStatus.Value(), 2));
-            break;
-        case 30:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 31:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("windowStatus", value, 0U));
-            }
-            break;
-        case 32:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::Nullable<chip::FabricIndex> value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValueNull("adminFabricIndex", value));
-            }
-            break;
-        case 33:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::Nullable<uint16_t> value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValueNull("adminVendorId", value));
-            }
-            break;
         default:
             LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
         }
@@ -102294,364 +99461,7 @@ private:
     {
         using namespace chip::app::Clusters;
         switch (testIndex)
-        {
-        case 0: {
-            LogStep(0, "Precondition: Reset Devices to factory defaults");
-            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::SystemCommands::Commands::FactoryReset::Type value;
-            return FactoryReset(kIdentityAlpha, value);
-        }
-        case 1: {
-            LogStep(1, "Precondition: Reset Devices to factory defaults");
-            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message =
-                chip::Span<const char>("Factory Reset the DUT and enter 'y' after successgarbage: not in length on purpose", 49);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 2: {
-            LogStep(2, "TH_CR1 starts a commissioning process with DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-            return WaitForCommissionee(kIdentityAlpha, value);
-        }
-        case 3: {
-            LogStep(3, "TH_CR1 opens a commissioning window on DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type value;
-            value.commissioningTimeout = 180U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 4: {
-            LogStep(4, "Waiting after opening commissioning window");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
-            return WaitForMs(kIdentityAlpha, value);
-        }
-        case 5: {
-            LogStep(5, "TH_CR1 reads WindowStatus attribute from DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                                 AdministratorCommissioning::Attributes::WindowStatus::Id, true, chip::NullOptional);
-        }
-        case 6: {
-            LogStep(6,
-                    "TH_CR1 reads AdminFabricIndex attribute from DUT_CE and Verify TH_CR1 reads the AdminFabricIndex value "
-                    "successfully and verify the value to be the same as the Fabric Index of the Fabrics attribute list entry in "
-                    "TH_CR1");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.A0001 && PICS_USER_PROMPT"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 7: {
-            LogStep(7,
-                    "TH_CR1 reads AdminVendorId attribute from DUT_CE and Verify TH_CR1 reads the AdminVendorId value successfully "
-                    "and verify this value to be the same as the Vendor ID field of Fabrics attribute list entry in TH_CR1");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.A0002 && PICS_USER_PROMPT"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 8: {
-            LogStep(8, "Verify that the DNS-SD advertisement shows CM=1");
-            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>("enter 'y' after successgarbage: not in length on purpose", 23);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 9: {
-            LogStep(9, "TH_CR3 starts a commissioning process with DUT_CE");
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL;
-            value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-            return PairWithCode(kIdentityGamma, value);
-        }
-        case 10: {
-            LogStep(10, "DUT_CE is commissioned to TH_CR3 on Fabric ID3 with Node ID3");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-            value.nodeId = mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL;
-            return WaitForCommissionee(kIdentityGamma, value);
-        }
-        case 11: {
-            LogStep(11, "TH_CR1 opens a commissioning window on DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type value;
-            value.commissioningTimeout = 180U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 12: {
-            LogStep(12, "Waiting after opening commissioning window");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
-            return WaitForMs(kIdentityAlpha, value);
-        }
-        case 13: {
-            LogStep(13, "TH_CR2 starts a commissioning process with DUT_CE");
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
-            return PairWithCode(kIdentityBeta, value);
-        }
-        case 14: {
-            LogStep(14, "DUT_CE is commissioned to TH_CR2 on Fabric ID2 with Node ID2");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-            value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            return WaitForCommissionee(kIdentityBeta, value);
-        }
-        case 15: {
-            LogStep(15, "TH_CR1 opens a commissioning window on DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type value;
-            value.commissioningTimeout = 180U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 16: {
-            LogStep(16, "Waiting after opening commissioning window");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
-            return WaitForMs(kIdentityAlpha, value);
-        }
-        case 17: {
-            LogStep(17, "TH_CR1 opens a 2nd commissioning window on DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
-            value.commissioningTimeout = 180U;
-            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
-                ? mPakeVerifier.Value()
-                : chip::ByteSpan(
-                      chip::Uint8::from_const_char(
-                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
-                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
-                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
-                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
-                      97);
-            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations           = 1000UL;
-            value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
-            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 18: {
-            LogStep(18, "TH_CR1 reads the list of Fabrics on DUT_CE");
-            VerifyOrDo(!ShouldSkip("OPCREDS.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
-                                 OperationalCredentials::Attributes::Fabrics::Id, false, chip::NullOptional);
-        }
-        case 19: {
-            LogStep(19, "Wait for the expiration of PIXIT.CADMIN.CwDuration seconds");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-            value.ms = 180000UL;
-            return WaitForMs(kIdentityAlpha, value);
-        }
-        case 20: {
-            LogStep(20, "TH_CR1 re-opens new commissioning window on DUT_CE using ECM");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
-            value.commissioningTimeout = 180U;
-            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
-                ? mPakeVerifier.Value()
-                : chip::ByteSpan(
-                      chip::Uint8::from_const_char(
-                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
-                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
-                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
-                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
-                      97);
-            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations           = 1000UL;
-            value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
-            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 21: {
-            LogStep(21, "Waiting after opening commissioning window");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
-            return WaitForMs(kIdentityAlpha, value);
-        }
-        case 22: {
-            LogStep(22, "TH_CR1 reads WindowStatus attribute from DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                                 AdministratorCommissioning::Attributes::WindowStatus::Id, true, chip::NullOptional);
-        }
-        case 23: {
-            LogStep(23, "Verify that the DNS-SD advertisement shows CM=2");
-            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>("enter 'y' after successgarbage: not in length on purpose", 23);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 24: {
-            LogStep(24, "TH_CR3 opens a 2nd commissioning window on DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
-            value.commissioningTimeout = 180U;
-            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
-                ? mPakeVerifier.Value()
-                : chip::ByteSpan(
-                      chip::Uint8::from_const_char(
-                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
-                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
-                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
-                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
-                      97);
-            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations           = 1000UL;
-            value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
-            return SendCommand(kIdentityGamma, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 25: {
-            LogStep(25, "TH_CR1 reads the list of Fabrics on DUT_CE");
-            VerifyOrDo(!ShouldSkip("OPCREDS.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
-                                 OperationalCredentials::Attributes::Fabrics::Id, false, chip::NullOptional);
-        }
-        case 26: {
-            LogStep(26, "Wait for the expiration of PIXIT_COMM_WIN seconds");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-            value.ms = 180000UL;
-            return WaitForMs(kIdentityAlpha, value);
-        }
-        case 27: {
-            LogStep(27, "TH_CR1 opens a new commissioning window on DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
-            value.commissioningTimeout = 180U;
-            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
-                ? mPakeVerifier.Value()
-                : chip::ByteSpan(
-                      chip::Uint8::from_const_char(
-                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
-                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
-                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
-                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
-                      97);
-            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations           = 1000UL;
-            value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
-            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 28: {
-            LogStep(28, "Waiting after opening commissioning window");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-            value.ms = mWaitAfterCommissioning.HasValue() ? mWaitAfterCommissioning.Value() : 5000UL;
-            return WaitForMs(kIdentityAlpha, value);
-        }
-        case 29: {
-            LogStep(29, "TH_CR2 opens a 2nd commissioning window on DUT_CE using ECM");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
-            value.commissioningTimeout = 180U;
-            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
-                ? mPakeVerifier.Value()
-                : chip::ByteSpan(
-                      chip::Uint8::from_const_char(
-                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
-                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
-                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
-                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
-                      97);
-            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations           = 1000UL;
-            value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
-            return SendCommand(kIdentityBeta, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
-                               chip::Optional<uint16_t>(10000), chip::NullOptional
-
-            );
-        }
-        case 30: {
-            LogStep(30, "Wait for the expiration of PIXIT.CADMIN.CwDuration seconds");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-            value.ms = 180000UL;
-            return WaitForMs(kIdentityAlpha, value);
-        }
-        case 31: {
-            LogStep(31, "TH_CR1 reads WindowStatus attribute from DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                                 AdministratorCommissioning::Attributes::WindowStatus::Id, true, chip::NullOptional);
-        }
-        case 32: {
-            LogStep(32, "TH_CR1 reads AdminFabricIndex attribute from DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                                 AdministratorCommissioning::Attributes::AdminFabricIndex::Id, true, chip::NullOptional);
-        }
-        case 33: {
-            LogStep(33, "TH_CR1 reads AdminVendorId attribute from DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                                 AdministratorCommissioning::Attributes::AdminVendorId::Id, true, chip::NullOptional);
-        }
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -102821,7 +99631,7 @@ class Test_TC_CADMIN_1_24Suite : public TestCommand
 {
 public:
     Test_TC_CADMIN_1_24Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_CADMIN_1_24", 8, credsIssuerConfig)
+        TestCommand("Test_TC_CADMIN_1_24", 10, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
@@ -102867,12 +99677,16 @@ private:
             break;
         case 3:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         case 4:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
             break;
         case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
@@ -102880,10 +99694,14 @@ private:
                 VerifyOrReturn(CheckValue("windowStatus", value, 0U));
             }
             break;
-        case 6:
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
-        case 7:
+        case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
@@ -102933,8 +99751,18 @@ private:
             return WaitForCommissionee(kIdentityAlpha, value);
         }
         case 3: {
-            LogStep(3, "TH_CR1 opens a commissioning window on DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(3, "TH_CR1 opens a commissioning window on DUT_CE using ECM with a value of 180 seconds");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP && CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 4: {
+            LogStep(4, "TH_CR1 opens a commissioning window on DUT_CE");
+            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp && PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 180U;
@@ -102956,22 +99784,32 @@ private:
 
             );
         }
-        case 4: {
-            LogStep(4, "Wait for commissioning Window to 181 seconds");
+        case 5: {
+            LogStep(5, "Wait for commissioning Window to 181 seconds");
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 181000UL;
             return WaitForMs(kIdentityAlpha, value);
         }
-        case 5: {
-            LogStep(5, "TH_CR1 reads the window status to verify the DUT_CE window is closed");
+        case 6: {
+            LogStep(6, "TH_CR1 reads the window status to verify the DUT_CE window is closed");
             VerifyOrDo(!ShouldSkip("CADMIN.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
                                  AdministratorCommissioning::Attributes::WindowStatus::Id, true, chip::NullOptional);
         }
-        case 6: {
-            LogStep(6, "TH_CR1 opens a commissioning window on DUT_CE");
-            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+        case 7: {
+            LogStep(7, "TH_CR1 opens a commissioning window on DUT_CE using ECM with a value of 179 seconds");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP && CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 8: {
+            LogStep(8, "TH_CR1 opens a commissioning window on DUT_CE");
+            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp && PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 179U;
@@ -102993,8 +99831,8 @@ private:
 
             );
         }
-        case 7: {
-            LogStep(7, "TH_CR1 reads the window status to verify the DUT_CE window is closed");
+        case 9: {
+            LogStep(9, "TH_CR1 reads the window status to verify the DUT_CE window is closed");
             VerifyOrDo(!ShouldSkip("CADMIN.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
                                  AdministratorCommissioning::Attributes::WindowStatus::Id, true, chip::NullOptional);
@@ -104281,6 +101119,116 @@ public:
     }
 
     ~Test_TC_PSCFG_2_2Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {}
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_PSCFG_3_1Suite : public TestCommand
+{
+public:
+    Test_TC_PSCFG_3_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_PSCFG_3_1", 0, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_PSCFG_3_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {}
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_PRS_3_1Suite : public TestCommand
+{
+public:
+    Test_TC_PRS_3_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_PRS_3_1", 0, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_PRS_3_1Suite() {}
 
     chip::System::Clock::Timeout GetWaitDuration() const override
     {
@@ -106201,6 +103149,61 @@ private:
     }
 };
 
+class Test_TC_FLW_3_1Suite : public TestCommand
+{
+public:
+    Test_TC_FLW_3_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_FLW_3_1", 0, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_FLW_3_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {}
+        return CHIP_NO_ERROR;
+    }
+};
+
 class Test_TC_OCC_3_1Suite : public TestCommand
 {
 public:
@@ -106367,6 +103370,61 @@ private:
     }
 };
 
+class Test_TC_PS_3_1Suite : public TestCommand
+{
+public:
+    Test_TC_PS_3_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_PS_3_1", 0, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_PS_3_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {}
+        return CHIP_NO_ERROR;
+    }
+};
+
 class Test_TC_BOOL_2_2Suite : public TestCommand
 {
 public:
@@ -106379,6 +103437,61 @@ public:
     }
 
     ~Test_TC_BOOL_2_2Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {}
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_BOOL_3_1Suite : public TestCommand
+{
+public:
+    Test_TC_BOOL_3_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_BOOL_3_1", 0, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_BOOL_3_1Suite() {}
 
     chip::System::Clock::Timeout GetWaitDuration() const override
     {
@@ -113342,6 +110455,61 @@ private:
     }
 };
 
+class Test_TC_SWTCH_3_1Suite : public TestCommand
+{
+public:
+    Test_TC_SWTCH_3_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_SWTCH_3_1", 0, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_SWTCH_3_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {}
+        return CHIP_NO_ERROR;
+    }
+};
+
 class Test_TC_SWTCH_3_2Suite : public TestCommand
 {
 public:
@@ -114212,6 +111380,61 @@ private:
     }
 };
 
+class Test_TC_ACT_3_1Suite : public TestCommand
+{
+public:
+    Test_TC_ACT_3_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_ACT_3_1", 0, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_ACT_3_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {}
+        return CHIP_NO_ERROR;
+    }
+};
+
 class Test_TC_ACT_3_2Suite : public TestCommand
 {
 public:
@@ -114982,6 +112205,118 @@ private:
     }
 };
 
+class Test_TC_BRBINFO_1_1Suite : public TestCommand
+{
+public:
+    Test_TC_BRBINFO_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_BRBINFO_1_1", 0, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_BRBINFO_1_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {}
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_BRBINFO_2_1Suite : public TestCommand
+{
+public:
+    Test_TC_BRBINFO_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_BRBINFO_2_1", 0, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_BRBINFO_2_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {}
+        return CHIP_NO_ERROR;
+    }
+};
+
 class Test_TC_BRBINFO_2_2Suite : public TestCommand
 {
 public:
@@ -115173,8 +112508,6 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_ACE_1_5Suite>(credsIssuerConfig),
         make_unique<Test_TC_BOOL_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_BOOL_2_1Suite>(credsIssuerConfig),
-        make_unique<Test_TC_BRBINFO_1_1Suite>(credsIssuerConfig),
-        make_unique<Test_TC_BRBINFO_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_ACT_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_BIND_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_CC_1_1Suite>(credsIssuerConfig),
@@ -115243,7 +112576,6 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_APBSC_1_10Suite>(credsIssuerConfig),
         make_unique<Test_TC_CONTENTLAUNCHER_1_11Suite>(credsIssuerConfig),
         make_unique<Test_TC_ALOGIN_1_12Suite>(credsIssuerConfig),
-        make_unique<Test_TC_ALOGIN_12_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_LOWPOWER_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_KEYPADINPUT_3_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_KEYPADINPUT_3_3Suite>(credsIssuerConfig),
@@ -115256,7 +112588,6 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_MEDIAINPUT_3_11Suite>(credsIssuerConfig),
         make_unique<Test_TC_MEDIAINPUT_3_12Suite>(credsIssuerConfig),
         make_unique<Test_TC_MEDIAINPUT_3_13Suite>(credsIssuerConfig),
-        make_unique<Test_TC_WAKEONLAN_4_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_CHANNEL_5_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_CHANNEL_5_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_CHANNEL_5_3Suite>(credsIssuerConfig),
@@ -115492,6 +112823,7 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_DGGEN_2_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_DGGEN_2_3Suite>(credsIssuerConfig),
         make_unique<Test_TC_DGGEN_3_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_I_3_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_I_3_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_ILL_3_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_IDM_1_1Suite>(credsIssuerConfig),
@@ -115535,6 +112867,8 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_MC_11_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_MC_11_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_ALOGIN_12_2Suite>(credsIssuerConfig),
+        make_unique<Test_TC_WAKEONLAN_4_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_ALOGIN_12_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_CADMIN_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_CADMIN_1_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_CADMIN_1_7Suite>(credsIssuerConfig),
@@ -115583,6 +112917,8 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_SU_4_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_SU_4_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_PSCFG_2_2Suite>(credsIssuerConfig),
+        make_unique<Test_TC_PSCFG_3_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_PRS_3_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_SC_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_SC_1_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_SC_1_3Suite>(credsIssuerConfig),
@@ -115616,9 +112952,12 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_WNCV_6_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_WNCV_7_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_FLW_2_2Suite>(credsIssuerConfig),
+        make_unique<Test_TC_FLW_3_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_OCC_3_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_PS_2_2Suite>(credsIssuerConfig),
+        make_unique<Test_TC_PS_3_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_BOOL_2_2Suite>(credsIssuerConfig),
+        make_unique<Test_TC_BOOL_3_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_CC_2_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_CC_3_4Suite>(credsIssuerConfig),
         make_unique<Test_TC_CC_4_5Suite>(credsIssuerConfig),
@@ -115646,6 +112985,7 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_OO_3_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_RH_2_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_SWTCH_2_2Suite>(credsIssuerConfig),
+        make_unique<Test_TC_SWTCH_3_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_SWTCH_3_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_TMP_2_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_TMP_3_1Suite>(credsIssuerConfig),
@@ -115660,6 +113000,7 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_DGTHREAD_3_5Suite>(credsIssuerConfig),
         make_unique<Test_TC_ACT_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_ACT_2_2Suite>(credsIssuerConfig),
+        make_unique<Test_TC_ACT_3_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_ACT_3_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_LTIME_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_LTIME_3_1Suite>(credsIssuerConfig),
@@ -115674,6 +113015,8 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_PCC_3_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_ACL_2_5Suite>(credsIssuerConfig),
         make_unique<Test_TC_ACL_2_6Suite>(credsIssuerConfig),
+        make_unique<Test_TC_BRBINFO_1_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_BRBINFO_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_BRBINFO_2_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_BRBINFO_2_3Suite>(credsIssuerConfig),
         make_unique<Test_TC_ACE_1_2Suite>(credsIssuerConfig),
