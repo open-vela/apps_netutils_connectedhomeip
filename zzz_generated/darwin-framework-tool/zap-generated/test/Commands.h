@@ -21373,7 +21373,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 2U));
             }
 
             VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
@@ -97786,6 +97786,10 @@ public:
             ChipLogProgress(chipTool, " ***** Test Step 17 : Restore initial LocalConfigDisabled value\n");
             err = TestRestoreInitialLocalConfigDisabledValue_17();
             break;
+        case 18:
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Read the ProductApppearance value\n");
+            err = TestReadTheProductApppearanceValue_18();
+            break;
         }
 
         if (CHIP_NO_ERROR != err) {
@@ -97851,6 +97855,9 @@ public:
         case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -97864,7 +97871,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 18;
+    const uint16_t mTestCount = 19;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -97981,7 +97988,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(25)));
+                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(26)));
                 VerifyOrReturn(CheckValue("", actualValue[0], 0UL));
                 VerifyOrReturn(CheckValue("", actualValue[1], 1UL));
                 VerifyOrReturn(CheckValue("", actualValue[2], 2UL));
@@ -98002,11 +98009,12 @@ private:
                 VerifyOrReturn(CheckValue("", actualValue[17], 17UL));
                 VerifyOrReturn(CheckValue("", actualValue[18], 18UL));
                 VerifyOrReturn(CheckValue("", actualValue[19], 19UL));
-                VerifyOrReturn(CheckValue("", actualValue[20], 65528UL));
-                VerifyOrReturn(CheckValue("", actualValue[21], 65529UL));
-                VerifyOrReturn(CheckValue("", actualValue[22], 65531UL));
-                VerifyOrReturn(CheckValue("", actualValue[23], 65532UL));
-                VerifyOrReturn(CheckValue("", actualValue[24], 65533UL));
+                VerifyOrReturn(CheckValue("", actualValue[20], 20UL));
+                VerifyOrReturn(CheckValue("", actualValue[21], 65528UL));
+                VerifyOrReturn(CheckValue("", actualValue[22], 65529UL));
+                VerifyOrReturn(CheckValue("", actualValue[23], 65531UL));
+                VerifyOrReturn(CheckValue("", actualValue[24], 65532UL));
+                VerifyOrReturn(CheckValue("", actualValue[25], 65533UL));
             }
 
             NextTest();
@@ -98248,6 +98256,35 @@ private:
 
                                                      NextTest();
                                                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheProductApppearanceValue_18()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterBasicInformation alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeProductAppearanceWithCompletion:^(
+            MTRBasicInformationClusterProductAppearanceStruct * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the ProductApppearance value Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(
+                    CheckValue("Finish", ((MTRBasicInformationClusterProductAppearanceStruct *) actualValue).finish, 1U));
+                VerifyOrReturn(CheckValueNonNull(
+                    "PrimaryColor", ((MTRBasicInformationClusterProductAppearanceStruct *) actualValue).primaryColor));
+                VerifyOrReturn(CheckValue(
+                    "PrimaryColor", ((MTRBasicInformationClusterProductAppearanceStruct *) actualValue).primaryColor, 5U));
+            }
+
+            NextTest();
+        }];
 
         return CHIP_NO_ERROR;
     }

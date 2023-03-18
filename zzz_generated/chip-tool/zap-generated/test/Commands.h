@@ -18889,7 +18889,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 2U));
                 VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
@@ -67195,7 +67195,7 @@ class TestBasicInformationSuite : public TestCommand
 {
 public:
     TestBasicInformationSuite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("TestBasicInformation", 18, credsIssuerConfig)
+        TestCommand("TestBasicInformation", 19, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -67302,16 +67302,18 @@ private:
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("attributeList", iter_0, 19));
                     VerifyOrReturn(CheckValue("attributeList[19]", iter_0.GetValue(), 19UL));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("attributeList", iter_0, 20));
-                    VerifyOrReturn(CheckValue("attributeList[20]", iter_0.GetValue(), 65528UL));
+                    VerifyOrReturn(CheckValue("attributeList[20]", iter_0.GetValue(), 20UL));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("attributeList", iter_0, 21));
-                    VerifyOrReturn(CheckValue("attributeList[21]", iter_0.GetValue(), 65529UL));
+                    VerifyOrReturn(CheckValue("attributeList[21]", iter_0.GetValue(), 65528UL));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("attributeList", iter_0, 22));
-                    VerifyOrReturn(CheckValue("attributeList[22]", iter_0.GetValue(), 65531UL));
+                    VerifyOrReturn(CheckValue("attributeList[22]", iter_0.GetValue(), 65529UL));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("attributeList", iter_0, 23));
-                    VerifyOrReturn(CheckValue("attributeList[23]", iter_0.GetValue(), 65532UL));
+                    VerifyOrReturn(CheckValue("attributeList[23]", iter_0.GetValue(), 65531UL));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("attributeList", iter_0, 24));
-                    VerifyOrReturn(CheckValue("attributeList[24]", iter_0.GetValue(), 65533UL));
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("attributeList", iter_0, 25));
+                    VerifyOrReturn(CheckValue("attributeList[24]", iter_0.GetValue(), 65532UL));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("attributeList", iter_0, 25));
+                    VerifyOrReturn(CheckValue("attributeList[25]", iter_0.GetValue(), 65533UL));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("attributeList", iter_0, 26));
                 }
             }
             break;
@@ -67382,6 +67384,16 @@ private:
             break;
         case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::BasicInformation::Structs::ProductAppearanceStruct::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("productAppearance.finish", value.finish, 1U));
+                VerifyOrReturn(CheckValueNonNull("productAppearance.primaryColor", value.primaryColor));
+                VerifyOrReturn(CheckValue("productAppearance.primaryColor.Value()", value.primaryColor.Value(), 5U));
+            }
             break;
         default:
             LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
@@ -67512,6 +67524,11 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
                                   BasicInformation::Attributes::LocalConfigDisabled::Id, value, chip::NullOptional,
                                   chip::NullOptional);
+        }
+        case 18: {
+            LogStep(18, "Read the ProductApppearance value");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::ProductAppearance::Id, true, chip::NullOptional);
         }
         }
         return CHIP_NO_ERROR;
