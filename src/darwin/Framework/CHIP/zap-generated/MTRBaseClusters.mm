@@ -14127,6 +14127,54 @@ using chip::System::Clock::Timeout;
         });
 }
 
+- (void)readAttributeProductAppearanceWithCompletion:(void (^)(MTRBasicInformationClusterProductAppearanceStruct * _Nullable value,
+                                                         NSError * _Nullable error))completion
+{
+    MTRReadParams * params = [[MTRReadParams alloc] init];
+    using TypeInfo = BasicInformation::Attributes::ProductAppearance::TypeInfo;
+    return MTRReadAttribute<MTRBasicInformationProductAppearanceStructAttributeCallbackBridge,
+        MTRBasicInformationClusterProductAppearanceStruct, TypeInfo::DecodableType>(
+        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
+- (void)subscribeAttributeProductAppearanceWithParams:(MTRSubscribeParams * _Nonnull)params
+                              subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                        reportHandler:(void (^)(MTRBasicInformationClusterProductAppearanceStruct * _Nullable value,
+                                                          NSError * _Nullable error))reportHandler
+{
+    using TypeInfo = BasicInformation::Attributes::ProductAppearance::TypeInfo;
+    MTRSubscribeAttribute<MTRBasicInformationProductAppearanceStructAttributeCallbackSubscriptionBridge,
+        MTRBasicInformationClusterProductAppearanceStruct, TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler,
+        self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
++ (void)readAttributeProductAppearanceWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                                   endpoint:(NSNumber *)endpoint
+                                                      queue:(dispatch_queue_t)queue
+                                                 completion:
+                                                     (void (^)(MTRBasicInformationClusterProductAppearanceStruct * _Nullable value,
+                                                         NSError * _Nullable error))completion
+{
+    auto * bridge = new MTRBasicInformationProductAppearanceStructAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
+        ^(BasicInformationProductAppearanceStructAttributeCallback successCb, MTRErrorCallback failureCb) {
+            if (clusterStateCacheContainer.cppClusterStateCache) {
+                chip::app::ConcreteAttributePath path;
+                using TypeInfo = BasicInformation::Attributes::ProductAppearance::TypeInfo;
+                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+                path.mClusterId = TypeInfo::GetClusterId();
+                path.mAttributeId = TypeInfo::GetAttributeId();
+                TypeInfo::DecodableType value;
+                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+                if (err == CHIP_NO_ERROR) {
+                    successCb(bridge, value);
+                }
+                return err;
+            }
+            return CHIP_ERROR_NOT_FOUND;
+        });
+}
+
 - (void)readAttributeGeneratedCommandListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
