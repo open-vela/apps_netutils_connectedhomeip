@@ -10964,7 +10964,6 @@ public:
 | * Reachable                                                         | 0x0011 |
 | * UniqueID                                                          | 0x0012 |
 | * CapabilityMinima                                                  | 0x0013 |
-| * ProductAppearance                                                 | 0x0014 |
 | * GeneratedCommandList                                              | 0xFFF8 |
 | * AcceptedCommandList                                               | 0xFFF9 |
 | * EventList                                                         | 0xFFFA |
@@ -12497,77 +12496,6 @@ public:
             }
             reportHandler:^(MTRBasicInformationClusterCapabilityMinimaStruct * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BasicInformation.CapabilityMinima response %@", [value description]);
-                SetCommandExitStatus(error);
-            }];
-
-        return CHIP_NO_ERROR;
-    }
-};
-
-/*
- * Attribute ProductAppearance
- */
-class ReadBasicInformationProductAppearance : public ReadAttribute {
-public:
-    ReadBasicInformationProductAppearance()
-        : ReadAttribute("product-appearance")
-    {
-    }
-
-    ~ReadBasicInformationProductAppearance() {}
-
-    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
-    {
-        ChipLogProgress(chipTool, "Sending cluster (0x00000028) ReadAttribute (0x00000014) on endpoint %u", endpointId);
-
-        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBasicInformation alloc] initWithDevice:device
-                                                                            endpointID:@(endpointId)
-                                                                                 queue:callbackQueue];
-        [cluster readAttributeProductAppearanceWithCompletion:^(
-            MTRBasicInformationClusterProductAppearanceStruct * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"BasicInformation.ProductAppearance response %@", [value description]);
-            if (error != nil) {
-                LogNSError("BasicInformation ProductAppearance read Error", error);
-            }
-            SetCommandExitStatus(error);
-        }];
-        return CHIP_NO_ERROR;
-    }
-};
-
-class SubscribeAttributeBasicInformationProductAppearance : public SubscribeAttribute {
-public:
-    SubscribeAttributeBasicInformationProductAppearance()
-        : SubscribeAttribute("product-appearance")
-    {
-    }
-
-    ~SubscribeAttributeBasicInformationProductAppearance() {}
-
-    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
-    {
-        ChipLogProgress(chipTool, "Sending cluster (0x00000028) ReportAttribute (0x00000014) on endpoint %u", endpointId);
-        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBasicInformation alloc] initWithDevice:device
-                                                                            endpointID:@(endpointId)
-                                                                                 queue:callbackQueue];
-        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
-        if (mKeepSubscriptions.HasValue()) {
-            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
-        }
-        if (mFabricFiltered.HasValue()) {
-            params.filterByFabric = mFabricFiltered.Value();
-        }
-        if (mAutoResubscribe.HasValue()) {
-            params.resubscribeAutomatically = mAutoResubscribe.Value();
-        }
-        [cluster subscribeAttributeProductAppearanceWithParams:params
-            subscriptionEstablished:^() {
-                mSubscriptionEstablished = YES;
-            }
-            reportHandler:^(MTRBasicInformationClusterProductAppearanceStruct * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"BasicInformation.ProductAppearance response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -98101,8 +98029,6 @@ void registerClusterBasicInformation(Commands & commands)
         make_unique<SubscribeAttributeBasicInformationUniqueID>(), //
         make_unique<ReadBasicInformationCapabilityMinima>(), //
         make_unique<SubscribeAttributeBasicInformationCapabilityMinima>(), //
-        make_unique<ReadBasicInformationProductAppearance>(), //
-        make_unique<SubscribeAttributeBasicInformationProductAppearance>(), //
         make_unique<ReadBasicInformationGeneratedCommandList>(), //
         make_unique<SubscribeAttributeBasicInformationGeneratedCommandList>(), //
         make_unique<ReadBasicInformationAcceptedCommandList>(), //
