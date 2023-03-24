@@ -132086,6 +132086,46 @@ private:
             ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[5]).groupKeySetID = [NSNumber numberWithUnsignedShort:418U];
             ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[5]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
 
+            temp_0[6] = [[MTRGroupKeyManagementClusterGroupKeyMapStruct alloc] init];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[6]).groupId = [NSNumber numberWithUnsignedShort:260U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[6]).groupKeySetID = [NSNumber numberWithUnsignedShort:417U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[6]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            temp_0[7] = [[MTRGroupKeyManagementClusterGroupKeyMapStruct alloc] init];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[7]).groupId = [NSNumber numberWithUnsignedShort:260U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[7]).groupKeySetID = [NSNumber numberWithUnsignedShort:418U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[7]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            temp_0[8] = [[MTRGroupKeyManagementClusterGroupKeyMapStruct alloc] init];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[8]).groupId = [NSNumber numberWithUnsignedShort:261U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[8]).groupKeySetID = [NSNumber numberWithUnsignedShort:417U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[8]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            temp_0[9] = [[MTRGroupKeyManagementClusterGroupKeyMapStruct alloc] init];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[9]).groupId = [NSNumber numberWithUnsignedShort:261U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[9]).groupKeySetID = [NSNumber numberWithUnsignedShort:418U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[9]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            temp_0[10] = [[MTRGroupKeyManagementClusterGroupKeyMapStruct alloc] init];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[10]).groupId = [NSNumber numberWithUnsignedShort:262U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[10]).groupKeySetID = [NSNumber numberWithUnsignedShort:417U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[10]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            temp_0[11] = [[MTRGroupKeyManagementClusterGroupKeyMapStruct alloc] init];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[11]).groupId = [NSNumber numberWithUnsignedShort:262U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[11]).groupKeySetID = [NSNumber numberWithUnsignedShort:418U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[11]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            temp_0[12] = [[MTRGroupKeyManagementClusterGroupKeyMapStruct alloc] init];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[12]).groupId = [NSNumber numberWithUnsignedShort:263U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[12]).groupKeySetID = [NSNumber numberWithUnsignedShort:417U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[12]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            temp_0[13] = [[MTRGroupKeyManagementClusterGroupKeyMapStruct alloc] init];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[13]).groupId = [NSNumber numberWithUnsignedShort:263U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[13]).groupKeySetID = [NSNumber numberWithUnsignedShort:418U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[13]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
             groupKeyMapArgument = temp_0;
         }
         [cluster writeAttributeGroupKeyMapWithValue:groupKeyMapArgument
