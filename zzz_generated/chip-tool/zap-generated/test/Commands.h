@@ -87461,7 +87461,7 @@ private:
             chip::app::DataModel::List<const chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>(6);
+                auto * listHolder_0 = new ListHolder<chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>(14);
                 listFreer.add(listHolder_0);
 
                 listHolder_0->mList[0].groupId       = 257U;
@@ -87488,8 +87488,40 @@ private:
                 listHolder_0->mList[5].groupKeySetID = 418U;
                 listHolder_0->mList[5].fabricIndex   = 1U;
 
+                listHolder_0->mList[6].groupId       = 260U;
+                listHolder_0->mList[6].groupKeySetID = 417U;
+                listHolder_0->mList[6].fabricIndex   = 1U;
+
+                listHolder_0->mList[7].groupId       = 260U;
+                listHolder_0->mList[7].groupKeySetID = 418U;
+                listHolder_0->mList[7].fabricIndex   = 1U;
+
+                listHolder_0->mList[8].groupId       = 261U;
+                listHolder_0->mList[8].groupKeySetID = 417U;
+                listHolder_0->mList[8].fabricIndex   = 1U;
+
+                listHolder_0->mList[9].groupId       = 261U;
+                listHolder_0->mList[9].groupKeySetID = 418U;
+                listHolder_0->mList[9].fabricIndex   = 1U;
+
+                listHolder_0->mList[10].groupId       = 262U;
+                listHolder_0->mList[10].groupKeySetID = 417U;
+                listHolder_0->mList[10].fabricIndex   = 1U;
+
+                listHolder_0->mList[11].groupId       = 262U;
+                listHolder_0->mList[11].groupKeySetID = 418U;
+                listHolder_0->mList[11].fabricIndex   = 1U;
+
+                listHolder_0->mList[12].groupId       = 263U;
+                listHolder_0->mList[12].groupKeySetID = 417U;
+                listHolder_0->mList[12].fabricIndex   = 1U;
+
+                listHolder_0->mList[13].groupId       = 263U;
+                listHolder_0->mList[13].groupKeySetID = 418U;
+                listHolder_0->mList[13].fabricIndex   = 1U;
+
                 value = chip::app::DataModel::List<chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>(
-                    listHolder_0->mList, 6);
+                    listHolder_0->mList, 14);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                   GroupKeyManagement::Attributes::GroupKeyMap::Id, value, chip::NullOptional, chip::NullOptional);
