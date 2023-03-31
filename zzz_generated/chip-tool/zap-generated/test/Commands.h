@@ -54500,7 +54500,7 @@ private:
             {
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValueAsString("MACAddress", value, chip::CharSpan("00:00:00:00:00", 14)));
+                VerifyOrReturn(CheckConstraintMinLength("value", value, 3));
             }
             break;
         default:
