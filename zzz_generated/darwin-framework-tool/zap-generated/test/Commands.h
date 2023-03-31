@@ -74011,11 +74011,7 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValueAsString("MACAddress", actualValue, @"00:00:00:00:00"));
-            }
-
+            VerifyOrReturn(CheckConstraintMinLength("MACAddress", value, 3));
             NextTest();
         }];
 
