@@ -65702,53 +65702,69 @@ public:
             break;
         case 18:
             ChipLogProgress(chipTool, " ***** Test Step 18 : 3d: read the RO optional attribute default: CurrentPositionLift\n");
-            if (ShouldSkip("WNCV.S.A0003")) {
+            if (ShouldSkip("WNCV.S.A0003 && !WNCV.S.A0010 && !WNCV.S.A0011")) {
                 NextTest();
                 return;
             }
             err = Test3dReadTheRoOptionalAttributeDefaultCurrentPositionLift_18();
             break;
         case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : 3e: read the RO optional attribute default: CurrentPositionTilt\n");
-            if (ShouldSkip("WNCV.S.A0004")) {
+            ChipLogProgress(chipTool, " ***** Test Step 19 : 3d: read the RO optional attribute default: CurrentPositionLift\n");
+            if (ShouldSkip("WNCV.S.A0003 && WNCV.S.A0010 && WNCV.S.A0011")) {
                 NextTest();
                 return;
             }
-            err = Test3eReadTheRoOptionalAttributeDefaultCurrentPositionTilt_19();
+            err = Test3dReadTheRoOptionalAttributeDefaultCurrentPositionLift_19();
             break;
         case 20:
-            ChipLogProgress(chipTool, " ***** Test Step 20 : 3f: read the RO optional attribute default: NumberOfActuationsLift\n");
+            ChipLogProgress(chipTool, " ***** Test Step 20 : 3e: read the RO optional attribute default: CurrentPositionTilt\n");
+            if (ShouldSkip("WNCV.S.A0004 && !WNCV.S.A0012 && !WNCV.S.A0013")) {
+                NextTest();
+                return;
+            }
+            err = Test3eReadTheRoOptionalAttributeDefaultCurrentPositionTilt_20();
+            break;
+        case 21:
+            ChipLogProgress(chipTool, " ***** Test Step 21 : 3e: read the RO optional attribute default: CurrentPositionTilt\n");
+            if (ShouldSkip("WNCV.S.A0004 && WNCV.S.A0012 && WNCV.S.A0013")) {
+                NextTest();
+                return;
+            }
+            err = Test3eReadTheRoOptionalAttributeDefaultCurrentPositionTilt_21();
+            break;
+        case 22:
+            ChipLogProgress(chipTool, " ***** Test Step 22 : 3f: read the RO optional attribute default: NumberOfActuationsLift\n");
             if (ShouldSkip("WNCV.S.A0005")) {
                 NextTest();
                 return;
             }
-            err = Test3fReadTheRoOptionalAttributeDefaultNumberOfActuationsLift_20();
+            err = Test3fReadTheRoOptionalAttributeDefaultNumberOfActuationsLift_22();
             break;
-        case 21:
-            ChipLogProgress(chipTool, " ***** Test Step 21 : 3g: read the RO optional attribute default: NumberOfActuationsTilt\n");
+        case 23:
+            ChipLogProgress(chipTool, " ***** Test Step 23 : 3g: read the RO optional attribute default: NumberOfActuationsTilt\n");
             if (ShouldSkip("WNCV.S.A0006")) {
                 NextTest();
                 return;
             }
-            err = Test3gReadTheRoOptionalAttributeDefaultNumberOfActuationsTilt_21();
+            err = Test3gReadTheRoOptionalAttributeDefaultNumberOfActuationsTilt_23();
             break;
-        case 22:
+        case 24:
             ChipLogProgress(
-                chipTool, " ***** Test Step 22 : 3h: read the RO optional attribute default: CurrentPositionLiftPercentage\n");
+                chipTool, " ***** Test Step 24 : 3h: read the RO optional attribute default: CurrentPositionLiftPercentage\n");
             if (ShouldSkip("WNCV.S.A0008")) {
                 NextTest();
                 return;
             }
-            err = Test3hReadTheRoOptionalAttributeDefaultCurrentPositionLiftPercentage_22();
+            err = Test3hReadTheRoOptionalAttributeDefaultCurrentPositionLiftPercentage_24();
             break;
-        case 23:
+        case 25:
             ChipLogProgress(
-                chipTool, " ***** Test Step 23 : 3i:read the RO optional attribute default: CurrentPositionTiltPercentage\n");
+                chipTool, " ***** Test Step 25 : 3i:read the RO optional attribute default: CurrentPositionTiltPercentage\n");
             if (ShouldSkip("WNCV.S.A0009")) {
                 NextTest();
                 return;
             }
-            err = Test3ireadTheRoOptionalAttributeDefaultCurrentPositionTiltPercentage_23();
+            err = Test3ireadTheRoOptionalAttributeDefaultCurrentPositionTiltPercentage_25();
             break;
         }
 
@@ -65833,6 +65849,12 @@ public:
         case 23:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -65846,7 +65868,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 24;
+    const uint16_t mTestCount = 26;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -66101,6 +66123,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
+    NSNumber * _Nonnull InstalledOpenLimitLift;
 
     CHIP_ERROR Test2eReadTheRoOptionalAttributeDefaultInstalledOpenLimitLift_11()
     {
@@ -66117,12 +66140,16 @@ private:
             VerifyOrReturn(CheckConstraintType("installedOpenLimitLift", "int16u", "int16u"));
             VerifyOrReturn(CheckConstraintMinValue<uint16_t>("installedOpenLimitLift", [value unsignedShortValue], 0U));
             VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("installedOpenLimitLift", [value unsignedShortValue], 65535U));
+            {
+                InstalledOpenLimitLift = value;
+            }
 
             NextTest();
         }];
 
         return CHIP_NO_ERROR;
     }
+    NSNumber * _Nonnull InstalledClosedLimitLift;
 
     CHIP_ERROR Test2fReadTheRoOptionalAttributeDefaultInstalledClosedLimitLift_12()
     {
@@ -66139,12 +66166,16 @@ private:
             VerifyOrReturn(CheckConstraintType("installedClosedLimitLift", "int16u", "int16u"));
             VerifyOrReturn(CheckConstraintMinValue<uint16_t>("installedClosedLimitLift", [value unsignedShortValue], 0U));
             VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("installedClosedLimitLift", [value unsignedShortValue], 65535U));
+            {
+                InstalledClosedLimitLift = value;
+            }
 
             NextTest();
         }];
 
         return CHIP_NO_ERROR;
     }
+    NSNumber * _Nonnull InstalledOpenLimitTilt;
 
     CHIP_ERROR Test2gReadTheRoOptionalAttributeDefaultInstalledOpenLimitTilt_13()
     {
@@ -66161,12 +66192,16 @@ private:
             VerifyOrReturn(CheckConstraintType("installedOpenLimitTilt", "int16u", "int16u"));
             VerifyOrReturn(CheckConstraintMinValue<uint16_t>("installedOpenLimitTilt", [value unsignedShortValue], 0U));
             VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("installedOpenLimitTilt", [value unsignedShortValue], 65535U));
+            {
+                InstalledOpenLimitTilt = value;
+            }
 
             NextTest();
         }];
 
         return CHIP_NO_ERROR;
     }
+    NSNumber * _Nonnull InstalledClosedLimitTilt;
 
     CHIP_ERROR Test2hReadTheRoOptionalAttributeDefaultInstalledClosedLimitTilt_14()
     {
@@ -66183,6 +66218,9 @@ private:
             VerifyOrReturn(CheckConstraintType("installedClosedLimitTilt", "int16u", "int16u"));
             VerifyOrReturn(CheckConstraintMinValue<uint16_t>("installedClosedLimitTilt", [value unsignedShortValue], 0U));
             VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("installedClosedLimitTilt", [value unsignedShortValue], 65535U));
+            {
+                InstalledClosedLimitTilt = value;
+            }
 
             NextTest();
         }];
@@ -66281,7 +66319,34 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test3eReadTheRoOptionalAttributeDefaultCurrentPositionTilt_19()
+    CHIP_ERROR Test3dReadTheRoOptionalAttributeDefaultCurrentPositionLift_19()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterWindowCovering alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentPositionLiftWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"3d: read the RO optional attribute default: CurrentPositionLift Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("currentPositionLift", "int16u", "int16u"));
+                VerifyOrReturn(
+                    CheckConstraintMinValue<uint16_t>("currentPositionLift", [value unsignedShortValue], InstalledOpenLimitLift));
+                VerifyOrReturn(
+                    CheckConstraintMaxValue<uint16_t>("currentPositionLift", [value unsignedShortValue], InstalledClosedLimitLift));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR Test3eReadTheRoOptionalAttributeDefaultCurrentPositionTilt_20()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -66306,7 +66371,34 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test3fReadTheRoOptionalAttributeDefaultNumberOfActuationsLift_20()
+    CHIP_ERROR Test3eReadTheRoOptionalAttributeDefaultCurrentPositionTilt_21()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterWindowCovering alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentPositionTiltWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"3e: read the RO optional attribute default: CurrentPositionTilt Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("currentPositionTilt", "int16u", "int16u"));
+                VerifyOrReturn(
+                    CheckConstraintMinValue<uint16_t>("currentPositionTilt", [value unsignedShortValue], InstalledOpenLimitTilt));
+                VerifyOrReturn(
+                    CheckConstraintMaxValue<uint16_t>("currentPositionTilt", [value unsignedShortValue], InstalledClosedLimitTilt));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR Test3fReadTheRoOptionalAttributeDefaultNumberOfActuationsLift_22()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -66328,7 +66420,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test3gReadTheRoOptionalAttributeDefaultNumberOfActuationsTilt_21()
+    CHIP_ERROR Test3gReadTheRoOptionalAttributeDefaultNumberOfActuationsTilt_23()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -66350,7 +66442,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test3hReadTheRoOptionalAttributeDefaultCurrentPositionLiftPercentage_22()
+    CHIP_ERROR Test3hReadTheRoOptionalAttributeDefaultCurrentPositionLiftPercentage_24()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -66377,7 +66469,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test3ireadTheRoOptionalAttributeDefaultCurrentPositionTiltPercentage_23()
+    CHIP_ERROR Test3ireadTheRoOptionalAttributeDefaultCurrentPositionTiltPercentage_25()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");

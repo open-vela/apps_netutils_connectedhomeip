@@ -49985,7 +49985,7 @@ private:
 class Test_TC_WNCV_2_1Suite : public TestCommand
 {
 public:
-    Test_TC_WNCV_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_WNCV_2_1", 24, credsIssuerConfig)
+    Test_TC_WNCV_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_WNCV_2_1", 26, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -50005,6 +50005,11 @@ private:
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
+
+    uint16_t InstalledOpenLimitLift;
+    uint16_t InstalledClosedLimitLift;
+    uint16_t InstalledOpenLimitTilt;
+    uint16_t InstalledClosedLimitTilt;
 
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
 
@@ -50123,6 +50128,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
+                InstalledOpenLimitLift = value;
             }
             break;
         case 12:
@@ -50133,6 +50139,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
+                InstalledClosedLimitLift = value;
             }
             break;
         case 13:
@@ -50143,6 +50150,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
+                InstalledOpenLimitTilt = value;
             }
             break;
         case 14:
@@ -50153,6 +50161,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
+                InstalledClosedLimitTilt = value;
             }
             break;
         case 15:
@@ -50201,14 +50210,14 @@ private:
                 chip::app::DataModel::Nullable<uint16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, InstalledOpenLimitLift));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, InstalledClosedLimitLift));
             }
             break;
         case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint16_t value;
+                chip::app::DataModel::Nullable<uint16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
@@ -50218,6 +50227,16 @@ private:
         case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
+                chip::app::DataModel::Nullable<uint16_t> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, InstalledOpenLimitTilt));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, InstalledClosedLimitTilt));
+            }
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
@@ -50225,7 +50244,17 @@ private:
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
             break;
-        case 22:
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
+            }
+            break;
+        case 24:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::Nullable<chip::Percent> value;
@@ -50235,7 +50264,7 @@ private:
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 100U));
             }
             break;
-        case 23:
+        case 25:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::Nullable<chip::Percent> value;
@@ -50374,36 +50403,50 @@ private:
         }
         case 18: {
             LogStep(18, "3d: read the RO optional attribute default: CurrentPositionLift");
-            VerifyOrDo(!ShouldSkip("WNCV.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("WNCV.S.A0003 && !WNCV.S.A0010 && !WNCV.S.A0011"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WindowCovering::Id,
                                  WindowCovering::Attributes::CurrentPositionLift::Id, true, chip::NullOptional);
         }
         case 19: {
-            LogStep(19, "3e: read the RO optional attribute default: CurrentPositionTilt");
-            VerifyOrDo(!ShouldSkip("WNCV.S.A0004"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(19, "3d: read the RO optional attribute default: CurrentPositionLift");
+            VerifyOrDo(!ShouldSkip("WNCV.S.A0003 && WNCV.S.A0010 && WNCV.S.A0011"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WindowCovering::Id,
+                                 WindowCovering::Attributes::CurrentPositionLift::Id, true, chip::NullOptional);
+        }
+        case 20: {
+            LogStep(20, "3e: read the RO optional attribute default: CurrentPositionTilt");
+            VerifyOrDo(!ShouldSkip("WNCV.S.A0004 && !WNCV.S.A0012 && !WNCV.S.A0013"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WindowCovering::Id,
                                  WindowCovering::Attributes::CurrentPositionTilt::Id, true, chip::NullOptional);
         }
-        case 20: {
-            LogStep(20, "3f: read the RO optional attribute default: NumberOfActuationsLift");
+        case 21: {
+            LogStep(21, "3e: read the RO optional attribute default: CurrentPositionTilt");
+            VerifyOrDo(!ShouldSkip("WNCV.S.A0004 && WNCV.S.A0012 && WNCV.S.A0013"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WindowCovering::Id,
+                                 WindowCovering::Attributes::CurrentPositionTilt::Id, true, chip::NullOptional);
+        }
+        case 22: {
+            LogStep(22, "3f: read the RO optional attribute default: NumberOfActuationsLift");
             VerifyOrDo(!ShouldSkip("WNCV.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WindowCovering::Id,
                                  WindowCovering::Attributes::NumberOfActuationsLift::Id, true, chip::NullOptional);
         }
-        case 21: {
-            LogStep(21, "3g: read the RO optional attribute default: NumberOfActuationsTilt");
+        case 23: {
+            LogStep(23, "3g: read the RO optional attribute default: NumberOfActuationsTilt");
             VerifyOrDo(!ShouldSkip("WNCV.S.A0006"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WindowCovering::Id,
                                  WindowCovering::Attributes::NumberOfActuationsTilt::Id, true, chip::NullOptional);
         }
-        case 22: {
-            LogStep(22, "3h: read the RO optional attribute default: CurrentPositionLiftPercentage");
+        case 24: {
+            LogStep(24, "3h: read the RO optional attribute default: CurrentPositionLiftPercentage");
             VerifyOrDo(!ShouldSkip("WNCV.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WindowCovering::Id,
                                  WindowCovering::Attributes::CurrentPositionLiftPercentage::Id, true, chip::NullOptional);
         }
-        case 23: {
-            LogStep(23, "3i:read the RO optional attribute default: CurrentPositionTiltPercentage");
+        case 25: {
+            LogStep(25, "3i:read the RO optional attribute default: CurrentPositionTiltPercentage");
             VerifyOrDo(!ShouldSkip("WNCV.S.A0009"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WindowCovering::Id,
                                  WindowCovering::Attributes::CurrentPositionTiltPercentage::Id, true, chip::NullOptional);
