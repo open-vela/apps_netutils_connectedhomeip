@@ -82389,7 +82389,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 156:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 157:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -87068,18 +87068,11 @@ private:
                             completion:^(MTRUnitTestingClusterTestEnumsResponseParams * _Nullable values, NSError * _Nullable err) {
                                 NSLog(@"Send a command with a vendor_id and invalid enum Error: %@", err);
 
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                {
-                                    id actualValue = values.arg1;
-                                    VerifyOrReturn(CheckValue("arg1", actualValue, 20003U));
-                                }
-
-                                {
-                                    id actualValue = values.arg2;
-                                    VerifyOrReturn(CheckValue("arg2", actualValue, 4U));
-                                }
-
+                                VerifyOrReturn(CheckValue("status",
+                                    err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                  : EMBER_ZCL_STATUS_FAILURE)
+                                        : 0,
+                                    EMBER_ZCL_STATUS_FAILURE));
                                 NextTest();
                             }];
 

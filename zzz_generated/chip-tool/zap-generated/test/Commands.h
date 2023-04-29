@@ -58751,13 +58751,7 @@ private:
             }
             break;
         case 156:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::UnitTesting::Commands::TestEnumsResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("arg1", value.arg1, 20003U));
-                VerifyOrReturn(CheckValue("arg2", value.arg2, 4U));
-            }
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 157:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -66197,7 +66191,7 @@ private:
                     chip::app::Clusters::UnitTesting::Events::TestEvent::DecodableType value;
                     VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                     VerifyOrReturn(CheckValue("testEvent.arg1", value.arg1, 3U));
-                    VerifyOrReturn(CheckValue("testEvent.arg2", value.arg2, 4U));
+                    VerifyOrReturn(CheckValue("testEvent.arg2", value.arg2, 1U));
                     VerifyOrReturn(CheckValue("testEvent.arg3", value.arg3, false));
                 }
                 mTestSubStepIndex++;
@@ -66227,7 +66221,7 @@ private:
                     chip::app::Clusters::UnitTesting::Events::TestEvent::DecodableType value;
                     VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                     VerifyOrReturn(CheckValue("testEvent.arg1", value.arg1, 3U));
-                    VerifyOrReturn(CheckValue("testEvent.arg2", value.arg2, 4U));
+                    VerifyOrReturn(CheckValue("testEvent.arg2", value.arg2, 1U));
                     VerifyOrReturn(CheckValue("testEvent.arg3", value.arg3, false));
                 }
                 mTestSubStepIndex++;
@@ -66334,7 +66328,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::UnitTesting::Commands::TestEmitTestEventRequest::Type value;
             value.arg1 = 3U;
-            value.arg2 = static_cast<chip::app::Clusters::UnitTesting::SimpleEnum>(4);
+            value.arg2 = static_cast<chip::app::Clusters::UnitTesting::SimpleEnum>(1);
             value.arg3 = false;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Commands::TestEmitTestEventRequest::Id,
                                value, chip::NullOptional
