@@ -52823,12 +52823,12 @@ public:
             err = TestThSendsOffCommandToDut_26();
             break;
         case 27:
-            ChipLogProgress(chipTool, " ***** Test Step 27 : Wait for send Off command to take affect\n");
-            if (ShouldSkip("PICS_SDK_CI_ONLY")) {
+            ChipLogProgress(chipTool, " ***** Test Step 27 : TH reads the OnOff attribute from the DUT\n");
+            if (ShouldSkip("OO.S.A0000")) {
                 NextTest();
                 return;
             }
-            err = TestWaitForSendOffCommandToTakeAffect_27();
+            err = TestThReadsTheOnOffAttributeFromTheDut_27();
             break;
         case 28:
             ChipLogProgress(chipTool, " ***** Test Step 28 : Reboot target device\n");
@@ -53358,12 +53358,27 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWaitForSendOffCommandToTakeAffect_27()
+    CHIP_ERROR TestThReadsTheOnOffAttributeFromTheDut_27()
     {
 
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 10UL;
-        return WaitForMs("alpha", value);
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOnOff alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeOnOffWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads the OnOff attribute from the DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("OnOff", actualValue, 0));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 
     CHIP_ERROR TestRebootTargetDevice_28()
