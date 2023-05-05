@@ -101234,7 +101234,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(26)));
+                VerifyOrReturn(CheckValue("AttributeList", [actualValue count], static_cast<uint32_t>(25)));
                 VerifyOrReturn(CheckValue("", actualValue[0], 0UL));
                 VerifyOrReturn(CheckValue("", actualValue[1], 1UL));
                 VerifyOrReturn(CheckValue("", actualValue[2], 2UL));
@@ -101252,15 +101252,14 @@ private:
                 VerifyOrReturn(CheckValue("", actualValue[14], 14UL));
                 VerifyOrReturn(CheckValue("", actualValue[15], 15UL));
                 VerifyOrReturn(CheckValue("", actualValue[16], 16UL));
-                VerifyOrReturn(CheckValue("", actualValue[17], 17UL));
-                VerifyOrReturn(CheckValue("", actualValue[18], 18UL));
-                VerifyOrReturn(CheckValue("", actualValue[19], 19UL));
-                VerifyOrReturn(CheckValue("", actualValue[20], 20UL));
-                VerifyOrReturn(CheckValue("", actualValue[21], 65528UL));
-                VerifyOrReturn(CheckValue("", actualValue[22], 65529UL));
-                VerifyOrReturn(CheckValue("", actualValue[23], 65531UL));
-                VerifyOrReturn(CheckValue("", actualValue[24], 65532UL));
-                VerifyOrReturn(CheckValue("", actualValue[25], 65533UL));
+                VerifyOrReturn(CheckValue("", actualValue[17], 18UL));
+                VerifyOrReturn(CheckValue("", actualValue[18], 19UL));
+                VerifyOrReturn(CheckValue("", actualValue[19], 20UL));
+                VerifyOrReturn(CheckValue("", actualValue[20], 65528UL));
+                VerifyOrReturn(CheckValue("", actualValue[21], 65529UL));
+                VerifyOrReturn(CheckValue("", actualValue[22], 65531UL));
+                VerifyOrReturn(CheckValue("", actualValue[23], 65532UL));
+                VerifyOrReturn(CheckValue("", actualValue[24], 65533UL));
             }
 
             NextTest();
