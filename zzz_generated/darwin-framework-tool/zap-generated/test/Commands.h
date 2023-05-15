@@ -95789,72 +95789,119 @@ public:
             err = TestReadAttributeCharStringValueIsLowerCaseIsUpperCaseConstraints_27();
             break;
         case 28:
-            ChipLogProgress(chipTool, " ***** Test Step 28 : Write attribute CHAR_STRING Value\n");
-            err = TestWriteAttributeCharStringValue_28();
+            ChipLogProgress(chipTool, " ***** Test Step 28 : Write attribute CHAR_STRING Value with only digits\n");
+            err = TestWriteAttributeCharStringValueWithOnlyDigits_28();
             break;
         case 29:
-            ChipLogProgress(chipTool, " ***** Test Step 29 : Read attribute CHAR_STRING Value isHexString Constraints\n");
-            err = TestReadAttributeCharStringValueIsHexStringConstraints_29();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 29 : Read attribute CHAR_STRING Value isLowerCase/isUpperCase Constraints\n");
+            err = TestReadAttributeCharStringValueIsLowerCaseIsUpperCaseConstraints_29();
             break;
         case 30:
-            ChipLogProgress(chipTool, " ***** Test Step 30 : Write attribute CHAR_STRING Value\n");
-            err = TestWriteAttributeCharStringValue_30();
+            ChipLogProgress(chipTool, " ***** Test Step 30 : Write attribute CHAR_STRING Value with only non-letters\n");
+            err = TestWriteAttributeCharStringValueWithOnlyNonLetters_30();
             break;
         case 31:
-            ChipLogProgress(chipTool, " ***** Test Step 31 : Read attribute CHAR_STRING Value isHexString Constraints\n");
-            err = TestReadAttributeCharStringValueIsHexStringConstraints_31();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 31 : Read attribute CHAR_STRING Value isLowerCase/isUpperCase Constraints\n");
+            err = TestReadAttributeCharStringValueIsLowerCaseIsUpperCaseConstraints_31();
             break;
         case 32:
-            ChipLogProgress(chipTool, " ***** Test Step 32 : Write attribute CHAR_STRING Value Back to Default Value\n");
-            err = TestWriteAttributeCharStringValueBackToDefaultValue_32();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 32 : Write attribute CHAR_STRING Value with uppercase letters and symbols\n");
+            err = TestWriteAttributeCharStringValueWithUppercaseLettersAndSymbols_32();
             break;
         case 33:
-            ChipLogProgress(chipTool, " ***** Test Step 33 : Read attribute NULLABLE_INT8U Default Value\n");
-            err = TestReadAttributeNullableInt8uDefaultValue_33();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 33 : Read attribute CHAR_STRING Value isLowerCase/isUpperCase Constraints\n");
+            err = TestReadAttributeCharStringValueIsLowerCaseIsUpperCaseConstraints_33();
             break;
         case 34:
-            ChipLogProgress(chipTool, " ***** Test Step 34 : Write attribute NULLABLE_INT8U with a value\n");
-            err = TestWriteAttributeNullableInt8uWithAValue_34();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 34 : Write attribute CHAR_STRING Value with lowercase letters and symbols\n");
+            err = TestWriteAttributeCharStringValueWithLowercaseLettersAndSymbols_34();
             break;
         case 35:
-            ChipLogProgress(chipTool, " ***** Test Step 35 : Read attribute NULLABLE_INT8U with a value\n");
-            err = TestReadAttributeNullableInt8uWithAValue_35();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 35 : Read attribute CHAR_STRING Value isLowerCase/isUpperCase Constraints\n");
+            err = TestReadAttributeCharStringValueIsLowerCaseIsUpperCaseConstraints_35();
             break;
         case 36:
-            ChipLogProgress(chipTool, " ***** Test Step 36 : Write attribute NULLABLE_INT8U without a value\n");
-            err = TestWriteAttributeNullableInt8uWithoutAValue_36();
+            ChipLogProgress(chipTool, " ***** Test Step 36 : Write attribute CHAR_STRING Value which is empty\n");
+            err = TestWriteAttributeCharStringValueWhichIsEmpty_36();
             break;
         case 37:
-            ChipLogProgress(chipTool, " ***** Test Step 37 : Read attribute NULLABLE_INT8U with a value\n");
-            err = TestReadAttributeNullableInt8uWithAValue_37();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 37 : Read attribute CHAR_STRING Value isLowerCase/isUpperCase Constraints\n");
+            err = TestReadAttributeCharStringValueIsLowerCaseIsUpperCaseConstraints_37();
             break;
         case 38:
-            ChipLogProgress(chipTool, " ***** Test Step 38 : Write attribute NULLABLE_INT8U back to Default Value\n");
-            err = TestWriteAttributeNullableInt8uBackToDefaultValue_38();
+            ChipLogProgress(chipTool, " ***** Test Step 38 : Write attribute CHAR_STRING Value\n");
+            err = TestWriteAttributeCharStringValue_38();
             break;
         case 39:
-            ChipLogProgress(chipTool, " ***** Test Step 39 : Read attribute NULLABLE_OCTET_STRING Default Value\n");
-            err = TestReadAttributeNullableOctetStringDefaultValue_39();
+            ChipLogProgress(chipTool, " ***** Test Step 39 : Read attribute CHAR_STRING Value isHexString Constraints\n");
+            err = TestReadAttributeCharStringValueIsHexStringConstraints_39();
             break;
         case 40:
-            ChipLogProgress(chipTool, " ***** Test Step 40 : Write attribute NULLABLE_OCTET_STRING\n");
-            err = TestWriteAttributeNullableOctetString_40();
+            ChipLogProgress(chipTool, " ***** Test Step 40 : Write attribute CHAR_STRING Value\n");
+            err = TestWriteAttributeCharStringValue_40();
             break;
         case 41:
-            ChipLogProgress(chipTool, " ***** Test Step 41 : Read attribute NULLABLE_OCTET_STRING\n");
-            err = TestReadAttributeNullableOctetString_41();
+            ChipLogProgress(chipTool, " ***** Test Step 41 : Read attribute CHAR_STRING Value isHexString Constraints\n");
+            err = TestReadAttributeCharStringValueIsHexStringConstraints_41();
             break;
         case 42:
-            ChipLogProgress(chipTool, " ***** Test Step 42 : Write attribute NULLABLE_OCTET_STRING\n");
-            err = TestWriteAttributeNullableOctetString_42();
+            ChipLogProgress(chipTool, " ***** Test Step 42 : Write attribute CHAR_STRING Value Back to Default Value\n");
+            err = TestWriteAttributeCharStringValueBackToDefaultValue_42();
             break;
         case 43:
-            ChipLogProgress(chipTool, " ***** Test Step 43 : Read attribute NULLABLE_OCTET_STRING\n");
-            err = TestReadAttributeNullableOctetString_43();
+            ChipLogProgress(chipTool, " ***** Test Step 43 : Read attribute NULLABLE_INT8U Default Value\n");
+            err = TestReadAttributeNullableInt8uDefaultValue_43();
             break;
         case 44:
-            ChipLogProgress(chipTool, " ***** Test Step 44 : Write attribute NULLABLE_OCTET_STRING back to Default Value\n");
-            err = TestWriteAttributeNullableOctetStringBackToDefaultValue_44();
+            ChipLogProgress(chipTool, " ***** Test Step 44 : Write attribute NULLABLE_INT8U with a value\n");
+            err = TestWriteAttributeNullableInt8uWithAValue_44();
+            break;
+        case 45:
+            ChipLogProgress(chipTool, " ***** Test Step 45 : Read attribute NULLABLE_INT8U with a value\n");
+            err = TestReadAttributeNullableInt8uWithAValue_45();
+            break;
+        case 46:
+            ChipLogProgress(chipTool, " ***** Test Step 46 : Write attribute NULLABLE_INT8U without a value\n");
+            err = TestWriteAttributeNullableInt8uWithoutAValue_46();
+            break;
+        case 47:
+            ChipLogProgress(chipTool, " ***** Test Step 47 : Read attribute NULLABLE_INT8U with a value\n");
+            err = TestReadAttributeNullableInt8uWithAValue_47();
+            break;
+        case 48:
+            ChipLogProgress(chipTool, " ***** Test Step 48 : Write attribute NULLABLE_INT8U back to Default Value\n");
+            err = TestWriteAttributeNullableInt8uBackToDefaultValue_48();
+            break;
+        case 49:
+            ChipLogProgress(chipTool, " ***** Test Step 49 : Read attribute NULLABLE_OCTET_STRING Default Value\n");
+            err = TestReadAttributeNullableOctetStringDefaultValue_49();
+            break;
+        case 50:
+            ChipLogProgress(chipTool, " ***** Test Step 50 : Write attribute NULLABLE_OCTET_STRING\n");
+            err = TestWriteAttributeNullableOctetString_50();
+            break;
+        case 51:
+            ChipLogProgress(chipTool, " ***** Test Step 51 : Read attribute NULLABLE_OCTET_STRING\n");
+            err = TestReadAttributeNullableOctetString_51();
+            break;
+        case 52:
+            ChipLogProgress(chipTool, " ***** Test Step 52 : Write attribute NULLABLE_OCTET_STRING\n");
+            err = TestWriteAttributeNullableOctetString_52();
+            break;
+        case 53:
+            ChipLogProgress(chipTool, " ***** Test Step 53 : Read attribute NULLABLE_OCTET_STRING\n");
+            err = TestReadAttributeNullableOctetString_53();
+            break;
+        case 54:
+            ChipLogProgress(chipTool, " ***** Test Step 54 : Write attribute NULLABLE_OCTET_STRING back to Default Value\n");
+            err = TestWriteAttributeNullableOctetStringBackToDefaultValue_54();
             break;
         }
 
@@ -96002,6 +96049,36 @@ public:
         case 44:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 45:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 46:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 47:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 48:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 49:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 50:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 51:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 52:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 53:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 54:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -96015,7 +96092,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 45;
+    const uint16_t mTestCount = 55;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -96604,7 +96681,214 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeCharStringValue_28()
+    CHIP_ERROR TestWriteAttributeCharStringValueWithOnlyDigits_28()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id charStringArgument;
+        charStringArgument = @"1234567890";
+        [cluster writeAttributeCharStringWithValue:charStringArgument
+                                        completion:^(NSError * _Nullable err) {
+                                            NSLog(@"Write attribute CHAR_STRING Value with only digits Error: %@", err);
+
+                                            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                            NextTest();
+                                        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadAttributeCharStringValueIsLowerCaseIsUpperCaseConstraints_29()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCharStringWithCompletion:^(NSString * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read attribute CHAR_STRING Value isLowerCase/isUpperCase Constraints Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintIsUpperCase("charString", value, true));
+            VerifyOrReturn(CheckConstraintIsLowerCase("charString", value, true));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWriteAttributeCharStringValueWithOnlyNonLetters_30()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id charStringArgument;
+        charStringArgument = @"12.4,76:";
+        [cluster writeAttributeCharStringWithValue:charStringArgument
+                                        completion:^(NSError * _Nullable err) {
+                                            NSLog(@"Write attribute CHAR_STRING Value with only non-letters Error: %@", err);
+
+                                            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                            NextTest();
+                                        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadAttributeCharStringValueIsLowerCaseIsUpperCaseConstraints_31()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCharStringWithCompletion:^(NSString * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read attribute CHAR_STRING Value isLowerCase/isUpperCase Constraints Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintIsUpperCase("charString", value, true));
+            VerifyOrReturn(CheckConstraintIsLowerCase("charString", value, true));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWriteAttributeCharStringValueWithUppercaseLettersAndSymbols_32()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id charStringArgument;
+        charStringArgument = @"ABC;.* ";
+        [cluster writeAttributeCharStringWithValue:charStringArgument
+                                        completion:^(NSError * _Nullable err) {
+                                            NSLog(@"Write attribute CHAR_STRING Value with uppercase letters and symbols Error: %@",
+                                                err);
+
+                                            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                            NextTest();
+                                        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadAttributeCharStringValueIsLowerCaseIsUpperCaseConstraints_33()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCharStringWithCompletion:^(NSString * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read attribute CHAR_STRING Value isLowerCase/isUpperCase Constraints Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintIsUpperCase("charString", value, true));
+            VerifyOrReturn(CheckConstraintIsLowerCase("charString", value, false));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWriteAttributeCharStringValueWithLowercaseLettersAndSymbols_34()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id charStringArgument;
+        charStringArgument = @"abc;.* ";
+        [cluster writeAttributeCharStringWithValue:charStringArgument
+                                        completion:^(NSError * _Nullable err) {
+                                            NSLog(@"Write attribute CHAR_STRING Value with lowercase letters and symbols Error: %@",
+                                                err);
+
+                                            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                            NextTest();
+                                        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadAttributeCharStringValueIsLowerCaseIsUpperCaseConstraints_35()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCharStringWithCompletion:^(NSString * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read attribute CHAR_STRING Value isLowerCase/isUpperCase Constraints Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintIsUpperCase("charString", value, false));
+            VerifyOrReturn(CheckConstraintIsLowerCase("charString", value, true));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWriteAttributeCharStringValueWhichIsEmpty_36()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id charStringArgument;
+        charStringArgument = @"";
+        [cluster writeAttributeCharStringWithValue:charStringArgument
+                                        completion:^(NSError * _Nullable err) {
+                                            NSLog(@"Write attribute CHAR_STRING Value which is empty Error: %@", err);
+
+                                            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                            NextTest();
+                                        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadAttributeCharStringValueIsLowerCaseIsUpperCaseConstraints_37()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCharStringWithCompletion:^(NSString * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read attribute CHAR_STRING Value isLowerCase/isUpperCase Constraints Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintIsUpperCase("charString", value, true));
+            VerifyOrReturn(CheckConstraintIsLowerCase("charString", value, true));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWriteAttributeCharStringValue_38()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -96625,7 +96909,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeCharStringValueIsHexStringConstraints_29()
+    CHIP_ERROR TestReadAttributeCharStringValueIsHexStringConstraints_39()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -96644,7 +96928,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeCharStringValue_30()
+    CHIP_ERROR TestWriteAttributeCharStringValue_40()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -96665,7 +96949,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeCharStringValueIsHexStringConstraints_31()
+    CHIP_ERROR TestReadAttributeCharStringValueIsHexStringConstraints_41()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -96684,7 +96968,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeCharStringValueBackToDefaultValue_32()
+    CHIP_ERROR TestWriteAttributeCharStringValueBackToDefaultValue_42()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -96705,7 +96989,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt8uDefaultValue_33()
+    CHIP_ERROR TestReadAttributeNullableInt8uDefaultValue_43()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -96729,7 +97013,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt8uWithAValue_34()
+    CHIP_ERROR TestWriteAttributeNullableInt8uWithAValue_44()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -96750,7 +97034,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt8uWithAValue_35()
+    CHIP_ERROR TestReadAttributeNullableInt8uWithAValue_45()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -96771,7 +97055,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt8uWithoutAValue_36()
+    CHIP_ERROR TestWriteAttributeNullableInt8uWithoutAValue_46()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -96792,7 +97076,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt8uWithAValue_37()
+    CHIP_ERROR TestReadAttributeNullableInt8uWithAValue_47()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -96813,7 +97097,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt8uBackToDefaultValue_38()
+    CHIP_ERROR TestWriteAttributeNullableInt8uBackToDefaultValue_48()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -96834,7 +97118,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableOctetStringDefaultValue_39()
+    CHIP_ERROR TestReadAttributeNullableOctetStringDefaultValue_49()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -96859,7 +97143,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableOctetString_40()
+    CHIP_ERROR TestWriteAttributeNullableOctetString_50()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -96880,7 +97164,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableOctetString_41()
+    CHIP_ERROR TestReadAttributeNullableOctetString_51()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -96901,7 +97185,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableOctetString_42()
+    CHIP_ERROR TestWriteAttributeNullableOctetString_52()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -96922,7 +97206,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableOctetString_43()
+    CHIP_ERROR TestReadAttributeNullableOctetString_53()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -96943,7 +97227,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableOctetStringBackToDefaultValue_44()
+    CHIP_ERROR TestWriteAttributeNullableOctetStringBackToDefaultValue_54()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
