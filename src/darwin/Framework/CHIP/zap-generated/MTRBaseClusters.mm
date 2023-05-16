@@ -46256,6 +46256,329 @@ using chip::System::Clock::Timeout;
 
 @end
 
+@implementation MTRBaseClusterAirQuality
+
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpointID:(NSNumber *)endpointID queue:(dispatch_queue_t)queue
+{
+    if (self = [super initWithQueue:queue]) {
+        if (device == nil) {
+            return nil;
+        }
+
+        _device = device;
+        _endpoint = [endpointID unsignedShortValue];
+    }
+    return self;
+}
+
+- (void)readAttributeAirQualityWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
+{
+    MTRReadParams * params = [[MTRReadParams alloc] init];
+    using TypeInfo = AirQuality::Attributes::AirQuality::TypeInfo;
+    return MTRReadAttribute<MTRAirQualityClusterAirQualityEnumAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
+- (void)subscribeAttributeAirQualityWithParams:(MTRSubscribeParams * _Nonnull)params
+                       subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                 reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
+{
+    using TypeInfo = AirQuality::Attributes::AirQuality::TypeInfo;
+    MTRSubscribeAttribute<MTRAirQualityClusterAirQualityEnumAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(
+        params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
+        TypeInfo::GetAttributeId());
+}
+
++ (void)readAttributeAirQualityWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                            endpoint:(NSNumber *)endpoint
+                                               queue:(dispatch_queue_t)queue
+                                          completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
+{
+    auto * bridge = new MTRAirQualityClusterAirQualityEnumAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
+        ^(AirQualityClusterAirQualityEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
+            if (clusterStateCacheContainer.cppClusterStateCache) {
+                chip::app::ConcreteAttributePath path;
+                using TypeInfo = AirQuality::Attributes::AirQuality::TypeInfo;
+                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+                path.mClusterId = TypeInfo::GetClusterId();
+                path.mAttributeId = TypeInfo::GetAttributeId();
+                TypeInfo::DecodableType value;
+                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+                if (err == CHIP_NO_ERROR) {
+                    successCb(bridge, value);
+                }
+                return err;
+            }
+            return CHIP_ERROR_NOT_FOUND;
+        });
+}
+
+- (void)readAttributeGeneratedCommandListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
+{
+    MTRReadParams * params = [[MTRReadParams alloc] init];
+    using TypeInfo = AirQuality::Attributes::GeneratedCommandList::TypeInfo;
+    return MTRReadAttribute<MTRAirQualityGeneratedCommandListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
+        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
+- (void)subscribeAttributeGeneratedCommandListWithParams:(MTRSubscribeParams * _Nonnull)params
+                                 subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                           reportHandler:
+                                               (void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
+{
+    using TypeInfo = AirQuality::Attributes::GeneratedCommandList::TypeInfo;
+    MTRSubscribeAttribute<MTRAirQualityGeneratedCommandListListAttributeCallbackSubscriptionBridge, NSArray,
+        TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
+        TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
++ (void)readAttributeGeneratedCommandListWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                                      endpoint:(NSNumber *)endpoint
+                                                         queue:(dispatch_queue_t)queue
+                                                    completion:
+                                                        (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
+{
+    auto * bridge = new MTRAirQualityGeneratedCommandListListAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
+        ^(AirQualityGeneratedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+            if (clusterStateCacheContainer.cppClusterStateCache) {
+                chip::app::ConcreteAttributePath path;
+                using TypeInfo = AirQuality::Attributes::GeneratedCommandList::TypeInfo;
+                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+                path.mClusterId = TypeInfo::GetClusterId();
+                path.mAttributeId = TypeInfo::GetAttributeId();
+                TypeInfo::DecodableType value;
+                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+                if (err == CHIP_NO_ERROR) {
+                    successCb(bridge, value);
+                }
+                return err;
+            }
+            return CHIP_ERROR_NOT_FOUND;
+        });
+}
+
+- (void)readAttributeAcceptedCommandListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
+{
+    MTRReadParams * params = [[MTRReadParams alloc] init];
+    using TypeInfo = AirQuality::Attributes::AcceptedCommandList::TypeInfo;
+    return MTRReadAttribute<MTRAirQualityAcceptedCommandListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
+        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
+- (void)subscribeAttributeAcceptedCommandListWithParams:(MTRSubscribeParams * _Nonnull)params
+                                subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                          reportHandler:
+                                              (void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
+{
+    using TypeInfo = AirQuality::Attributes::AcceptedCommandList::TypeInfo;
+    MTRSubscribeAttribute<MTRAirQualityAcceptedCommandListListAttributeCallbackSubscriptionBridge, NSArray,
+        TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
+        TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
++ (void)readAttributeAcceptedCommandListWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                                     endpoint:(NSNumber *)endpoint
+                                                        queue:(dispatch_queue_t)queue
+                                                   completion:
+                                                       (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
+{
+    auto * bridge = new MTRAirQualityAcceptedCommandListListAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
+        ^(AirQualityAcceptedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+            if (clusterStateCacheContainer.cppClusterStateCache) {
+                chip::app::ConcreteAttributePath path;
+                using TypeInfo = AirQuality::Attributes::AcceptedCommandList::TypeInfo;
+                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+                path.mClusterId = TypeInfo::GetClusterId();
+                path.mAttributeId = TypeInfo::GetAttributeId();
+                TypeInfo::DecodableType value;
+                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+                if (err == CHIP_NO_ERROR) {
+                    successCb(bridge, value);
+                }
+                return err;
+            }
+            return CHIP_ERROR_NOT_FOUND;
+        });
+}
+
+- (void)readAttributeEventListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
+{
+    MTRReadParams * params = [[MTRReadParams alloc] init];
+    using TypeInfo = AirQuality::Attributes::EventList::TypeInfo;
+    return MTRReadAttribute<MTRAirQualityEventListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
+        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
+- (void)subscribeAttributeEventListWithParams:(MTRSubscribeParams * _Nonnull)params
+                      subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                reportHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
+{
+    using TypeInfo = AirQuality::Attributes::EventList::TypeInfo;
+    MTRSubscribeAttribute<MTRAirQualityEventListListAttributeCallbackSubscriptionBridge, NSArray, TypeInfo::DecodableType>(params,
+        subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
+        TypeInfo::GetAttributeId());
+}
+
++ (void)readAttributeEventListWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                           endpoint:(NSNumber *)endpoint
+                                              queue:(dispatch_queue_t)queue
+                                         completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
+{
+    auto * bridge = new MTRAirQualityEventListListAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(
+        clusterStateCacheContainer.baseDevice, ^(AirQualityEventListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+            if (clusterStateCacheContainer.cppClusterStateCache) {
+                chip::app::ConcreteAttributePath path;
+                using TypeInfo = AirQuality::Attributes::EventList::TypeInfo;
+                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+                path.mClusterId = TypeInfo::GetClusterId();
+                path.mAttributeId = TypeInfo::GetAttributeId();
+                TypeInfo::DecodableType value;
+                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+                if (err == CHIP_NO_ERROR) {
+                    successCb(bridge, value);
+                }
+                return err;
+            }
+            return CHIP_ERROR_NOT_FOUND;
+        });
+}
+
+- (void)readAttributeAttributeListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
+{
+    MTRReadParams * params = [[MTRReadParams alloc] init];
+    using TypeInfo = AirQuality::Attributes::AttributeList::TypeInfo;
+    return MTRReadAttribute<MTRAirQualityAttributeListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
+        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
+- (void)subscribeAttributeAttributeListWithParams:(MTRSubscribeParams * _Nonnull)params
+                          subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                    reportHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
+{
+    using TypeInfo = AirQuality::Attributes::AttributeList::TypeInfo;
+    MTRSubscribeAttribute<MTRAirQualityAttributeListListAttributeCallbackSubscriptionBridge, NSArray, TypeInfo::DecodableType>(
+        params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
+        TypeInfo::GetAttributeId());
+}
+
++ (void)readAttributeAttributeListWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                               endpoint:(NSNumber *)endpoint
+                                                  queue:(dispatch_queue_t)queue
+                                             completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
+{
+    auto * bridge = new MTRAirQualityAttributeListListAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
+        ^(AirQualityAttributeListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+            if (clusterStateCacheContainer.cppClusterStateCache) {
+                chip::app::ConcreteAttributePath path;
+                using TypeInfo = AirQuality::Attributes::AttributeList::TypeInfo;
+                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+                path.mClusterId = TypeInfo::GetClusterId();
+                path.mAttributeId = TypeInfo::GetAttributeId();
+                TypeInfo::DecodableType value;
+                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+                if (err == CHIP_NO_ERROR) {
+                    successCb(bridge, value);
+                }
+                return err;
+            }
+            return CHIP_ERROR_NOT_FOUND;
+        });
+}
+
+- (void)readAttributeFeatureMapWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
+{
+    MTRReadParams * params = [[MTRReadParams alloc] init];
+    using TypeInfo = AirQuality::Attributes::FeatureMap::TypeInfo;
+    return MTRReadAttribute<MTRInt32uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
+- (void)subscribeAttributeFeatureMapWithParams:(MTRSubscribeParams * _Nonnull)params
+                       subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                 reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
+{
+    using TypeInfo = AirQuality::Attributes::FeatureMap::TypeInfo;
+    MTRSubscribeAttribute<MTRInt32uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
+        subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
+        TypeInfo::GetAttributeId());
+}
+
++ (void)readAttributeFeatureMapWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                            endpoint:(NSNumber *)endpoint
+                                               queue:(dispatch_queue_t)queue
+                                          completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
+{
+    auto * bridge = new MTRInt32uAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(
+        clusterStateCacheContainer.baseDevice, ^(Int32uAttributeCallback successCb, MTRErrorCallback failureCb) {
+            if (clusterStateCacheContainer.cppClusterStateCache) {
+                chip::app::ConcreteAttributePath path;
+                using TypeInfo = AirQuality::Attributes::FeatureMap::TypeInfo;
+                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+                path.mClusterId = TypeInfo::GetClusterId();
+                path.mAttributeId = TypeInfo::GetAttributeId();
+                TypeInfo::DecodableType value;
+                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+                if (err == CHIP_NO_ERROR) {
+                    successCb(bridge, value);
+                }
+                return err;
+            }
+            return CHIP_ERROR_NOT_FOUND;
+        });
+}
+
+- (void)readAttributeClusterRevisionWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
+{
+    MTRReadParams * params = [[MTRReadParams alloc] init];
+    using TypeInfo = AirQuality::Attributes::ClusterRevision::TypeInfo;
+    return MTRReadAttribute<MTRInt16uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
+- (void)subscribeAttributeClusterRevisionWithParams:(MTRSubscribeParams * _Nonnull)params
+                            subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                      reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
+{
+    using TypeInfo = AirQuality::Attributes::ClusterRevision::TypeInfo;
+    MTRSubscribeAttribute<MTRInt16uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
+        subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
+        TypeInfo::GetAttributeId());
+}
+
++ (void)readAttributeClusterRevisionWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                                 endpoint:(NSNumber *)endpoint
+                                                    queue:(dispatch_queue_t)queue
+                                               completion:
+                                                   (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
+{
+    auto * bridge = new MTRInt16uAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(
+        clusterStateCacheContainer.baseDevice, ^(Int16uAttributeCallback successCb, MTRErrorCallback failureCb) {
+            if (clusterStateCacheContainer.cppClusterStateCache) {
+                chip::app::ConcreteAttributePath path;
+                using TypeInfo = AirQuality::Attributes::ClusterRevision::TypeInfo;
+                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+                path.mClusterId = TypeInfo::GetClusterId();
+                path.mAttributeId = TypeInfo::GetAttributeId();
+                TypeInfo::DecodableType value;
+                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+                if (err == CHIP_NO_ERROR) {
+                    successCb(bridge, value);
+                }
+                return err;
+            }
+            return CHIP_ERROR_NOT_FOUND;
+        });
+}
+
+@end
+
 @implementation MTRBaseClusterHEPAFilterMonitoring
 
 - (instancetype)initWithDevice:(MTRBaseDevice *)device endpointID:(NSNumber *)endpointID queue:(dispatch_queue_t)queue
