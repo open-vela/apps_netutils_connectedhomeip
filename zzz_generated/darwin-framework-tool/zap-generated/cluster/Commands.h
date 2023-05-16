@@ -39966,76 +39966,6 @@ public:
 };
 
 /*
- * Attribute EventList
- */
-class ReadHepaFilterMonitoringEventList : public ReadAttribute {
-public:
-    ReadHepaFilterMonitoringEventList()
-        : ReadAttribute("event-list")
-    {
-    }
-
-    ~ReadHepaFilterMonitoringEventList() {}
-
-    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
-    {
-        ChipLogProgress(chipTool, "Sending cluster (0x00000071) ReadAttribute (0x0000FFFA) on endpoint %u", endpointId);
-
-        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterHEPAFilterMonitoring alloc] initWithDevice:device
-                                                                                endpointID:@(endpointId)
-                                                                                     queue:callbackQueue];
-        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"HEPAFilterMonitoring.EventList response %@", [value description]);
-            if (error != nil) {
-                LogNSError("HEPAFilterMonitoring EventList read Error", error);
-            }
-            SetCommandExitStatus(error);
-        }];
-        return CHIP_NO_ERROR;
-    }
-};
-
-class SubscribeAttributeHepaFilterMonitoringEventList : public SubscribeAttribute {
-public:
-    SubscribeAttributeHepaFilterMonitoringEventList()
-        : SubscribeAttribute("event-list")
-    {
-    }
-
-    ~SubscribeAttributeHepaFilterMonitoringEventList() {}
-
-    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
-    {
-        ChipLogProgress(chipTool, "Sending cluster (0x00000071) ReportAttribute (0x0000FFFA) on endpoint %u", endpointId);
-        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterHEPAFilterMonitoring alloc] initWithDevice:device
-                                                                                endpointID:@(endpointId)
-                                                                                     queue:callbackQueue];
-        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
-        if (mKeepSubscriptions.HasValue()) {
-            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
-        }
-        if (mFabricFiltered.HasValue()) {
-            params.filterByFabric = mFabricFiltered.Value();
-        }
-        if (mAutoResubscribe.HasValue()) {
-            params.resubscribeAutomatically = mAutoResubscribe.Value();
-        }
-        [cluster subscribeAttributeEventListWithParams:params
-            subscriptionEstablished:^() {
-                mSubscriptionEstablished = YES;
-            }
-            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"HEPAFilterMonitoring.EventList response %@", [value description]);
-                SetCommandExitStatus(error);
-            }];
-
-        return CHIP_NO_ERROR;
-    }
-};
-
-/*
  * Attribute AttributeList
  */
 class ReadHepaFilterMonitoringAttributeList : public ReadAttribute {
@@ -40722,76 +40652,6 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ActivatedCarbonFilterMonitoring.AcceptedCommandList response %@", [value description]);
-                SetCommandExitStatus(error);
-            }];
-
-        return CHIP_NO_ERROR;
-    }
-};
-
-/*
- * Attribute EventList
- */
-class ReadActivatedCarbonFilterMonitoringEventList : public ReadAttribute {
-public:
-    ReadActivatedCarbonFilterMonitoringEventList()
-        : ReadAttribute("event-list")
-    {
-    }
-
-    ~ReadActivatedCarbonFilterMonitoringEventList() {}
-
-    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
-    {
-        ChipLogProgress(chipTool, "Sending cluster (0x00000072) ReadAttribute (0x0000FFFA) on endpoint %u", endpointId);
-
-        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterActivatedCarbonFilterMonitoring alloc] initWithDevice:device
-                                                                                           endpointID:@(endpointId)
-                                                                                                queue:callbackQueue];
-        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"ActivatedCarbonFilterMonitoring.EventList response %@", [value description]);
-            if (error != nil) {
-                LogNSError("ActivatedCarbonFilterMonitoring EventList read Error", error);
-            }
-            SetCommandExitStatus(error);
-        }];
-        return CHIP_NO_ERROR;
-    }
-};
-
-class SubscribeAttributeActivatedCarbonFilterMonitoringEventList : public SubscribeAttribute {
-public:
-    SubscribeAttributeActivatedCarbonFilterMonitoringEventList()
-        : SubscribeAttribute("event-list")
-    {
-    }
-
-    ~SubscribeAttributeActivatedCarbonFilterMonitoringEventList() {}
-
-    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
-    {
-        ChipLogProgress(chipTool, "Sending cluster (0x00000072) ReportAttribute (0x0000FFFA) on endpoint %u", endpointId);
-        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterActivatedCarbonFilterMonitoring alloc] initWithDevice:device
-                                                                                           endpointID:@(endpointId)
-                                                                                                queue:callbackQueue];
-        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
-        if (mKeepSubscriptions.HasValue()) {
-            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
-        }
-        if (mFabricFiltered.HasValue()) {
-            params.filterByFabric = mFabricFiltered.Value();
-        }
-        if (mAutoResubscribe.HasValue()) {
-            params.resubscribeAutomatically = mAutoResubscribe.Value();
-        }
-        [cluster subscribeAttributeEventListWithParams:params
-            subscriptionEstablished:^() {
-                mSubscriptionEstablished = YES;
-            }
-            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"ActivatedCarbonFilterMonitoring.EventList response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -41494,76 +41354,6 @@ public:
 };
 
 /*
- * Attribute EventList
- */
-class ReadCeramicFilterMonitoringEventList : public ReadAttribute {
-public:
-    ReadCeramicFilterMonitoringEventList()
-        : ReadAttribute("event-list")
-    {
-    }
-
-    ~ReadCeramicFilterMonitoringEventList() {}
-
-    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
-    {
-        ChipLogProgress(chipTool, "Sending cluster (0x00000073) ReadAttribute (0x0000FFFA) on endpoint %u", endpointId);
-
-        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterCeramicFilterMonitoring alloc] initWithDevice:device
-                                                                                   endpointID:@(endpointId)
-                                                                                        queue:callbackQueue];
-        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"CeramicFilterMonitoring.EventList response %@", [value description]);
-            if (error != nil) {
-                LogNSError("CeramicFilterMonitoring EventList read Error", error);
-            }
-            SetCommandExitStatus(error);
-        }];
-        return CHIP_NO_ERROR;
-    }
-};
-
-class SubscribeAttributeCeramicFilterMonitoringEventList : public SubscribeAttribute {
-public:
-    SubscribeAttributeCeramicFilterMonitoringEventList()
-        : SubscribeAttribute("event-list")
-    {
-    }
-
-    ~SubscribeAttributeCeramicFilterMonitoringEventList() {}
-
-    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
-    {
-        ChipLogProgress(chipTool, "Sending cluster (0x00000073) ReportAttribute (0x0000FFFA) on endpoint %u", endpointId);
-        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterCeramicFilterMonitoring alloc] initWithDevice:device
-                                                                                   endpointID:@(endpointId)
-                                                                                        queue:callbackQueue];
-        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
-        if (mKeepSubscriptions.HasValue()) {
-            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
-        }
-        if (mFabricFiltered.HasValue()) {
-            params.filterByFabric = mFabricFiltered.Value();
-        }
-        if (mAutoResubscribe.HasValue()) {
-            params.resubscribeAutomatically = mAutoResubscribe.Value();
-        }
-        [cluster subscribeAttributeEventListWithParams:params
-            subscriptionEstablished:^() {
-                mSubscriptionEstablished = YES;
-            }
-            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"CeramicFilterMonitoring.EventList response %@", [value description]);
-                SetCommandExitStatus(error);
-            }];
-
-        return CHIP_NO_ERROR;
-    }
-};
-
-/*
  * Attribute AttributeList
  */
 class ReadCeramicFilterMonitoringAttributeList : public ReadAttribute {
@@ -42250,76 +42040,6 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectrostaticFilterMonitoring.AcceptedCommandList response %@", [value description]);
-                SetCommandExitStatus(error);
-            }];
-
-        return CHIP_NO_ERROR;
-    }
-};
-
-/*
- * Attribute EventList
- */
-class ReadElectrostaticFilterMonitoringEventList : public ReadAttribute {
-public:
-    ReadElectrostaticFilterMonitoringEventList()
-        : ReadAttribute("event-list")
-    {
-    }
-
-    ~ReadElectrostaticFilterMonitoringEventList() {}
-
-    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
-    {
-        ChipLogProgress(chipTool, "Sending cluster (0x00000074) ReadAttribute (0x0000FFFA) on endpoint %u", endpointId);
-
-        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterElectrostaticFilterMonitoring alloc] initWithDevice:device
-                                                                                         endpointID:@(endpointId)
-                                                                                              queue:callbackQueue];
-        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"ElectrostaticFilterMonitoring.EventList response %@", [value description]);
-            if (error != nil) {
-                LogNSError("ElectrostaticFilterMonitoring EventList read Error", error);
-            }
-            SetCommandExitStatus(error);
-        }];
-        return CHIP_NO_ERROR;
-    }
-};
-
-class SubscribeAttributeElectrostaticFilterMonitoringEventList : public SubscribeAttribute {
-public:
-    SubscribeAttributeElectrostaticFilterMonitoringEventList()
-        : SubscribeAttribute("event-list")
-    {
-    }
-
-    ~SubscribeAttributeElectrostaticFilterMonitoringEventList() {}
-
-    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
-    {
-        ChipLogProgress(chipTool, "Sending cluster (0x00000074) ReportAttribute (0x0000FFFA) on endpoint %u", endpointId);
-        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterElectrostaticFilterMonitoring alloc] initWithDevice:device
-                                                                                         endpointID:@(endpointId)
-                                                                                              queue:callbackQueue];
-        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
-        if (mKeepSubscriptions.HasValue()) {
-            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
-        }
-        if (mFabricFiltered.HasValue()) {
-            params.filterByFabric = mFabricFiltered.Value();
-        }
-        if (mAutoResubscribe.HasValue()) {
-            params.resubscribeAutomatically = mAutoResubscribe.Value();
-        }
-        [cluster subscribeAttributeEventListWithParams:params
-            subscriptionEstablished:^() {
-                mSubscriptionEstablished = YES;
-            }
-            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"ElectrostaticFilterMonitoring.EventList response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -43022,76 +42742,6 @@ public:
 };
 
 /*
- * Attribute EventList
- */
-class ReadUvFilterMonitoringEventList : public ReadAttribute {
-public:
-    ReadUvFilterMonitoringEventList()
-        : ReadAttribute("event-list")
-    {
-    }
-
-    ~ReadUvFilterMonitoringEventList() {}
-
-    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
-    {
-        ChipLogProgress(chipTool, "Sending cluster (0x00000075) ReadAttribute (0x0000FFFA) on endpoint %u", endpointId);
-
-        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterUVFilterMonitoring alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
-        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"UVFilterMonitoring.EventList response %@", [value description]);
-            if (error != nil) {
-                LogNSError("UVFilterMonitoring EventList read Error", error);
-            }
-            SetCommandExitStatus(error);
-        }];
-        return CHIP_NO_ERROR;
-    }
-};
-
-class SubscribeAttributeUvFilterMonitoringEventList : public SubscribeAttribute {
-public:
-    SubscribeAttributeUvFilterMonitoringEventList()
-        : SubscribeAttribute("event-list")
-    {
-    }
-
-    ~SubscribeAttributeUvFilterMonitoringEventList() {}
-
-    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
-    {
-        ChipLogProgress(chipTool, "Sending cluster (0x00000075) ReportAttribute (0x0000FFFA) on endpoint %u", endpointId);
-        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterUVFilterMonitoring alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
-        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
-        if (mKeepSubscriptions.HasValue()) {
-            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
-        }
-        if (mFabricFiltered.HasValue()) {
-            params.filterByFabric = mFabricFiltered.Value();
-        }
-        if (mAutoResubscribe.HasValue()) {
-            params.resubscribeAutomatically = mAutoResubscribe.Value();
-        }
-        [cluster subscribeAttributeEventListWithParams:params
-            subscriptionEstablished:^() {
-                mSubscriptionEstablished = YES;
-            }
-            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"UVFilterMonitoring.EventList response %@", [value description]);
-                SetCommandExitStatus(error);
-            }];
-
-        return CHIP_NO_ERROR;
-    }
-};
-
-/*
  * Attribute AttributeList
  */
 class ReadUvFilterMonitoringAttributeList : public ReadAttribute {
@@ -43778,76 +43428,6 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"IonizingFilterMonitoring.AcceptedCommandList response %@", [value description]);
-                SetCommandExitStatus(error);
-            }];
-
-        return CHIP_NO_ERROR;
-    }
-};
-
-/*
- * Attribute EventList
- */
-class ReadIonizingFilterMonitoringEventList : public ReadAttribute {
-public:
-    ReadIonizingFilterMonitoringEventList()
-        : ReadAttribute("event-list")
-    {
-    }
-
-    ~ReadIonizingFilterMonitoringEventList() {}
-
-    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
-    {
-        ChipLogProgress(chipTool, "Sending cluster (0x00000076) ReadAttribute (0x0000FFFA) on endpoint %u", endpointId);
-
-        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterIonizingFilterMonitoring alloc] initWithDevice:device
-                                                                                    endpointID:@(endpointId)
-                                                                                         queue:callbackQueue];
-        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"IonizingFilterMonitoring.EventList response %@", [value description]);
-            if (error != nil) {
-                LogNSError("IonizingFilterMonitoring EventList read Error", error);
-            }
-            SetCommandExitStatus(error);
-        }];
-        return CHIP_NO_ERROR;
-    }
-};
-
-class SubscribeAttributeIonizingFilterMonitoringEventList : public SubscribeAttribute {
-public:
-    SubscribeAttributeIonizingFilterMonitoringEventList()
-        : SubscribeAttribute("event-list")
-    {
-    }
-
-    ~SubscribeAttributeIonizingFilterMonitoringEventList() {}
-
-    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
-    {
-        ChipLogProgress(chipTool, "Sending cluster (0x00000076) ReportAttribute (0x0000FFFA) on endpoint %u", endpointId);
-        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterIonizingFilterMonitoring alloc] initWithDevice:device
-                                                                                    endpointID:@(endpointId)
-                                                                                         queue:callbackQueue];
-        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
-        if (mKeepSubscriptions.HasValue()) {
-            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
-        }
-        if (mFabricFiltered.HasValue()) {
-            params.filterByFabric = mFabricFiltered.Value();
-        }
-        if (mAutoResubscribe.HasValue()) {
-            params.resubscribeAutomatically = mAutoResubscribe.Value();
-        }
-        [cluster subscribeAttributeEventListWithParams:params
-            subscriptionEstablished:^() {
-                mSubscriptionEstablished = YES;
-            }
-            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"IonizingFilterMonitoring.EventList response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -44550,76 +44130,6 @@ public:
 };
 
 /*
- * Attribute EventList
- */
-class ReadZeoliteFilterMonitoringEventList : public ReadAttribute {
-public:
-    ReadZeoliteFilterMonitoringEventList()
-        : ReadAttribute("event-list")
-    {
-    }
-
-    ~ReadZeoliteFilterMonitoringEventList() {}
-
-    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
-    {
-        ChipLogProgress(chipTool, "Sending cluster (0x00000077) ReadAttribute (0x0000FFFA) on endpoint %u", endpointId);
-
-        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterZeoliteFilterMonitoring alloc] initWithDevice:device
-                                                                                   endpointID:@(endpointId)
-                                                                                        queue:callbackQueue];
-        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"ZeoliteFilterMonitoring.EventList response %@", [value description]);
-            if (error != nil) {
-                LogNSError("ZeoliteFilterMonitoring EventList read Error", error);
-            }
-            SetCommandExitStatus(error);
-        }];
-        return CHIP_NO_ERROR;
-    }
-};
-
-class SubscribeAttributeZeoliteFilterMonitoringEventList : public SubscribeAttribute {
-public:
-    SubscribeAttributeZeoliteFilterMonitoringEventList()
-        : SubscribeAttribute("event-list")
-    {
-    }
-
-    ~SubscribeAttributeZeoliteFilterMonitoringEventList() {}
-
-    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
-    {
-        ChipLogProgress(chipTool, "Sending cluster (0x00000077) ReportAttribute (0x0000FFFA) on endpoint %u", endpointId);
-        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterZeoliteFilterMonitoring alloc] initWithDevice:device
-                                                                                   endpointID:@(endpointId)
-                                                                                        queue:callbackQueue];
-        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
-        if (mKeepSubscriptions.HasValue()) {
-            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
-        }
-        if (mFabricFiltered.HasValue()) {
-            params.filterByFabric = mFabricFiltered.Value();
-        }
-        if (mAutoResubscribe.HasValue()) {
-            params.resubscribeAutomatically = mAutoResubscribe.Value();
-        }
-        [cluster subscribeAttributeEventListWithParams:params
-            subscriptionEstablished:^() {
-                mSubscriptionEstablished = YES;
-            }
-            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"ZeoliteFilterMonitoring.EventList response %@", [value description]);
-                SetCommandExitStatus(error);
-            }];
-
-        return CHIP_NO_ERROR;
-    }
-};
-
-/*
  * Attribute AttributeList
  */
 class ReadZeoliteFilterMonitoringAttributeList : public ReadAttribute {
@@ -45306,76 +44816,6 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OzoneFilterMonitoring.AcceptedCommandList response %@", [value description]);
-                SetCommandExitStatus(error);
-            }];
-
-        return CHIP_NO_ERROR;
-    }
-};
-
-/*
- * Attribute EventList
- */
-class ReadOzoneFilterMonitoringEventList : public ReadAttribute {
-public:
-    ReadOzoneFilterMonitoringEventList()
-        : ReadAttribute("event-list")
-    {
-    }
-
-    ~ReadOzoneFilterMonitoringEventList() {}
-
-    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
-    {
-        ChipLogProgress(chipTool, "Sending cluster (0x00000078) ReadAttribute (0x0000FFFA) on endpoint %u", endpointId);
-
-        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterOzoneFilterMonitoring alloc] initWithDevice:device
-                                                                                 endpointID:@(endpointId)
-                                                                                      queue:callbackQueue];
-        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"OzoneFilterMonitoring.EventList response %@", [value description]);
-            if (error != nil) {
-                LogNSError("OzoneFilterMonitoring EventList read Error", error);
-            }
-            SetCommandExitStatus(error);
-        }];
-        return CHIP_NO_ERROR;
-    }
-};
-
-class SubscribeAttributeOzoneFilterMonitoringEventList : public SubscribeAttribute {
-public:
-    SubscribeAttributeOzoneFilterMonitoringEventList()
-        : SubscribeAttribute("event-list")
-    {
-    }
-
-    ~SubscribeAttributeOzoneFilterMonitoringEventList() {}
-
-    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
-    {
-        ChipLogProgress(chipTool, "Sending cluster (0x00000078) ReportAttribute (0x0000FFFA) on endpoint %u", endpointId);
-        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterOzoneFilterMonitoring alloc] initWithDevice:device
-                                                                                 endpointID:@(endpointId)
-                                                                                      queue:callbackQueue];
-        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
-        if (mKeepSubscriptions.HasValue()) {
-            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
-        }
-        if (mFabricFiltered.HasValue()) {
-            params.filterByFabric = mFabricFiltered.Value();
-        }
-        if (mAutoResubscribe.HasValue()) {
-            params.resubscribeAutomatically = mAutoResubscribe.Value();
-        }
-        [cluster subscribeAttributeEventListWithParams:params
-            subscriptionEstablished:^() {
-                mSubscriptionEstablished = YES;
-            }
-            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"OzoneFilterMonitoring.EventList response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -46078,76 +45518,6 @@ public:
 };
 
 /*
- * Attribute EventList
- */
-class ReadWaterTankMonitoringEventList : public ReadAttribute {
-public:
-    ReadWaterTankMonitoringEventList()
-        : ReadAttribute("event-list")
-    {
-    }
-
-    ~ReadWaterTankMonitoringEventList() {}
-
-    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
-    {
-        ChipLogProgress(chipTool, "Sending cluster (0x00000079) ReadAttribute (0x0000FFFA) on endpoint %u", endpointId);
-
-        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterWaterTankMonitoring alloc] initWithDevice:device
-                                                                               endpointID:@(endpointId)
-                                                                                    queue:callbackQueue];
-        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"WaterTankMonitoring.EventList response %@", [value description]);
-            if (error != nil) {
-                LogNSError("WaterTankMonitoring EventList read Error", error);
-            }
-            SetCommandExitStatus(error);
-        }];
-        return CHIP_NO_ERROR;
-    }
-};
-
-class SubscribeAttributeWaterTankMonitoringEventList : public SubscribeAttribute {
-public:
-    SubscribeAttributeWaterTankMonitoringEventList()
-        : SubscribeAttribute("event-list")
-    {
-    }
-
-    ~SubscribeAttributeWaterTankMonitoringEventList() {}
-
-    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
-    {
-        ChipLogProgress(chipTool, "Sending cluster (0x00000079) ReportAttribute (0x0000FFFA) on endpoint %u", endpointId);
-        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterWaterTankMonitoring alloc] initWithDevice:device
-                                                                               endpointID:@(endpointId)
-                                                                                    queue:callbackQueue];
-        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
-        if (mKeepSubscriptions.HasValue()) {
-            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
-        }
-        if (mFabricFiltered.HasValue()) {
-            params.filterByFabric = mFabricFiltered.Value();
-        }
-        if (mAutoResubscribe.HasValue()) {
-            params.resubscribeAutomatically = mAutoResubscribe.Value();
-        }
-        [cluster subscribeAttributeEventListWithParams:params
-            subscriptionEstablished:^() {
-                mSubscriptionEstablished = YES;
-            }
-            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"WaterTankMonitoring.EventList response %@", [value description]);
-                SetCommandExitStatus(error);
-            }];
-
-        return CHIP_NO_ERROR;
-    }
-};
-
-/*
  * Attribute AttributeList
  */
 class ReadWaterTankMonitoringAttributeList : public ReadAttribute {
@@ -46834,76 +46204,6 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"FuelTankMonitoring.AcceptedCommandList response %@", [value description]);
-                SetCommandExitStatus(error);
-            }];
-
-        return CHIP_NO_ERROR;
-    }
-};
-
-/*
- * Attribute EventList
- */
-class ReadFuelTankMonitoringEventList : public ReadAttribute {
-public:
-    ReadFuelTankMonitoringEventList()
-        : ReadAttribute("event-list")
-    {
-    }
-
-    ~ReadFuelTankMonitoringEventList() {}
-
-    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
-    {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000007A) ReadAttribute (0x0000FFFA) on endpoint %u", endpointId);
-
-        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterFuelTankMonitoring alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
-        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"FuelTankMonitoring.EventList response %@", [value description]);
-            if (error != nil) {
-                LogNSError("FuelTankMonitoring EventList read Error", error);
-            }
-            SetCommandExitStatus(error);
-        }];
-        return CHIP_NO_ERROR;
-    }
-};
-
-class SubscribeAttributeFuelTankMonitoringEventList : public SubscribeAttribute {
-public:
-    SubscribeAttributeFuelTankMonitoringEventList()
-        : SubscribeAttribute("event-list")
-    {
-    }
-
-    ~SubscribeAttributeFuelTankMonitoringEventList() {}
-
-    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
-    {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000007A) ReportAttribute (0x0000FFFA) on endpoint %u", endpointId);
-        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterFuelTankMonitoring alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
-        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
-        if (mKeepSubscriptions.HasValue()) {
-            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
-        }
-        if (mFabricFiltered.HasValue()) {
-            params.filterByFabric = mFabricFiltered.Value();
-        }
-        if (mAutoResubscribe.HasValue()) {
-            params.resubscribeAutomatically = mAutoResubscribe.Value();
-        }
-        [cluster subscribeAttributeEventListWithParams:params
-            subscriptionEstablished:^() {
-                mSubscriptionEstablished = YES;
-            }
-            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"FuelTankMonitoring.EventList response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -47606,76 +46906,6 @@ public:
 };
 
 /*
- * Attribute EventList
- */
-class ReadInkCartridgeMonitoringEventList : public ReadAttribute {
-public:
-    ReadInkCartridgeMonitoringEventList()
-        : ReadAttribute("event-list")
-    {
-    }
-
-    ~ReadInkCartridgeMonitoringEventList() {}
-
-    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
-    {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000007B) ReadAttribute (0x0000FFFA) on endpoint %u", endpointId);
-
-        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterInkCartridgeMonitoring alloc] initWithDevice:device
-                                                                                  endpointID:@(endpointId)
-                                                                                       queue:callbackQueue];
-        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"InkCartridgeMonitoring.EventList response %@", [value description]);
-            if (error != nil) {
-                LogNSError("InkCartridgeMonitoring EventList read Error", error);
-            }
-            SetCommandExitStatus(error);
-        }];
-        return CHIP_NO_ERROR;
-    }
-};
-
-class SubscribeAttributeInkCartridgeMonitoringEventList : public SubscribeAttribute {
-public:
-    SubscribeAttributeInkCartridgeMonitoringEventList()
-        : SubscribeAttribute("event-list")
-    {
-    }
-
-    ~SubscribeAttributeInkCartridgeMonitoringEventList() {}
-
-    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
-    {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000007B) ReportAttribute (0x0000FFFA) on endpoint %u", endpointId);
-        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterInkCartridgeMonitoring alloc] initWithDevice:device
-                                                                                  endpointID:@(endpointId)
-                                                                                       queue:callbackQueue];
-        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
-        if (mKeepSubscriptions.HasValue()) {
-            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
-        }
-        if (mFabricFiltered.HasValue()) {
-            params.filterByFabric = mFabricFiltered.Value();
-        }
-        if (mAutoResubscribe.HasValue()) {
-            params.resubscribeAutomatically = mAutoResubscribe.Value();
-        }
-        [cluster subscribeAttributeEventListWithParams:params
-            subscriptionEstablished:^() {
-                mSubscriptionEstablished = YES;
-            }
-            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"InkCartridgeMonitoring.EventList response %@", [value description]);
-                SetCommandExitStatus(error);
-            }];
-
-        return CHIP_NO_ERROR;
-    }
-};
-
-/*
  * Attribute AttributeList
  */
 class ReadInkCartridgeMonitoringAttributeList : public ReadAttribute {
@@ -48362,76 +47592,6 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TonerCartridgeMonitoring.AcceptedCommandList response %@", [value description]);
-                SetCommandExitStatus(error);
-            }];
-
-        return CHIP_NO_ERROR;
-    }
-};
-
-/*
- * Attribute EventList
- */
-class ReadTonerCartridgeMonitoringEventList : public ReadAttribute {
-public:
-    ReadTonerCartridgeMonitoringEventList()
-        : ReadAttribute("event-list")
-    {
-    }
-
-    ~ReadTonerCartridgeMonitoringEventList() {}
-
-    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
-    {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000007C) ReadAttribute (0x0000FFFA) on endpoint %u", endpointId);
-
-        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterTonerCartridgeMonitoring alloc] initWithDevice:device
-                                                                                    endpointID:@(endpointId)
-                                                                                         queue:callbackQueue];
-        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TonerCartridgeMonitoring.EventList response %@", [value description]);
-            if (error != nil) {
-                LogNSError("TonerCartridgeMonitoring EventList read Error", error);
-            }
-            SetCommandExitStatus(error);
-        }];
-        return CHIP_NO_ERROR;
-    }
-};
-
-class SubscribeAttributeTonerCartridgeMonitoringEventList : public SubscribeAttribute {
-public:
-    SubscribeAttributeTonerCartridgeMonitoringEventList()
-        : SubscribeAttribute("event-list")
-    {
-    }
-
-    ~SubscribeAttributeTonerCartridgeMonitoringEventList() {}
-
-    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
-    {
-        ChipLogProgress(chipTool, "Sending cluster (0x0000007C) ReportAttribute (0x0000FFFA) on endpoint %u", endpointId);
-        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterTonerCartridgeMonitoring alloc] initWithDevice:device
-                                                                                    endpointID:@(endpointId)
-                                                                                         queue:callbackQueue];
-        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
-        if (mKeepSubscriptions.HasValue()) {
-            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
-        }
-        if (mFabricFiltered.HasValue()) {
-            params.filterByFabric = mFabricFiltered.Value();
-        }
-        if (mAutoResubscribe.HasValue()) {
-            params.resubscribeAutomatically = mAutoResubscribe.Value();
-        }
-        [cluster subscribeAttributeEventListWithParams:params
-            subscriptionEstablished:^() {
-                mSubscriptionEstablished = YES;
-            }
-            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TonerCartridgeMonitoring.EventList response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -110052,8 +109212,6 @@ void registerClusterHepaFilterMonitoring(Commands & commands)
         make_unique<SubscribeAttributeHepaFilterMonitoringGeneratedCommandList>(), //
         make_unique<ReadHepaFilterMonitoringAcceptedCommandList>(), //
         make_unique<SubscribeAttributeHepaFilterMonitoringAcceptedCommandList>(), //
-        make_unique<ReadHepaFilterMonitoringEventList>(), //
-        make_unique<SubscribeAttributeHepaFilterMonitoringEventList>(), //
         make_unique<ReadHepaFilterMonitoringAttributeList>(), //
         make_unique<SubscribeAttributeHepaFilterMonitoringAttributeList>(), //
         make_unique<ReadHepaFilterMonitoringFeatureMap>(), //
@@ -110088,8 +109246,6 @@ void registerClusterActivatedCarbonFilterMonitoring(Commands & commands)
         make_unique<SubscribeAttributeActivatedCarbonFilterMonitoringGeneratedCommandList>(), //
         make_unique<ReadActivatedCarbonFilterMonitoringAcceptedCommandList>(), //
         make_unique<SubscribeAttributeActivatedCarbonFilterMonitoringAcceptedCommandList>(), //
-        make_unique<ReadActivatedCarbonFilterMonitoringEventList>(), //
-        make_unique<SubscribeAttributeActivatedCarbonFilterMonitoringEventList>(), //
         make_unique<ReadActivatedCarbonFilterMonitoringAttributeList>(), //
         make_unique<SubscribeAttributeActivatedCarbonFilterMonitoringAttributeList>(), //
         make_unique<ReadActivatedCarbonFilterMonitoringFeatureMap>(), //
@@ -110124,8 +109280,6 @@ void registerClusterCeramicFilterMonitoring(Commands & commands)
         make_unique<SubscribeAttributeCeramicFilterMonitoringGeneratedCommandList>(), //
         make_unique<ReadCeramicFilterMonitoringAcceptedCommandList>(), //
         make_unique<SubscribeAttributeCeramicFilterMonitoringAcceptedCommandList>(), //
-        make_unique<ReadCeramicFilterMonitoringEventList>(), //
-        make_unique<SubscribeAttributeCeramicFilterMonitoringEventList>(), //
         make_unique<ReadCeramicFilterMonitoringAttributeList>(), //
         make_unique<SubscribeAttributeCeramicFilterMonitoringAttributeList>(), //
         make_unique<ReadCeramicFilterMonitoringFeatureMap>(), //
@@ -110160,8 +109314,6 @@ void registerClusterElectrostaticFilterMonitoring(Commands & commands)
         make_unique<SubscribeAttributeElectrostaticFilterMonitoringGeneratedCommandList>(), //
         make_unique<ReadElectrostaticFilterMonitoringAcceptedCommandList>(), //
         make_unique<SubscribeAttributeElectrostaticFilterMonitoringAcceptedCommandList>(), //
-        make_unique<ReadElectrostaticFilterMonitoringEventList>(), //
-        make_unique<SubscribeAttributeElectrostaticFilterMonitoringEventList>(), //
         make_unique<ReadElectrostaticFilterMonitoringAttributeList>(), //
         make_unique<SubscribeAttributeElectrostaticFilterMonitoringAttributeList>(), //
         make_unique<ReadElectrostaticFilterMonitoringFeatureMap>(), //
@@ -110196,8 +109348,6 @@ void registerClusterUvFilterMonitoring(Commands & commands)
         make_unique<SubscribeAttributeUvFilterMonitoringGeneratedCommandList>(), //
         make_unique<ReadUvFilterMonitoringAcceptedCommandList>(), //
         make_unique<SubscribeAttributeUvFilterMonitoringAcceptedCommandList>(), //
-        make_unique<ReadUvFilterMonitoringEventList>(), //
-        make_unique<SubscribeAttributeUvFilterMonitoringEventList>(), //
         make_unique<ReadUvFilterMonitoringAttributeList>(), //
         make_unique<SubscribeAttributeUvFilterMonitoringAttributeList>(), //
         make_unique<ReadUvFilterMonitoringFeatureMap>(), //
@@ -110232,8 +109382,6 @@ void registerClusterIonizingFilterMonitoring(Commands & commands)
         make_unique<SubscribeAttributeIonizingFilterMonitoringGeneratedCommandList>(), //
         make_unique<ReadIonizingFilterMonitoringAcceptedCommandList>(), //
         make_unique<SubscribeAttributeIonizingFilterMonitoringAcceptedCommandList>(), //
-        make_unique<ReadIonizingFilterMonitoringEventList>(), //
-        make_unique<SubscribeAttributeIonizingFilterMonitoringEventList>(), //
         make_unique<ReadIonizingFilterMonitoringAttributeList>(), //
         make_unique<SubscribeAttributeIonizingFilterMonitoringAttributeList>(), //
         make_unique<ReadIonizingFilterMonitoringFeatureMap>(), //
@@ -110268,8 +109416,6 @@ void registerClusterZeoliteFilterMonitoring(Commands & commands)
         make_unique<SubscribeAttributeZeoliteFilterMonitoringGeneratedCommandList>(), //
         make_unique<ReadZeoliteFilterMonitoringAcceptedCommandList>(), //
         make_unique<SubscribeAttributeZeoliteFilterMonitoringAcceptedCommandList>(), //
-        make_unique<ReadZeoliteFilterMonitoringEventList>(), //
-        make_unique<SubscribeAttributeZeoliteFilterMonitoringEventList>(), //
         make_unique<ReadZeoliteFilterMonitoringAttributeList>(), //
         make_unique<SubscribeAttributeZeoliteFilterMonitoringAttributeList>(), //
         make_unique<ReadZeoliteFilterMonitoringFeatureMap>(), //
@@ -110304,8 +109450,6 @@ void registerClusterOzoneFilterMonitoring(Commands & commands)
         make_unique<SubscribeAttributeOzoneFilterMonitoringGeneratedCommandList>(), //
         make_unique<ReadOzoneFilterMonitoringAcceptedCommandList>(), //
         make_unique<SubscribeAttributeOzoneFilterMonitoringAcceptedCommandList>(), //
-        make_unique<ReadOzoneFilterMonitoringEventList>(), //
-        make_unique<SubscribeAttributeOzoneFilterMonitoringEventList>(), //
         make_unique<ReadOzoneFilterMonitoringAttributeList>(), //
         make_unique<SubscribeAttributeOzoneFilterMonitoringAttributeList>(), //
         make_unique<ReadOzoneFilterMonitoringFeatureMap>(), //
@@ -110340,8 +109484,6 @@ void registerClusterWaterTankMonitoring(Commands & commands)
         make_unique<SubscribeAttributeWaterTankMonitoringGeneratedCommandList>(), //
         make_unique<ReadWaterTankMonitoringAcceptedCommandList>(), //
         make_unique<SubscribeAttributeWaterTankMonitoringAcceptedCommandList>(), //
-        make_unique<ReadWaterTankMonitoringEventList>(), //
-        make_unique<SubscribeAttributeWaterTankMonitoringEventList>(), //
         make_unique<ReadWaterTankMonitoringAttributeList>(), //
         make_unique<SubscribeAttributeWaterTankMonitoringAttributeList>(), //
         make_unique<ReadWaterTankMonitoringFeatureMap>(), //
@@ -110376,8 +109518,6 @@ void registerClusterFuelTankMonitoring(Commands & commands)
         make_unique<SubscribeAttributeFuelTankMonitoringGeneratedCommandList>(), //
         make_unique<ReadFuelTankMonitoringAcceptedCommandList>(), //
         make_unique<SubscribeAttributeFuelTankMonitoringAcceptedCommandList>(), //
-        make_unique<ReadFuelTankMonitoringEventList>(), //
-        make_unique<SubscribeAttributeFuelTankMonitoringEventList>(), //
         make_unique<ReadFuelTankMonitoringAttributeList>(), //
         make_unique<SubscribeAttributeFuelTankMonitoringAttributeList>(), //
         make_unique<ReadFuelTankMonitoringFeatureMap>(), //
@@ -110412,8 +109552,6 @@ void registerClusterInkCartridgeMonitoring(Commands & commands)
         make_unique<SubscribeAttributeInkCartridgeMonitoringGeneratedCommandList>(), //
         make_unique<ReadInkCartridgeMonitoringAcceptedCommandList>(), //
         make_unique<SubscribeAttributeInkCartridgeMonitoringAcceptedCommandList>(), //
-        make_unique<ReadInkCartridgeMonitoringEventList>(), //
-        make_unique<SubscribeAttributeInkCartridgeMonitoringEventList>(), //
         make_unique<ReadInkCartridgeMonitoringAttributeList>(), //
         make_unique<SubscribeAttributeInkCartridgeMonitoringAttributeList>(), //
         make_unique<ReadInkCartridgeMonitoringFeatureMap>(), //
@@ -110448,8 +109586,6 @@ void registerClusterTonerCartridgeMonitoring(Commands & commands)
         make_unique<SubscribeAttributeTonerCartridgeMonitoringGeneratedCommandList>(), //
         make_unique<ReadTonerCartridgeMonitoringAcceptedCommandList>(), //
         make_unique<SubscribeAttributeTonerCartridgeMonitoringAcceptedCommandList>(), //
-        make_unique<ReadTonerCartridgeMonitoringEventList>(), //
-        make_unique<SubscribeAttributeTonerCartridgeMonitoringEventList>(), //
         make_unique<ReadTonerCartridgeMonitoringAttributeList>(), //
         make_unique<SubscribeAttributeTonerCartridgeMonitoringAttributeList>(), //
         make_unique<ReadTonerCartridgeMonitoringFeatureMap>(), //
