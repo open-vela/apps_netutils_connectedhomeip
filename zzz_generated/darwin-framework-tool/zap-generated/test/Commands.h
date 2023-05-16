@@ -102353,7 +102353,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("ServerList", [actualValue count], static_cast<uint32_t>(27)));
+                VerifyOrReturn(CheckValue("ServerList", [actualValue count], static_cast<uint32_t>(28)));
                 VerifyOrReturn(CheckValue("", actualValue[0], 3UL));
                 VerifyOrReturn(CheckValue("", actualValue[1], 4UL));
                 VerifyOrReturn(CheckValue("", actualValue[2], 29UL));
@@ -102379,8 +102379,9 @@ private:
                 VerifyOrReturn(CheckValue("", actualValue[22], 63UL));
                 VerifyOrReturn(CheckValue("", actualValue[23], 64UL));
                 VerifyOrReturn(CheckValue("", actualValue[24], 65UL));
-                VerifyOrReturn(CheckValue("", actualValue[25], 1029UL));
-                VerifyOrReturn(CheckValue("", actualValue[26], 4294048774UL));
+                VerifyOrReturn(CheckValue("", actualValue[25], 70UL));
+                VerifyOrReturn(CheckValue("", actualValue[26], 1029UL));
+                VerifyOrReturn(CheckValue("", actualValue[27], 4294048774UL));
             }
 
             NextTest();

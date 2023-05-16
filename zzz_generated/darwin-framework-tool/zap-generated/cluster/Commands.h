@@ -75,6 +75,7 @@
 | ProxyDiscovery                                                      | 0x0043 |
 | ProxyValid                                                          | 0x0044 |
 | BooleanState                                                        | 0x0045 |
+| IcdManagement                                                       | 0x0046 |
 | ModeSelect                                                          | 0x0050 |
 | AirQuality                                                          | 0x005B |
 | HepaFilterMonitoring                                                | 0x0071 |
@@ -117,7 +118,6 @@
 | ApplicationBasic                                                    | 0x050D |
 | AccountLogin                                                        | 0x050E |
 | ElectricalMeasurement                                               | 0x0B04 |
-| ClientMonitoring                                                    | 0x1046 |
 | UnitTesting                                                         | 0xFFF1FC05|
 | FaultInjection                                                      | 0xFFF1FC06|
 \*----------------------------------------------------------------------------*/
@@ -37024,6 +37024,1030 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BooleanState.ClusterRevision response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*----------------------------------------------------------------------------*\
+| Cluster IcdManagement                                               | 0x0046 |
+|------------------------------------------------------------------------------|
+| Commands:                                                           |        |
+| * RegisterClient                                                    |   0x00 |
+| * UnregisterClient                                                  |   0x02 |
+| * StayActiveRequest                                                 |   0x03 |
+|------------------------------------------------------------------------------|
+| Attributes:                                                         |        |
+| * IdleModeInterval                                                  | 0x0000 |
+| * ActiveModeInterval                                                | 0x0001 |
+| * ActiveModeThreshold                                               | 0x0002 |
+| * RegisteredClients                                                 | 0x0003 |
+| * ICDCounter                                                        | 0x0004 |
+| * ClientsSupportedPerFabric                                         | 0x0005 |
+| * GeneratedCommandList                                              | 0xFFF8 |
+| * AcceptedCommandList                                               | 0xFFF9 |
+| * EventList                                                         | 0xFFFA |
+| * AttributeList                                                     | 0xFFFB |
+| * FeatureMap                                                        | 0xFFFC |
+| * ClusterRevision                                                   | 0xFFFD |
+|------------------------------------------------------------------------------|
+| Events:                                                             |        |
+\*----------------------------------------------------------------------------*/
+
+/*
+ * Command RegisterClient
+ */
+class IcdManagementRegisterClient : public ClusterCommand {
+public:
+    IcdManagementRegisterClient()
+        : ClusterCommand("register-client")
+    {
+        AddArgument("CheckInNodeID", 0, UINT64_MAX, &mRequest.checkInNodeID);
+        AddArgument("MonitoredSubject", 0, UINT64_MAX, &mRequest.monitoredSubject);
+        AddArgument("Key", &mRequest.key);
+        AddArgument("VerificationKey", &mRequest.verificationKey);
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000046) command (0x00000000) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterICDManagement alloc] initWithDevice:device
+                                                                         endpointID:@(endpointId)
+                                                                              queue:callbackQueue];
+        __auto_type * params = [[MTRICDManagementClusterRegisterClientParams alloc] init];
+        params.timedInvokeTimeoutMs
+            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.checkInNodeID = [NSNumber numberWithUnsignedLongLong:mRequest.checkInNodeID];
+        params.monitoredSubject = [NSNumber numberWithUnsignedLongLong:mRequest.monitoredSubject];
+        params.key = [NSData dataWithBytes:mRequest.key.data() length:mRequest.key.size()];
+        if (mRequest.verificationKey.HasValue()) {
+            params.verificationKey = [NSData dataWithBytes:mRequest.verificationKey.Value().data()
+                                                    length:mRequest.verificationKey.Value().size()];
+        } else {
+            params.verificationKey = nil;
+        }
+        uint16_t repeatCount = mRepeatCount.ValueOr(1);
+        uint16_t __block responsesNeeded = repeatCount;
+        while (repeatCount--) {
+            [cluster registerClientWithParams:params
+                                   completion:^(MTRICDManagementClusterRegisterClientResponseParams * _Nullable values,
+                                       NSError * _Nullable error) {
+                                       NSLog(@"Values: %@", values);
+                                       responsesNeeded--;
+                                       if (error != nil) {
+                                           mError = error;
+                                           LogNSError("Error", error);
+                                       }
+                                       if (responsesNeeded == 0) {
+                                           SetCommandExitStatus(mError);
+                                       }
+                                   }];
+        }
+        return CHIP_NO_ERROR;
+    }
+
+private:
+    chip::app::Clusters::IcdManagement::Commands::RegisterClient::Type mRequest;
+};
+
+/*
+ * Command UnregisterClient
+ */
+class IcdManagementUnregisterClient : public ClusterCommand {
+public:
+    IcdManagementUnregisterClient()
+        : ClusterCommand("unregister-client")
+    {
+        AddArgument("CheckInNodeID", 0, UINT64_MAX, &mRequest.checkInNodeID);
+        AddArgument("Key", &mRequest.key);
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000046) command (0x00000002) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterICDManagement alloc] initWithDevice:device
+                                                                         endpointID:@(endpointId)
+                                                                              queue:callbackQueue];
+        __auto_type * params = [[MTRICDManagementClusterUnregisterClientParams alloc] init];
+        params.timedInvokeTimeoutMs
+            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.checkInNodeID = [NSNumber numberWithUnsignedLongLong:mRequest.checkInNodeID];
+        if (mRequest.key.HasValue()) {
+            params.key = [NSData dataWithBytes:mRequest.key.Value().data() length:mRequest.key.Value().size()];
+        } else {
+            params.key = nil;
+        }
+        uint16_t repeatCount = mRepeatCount.ValueOr(1);
+        uint16_t __block responsesNeeded = repeatCount;
+        while (repeatCount--) {
+            [cluster unregisterClientWithParams:params
+                                     completion:^(NSError * _Nullable error) {
+                                         responsesNeeded--;
+                                         if (error != nil) {
+                                             mError = error;
+                                             LogNSError("Error", error);
+                                         }
+                                         if (responsesNeeded == 0) {
+                                             SetCommandExitStatus(mError);
+                                         }
+                                     }];
+        }
+        return CHIP_NO_ERROR;
+    }
+
+private:
+    chip::app::Clusters::IcdManagement::Commands::UnregisterClient::Type mRequest;
+};
+
+/*
+ * Command StayActiveRequest
+ */
+class IcdManagementStayActiveRequest : public ClusterCommand {
+public:
+    IcdManagementStayActiveRequest()
+        : ClusterCommand("stay-active-request")
+    {
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000046) command (0x00000003) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterICDManagement alloc] initWithDevice:device
+                                                                         endpointID:@(endpointId)
+                                                                              queue:callbackQueue];
+        __auto_type * params = [[MTRICDManagementClusterStayActiveRequestParams alloc] init];
+        params.timedInvokeTimeoutMs
+            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        uint16_t repeatCount = mRepeatCount.ValueOr(1);
+        uint16_t __block responsesNeeded = repeatCount;
+        while (repeatCount--) {
+            [cluster stayActiveRequestWithParams:params
+                                      completion:^(NSError * _Nullable error) {
+                                          responsesNeeded--;
+                                          if (error != nil) {
+                                              mError = error;
+                                              LogNSError("Error", error);
+                                          }
+                                          if (responsesNeeded == 0) {
+                                              SetCommandExitStatus(mError);
+                                          }
+                                      }];
+        }
+        return CHIP_NO_ERROR;
+    }
+
+private:
+};
+
+/*
+ * Attribute IdleModeInterval
+ */
+class ReadIcdManagementIdleModeInterval : public ReadAttribute {
+public:
+    ReadIcdManagementIdleModeInterval()
+        : ReadAttribute("idle-mode-interval")
+    {
+    }
+
+    ~ReadIcdManagementIdleModeInterval() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000046) ReadAttribute (0x00000000) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterICDManagement alloc] initWithDevice:device
+                                                                         endpointID:@(endpointId)
+                                                                              queue:callbackQueue];
+        [cluster readAttributeIdleModeIntervalWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"ICDManagement.IdleModeInterval response %@", [value description]);
+            if (error != nil) {
+                LogNSError("ICDManagement IdleModeInterval read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeIcdManagementIdleModeInterval : public SubscribeAttribute {
+public:
+    SubscribeAttributeIcdManagementIdleModeInterval()
+        : SubscribeAttribute("idle-mode-interval")
+    {
+    }
+
+    ~SubscribeAttributeIcdManagementIdleModeInterval() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000046) ReportAttribute (0x00000000) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterICDManagement alloc] initWithDevice:device
+                                                                         endpointID:@(endpointId)
+                                                                              queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeIdleModeIntervalWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"ICDManagement.IdleModeInterval response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute ActiveModeInterval
+ */
+class ReadIcdManagementActiveModeInterval : public ReadAttribute {
+public:
+    ReadIcdManagementActiveModeInterval()
+        : ReadAttribute("active-mode-interval")
+    {
+    }
+
+    ~ReadIcdManagementActiveModeInterval() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000046) ReadAttribute (0x00000001) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterICDManagement alloc] initWithDevice:device
+                                                                         endpointID:@(endpointId)
+                                                                              queue:callbackQueue];
+        [cluster readAttributeActiveModeIntervalWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"ICDManagement.ActiveModeInterval response %@", [value description]);
+            if (error != nil) {
+                LogNSError("ICDManagement ActiveModeInterval read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeIcdManagementActiveModeInterval : public SubscribeAttribute {
+public:
+    SubscribeAttributeIcdManagementActiveModeInterval()
+        : SubscribeAttribute("active-mode-interval")
+    {
+    }
+
+    ~SubscribeAttributeIcdManagementActiveModeInterval() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000046) ReportAttribute (0x00000001) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterICDManagement alloc] initWithDevice:device
+                                                                         endpointID:@(endpointId)
+                                                                              queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeActiveModeIntervalWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"ICDManagement.ActiveModeInterval response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute ActiveModeThreshold
+ */
+class ReadIcdManagementActiveModeThreshold : public ReadAttribute {
+public:
+    ReadIcdManagementActiveModeThreshold()
+        : ReadAttribute("active-mode-threshold")
+    {
+    }
+
+    ~ReadIcdManagementActiveModeThreshold() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000046) ReadAttribute (0x00000002) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterICDManagement alloc] initWithDevice:device
+                                                                         endpointID:@(endpointId)
+                                                                              queue:callbackQueue];
+        [cluster readAttributeActiveModeThresholdWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"ICDManagement.ActiveModeThreshold response %@", [value description]);
+            if (error != nil) {
+                LogNSError("ICDManagement ActiveModeThreshold read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeIcdManagementActiveModeThreshold : public SubscribeAttribute {
+public:
+    SubscribeAttributeIcdManagementActiveModeThreshold()
+        : SubscribeAttribute("active-mode-threshold")
+    {
+    }
+
+    ~SubscribeAttributeIcdManagementActiveModeThreshold() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000046) ReportAttribute (0x00000002) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterICDManagement alloc] initWithDevice:device
+                                                                         endpointID:@(endpointId)
+                                                                              queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeActiveModeThresholdWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"ICDManagement.ActiveModeThreshold response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute RegisteredClients
+ */
+class ReadIcdManagementRegisteredClients : public ReadAttribute {
+public:
+    ReadIcdManagementRegisteredClients()
+        : ReadAttribute("registered-clients")
+    {
+    }
+
+    ~ReadIcdManagementRegisteredClients() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000046) ReadAttribute (0x00000003) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterICDManagement alloc] initWithDevice:device
+                                                                         endpointID:@(endpointId)
+                                                                              queue:callbackQueue];
+        __auto_type * params = [[MTRReadParams alloc] init];
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        [cluster readAttributeRegisteredClientsWithParams:params
+                                               completion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                                                   NSLog(@"ICDManagement.RegisteredClients response %@", [value description]);
+                                                   if (error != nil) {
+                                                       LogNSError("ICDManagement RegisteredClients read Error", error);
+                                                   }
+                                                   SetCommandExitStatus(error);
+                                               }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeIcdManagementRegisteredClients : public SubscribeAttribute {
+public:
+    SubscribeAttributeIcdManagementRegisteredClients()
+        : SubscribeAttribute("registered-clients")
+    {
+    }
+
+    ~SubscribeAttributeIcdManagementRegisteredClients() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000046) ReportAttribute (0x00000003) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterICDManagement alloc] initWithDevice:device
+                                                                         endpointID:@(endpointId)
+                                                                              queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeRegisteredClientsWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"ICDManagement.RegisteredClients response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute ICDCounter
+ */
+class ReadIcdManagementICDCounter : public ReadAttribute {
+public:
+    ReadIcdManagementICDCounter()
+        : ReadAttribute("icdcounter")
+    {
+    }
+
+    ~ReadIcdManagementICDCounter() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000046) ReadAttribute (0x00000004) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterICDManagement alloc] initWithDevice:device
+                                                                         endpointID:@(endpointId)
+                                                                              queue:callbackQueue];
+        [cluster readAttributeICDCounterWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"ICDManagement.ICDCounter response %@", [value description]);
+            if (error != nil) {
+                LogNSError("ICDManagement ICDCounter read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeIcdManagementICDCounter : public SubscribeAttribute {
+public:
+    SubscribeAttributeIcdManagementICDCounter()
+        : SubscribeAttribute("icdcounter")
+    {
+    }
+
+    ~SubscribeAttributeIcdManagementICDCounter() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000046) ReportAttribute (0x00000004) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterICDManagement alloc] initWithDevice:device
+                                                                         endpointID:@(endpointId)
+                                                                              queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeICDCounterWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"ICDManagement.ICDCounter response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute ClientsSupportedPerFabric
+ */
+class ReadIcdManagementClientsSupportedPerFabric : public ReadAttribute {
+public:
+    ReadIcdManagementClientsSupportedPerFabric()
+        : ReadAttribute("clients-supported-per-fabric")
+    {
+    }
+
+    ~ReadIcdManagementClientsSupportedPerFabric() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000046) ReadAttribute (0x00000005) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterICDManagement alloc] initWithDevice:device
+                                                                         endpointID:@(endpointId)
+                                                                              queue:callbackQueue];
+        [cluster readAttributeClientsSupportedPerFabricWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"ICDManagement.ClientsSupportedPerFabric response %@", [value description]);
+            if (error != nil) {
+                LogNSError("ICDManagement ClientsSupportedPerFabric read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeIcdManagementClientsSupportedPerFabric : public SubscribeAttribute {
+public:
+    SubscribeAttributeIcdManagementClientsSupportedPerFabric()
+        : SubscribeAttribute("clients-supported-per-fabric")
+    {
+    }
+
+    ~SubscribeAttributeIcdManagementClientsSupportedPerFabric() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000046) ReportAttribute (0x00000005) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterICDManagement alloc] initWithDevice:device
+                                                                         endpointID:@(endpointId)
+                                                                              queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeClientsSupportedPerFabricWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"ICDManagement.ClientsSupportedPerFabric response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute GeneratedCommandList
+ */
+class ReadIcdManagementGeneratedCommandList : public ReadAttribute {
+public:
+    ReadIcdManagementGeneratedCommandList()
+        : ReadAttribute("generated-command-list")
+    {
+    }
+
+    ~ReadIcdManagementGeneratedCommandList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000046) ReadAttribute (0x0000FFF8) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterICDManagement alloc] initWithDevice:device
+                                                                         endpointID:@(endpointId)
+                                                                              queue:callbackQueue];
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"ICDManagement.GeneratedCommandList response %@", [value description]);
+            if (error != nil) {
+                LogNSError("ICDManagement GeneratedCommandList read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeIcdManagementGeneratedCommandList : public SubscribeAttribute {
+public:
+    SubscribeAttributeIcdManagementGeneratedCommandList()
+        : SubscribeAttribute("generated-command-list")
+    {
+    }
+
+    ~SubscribeAttributeIcdManagementGeneratedCommandList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000046) ReportAttribute (0x0000FFF8) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterICDManagement alloc] initWithDevice:device
+                                                                         endpointID:@(endpointId)
+                                                                              queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeGeneratedCommandListWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"ICDManagement.GeneratedCommandList response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute AcceptedCommandList
+ */
+class ReadIcdManagementAcceptedCommandList : public ReadAttribute {
+public:
+    ReadIcdManagementAcceptedCommandList()
+        : ReadAttribute("accepted-command-list")
+    {
+    }
+
+    ~ReadIcdManagementAcceptedCommandList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000046) ReadAttribute (0x0000FFF9) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterICDManagement alloc] initWithDevice:device
+                                                                         endpointID:@(endpointId)
+                                                                              queue:callbackQueue];
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"ICDManagement.AcceptedCommandList response %@", [value description]);
+            if (error != nil) {
+                LogNSError("ICDManagement AcceptedCommandList read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeIcdManagementAcceptedCommandList : public SubscribeAttribute {
+public:
+    SubscribeAttributeIcdManagementAcceptedCommandList()
+        : SubscribeAttribute("accepted-command-list")
+    {
+    }
+
+    ~SubscribeAttributeIcdManagementAcceptedCommandList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000046) ReportAttribute (0x0000FFF9) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterICDManagement alloc] initWithDevice:device
+                                                                         endpointID:@(endpointId)
+                                                                              queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeAcceptedCommandListWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"ICDManagement.AcceptedCommandList response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute EventList
+ */
+class ReadIcdManagementEventList : public ReadAttribute {
+public:
+    ReadIcdManagementEventList()
+        : ReadAttribute("event-list")
+    {
+    }
+
+    ~ReadIcdManagementEventList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000046) ReadAttribute (0x0000FFFA) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterICDManagement alloc] initWithDevice:device
+                                                                         endpointID:@(endpointId)
+                                                                              queue:callbackQueue];
+        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"ICDManagement.EventList response %@", [value description]);
+            if (error != nil) {
+                LogNSError("ICDManagement EventList read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeIcdManagementEventList : public SubscribeAttribute {
+public:
+    SubscribeAttributeIcdManagementEventList()
+        : SubscribeAttribute("event-list")
+    {
+    }
+
+    ~SubscribeAttributeIcdManagementEventList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000046) ReportAttribute (0x0000FFFA) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterICDManagement alloc] initWithDevice:device
+                                                                         endpointID:@(endpointId)
+                                                                              queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeEventListWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"ICDManagement.EventList response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute AttributeList
+ */
+class ReadIcdManagementAttributeList : public ReadAttribute {
+public:
+    ReadIcdManagementAttributeList()
+        : ReadAttribute("attribute-list")
+    {
+    }
+
+    ~ReadIcdManagementAttributeList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000046) ReadAttribute (0x0000FFFB) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterICDManagement alloc] initWithDevice:device
+                                                                         endpointID:@(endpointId)
+                                                                              queue:callbackQueue];
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"ICDManagement.AttributeList response %@", [value description]);
+            if (error != nil) {
+                LogNSError("ICDManagement AttributeList read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeIcdManagementAttributeList : public SubscribeAttribute {
+public:
+    SubscribeAttributeIcdManagementAttributeList()
+        : SubscribeAttribute("attribute-list")
+    {
+    }
+
+    ~SubscribeAttributeIcdManagementAttributeList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000046) ReportAttribute (0x0000FFFB) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterICDManagement alloc] initWithDevice:device
+                                                                         endpointID:@(endpointId)
+                                                                              queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeAttributeListWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"ICDManagement.AttributeList response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute FeatureMap
+ */
+class ReadIcdManagementFeatureMap : public ReadAttribute {
+public:
+    ReadIcdManagementFeatureMap()
+        : ReadAttribute("feature-map")
+    {
+    }
+
+    ~ReadIcdManagementFeatureMap() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000046) ReadAttribute (0x0000FFFC) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterICDManagement alloc] initWithDevice:device
+                                                                         endpointID:@(endpointId)
+                                                                              queue:callbackQueue];
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"ICDManagement.FeatureMap response %@", [value description]);
+            if (error != nil) {
+                LogNSError("ICDManagement FeatureMap read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeIcdManagementFeatureMap : public SubscribeAttribute {
+public:
+    SubscribeAttributeIcdManagementFeatureMap()
+        : SubscribeAttribute("feature-map")
+    {
+    }
+
+    ~SubscribeAttributeIcdManagementFeatureMap() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000046) ReportAttribute (0x0000FFFC) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterICDManagement alloc] initWithDevice:device
+                                                                         endpointID:@(endpointId)
+                                                                              queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeFeatureMapWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"ICDManagement.FeatureMap response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute ClusterRevision
+ */
+class ReadIcdManagementClusterRevision : public ReadAttribute {
+public:
+    ReadIcdManagementClusterRevision()
+        : ReadAttribute("cluster-revision")
+    {
+    }
+
+    ~ReadIcdManagementClusterRevision() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000046) ReadAttribute (0x0000FFFD) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterICDManagement alloc] initWithDevice:device
+                                                                         endpointID:@(endpointId)
+                                                                              queue:callbackQueue];
+        [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"ICDManagement.ClusterRevision response %@", [value description]);
+            if (error != nil) {
+                LogNSError("ICDManagement ClusterRevision read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeIcdManagementClusterRevision : public SubscribeAttribute {
+public:
+    SubscribeAttributeIcdManagementClusterRevision()
+        : SubscribeAttribute("cluster-revision")
+    {
+    }
+
+    ~SubscribeAttributeIcdManagementClusterRevision() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000046) ReportAttribute (0x0000FFFD) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterICDManagement alloc] initWithDevice:device
+                                                                         endpointID:@(endpointId)
+                                                                              queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeClusterRevisionWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"ICDManagement.ClusterRevision response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -108893,6 +109917,48 @@ void registerClusterBooleanState(Commands & commands)
 
     commands.Register(clusterName, clusterCommands);
 }
+void registerClusterIcdManagement(Commands & commands)
+{
+    using namespace chip::app::Clusters::IcdManagement;
+
+    const char * clusterName = "IcdManagement";
+
+    commands_list clusterCommands = {
+        make_unique<ClusterCommand>(Id), //
+        make_unique<IcdManagementRegisterClient>(), //
+        make_unique<IcdManagementUnregisterClient>(), //
+        make_unique<IcdManagementStayActiveRequest>(), //
+        make_unique<ReadAttribute>(Id), //
+        make_unique<ReadIcdManagementIdleModeInterval>(), //
+        make_unique<WriteAttribute>(Id), //
+        make_unique<SubscribeAttribute>(Id), //
+        make_unique<SubscribeAttributeIcdManagementIdleModeInterval>(), //
+        make_unique<ReadIcdManagementActiveModeInterval>(), //
+        make_unique<SubscribeAttributeIcdManagementActiveModeInterval>(), //
+        make_unique<ReadIcdManagementActiveModeThreshold>(), //
+        make_unique<SubscribeAttributeIcdManagementActiveModeThreshold>(), //
+        make_unique<ReadIcdManagementRegisteredClients>(), //
+        make_unique<SubscribeAttributeIcdManagementRegisteredClients>(), //
+        make_unique<ReadIcdManagementICDCounter>(), //
+        make_unique<SubscribeAttributeIcdManagementICDCounter>(), //
+        make_unique<ReadIcdManagementClientsSupportedPerFabric>(), //
+        make_unique<SubscribeAttributeIcdManagementClientsSupportedPerFabric>(), //
+        make_unique<ReadIcdManagementGeneratedCommandList>(), //
+        make_unique<SubscribeAttributeIcdManagementGeneratedCommandList>(), //
+        make_unique<ReadIcdManagementAcceptedCommandList>(), //
+        make_unique<SubscribeAttributeIcdManagementAcceptedCommandList>(), //
+        make_unique<ReadIcdManagementEventList>(), //
+        make_unique<SubscribeAttributeIcdManagementEventList>(), //
+        make_unique<ReadIcdManagementAttributeList>(), //
+        make_unique<SubscribeAttributeIcdManagementAttributeList>(), //
+        make_unique<ReadIcdManagementFeatureMap>(), //
+        make_unique<SubscribeAttributeIcdManagementFeatureMap>(), //
+        make_unique<ReadIcdManagementClusterRevision>(), //
+        make_unique<SubscribeAttributeIcdManagementClusterRevision>(), //
+    };
+
+    commands.Register(clusterName, clusterCommands);
+}
 void registerClusterModeSelect(Commands & commands)
 {
     using namespace chip::app::Clusters::ModeSelect;
@@ -111469,6 +112535,7 @@ void registerClusters(Commands & commands)
     registerClusterFixedLabel(commands);
     registerClusterUserLabel(commands);
     registerClusterBooleanState(commands);
+    registerClusterIcdManagement(commands);
     registerClusterModeSelect(commands);
     registerClusterAirQuality(commands);
     registerClusterHepaFilterMonitoring(commands);
