@@ -27,8 +27,10 @@
 #import "MTRDevice_Internal.h"
 #import "MTRStructsObjc.h"
 
+#include <controller/CHIPCluster.h>
 #include <lib/support/CHIPListUtils.h>
 #include <platform/CHIPDeviceLayer.h>
+
 #include <type_traits>
 
 using chip::Callback::Callback;
@@ -170,7 +172,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::IdentifyCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -3622,7 +3624,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::OnOffCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -3702,7 +3704,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::OnOffCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -3787,7 +3789,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = static_cast<std::remove_reference_t<decltype(nonNullValue_0)>>(value.unsignedCharValue);
             }
 
-            chip::Controller::OnOffCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -4662,7 +4664,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::OnOffSwitchConfigurationCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -6001,7 +6003,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = static_cast<std::remove_reference_t<decltype(cppValue)>>(value.unsignedCharValue);
 
-            chip::Controller::LevelControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -6081,7 +6083,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::LevelControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -6168,7 +6170,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.unsignedCharValue;
             }
 
-            chip::Controller::LevelControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -6253,7 +6255,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.unsignedShortValue;
             }
 
-            chip::Controller::LevelControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -6339,7 +6341,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.unsignedShortValue;
             }
 
-            chip::Controller::LevelControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -6425,7 +6427,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.unsignedCharValue;
             }
 
-            chip::Controller::LevelControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -6511,7 +6513,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.unsignedCharValue;
             }
 
-            chip::Controller::LevelControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -7780,7 +7782,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = [self asCharSpan:value];
 
-            chip::Controller::BinaryInputBasicCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -7860,7 +7862,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = [self asCharSpan:value];
 
-            chip::Controller::BinaryInputBasicCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -7940,7 +7942,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = [self asCharSpan:value];
 
-            chip::Controller::BinaryInputBasicCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -8020,7 +8022,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.boolValue;
 
-            chip::Controller::BinaryInputBasicCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -8143,7 +8145,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.boolValue;
 
-            chip::Controller::BinaryInputBasicCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -8223,7 +8225,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::BinaryInputBasicCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -10144,7 +10146,7 @@ using chip::System::Clock::Timeout;
                 }
             }
 
-            chip::Controller::BindingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -10841,7 +10843,7 @@ using chip::System::Clock::Timeout;
                 }
             }
 
-            chip::Controller::AccessControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -10944,7 +10946,7 @@ using chip::System::Clock::Timeout;
                 }
             }
 
-            chip::Controller::AccessControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -13396,7 +13398,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = [self asCharSpan:value];
 
-            chip::Controller::BasicInformationCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -13476,7 +13478,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = [self asCharSpan:value];
 
-            chip::Controller::BasicInformationCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -13950,7 +13952,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.boolValue;
 
-            chip::Controller::BasicInformationCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -16311,7 +16313,7 @@ using chip::System::Clock::Timeout;
                 }
             }
 
-            chip::Controller::OtaSoftwareUpdateRequestorCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -17191,7 +17193,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = [self asCharSpan:value];
 
-            chip::Controller::LocalizationConfigurationCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -17881,7 +17883,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = static_cast<std::remove_reference_t<decltype(cppValue)>>(value.unsignedCharValue);
 
-            chip::Controller::TimeFormatLocalizationCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -17962,7 +17964,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = static_cast<std::remove_reference_t<decltype(cppValue)>>(value.unsignedCharValue);
 
-            chip::Controller::TimeFormatLocalizationCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -18710,7 +18712,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = static_cast<std::remove_reference_t<decltype(cppValue)>>(value.unsignedCharValue);
 
-            chip::Controller::UnitLocalizationCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -23182,7 +23184,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedLongLongValue;
 
-            chip::Controller::GeneralCommissioningCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -24628,7 +24630,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.boolValue;
 
-            chip::Controller::NetworkCommissioningCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -37610,7 +37612,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = [self asCharSpan:value];
 
-            chip::Controller::BridgedDeviceBasicInformationCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -42564,7 +42566,7 @@ using chip::System::Clock::Timeout;
                 }
             }
 
-            chip::Controller::GroupKeyManagementCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -44034,7 +44036,7 @@ using chip::System::Clock::Timeout;
                 }
             }
 
-            chip::Controller::UserLabelCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -45395,7 +45397,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.unsignedCharValue;
             }
 
-            chip::Controller::ModeSelectCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -45480,7 +45482,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.unsignedCharValue;
             }
 
-            chip::Controller::ModeSelectCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -53050,7 +53052,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedIntValue;
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -53130,7 +53132,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedIntValue;
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -53211,7 +53213,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -53843,7 +53845,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = [self asCharSpan:value];
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -53923,7 +53925,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -54003,7 +54005,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedIntValue;
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -54083,7 +54085,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -54163,7 +54165,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = static_cast<std::remove_reference_t<decltype(cppValue)>>(value.unsignedCharValue);
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -54337,7 +54339,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.boolValue;
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -54419,7 +54421,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.boolValue;
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -54501,7 +54503,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.boolValue;
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -54584,7 +54586,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.boolValue;
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -54667,7 +54669,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = static_cast<std::remove_reference_t<decltype(cppValue)>>(value.unsignedCharValue);
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -54749,7 +54751,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -54832,7 +54834,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -54915,7 +54917,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.boolValue;
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -54997,7 +54999,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.boolValue;
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -55080,7 +55082,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -58734,7 +58736,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = static_cast<std::remove_reference_t<decltype(cppValue)>>(value.unsignedCharValue);
 
-            chip::Controller::WindowCoveringCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -60573,7 +60575,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::BarrierControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -60654,7 +60656,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::BarrierControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -60737,7 +60739,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::BarrierControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -60820,7 +60822,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::BarrierControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -60902,7 +60904,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::BarrierControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -60983,7 +60985,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::BarrierControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -62892,7 +62894,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.unsignedIntValue;
             }
 
-            chip::Controller::PumpConfigurationAndControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -63023,7 +63025,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.unsignedIntValue;
             }
 
-            chip::Controller::PumpConfigurationAndControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -63106,7 +63108,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = static_cast<std::remove_reference_t<decltype(cppValue)>>(value.unsignedCharValue);
 
-            chip::Controller::PumpConfigurationAndControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -63187,7 +63189,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = static_cast<std::remove_reference_t<decltype(cppValue)>>(value.unsignedCharValue);
 
-            chip::Controller::PumpConfigurationAndControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -65367,7 +65369,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::ThermostatCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -65450,7 +65452,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.charValue;
 
-            chip::Controller::ThermostatCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -65533,7 +65535,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.shortValue;
 
-            chip::Controller::ThermostatCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -65616,7 +65618,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.shortValue;
 
-            chip::Controller::ThermostatCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -65699,7 +65701,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.shortValue;
 
-            chip::Controller::ThermostatCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -65782,7 +65784,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.shortValue;
 
-            chip::Controller::ThermostatCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -65864,7 +65866,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.shortValue;
 
-            chip::Controller::ThermostatCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -65946,7 +65948,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.shortValue;
 
-            chip::Controller::ThermostatCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -66028,7 +66030,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.shortValue;
 
-            chip::Controller::ThermostatCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -66110,7 +66112,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.shortValue;
 
-            chip::Controller::ThermostatCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -66192,7 +66194,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.charValue;
 
-            chip::Controller::ThermostatCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -66274,7 +66276,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::ThermostatCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -66356,7 +66358,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = static_cast<std::remove_reference_t<decltype(cppValue)>>(value.unsignedCharValue);
 
-            chip::Controller::ThermostatCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -66438,7 +66440,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::ThermostatCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -66699,7 +66701,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::ThermostatCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -66788,7 +66790,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.unsignedShortValue;
             }
 
-            chip::Controller::ThermostatCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -66874,7 +66876,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::ThermostatCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -67146,7 +67148,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.unsignedCharValue;
             }
 
-            chip::Controller::ThermostatCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -67322,7 +67324,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.unsignedCharValue;
             }
 
-            chip::Controller::ThermostatCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -67493,7 +67495,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::ThermostatCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -67575,7 +67577,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::ThermostatCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -67655,7 +67657,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::ThermostatCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -67735,7 +67737,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::ThermostatCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -67816,7 +67818,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::ThermostatCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -67897,7 +67899,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedIntValue;
 
-            chip::Controller::ThermostatCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -67977,7 +67979,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::ThermostatCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -68102,7 +68104,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::ThermostatCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -71148,7 +71150,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = static_cast<std::remove_reference_t<decltype(cppValue)>>(value.unsignedCharValue);
 
-            chip::Controller::FanControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -71228,7 +71230,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = static_cast<std::remove_reference_t<decltype(cppValue)>>(value.unsignedCharValue);
 
-            chip::Controller::FanControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -71314,7 +71316,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.unsignedCharValue;
             }
 
-            chip::Controller::FanControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -71485,7 +71487,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.unsignedCharValue;
             }
 
-            chip::Controller::FanControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -71651,7 +71653,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::FanControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -71774,7 +71776,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::FanControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -72853,7 +72855,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::ThermostatUserInterfaceConfigurationCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -72935,7 +72937,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::ThermostatUserInterfaceConfigurationCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -73016,7 +73018,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::ThermostatUserInterfaceConfigurationCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -74892,7 +74894,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::ColorControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -75796,7 +75798,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::ColorControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -75876,7 +75878,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::ColorControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -75956,7 +75958,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::ColorControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -76036,7 +76038,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::ColorControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -76121,7 +76123,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.unsignedCharValue;
             }
 
-            chip::Controller::ColorControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -76203,7 +76205,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::ColorControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -76283,7 +76285,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::ColorControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -76368,7 +76370,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.unsignedCharValue;
             }
 
-            chip::Controller::ColorControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -76450,7 +76452,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::ColorControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -76530,7 +76532,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::ColorControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -76615,7 +76617,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.unsignedCharValue;
             }
 
-            chip::Controller::ColorControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -77200,7 +77202,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.unsignedShortValue;
             }
 
-            chip::Controller::ColorControlCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -80373,7 +80375,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::BallastConfigurationCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -80453,7 +80455,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::BallastConfigurationCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -80539,7 +80541,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.unsignedCharValue;
             }
 
-            chip::Controller::BallastConfigurationCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -80627,7 +80629,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.unsignedCharValue;
             }
 
-            chip::Controller::BallastConfigurationCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -80752,7 +80754,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = [self asCharSpan:value];
 
-            chip::Controller::BallastConfigurationCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -80832,7 +80834,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = [self asCharSpan:value];
 
-            chip::Controller::BallastConfigurationCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -80918,7 +80920,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.unsignedIntValue;
             }
 
-            chip::Controller::BallastConfigurationCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -81003,7 +81005,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.unsignedIntValue;
             }
 
-            chip::Controller::BallastConfigurationCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -81083,7 +81085,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::BallastConfigurationCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -81169,7 +81171,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.unsignedIntValue;
             }
 
-            chip::Controller::BallastConfigurationCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -87162,7 +87164,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::OccupancySensingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -87246,7 +87248,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::OccupancySensingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -87331,7 +87333,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::OccupancySensingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -87417,7 +87419,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::OccupancySensingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -87503,7 +87505,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::OccupancySensingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -87591,7 +87593,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::OccupancySensingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -87679,7 +87681,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::OccupancySensingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -87767,7 +87769,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::OccupancySensingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -87855,7 +87857,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::OccupancySensingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -94928,7 +94930,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedIntValue;
 
-            chip::Controller::ContentLauncherCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -96501,7 +96503,7 @@ using chip::System::Clock::Timeout;
                 }
             }
 
-            chip::Controller::ApplicationLauncherCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -101622,7 +101624,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::ElectricalMeasurementCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -101707,7 +101709,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::ElectricalMeasurementCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -101791,7 +101793,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::ElectricalMeasurementCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -101874,7 +101876,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::ElectricalMeasurementCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -101957,7 +101959,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::ElectricalMeasurementCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -102039,7 +102041,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::ElectricalMeasurementCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -102386,7 +102388,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::ElectricalMeasurementCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -102556,7 +102558,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::ElectricalMeasurementCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -112910,7 +112912,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.boolValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -112990,7 +112992,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = static_cast<std::remove_reference_t<decltype(cppValue)>>(value.unsignedCharValue);
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -113070,7 +113072,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = static_cast<std::remove_reference_t<decltype(cppValue)>>(value.unsignedShortValue);
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -113150,7 +113152,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = static_cast<std::remove_reference_t<decltype(cppValue)>>(value.unsignedIntValue);
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -113230,7 +113232,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = static_cast<std::remove_reference_t<decltype(cppValue)>>(value.unsignedLongLongValue);
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -113310,7 +113312,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -113390,7 +113392,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -113470,7 +113472,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedIntValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -113550,7 +113552,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedIntValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -113630,7 +113632,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedLongLongValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -113710,7 +113712,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedLongLongValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -113790,7 +113792,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedLongLongValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -113870,7 +113872,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedLongLongValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -113950,7 +113952,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.charValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -114030,7 +114032,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.shortValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -114110,7 +114112,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.intValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -114190,7 +114192,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.intValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -114270,7 +114272,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.longLongValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -114350,7 +114352,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.longLongValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -114430,7 +114432,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.longLongValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -114510,7 +114512,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.longLongValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -114590,7 +114592,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -114670,7 +114672,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -114750,7 +114752,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.floatValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -114830,7 +114832,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.doubleValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -114910,7 +114912,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = [self asByteSpan:value];
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -115011,7 +115013,7 @@ using chip::System::Clock::Timeout;
                 }
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -115112,7 +115114,7 @@ using chip::System::Clock::Timeout;
                 }
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -115214,7 +115216,7 @@ using chip::System::Clock::Timeout;
                 }
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -115296,7 +115298,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = [self asByteSpan:value];
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -115376,7 +115378,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = [self asCharSpan:value];
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -115456,7 +115458,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = [self asCharSpan:value];
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -115536,7 +115538,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedLongLongValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -115616,7 +115618,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedIntValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -115696,7 +115698,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = static_cast<std::remove_reference_t<decltype(cppValue)>>(value.unsignedShortValue);
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -115971,7 +115973,7 @@ using chip::System::Clock::Timeout;
                 }
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -116055,7 +116057,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = static_cast<std::remove_reference_t<decltype(cppValue)>>(value.unsignedCharValue);
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -116145,7 +116147,7 @@ using chip::System::Clock::Timeout;
             cppValue.g = value.g.floatValue;
             cppValue.h = value.h.doubleValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -116227,7 +116229,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -116309,7 +116311,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.charValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -116391,7 +116393,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -116473,7 +116475,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.shortValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -116576,7 +116578,7 @@ using chip::System::Clock::Timeout;
                 }
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -116736,7 +116738,7 @@ using chip::System::Clock::Timeout;
                 }
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -116817,7 +116819,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.boolValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -116898,7 +116900,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.boolValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -116980,7 +116982,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.boolValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -117062,7 +117064,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.boolValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -117147,7 +117149,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.boolValue;
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -117233,7 +117235,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = static_cast<std::remove_reference_t<decltype(nonNullValue_0)>>(value.unsignedCharValue);
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -117319,7 +117321,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = static_cast<std::remove_reference_t<decltype(nonNullValue_0)>>(value.unsignedShortValue);
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -117405,7 +117407,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = static_cast<std::remove_reference_t<decltype(nonNullValue_0)>>(value.unsignedIntValue);
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -117491,7 +117493,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = static_cast<std::remove_reference_t<decltype(nonNullValue_0)>>(value.unsignedLongLongValue);
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -117577,7 +117579,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.unsignedCharValue;
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -117662,7 +117664,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.unsignedShortValue;
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -117747,7 +117749,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.unsignedIntValue;
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -117832,7 +117834,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.unsignedIntValue;
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -117917,7 +117919,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.unsignedLongLongValue;
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -118002,7 +118004,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.unsignedLongLongValue;
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -118087,7 +118089,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.unsignedLongLongValue;
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -118172,7 +118174,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.unsignedLongLongValue;
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -118257,7 +118259,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.charValue;
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -118342,7 +118344,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.shortValue;
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -118427,7 +118429,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.intValue;
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -118512,7 +118514,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.intValue;
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -118597,7 +118599,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.longLongValue;
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -118682,7 +118684,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.longLongValue;
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -118767,7 +118769,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.longLongValue;
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -118852,7 +118854,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.longLongValue;
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -118937,7 +118939,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.unsignedCharValue;
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -119022,7 +119024,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.unsignedShortValue;
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -119107,7 +119109,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.floatValue;
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -119194,7 +119196,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.doubleValue;
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -119281,7 +119283,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = [self asByteSpan:value];
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -119367,7 +119369,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = [self asCharSpan:value];
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -119454,7 +119456,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = static_cast<std::remove_reference_t<decltype(nonNullValue_0)>>(value.unsignedCharValue);
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -119552,7 +119554,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0.h = value.h.doubleValue;
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -119640,7 +119642,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.unsignedCharValue;
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -119729,7 +119731,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.charValue;
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -119818,7 +119820,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.unsignedShortValue;
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -119907,7 +119909,7 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0 = value.shortValue;
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -119990,7 +119992,7 @@ using chip::System::Clock::Timeout;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
