@@ -52794,6 +52794,50 @@ using chip::System::Clock::Timeout;
     std::move(*bridge).DispatchAction(self.device);
 }
 
+- (void)unboltDoorWithParams:(MTRDoorLockClusterUnboltDoorParams * _Nullable)params completion:(MTRStatusCompletion)completion
+{
+    // Make a copy of params before we go async.
+    params = [params copy];
+    auto * bridge = new MTRCommandSuccessCallbackBridge(
+        self.callbackQueue,
+        ^(id _Nullable value, NSError * _Nullable error) {
+            completion(error);
+        },
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
+            MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
+            ListFreer listFreer;
+            DoorLock::Commands::UnboltDoor::Type request;
+            if (params != nil) {
+                if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
+                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
+                }
+            }
+            if (!timedInvokeTimeoutMs.HasValue()) {
+                timedInvokeTimeoutMs.SetValue(10000);
+            }
+            if (params != nil) {
+                if (params.pinCode != nil) {
+                    auto & definedValue_0 = request.PINCode.Emplace();
+                    definedValue_0 = [self asByteSpan:params.pinCode];
+                }
+            }
+
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
+        });
+    std::move(*bridge).DispatchAction(self.device);
+}
+
 - (void)readAttributeLockStateWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
@@ -55424,6 +55468,11 @@ using chip::System::Clock::Timeout;
                 completionHandler:(MTRStatusCompletion)completionHandler
 {
     [self clearCredentialWithParams:params completion:completionHandler];
+}
+- (void)unboltDoorWithParams:(MTRDoorLockClusterUnboltDoorParams * _Nullable)params
+           completionHandler:(MTRStatusCompletion)completionHandler
+{
+    [self unboltDoorWithParams:params completion:completionHandler];
 }
 
 - (void)readAttributeLockStateWithCompletionHandler:(void (^)(

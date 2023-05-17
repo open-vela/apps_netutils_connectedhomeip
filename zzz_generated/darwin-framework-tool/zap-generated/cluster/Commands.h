@@ -46737,6 +46737,7 @@ public:
 | * SetCredential                                                     |   0x22 |
 | * GetCredentialStatus                                               |   0x24 |
 | * ClearCredential                                                   |   0x26 |
+| * UnboltDoor                                                        |   0x27 |
 |------------------------------------------------------------------------------|
 | Attributes:                                                         |        |
 | * LockState                                                         | 0x0000 |
@@ -47713,6 +47714,54 @@ private:
     chip::app::Clusters::DoorLock::Commands::ClearCredential::Type mRequest;
     TypedComplexArgument<chip::app::DataModel::Nullable<chip::app::Clusters::DoorLock::Structs::CredentialStruct::Type>>
         mComplex_Credential;
+};
+
+/*
+ * Command UnboltDoor
+ */
+class DoorLockUnboltDoor : public ClusterCommand {
+public:
+    DoorLockUnboltDoor()
+        : ClusterCommand("unbolt-door")
+    {
+        AddArgument("PINCode", &mRequest.PINCode);
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000101) command (0x00000027) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(endpointId) queue:callbackQueue];
+        __auto_type * params = [[MTRDoorLockClusterUnboltDoorParams alloc] init];
+        params.timedInvokeTimeoutMs
+            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        if (mRequest.PINCode.HasValue()) {
+            params.pinCode = [NSData dataWithBytes:mRequest.PINCode.Value().data() length:mRequest.PINCode.Value().size()];
+        } else {
+            params.pinCode = nil;
+        }
+        uint16_t repeatCount = mRepeatCount.ValueOr(1);
+        uint16_t __block responsesNeeded = repeatCount;
+        while (repeatCount--) {
+            [cluster unboltDoorWithParams:params
+                               completion:^(NSError * _Nullable error) {
+                                   responsesNeeded--;
+                                   if (error != nil) {
+                                       mError = error;
+                                       LogNSError("Error", error);
+                                   }
+                                   if (responsesNeeded == 0) {
+                                       SetCommandExitStatus(mError);
+                                   }
+                               }];
+        }
+        return CHIP_NO_ERROR;
+    }
+
+private:
+    chip::app::Clusters::DoorLock::Commands::UnboltDoor::Type mRequest;
 };
 
 /*
@@ -108484,6 +108533,7 @@ void registerClusterDoorLock(Commands & commands)
         make_unique<DoorLockSetCredential>(), //
         make_unique<DoorLockGetCredentialStatus>(), //
         make_unique<DoorLockClearCredential>(), //
+        make_unique<DoorLockUnboltDoor>(), //
         make_unique<ReadAttribute>(Id), //
         make_unique<ReadDoorLockLockState>(), //
         make_unique<WriteAttribute>(Id), //
