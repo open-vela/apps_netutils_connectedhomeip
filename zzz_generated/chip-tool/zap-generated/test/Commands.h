@@ -82839,7 +82839,7 @@ public:
 
     ~DL_LockUnlockSuite() {}
 
-    chip::System::Clock::Timeout GetWaitDuration() const override { return chip::System::Clock::Seconds16(mTimeout.ValueOr(15)); }
+    chip::System::Clock::Timeout GetWaitDuration() const override { return chip::System::Clock::Seconds16(mTimeout.ValueOr(25)); }
 
 private:
     chip::Optional<chip::NodeId> mNodeId;
