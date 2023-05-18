@@ -78,6 +78,7 @@
 | IcdManagement                                                       | 0x0046 |
 | ModeSelect                                                          | 0x0050 |
 | AirQuality                                                          | 0x005B |
+| SmokeCoAlarm                                                        | 0x005C |
 | HepaFilterMonitoring                                                | 0x0071 |
 | ActivatedCarbonFilterMonitoring                                     | 0x0072 |
 | CeramicFilterMonitoring                                             | 0x0073 |
@@ -38380,6 +38381,1389 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"AirQuality.ClusterRevision response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*----------------------------------------------------------------------------*\
+| Cluster SmokeCoAlarm                                                | 0x005C |
+|------------------------------------------------------------------------------|
+| Commands:                                                           |        |
+| * SelfTestRequest                                                   |   0x00 |
+|------------------------------------------------------------------------------|
+| Attributes:                                                         |        |
+| * ExpressedState                                                    | 0x0000 |
+| * SmokeState                                                        | 0x0001 |
+| * COState                                                           | 0x0002 |
+| * BatteryAlert                                                      | 0x0003 |
+| * DeviceMuted                                                       | 0x0004 |
+| * TestInProgress                                                    | 0x0005 |
+| * HardwareFaultAlert                                                | 0x0006 |
+| * EndOfServiceAlert                                                 | 0x0007 |
+| * InterconnectSmokeAlarm                                            | 0x0008 |
+| * InterconnectCOAlarm                                               | 0x0009 |
+| * ContaminationState                                                | 0x000A |
+| * SensitivityLevel                                                  | 0x000B |
+| * GeneratedCommandList                                              | 0xFFF8 |
+| * AcceptedCommandList                                               | 0xFFF9 |
+| * EventList                                                         | 0xFFFA |
+| * AttributeList                                                     | 0xFFFB |
+| * FeatureMap                                                        | 0xFFFC |
+| * ClusterRevision                                                   | 0xFFFD |
+|------------------------------------------------------------------------------|
+| Events:                                                             |        |
+| * SmokeAlarm                                                        | 0x0000 |
+| * COAlarm                                                           | 0x0001 |
+| * LowBattery                                                        | 0x0002 |
+| * HardwareFault                                                     | 0x0003 |
+| * EndOfService                                                      | 0x0004 |
+| * SelfTestComplete                                                  | 0x0005 |
+| * AlarmMuted                                                        | 0x0006 |
+| * MuteEnded                                                         | 0x0007 |
+| * InterconnectSmokeAlarm                                            | 0x0008 |
+| * InterconnectCOAlarm                                               | 0x0009 |
+| * AllClear                                                          | 0x000A |
+\*----------------------------------------------------------------------------*/
+
+/*
+ * Command SelfTestRequest
+ */
+class SmokeCoAlarmSelfTestRequest : public ClusterCommand {
+public:
+    SmokeCoAlarmSelfTestRequest()
+        : ClusterCommand("self-test-request")
+    {
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) command (0x00000000) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        __auto_type * params = [[MTRSmokeCOAlarmClusterSelfTestRequestParams alloc] init];
+        params.timedInvokeTimeoutMs
+            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        uint16_t repeatCount = mRepeatCount.ValueOr(1);
+        uint16_t __block responsesNeeded = repeatCount;
+        while (repeatCount--) {
+            [cluster selfTestRequestWithParams:params
+                                    completion:^(NSError * _Nullable error) {
+                                        responsesNeeded--;
+                                        if (error != nil) {
+                                            mError = error;
+                                            LogNSError("Error", error);
+                                        }
+                                        if (responsesNeeded == 0) {
+                                            SetCommandExitStatus(mError);
+                                        }
+                                    }];
+        }
+        return CHIP_NO_ERROR;
+    }
+
+private:
+};
+
+/*
+ * Attribute ExpressedState
+ */
+class ReadSmokeCoAlarmExpressedState : public ReadAttribute {
+public:
+    ReadSmokeCoAlarmExpressedState()
+        : ReadAttribute("expressed-state")
+    {
+    }
+
+    ~ReadSmokeCoAlarmExpressedState() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReadAttribute (0x00000000) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        [cluster readAttributeExpressedStateWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"SmokeCOAlarm.ExpressedState response %@", [value description]);
+            if (error != nil) {
+                LogNSError("SmokeCOAlarm ExpressedState read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeSmokeCoAlarmExpressedState : public SubscribeAttribute {
+public:
+    SubscribeAttributeSmokeCoAlarmExpressedState()
+        : SubscribeAttribute("expressed-state")
+    {
+    }
+
+    ~SubscribeAttributeSmokeCoAlarmExpressedState() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReportAttribute (0x00000000) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeExpressedStateWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"SmokeCOAlarm.ExpressedState response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute SmokeState
+ */
+class ReadSmokeCoAlarmSmokeState : public ReadAttribute {
+public:
+    ReadSmokeCoAlarmSmokeState()
+        : ReadAttribute("smoke-state")
+    {
+    }
+
+    ~ReadSmokeCoAlarmSmokeState() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReadAttribute (0x00000001) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        [cluster readAttributeSmokeStateWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"SmokeCOAlarm.SmokeState response %@", [value description]);
+            if (error != nil) {
+                LogNSError("SmokeCOAlarm SmokeState read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeSmokeCoAlarmSmokeState : public SubscribeAttribute {
+public:
+    SubscribeAttributeSmokeCoAlarmSmokeState()
+        : SubscribeAttribute("smoke-state")
+    {
+    }
+
+    ~SubscribeAttributeSmokeCoAlarmSmokeState() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReportAttribute (0x00000001) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeSmokeStateWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"SmokeCOAlarm.SmokeState response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute COState
+ */
+class ReadSmokeCoAlarmCOState : public ReadAttribute {
+public:
+    ReadSmokeCoAlarmCOState()
+        : ReadAttribute("costate")
+    {
+    }
+
+    ~ReadSmokeCoAlarmCOState() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReadAttribute (0x00000002) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        [cluster readAttributeCOStateWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"SmokeCOAlarm.COState response %@", [value description]);
+            if (error != nil) {
+                LogNSError("SmokeCOAlarm COState read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeSmokeCoAlarmCOState : public SubscribeAttribute {
+public:
+    SubscribeAttributeSmokeCoAlarmCOState()
+        : SubscribeAttribute("costate")
+    {
+    }
+
+    ~SubscribeAttributeSmokeCoAlarmCOState() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReportAttribute (0x00000002) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeCOStateWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"SmokeCOAlarm.COState response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute BatteryAlert
+ */
+class ReadSmokeCoAlarmBatteryAlert : public ReadAttribute {
+public:
+    ReadSmokeCoAlarmBatteryAlert()
+        : ReadAttribute("battery-alert")
+    {
+    }
+
+    ~ReadSmokeCoAlarmBatteryAlert() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReadAttribute (0x00000003) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        [cluster readAttributeBatteryAlertWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"SmokeCOAlarm.BatteryAlert response %@", [value description]);
+            if (error != nil) {
+                LogNSError("SmokeCOAlarm BatteryAlert read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeSmokeCoAlarmBatteryAlert : public SubscribeAttribute {
+public:
+    SubscribeAttributeSmokeCoAlarmBatteryAlert()
+        : SubscribeAttribute("battery-alert")
+    {
+    }
+
+    ~SubscribeAttributeSmokeCoAlarmBatteryAlert() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReportAttribute (0x00000003) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeBatteryAlertWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"SmokeCOAlarm.BatteryAlert response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute DeviceMuted
+ */
+class ReadSmokeCoAlarmDeviceMuted : public ReadAttribute {
+public:
+    ReadSmokeCoAlarmDeviceMuted()
+        : ReadAttribute("device-muted")
+    {
+    }
+
+    ~ReadSmokeCoAlarmDeviceMuted() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReadAttribute (0x00000004) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        [cluster readAttributeDeviceMutedWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"SmokeCOAlarm.DeviceMuted response %@", [value description]);
+            if (error != nil) {
+                LogNSError("SmokeCOAlarm DeviceMuted read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeSmokeCoAlarmDeviceMuted : public SubscribeAttribute {
+public:
+    SubscribeAttributeSmokeCoAlarmDeviceMuted()
+        : SubscribeAttribute("device-muted")
+    {
+    }
+
+    ~SubscribeAttributeSmokeCoAlarmDeviceMuted() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReportAttribute (0x00000004) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeDeviceMutedWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"SmokeCOAlarm.DeviceMuted response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute TestInProgress
+ */
+class ReadSmokeCoAlarmTestInProgress : public ReadAttribute {
+public:
+    ReadSmokeCoAlarmTestInProgress()
+        : ReadAttribute("test-in-progress")
+    {
+    }
+
+    ~ReadSmokeCoAlarmTestInProgress() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReadAttribute (0x00000005) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        [cluster readAttributeTestInProgressWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"SmokeCOAlarm.TestInProgress response %@", [value description]);
+            if (error != nil) {
+                LogNSError("SmokeCOAlarm TestInProgress read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeSmokeCoAlarmTestInProgress : public SubscribeAttribute {
+public:
+    SubscribeAttributeSmokeCoAlarmTestInProgress()
+        : SubscribeAttribute("test-in-progress")
+    {
+    }
+
+    ~SubscribeAttributeSmokeCoAlarmTestInProgress() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReportAttribute (0x00000005) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeTestInProgressWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"SmokeCOAlarm.TestInProgress response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute HardwareFaultAlert
+ */
+class ReadSmokeCoAlarmHardwareFaultAlert : public ReadAttribute {
+public:
+    ReadSmokeCoAlarmHardwareFaultAlert()
+        : ReadAttribute("hardware-fault-alert")
+    {
+    }
+
+    ~ReadSmokeCoAlarmHardwareFaultAlert() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReadAttribute (0x00000006) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        [cluster readAttributeHardwareFaultAlertWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"SmokeCOAlarm.HardwareFaultAlert response %@", [value description]);
+            if (error != nil) {
+                LogNSError("SmokeCOAlarm HardwareFaultAlert read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeSmokeCoAlarmHardwareFaultAlert : public SubscribeAttribute {
+public:
+    SubscribeAttributeSmokeCoAlarmHardwareFaultAlert()
+        : SubscribeAttribute("hardware-fault-alert")
+    {
+    }
+
+    ~SubscribeAttributeSmokeCoAlarmHardwareFaultAlert() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReportAttribute (0x00000006) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeHardwareFaultAlertWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"SmokeCOAlarm.HardwareFaultAlert response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute EndOfServiceAlert
+ */
+class ReadSmokeCoAlarmEndOfServiceAlert : public ReadAttribute {
+public:
+    ReadSmokeCoAlarmEndOfServiceAlert()
+        : ReadAttribute("end-of-service-alert")
+    {
+    }
+
+    ~ReadSmokeCoAlarmEndOfServiceAlert() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReadAttribute (0x00000007) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        [cluster readAttributeEndOfServiceAlertWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"SmokeCOAlarm.EndOfServiceAlert response %@", [value description]);
+            if (error != nil) {
+                LogNSError("SmokeCOAlarm EndOfServiceAlert read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeSmokeCoAlarmEndOfServiceAlert : public SubscribeAttribute {
+public:
+    SubscribeAttributeSmokeCoAlarmEndOfServiceAlert()
+        : SubscribeAttribute("end-of-service-alert")
+    {
+    }
+
+    ~SubscribeAttributeSmokeCoAlarmEndOfServiceAlert() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReportAttribute (0x00000007) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeEndOfServiceAlertWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"SmokeCOAlarm.EndOfServiceAlert response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute InterconnectSmokeAlarm
+ */
+class ReadSmokeCoAlarmInterconnectSmokeAlarm : public ReadAttribute {
+public:
+    ReadSmokeCoAlarmInterconnectSmokeAlarm()
+        : ReadAttribute("interconnect-smoke-alarm")
+    {
+    }
+
+    ~ReadSmokeCoAlarmInterconnectSmokeAlarm() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReadAttribute (0x00000008) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        [cluster readAttributeInterconnectSmokeAlarmWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"SmokeCOAlarm.InterconnectSmokeAlarm response %@", [value description]);
+            if (error != nil) {
+                LogNSError("SmokeCOAlarm InterconnectSmokeAlarm read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeSmokeCoAlarmInterconnectSmokeAlarm : public SubscribeAttribute {
+public:
+    SubscribeAttributeSmokeCoAlarmInterconnectSmokeAlarm()
+        : SubscribeAttribute("interconnect-smoke-alarm")
+    {
+    }
+
+    ~SubscribeAttributeSmokeCoAlarmInterconnectSmokeAlarm() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReportAttribute (0x00000008) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeInterconnectSmokeAlarmWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"SmokeCOAlarm.InterconnectSmokeAlarm response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute InterconnectCOAlarm
+ */
+class ReadSmokeCoAlarmInterconnectCOAlarm : public ReadAttribute {
+public:
+    ReadSmokeCoAlarmInterconnectCOAlarm()
+        : ReadAttribute("interconnect-coalarm")
+    {
+    }
+
+    ~ReadSmokeCoAlarmInterconnectCOAlarm() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReadAttribute (0x00000009) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        [cluster readAttributeInterconnectCOAlarmWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"SmokeCOAlarm.InterconnectCOAlarm response %@", [value description]);
+            if (error != nil) {
+                LogNSError("SmokeCOAlarm InterconnectCOAlarm read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeSmokeCoAlarmInterconnectCOAlarm : public SubscribeAttribute {
+public:
+    SubscribeAttributeSmokeCoAlarmInterconnectCOAlarm()
+        : SubscribeAttribute("interconnect-coalarm")
+    {
+    }
+
+    ~SubscribeAttributeSmokeCoAlarmInterconnectCOAlarm() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReportAttribute (0x00000009) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeInterconnectCOAlarmWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"SmokeCOAlarm.InterconnectCOAlarm response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute ContaminationState
+ */
+class ReadSmokeCoAlarmContaminationState : public ReadAttribute {
+public:
+    ReadSmokeCoAlarmContaminationState()
+        : ReadAttribute("contamination-state")
+    {
+    }
+
+    ~ReadSmokeCoAlarmContaminationState() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReadAttribute (0x0000000A) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        [cluster readAttributeContaminationStateWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"SmokeCOAlarm.ContaminationState response %@", [value description]);
+            if (error != nil) {
+                LogNSError("SmokeCOAlarm ContaminationState read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeSmokeCoAlarmContaminationState : public SubscribeAttribute {
+public:
+    SubscribeAttributeSmokeCoAlarmContaminationState()
+        : SubscribeAttribute("contamination-state")
+    {
+    }
+
+    ~SubscribeAttributeSmokeCoAlarmContaminationState() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReportAttribute (0x0000000A) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeContaminationStateWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"SmokeCOAlarm.ContaminationState response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute SensitivityLevel
+ */
+class ReadSmokeCoAlarmSensitivityLevel : public ReadAttribute {
+public:
+    ReadSmokeCoAlarmSensitivityLevel()
+        : ReadAttribute("sensitivity-level")
+    {
+    }
+
+    ~ReadSmokeCoAlarmSensitivityLevel() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReadAttribute (0x0000000B) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        [cluster readAttributeSensitivityLevelWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"SmokeCOAlarm.SensitivityLevel response %@", [value description]);
+            if (error != nil) {
+                LogNSError("SmokeCOAlarm SensitivityLevel read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class WriteSmokeCoAlarmSensitivityLevel : public WriteAttribute {
+public:
+    WriteSmokeCoAlarmSensitivityLevel()
+        : WriteAttribute("sensitivity-level")
+    {
+        AddArgument("attr-name", "sensitivity-level");
+        AddArgument("attr-value", 0, UINT8_MAX, &mValue);
+        WriteAttribute::AddArguments();
+    }
+
+    ~WriteSmokeCoAlarmSensitivityLevel() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) WriteAttribute (0x0000000B) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        __auto_type * params = [[MTRWriteParams alloc] init];
+        params.timedWriteTimeout
+            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
+        NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
+
+        [cluster writeAttributeSensitivityLevelWithValue:value
+                                                  params:params
+                                              completion:^(NSError * _Nullable error) {
+                                                  if (error != nil) {
+                                                      LogNSError("SmokeCOAlarm SensitivityLevel write Error", error);
+                                                  }
+                                                  SetCommandExitStatus(error);
+                                              }];
+        return CHIP_NO_ERROR;
+    }
+
+private:
+    uint8_t mValue;
+};
+
+class SubscribeAttributeSmokeCoAlarmSensitivityLevel : public SubscribeAttribute {
+public:
+    SubscribeAttributeSmokeCoAlarmSensitivityLevel()
+        : SubscribeAttribute("sensitivity-level")
+    {
+    }
+
+    ~SubscribeAttributeSmokeCoAlarmSensitivityLevel() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReportAttribute (0x0000000B) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeSensitivityLevelWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"SmokeCOAlarm.SensitivityLevel response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute GeneratedCommandList
+ */
+class ReadSmokeCoAlarmGeneratedCommandList : public ReadAttribute {
+public:
+    ReadSmokeCoAlarmGeneratedCommandList()
+        : ReadAttribute("generated-command-list")
+    {
+    }
+
+    ~ReadSmokeCoAlarmGeneratedCommandList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReadAttribute (0x0000FFF8) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"SmokeCOAlarm.GeneratedCommandList response %@", [value description]);
+            if (error != nil) {
+                LogNSError("SmokeCOAlarm GeneratedCommandList read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeSmokeCoAlarmGeneratedCommandList : public SubscribeAttribute {
+public:
+    SubscribeAttributeSmokeCoAlarmGeneratedCommandList()
+        : SubscribeAttribute("generated-command-list")
+    {
+    }
+
+    ~SubscribeAttributeSmokeCoAlarmGeneratedCommandList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReportAttribute (0x0000FFF8) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeGeneratedCommandListWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"SmokeCOAlarm.GeneratedCommandList response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute AcceptedCommandList
+ */
+class ReadSmokeCoAlarmAcceptedCommandList : public ReadAttribute {
+public:
+    ReadSmokeCoAlarmAcceptedCommandList()
+        : ReadAttribute("accepted-command-list")
+    {
+    }
+
+    ~ReadSmokeCoAlarmAcceptedCommandList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReadAttribute (0x0000FFF9) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"SmokeCOAlarm.AcceptedCommandList response %@", [value description]);
+            if (error != nil) {
+                LogNSError("SmokeCOAlarm AcceptedCommandList read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeSmokeCoAlarmAcceptedCommandList : public SubscribeAttribute {
+public:
+    SubscribeAttributeSmokeCoAlarmAcceptedCommandList()
+        : SubscribeAttribute("accepted-command-list")
+    {
+    }
+
+    ~SubscribeAttributeSmokeCoAlarmAcceptedCommandList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReportAttribute (0x0000FFF9) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeAcceptedCommandListWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"SmokeCOAlarm.AcceptedCommandList response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute EventList
+ */
+class ReadSmokeCoAlarmEventList : public ReadAttribute {
+public:
+    ReadSmokeCoAlarmEventList()
+        : ReadAttribute("event-list")
+    {
+    }
+
+    ~ReadSmokeCoAlarmEventList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReadAttribute (0x0000FFFA) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"SmokeCOAlarm.EventList response %@", [value description]);
+            if (error != nil) {
+                LogNSError("SmokeCOAlarm EventList read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeSmokeCoAlarmEventList : public SubscribeAttribute {
+public:
+    SubscribeAttributeSmokeCoAlarmEventList()
+        : SubscribeAttribute("event-list")
+    {
+    }
+
+    ~SubscribeAttributeSmokeCoAlarmEventList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReportAttribute (0x0000FFFA) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeEventListWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"SmokeCOAlarm.EventList response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute AttributeList
+ */
+class ReadSmokeCoAlarmAttributeList : public ReadAttribute {
+public:
+    ReadSmokeCoAlarmAttributeList()
+        : ReadAttribute("attribute-list")
+    {
+    }
+
+    ~ReadSmokeCoAlarmAttributeList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReadAttribute (0x0000FFFB) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"SmokeCOAlarm.AttributeList response %@", [value description]);
+            if (error != nil) {
+                LogNSError("SmokeCOAlarm AttributeList read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeSmokeCoAlarmAttributeList : public SubscribeAttribute {
+public:
+    SubscribeAttributeSmokeCoAlarmAttributeList()
+        : SubscribeAttribute("attribute-list")
+    {
+    }
+
+    ~SubscribeAttributeSmokeCoAlarmAttributeList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReportAttribute (0x0000FFFB) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeAttributeListWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"SmokeCOAlarm.AttributeList response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute FeatureMap
+ */
+class ReadSmokeCoAlarmFeatureMap : public ReadAttribute {
+public:
+    ReadSmokeCoAlarmFeatureMap()
+        : ReadAttribute("feature-map")
+    {
+    }
+
+    ~ReadSmokeCoAlarmFeatureMap() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReadAttribute (0x0000FFFC) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"SmokeCOAlarm.FeatureMap response %@", [value description]);
+            if (error != nil) {
+                LogNSError("SmokeCOAlarm FeatureMap read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeSmokeCoAlarmFeatureMap : public SubscribeAttribute {
+public:
+    SubscribeAttributeSmokeCoAlarmFeatureMap()
+        : SubscribeAttribute("feature-map")
+    {
+    }
+
+    ~SubscribeAttributeSmokeCoAlarmFeatureMap() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReportAttribute (0x0000FFFC) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeFeatureMapWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"SmokeCOAlarm.FeatureMap response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute ClusterRevision
+ */
+class ReadSmokeCoAlarmClusterRevision : public ReadAttribute {
+public:
+    ReadSmokeCoAlarmClusterRevision()
+        : ReadAttribute("cluster-revision")
+    {
+    }
+
+    ~ReadSmokeCoAlarmClusterRevision() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReadAttribute (0x0000FFFD) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"SmokeCOAlarm.ClusterRevision response %@", [value description]);
+            if (error != nil) {
+                LogNSError("SmokeCOAlarm ClusterRevision read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeSmokeCoAlarmClusterRevision : public SubscribeAttribute {
+public:
+    SubscribeAttributeSmokeCoAlarmClusterRevision()
+        : SubscribeAttribute("cluster-revision")
+    {
+    }
+
+    ~SubscribeAttributeSmokeCoAlarmClusterRevision() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReportAttribute (0x0000FFFD) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeClusterRevisionWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"SmokeCOAlarm.ClusterRevision response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -108099,6 +109483,61 @@ void registerClusterAirQuality(Commands & commands)
 
     commands.Register(clusterName, clusterCommands);
 }
+void registerClusterSmokeCoAlarm(Commands & commands)
+{
+    using namespace chip::app::Clusters::SmokeCoAlarm;
+
+    const char * clusterName = "SmokeCoAlarm";
+
+    commands_list clusterCommands = {
+        make_unique<ClusterCommand>(Id), //
+        make_unique<SmokeCoAlarmSelfTestRequest>(), //
+        make_unique<ReadAttribute>(Id), //
+        make_unique<ReadSmokeCoAlarmExpressedState>(), //
+        make_unique<WriteAttribute>(Id), //
+        make_unique<SubscribeAttribute>(Id), //
+        make_unique<SubscribeAttributeSmokeCoAlarmExpressedState>(), //
+        make_unique<ReadSmokeCoAlarmSmokeState>(), //
+        make_unique<SubscribeAttributeSmokeCoAlarmSmokeState>(), //
+        make_unique<ReadSmokeCoAlarmCOState>(), //
+        make_unique<SubscribeAttributeSmokeCoAlarmCOState>(), //
+        make_unique<ReadSmokeCoAlarmBatteryAlert>(), //
+        make_unique<SubscribeAttributeSmokeCoAlarmBatteryAlert>(), //
+        make_unique<ReadSmokeCoAlarmDeviceMuted>(), //
+        make_unique<SubscribeAttributeSmokeCoAlarmDeviceMuted>(), //
+        make_unique<ReadSmokeCoAlarmTestInProgress>(), //
+        make_unique<SubscribeAttributeSmokeCoAlarmTestInProgress>(), //
+        make_unique<ReadSmokeCoAlarmHardwareFaultAlert>(), //
+        make_unique<SubscribeAttributeSmokeCoAlarmHardwareFaultAlert>(), //
+        make_unique<ReadSmokeCoAlarmEndOfServiceAlert>(), //
+        make_unique<SubscribeAttributeSmokeCoAlarmEndOfServiceAlert>(), //
+        make_unique<ReadSmokeCoAlarmInterconnectSmokeAlarm>(), //
+        make_unique<SubscribeAttributeSmokeCoAlarmInterconnectSmokeAlarm>(), //
+        make_unique<ReadSmokeCoAlarmInterconnectCOAlarm>(), //
+        make_unique<SubscribeAttributeSmokeCoAlarmInterconnectCOAlarm>(), //
+        make_unique<ReadSmokeCoAlarmContaminationState>(), //
+        make_unique<SubscribeAttributeSmokeCoAlarmContaminationState>(), //
+        make_unique<ReadSmokeCoAlarmSensitivityLevel>(), //
+        make_unique<WriteSmokeCoAlarmSensitivityLevel>(), //
+        make_unique<SubscribeAttributeSmokeCoAlarmSensitivityLevel>(), //
+        make_unique<ReadSmokeCoAlarmGeneratedCommandList>(), //
+        make_unique<SubscribeAttributeSmokeCoAlarmGeneratedCommandList>(), //
+        make_unique<ReadSmokeCoAlarmAcceptedCommandList>(), //
+        make_unique<SubscribeAttributeSmokeCoAlarmAcceptedCommandList>(), //
+        make_unique<ReadSmokeCoAlarmEventList>(), //
+        make_unique<SubscribeAttributeSmokeCoAlarmEventList>(), //
+        make_unique<ReadSmokeCoAlarmAttributeList>(), //
+        make_unique<SubscribeAttributeSmokeCoAlarmAttributeList>(), //
+        make_unique<ReadSmokeCoAlarmFeatureMap>(), //
+        make_unique<SubscribeAttributeSmokeCoAlarmFeatureMap>(), //
+        make_unique<ReadSmokeCoAlarmClusterRevision>(), //
+        make_unique<SubscribeAttributeSmokeCoAlarmClusterRevision>(), //
+        make_unique<ReadEvent>(Id), //
+        make_unique<SubscribeEvent>(Id), //
+    };
+
+    commands.Register(clusterName, clusterCommands);
+}
 void registerClusterHepaFilterMonitoring(Commands & commands)
 {
     using namespace chip::app::Clusters::HepaFilterMonitoring;
@@ -110585,6 +112024,7 @@ void registerClusters(Commands & commands)
     registerClusterBooleanState(commands);
     registerClusterModeSelect(commands);
     registerClusterAirQuality(commands);
+    registerClusterSmokeCoAlarm(commands);
     registerClusterHepaFilterMonitoring(commands);
     registerClusterActivatedCarbonFilterMonitoring(commands);
     registerClusterCeramicFilterMonitoring(commands);
