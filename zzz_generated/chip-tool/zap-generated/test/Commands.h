@@ -36758,7 +36758,7 @@ private:
             VerifyOrDo(!ShouldSkip("CHANNEL.S.C03.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::Channel::Commands::SkipChannel::Type value;
-            value.count = 1U;
+            value.count = 1;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Commands::SkipChannel::Id, value,
                                chip::NullOptional
 
@@ -60634,7 +60634,7 @@ private:
 class TV_ChannelClusterSuite : public TestCommand
 {
 public:
-    TV_ChannelClusterSuite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("TV_ChannelCluster", 7, credsIssuerConfig)
+    TV_ChannelClusterSuite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("TV_ChannelCluster", 60, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -60782,6 +60782,485 @@ private:
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::ChannelInfoStruct::DecodableType> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("currentChannel", value));
+                VerifyOrReturn(CheckValue("currentChannel.Value().majorNumber", value.Value().majorNumber, 9U));
+                VerifyOrReturn(CheckValue("currentChannel.Value().minorNumber", value.Value().minorNumber, 2U));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().name", value.Value().name));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().name.Value()", value.Value().name.Value(),
+                                                  chip::CharSpan("PBS Kids", 8)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().callSign", value.Value().callSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().callSign.Value()", value.Value().callSign.Value(),
+                                                  chip::CharSpan("KCTS-TV", 7)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().affiliateCallSign", value.Value().affiliateCallSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().affiliateCallSign.Value()",
+                                                  value.Value().affiliateCallSign.Value(), chip::CharSpan("KCTS", 4)));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::ChannelInfoStruct::DecodableType> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("currentChannel", value));
+                VerifyOrReturn(CheckValue("currentChannel.Value().majorNumber", value.Value().majorNumber, 9U));
+                VerifyOrReturn(CheckValue("currentChannel.Value().minorNumber", value.Value().minorNumber, 1U));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().name", value.Value().name));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().name.Value()", value.Value().name.Value(),
+                                                  chip::CharSpan("PBS", 3)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().callSign", value.Value().callSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().callSign.Value()", value.Value().callSign.Value(),
+                                                  chip::CharSpan("KCTS-TV", 7)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().affiliateCallSign", value.Value().affiliateCallSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().affiliateCallSign.Value()",
+                                                  value.Value().affiliateCallSign.Value(), chip::CharSpan("KCTS", 4)));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::ChannelInfoStruct::DecodableType> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("currentChannel", value));
+                VerifyOrReturn(CheckValue("currentChannel.Value().majorNumber", value.Value().majorNumber, 9U));
+                VerifyOrReturn(CheckValue("currentChannel.Value().minorNumber", value.Value().minorNumber, 3U));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().name", value.Value().name));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().name.Value()", value.Value().name.Value(),
+                                                  chip::CharSpan("World Channel", 13)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().callSign", value.Value().callSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().callSign.Value()", value.Value().callSign.Value(),
+                                                  chip::CharSpan("KCTS-TV", 7)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().affiliateCallSign", value.Value().affiliateCallSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().affiliateCallSign.Value()",
+                                                  value.Value().affiliateCallSign.Value(), chip::CharSpan("KCTS", 4)));
+            }
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::ChannelInfoStruct::DecodableType> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("currentChannel", value));
+                VerifyOrReturn(CheckValue("currentChannel.Value().majorNumber", value.Value().majorNumber, 6U));
+                VerifyOrReturn(CheckValue("currentChannel.Value().minorNumber", value.Value().minorNumber, 0U));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().name", value.Value().name));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().name.Value()", value.Value().name.Value(),
+                                                  chip::CharSpan("ABC", 3)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().callSign", value.Value().callSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().callSign.Value()", value.Value().callSign.Value(),
+                                                  chip::CharSpan("KAAL-TV", 7)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().affiliateCallSign", value.Value().affiliateCallSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().affiliateCallSign.Value()",
+                                                  value.Value().affiliateCallSign.Value(), chip::CharSpan("KAAL", 4)));
+            }
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::ChannelInfoStruct::DecodableType> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("currentChannel", value));
+                VerifyOrReturn(CheckValue("currentChannel.Value().majorNumber", value.Value().majorNumber, 9U));
+                VerifyOrReturn(CheckValue("currentChannel.Value().minorNumber", value.Value().minorNumber, 1U));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().name", value.Value().name));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().name.Value()", value.Value().name.Value(),
+                                                  chip::CharSpan("PBS", 3)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().callSign", value.Value().callSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().callSign.Value()", value.Value().callSign.Value(),
+                                                  chip::CharSpan("KCTS-TV", 7)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().affiliateCallSign", value.Value().affiliateCallSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().affiliateCallSign.Value()",
+                                                  value.Value().affiliateCallSign.Value(), chip::CharSpan("KCTS", 4)));
+            }
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::ChannelInfoStruct::DecodableType> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("currentChannel", value));
+                VerifyOrReturn(CheckValue("currentChannel.Value().majorNumber", value.Value().majorNumber, 9U));
+                VerifyOrReturn(CheckValue("currentChannel.Value().minorNumber", value.Value().minorNumber, 2U));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().name", value.Value().name));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().name.Value()", value.Value().name.Value(),
+                                                  chip::CharSpan("PBS Kids", 8)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().callSign", value.Value().callSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().callSign.Value()", value.Value().callSign.Value(),
+                                                  chip::CharSpan("KCTS-TV", 7)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().affiliateCallSign", value.Value().affiliateCallSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().affiliateCallSign.Value()",
+                                                  value.Value().affiliateCallSign.Value(), chip::CharSpan("KCTS", 4)));
+            }
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::ChannelInfoStruct::DecodableType> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("currentChannel", value));
+                VerifyOrReturn(CheckValue("currentChannel.Value().majorNumber", value.Value().majorNumber, 9U));
+                VerifyOrReturn(CheckValue("currentChannel.Value().minorNumber", value.Value().minorNumber, 3U));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().name", value.Value().name));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().name.Value()", value.Value().name.Value(),
+                                                  chip::CharSpan("World Channel", 13)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().callSign", value.Value().callSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().callSign.Value()", value.Value().callSign.Value(),
+                                                  chip::CharSpan("KCTS-TV", 7)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().affiliateCallSign", value.Value().affiliateCallSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().affiliateCallSign.Value()",
+                                                  value.Value().affiliateCallSign.Value(), chip::CharSpan("KCTS", 4)));
+            }
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::ChannelInfoStruct::DecodableType> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("currentChannel", value));
+                VerifyOrReturn(CheckValue("currentChannel.Value().majorNumber", value.Value().majorNumber, 6U));
+                VerifyOrReturn(CheckValue("currentChannel.Value().minorNumber", value.Value().minorNumber, 0U));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().name", value.Value().name));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().name.Value()", value.Value().name.Value(),
+                                                  chip::CharSpan("ABC", 3)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().callSign", value.Value().callSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().callSign.Value()", value.Value().callSign.Value(),
+                                                  chip::CharSpan("KAAL-TV", 7)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().affiliateCallSign", value.Value().affiliateCallSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().affiliateCallSign.Value()",
+                                                  value.Value().affiliateCallSign.Value(), chip::CharSpan("KAAL", 4)));
+            }
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 28:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 29:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::ChannelInfoStruct::DecodableType> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("currentChannel", value));
+                VerifyOrReturn(CheckValue("currentChannel.Value().majorNumber", value.Value().majorNumber, 9U));
+                VerifyOrReturn(CheckValue("currentChannel.Value().minorNumber", value.Value().minorNumber, 1U));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().name", value.Value().name));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().name.Value()", value.Value().name.Value(),
+                                                  chip::CharSpan("PBS", 3)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().callSign", value.Value().callSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().callSign.Value()", value.Value().callSign.Value(),
+                                                  chip::CharSpan("KCTS-TV", 7)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().affiliateCallSign", value.Value().affiliateCallSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().affiliateCallSign.Value()",
+                                                  value.Value().affiliateCallSign.Value(), chip::CharSpan("KCTS", 4)));
+            }
+            break;
+        case 30:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 31:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 32:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::ChannelInfoStruct::DecodableType> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("currentChannel", value));
+                VerifyOrReturn(CheckValue("currentChannel.Value().majorNumber", value.Value().majorNumber, 9U));
+                VerifyOrReturn(CheckValue("currentChannel.Value().minorNumber", value.Value().minorNumber, 2U));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().name", value.Value().name));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().name.Value()", value.Value().name.Value(),
+                                                  chip::CharSpan("PBS Kids", 8)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().callSign", value.Value().callSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().callSign.Value()", value.Value().callSign.Value(),
+                                                  chip::CharSpan("KCTS-TV", 7)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().affiliateCallSign", value.Value().affiliateCallSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().affiliateCallSign.Value()",
+                                                  value.Value().affiliateCallSign.Value(), chip::CharSpan("KCTS", 4)));
+            }
+            break;
+        case 33:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 34:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::ChannelInfoStruct::DecodableType> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("currentChannel", value));
+                VerifyOrReturn(CheckValue("currentChannel.Value().majorNumber", value.Value().majorNumber, 9U));
+                VerifyOrReturn(CheckValue("currentChannel.Value().minorNumber", value.Value().minorNumber, 1U));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().name", value.Value().name));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().name.Value()", value.Value().name.Value(),
+                                                  chip::CharSpan("PBS", 3)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().callSign", value.Value().callSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().callSign.Value()", value.Value().callSign.Value(),
+                                                  chip::CharSpan("KCTS-TV", 7)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().affiliateCallSign", value.Value().affiliateCallSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().affiliateCallSign.Value()",
+                                                  value.Value().affiliateCallSign.Value(), chip::CharSpan("KCTS", 4)));
+            }
+            break;
+        case 35:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 36:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 37:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::ChannelInfoStruct::DecodableType> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("currentChannel", value));
+                VerifyOrReturn(CheckValue("currentChannel.Value().majorNumber", value.Value().majorNumber, 6U));
+                VerifyOrReturn(CheckValue("currentChannel.Value().minorNumber", value.Value().minorNumber, 0U));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().name", value.Value().name));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().name.Value()", value.Value().name.Value(),
+                                                  chip::CharSpan("ABC", 3)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().callSign", value.Value().callSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().callSign.Value()", value.Value().callSign.Value(),
+                                                  chip::CharSpan("KAAL-TV", 7)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().affiliateCallSign", value.Value().affiliateCallSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().affiliateCallSign.Value()",
+                                                  value.Value().affiliateCallSign.Value(), chip::CharSpan("KAAL", 4)));
+            }
+            break;
+        case 38:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 39:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 40:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::ChannelInfoStruct::DecodableType> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("currentChannel", value));
+                VerifyOrReturn(CheckValue("currentChannel.Value().majorNumber", value.Value().majorNumber, 9U));
+                VerifyOrReturn(CheckValue("currentChannel.Value().minorNumber", value.Value().minorNumber, 3U));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().name", value.Value().name));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().name.Value()", value.Value().name.Value(),
+                                                  chip::CharSpan("World Channel", 13)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().callSign", value.Value().callSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().callSign.Value()", value.Value().callSign.Value(),
+                                                  chip::CharSpan("KCTS-TV", 7)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().affiliateCallSign", value.Value().affiliateCallSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().affiliateCallSign.Value()",
+                                                  value.Value().affiliateCallSign.Value(), chip::CharSpan("KCTS", 4)));
+            }
+            break;
+        case 41:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 42:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 43:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::ChannelInfoStruct::DecodableType> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("currentChannel", value));
+                VerifyOrReturn(CheckValue("currentChannel.Value().majorNumber", value.Value().majorNumber, 9U));
+                VerifyOrReturn(CheckValue("currentChannel.Value().minorNumber", value.Value().minorNumber, 2U));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().name", value.Value().name));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().name.Value()", value.Value().name.Value(),
+                                                  chip::CharSpan("PBS Kids", 8)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().callSign", value.Value().callSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().callSign.Value()", value.Value().callSign.Value(),
+                                                  chip::CharSpan("KCTS-TV", 7)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().affiliateCallSign", value.Value().affiliateCallSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().affiliateCallSign.Value()",
+                                                  value.Value().affiliateCallSign.Value(), chip::CharSpan("KCTS", 4)));
+            }
+            break;
+        case 44:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 45:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::ChannelInfoStruct::DecodableType> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("currentChannel", value));
+                VerifyOrReturn(CheckValue("currentChannel.Value().majorNumber", value.Value().majorNumber, 9U));
+                VerifyOrReturn(CheckValue("currentChannel.Value().minorNumber", value.Value().minorNumber, 1U));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().name", value.Value().name));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().name.Value()", value.Value().name.Value(),
+                                                  chip::CharSpan("PBS", 3)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().callSign", value.Value().callSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().callSign.Value()", value.Value().callSign.Value(),
+                                                  chip::CharSpan("KCTS-TV", 7)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().affiliateCallSign", value.Value().affiliateCallSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().affiliateCallSign.Value()",
+                                                  value.Value().affiliateCallSign.Value(), chip::CharSpan("KCTS", 4)));
+            }
+            break;
+        case 46:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 47:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 48:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::ChannelInfoStruct::DecodableType> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("currentChannel", value));
+                VerifyOrReturn(CheckValue("currentChannel.Value().majorNumber", value.Value().majorNumber, 6U));
+                VerifyOrReturn(CheckValue("currentChannel.Value().minorNumber", value.Value().minorNumber, 0U));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().name", value.Value().name));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().name.Value()", value.Value().name.Value(),
+                                                  chip::CharSpan("ABC", 3)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().callSign", value.Value().callSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().callSign.Value()", value.Value().callSign.Value(),
+                                                  chip::CharSpan("KAAL-TV", 7)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().affiliateCallSign", value.Value().affiliateCallSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().affiliateCallSign.Value()",
+                                                  value.Value().affiliateCallSign.Value(), chip::CharSpan("KAAL", 4)));
+            }
+            break;
+        case 49:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 50:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 51:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::ChannelInfoStruct::DecodableType> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("currentChannel", value));
+                VerifyOrReturn(CheckValue("currentChannel.Value().majorNumber", value.Value().majorNumber, 9U));
+                VerifyOrReturn(CheckValue("currentChannel.Value().minorNumber", value.Value().minorNumber, 3U));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().name", value.Value().name));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().name.Value()", value.Value().name.Value(),
+                                                  chip::CharSpan("World Channel", 13)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().callSign", value.Value().callSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().callSign.Value()", value.Value().callSign.Value(),
+                                                  chip::CharSpan("KCTS-TV", 7)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().affiliateCallSign", value.Value().affiliateCallSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().affiliateCallSign.Value()",
+                                                  value.Value().affiliateCallSign.Value(), chip::CharSpan("KCTS", 4)));
+            }
+            break;
+        case 52:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 53:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 54:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::ChannelInfoStruct::DecodableType> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("currentChannel", value));
+                VerifyOrReturn(CheckValue("currentChannel.Value().majorNumber", value.Value().majorNumber, 9U));
+                VerifyOrReturn(CheckValue("currentChannel.Value().minorNumber", value.Value().minorNumber, 2U));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().name", value.Value().name));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().name.Value()", value.Value().name.Value(),
+                                                  chip::CharSpan("PBS Kids", 8)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().callSign", value.Value().callSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().callSign.Value()", value.Value().callSign.Value(),
+                                                  chip::CharSpan("KCTS-TV", 7)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().affiliateCallSign", value.Value().affiliateCallSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().affiliateCallSign.Value()",
+                                                  value.Value().affiliateCallSign.Value(), chip::CharSpan("KCTS", 4)));
+            }
+            break;
+        case 55:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 56:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::ChannelInfoStruct::DecodableType> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("currentChannel", value));
+                VerifyOrReturn(CheckValue("currentChannel.Value().majorNumber", value.Value().majorNumber, 9U));
+                VerifyOrReturn(CheckValue("currentChannel.Value().minorNumber", value.Value().minorNumber, 1U));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().name", value.Value().name));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().name.Value()", value.Value().name.Value(),
+                                                  chip::CharSpan("PBS", 3)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().callSign", value.Value().callSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().callSign.Value()", value.Value().callSign.Value(),
+                                                  chip::CharSpan("KCTS-TV", 7)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().affiliateCallSign", value.Value().affiliateCallSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().affiliateCallSign.Value()",
+                                                  value.Value().affiliateCallSign.Value(), chip::CharSpan("KCTS", 4)));
+            }
+            break;
+        case 57:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 58:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 59:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::ChannelInfoStruct::DecodableType> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("currentChannel", value));
+                VerifyOrReturn(CheckValue("currentChannel.Value().majorNumber", value.Value().majorNumber, 9U));
+                VerifyOrReturn(CheckValue("currentChannel.Value().minorNumber", value.Value().minorNumber, 2U));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().name", value.Value().name));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().name.Value()", value.Value().name.Value(),
+                                                  chip::CharSpan("PBS Kids", 8)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().callSign", value.Value().callSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().callSign.Value()", value.Value().callSign.Value(),
+                                                  chip::CharSpan("KCTS-TV", 7)));
+                VerifyOrReturn(CheckValuePresent("currentChannel.Value().affiliateCallSign", value.Value().affiliateCallSign));
+                VerifyOrReturn(CheckValueAsString("currentChannel.Value().affiliateCallSign.Value()",
+                                                  value.Value().affiliateCallSign.Value(), chip::CharSpan("KCTS", 4)));
+            }
+            break;
         default:
             LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
         }
@@ -60844,11 +61323,455 @@ private:
             LogStep(6, "Skip Channel Command");
             ListFreer listFreer;
             chip::app::Clusters::Channel::Commands::SkipChannel::Type value;
-            value.count = 1U;
+            value.count = 2;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Commands::SkipChannel::Id, value,
                                chip::NullOptional
 
             );
+        }
+        case 7: {
+            LogStep(7, "Verify that Skip Channel Command set correct current channel");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Attributes::CurrentChannel::Id, true,
+                                 chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "Skip Channel Command");
+            ListFreer listFreer;
+            chip::app::Clusters::Channel::Commands::SkipChannel::Type value;
+            value.count = 123;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Commands::SkipChannel::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 9: {
+            LogStep(9, "Verify that Skip Channel Command set correct current channel");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Attributes::CurrentChannel::Id, true,
+                                 chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "Test 1.1 - Start from Channel 3");
+            ListFreer listFreer;
+            chip::app::Clusters::Channel::Commands::ChangeChannelByNumber::Type value;
+            value.majorNumber = 9U;
+            value.minorNumber = 2U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Commands::ChangeChannelByNumber::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 11: {
+            LogStep(11, "Test 1.2 - Skip Up By 1");
+            ListFreer listFreer;
+            chip::app::Clusters::Channel::Commands::SkipChannel::Type value;
+            value.count = 1;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Commands::SkipChannel::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 12: {
+            LogStep(12, "Test 1.3 - Verify that Skip Channel Command set correct current channel");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Attributes::CurrentChannel::Id, true,
+                                 chip::NullOptional);
+        }
+        case 13: {
+            LogStep(13, "Test 2.1 - Start from Channel 3");
+            ListFreer listFreer;
+            chip::app::Clusters::Channel::Commands::ChangeChannelByNumber::Type value;
+            value.majorNumber = 9U;
+            value.minorNumber = 2U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Commands::ChangeChannelByNumber::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 14: {
+            LogStep(14, "Test 2.2 - Skip Up By 2");
+            ListFreer listFreer;
+            chip::app::Clusters::Channel::Commands::SkipChannel::Type value;
+            value.count = 2;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Commands::SkipChannel::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 15: {
+            LogStep(15, "Test 2.3 - Verify that Skip Channel Command set correct current channel");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Attributes::CurrentChannel::Id, true,
+                                 chip::NullOptional);
+        }
+        case 16: {
+            LogStep(16, "Test 3.1 - Start from Channel 3");
+            ListFreer listFreer;
+            chip::app::Clusters::Channel::Commands::ChangeChannelByNumber::Type value;
+            value.majorNumber = 9U;
+            value.minorNumber = 2U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Commands::ChangeChannelByNumber::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 17: {
+            LogStep(17, "Test 3.2 - Skip Up By 3");
+            ListFreer listFreer;
+            chip::app::Clusters::Channel::Commands::SkipChannel::Type value;
+            value.count = 3;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Commands::SkipChannel::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 18: {
+            LogStep(18, "Test 3.3 - Verify that Skip Channel Command set correct current channel");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Attributes::CurrentChannel::Id, true,
+                                 chip::NullOptional);
+        }
+        case 19: {
+            LogStep(19, "Test 4.1 - Start from Channel 3");
+            ListFreer listFreer;
+            chip::app::Clusters::Channel::Commands::ChangeChannelByNumber::Type value;
+            value.majorNumber = 9U;
+            value.minorNumber = 2U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Commands::ChangeChannelByNumber::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 20: {
+            LogStep(20, "Test 4.2 - Skip Up By 4");
+            ListFreer listFreer;
+            chip::app::Clusters::Channel::Commands::SkipChannel::Type value;
+            value.count = 4;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Commands::SkipChannel::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 21: {
+            LogStep(21, "Test 4.3 - Verify that Skip Channel Command set correct current channel");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Attributes::CurrentChannel::Id, true,
+                                 chip::NullOptional);
+        }
+        case 22: {
+            LogStep(22, "Test 5.2 - Skip Up By 5");
+            ListFreer listFreer;
+            chip::app::Clusters::Channel::Commands::SkipChannel::Type value;
+            value.count = 5;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Commands::SkipChannel::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 23: {
+            LogStep(23, "Test 5.3 - Verify that Skip Channel Command set correct current channel");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Attributes::CurrentChannel::Id, true,
+                                 chip::NullOptional);
+        }
+        case 24: {
+            LogStep(24, "Test 6.1 - Start from Channel 3");
+            ListFreer listFreer;
+            chip::app::Clusters::Channel::Commands::ChangeChannelByNumber::Type value;
+            value.majorNumber = 9U;
+            value.minorNumber = 2U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Commands::ChangeChannelByNumber::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 25: {
+            LogStep(25, "Test 6.2 - Skip Up By 6");
+            ListFreer listFreer;
+            chip::app::Clusters::Channel::Commands::SkipChannel::Type value;
+            value.count = 6;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Commands::SkipChannel::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 26: {
+            LogStep(26, "Test 6.3 - Verify that Skip Channel Command set correct current channel");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Attributes::CurrentChannel::Id, true,
+                                 chip::NullOptional);
+        }
+        case 27: {
+            LogStep(27, "Test 7.1 - Start from Channel 3");
+            ListFreer listFreer;
+            chip::app::Clusters::Channel::Commands::ChangeChannelByNumber::Type value;
+            value.majorNumber = 9U;
+            value.minorNumber = 2U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Commands::ChangeChannelByNumber::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 28: {
+            LogStep(28, "Test 7.2 - Skip Up By 7");
+            ListFreer listFreer;
+            chip::app::Clusters::Channel::Commands::SkipChannel::Type value;
+            value.count = 7;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Commands::SkipChannel::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 29: {
+            LogStep(29, "Test 7.3 - Verify that Skip Channel Command set correct current channel");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Attributes::CurrentChannel::Id, true,
+                                 chip::NullOptional);
+        }
+        case 30: {
+            LogStep(30, "Test 8.1 - Start from Channel 3");
+            ListFreer listFreer;
+            chip::app::Clusters::Channel::Commands::ChangeChannelByNumber::Type value;
+            value.majorNumber = 9U;
+            value.minorNumber = 2U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Commands::ChangeChannelByNumber::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 31: {
+            LogStep(31, "Test 8.2 - Skip Up By 8");
+            ListFreer listFreer;
+            chip::app::Clusters::Channel::Commands::SkipChannel::Type value;
+            value.count = 8;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Commands::SkipChannel::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 32: {
+            LogStep(32, "Test 8.3 - Verify that Skip Channel Command set correct current channel");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Attributes::CurrentChannel::Id, true,
+                                 chip::NullOptional);
+        }
+        case 33: {
+            LogStep(33, "Test 1.2 - Skip Down By 1");
+            ListFreer listFreer;
+            chip::app::Clusters::Channel::Commands::SkipChannel::Type value;
+            value.count = -1;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Commands::SkipChannel::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 34: {
+            LogStep(34, "Test 1.3 - Verify that Skip Channel Command set correct current channel");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Attributes::CurrentChannel::Id, true,
+                                 chip::NullOptional);
+        }
+        case 35: {
+            LogStep(35, "Test 2.1 - Start from Channel 3");
+            ListFreer listFreer;
+            chip::app::Clusters::Channel::Commands::ChangeChannelByNumber::Type value;
+            value.majorNumber = 9U;
+            value.minorNumber = 2U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Commands::ChangeChannelByNumber::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 36: {
+            LogStep(36, "Test 2.2 - Skip Down By 2");
+            ListFreer listFreer;
+            chip::app::Clusters::Channel::Commands::SkipChannel::Type value;
+            value.count = -2;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Commands::SkipChannel::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 37: {
+            LogStep(37, "Test 2.3 - Verify that Skip Channel Command set correct current channel");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Attributes::CurrentChannel::Id, true,
+                                 chip::NullOptional);
+        }
+        case 38: {
+            LogStep(38, "Test 3.1 - Start from Channel 3");
+            ListFreer listFreer;
+            chip::app::Clusters::Channel::Commands::ChangeChannelByNumber::Type value;
+            value.majorNumber = 9U;
+            value.minorNumber = 2U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Commands::ChangeChannelByNumber::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 39: {
+            LogStep(39, "Test 3.2 - Skip Down By 3");
+            ListFreer listFreer;
+            chip::app::Clusters::Channel::Commands::SkipChannel::Type value;
+            value.count = -3;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Commands::SkipChannel::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 40: {
+            LogStep(40, "Test 3.3 - Verify that Skip Channel Command set correct current channel");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Attributes::CurrentChannel::Id, true,
+                                 chip::NullOptional);
+        }
+        case 41: {
+            LogStep(41, "Test 4.1 - Start from Channel 3");
+            ListFreer listFreer;
+            chip::app::Clusters::Channel::Commands::ChangeChannelByNumber::Type value;
+            value.majorNumber = 9U;
+            value.minorNumber = 2U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Commands::ChangeChannelByNumber::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 42: {
+            LogStep(42, "Test 4.2 - Skip Down By 4");
+            ListFreer listFreer;
+            chip::app::Clusters::Channel::Commands::SkipChannel::Type value;
+            value.count = -4;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Commands::SkipChannel::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 43: {
+            LogStep(43, "Test 4.3 - Verify that Skip Channel Command set correct current channel");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Attributes::CurrentChannel::Id, true,
+                                 chip::NullOptional);
+        }
+        case 44: {
+            LogStep(44, "Test 5.2 - Skip Down By 5");
+            ListFreer listFreer;
+            chip::app::Clusters::Channel::Commands::SkipChannel::Type value;
+            value.count = -5;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Commands::SkipChannel::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 45: {
+            LogStep(45, "Test 5.3 - Verify that Skip Channel Command set correct current channel");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Attributes::CurrentChannel::Id, true,
+                                 chip::NullOptional);
+        }
+        case 46: {
+            LogStep(46, "Test 6.1 - Start from Channel 3");
+            ListFreer listFreer;
+            chip::app::Clusters::Channel::Commands::ChangeChannelByNumber::Type value;
+            value.majorNumber = 9U;
+            value.minorNumber = 2U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Commands::ChangeChannelByNumber::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 47: {
+            LogStep(47, "Test 6.2 - Skip Down By 6");
+            ListFreer listFreer;
+            chip::app::Clusters::Channel::Commands::SkipChannel::Type value;
+            value.count = -6;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Commands::SkipChannel::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 48: {
+            LogStep(48, "Test 6.3 - Verify that Skip Channel Command set correct current channel");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Attributes::CurrentChannel::Id, true,
+                                 chip::NullOptional);
+        }
+        case 49: {
+            LogStep(49, "Test 7.1 - Start from Channel 3");
+            ListFreer listFreer;
+            chip::app::Clusters::Channel::Commands::ChangeChannelByNumber::Type value;
+            value.majorNumber = 9U;
+            value.minorNumber = 2U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Commands::ChangeChannelByNumber::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 50: {
+            LogStep(50, "Test 7.2 - Skip Down By 7");
+            ListFreer listFreer;
+            chip::app::Clusters::Channel::Commands::SkipChannel::Type value;
+            value.count = -7;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Commands::SkipChannel::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 51: {
+            LogStep(51, "Test 7.3 - Verify that Skip Channel Command set correct current channel");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Attributes::CurrentChannel::Id, true,
+                                 chip::NullOptional);
+        }
+        case 52: {
+            LogStep(52, "Test 8.1 - Start from Channel 3");
+            ListFreer listFreer;
+            chip::app::Clusters::Channel::Commands::ChangeChannelByNumber::Type value;
+            value.majorNumber = 9U;
+            value.minorNumber = 2U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Commands::ChangeChannelByNumber::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 53: {
+            LogStep(53, "Test 8.2 - Skip Down By 8");
+            ListFreer listFreer;
+            chip::app::Clusters::Channel::Commands::SkipChannel::Type value;
+            value.count = -8;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Commands::SkipChannel::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 54: {
+            LogStep(54, "Test 8.3 - Verify that Skip Channel Command set correct current channel");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Attributes::CurrentChannel::Id, true,
+                                 chip::NullOptional);
+        }
+        case 55: {
+            LogStep(55, "Test 1.2 - Skip Up By 32,767");
+            ListFreer listFreer;
+            chip::app::Clusters::Channel::Commands::SkipChannel::Type value;
+            value.count = 32767;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Commands::SkipChannel::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 56: {
+            LogStep(56, "Test 1.3 - Verify that Skip Channel Command set correct current channel");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Attributes::CurrentChannel::Id, true,
+                                 chip::NullOptional);
+        }
+        case 57: {
+            LogStep(57, "Test 1.1 - Start from Channel 3");
+            ListFreer listFreer;
+            chip::app::Clusters::Channel::Commands::ChangeChannelByNumber::Type value;
+            value.majorNumber = 9U;
+            value.minorNumber = 2U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Commands::ChangeChannelByNumber::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 58: {
+            LogStep(58, "Test 1.2 - Skip Down By 32,768");
+            ListFreer listFreer;
+            chip::app::Clusters::Channel::Commands::SkipChannel::Type value;
+            value.count = -32768;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Commands::SkipChannel::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 59: {
+            LogStep(59, "Test 1.3 - Verify that Skip Channel Command set correct current channel");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Channel::Id, Channel::Attributes::CurrentChannel::Id, true,
+                                 chip::NullOptional);
         }
         }
         return CHIP_NO_ERROR;

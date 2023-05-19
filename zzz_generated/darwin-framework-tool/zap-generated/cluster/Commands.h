@@ -84346,7 +84346,7 @@ public:
     ChannelSkipChannel()
         : ClusterCommand("skip-channel")
     {
-        AddArgument("Count", 0, UINT16_MAX, &mRequest.count);
+        AddArgument("Count", INT16_MIN, INT16_MAX, &mRequest.count);
         ClusterCommand::AddArguments();
     }
 
@@ -84359,7 +84359,7 @@ public:
         __auto_type * params = [[MTRChannelClusterSkipChannelParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.count = [NSNumber numberWithUnsignedShort:mRequest.count];
+        params.count = [NSNumber numberWithShort:mRequest.count];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {

@@ -49337,7 +49337,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRChannelClusterSkipChannelParams alloc] init];
-        params.count = [NSNumber numberWithUnsignedShort:1U];
+        params.count = [NSNumber numberWithShort:1];
         [cluster skipChannelWithParams:params
                             completion:^(NSError * _Nullable err) {
                                 NSLog(@"Sends a SkipChannel command to the DUT Error: %@", err);
@@ -83573,6 +83573,236 @@ public:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Skip Channel Command\n");
             err = TestSkipChannelCommand_6();
             break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Verify that Skip Channel Command set correct current channel\n");
+            err = TestVerifyThatSkipChannelCommandSetCorrectCurrentChannel_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Skip Channel Command\n");
+            err = TestSkipChannelCommand_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Verify that Skip Channel Command set correct current channel\n");
+            err = TestVerifyThatSkipChannelCommandSetCorrectCurrentChannel_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Test 1.1 - Start from Channel 3\n");
+            err = TestTest11StartFromChannel3_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Test 1.2 - Skip Up By 1\n");
+            err = TestTest12SkipUpBy1_11();
+            break;
+        case 12:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 12 : Test 1.3 - Verify that Skip Channel Command set correct current channel\n");
+            err = TestTest13VerifyThatSkipChannelCommandSetCorrectCurrentChannel_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Test 2.1 - Start from Channel 3\n");
+            err = TestTest21StartFromChannel3_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Test 2.2 - Skip Up By 2\n");
+            err = TestTest22SkipUpBy2_14();
+            break;
+        case 15:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 15 : Test 2.3 - Verify that Skip Channel Command set correct current channel\n");
+            err = TestTest23VerifyThatSkipChannelCommandSetCorrectCurrentChannel_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Test 3.1 - Start from Channel 3\n");
+            err = TestTest31StartFromChannel3_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Test 3.2 - Skip Up By 3\n");
+            err = TestTest32SkipUpBy3_17();
+            break;
+        case 18:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 18 : Test 3.3 - Verify that Skip Channel Command set correct current channel\n");
+            err = TestTest33VerifyThatSkipChannelCommandSetCorrectCurrentChannel_18();
+            break;
+        case 19:
+            ChipLogProgress(chipTool, " ***** Test Step 19 : Test 4.1 - Start from Channel 3\n");
+            err = TestTest41StartFromChannel3_19();
+            break;
+        case 20:
+            ChipLogProgress(chipTool, " ***** Test Step 20 : Test 4.2 - Skip Up By 4\n");
+            err = TestTest42SkipUpBy4_20();
+            break;
+        case 21:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 21 : Test 4.3 - Verify that Skip Channel Command set correct current channel\n");
+            err = TestTest43VerifyThatSkipChannelCommandSetCorrectCurrentChannel_21();
+            break;
+        case 22:
+            ChipLogProgress(chipTool, " ***** Test Step 22 : Test 5.2 - Skip Up By 5\n");
+            err = TestTest52SkipUpBy5_22();
+            break;
+        case 23:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 23 : Test 5.3 - Verify that Skip Channel Command set correct current channel\n");
+            err = TestTest53VerifyThatSkipChannelCommandSetCorrectCurrentChannel_23();
+            break;
+        case 24:
+            ChipLogProgress(chipTool, " ***** Test Step 24 : Test 6.1 - Start from Channel 3\n");
+            err = TestTest61StartFromChannel3_24();
+            break;
+        case 25:
+            ChipLogProgress(chipTool, " ***** Test Step 25 : Test 6.2 - Skip Up By 6\n");
+            err = TestTest62SkipUpBy6_25();
+            break;
+        case 26:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 26 : Test 6.3 - Verify that Skip Channel Command set correct current channel\n");
+            err = TestTest63VerifyThatSkipChannelCommandSetCorrectCurrentChannel_26();
+            break;
+        case 27:
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Test 7.1 - Start from Channel 3\n");
+            err = TestTest71StartFromChannel3_27();
+            break;
+        case 28:
+            ChipLogProgress(chipTool, " ***** Test Step 28 : Test 7.2 - Skip Up By 7\n");
+            err = TestTest72SkipUpBy7_28();
+            break;
+        case 29:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 29 : Test 7.3 - Verify that Skip Channel Command set correct current channel\n");
+            err = TestTest73VerifyThatSkipChannelCommandSetCorrectCurrentChannel_29();
+            break;
+        case 30:
+            ChipLogProgress(chipTool, " ***** Test Step 30 : Test 8.1 - Start from Channel 3\n");
+            err = TestTest81StartFromChannel3_30();
+            break;
+        case 31:
+            ChipLogProgress(chipTool, " ***** Test Step 31 : Test 8.2 - Skip Up By 8\n");
+            err = TestTest82SkipUpBy8_31();
+            break;
+        case 32:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 32 : Test 8.3 - Verify that Skip Channel Command set correct current channel\n");
+            err = TestTest83VerifyThatSkipChannelCommandSetCorrectCurrentChannel_32();
+            break;
+        case 33:
+            ChipLogProgress(chipTool, " ***** Test Step 33 : Test 1.2 - Skip Down By 1\n");
+            err = TestTest12SkipDownBy1_33();
+            break;
+        case 34:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 34 : Test 1.3 - Verify that Skip Channel Command set correct current channel\n");
+            err = TestTest13VerifyThatSkipChannelCommandSetCorrectCurrentChannel_34();
+            break;
+        case 35:
+            ChipLogProgress(chipTool, " ***** Test Step 35 : Test 2.1 - Start from Channel 3\n");
+            err = TestTest21StartFromChannel3_35();
+            break;
+        case 36:
+            ChipLogProgress(chipTool, " ***** Test Step 36 : Test 2.2 - Skip Down By 2\n");
+            err = TestTest22SkipDownBy2_36();
+            break;
+        case 37:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 37 : Test 2.3 - Verify that Skip Channel Command set correct current channel\n");
+            err = TestTest23VerifyThatSkipChannelCommandSetCorrectCurrentChannel_37();
+            break;
+        case 38:
+            ChipLogProgress(chipTool, " ***** Test Step 38 : Test 3.1 - Start from Channel 3\n");
+            err = TestTest31StartFromChannel3_38();
+            break;
+        case 39:
+            ChipLogProgress(chipTool, " ***** Test Step 39 : Test 3.2 - Skip Down By 3\n");
+            err = TestTest32SkipDownBy3_39();
+            break;
+        case 40:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 40 : Test 3.3 - Verify that Skip Channel Command set correct current channel\n");
+            err = TestTest33VerifyThatSkipChannelCommandSetCorrectCurrentChannel_40();
+            break;
+        case 41:
+            ChipLogProgress(chipTool, " ***** Test Step 41 : Test 4.1 - Start from Channel 3\n");
+            err = TestTest41StartFromChannel3_41();
+            break;
+        case 42:
+            ChipLogProgress(chipTool, " ***** Test Step 42 : Test 4.2 - Skip Down By 4\n");
+            err = TestTest42SkipDownBy4_42();
+            break;
+        case 43:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 43 : Test 4.3 - Verify that Skip Channel Command set correct current channel\n");
+            err = TestTest43VerifyThatSkipChannelCommandSetCorrectCurrentChannel_43();
+            break;
+        case 44:
+            ChipLogProgress(chipTool, " ***** Test Step 44 : Test 5.2 - Skip Down By 5\n");
+            err = TestTest52SkipDownBy5_44();
+            break;
+        case 45:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 45 : Test 5.3 - Verify that Skip Channel Command set correct current channel\n");
+            err = TestTest53VerifyThatSkipChannelCommandSetCorrectCurrentChannel_45();
+            break;
+        case 46:
+            ChipLogProgress(chipTool, " ***** Test Step 46 : Test 6.1 - Start from Channel 3\n");
+            err = TestTest61StartFromChannel3_46();
+            break;
+        case 47:
+            ChipLogProgress(chipTool, " ***** Test Step 47 : Test 6.2 - Skip Down By 6\n");
+            err = TestTest62SkipDownBy6_47();
+            break;
+        case 48:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 48 : Test 6.3 - Verify that Skip Channel Command set correct current channel\n");
+            err = TestTest63VerifyThatSkipChannelCommandSetCorrectCurrentChannel_48();
+            break;
+        case 49:
+            ChipLogProgress(chipTool, " ***** Test Step 49 : Test 7.1 - Start from Channel 3\n");
+            err = TestTest71StartFromChannel3_49();
+            break;
+        case 50:
+            ChipLogProgress(chipTool, " ***** Test Step 50 : Test 7.2 - Skip Down By 7\n");
+            err = TestTest72SkipDownBy7_50();
+            break;
+        case 51:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 51 : Test 7.3 - Verify that Skip Channel Command set correct current channel\n");
+            err = TestTest73VerifyThatSkipChannelCommandSetCorrectCurrentChannel_51();
+            break;
+        case 52:
+            ChipLogProgress(chipTool, " ***** Test Step 52 : Test 8.1 - Start from Channel 3\n");
+            err = TestTest81StartFromChannel3_52();
+            break;
+        case 53:
+            ChipLogProgress(chipTool, " ***** Test Step 53 : Test 8.2 - Skip Down By 8\n");
+            err = TestTest82SkipDownBy8_53();
+            break;
+        case 54:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 54 : Test 8.3 - Verify that Skip Channel Command set correct current channel\n");
+            err = TestTest83VerifyThatSkipChannelCommandSetCorrectCurrentChannel_54();
+            break;
+        case 55:
+            ChipLogProgress(chipTool, " ***** Test Step 55 : Test 1.2 - Skip Up By 32,767\n");
+            err = TestTest12SkipUpBy32767_55();
+            break;
+        case 56:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 56 : Test 1.3 - Verify that Skip Channel Command set correct current channel\n");
+            err = TestTest13VerifyThatSkipChannelCommandSetCorrectCurrentChannel_56();
+            break;
+        case 57:
+            ChipLogProgress(chipTool, " ***** Test Step 57 : Test 1.1 - Start from Channel 3\n");
+            err = TestTest11StartFromChannel3_57();
+            break;
+        case 58:
+            ChipLogProgress(chipTool, " ***** Test Step 58 : Test 1.2 - Skip Down By 32,768\n");
+            err = TestTest12SkipDownBy32768_58();
+            break;
+        case 59:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 59 : Test 1.3 - Verify that Skip Channel Command set correct current channel\n");
+            err = TestTest13VerifyThatSkipChannelCommandSetCorrectCurrentChannel_59();
+            break;
         }
 
         if (CHIP_NO_ERROR != err) {
@@ -83605,6 +83835,165 @@ public:
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 28:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 29:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 30:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 31:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 32:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 33:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 34:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 35:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 36:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 37:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 38:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 39:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 40:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 41:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 42:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 43:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 44:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 45:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 46:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 47:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 48:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 49:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 50:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 51:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 52:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 53:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 54:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 55:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 56:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 57:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 58:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 59:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -83618,7 +84007,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 7;
+    const uint16_t mTestCount = 60;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -83810,7 +84199,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRChannelClusterSkipChannelParams alloc] init];
-        params.count = [NSNumber numberWithUnsignedShort:1U];
+        params.count = [NSNumber numberWithShort:2];
         [cluster skipChannelWithParams:params
                             completion:^(NSError * _Nullable err) {
                                 NSLog(@"Skip Channel Command Error: %@", err);
@@ -83819,6 +84208,1337 @@ private:
 
                                 NextTest();
                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatSkipChannelCommandSetCorrectCurrentChannel_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentChannelWithCompletion:^(
+            MTRChannelClusterChannelInfoStruct * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Verify that Skip Channel Command set correct current channel Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("CurrentChannel", actualValue));
+                VerifyOrReturn(CheckValue("MajorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).majorNumber, 9U));
+                VerifyOrReturn(CheckValue("MinorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).minorNumber, 2U));
+                VerifyOrReturn(CheckValueAsString("Name", ((MTRChannelClusterChannelInfoStruct *) actualValue).name, @"PBS Kids"));
+                VerifyOrReturn(
+                    CheckValueAsString("CallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).callSign, @"KCTS-TV"));
+                VerifyOrReturn(CheckValueAsString(
+                    "AffiliateCallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).affiliateCallSign, @"KCTS"));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSkipChannelCommand_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRChannelClusterSkipChannelParams alloc] init];
+        params.count = [NSNumber numberWithShort:123];
+        [cluster skipChannelWithParams:params
+                            completion:^(NSError * _Nullable err) {
+                                NSLog(@"Skip Channel Command Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatSkipChannelCommandSetCorrectCurrentChannel_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentChannelWithCompletion:^(
+            MTRChannelClusterChannelInfoStruct * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Verify that Skip Channel Command set correct current channel Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("CurrentChannel", actualValue));
+                VerifyOrReturn(CheckValue("MajorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).majorNumber, 9U));
+                VerifyOrReturn(CheckValue("MinorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).minorNumber, 1U));
+                VerifyOrReturn(CheckValueAsString("Name", ((MTRChannelClusterChannelInfoStruct *) actualValue).name, @"PBS"));
+                VerifyOrReturn(
+                    CheckValueAsString("CallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).callSign, @"KCTS-TV"));
+                VerifyOrReturn(CheckValueAsString(
+                    "AffiliateCallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).affiliateCallSign, @"KCTS"));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest11StartFromChannel3_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRChannelClusterChangeChannelByNumberParams alloc] init];
+        params.majorNumber = [NSNumber numberWithUnsignedShort:9U];
+        params.minorNumber = [NSNumber numberWithUnsignedShort:2U];
+        [cluster changeChannelByNumberWithParams:params
+                                      completion:^(NSError * _Nullable err) {
+                                          NSLog(@"Test 1.1 - Start from Channel 3 Error: %@", err);
+
+                                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                          NextTest();
+                                      }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest12SkipUpBy1_11()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRChannelClusterSkipChannelParams alloc] init];
+        params.count = [NSNumber numberWithShort:1];
+        [cluster skipChannelWithParams:params
+                            completion:^(NSError * _Nullable err) {
+                                NSLog(@"Test 1.2 - Skip Up By 1 Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest13VerifyThatSkipChannelCommandSetCorrectCurrentChannel_12()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentChannelWithCompletion:^(
+            MTRChannelClusterChannelInfoStruct * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test 1.3 - Verify that Skip Channel Command set correct current channel Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("CurrentChannel", actualValue));
+                VerifyOrReturn(CheckValue("MajorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).majorNumber, 9U));
+                VerifyOrReturn(CheckValue("MinorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).minorNumber, 3U));
+                VerifyOrReturn(
+                    CheckValueAsString("Name", ((MTRChannelClusterChannelInfoStruct *) actualValue).name, @"World Channel"));
+                VerifyOrReturn(
+                    CheckValueAsString("CallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).callSign, @"KCTS-TV"));
+                VerifyOrReturn(CheckValueAsString(
+                    "AffiliateCallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).affiliateCallSign, @"KCTS"));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest21StartFromChannel3_13()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRChannelClusterChangeChannelByNumberParams alloc] init];
+        params.majorNumber = [NSNumber numberWithUnsignedShort:9U];
+        params.minorNumber = [NSNumber numberWithUnsignedShort:2U];
+        [cluster changeChannelByNumberWithParams:params
+                                      completion:^(NSError * _Nullable err) {
+                                          NSLog(@"Test 2.1 - Start from Channel 3 Error: %@", err);
+
+                                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                          NextTest();
+                                      }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest22SkipUpBy2_14()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRChannelClusterSkipChannelParams alloc] init];
+        params.count = [NSNumber numberWithShort:2];
+        [cluster skipChannelWithParams:params
+                            completion:^(NSError * _Nullable err) {
+                                NSLog(@"Test 2.2 - Skip Up By 2 Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest23VerifyThatSkipChannelCommandSetCorrectCurrentChannel_15()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentChannelWithCompletion:^(
+            MTRChannelClusterChannelInfoStruct * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test 2.3 - Verify that Skip Channel Command set correct current channel Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("CurrentChannel", actualValue));
+                VerifyOrReturn(CheckValue("MajorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).majorNumber, 6U));
+                VerifyOrReturn(CheckValue("MinorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).minorNumber, 0U));
+                VerifyOrReturn(CheckValueAsString("Name", ((MTRChannelClusterChannelInfoStruct *) actualValue).name, @"ABC"));
+                VerifyOrReturn(
+                    CheckValueAsString("CallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).callSign, @"KAAL-TV"));
+                VerifyOrReturn(CheckValueAsString(
+                    "AffiliateCallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).affiliateCallSign, @"KAAL"));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest31StartFromChannel3_16()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRChannelClusterChangeChannelByNumberParams alloc] init];
+        params.majorNumber = [NSNumber numberWithUnsignedShort:9U];
+        params.minorNumber = [NSNumber numberWithUnsignedShort:2U];
+        [cluster changeChannelByNumberWithParams:params
+                                      completion:^(NSError * _Nullable err) {
+                                          NSLog(@"Test 3.1 - Start from Channel 3 Error: %@", err);
+
+                                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                          NextTest();
+                                      }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest32SkipUpBy3_17()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRChannelClusterSkipChannelParams alloc] init];
+        params.count = [NSNumber numberWithShort:3];
+        [cluster skipChannelWithParams:params
+                            completion:^(NSError * _Nullable err) {
+                                NSLog(@"Test 3.2 - Skip Up By 3 Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest33VerifyThatSkipChannelCommandSetCorrectCurrentChannel_18()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentChannelWithCompletion:^(
+            MTRChannelClusterChannelInfoStruct * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test 3.3 - Verify that Skip Channel Command set correct current channel Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("CurrentChannel", actualValue));
+                VerifyOrReturn(CheckValue("MajorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).majorNumber, 9U));
+                VerifyOrReturn(CheckValue("MinorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).minorNumber, 1U));
+                VerifyOrReturn(CheckValueAsString("Name", ((MTRChannelClusterChannelInfoStruct *) actualValue).name, @"PBS"));
+                VerifyOrReturn(
+                    CheckValueAsString("CallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).callSign, @"KCTS-TV"));
+                VerifyOrReturn(CheckValueAsString(
+                    "AffiliateCallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).affiliateCallSign, @"KCTS"));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest41StartFromChannel3_19()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRChannelClusterChangeChannelByNumberParams alloc] init];
+        params.majorNumber = [NSNumber numberWithUnsignedShort:9U];
+        params.minorNumber = [NSNumber numberWithUnsignedShort:2U];
+        [cluster changeChannelByNumberWithParams:params
+                                      completion:^(NSError * _Nullable err) {
+                                          NSLog(@"Test 4.1 - Start from Channel 3 Error: %@", err);
+
+                                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                          NextTest();
+                                      }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest42SkipUpBy4_20()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRChannelClusterSkipChannelParams alloc] init];
+        params.count = [NSNumber numberWithShort:4];
+        [cluster skipChannelWithParams:params
+                            completion:^(NSError * _Nullable err) {
+                                NSLog(@"Test 4.2 - Skip Up By 4 Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest43VerifyThatSkipChannelCommandSetCorrectCurrentChannel_21()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentChannelWithCompletion:^(
+            MTRChannelClusterChannelInfoStruct * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test 4.3 - Verify that Skip Channel Command set correct current channel Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("CurrentChannel", actualValue));
+                VerifyOrReturn(CheckValue("MajorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).majorNumber, 9U));
+                VerifyOrReturn(CheckValue("MinorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).minorNumber, 2U));
+                VerifyOrReturn(CheckValueAsString("Name", ((MTRChannelClusterChannelInfoStruct *) actualValue).name, @"PBS Kids"));
+                VerifyOrReturn(
+                    CheckValueAsString("CallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).callSign, @"KCTS-TV"));
+                VerifyOrReturn(CheckValueAsString(
+                    "AffiliateCallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).affiliateCallSign, @"KCTS"));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest52SkipUpBy5_22()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRChannelClusterSkipChannelParams alloc] init];
+        params.count = [NSNumber numberWithShort:5];
+        [cluster skipChannelWithParams:params
+                            completion:^(NSError * _Nullable err) {
+                                NSLog(@"Test 5.2 - Skip Up By 5 Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest53VerifyThatSkipChannelCommandSetCorrectCurrentChannel_23()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentChannelWithCompletion:^(
+            MTRChannelClusterChannelInfoStruct * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test 5.3 - Verify that Skip Channel Command set correct current channel Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("CurrentChannel", actualValue));
+                VerifyOrReturn(CheckValue("MajorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).majorNumber, 9U));
+                VerifyOrReturn(CheckValue("MinorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).minorNumber, 3U));
+                VerifyOrReturn(
+                    CheckValueAsString("Name", ((MTRChannelClusterChannelInfoStruct *) actualValue).name, @"World Channel"));
+                VerifyOrReturn(
+                    CheckValueAsString("CallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).callSign, @"KCTS-TV"));
+                VerifyOrReturn(CheckValueAsString(
+                    "AffiliateCallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).affiliateCallSign, @"KCTS"));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest61StartFromChannel3_24()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRChannelClusterChangeChannelByNumberParams alloc] init];
+        params.majorNumber = [NSNumber numberWithUnsignedShort:9U];
+        params.minorNumber = [NSNumber numberWithUnsignedShort:2U];
+        [cluster changeChannelByNumberWithParams:params
+                                      completion:^(NSError * _Nullable err) {
+                                          NSLog(@"Test 6.1 - Start from Channel 3 Error: %@", err);
+
+                                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                          NextTest();
+                                      }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest62SkipUpBy6_25()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRChannelClusterSkipChannelParams alloc] init];
+        params.count = [NSNumber numberWithShort:6];
+        [cluster skipChannelWithParams:params
+                            completion:^(NSError * _Nullable err) {
+                                NSLog(@"Test 6.2 - Skip Up By 6 Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest63VerifyThatSkipChannelCommandSetCorrectCurrentChannel_26()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentChannelWithCompletion:^(
+            MTRChannelClusterChannelInfoStruct * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test 6.3 - Verify that Skip Channel Command set correct current channel Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("CurrentChannel", actualValue));
+                VerifyOrReturn(CheckValue("MajorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).majorNumber, 6U));
+                VerifyOrReturn(CheckValue("MinorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).minorNumber, 0U));
+                VerifyOrReturn(CheckValueAsString("Name", ((MTRChannelClusterChannelInfoStruct *) actualValue).name, @"ABC"));
+                VerifyOrReturn(
+                    CheckValueAsString("CallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).callSign, @"KAAL-TV"));
+                VerifyOrReturn(CheckValueAsString(
+                    "AffiliateCallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).affiliateCallSign, @"KAAL"));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest71StartFromChannel3_27()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRChannelClusterChangeChannelByNumberParams alloc] init];
+        params.majorNumber = [NSNumber numberWithUnsignedShort:9U];
+        params.minorNumber = [NSNumber numberWithUnsignedShort:2U];
+        [cluster changeChannelByNumberWithParams:params
+                                      completion:^(NSError * _Nullable err) {
+                                          NSLog(@"Test 7.1 - Start from Channel 3 Error: %@", err);
+
+                                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                          NextTest();
+                                      }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest72SkipUpBy7_28()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRChannelClusterSkipChannelParams alloc] init];
+        params.count = [NSNumber numberWithShort:7];
+        [cluster skipChannelWithParams:params
+                            completion:^(NSError * _Nullable err) {
+                                NSLog(@"Test 7.2 - Skip Up By 7 Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest73VerifyThatSkipChannelCommandSetCorrectCurrentChannel_29()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentChannelWithCompletion:^(
+            MTRChannelClusterChannelInfoStruct * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test 7.3 - Verify that Skip Channel Command set correct current channel Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("CurrentChannel", actualValue));
+                VerifyOrReturn(CheckValue("MajorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).majorNumber, 9U));
+                VerifyOrReturn(CheckValue("MinorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).minorNumber, 1U));
+                VerifyOrReturn(CheckValueAsString("Name", ((MTRChannelClusterChannelInfoStruct *) actualValue).name, @"PBS"));
+                VerifyOrReturn(
+                    CheckValueAsString("CallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).callSign, @"KCTS-TV"));
+                VerifyOrReturn(CheckValueAsString(
+                    "AffiliateCallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).affiliateCallSign, @"KCTS"));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest81StartFromChannel3_30()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRChannelClusterChangeChannelByNumberParams alloc] init];
+        params.majorNumber = [NSNumber numberWithUnsignedShort:9U];
+        params.minorNumber = [NSNumber numberWithUnsignedShort:2U];
+        [cluster changeChannelByNumberWithParams:params
+                                      completion:^(NSError * _Nullable err) {
+                                          NSLog(@"Test 8.1 - Start from Channel 3 Error: %@", err);
+
+                                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                          NextTest();
+                                      }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest82SkipUpBy8_31()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRChannelClusterSkipChannelParams alloc] init];
+        params.count = [NSNumber numberWithShort:8];
+        [cluster skipChannelWithParams:params
+                            completion:^(NSError * _Nullable err) {
+                                NSLog(@"Test 8.2 - Skip Up By 8 Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest83VerifyThatSkipChannelCommandSetCorrectCurrentChannel_32()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentChannelWithCompletion:^(
+            MTRChannelClusterChannelInfoStruct * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test 8.3 - Verify that Skip Channel Command set correct current channel Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("CurrentChannel", actualValue));
+                VerifyOrReturn(CheckValue("MajorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).majorNumber, 9U));
+                VerifyOrReturn(CheckValue("MinorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).minorNumber, 2U));
+                VerifyOrReturn(CheckValueAsString("Name", ((MTRChannelClusterChannelInfoStruct *) actualValue).name, @"PBS Kids"));
+                VerifyOrReturn(
+                    CheckValueAsString("CallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).callSign, @"KCTS-TV"));
+                VerifyOrReturn(CheckValueAsString(
+                    "AffiliateCallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).affiliateCallSign, @"KCTS"));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest12SkipDownBy1_33()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRChannelClusterSkipChannelParams alloc] init];
+        params.count = [NSNumber numberWithShort:-1];
+        [cluster skipChannelWithParams:params
+                            completion:^(NSError * _Nullable err) {
+                                NSLog(@"Test 1.2 - Skip Down By 1 Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest13VerifyThatSkipChannelCommandSetCorrectCurrentChannel_34()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentChannelWithCompletion:^(
+            MTRChannelClusterChannelInfoStruct * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test 1.3 - Verify that Skip Channel Command set correct current channel Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("CurrentChannel", actualValue));
+                VerifyOrReturn(CheckValue("MajorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).majorNumber, 9U));
+                VerifyOrReturn(CheckValue("MinorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).minorNumber, 1U));
+                VerifyOrReturn(CheckValueAsString("Name", ((MTRChannelClusterChannelInfoStruct *) actualValue).name, @"PBS"));
+                VerifyOrReturn(
+                    CheckValueAsString("CallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).callSign, @"KCTS-TV"));
+                VerifyOrReturn(CheckValueAsString(
+                    "AffiliateCallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).affiliateCallSign, @"KCTS"));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest21StartFromChannel3_35()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRChannelClusterChangeChannelByNumberParams alloc] init];
+        params.majorNumber = [NSNumber numberWithUnsignedShort:9U];
+        params.minorNumber = [NSNumber numberWithUnsignedShort:2U];
+        [cluster changeChannelByNumberWithParams:params
+                                      completion:^(NSError * _Nullable err) {
+                                          NSLog(@"Test 2.1 - Start from Channel 3 Error: %@", err);
+
+                                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                          NextTest();
+                                      }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest22SkipDownBy2_36()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRChannelClusterSkipChannelParams alloc] init];
+        params.count = [NSNumber numberWithShort:-2];
+        [cluster skipChannelWithParams:params
+                            completion:^(NSError * _Nullable err) {
+                                NSLog(@"Test 2.2 - Skip Down By 2 Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest23VerifyThatSkipChannelCommandSetCorrectCurrentChannel_37()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentChannelWithCompletion:^(
+            MTRChannelClusterChannelInfoStruct * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test 2.3 - Verify that Skip Channel Command set correct current channel Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("CurrentChannel", actualValue));
+                VerifyOrReturn(CheckValue("MajorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).majorNumber, 6U));
+                VerifyOrReturn(CheckValue("MinorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).minorNumber, 0U));
+                VerifyOrReturn(CheckValueAsString("Name", ((MTRChannelClusterChannelInfoStruct *) actualValue).name, @"ABC"));
+                VerifyOrReturn(
+                    CheckValueAsString("CallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).callSign, @"KAAL-TV"));
+                VerifyOrReturn(CheckValueAsString(
+                    "AffiliateCallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).affiliateCallSign, @"KAAL"));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest31StartFromChannel3_38()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRChannelClusterChangeChannelByNumberParams alloc] init];
+        params.majorNumber = [NSNumber numberWithUnsignedShort:9U];
+        params.minorNumber = [NSNumber numberWithUnsignedShort:2U];
+        [cluster changeChannelByNumberWithParams:params
+                                      completion:^(NSError * _Nullable err) {
+                                          NSLog(@"Test 3.1 - Start from Channel 3 Error: %@", err);
+
+                                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                          NextTest();
+                                      }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest32SkipDownBy3_39()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRChannelClusterSkipChannelParams alloc] init];
+        params.count = [NSNumber numberWithShort:-3];
+        [cluster skipChannelWithParams:params
+                            completion:^(NSError * _Nullable err) {
+                                NSLog(@"Test 3.2 - Skip Down By 3 Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest33VerifyThatSkipChannelCommandSetCorrectCurrentChannel_40()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentChannelWithCompletion:^(
+            MTRChannelClusterChannelInfoStruct * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test 3.3 - Verify that Skip Channel Command set correct current channel Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("CurrentChannel", actualValue));
+                VerifyOrReturn(CheckValue("MajorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).majorNumber, 9U));
+                VerifyOrReturn(CheckValue("MinorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).minorNumber, 3U));
+                VerifyOrReturn(
+                    CheckValueAsString("Name", ((MTRChannelClusterChannelInfoStruct *) actualValue).name, @"World Channel"));
+                VerifyOrReturn(
+                    CheckValueAsString("CallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).callSign, @"KCTS-TV"));
+                VerifyOrReturn(CheckValueAsString(
+                    "AffiliateCallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).affiliateCallSign, @"KCTS"));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest41StartFromChannel3_41()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRChannelClusterChangeChannelByNumberParams alloc] init];
+        params.majorNumber = [NSNumber numberWithUnsignedShort:9U];
+        params.minorNumber = [NSNumber numberWithUnsignedShort:2U];
+        [cluster changeChannelByNumberWithParams:params
+                                      completion:^(NSError * _Nullable err) {
+                                          NSLog(@"Test 4.1 - Start from Channel 3 Error: %@", err);
+
+                                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                          NextTest();
+                                      }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest42SkipDownBy4_42()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRChannelClusterSkipChannelParams alloc] init];
+        params.count = [NSNumber numberWithShort:-4];
+        [cluster skipChannelWithParams:params
+                            completion:^(NSError * _Nullable err) {
+                                NSLog(@"Test 4.2 - Skip Down By 4 Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest43VerifyThatSkipChannelCommandSetCorrectCurrentChannel_43()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentChannelWithCompletion:^(
+            MTRChannelClusterChannelInfoStruct * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test 4.3 - Verify that Skip Channel Command set correct current channel Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("CurrentChannel", actualValue));
+                VerifyOrReturn(CheckValue("MajorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).majorNumber, 9U));
+                VerifyOrReturn(CheckValue("MinorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).minorNumber, 2U));
+                VerifyOrReturn(CheckValueAsString("Name", ((MTRChannelClusterChannelInfoStruct *) actualValue).name, @"PBS Kids"));
+                VerifyOrReturn(
+                    CheckValueAsString("CallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).callSign, @"KCTS-TV"));
+                VerifyOrReturn(CheckValueAsString(
+                    "AffiliateCallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).affiliateCallSign, @"KCTS"));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest52SkipDownBy5_44()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRChannelClusterSkipChannelParams alloc] init];
+        params.count = [NSNumber numberWithShort:-5];
+        [cluster skipChannelWithParams:params
+                            completion:^(NSError * _Nullable err) {
+                                NSLog(@"Test 5.2 - Skip Down By 5 Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest53VerifyThatSkipChannelCommandSetCorrectCurrentChannel_45()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentChannelWithCompletion:^(
+            MTRChannelClusterChannelInfoStruct * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test 5.3 - Verify that Skip Channel Command set correct current channel Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("CurrentChannel", actualValue));
+                VerifyOrReturn(CheckValue("MajorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).majorNumber, 9U));
+                VerifyOrReturn(CheckValue("MinorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).minorNumber, 1U));
+                VerifyOrReturn(CheckValueAsString("Name", ((MTRChannelClusterChannelInfoStruct *) actualValue).name, @"PBS"));
+                VerifyOrReturn(
+                    CheckValueAsString("CallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).callSign, @"KCTS-TV"));
+                VerifyOrReturn(CheckValueAsString(
+                    "AffiliateCallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).affiliateCallSign, @"KCTS"));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest61StartFromChannel3_46()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRChannelClusterChangeChannelByNumberParams alloc] init];
+        params.majorNumber = [NSNumber numberWithUnsignedShort:9U];
+        params.minorNumber = [NSNumber numberWithUnsignedShort:2U];
+        [cluster changeChannelByNumberWithParams:params
+                                      completion:^(NSError * _Nullable err) {
+                                          NSLog(@"Test 6.1 - Start from Channel 3 Error: %@", err);
+
+                                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                          NextTest();
+                                      }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest62SkipDownBy6_47()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRChannelClusterSkipChannelParams alloc] init];
+        params.count = [NSNumber numberWithShort:-6];
+        [cluster skipChannelWithParams:params
+                            completion:^(NSError * _Nullable err) {
+                                NSLog(@"Test 6.2 - Skip Down By 6 Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest63VerifyThatSkipChannelCommandSetCorrectCurrentChannel_48()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentChannelWithCompletion:^(
+            MTRChannelClusterChannelInfoStruct * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test 6.3 - Verify that Skip Channel Command set correct current channel Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("CurrentChannel", actualValue));
+                VerifyOrReturn(CheckValue("MajorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).majorNumber, 6U));
+                VerifyOrReturn(CheckValue("MinorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).minorNumber, 0U));
+                VerifyOrReturn(CheckValueAsString("Name", ((MTRChannelClusterChannelInfoStruct *) actualValue).name, @"ABC"));
+                VerifyOrReturn(
+                    CheckValueAsString("CallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).callSign, @"KAAL-TV"));
+                VerifyOrReturn(CheckValueAsString(
+                    "AffiliateCallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).affiliateCallSign, @"KAAL"));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest71StartFromChannel3_49()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRChannelClusterChangeChannelByNumberParams alloc] init];
+        params.majorNumber = [NSNumber numberWithUnsignedShort:9U];
+        params.minorNumber = [NSNumber numberWithUnsignedShort:2U];
+        [cluster changeChannelByNumberWithParams:params
+                                      completion:^(NSError * _Nullable err) {
+                                          NSLog(@"Test 7.1 - Start from Channel 3 Error: %@", err);
+
+                                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                          NextTest();
+                                      }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest72SkipDownBy7_50()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRChannelClusterSkipChannelParams alloc] init];
+        params.count = [NSNumber numberWithShort:-7];
+        [cluster skipChannelWithParams:params
+                            completion:^(NSError * _Nullable err) {
+                                NSLog(@"Test 7.2 - Skip Down By 7 Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest73VerifyThatSkipChannelCommandSetCorrectCurrentChannel_51()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentChannelWithCompletion:^(
+            MTRChannelClusterChannelInfoStruct * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test 7.3 - Verify that Skip Channel Command set correct current channel Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("CurrentChannel", actualValue));
+                VerifyOrReturn(CheckValue("MajorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).majorNumber, 9U));
+                VerifyOrReturn(CheckValue("MinorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).minorNumber, 3U));
+                VerifyOrReturn(
+                    CheckValueAsString("Name", ((MTRChannelClusterChannelInfoStruct *) actualValue).name, @"World Channel"));
+                VerifyOrReturn(
+                    CheckValueAsString("CallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).callSign, @"KCTS-TV"));
+                VerifyOrReturn(CheckValueAsString(
+                    "AffiliateCallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).affiliateCallSign, @"KCTS"));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest81StartFromChannel3_52()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRChannelClusterChangeChannelByNumberParams alloc] init];
+        params.majorNumber = [NSNumber numberWithUnsignedShort:9U];
+        params.minorNumber = [NSNumber numberWithUnsignedShort:2U];
+        [cluster changeChannelByNumberWithParams:params
+                                      completion:^(NSError * _Nullable err) {
+                                          NSLog(@"Test 8.1 - Start from Channel 3 Error: %@", err);
+
+                                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                          NextTest();
+                                      }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest82SkipDownBy8_53()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRChannelClusterSkipChannelParams alloc] init];
+        params.count = [NSNumber numberWithShort:-8];
+        [cluster skipChannelWithParams:params
+                            completion:^(NSError * _Nullable err) {
+                                NSLog(@"Test 8.2 - Skip Down By 8 Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest83VerifyThatSkipChannelCommandSetCorrectCurrentChannel_54()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentChannelWithCompletion:^(
+            MTRChannelClusterChannelInfoStruct * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test 8.3 - Verify that Skip Channel Command set correct current channel Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("CurrentChannel", actualValue));
+                VerifyOrReturn(CheckValue("MajorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).majorNumber, 9U));
+                VerifyOrReturn(CheckValue("MinorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).minorNumber, 2U));
+                VerifyOrReturn(CheckValueAsString("Name", ((MTRChannelClusterChannelInfoStruct *) actualValue).name, @"PBS Kids"));
+                VerifyOrReturn(
+                    CheckValueAsString("CallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).callSign, @"KCTS-TV"));
+                VerifyOrReturn(CheckValueAsString(
+                    "AffiliateCallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).affiliateCallSign, @"KCTS"));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest12SkipUpBy32767_55()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRChannelClusterSkipChannelParams alloc] init];
+        params.count = [NSNumber numberWithShort:32767];
+        [cluster skipChannelWithParams:params
+                            completion:^(NSError * _Nullable err) {
+                                NSLog(@"Test 1.2 - Skip Up By 32,767 Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest13VerifyThatSkipChannelCommandSetCorrectCurrentChannel_56()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentChannelWithCompletion:^(
+            MTRChannelClusterChannelInfoStruct * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test 1.3 - Verify that Skip Channel Command set correct current channel Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("CurrentChannel", actualValue));
+                VerifyOrReturn(CheckValue("MajorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).majorNumber, 9U));
+                VerifyOrReturn(CheckValue("MinorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).minorNumber, 1U));
+                VerifyOrReturn(CheckValueAsString("Name", ((MTRChannelClusterChannelInfoStruct *) actualValue).name, @"PBS"));
+                VerifyOrReturn(
+                    CheckValueAsString("CallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).callSign, @"KCTS-TV"));
+                VerifyOrReturn(CheckValueAsString(
+                    "AffiliateCallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).affiliateCallSign, @"KCTS"));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest11StartFromChannel3_57()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRChannelClusterChangeChannelByNumberParams alloc] init];
+        params.majorNumber = [NSNumber numberWithUnsignedShort:9U];
+        params.minorNumber = [NSNumber numberWithUnsignedShort:2U];
+        [cluster changeChannelByNumberWithParams:params
+                                      completion:^(NSError * _Nullable err) {
+                                          NSLog(@"Test 1.1 - Start from Channel 3 Error: %@", err);
+
+                                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                          NextTest();
+                                      }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest12SkipDownBy32768_58()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRChannelClusterSkipChannelParams alloc] init];
+        params.count = [NSNumber numberWithShort:-32768];
+        [cluster skipChannelWithParams:params
+                            completion:^(NSError * _Nullable err) {
+                                NSLog(@"Test 1.2 - Skip Down By 32,768 Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTest13VerifyThatSkipChannelCommandSetCorrectCurrentChannel_59()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentChannelWithCompletion:^(
+            MTRChannelClusterChannelInfoStruct * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test 1.3 - Verify that Skip Channel Command set correct current channel Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("CurrentChannel", actualValue));
+                VerifyOrReturn(CheckValue("MajorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).majorNumber, 9U));
+                VerifyOrReturn(CheckValue("MinorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).minorNumber, 2U));
+                VerifyOrReturn(CheckValueAsString("Name", ((MTRChannelClusterChannelInfoStruct *) actualValue).name, @"PBS Kids"));
+                VerifyOrReturn(
+                    CheckValueAsString("CallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).callSign, @"KCTS-TV"));
+                VerifyOrReturn(CheckValueAsString(
+                    "AffiliateCallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).affiliateCallSign, @"KCTS"));
+            }
+
+            NextTest();
+        }];
 
         return CHIP_NO_ERROR;
     }
