@@ -93960,7 +93960,7 @@ using chip::System::Clock::Timeout;
                     invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
-            request.count = params.count.unsignedShortValue;
+            request.count = params.count.shortValue;
 
             return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
                 timedInvokeTimeoutMs, invokeTimeout);
