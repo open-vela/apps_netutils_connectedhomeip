@@ -47806,6 +47806,600 @@ using chip::System::Clock::Timeout;
 
 @end
 
+@implementation MTRBaseClusterTemperatureControl
+
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpointID:(NSNumber *)endpointID queue:(dispatch_queue_t)queue
+{
+    if (self = [super initWithQueue:queue]) {
+        if (device == nil) {
+            return nil;
+        }
+
+        _device = device;
+        _endpoint = [endpointID unsignedShortValue];
+    }
+    return self;
+}
+
+- (void)setTemperatureWithParams:(MTRTemperatureControlClusterSetTemperatureParams * _Nullable)params
+                      completion:(MTRStatusCompletion)completion
+{
+    // Make a copy of params before we go async.
+    params = [params copy];
+    auto * bridge = new MTRCommandSuccessCallbackBridge(
+        self.callbackQueue,
+        ^(id _Nullable value, NSError * _Nullable error) {
+            completion(error);
+        },
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
+            MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
+            ListFreer listFreer;
+            TemperatureControl::Commands::SetTemperature::Type request;
+            if (params != nil) {
+                if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
+                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
+                }
+            }
+            if (params != nil) {
+                if (params.targetTemperature != nil) {
+                    auto & definedValue_0 = request.targetTemperature.Emplace();
+                    definedValue_0 = params.targetTemperature.shortValue;
+                }
+                if (params.targetTemperatureLevel != nil) {
+                    auto & definedValue_0 = request.targetTemperatureLevel.Emplace();
+                    definedValue_0 = params.targetTemperatureLevel.unsignedCharValue;
+                }
+            }
+
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
+        });
+    std::move(*bridge).DispatchAction(self.device);
+}
+
+- (void)readAttributeTemperatureSetpointWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
+{
+    MTRReadParams * params = [[MTRReadParams alloc] init];
+    using TypeInfo = TemperatureControl::Attributes::TemperatureSetpoint::TypeInfo;
+    return MTRReadAttribute<MTRInt16sAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
+- (void)subscribeAttributeTemperatureSetpointWithParams:(MTRSubscribeParams * _Nonnull)params
+                                subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                          reportHandler:
+                                              (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
+{
+    using TypeInfo = TemperatureControl::Attributes::TemperatureSetpoint::TypeInfo;
+    MTRSubscribeAttribute<MTRInt16sAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
+        subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
+        TypeInfo::GetAttributeId());
+}
+
++ (void)readAttributeTemperatureSetpointWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                                     endpoint:(NSNumber *)endpoint
+                                                        queue:(dispatch_queue_t)queue
+                                                   completion:
+                                                       (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
+{
+    auto * bridge = new MTRInt16sAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(
+        clusterStateCacheContainer.baseDevice, ^(Int16sAttributeCallback successCb, MTRErrorCallback failureCb) {
+            if (clusterStateCacheContainer.cppClusterStateCache) {
+                chip::app::ConcreteAttributePath path;
+                using TypeInfo = TemperatureControl::Attributes::TemperatureSetpoint::TypeInfo;
+                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+                path.mClusterId = TypeInfo::GetClusterId();
+                path.mAttributeId = TypeInfo::GetAttributeId();
+                TypeInfo::DecodableType value;
+                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+                if (err == CHIP_NO_ERROR) {
+                    successCb(bridge, value);
+                }
+                return err;
+            }
+            return CHIP_ERROR_NOT_FOUND;
+        });
+}
+
+- (void)readAttributeMinTemperatureWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
+{
+    MTRReadParams * params = [[MTRReadParams alloc] init];
+    using TypeInfo = TemperatureControl::Attributes::MinTemperature::TypeInfo;
+    return MTRReadAttribute<MTRInt16sAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
+- (void)subscribeAttributeMinTemperatureWithParams:(MTRSubscribeParams * _Nonnull)params
+                           subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                     reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
+{
+    using TypeInfo = TemperatureControl::Attributes::MinTemperature::TypeInfo;
+    MTRSubscribeAttribute<MTRInt16sAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
+        subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
+        TypeInfo::GetAttributeId());
+}
+
++ (void)readAttributeMinTemperatureWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                                endpoint:(NSNumber *)endpoint
+                                                   queue:(dispatch_queue_t)queue
+                                              completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
+{
+    auto * bridge = new MTRInt16sAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(
+        clusterStateCacheContainer.baseDevice, ^(Int16sAttributeCallback successCb, MTRErrorCallback failureCb) {
+            if (clusterStateCacheContainer.cppClusterStateCache) {
+                chip::app::ConcreteAttributePath path;
+                using TypeInfo = TemperatureControl::Attributes::MinTemperature::TypeInfo;
+                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+                path.mClusterId = TypeInfo::GetClusterId();
+                path.mAttributeId = TypeInfo::GetAttributeId();
+                TypeInfo::DecodableType value;
+                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+                if (err == CHIP_NO_ERROR) {
+                    successCb(bridge, value);
+                }
+                return err;
+            }
+            return CHIP_ERROR_NOT_FOUND;
+        });
+}
+
+- (void)readAttributeMaxTemperatureWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
+{
+    MTRReadParams * params = [[MTRReadParams alloc] init];
+    using TypeInfo = TemperatureControl::Attributes::MaxTemperature::TypeInfo;
+    return MTRReadAttribute<MTRInt16sAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
+- (void)subscribeAttributeMaxTemperatureWithParams:(MTRSubscribeParams * _Nonnull)params
+                           subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                     reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
+{
+    using TypeInfo = TemperatureControl::Attributes::MaxTemperature::TypeInfo;
+    MTRSubscribeAttribute<MTRInt16sAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
+        subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
+        TypeInfo::GetAttributeId());
+}
+
++ (void)readAttributeMaxTemperatureWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                                endpoint:(NSNumber *)endpoint
+                                                   queue:(dispatch_queue_t)queue
+                                              completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
+{
+    auto * bridge = new MTRInt16sAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(
+        clusterStateCacheContainer.baseDevice, ^(Int16sAttributeCallback successCb, MTRErrorCallback failureCb) {
+            if (clusterStateCacheContainer.cppClusterStateCache) {
+                chip::app::ConcreteAttributePath path;
+                using TypeInfo = TemperatureControl::Attributes::MaxTemperature::TypeInfo;
+                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+                path.mClusterId = TypeInfo::GetClusterId();
+                path.mAttributeId = TypeInfo::GetAttributeId();
+                TypeInfo::DecodableType value;
+                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+                if (err == CHIP_NO_ERROR) {
+                    successCb(bridge, value);
+                }
+                return err;
+            }
+            return CHIP_ERROR_NOT_FOUND;
+        });
+}
+
+- (void)readAttributeStepWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
+{
+    MTRReadParams * params = [[MTRReadParams alloc] init];
+    using TypeInfo = TemperatureControl::Attributes::Step::TypeInfo;
+    return MTRReadAttribute<MTRInt16sAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
+- (void)subscribeAttributeStepWithParams:(MTRSubscribeParams * _Nonnull)params
+                 subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                           reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
+{
+    using TypeInfo = TemperatureControl::Attributes::Step::TypeInfo;
+    MTRSubscribeAttribute<MTRInt16sAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
+        subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
+        TypeInfo::GetAttributeId());
+}
+
++ (void)readAttributeStepWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                      endpoint:(NSNumber *)endpoint
+                                         queue:(dispatch_queue_t)queue
+                                    completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
+{
+    auto * bridge = new MTRInt16sAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(
+        clusterStateCacheContainer.baseDevice, ^(Int16sAttributeCallback successCb, MTRErrorCallback failureCb) {
+            if (clusterStateCacheContainer.cppClusterStateCache) {
+                chip::app::ConcreteAttributePath path;
+                using TypeInfo = TemperatureControl::Attributes::Step::TypeInfo;
+                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+                path.mClusterId = TypeInfo::GetClusterId();
+                path.mAttributeId = TypeInfo::GetAttributeId();
+                TypeInfo::DecodableType value;
+                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+                if (err == CHIP_NO_ERROR) {
+                    successCb(bridge, value);
+                }
+                return err;
+            }
+            return CHIP_ERROR_NOT_FOUND;
+        });
+}
+
+- (void)readAttributeCurrentTemperatureLevelIndexWithCompletion:(void (^)(NSNumber * _Nullable value,
+                                                                    NSError * _Nullable error))completion
+{
+    MTRReadParams * params = [[MTRReadParams alloc] init];
+    using TypeInfo = TemperatureControl::Attributes::CurrentTemperatureLevelIndex::TypeInfo;
+    return MTRReadAttribute<MTRInt8uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
+- (void)subscribeAttributeCurrentTemperatureLevelIndexWithParams:(MTRSubscribeParams * _Nonnull)params
+                                         subscriptionEstablished:
+                                             (MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                                   reportHandler:(void (^)(NSNumber * _Nullable value,
+                                                                     NSError * _Nullable error))reportHandler
+{
+    using TypeInfo = TemperatureControl::Attributes::CurrentTemperatureLevelIndex::TypeInfo;
+    MTRSubscribeAttribute<MTRInt8uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
+        subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
+        TypeInfo::GetAttributeId());
+}
+
++ (void)readAttributeCurrentTemperatureLevelIndexWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                                              endpoint:(NSNumber *)endpoint
+                                                                 queue:(dispatch_queue_t)queue
+                                                            completion:(void (^)(NSNumber * _Nullable value,
+                                                                           NSError * _Nullable error))completion
+{
+    auto * bridge = new MTRInt8uAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(
+        clusterStateCacheContainer.baseDevice, ^(Int8uAttributeCallback successCb, MTRErrorCallback failureCb) {
+            if (clusterStateCacheContainer.cppClusterStateCache) {
+                chip::app::ConcreteAttributePath path;
+                using TypeInfo = TemperatureControl::Attributes::CurrentTemperatureLevelIndex::TypeInfo;
+                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+                path.mClusterId = TypeInfo::GetClusterId();
+                path.mAttributeId = TypeInfo::GetAttributeId();
+                TypeInfo::DecodableType value;
+                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+                if (err == CHIP_NO_ERROR) {
+                    successCb(bridge, value);
+                }
+                return err;
+            }
+            return CHIP_ERROR_NOT_FOUND;
+        });
+}
+
+- (void)readAttributeSupportedTemperatureLevelsWithCompletion:(void (^)(
+                                                                  NSArray * _Nullable value, NSError * _Nullable error))completion
+{
+    MTRReadParams * params = [[MTRReadParams alloc] init];
+    using TypeInfo = TemperatureControl::Attributes::SupportedTemperatureLevels::TypeInfo;
+    return MTRReadAttribute<MTRTemperatureControlSupportedTemperatureLevelsListAttributeCallbackBridge, NSArray,
+        TypeInfo::DecodableType>(
+        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
+- (void)subscribeAttributeSupportedTemperatureLevelsWithParams:(MTRSubscribeParams * _Nonnull)params
+                                       subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                                 reportHandler:
+                                                     (void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
+{
+    using TypeInfo = TemperatureControl::Attributes::SupportedTemperatureLevels::TypeInfo;
+    MTRSubscribeAttribute<MTRTemperatureControlSupportedTemperatureLevelsListAttributeCallbackSubscriptionBridge, NSArray,
+        TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
+        TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
++ (void)readAttributeSupportedTemperatureLevelsWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                                            endpoint:(NSNumber *)endpoint
+                                                               queue:(dispatch_queue_t)queue
+                                                          completion:(void (^)(NSArray * _Nullable value,
+                                                                         NSError * _Nullable error))completion
+{
+    auto * bridge = new MTRTemperatureControlSupportedTemperatureLevelsListAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
+        ^(TemperatureControlSupportedTemperatureLevelsListAttributeCallback successCb, MTRErrorCallback failureCb) {
+            if (clusterStateCacheContainer.cppClusterStateCache) {
+                chip::app::ConcreteAttributePath path;
+                using TypeInfo = TemperatureControl::Attributes::SupportedTemperatureLevels::TypeInfo;
+                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+                path.mClusterId = TypeInfo::GetClusterId();
+                path.mAttributeId = TypeInfo::GetAttributeId();
+                TypeInfo::DecodableType value;
+                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+                if (err == CHIP_NO_ERROR) {
+                    successCb(bridge, value);
+                }
+                return err;
+            }
+            return CHIP_ERROR_NOT_FOUND;
+        });
+}
+
+- (void)readAttributeGeneratedCommandListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
+{
+    MTRReadParams * params = [[MTRReadParams alloc] init];
+    using TypeInfo = TemperatureControl::Attributes::GeneratedCommandList::TypeInfo;
+    return MTRReadAttribute<MTRTemperatureControlGeneratedCommandListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
+        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
+- (void)subscribeAttributeGeneratedCommandListWithParams:(MTRSubscribeParams * _Nonnull)params
+                                 subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                           reportHandler:
+                                               (void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
+{
+    using TypeInfo = TemperatureControl::Attributes::GeneratedCommandList::TypeInfo;
+    MTRSubscribeAttribute<MTRTemperatureControlGeneratedCommandListListAttributeCallbackSubscriptionBridge, NSArray,
+        TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
+        TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
++ (void)readAttributeGeneratedCommandListWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                                      endpoint:(NSNumber *)endpoint
+                                                         queue:(dispatch_queue_t)queue
+                                                    completion:
+                                                        (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
+{
+    auto * bridge = new MTRTemperatureControlGeneratedCommandListListAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
+        ^(TemperatureControlGeneratedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+            if (clusterStateCacheContainer.cppClusterStateCache) {
+                chip::app::ConcreteAttributePath path;
+                using TypeInfo = TemperatureControl::Attributes::GeneratedCommandList::TypeInfo;
+                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+                path.mClusterId = TypeInfo::GetClusterId();
+                path.mAttributeId = TypeInfo::GetAttributeId();
+                TypeInfo::DecodableType value;
+                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+                if (err == CHIP_NO_ERROR) {
+                    successCb(bridge, value);
+                }
+                return err;
+            }
+            return CHIP_ERROR_NOT_FOUND;
+        });
+}
+
+- (void)readAttributeAcceptedCommandListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
+{
+    MTRReadParams * params = [[MTRReadParams alloc] init];
+    using TypeInfo = TemperatureControl::Attributes::AcceptedCommandList::TypeInfo;
+    return MTRReadAttribute<MTRTemperatureControlAcceptedCommandListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
+        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
+- (void)subscribeAttributeAcceptedCommandListWithParams:(MTRSubscribeParams * _Nonnull)params
+                                subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                          reportHandler:
+                                              (void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
+{
+    using TypeInfo = TemperatureControl::Attributes::AcceptedCommandList::TypeInfo;
+    MTRSubscribeAttribute<MTRTemperatureControlAcceptedCommandListListAttributeCallbackSubscriptionBridge, NSArray,
+        TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
+        TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
++ (void)readAttributeAcceptedCommandListWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                                     endpoint:(NSNumber *)endpoint
+                                                        queue:(dispatch_queue_t)queue
+                                                   completion:
+                                                       (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
+{
+    auto * bridge = new MTRTemperatureControlAcceptedCommandListListAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
+        ^(TemperatureControlAcceptedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+            if (clusterStateCacheContainer.cppClusterStateCache) {
+                chip::app::ConcreteAttributePath path;
+                using TypeInfo = TemperatureControl::Attributes::AcceptedCommandList::TypeInfo;
+                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+                path.mClusterId = TypeInfo::GetClusterId();
+                path.mAttributeId = TypeInfo::GetAttributeId();
+                TypeInfo::DecodableType value;
+                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+                if (err == CHIP_NO_ERROR) {
+                    successCb(bridge, value);
+                }
+                return err;
+            }
+            return CHIP_ERROR_NOT_FOUND;
+        });
+}
+
+- (void)readAttributeEventListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
+{
+    MTRReadParams * params = [[MTRReadParams alloc] init];
+    using TypeInfo = TemperatureControl::Attributes::EventList::TypeInfo;
+    return MTRReadAttribute<MTRTemperatureControlEventListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
+        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
+- (void)subscribeAttributeEventListWithParams:(MTRSubscribeParams * _Nonnull)params
+                      subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                reportHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
+{
+    using TypeInfo = TemperatureControl::Attributes::EventList::TypeInfo;
+    MTRSubscribeAttribute<MTRTemperatureControlEventListListAttributeCallbackSubscriptionBridge, NSArray, TypeInfo::DecodableType>(
+        params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
+        TypeInfo::GetAttributeId());
+}
+
++ (void)readAttributeEventListWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                           endpoint:(NSNumber *)endpoint
+                                              queue:(dispatch_queue_t)queue
+                                         completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
+{
+    auto * bridge = new MTRTemperatureControlEventListListAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
+        ^(TemperatureControlEventListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+            if (clusterStateCacheContainer.cppClusterStateCache) {
+                chip::app::ConcreteAttributePath path;
+                using TypeInfo = TemperatureControl::Attributes::EventList::TypeInfo;
+                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+                path.mClusterId = TypeInfo::GetClusterId();
+                path.mAttributeId = TypeInfo::GetAttributeId();
+                TypeInfo::DecodableType value;
+                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+                if (err == CHIP_NO_ERROR) {
+                    successCb(bridge, value);
+                }
+                return err;
+            }
+            return CHIP_ERROR_NOT_FOUND;
+        });
+}
+
+- (void)readAttributeAttributeListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
+{
+    MTRReadParams * params = [[MTRReadParams alloc] init];
+    using TypeInfo = TemperatureControl::Attributes::AttributeList::TypeInfo;
+    return MTRReadAttribute<MTRTemperatureControlAttributeListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
+        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
+- (void)subscribeAttributeAttributeListWithParams:(MTRSubscribeParams * _Nonnull)params
+                          subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                    reportHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
+{
+    using TypeInfo = TemperatureControl::Attributes::AttributeList::TypeInfo;
+    MTRSubscribeAttribute<MTRTemperatureControlAttributeListListAttributeCallbackSubscriptionBridge, NSArray,
+        TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
+        TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
++ (void)readAttributeAttributeListWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                               endpoint:(NSNumber *)endpoint
+                                                  queue:(dispatch_queue_t)queue
+                                             completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
+{
+    auto * bridge = new MTRTemperatureControlAttributeListListAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
+        ^(TemperatureControlAttributeListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+            if (clusterStateCacheContainer.cppClusterStateCache) {
+                chip::app::ConcreteAttributePath path;
+                using TypeInfo = TemperatureControl::Attributes::AttributeList::TypeInfo;
+                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+                path.mClusterId = TypeInfo::GetClusterId();
+                path.mAttributeId = TypeInfo::GetAttributeId();
+                TypeInfo::DecodableType value;
+                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+                if (err == CHIP_NO_ERROR) {
+                    successCb(bridge, value);
+                }
+                return err;
+            }
+            return CHIP_ERROR_NOT_FOUND;
+        });
+}
+
+- (void)readAttributeFeatureMapWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
+{
+    MTRReadParams * params = [[MTRReadParams alloc] init];
+    using TypeInfo = TemperatureControl::Attributes::FeatureMap::TypeInfo;
+    return MTRReadAttribute<MTRInt32uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
+- (void)subscribeAttributeFeatureMapWithParams:(MTRSubscribeParams * _Nonnull)params
+                       subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                 reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
+{
+    using TypeInfo = TemperatureControl::Attributes::FeatureMap::TypeInfo;
+    MTRSubscribeAttribute<MTRInt32uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
+        subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
+        TypeInfo::GetAttributeId());
+}
+
++ (void)readAttributeFeatureMapWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                            endpoint:(NSNumber *)endpoint
+                                               queue:(dispatch_queue_t)queue
+                                          completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
+{
+    auto * bridge = new MTRInt32uAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(
+        clusterStateCacheContainer.baseDevice, ^(Int32uAttributeCallback successCb, MTRErrorCallback failureCb) {
+            if (clusterStateCacheContainer.cppClusterStateCache) {
+                chip::app::ConcreteAttributePath path;
+                using TypeInfo = TemperatureControl::Attributes::FeatureMap::TypeInfo;
+                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+                path.mClusterId = TypeInfo::GetClusterId();
+                path.mAttributeId = TypeInfo::GetAttributeId();
+                TypeInfo::DecodableType value;
+                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+                if (err == CHIP_NO_ERROR) {
+                    successCb(bridge, value);
+                }
+                return err;
+            }
+            return CHIP_ERROR_NOT_FOUND;
+        });
+}
+
+- (void)readAttributeClusterRevisionWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
+{
+    MTRReadParams * params = [[MTRReadParams alloc] init];
+    using TypeInfo = TemperatureControl::Attributes::ClusterRevision::TypeInfo;
+    return MTRReadAttribute<MTRInt16uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
+- (void)subscribeAttributeClusterRevisionWithParams:(MTRSubscribeParams * _Nonnull)params
+                            subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                      reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
+{
+    using TypeInfo = TemperatureControl::Attributes::ClusterRevision::TypeInfo;
+    MTRSubscribeAttribute<MTRInt16uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
+        subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
+        TypeInfo::GetAttributeId());
+}
+
++ (void)readAttributeClusterRevisionWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                                 endpoint:(NSNumber *)endpoint
+                                                    queue:(dispatch_queue_t)queue
+                                               completion:
+                                                   (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
+{
+    auto * bridge = new MTRInt16uAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(
+        clusterStateCacheContainer.baseDevice, ^(Int16uAttributeCallback successCb, MTRErrorCallback failureCb) {
+            if (clusterStateCacheContainer.cppClusterStateCache) {
+                chip::app::ConcreteAttributePath path;
+                using TypeInfo = TemperatureControl::Attributes::ClusterRevision::TypeInfo;
+                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+                path.mClusterId = TypeInfo::GetClusterId();
+                path.mAttributeId = TypeInfo::GetAttributeId();
+                TypeInfo::DecodableType value;
+                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+                if (err == CHIP_NO_ERROR) {
+                    successCb(bridge, value);
+                }
+                return err;
+            }
+            return CHIP_ERROR_NOT_FOUND;
+        });
+}
+
+@end
+
 @implementation MTRBaseClusterAirQuality
 
 - (instancetype)initWithDevice:(MTRBaseDevice *)device endpointID:(NSNumber *)endpointID queue:(dispatch_queue_t)queue
