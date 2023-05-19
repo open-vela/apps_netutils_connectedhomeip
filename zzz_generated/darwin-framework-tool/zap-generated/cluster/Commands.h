@@ -78,6 +78,7 @@
 | IcdManagement                                                       | 0x0046 |
 | ModeSelect                                                          | 0x0050 |
 | TemperatureControl                                                  | 0x0056 |
+| RefrigeratorAlarm                                                   | 0x0057 |
 | AirQuality                                                          | 0x005B |
 | SmokeCoAlarm                                                        | 0x005C |
 | HepaFilterMonitoring                                                | 0x0071 |
@@ -41356,6 +41357,749 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TemperatureControl.ClusterRevision response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*----------------------------------------------------------------------------*\
+| Cluster RefrigeratorAlarm                                           | 0x0057 |
+|------------------------------------------------------------------------------|
+| Commands:                                                           |        |
+| * Reset                                                             |   0x00 |
+|------------------------------------------------------------------------------|
+| Attributes:                                                         |        |
+| * Mask                                                              | 0x0000 |
+| * Latch                                                             | 0x0001 |
+| * State                                                             | 0x0002 |
+| * GeneratedCommandList                                              | 0xFFF8 |
+| * AcceptedCommandList                                               | 0xFFF9 |
+| * EventList                                                         | 0xFFFA |
+| * AttributeList                                                     | 0xFFFB |
+| * FeatureMap                                                        | 0xFFFC |
+| * ClusterRevision                                                   | 0xFFFD |
+|------------------------------------------------------------------------------|
+| Events:                                                             |        |
+| * Notify                                                            | 0x0000 |
+\*----------------------------------------------------------------------------*/
+
+/*
+ * Command Reset
+ */
+class RefrigeratorAlarmReset : public ClusterCommand {
+public:
+    RefrigeratorAlarmReset()
+        : ClusterCommand("reset")
+    {
+        AddArgument("Alarms", 0, UINT32_MAX, &mRequest.alarms);
+        AddArgument("Mask", 0, UINT32_MAX, &mRequest.mask);
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000057) command (0x00000000) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterRefrigeratorAlarm alloc] initWithDevice:device
+                                                                             endpointID:@(endpointId)
+                                                                                  queue:callbackQueue];
+        __auto_type * params = [[MTRRefrigeratorAlarmClusterResetParams alloc] init];
+        params.timedInvokeTimeoutMs
+            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.alarms = [NSNumber numberWithUnsignedInt:mRequest.alarms.Raw()];
+        if (mRequest.mask.HasValue()) {
+            params.mask = [NSNumber numberWithUnsignedInt:mRequest.mask.Value().Raw()];
+        } else {
+            params.mask = nil;
+        }
+        uint16_t repeatCount = mRepeatCount.ValueOr(1);
+        uint16_t __block responsesNeeded = repeatCount;
+        while (repeatCount--) {
+            [cluster resetWithParams:params
+                          completion:^(NSError * _Nullable error) {
+                              responsesNeeded--;
+                              if (error != nil) {
+                                  mError = error;
+                                  LogNSError("Error", error);
+                              }
+                              if (responsesNeeded == 0) {
+                                  SetCommandExitStatus(mError);
+                              }
+                          }];
+        }
+        return CHIP_NO_ERROR;
+    }
+
+private:
+    chip::app::Clusters::RefrigeratorAlarm::Commands::Reset::Type mRequest;
+};
+
+/*
+ * Attribute Mask
+ */
+class ReadRefrigeratorAlarmMask : public ReadAttribute {
+public:
+    ReadRefrigeratorAlarmMask()
+        : ReadAttribute("mask")
+    {
+    }
+
+    ~ReadRefrigeratorAlarmMask() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000057) ReadAttribute (0x00000000) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterRefrigeratorAlarm alloc] initWithDevice:device
+                                                                             endpointID:@(endpointId)
+                                                                                  queue:callbackQueue];
+        [cluster readAttributeMaskWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"RefrigeratorAlarm.Mask response %@", [value description]);
+            if (error != nil) {
+                LogNSError("RefrigeratorAlarm Mask read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class WriteRefrigeratorAlarmMask : public WriteAttribute {
+public:
+    WriteRefrigeratorAlarmMask()
+        : WriteAttribute("mask")
+    {
+        AddArgument("attr-name", "mask");
+        AddArgument("attr-value", 0, UINT32_MAX, &mValue);
+        WriteAttribute::AddArguments();
+    }
+
+    ~WriteRefrigeratorAlarmMask() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000057) WriteAttribute (0x00000000) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterRefrigeratorAlarm alloc] initWithDevice:device
+                                                                             endpointID:@(endpointId)
+                                                                                  queue:callbackQueue];
+        __auto_type * params = [[MTRWriteParams alloc] init];
+        params.timedWriteTimeout
+            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
+        NSNumber * _Nonnull value = [NSNumber numberWithUnsignedInt:mValue];
+
+        [cluster writeAttributeMaskWithValue:value
+                                      params:params
+                                  completion:^(NSError * _Nullable error) {
+                                      if (error != nil) {
+                                          LogNSError("RefrigeratorAlarm Mask write Error", error);
+                                      }
+                                      SetCommandExitStatus(error);
+                                  }];
+        return CHIP_NO_ERROR;
+    }
+
+private:
+    uint32_t mValue;
+};
+
+class SubscribeAttributeRefrigeratorAlarmMask : public SubscribeAttribute {
+public:
+    SubscribeAttributeRefrigeratorAlarmMask()
+        : SubscribeAttribute("mask")
+    {
+    }
+
+    ~SubscribeAttributeRefrigeratorAlarmMask() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000057) ReportAttribute (0x00000000) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterRefrigeratorAlarm alloc] initWithDevice:device
+                                                                             endpointID:@(endpointId)
+                                                                                  queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeMaskWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"RefrigeratorAlarm.Mask response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute Latch
+ */
+class ReadRefrigeratorAlarmLatch : public ReadAttribute {
+public:
+    ReadRefrigeratorAlarmLatch()
+        : ReadAttribute("latch")
+    {
+    }
+
+    ~ReadRefrigeratorAlarmLatch() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000057) ReadAttribute (0x00000001) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterRefrigeratorAlarm alloc] initWithDevice:device
+                                                                             endpointID:@(endpointId)
+                                                                                  queue:callbackQueue];
+        [cluster readAttributeLatchWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"RefrigeratorAlarm.Latch response %@", [value description]);
+            if (error != nil) {
+                LogNSError("RefrigeratorAlarm Latch read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeRefrigeratorAlarmLatch : public SubscribeAttribute {
+public:
+    SubscribeAttributeRefrigeratorAlarmLatch()
+        : SubscribeAttribute("latch")
+    {
+    }
+
+    ~SubscribeAttributeRefrigeratorAlarmLatch() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000057) ReportAttribute (0x00000001) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterRefrigeratorAlarm alloc] initWithDevice:device
+                                                                             endpointID:@(endpointId)
+                                                                                  queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeLatchWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"RefrigeratorAlarm.Latch response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute State
+ */
+class ReadRefrigeratorAlarmState : public ReadAttribute {
+public:
+    ReadRefrigeratorAlarmState()
+        : ReadAttribute("state")
+    {
+    }
+
+    ~ReadRefrigeratorAlarmState() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000057) ReadAttribute (0x00000002) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterRefrigeratorAlarm alloc] initWithDevice:device
+                                                                             endpointID:@(endpointId)
+                                                                                  queue:callbackQueue];
+        [cluster readAttributeStateWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"RefrigeratorAlarm.State response %@", [value description]);
+            if (error != nil) {
+                LogNSError("RefrigeratorAlarm State read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeRefrigeratorAlarmState : public SubscribeAttribute {
+public:
+    SubscribeAttributeRefrigeratorAlarmState()
+        : SubscribeAttribute("state")
+    {
+    }
+
+    ~SubscribeAttributeRefrigeratorAlarmState() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000057) ReportAttribute (0x00000002) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterRefrigeratorAlarm alloc] initWithDevice:device
+                                                                             endpointID:@(endpointId)
+                                                                                  queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeStateWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"RefrigeratorAlarm.State response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute GeneratedCommandList
+ */
+class ReadRefrigeratorAlarmGeneratedCommandList : public ReadAttribute {
+public:
+    ReadRefrigeratorAlarmGeneratedCommandList()
+        : ReadAttribute("generated-command-list")
+    {
+    }
+
+    ~ReadRefrigeratorAlarmGeneratedCommandList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000057) ReadAttribute (0x0000FFF8) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterRefrigeratorAlarm alloc] initWithDevice:device
+                                                                             endpointID:@(endpointId)
+                                                                                  queue:callbackQueue];
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"RefrigeratorAlarm.GeneratedCommandList response %@", [value description]);
+            if (error != nil) {
+                LogNSError("RefrigeratorAlarm GeneratedCommandList read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeRefrigeratorAlarmGeneratedCommandList : public SubscribeAttribute {
+public:
+    SubscribeAttributeRefrigeratorAlarmGeneratedCommandList()
+        : SubscribeAttribute("generated-command-list")
+    {
+    }
+
+    ~SubscribeAttributeRefrigeratorAlarmGeneratedCommandList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000057) ReportAttribute (0x0000FFF8) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterRefrigeratorAlarm alloc] initWithDevice:device
+                                                                             endpointID:@(endpointId)
+                                                                                  queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeGeneratedCommandListWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"RefrigeratorAlarm.GeneratedCommandList response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute AcceptedCommandList
+ */
+class ReadRefrigeratorAlarmAcceptedCommandList : public ReadAttribute {
+public:
+    ReadRefrigeratorAlarmAcceptedCommandList()
+        : ReadAttribute("accepted-command-list")
+    {
+    }
+
+    ~ReadRefrigeratorAlarmAcceptedCommandList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000057) ReadAttribute (0x0000FFF9) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterRefrigeratorAlarm alloc] initWithDevice:device
+                                                                             endpointID:@(endpointId)
+                                                                                  queue:callbackQueue];
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"RefrigeratorAlarm.AcceptedCommandList response %@", [value description]);
+            if (error != nil) {
+                LogNSError("RefrigeratorAlarm AcceptedCommandList read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeRefrigeratorAlarmAcceptedCommandList : public SubscribeAttribute {
+public:
+    SubscribeAttributeRefrigeratorAlarmAcceptedCommandList()
+        : SubscribeAttribute("accepted-command-list")
+    {
+    }
+
+    ~SubscribeAttributeRefrigeratorAlarmAcceptedCommandList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000057) ReportAttribute (0x0000FFF9) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterRefrigeratorAlarm alloc] initWithDevice:device
+                                                                             endpointID:@(endpointId)
+                                                                                  queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeAcceptedCommandListWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"RefrigeratorAlarm.AcceptedCommandList response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute EventList
+ */
+class ReadRefrigeratorAlarmEventList : public ReadAttribute {
+public:
+    ReadRefrigeratorAlarmEventList()
+        : ReadAttribute("event-list")
+    {
+    }
+
+    ~ReadRefrigeratorAlarmEventList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000057) ReadAttribute (0x0000FFFA) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterRefrigeratorAlarm alloc] initWithDevice:device
+                                                                             endpointID:@(endpointId)
+                                                                                  queue:callbackQueue];
+        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"RefrigeratorAlarm.EventList response %@", [value description]);
+            if (error != nil) {
+                LogNSError("RefrigeratorAlarm EventList read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeRefrigeratorAlarmEventList : public SubscribeAttribute {
+public:
+    SubscribeAttributeRefrigeratorAlarmEventList()
+        : SubscribeAttribute("event-list")
+    {
+    }
+
+    ~SubscribeAttributeRefrigeratorAlarmEventList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000057) ReportAttribute (0x0000FFFA) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterRefrigeratorAlarm alloc] initWithDevice:device
+                                                                             endpointID:@(endpointId)
+                                                                                  queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeEventListWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"RefrigeratorAlarm.EventList response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute AttributeList
+ */
+class ReadRefrigeratorAlarmAttributeList : public ReadAttribute {
+public:
+    ReadRefrigeratorAlarmAttributeList()
+        : ReadAttribute("attribute-list")
+    {
+    }
+
+    ~ReadRefrigeratorAlarmAttributeList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000057) ReadAttribute (0x0000FFFB) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterRefrigeratorAlarm alloc] initWithDevice:device
+                                                                             endpointID:@(endpointId)
+                                                                                  queue:callbackQueue];
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"RefrigeratorAlarm.AttributeList response %@", [value description]);
+            if (error != nil) {
+                LogNSError("RefrigeratorAlarm AttributeList read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeRefrigeratorAlarmAttributeList : public SubscribeAttribute {
+public:
+    SubscribeAttributeRefrigeratorAlarmAttributeList()
+        : SubscribeAttribute("attribute-list")
+    {
+    }
+
+    ~SubscribeAttributeRefrigeratorAlarmAttributeList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000057) ReportAttribute (0x0000FFFB) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterRefrigeratorAlarm alloc] initWithDevice:device
+                                                                             endpointID:@(endpointId)
+                                                                                  queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeAttributeListWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"RefrigeratorAlarm.AttributeList response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute FeatureMap
+ */
+class ReadRefrigeratorAlarmFeatureMap : public ReadAttribute {
+public:
+    ReadRefrigeratorAlarmFeatureMap()
+        : ReadAttribute("feature-map")
+    {
+    }
+
+    ~ReadRefrigeratorAlarmFeatureMap() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000057) ReadAttribute (0x0000FFFC) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterRefrigeratorAlarm alloc] initWithDevice:device
+                                                                             endpointID:@(endpointId)
+                                                                                  queue:callbackQueue];
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"RefrigeratorAlarm.FeatureMap response %@", [value description]);
+            if (error != nil) {
+                LogNSError("RefrigeratorAlarm FeatureMap read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeRefrigeratorAlarmFeatureMap : public SubscribeAttribute {
+public:
+    SubscribeAttributeRefrigeratorAlarmFeatureMap()
+        : SubscribeAttribute("feature-map")
+    {
+    }
+
+    ~SubscribeAttributeRefrigeratorAlarmFeatureMap() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000057) ReportAttribute (0x0000FFFC) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterRefrigeratorAlarm alloc] initWithDevice:device
+                                                                             endpointID:@(endpointId)
+                                                                                  queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeFeatureMapWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"RefrigeratorAlarm.FeatureMap response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute ClusterRevision
+ */
+class ReadRefrigeratorAlarmClusterRevision : public ReadAttribute {
+public:
+    ReadRefrigeratorAlarmClusterRevision()
+        : ReadAttribute("cluster-revision")
+    {
+    }
+
+    ~ReadRefrigeratorAlarmClusterRevision() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000057) ReadAttribute (0x0000FFFD) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterRefrigeratorAlarm alloc] initWithDevice:device
+                                                                             endpointID:@(endpointId)
+                                                                                  queue:callbackQueue];
+        [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"RefrigeratorAlarm.ClusterRevision response %@", [value description]);
+            if (error != nil) {
+                LogNSError("RefrigeratorAlarm ClusterRevision read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeRefrigeratorAlarmClusterRevision : public SubscribeAttribute {
+public:
+    SubscribeAttributeRefrigeratorAlarmClusterRevision()
+        : SubscribeAttribute("cluster-revision")
+    {
+    }
+
+    ~SubscribeAttributeRefrigeratorAlarmClusterRevision() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000057) ReportAttribute (0x0000FFFD) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterRefrigeratorAlarm alloc] initWithDevice:device
+                                                                             endpointID:@(endpointId)
+                                                                                  queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeClusterRevisionWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"RefrigeratorAlarm.ClusterRevision response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -115908,6 +116652,43 @@ void registerClusterTemperatureControl(Commands & commands)
 
     commands.Register(clusterName, clusterCommands);
 }
+void registerClusterRefrigeratorAlarm(Commands & commands)
+{
+    using namespace chip::app::Clusters::RefrigeratorAlarm;
+
+    const char * clusterName = "RefrigeratorAlarm";
+
+    commands_list clusterCommands = {
+        make_unique<ClusterCommand>(Id), //
+        make_unique<RefrigeratorAlarmReset>(), //
+        make_unique<ReadAttribute>(Id), //
+        make_unique<ReadRefrigeratorAlarmMask>(), //
+        make_unique<WriteAttribute>(Id), //
+        make_unique<WriteRefrigeratorAlarmMask>(), //
+        make_unique<SubscribeAttribute>(Id), //
+        make_unique<SubscribeAttributeRefrigeratorAlarmMask>(), //
+        make_unique<ReadRefrigeratorAlarmLatch>(), //
+        make_unique<SubscribeAttributeRefrigeratorAlarmLatch>(), //
+        make_unique<ReadRefrigeratorAlarmState>(), //
+        make_unique<SubscribeAttributeRefrigeratorAlarmState>(), //
+        make_unique<ReadRefrigeratorAlarmGeneratedCommandList>(), //
+        make_unique<SubscribeAttributeRefrigeratorAlarmGeneratedCommandList>(), //
+        make_unique<ReadRefrigeratorAlarmAcceptedCommandList>(), //
+        make_unique<SubscribeAttributeRefrigeratorAlarmAcceptedCommandList>(), //
+        make_unique<ReadRefrigeratorAlarmEventList>(), //
+        make_unique<SubscribeAttributeRefrigeratorAlarmEventList>(), //
+        make_unique<ReadRefrigeratorAlarmAttributeList>(), //
+        make_unique<SubscribeAttributeRefrigeratorAlarmAttributeList>(), //
+        make_unique<ReadRefrigeratorAlarmFeatureMap>(), //
+        make_unique<SubscribeAttributeRefrigeratorAlarmFeatureMap>(), //
+        make_unique<ReadRefrigeratorAlarmClusterRevision>(), //
+        make_unique<SubscribeAttributeRefrigeratorAlarmClusterRevision>(), //
+        make_unique<ReadEvent>(Id), //
+        make_unique<SubscribeEvent>(Id), //
+    };
+
+    commands.Register(clusterName, clusterCommands);
+}
 void registerClusterAirQuality(Commands & commands)
 {
     using namespace chip::app::Clusters::AirQuality;
@@ -118560,6 +119341,7 @@ void registerClusters(Commands & commands)
     registerClusterBooleanState(commands);
     registerClusterModeSelect(commands);
     registerClusterTemperatureControl(commands);
+    registerClusterRefrigeratorAlarm(commands);
     registerClusterAirQuality(commands);
     registerClusterSmokeCoAlarm(commands);
     registerClusterHepaFilterMonitoring(commands);
