@@ -77,6 +77,7 @@
 | BooleanState                                                        | 0x0045 |
 | IcdManagement                                                       | 0x0046 |
 | ModeSelect                                                          | 0x0050 |
+| TemperatureControl                                                  | 0x0056 |
 | AirQuality                                                          | 0x005B |
 | SmokeCoAlarm                                                        | 0x005C |
 | HepaFilterMonitoring                                                | 0x0071 |
@@ -40436,6 +40437,925 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ModeSelect.ClusterRevision response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*----------------------------------------------------------------------------*\
+| Cluster TemperatureControl                                          | 0x0056 |
+|------------------------------------------------------------------------------|
+| Commands:                                                           |        |
+| * SetTemperature                                                    |   0x00 |
+|------------------------------------------------------------------------------|
+| Attributes:                                                         |        |
+| * TemperatureSetpoint                                               | 0x0000 |
+| * MinTemperature                                                    | 0x0001 |
+| * MaxTemperature                                                    | 0x0002 |
+| * Step                                                              | 0x0003 |
+| * CurrentTemperatureLevelIndex                                      | 0x0004 |
+| * SupportedTemperatureLevels                                        | 0x0005 |
+| * GeneratedCommandList                                              | 0xFFF8 |
+| * AcceptedCommandList                                               | 0xFFF9 |
+| * EventList                                                         | 0xFFFA |
+| * AttributeList                                                     | 0xFFFB |
+| * FeatureMap                                                        | 0xFFFC |
+| * ClusterRevision                                                   | 0xFFFD |
+|------------------------------------------------------------------------------|
+| Events:                                                             |        |
+\*----------------------------------------------------------------------------*/
+
+/*
+ * Command SetTemperature
+ */
+class TemperatureControlSetTemperature : public ClusterCommand {
+public:
+    TemperatureControlSetTemperature()
+        : ClusterCommand("set-temperature")
+    {
+        AddArgument("TargetTemperature", INT16_MIN, INT16_MAX, &mRequest.targetTemperature);
+        AddArgument("TargetTemperatureLevel", 0, UINT8_MAX, &mRequest.targetTemperatureLevel);
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000056) command (0x00000000) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterTemperatureControl alloc] initWithDevice:device
+                                                                              endpointID:@(endpointId)
+                                                                                   queue:callbackQueue];
+        __auto_type * params = [[MTRTemperatureControlClusterSetTemperatureParams alloc] init];
+        params.timedInvokeTimeoutMs
+            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        if (mRequest.targetTemperature.HasValue()) {
+            params.targetTemperature = [NSNumber numberWithShort:mRequest.targetTemperature.Value()];
+        } else {
+            params.targetTemperature = nil;
+        }
+        if (mRequest.targetTemperatureLevel.HasValue()) {
+            params.targetTemperatureLevel = [NSNumber numberWithUnsignedChar:mRequest.targetTemperatureLevel.Value()];
+        } else {
+            params.targetTemperatureLevel = nil;
+        }
+        uint16_t repeatCount = mRepeatCount.ValueOr(1);
+        uint16_t __block responsesNeeded = repeatCount;
+        while (repeatCount--) {
+            [cluster setTemperatureWithParams:params
+                                   completion:^(NSError * _Nullable error) {
+                                       responsesNeeded--;
+                                       if (error != nil) {
+                                           mError = error;
+                                           LogNSError("Error", error);
+                                       }
+                                       if (responsesNeeded == 0) {
+                                           SetCommandExitStatus(mError);
+                                       }
+                                   }];
+        }
+        return CHIP_NO_ERROR;
+    }
+
+private:
+    chip::app::Clusters::TemperatureControl::Commands::SetTemperature::Type mRequest;
+};
+
+/*
+ * Attribute TemperatureSetpoint
+ */
+class ReadTemperatureControlTemperatureSetpoint : public ReadAttribute {
+public:
+    ReadTemperatureControlTemperatureSetpoint()
+        : ReadAttribute("temperature-setpoint")
+    {
+    }
+
+    ~ReadTemperatureControlTemperatureSetpoint() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000056) ReadAttribute (0x00000000) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterTemperatureControl alloc] initWithDevice:device
+                                                                              endpointID:@(endpointId)
+                                                                                   queue:callbackQueue];
+        [cluster readAttributeTemperatureSetpointWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"TemperatureControl.TemperatureSetpoint response %@", [value description]);
+            if (error != nil) {
+                LogNSError("TemperatureControl TemperatureSetpoint read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeTemperatureControlTemperatureSetpoint : public SubscribeAttribute {
+public:
+    SubscribeAttributeTemperatureControlTemperatureSetpoint()
+        : SubscribeAttribute("temperature-setpoint")
+    {
+    }
+
+    ~SubscribeAttributeTemperatureControlTemperatureSetpoint() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000056) ReportAttribute (0x00000000) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterTemperatureControl alloc] initWithDevice:device
+                                                                              endpointID:@(endpointId)
+                                                                                   queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeTemperatureSetpointWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"TemperatureControl.TemperatureSetpoint response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute MinTemperature
+ */
+class ReadTemperatureControlMinTemperature : public ReadAttribute {
+public:
+    ReadTemperatureControlMinTemperature()
+        : ReadAttribute("min-temperature")
+    {
+    }
+
+    ~ReadTemperatureControlMinTemperature() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000056) ReadAttribute (0x00000001) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterTemperatureControl alloc] initWithDevice:device
+                                                                              endpointID:@(endpointId)
+                                                                                   queue:callbackQueue];
+        [cluster readAttributeMinTemperatureWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"TemperatureControl.MinTemperature response %@", [value description]);
+            if (error != nil) {
+                LogNSError("TemperatureControl MinTemperature read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeTemperatureControlMinTemperature : public SubscribeAttribute {
+public:
+    SubscribeAttributeTemperatureControlMinTemperature()
+        : SubscribeAttribute("min-temperature")
+    {
+    }
+
+    ~SubscribeAttributeTemperatureControlMinTemperature() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000056) ReportAttribute (0x00000001) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterTemperatureControl alloc] initWithDevice:device
+                                                                              endpointID:@(endpointId)
+                                                                                   queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeMinTemperatureWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"TemperatureControl.MinTemperature response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute MaxTemperature
+ */
+class ReadTemperatureControlMaxTemperature : public ReadAttribute {
+public:
+    ReadTemperatureControlMaxTemperature()
+        : ReadAttribute("max-temperature")
+    {
+    }
+
+    ~ReadTemperatureControlMaxTemperature() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000056) ReadAttribute (0x00000002) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterTemperatureControl alloc] initWithDevice:device
+                                                                              endpointID:@(endpointId)
+                                                                                   queue:callbackQueue];
+        [cluster readAttributeMaxTemperatureWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"TemperatureControl.MaxTemperature response %@", [value description]);
+            if (error != nil) {
+                LogNSError("TemperatureControl MaxTemperature read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeTemperatureControlMaxTemperature : public SubscribeAttribute {
+public:
+    SubscribeAttributeTemperatureControlMaxTemperature()
+        : SubscribeAttribute("max-temperature")
+    {
+    }
+
+    ~SubscribeAttributeTemperatureControlMaxTemperature() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000056) ReportAttribute (0x00000002) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterTemperatureControl alloc] initWithDevice:device
+                                                                              endpointID:@(endpointId)
+                                                                                   queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeMaxTemperatureWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"TemperatureControl.MaxTemperature response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute Step
+ */
+class ReadTemperatureControlStep : public ReadAttribute {
+public:
+    ReadTemperatureControlStep()
+        : ReadAttribute("step")
+    {
+    }
+
+    ~ReadTemperatureControlStep() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000056) ReadAttribute (0x00000003) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterTemperatureControl alloc] initWithDevice:device
+                                                                              endpointID:@(endpointId)
+                                                                                   queue:callbackQueue];
+        [cluster readAttributeStepWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"TemperatureControl.Step response %@", [value description]);
+            if (error != nil) {
+                LogNSError("TemperatureControl Step read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeTemperatureControlStep : public SubscribeAttribute {
+public:
+    SubscribeAttributeTemperatureControlStep()
+        : SubscribeAttribute("step")
+    {
+    }
+
+    ~SubscribeAttributeTemperatureControlStep() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000056) ReportAttribute (0x00000003) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterTemperatureControl alloc] initWithDevice:device
+                                                                              endpointID:@(endpointId)
+                                                                                   queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeStepWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"TemperatureControl.Step response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute CurrentTemperatureLevelIndex
+ */
+class ReadTemperatureControlCurrentTemperatureLevelIndex : public ReadAttribute {
+public:
+    ReadTemperatureControlCurrentTemperatureLevelIndex()
+        : ReadAttribute("current-temperature-level-index")
+    {
+    }
+
+    ~ReadTemperatureControlCurrentTemperatureLevelIndex() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000056) ReadAttribute (0x00000004) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterTemperatureControl alloc] initWithDevice:device
+                                                                              endpointID:@(endpointId)
+                                                                                   queue:callbackQueue];
+        [cluster readAttributeCurrentTemperatureLevelIndexWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"TemperatureControl.CurrentTemperatureLevelIndex response %@", [value description]);
+            if (error != nil) {
+                LogNSError("TemperatureControl CurrentTemperatureLevelIndex read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeTemperatureControlCurrentTemperatureLevelIndex : public SubscribeAttribute {
+public:
+    SubscribeAttributeTemperatureControlCurrentTemperatureLevelIndex()
+        : SubscribeAttribute("current-temperature-level-index")
+    {
+    }
+
+    ~SubscribeAttributeTemperatureControlCurrentTemperatureLevelIndex() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000056) ReportAttribute (0x00000004) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterTemperatureControl alloc] initWithDevice:device
+                                                                              endpointID:@(endpointId)
+                                                                                   queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeCurrentTemperatureLevelIndexWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"TemperatureControl.CurrentTemperatureLevelIndex response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute SupportedTemperatureLevels
+ */
+class ReadTemperatureControlSupportedTemperatureLevels : public ReadAttribute {
+public:
+    ReadTemperatureControlSupportedTemperatureLevels()
+        : ReadAttribute("supported-temperature-levels")
+    {
+    }
+
+    ~ReadTemperatureControlSupportedTemperatureLevels() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000056) ReadAttribute (0x00000005) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterTemperatureControl alloc] initWithDevice:device
+                                                                              endpointID:@(endpointId)
+                                                                                   queue:callbackQueue];
+        [cluster readAttributeSupportedTemperatureLevelsWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"TemperatureControl.SupportedTemperatureLevels response %@", [value description]);
+            if (error != nil) {
+                LogNSError("TemperatureControl SupportedTemperatureLevels read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeTemperatureControlSupportedTemperatureLevels : public SubscribeAttribute {
+public:
+    SubscribeAttributeTemperatureControlSupportedTemperatureLevels()
+        : SubscribeAttribute("supported-temperature-levels")
+    {
+    }
+
+    ~SubscribeAttributeTemperatureControlSupportedTemperatureLevels() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000056) ReportAttribute (0x00000005) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterTemperatureControl alloc] initWithDevice:device
+                                                                              endpointID:@(endpointId)
+                                                                                   queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeSupportedTemperatureLevelsWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"TemperatureControl.SupportedTemperatureLevels response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute GeneratedCommandList
+ */
+class ReadTemperatureControlGeneratedCommandList : public ReadAttribute {
+public:
+    ReadTemperatureControlGeneratedCommandList()
+        : ReadAttribute("generated-command-list")
+    {
+    }
+
+    ~ReadTemperatureControlGeneratedCommandList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000056) ReadAttribute (0x0000FFF8) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterTemperatureControl alloc] initWithDevice:device
+                                                                              endpointID:@(endpointId)
+                                                                                   queue:callbackQueue];
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"TemperatureControl.GeneratedCommandList response %@", [value description]);
+            if (error != nil) {
+                LogNSError("TemperatureControl GeneratedCommandList read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeTemperatureControlGeneratedCommandList : public SubscribeAttribute {
+public:
+    SubscribeAttributeTemperatureControlGeneratedCommandList()
+        : SubscribeAttribute("generated-command-list")
+    {
+    }
+
+    ~SubscribeAttributeTemperatureControlGeneratedCommandList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000056) ReportAttribute (0x0000FFF8) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterTemperatureControl alloc] initWithDevice:device
+                                                                              endpointID:@(endpointId)
+                                                                                   queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeGeneratedCommandListWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"TemperatureControl.GeneratedCommandList response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute AcceptedCommandList
+ */
+class ReadTemperatureControlAcceptedCommandList : public ReadAttribute {
+public:
+    ReadTemperatureControlAcceptedCommandList()
+        : ReadAttribute("accepted-command-list")
+    {
+    }
+
+    ~ReadTemperatureControlAcceptedCommandList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000056) ReadAttribute (0x0000FFF9) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterTemperatureControl alloc] initWithDevice:device
+                                                                              endpointID:@(endpointId)
+                                                                                   queue:callbackQueue];
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"TemperatureControl.AcceptedCommandList response %@", [value description]);
+            if (error != nil) {
+                LogNSError("TemperatureControl AcceptedCommandList read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeTemperatureControlAcceptedCommandList : public SubscribeAttribute {
+public:
+    SubscribeAttributeTemperatureControlAcceptedCommandList()
+        : SubscribeAttribute("accepted-command-list")
+    {
+    }
+
+    ~SubscribeAttributeTemperatureControlAcceptedCommandList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000056) ReportAttribute (0x0000FFF9) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterTemperatureControl alloc] initWithDevice:device
+                                                                              endpointID:@(endpointId)
+                                                                                   queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeAcceptedCommandListWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"TemperatureControl.AcceptedCommandList response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute EventList
+ */
+class ReadTemperatureControlEventList : public ReadAttribute {
+public:
+    ReadTemperatureControlEventList()
+        : ReadAttribute("event-list")
+    {
+    }
+
+    ~ReadTemperatureControlEventList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000056) ReadAttribute (0x0000FFFA) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterTemperatureControl alloc] initWithDevice:device
+                                                                              endpointID:@(endpointId)
+                                                                                   queue:callbackQueue];
+        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"TemperatureControl.EventList response %@", [value description]);
+            if (error != nil) {
+                LogNSError("TemperatureControl EventList read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeTemperatureControlEventList : public SubscribeAttribute {
+public:
+    SubscribeAttributeTemperatureControlEventList()
+        : SubscribeAttribute("event-list")
+    {
+    }
+
+    ~SubscribeAttributeTemperatureControlEventList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000056) ReportAttribute (0x0000FFFA) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterTemperatureControl alloc] initWithDevice:device
+                                                                              endpointID:@(endpointId)
+                                                                                   queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeEventListWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"TemperatureControl.EventList response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute AttributeList
+ */
+class ReadTemperatureControlAttributeList : public ReadAttribute {
+public:
+    ReadTemperatureControlAttributeList()
+        : ReadAttribute("attribute-list")
+    {
+    }
+
+    ~ReadTemperatureControlAttributeList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000056) ReadAttribute (0x0000FFFB) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterTemperatureControl alloc] initWithDevice:device
+                                                                              endpointID:@(endpointId)
+                                                                                   queue:callbackQueue];
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"TemperatureControl.AttributeList response %@", [value description]);
+            if (error != nil) {
+                LogNSError("TemperatureControl AttributeList read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeTemperatureControlAttributeList : public SubscribeAttribute {
+public:
+    SubscribeAttributeTemperatureControlAttributeList()
+        : SubscribeAttribute("attribute-list")
+    {
+    }
+
+    ~SubscribeAttributeTemperatureControlAttributeList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000056) ReportAttribute (0x0000FFFB) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterTemperatureControl alloc] initWithDevice:device
+                                                                              endpointID:@(endpointId)
+                                                                                   queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeAttributeListWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"TemperatureControl.AttributeList response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute FeatureMap
+ */
+class ReadTemperatureControlFeatureMap : public ReadAttribute {
+public:
+    ReadTemperatureControlFeatureMap()
+        : ReadAttribute("feature-map")
+    {
+    }
+
+    ~ReadTemperatureControlFeatureMap() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000056) ReadAttribute (0x0000FFFC) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterTemperatureControl alloc] initWithDevice:device
+                                                                              endpointID:@(endpointId)
+                                                                                   queue:callbackQueue];
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"TemperatureControl.FeatureMap response %@", [value description]);
+            if (error != nil) {
+                LogNSError("TemperatureControl FeatureMap read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeTemperatureControlFeatureMap : public SubscribeAttribute {
+public:
+    SubscribeAttributeTemperatureControlFeatureMap()
+        : SubscribeAttribute("feature-map")
+    {
+    }
+
+    ~SubscribeAttributeTemperatureControlFeatureMap() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000056) ReportAttribute (0x0000FFFC) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterTemperatureControl alloc] initWithDevice:device
+                                                                              endpointID:@(endpointId)
+                                                                                   queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeFeatureMapWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"TemperatureControl.FeatureMap response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute ClusterRevision
+ */
+class ReadTemperatureControlClusterRevision : public ReadAttribute {
+public:
+    ReadTemperatureControlClusterRevision()
+        : ReadAttribute("cluster-revision")
+    {
+    }
+
+    ~ReadTemperatureControlClusterRevision() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000056) ReadAttribute (0x0000FFFD) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterTemperatureControl alloc] initWithDevice:device
+                                                                              endpointID:@(endpointId)
+                                                                                   queue:callbackQueue];
+        [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"TemperatureControl.ClusterRevision response %@", [value description]);
+            if (error != nil) {
+                LogNSError("TemperatureControl ClusterRevision read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeTemperatureControlClusterRevision : public SubscribeAttribute {
+public:
+    SubscribeAttributeTemperatureControlClusterRevision()
+        : SubscribeAttribute("cluster-revision")
+    {
+    }
+
+    ~SubscribeAttributeTemperatureControlClusterRevision() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000056) ReportAttribute (0x0000FFFD) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterTemperatureControl alloc] initWithDevice:device
+                                                                              endpointID:@(endpointId)
+                                                                                   queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeClusterRevisionWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"TemperatureControl.ClusterRevision response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -114948,6 +115868,46 @@ void registerClusterModeSelect(Commands & commands)
 
     commands.Register(clusterName, clusterCommands);
 }
+void registerClusterTemperatureControl(Commands & commands)
+{
+    using namespace chip::app::Clusters::TemperatureControl;
+
+    const char * clusterName = "TemperatureControl";
+
+    commands_list clusterCommands = {
+        make_unique<ClusterCommand>(Id), //
+        make_unique<TemperatureControlSetTemperature>(), //
+        make_unique<ReadAttribute>(Id), //
+        make_unique<ReadTemperatureControlTemperatureSetpoint>(), //
+        make_unique<WriteAttribute>(Id), //
+        make_unique<SubscribeAttribute>(Id), //
+        make_unique<SubscribeAttributeTemperatureControlTemperatureSetpoint>(), //
+        make_unique<ReadTemperatureControlMinTemperature>(), //
+        make_unique<SubscribeAttributeTemperatureControlMinTemperature>(), //
+        make_unique<ReadTemperatureControlMaxTemperature>(), //
+        make_unique<SubscribeAttributeTemperatureControlMaxTemperature>(), //
+        make_unique<ReadTemperatureControlStep>(), //
+        make_unique<SubscribeAttributeTemperatureControlStep>(), //
+        make_unique<ReadTemperatureControlCurrentTemperatureLevelIndex>(), //
+        make_unique<SubscribeAttributeTemperatureControlCurrentTemperatureLevelIndex>(), //
+        make_unique<ReadTemperatureControlSupportedTemperatureLevels>(), //
+        make_unique<SubscribeAttributeTemperatureControlSupportedTemperatureLevels>(), //
+        make_unique<ReadTemperatureControlGeneratedCommandList>(), //
+        make_unique<SubscribeAttributeTemperatureControlGeneratedCommandList>(), //
+        make_unique<ReadTemperatureControlAcceptedCommandList>(), //
+        make_unique<SubscribeAttributeTemperatureControlAcceptedCommandList>(), //
+        make_unique<ReadTemperatureControlEventList>(), //
+        make_unique<SubscribeAttributeTemperatureControlEventList>(), //
+        make_unique<ReadTemperatureControlAttributeList>(), //
+        make_unique<SubscribeAttributeTemperatureControlAttributeList>(), //
+        make_unique<ReadTemperatureControlFeatureMap>(), //
+        make_unique<SubscribeAttributeTemperatureControlFeatureMap>(), //
+        make_unique<ReadTemperatureControlClusterRevision>(), //
+        make_unique<SubscribeAttributeTemperatureControlClusterRevision>(), //
+    };
+
+    commands.Register(clusterName, clusterCommands);
+}
 void registerClusterAirQuality(Commands & commands)
 {
     using namespace chip::app::Clusters::AirQuality;
@@ -117599,6 +118559,7 @@ void registerClusters(Commands & commands)
     registerClusterUserLabel(commands);
     registerClusterBooleanState(commands);
     registerClusterModeSelect(commands);
+    registerClusterTemperatureControl(commands);
     registerClusterAirQuality(commands);
     registerClusterSmokeCoAlarm(commands);
     registerClusterHepaFilterMonitoring(commands);
