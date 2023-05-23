@@ -24097,7 +24097,7 @@ using chip::System::Clock::Timeout;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = GeneralCommissioning::Attributes::RegulatoryConfig::TypeInfo;
-    return MTRReadAttribute<MTRGeneralCommissioningClusterRegulatoryLocationTypeAttributeCallbackBridge, NSNumber,
+    return MTRReadAttribute<MTRGeneralCommissioningClusterRegulatoryLocationTypeEnumAttributeCallbackBridge, NSNumber,
         TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -24107,7 +24107,7 @@ using chip::System::Clock::Timeout;
                                        reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = GeneralCommissioning::Attributes::RegulatoryConfig::TypeInfo;
-    MTRSubscribeAttribute<MTRGeneralCommissioningClusterRegulatoryLocationTypeAttributeCallbackSubscriptionBridge, NSNumber,
+    MTRSubscribeAttribute<MTRGeneralCommissioningClusterRegulatoryLocationTypeEnumAttributeCallbackSubscriptionBridge, NSNumber,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -24118,9 +24118,9 @@ using chip::System::Clock::Timeout;
                                                 completion:
                                                     (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRGeneralCommissioningClusterRegulatoryLocationTypeAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRGeneralCommissioningClusterRegulatoryLocationTypeEnumAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(GeneralCommissioningClusterRegulatoryLocationTypeAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(GeneralCommissioningClusterRegulatoryLocationTypeEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = GeneralCommissioning::Attributes::RegulatoryConfig::TypeInfo;
@@ -24142,7 +24142,7 @@ using chip::System::Clock::Timeout;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = GeneralCommissioning::Attributes::LocationCapability::TypeInfo;
-    return MTRReadAttribute<MTRGeneralCommissioningClusterRegulatoryLocationTypeAttributeCallbackBridge, NSNumber,
+    return MTRReadAttribute<MTRGeneralCommissioningClusterRegulatoryLocationTypeEnumAttributeCallbackBridge, NSNumber,
         TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -24153,7 +24153,7 @@ using chip::System::Clock::Timeout;
                                              (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = GeneralCommissioning::Attributes::LocationCapability::TypeInfo;
-    MTRSubscribeAttribute<MTRGeneralCommissioningClusterRegulatoryLocationTypeAttributeCallbackSubscriptionBridge, NSNumber,
+    MTRSubscribeAttribute<MTRGeneralCommissioningClusterRegulatoryLocationTypeEnumAttributeCallbackSubscriptionBridge, NSNumber,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -24164,9 +24164,9 @@ using chip::System::Clock::Timeout;
                                                   completion:
                                                       (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRGeneralCommissioningClusterRegulatoryLocationTypeAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRGeneralCommissioningClusterRegulatoryLocationTypeEnumAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(GeneralCommissioningClusterRegulatoryLocationTypeAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(GeneralCommissioningClusterRegulatoryLocationTypeEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = GeneralCommissioning::Attributes::LocationCapability::TypeInfo;
