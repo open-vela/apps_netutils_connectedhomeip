@@ -93080,7 +93080,7 @@ class TestGroupKeyManagementClusterSuite : public TestCommand
 {
 public:
     TestGroupKeyManagementClusterSuite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("TestGroupKeyManagementCluster", 43, credsIssuerConfig)
+        TestCommand("TestGroupKeyManagementCluster", 47, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -93157,6 +93157,12 @@ private:
             break;
         case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::GroupKeyManagement::Commands::KeySetReadResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
@@ -93176,91 +93182,17 @@ private:
                     CheckValue("groupKeySet.epochStartTime2.Value()", value.groupKeySet.epochStartTime2.Value(), 1110002ULL));
             }
             break;
-        case 10:
+        case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
-        case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            break;
-        case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::DecodableType>
-                    value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                {
-                    auto iter_0 = value.begin();
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupKeyMap", iter_0, 0));
-                    VerifyOrReturn(CheckValue("groupKeyMap[0].groupId", iter_0.GetValue().groupId, 257U));
-                    VerifyOrReturn(CheckValue("groupKeyMap[0].groupKeySetID", iter_0.GetValue().groupKeySetID, 417U));
-                    VerifyOrReturn(CheckValue("groupKeyMap[0].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupKeyMap", iter_0, 1));
-                    VerifyOrReturn(CheckValue("groupKeyMap[1].groupId", iter_0.GetValue().groupId, 258U));
-                    VerifyOrReturn(CheckValue("groupKeyMap[1].groupKeySetID", iter_0.GetValue().groupKeySetID, 418U));
-                    VerifyOrReturn(CheckValue("groupKeyMap[1].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupKeyMap", iter_0, 2));
-                    VerifyOrReturn(CheckValue("groupKeyMap[2].groupId", iter_0.GetValue().groupId, 259U));
-                    VerifyOrReturn(CheckValue("groupKeyMap[2].groupKeySetID", iter_0.GetValue().groupKeySetID, 417U));
-                    VerifyOrReturn(CheckValue("groupKeyMap[2].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupKeyMap", iter_0, 3));
-                    VerifyOrReturn(CheckValue("groupKeyMap[3].groupId", iter_0.GetValue().groupId, 260U));
-                    VerifyOrReturn(CheckValue("groupKeyMap[3].groupKeySetID", iter_0.GetValue().groupKeySetID, 418U));
-                    VerifyOrReturn(CheckValue("groupKeyMap[3].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("groupKeyMap", iter_0, 4));
-                }
-            }
             break;
         case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::DecodableType>
-                    value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                {
-                    auto iter_0 = value.begin();
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupKeyMap", iter_0, 0));
-                    VerifyOrReturn(CheckValue("groupKeyMap[0].groupId", iter_0.GetValue().groupId, 257U));
-                    VerifyOrReturn(CheckValue("groupKeyMap[0].groupKeySetID", iter_0.GetValue().groupKeySetID, 417U));
-                    VerifyOrReturn(CheckValue("groupKeyMap[0].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupKeyMap", iter_0, 1));
-                    VerifyOrReturn(CheckValue("groupKeyMap[1].groupId", iter_0.GetValue().groupId, 258U));
-                    VerifyOrReturn(CheckValue("groupKeyMap[1].groupKeySetID", iter_0.GetValue().groupKeySetID, 418U));
-                    VerifyOrReturn(CheckValue("groupKeyMap[1].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupKeyMap", iter_0, 2));
-                    VerifyOrReturn(CheckValue("groupKeyMap[2].groupId", iter_0.GetValue().groupId, 259U));
-                    VerifyOrReturn(CheckValue("groupKeyMap[2].groupKeySetID", iter_0.GetValue().groupKeySetID, 417U));
-                    VerifyOrReturn(CheckValue("groupKeyMap[2].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupKeyMap", iter_0, 3));
-                    VerifyOrReturn(CheckValue("groupKeyMap[3].groupId", iter_0.GetValue().groupId, 260U));
-                    VerifyOrReturn(CheckValue("groupKeyMap[3].groupKeySetID", iter_0.GetValue().groupKeySetID, 418U));
-                    VerifyOrReturn(CheckValue("groupKeyMap[3].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupKeyMap", iter_0, 4));
-                    VerifyOrReturn(CheckValue("groupKeyMap[4].groupId", iter_0.GetValue().groupId, 258U));
-                    VerifyOrReturn(CheckValue("groupKeyMap[4].groupKeySetID", iter_0.GetValue().groupKeySetID, 419U));
-                    VerifyOrReturn(CheckValue("groupKeyMap[4].fabricIndex", iter_0.GetValue().fabricIndex, 2U));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupKeyMap", iter_0, 5));
-                    VerifyOrReturn(CheckValue("groupKeyMap[5].groupId", iter_0.GetValue().groupId, 259U));
-                    VerifyOrReturn(CheckValue("groupKeyMap[5].groupKeySetID", iter_0.GetValue().groupKeySetID, 419U));
-                    VerifyOrReturn(CheckValue("groupKeyMap[5].fabricIndex", iter_0.GetValue().fabricIndex, 2U));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupKeyMap", iter_0, 6));
-                    VerifyOrReturn(CheckValue("groupKeyMap[6].groupId", iter_0.GetValue().groupId, 260U));
-                    VerifyOrReturn(CheckValue("groupKeyMap[6].groupKeySetID", iter_0.GetValue().groupKeySetID, 419U));
-                    VerifyOrReturn(CheckValue("groupKeyMap[6].fabricIndex", iter_0.GetValue().fabricIndex, 2U));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupKeyMap", iter_0, 7));
-                    VerifyOrReturn(CheckValue("groupKeyMap[7].groupId", iter_0.GetValue().groupId, 261U));
-                    VerifyOrReturn(CheckValue("groupKeyMap[7].groupKeySetID", iter_0.GetValue().groupKeySetID, 419U));
-                    VerifyOrReturn(CheckValue("groupKeyMap[7].fabricIndex", iter_0.GetValue().fabricIndex, 2U));
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("groupKeyMap", iter_0, 8));
-                }
-            }
             break;
         case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -93272,21 +93204,21 @@ private:
                 {
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupKeyMap", iter_0, 0));
-                    VerifyOrReturn(CheckValue("groupKeyMap[0].groupId", iter_0.GetValue().groupId, 258U));
-                    VerifyOrReturn(CheckValue("groupKeyMap[0].groupKeySetID", iter_0.GetValue().groupKeySetID, 419U));
-                    VerifyOrReturn(CheckValue("groupKeyMap[0].fabricIndex", iter_0.GetValue().fabricIndex, 2U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[0].groupId", iter_0.GetValue().groupId, 257U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[0].groupKeySetID", iter_0.GetValue().groupKeySetID, 417U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[0].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupKeyMap", iter_0, 1));
-                    VerifyOrReturn(CheckValue("groupKeyMap[1].groupId", iter_0.GetValue().groupId, 259U));
-                    VerifyOrReturn(CheckValue("groupKeyMap[1].groupKeySetID", iter_0.GetValue().groupKeySetID, 419U));
-                    VerifyOrReturn(CheckValue("groupKeyMap[1].fabricIndex", iter_0.GetValue().fabricIndex, 2U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[1].groupId", iter_0.GetValue().groupId, 258U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[1].groupKeySetID", iter_0.GetValue().groupKeySetID, 418U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[1].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupKeyMap", iter_0, 2));
-                    VerifyOrReturn(CheckValue("groupKeyMap[2].groupId", iter_0.GetValue().groupId, 260U));
-                    VerifyOrReturn(CheckValue("groupKeyMap[2].groupKeySetID", iter_0.GetValue().groupKeySetID, 419U));
-                    VerifyOrReturn(CheckValue("groupKeyMap[2].fabricIndex", iter_0.GetValue().fabricIndex, 2U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[2].groupId", iter_0.GetValue().groupId, 259U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[2].groupKeySetID", iter_0.GetValue().groupKeySetID, 417U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[2].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupKeyMap", iter_0, 3));
-                    VerifyOrReturn(CheckValue("groupKeyMap[3].groupId", iter_0.GetValue().groupId, 261U));
-                    VerifyOrReturn(CheckValue("groupKeyMap[3].groupKeySetID", iter_0.GetValue().groupKeySetID, 419U));
-                    VerifyOrReturn(CheckValue("groupKeyMap[3].fabricIndex", iter_0.GetValue().fabricIndex, 2U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[3].groupId", iter_0.GetValue().groupId, 260U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[3].groupKeySetID", iter_0.GetValue().groupKeySetID, 418U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[3].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("groupKeyMap", iter_0, 4));
                 }
             }
@@ -93339,19 +93271,75 @@ private:
         case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::Groups::Commands::AddGroupResponse::DecodableType value;
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::DecodableType>
+                    value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, 257U));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupKeyMap", iter_0, 0));
+                    VerifyOrReturn(CheckValue("groupKeyMap[0].groupId", iter_0.GetValue().groupId, 258U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[0].groupKeySetID", iter_0.GetValue().groupKeySetID, 419U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[0].fabricIndex", iter_0.GetValue().fabricIndex, 2U));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupKeyMap", iter_0, 1));
+                    VerifyOrReturn(CheckValue("groupKeyMap[1].groupId", iter_0.GetValue().groupId, 259U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[1].groupKeySetID", iter_0.GetValue().groupKeySetID, 419U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[1].fabricIndex", iter_0.GetValue().fabricIndex, 2U));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupKeyMap", iter_0, 2));
+                    VerifyOrReturn(CheckValue("groupKeyMap[2].groupId", iter_0.GetValue().groupId, 260U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[2].groupKeySetID", iter_0.GetValue().groupKeySetID, 419U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[2].fabricIndex", iter_0.GetValue().fabricIndex, 2U));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupKeyMap", iter_0, 3));
+                    VerifyOrReturn(CheckValue("groupKeyMap[3].groupId", iter_0.GetValue().groupId, 261U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[3].groupKeySetID", iter_0.GetValue().groupKeySetID, 419U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[3].fabricIndex", iter_0.GetValue().fabricIndex, 2U));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("groupKeyMap", iter_0, 4));
+                }
             }
             break;
         case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::Groups::Commands::AddGroupResponse::DecodableType value;
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::DecodableType>
+                    value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, 258U));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupKeyMap", iter_0, 0));
+                    VerifyOrReturn(CheckValue("groupKeyMap[0].groupId", iter_0.GetValue().groupId, 257U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[0].groupKeySetID", iter_0.GetValue().groupKeySetID, 417U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[0].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupKeyMap", iter_0, 1));
+                    VerifyOrReturn(CheckValue("groupKeyMap[1].groupId", iter_0.GetValue().groupId, 258U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[1].groupKeySetID", iter_0.GetValue().groupKeySetID, 418U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[1].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupKeyMap", iter_0, 2));
+                    VerifyOrReturn(CheckValue("groupKeyMap[2].groupId", iter_0.GetValue().groupId, 259U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[2].groupKeySetID", iter_0.GetValue().groupKeySetID, 417U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[2].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupKeyMap", iter_0, 3));
+                    VerifyOrReturn(CheckValue("groupKeyMap[3].groupId", iter_0.GetValue().groupId, 260U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[3].groupKeySetID", iter_0.GetValue().groupKeySetID, 418U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[3].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupKeyMap", iter_0, 4));
+                    VerifyOrReturn(CheckValue("groupKeyMap[4].groupId", iter_0.GetValue().groupId, 258U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[4].groupKeySetID", iter_0.GetValue().groupKeySetID, 419U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[4].fabricIndex", iter_0.GetValue().fabricIndex, 2U));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupKeyMap", iter_0, 5));
+                    VerifyOrReturn(CheckValue("groupKeyMap[5].groupId", iter_0.GetValue().groupId, 259U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[5].groupKeySetID", iter_0.GetValue().groupKeySetID, 419U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[5].fabricIndex", iter_0.GetValue().fabricIndex, 2U));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupKeyMap", iter_0, 6));
+                    VerifyOrReturn(CheckValue("groupKeyMap[6].groupId", iter_0.GetValue().groupId, 260U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[6].groupKeySetID", iter_0.GetValue().groupKeySetID, 419U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[6].fabricIndex", iter_0.GetValue().fabricIndex, 2U));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupKeyMap", iter_0, 7));
+                    VerifyOrReturn(CheckValue("groupKeyMap[7].groupId", iter_0.GetValue().groupId, 261U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[7].groupKeySetID", iter_0.GetValue().groupKeySetID, 419U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[7].fabricIndex", iter_0.GetValue().fabricIndex, 2U));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("groupKeyMap", iter_0, 8));
+                }
             }
             break;
         case 20:
@@ -93360,7 +93348,7 @@ private:
                 chip::app::Clusters::Groups::Commands::AddGroupResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, 259U));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, 257U));
             }
             break;
         case 21:
@@ -93369,7 +93357,7 @@ private:
                 chip::app::Clusters::Groups::Commands::AddGroupResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, 260U));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, 258U));
             }
             break;
         case 22:
@@ -93378,10 +93366,28 @@ private:
                 chip::app::Clusters::Groups::Commands::AddGroupResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, 261U));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, 259U));
             }
             break;
         case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Groups::Commands::AddGroupResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, 260U));
+            }
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Groups::Commands::AddGroupResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, 261U));
+            }
+            break;
+        case 25:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -93447,116 +93453,6 @@ private:
                                                       chip::CharSpan("Group #4", 8)));
                     VerifyOrReturn(CheckValue("groupTable[3].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("groupTable", iter_0, 4));
-                }
-            }
-            break;
-        case 24:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::GroupKeyManagement::Structs::GroupInfoMapStruct::DecodableType>
-                    value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                {
-                    auto iter_0 = value.begin();
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupTable", iter_0, 0));
-                    VerifyOrReturn(CheckValue("groupTable[0].groupId", iter_0.GetValue().groupId, 257U));
-                    {
-                        auto iter_2 = iter_0.GetValue().endpoints.begin();
-                        VerifyOrReturn(
-                            CheckNextListItemDecodes<decltype(iter_0.GetValue().endpoints)>("groupTable[0].endpoints", iter_2, 0));
-                        VerifyOrReturn(CheckValue("groupTable[0].endpoints[0]", iter_2.GetValue(), 1U));
-                        VerifyOrReturn(
-                            CheckNoMoreListItems<decltype(iter_0.GetValue().endpoints)>("groupTable[0].endpoints", iter_2, 1));
-                    }
-                    VerifyOrReturn(CheckValuePresent("groupTable[0].groupName", iter_0.GetValue().groupName));
-                    VerifyOrReturn(CheckValueAsString("groupTable[0].groupName.Value()", iter_0.GetValue().groupName.Value(),
-                                                      chip::CharSpan("Group #1", 8)));
-                    VerifyOrReturn(CheckValue("groupTable[0].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupTable", iter_0, 1));
-                    VerifyOrReturn(CheckValue("groupTable[1].groupId", iter_0.GetValue().groupId, 258U));
-                    {
-                        auto iter_2 = iter_0.GetValue().endpoints.begin();
-                        VerifyOrReturn(
-                            CheckNextListItemDecodes<decltype(iter_0.GetValue().endpoints)>("groupTable[1].endpoints", iter_2, 0));
-                        VerifyOrReturn(CheckValue("groupTable[1].endpoints[0]", iter_2.GetValue(), 1U));
-                        VerifyOrReturn(
-                            CheckNoMoreListItems<decltype(iter_0.GetValue().endpoints)>("groupTable[1].endpoints", iter_2, 1));
-                    }
-                    VerifyOrReturn(CheckValuePresent("groupTable[1].groupName", iter_0.GetValue().groupName));
-                    VerifyOrReturn(CheckValueAsString("groupTable[1].groupName.Value()", iter_0.GetValue().groupName.Value(),
-                                                      chip::CharSpan("Group #2", 8)));
-                    VerifyOrReturn(CheckValue("groupTable[1].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupTable", iter_0, 2));
-                    VerifyOrReturn(CheckValue("groupTable[2].groupId", iter_0.GetValue().groupId, 259U));
-                    {
-                        auto iter_2 = iter_0.GetValue().endpoints.begin();
-                        VerifyOrReturn(
-                            CheckNextListItemDecodes<decltype(iter_0.GetValue().endpoints)>("groupTable[2].endpoints", iter_2, 0));
-                        VerifyOrReturn(CheckValue("groupTable[2].endpoints[0]", iter_2.GetValue(), 1U));
-                        VerifyOrReturn(
-                            CheckNoMoreListItems<decltype(iter_0.GetValue().endpoints)>("groupTable[2].endpoints", iter_2, 1));
-                    }
-                    VerifyOrReturn(CheckValuePresent("groupTable[2].groupName", iter_0.GetValue().groupName));
-                    VerifyOrReturn(CheckValueAsString("groupTable[2].groupName.Value()", iter_0.GetValue().groupName.Value(),
-                                                      chip::CharSpan("Group #3", 8)));
-                    VerifyOrReturn(CheckValue("groupTable[2].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupTable", iter_0, 3));
-                    VerifyOrReturn(CheckValue("groupTable[3].groupId", iter_0.GetValue().groupId, 260U));
-                    {
-                        auto iter_2 = iter_0.GetValue().endpoints.begin();
-                        VerifyOrReturn(
-                            CheckNextListItemDecodes<decltype(iter_0.GetValue().endpoints)>("groupTable[3].endpoints", iter_2, 0));
-                        VerifyOrReturn(CheckValue("groupTable[3].endpoints[0]", iter_2.GetValue(), 1U));
-                        VerifyOrReturn(
-                            CheckNoMoreListItems<decltype(iter_0.GetValue().endpoints)>("groupTable[3].endpoints", iter_2, 1));
-                    }
-                    VerifyOrReturn(CheckValuePresent("groupTable[3].groupName", iter_0.GetValue().groupName));
-                    VerifyOrReturn(CheckValueAsString("groupTable[3].groupName.Value()", iter_0.GetValue().groupName.Value(),
-                                                      chip::CharSpan("Group #4", 8)));
-                    VerifyOrReturn(CheckValue("groupTable[3].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupTable", iter_0, 4));
-                    VerifyOrReturn(CheckValue("groupTable[4].groupId", iter_0.GetValue().groupId, 261U));
-                    {
-                        auto iter_2 = iter_0.GetValue().endpoints.begin();
-                        VerifyOrReturn(
-                            CheckNextListItemDecodes<decltype(iter_0.GetValue().endpoints)>("groupTable[4].endpoints", iter_2, 0));
-                        VerifyOrReturn(CheckValue("groupTable[4].endpoints[0]", iter_2.GetValue(), 1U));
-                        VerifyOrReturn(
-                            CheckNoMoreListItems<decltype(iter_0.GetValue().endpoints)>("groupTable[4].endpoints", iter_2, 1));
-                    }
-                    VerifyOrReturn(CheckValuePresent("groupTable[4].groupName", iter_0.GetValue().groupName));
-                    VerifyOrReturn(CheckValueAsString("groupTable[4].groupName.Value()", iter_0.GetValue().groupName.Value(),
-                                                      chip::CharSpan("Group #5", 8)));
-                    VerifyOrReturn(CheckValue("groupTable[4].fabricIndex", iter_0.GetValue().fabricIndex, 2U));
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("groupTable", iter_0, 5));
-                }
-            }
-            break;
-        case 25:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::GroupKeyManagement::Structs::GroupInfoMapStruct::DecodableType>
-                    value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                {
-                    auto iter_0 = value.begin();
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupTable", iter_0, 0));
-                    VerifyOrReturn(CheckValue("groupTable[0].groupId", iter_0.GetValue().groupId, 261U));
-                    {
-                        auto iter_2 = iter_0.GetValue().endpoints.begin();
-                        VerifyOrReturn(
-                            CheckNextListItemDecodes<decltype(iter_0.GetValue().endpoints)>("groupTable[0].endpoints", iter_2, 0));
-                        VerifyOrReturn(CheckValue("groupTable[0].endpoints[0]", iter_2.GetValue(), 1U));
-                        VerifyOrReturn(
-                            CheckNoMoreListItems<decltype(iter_0.GetValue().endpoints)>("groupTable[0].endpoints", iter_2, 1));
-                    }
-                    VerifyOrReturn(CheckValuePresent("groupTable[0].groupName", iter_0.GetValue().groupName));
-                    VerifyOrReturn(CheckValueAsString("groupTable[0].groupName.Value()", iter_0.GetValue().groupName.Value(),
-                                                      chip::CharSpan("Group #5", 8)));
-                    VerifyOrReturn(CheckValue("groupTable[0].fabricIndex", iter_0.GetValue().fabricIndex, 2U));
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("groupTable", iter_0, 1));
                 }
             }
             break;
@@ -93645,11 +93541,121 @@ private:
             break;
         case 27:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::GroupKeyManagement::Structs::GroupInfoMapStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupTable", iter_0, 0));
+                    VerifyOrReturn(CheckValue("groupTable[0].groupId", iter_0.GetValue().groupId, 261U));
+                    {
+                        auto iter_2 = iter_0.GetValue().endpoints.begin();
+                        VerifyOrReturn(
+                            CheckNextListItemDecodes<decltype(iter_0.GetValue().endpoints)>("groupTable[0].endpoints", iter_2, 0));
+                        VerifyOrReturn(CheckValue("groupTable[0].endpoints[0]", iter_2.GetValue(), 1U));
+                        VerifyOrReturn(
+                            CheckNoMoreListItems<decltype(iter_0.GetValue().endpoints)>("groupTable[0].endpoints", iter_2, 1));
+                    }
+                    VerifyOrReturn(CheckValuePresent("groupTable[0].groupName", iter_0.GetValue().groupName));
+                    VerifyOrReturn(CheckValueAsString("groupTable[0].groupName.Value()", iter_0.GetValue().groupName.Value(),
+                                                      chip::CharSpan("Group #5", 8)));
+                    VerifyOrReturn(CheckValue("groupTable[0].fabricIndex", iter_0.GetValue().fabricIndex, 2U));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("groupTable", iter_0, 1));
+                }
+            }
             break;
         case 28:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::GroupKeyManagement::Structs::GroupInfoMapStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupTable", iter_0, 0));
+                    VerifyOrReturn(CheckValue("groupTable[0].groupId", iter_0.GetValue().groupId, 257U));
+                    {
+                        auto iter_2 = iter_0.GetValue().endpoints.begin();
+                        VerifyOrReturn(
+                            CheckNextListItemDecodes<decltype(iter_0.GetValue().endpoints)>("groupTable[0].endpoints", iter_2, 0));
+                        VerifyOrReturn(CheckValue("groupTable[0].endpoints[0]", iter_2.GetValue(), 1U));
+                        VerifyOrReturn(
+                            CheckNoMoreListItems<decltype(iter_0.GetValue().endpoints)>("groupTable[0].endpoints", iter_2, 1));
+                    }
+                    VerifyOrReturn(CheckValuePresent("groupTable[0].groupName", iter_0.GetValue().groupName));
+                    VerifyOrReturn(CheckValueAsString("groupTable[0].groupName.Value()", iter_0.GetValue().groupName.Value(),
+                                                      chip::CharSpan("Group #1", 8)));
+                    VerifyOrReturn(CheckValue("groupTable[0].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupTable", iter_0, 1));
+                    VerifyOrReturn(CheckValue("groupTable[1].groupId", iter_0.GetValue().groupId, 258U));
+                    {
+                        auto iter_2 = iter_0.GetValue().endpoints.begin();
+                        VerifyOrReturn(
+                            CheckNextListItemDecodes<decltype(iter_0.GetValue().endpoints)>("groupTable[1].endpoints", iter_2, 0));
+                        VerifyOrReturn(CheckValue("groupTable[1].endpoints[0]", iter_2.GetValue(), 1U));
+                        VerifyOrReturn(
+                            CheckNoMoreListItems<decltype(iter_0.GetValue().endpoints)>("groupTable[1].endpoints", iter_2, 1));
+                    }
+                    VerifyOrReturn(CheckValuePresent("groupTable[1].groupName", iter_0.GetValue().groupName));
+                    VerifyOrReturn(CheckValueAsString("groupTable[1].groupName.Value()", iter_0.GetValue().groupName.Value(),
+                                                      chip::CharSpan("Group #2", 8)));
+                    VerifyOrReturn(CheckValue("groupTable[1].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupTable", iter_0, 2));
+                    VerifyOrReturn(CheckValue("groupTable[2].groupId", iter_0.GetValue().groupId, 259U));
+                    {
+                        auto iter_2 = iter_0.GetValue().endpoints.begin();
+                        VerifyOrReturn(
+                            CheckNextListItemDecodes<decltype(iter_0.GetValue().endpoints)>("groupTable[2].endpoints", iter_2, 0));
+                        VerifyOrReturn(CheckValue("groupTable[2].endpoints[0]", iter_2.GetValue(), 1U));
+                        VerifyOrReturn(
+                            CheckNoMoreListItems<decltype(iter_0.GetValue().endpoints)>("groupTable[2].endpoints", iter_2, 1));
+                    }
+                    VerifyOrReturn(CheckValuePresent("groupTable[2].groupName", iter_0.GetValue().groupName));
+                    VerifyOrReturn(CheckValueAsString("groupTable[2].groupName.Value()", iter_0.GetValue().groupName.Value(),
+                                                      chip::CharSpan("Group #3", 8)));
+                    VerifyOrReturn(CheckValue("groupTable[2].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupTable", iter_0, 3));
+                    VerifyOrReturn(CheckValue("groupTable[3].groupId", iter_0.GetValue().groupId, 260U));
+                    {
+                        auto iter_2 = iter_0.GetValue().endpoints.begin();
+                        VerifyOrReturn(
+                            CheckNextListItemDecodes<decltype(iter_0.GetValue().endpoints)>("groupTable[3].endpoints", iter_2, 0));
+                        VerifyOrReturn(CheckValue("groupTable[3].endpoints[0]", iter_2.GetValue(), 1U));
+                        VerifyOrReturn(
+                            CheckNoMoreListItems<decltype(iter_0.GetValue().endpoints)>("groupTable[3].endpoints", iter_2, 1));
+                    }
+                    VerifyOrReturn(CheckValuePresent("groupTable[3].groupName", iter_0.GetValue().groupName));
+                    VerifyOrReturn(CheckValueAsString("groupTable[3].groupName.Value()", iter_0.GetValue().groupName.Value(),
+                                                      chip::CharSpan("Group #4", 8)));
+                    VerifyOrReturn(CheckValue("groupTable[3].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupTable", iter_0, 4));
+                    VerifyOrReturn(CheckValue("groupTable[4].groupId", iter_0.GetValue().groupId, 261U));
+                    {
+                        auto iter_2 = iter_0.GetValue().endpoints.begin();
+                        VerifyOrReturn(
+                            CheckNextListItemDecodes<decltype(iter_0.GetValue().endpoints)>("groupTable[4].endpoints", iter_2, 0));
+                        VerifyOrReturn(CheckValue("groupTable[4].endpoints[0]", iter_2.GetValue(), 1U));
+                        VerifyOrReturn(
+                            CheckNoMoreListItems<decltype(iter_0.GetValue().endpoints)>("groupTable[4].endpoints", iter_2, 1));
+                    }
+                    VerifyOrReturn(CheckValuePresent("groupTable[4].groupName", iter_0.GetValue().groupName));
+                    VerifyOrReturn(CheckValueAsString("groupTable[4].groupName.Value()", iter_0.GetValue().groupName.Value(),
+                                                      chip::CharSpan("Group #5", 8)));
+                    VerifyOrReturn(CheckValue("groupTable[4].fabricIndex", iter_0.GetValue().fabricIndex, 2U));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("groupTable", iter_0, 5));
+                }
+            }
             break;
         case 29:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 30:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
+            break;
+        case 31:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::GroupKeyManagement::Commands::KeySetReadResponse::DecodableType value;
@@ -93670,7 +93676,28 @@ private:
                     CheckValue("groupKeySet.epochStartTime2.Value()", value.groupKeySet.epochStartTime2.Value(), 2110002ULL));
             }
             break;
-        case 30:
+        case 32:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::GroupKeyManagement::Commands::KeySetReadResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("groupKeySet.groupKeySetID", value.groupKeySet.groupKeySetID, 418U));
+                VerifyOrReturn(CheckValue("groupKeySet.groupKeySecurityPolicy", value.groupKeySet.groupKeySecurityPolicy, 0U));
+                VerifyOrReturn(CheckValueNull("groupKeySet.epochKey0", value.groupKeySet.epochKey0));
+                VerifyOrReturn(CheckValueNonNull("groupKeySet.epochStartTime0", value.groupKeySet.epochStartTime0));
+                VerifyOrReturn(
+                    CheckValue("groupKeySet.epochStartTime0.Value()", value.groupKeySet.epochStartTime0.Value(), 2110000ULL));
+                VerifyOrReturn(CheckValueNull("groupKeySet.epochKey1", value.groupKeySet.epochKey1));
+                VerifyOrReturn(CheckValueNonNull("groupKeySet.epochStartTime1", value.groupKeySet.epochStartTime1));
+                VerifyOrReturn(
+                    CheckValue("groupKeySet.epochStartTime1.Value()", value.groupKeySet.epochStartTime1.Value(), 2110001ULL));
+                VerifyOrReturn(CheckValueNull("groupKeySet.epochKey2", value.groupKeySet.epochKey2));
+                VerifyOrReturn(CheckValueNonNull("groupKeySet.epochStartTime2", value.groupKeySet.epochStartTime2));
+                VerifyOrReturn(
+                    CheckValue("groupKeySet.epochStartTime2.Value()", value.groupKeySet.epochStartTime2.Value(), 2110002ULL));
+            }
+            break;
+        case 33:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::Groups::Commands::RemoveGroupResponse::DecodableType value;
@@ -93679,7 +93706,7 @@ private:
                 VerifyOrReturn(CheckValue("groupID", value.groupID, 257U));
             }
             break;
-        case 31:
+        case 34:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -93734,10 +93761,10 @@ private:
                 }
             }
             break;
-        case 32:
+        case 35:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 33:
+        case 36:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -93750,25 +93777,28 @@ private:
                 }
             }
             break;
-        case 34:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 35:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
-            break;
-        case 36:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         case 37:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 38:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
             break;
         case 39:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 40:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 41:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 42:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 43:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 44:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -93785,10 +93815,10 @@ private:
                 }
             }
             break;
-        case 41:
+        case 45:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 42:
+        case 46:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -93895,7 +93925,8 @@ private:
             );
         }
         case 7: {
-            LogStep(7, "KeySet Write 2");
+            LogStep(7, "KeySet Write 2 CacheAndSync");
+            VerifyOrDo(!ShouldSkip("GRPKEY.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetWrite::Type value;
 
@@ -93930,7 +93961,44 @@ private:
             );
         }
         case 8: {
-            LogStep(8, "KeySet Write 3");
+            LogStep(8, "KeySet Write 2 TrustFirst");
+            VerifyOrDo(!ShouldSkip("!GRPKEY.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GroupKeyManagement::Commands::KeySetWrite::Type value;
+
+            value.groupKeySet.groupKeySetID = 418U;
+            value.groupKeySet.groupKeySecurityPolicy =
+                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicyEnum>(0);
+            value.groupKeySet.epochKey0.SetNonNull();
+            value.groupKeySet.epochKey0.Value() = chip::ByteSpan(
+                chip::Uint8::from_const_char(
+                    "\320\321\322\323\324\325\326\327\330\331\332\333\334\335\336\337garbage: not in length on purpose"),
+                16);
+            value.groupKeySet.epochStartTime0.SetNonNull();
+            value.groupKeySet.epochStartTime0.Value() = 2110000ULL;
+            value.groupKeySet.epochKey1.SetNonNull();
+            value.groupKeySet.epochKey1.Value() = chip::ByteSpan(
+                chip::Uint8::from_const_char(
+                    "\340\341\342\343\344\345\346\347\350\351\352\353\354\355\356\357garbage: not in length on purpose"),
+                16);
+            value.groupKeySet.epochStartTime1.SetNonNull();
+            value.groupKeySet.epochStartTime1.Value() = 2110001ULL;
+            value.groupKeySet.epochKey2.SetNonNull();
+            value.groupKeySet.epochKey2.Value() = chip::ByteSpan(
+                chip::Uint8::from_const_char(
+                    "\360\361\362\363\364\365\366\367\370\371\372\373\374\375\376\377garbage: not in length on purpose"),
+                16);
+            value.groupKeySet.epochStartTime2.SetNonNull();
+            value.groupKeySet.epochStartTime2.Value() = 2110002ULL;
+
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
+                               GroupKeyManagement::Commands::KeySetWrite::Id, value, chip::NullOptional
+
+            );
+        }
+        case 9: {
+            LogStep(9, "KeySet Write 3 CacheAndSync");
+            VerifyOrDo(!ShouldSkip("GRPKEY.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetWrite::Type value;
 
@@ -93962,8 +94030,42 @@ private:
 
             );
         }
-        case 9: {
-            LogStep(9, "KeySet Read");
+        case 10: {
+            LogStep(10, "KeySet Write 3 TrustFirst");
+            VerifyOrDo(!ShouldSkip("!GRPKEY.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GroupKeyManagement::Commands::KeySetWrite::Type value;
+
+            value.groupKeySet.groupKeySetID = 419U;
+            value.groupKeySet.groupKeySecurityPolicy =
+                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicyEnum>(0);
+            value.groupKeySet.epochKey0.SetNonNull();
+            value.groupKeySet.epochKey0.Value() = chip::ByteSpan(
+                chip::Uint8::from_const_char(
+                    "\000\001\002\003\004\005\006\007\010\011\012\013\014\015\016\017garbage: not in length on purpose"),
+                16);
+            value.groupKeySet.epochStartTime0.SetNonNull();
+            value.groupKeySet.epochStartTime0.Value() = 2110000ULL;
+            value.groupKeySet.epochKey1.SetNonNull();
+            value.groupKeySet.epochKey1.Value() = chip::ByteSpan(
+                chip::Uint8::from_const_char(
+                    "\020\021\022\023\024\025\026\027\030\031\032\033\034\035\036\037garbage: not in length on purpose"),
+                16);
+            value.groupKeySet.epochStartTime1.SetNonNull();
+            value.groupKeySet.epochStartTime1.Value() = 2110001ULL;
+            value.groupKeySet.epochKey2.SetNonNull();
+            value.groupKeySet.epochKey2.Value() =
+                chip::ByteSpan(chip::Uint8::from_const_char(" !\042#$%&'()*+,-./garbage: not in length on purpose"), 16);
+            value.groupKeySet.epochStartTime2.SetNonNull();
+            value.groupKeySet.epochStartTime2.Value() = 2110002ULL;
+
+            return SendCommand(kIdentityBeta, GetEndpoint(0), GroupKeyManagement::Id, GroupKeyManagement::Commands::KeySetWrite::Id,
+                               value, chip::NullOptional
+
+            );
+        }
+        case 11: {
+            LogStep(11, "KeySet Read");
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetRead::Type value;
             value.groupKeySetID = 417U;
@@ -93972,8 +94074,8 @@ private:
 
             );
         }
-        case 10: {
-            LogStep(10, "Write Group Keys (invalid)");
+        case 12: {
+            LogStep(12, "Write Group Keys (invalid)");
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type> value;
 
@@ -93991,8 +94093,8 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                   GroupKeyManagement::Attributes::GroupKeyMap::Id, value, chip::NullOptional, chip::NullOptional);
         }
-        case 11: {
-            LogStep(11, "Write Group Keys (too many)");
+        case 13: {
+            LogStep(13, "Write Group Keys (too many)");
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type> value;
 
@@ -94062,8 +94164,8 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                   GroupKeyManagement::Attributes::GroupKeyMap::Id, value, chip::NullOptional, chip::NullOptional);
         }
-        case 12: {
-            LogStep(12, "Write Group Keys on alpha");
+        case 14: {
+            LogStep(14, "Write Group Keys on alpha");
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type> value;
 
@@ -94093,8 +94195,8 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                   GroupKeyManagement::Attributes::GroupKeyMap::Id, value, chip::NullOptional, chip::NullOptional);
         }
-        case 13: {
-            LogStep(13, "Write Group Keys on beta");
+        case 15: {
+            LogStep(15, "Write Group Keys on beta");
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type> value;
 
@@ -94124,28 +94226,28 @@ private:
             return WriteAttribute(kIdentityBeta, GetEndpoint(0), GroupKeyManagement::Id,
                                   GroupKeyManagement::Attributes::GroupKeyMap::Id, value, chip::NullOptional, chip::NullOptional);
         }
-        case 14: {
-            LogStep(14, "Read Group Keys on alpha");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
-                                 GroupKeyManagement::Attributes::GroupKeyMap::Id, true, chip::NullOptional);
-        }
-        case 15: {
-            LogStep(15, "Read Group Keys on alpha without fabric filtering");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
-                                 GroupKeyManagement::Attributes::GroupKeyMap::Id, false, chip::NullOptional);
-        }
         case 16: {
-            LogStep(16, "Read Group Keys on beta");
-            return ReadAttribute(kIdentityBeta, GetEndpoint(0), GroupKeyManagement::Id,
+            LogStep(16, "Read Group Keys on alpha");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                  GroupKeyManagement::Attributes::GroupKeyMap::Id, true, chip::NullOptional);
         }
         case 17: {
-            LogStep(17, "Read Group Keys on beta without fabric filtering");
-            return ReadAttribute(kIdentityBeta, GetEndpoint(0), GroupKeyManagement::Id,
+            LogStep(17, "Read Group Keys on alpha without fabric filtering");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                  GroupKeyManagement::Attributes::GroupKeyMap::Id, false, chip::NullOptional);
         }
         case 18: {
-            LogStep(18, "Add Group 1");
+            LogStep(18, "Read Group Keys on beta");
+            return ReadAttribute(kIdentityBeta, GetEndpoint(0), GroupKeyManagement::Id,
+                                 GroupKeyManagement::Attributes::GroupKeyMap::Id, true, chip::NullOptional);
+        }
+        case 19: {
+            LogStep(19, "Read Group Keys on beta without fabric filtering");
+            return ReadAttribute(kIdentityBeta, GetEndpoint(0), GroupKeyManagement::Id,
+                                 GroupKeyManagement::Attributes::GroupKeyMap::Id, false, chip::NullOptional);
+        }
+        case 20: {
+            LogStep(20, "Add Group 1");
             ListFreer listFreer;
             chip::app::Clusters::Groups::Commands::AddGroup::Type value;
             value.groupID   = 257U;
@@ -94154,8 +94256,8 @@ private:
 
             );
         }
-        case 19: {
-            LogStep(19, "Add Group 2");
+        case 21: {
+            LogStep(21, "Add Group 2");
             ListFreer listFreer;
             chip::app::Clusters::Groups::Commands::AddGroup::Type value;
             value.groupID   = 258U;
@@ -94164,8 +94266,8 @@ private:
 
             );
         }
-        case 20: {
-            LogStep(20, "Add Group 3");
+        case 22: {
+            LogStep(22, "Add Group 3");
             ListFreer listFreer;
             chip::app::Clusters::Groups::Commands::AddGroup::Type value;
             value.groupID   = 259U;
@@ -94174,8 +94276,8 @@ private:
 
             );
         }
-        case 21: {
-            LogStep(21, "Add Group 4");
+        case 23: {
+            LogStep(23, "Add Group 4");
             ListFreer listFreer;
             chip::app::Clusters::Groups::Commands::AddGroup::Type value;
             value.groupID   = 260U;
@@ -94184,8 +94286,8 @@ private:
 
             );
         }
-        case 22: {
-            LogStep(22, "Add Group 5");
+        case 24: {
+            LogStep(24, "Add Group 5");
             ListFreer listFreer;
             chip::app::Clusters::Groups::Commands::AddGroup::Type value;
             value.groupID   = 261U;
@@ -94194,28 +94296,28 @@ private:
 
             );
         }
-        case 23: {
-            LogStep(23, "Read GroupTable from alpha");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
-                                 GroupKeyManagement::Attributes::GroupTable::Id, true, chip::NullOptional);
-        }
-        case 24: {
-            LogStep(24, "Read GroupTable from alpha without fabric filtering");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
-                                 GroupKeyManagement::Attributes::GroupTable::Id, false, chip::NullOptional);
-        }
         case 25: {
-            LogStep(25, "Read GroupTable from beta");
-            return ReadAttribute(kIdentityBeta, GetEndpoint(0), GroupKeyManagement::Id,
+            LogStep(25, "Read GroupTable from alpha");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                  GroupKeyManagement::Attributes::GroupTable::Id, true, chip::NullOptional);
         }
         case 26: {
-            LogStep(26, "Read GroupTable from beta without fabric filtering");
-            return ReadAttribute(kIdentityBeta, GetEndpoint(0), GroupKeyManagement::Id,
+            LogStep(26, "Read GroupTable from alpha without fabric filtering");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                  GroupKeyManagement::Attributes::GroupTable::Id, false, chip::NullOptional);
         }
         case 27: {
-            LogStep(27, "KeySet Remove 1");
+            LogStep(27, "Read GroupTable from beta");
+            return ReadAttribute(kIdentityBeta, GetEndpoint(0), GroupKeyManagement::Id,
+                                 GroupKeyManagement::Attributes::GroupTable::Id, true, chip::NullOptional);
+        }
+        case 28: {
+            LogStep(28, "Read GroupTable from beta without fabric filtering");
+            return ReadAttribute(kIdentityBeta, GetEndpoint(0), GroupKeyManagement::Id,
+                                 GroupKeyManagement::Attributes::GroupTable::Id, false, chip::NullOptional);
+        }
+        case 29: {
+            LogStep(29, "KeySet Remove 1");
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetRemove::Type value;
             value.groupKeySetID = 417U;
@@ -94224,8 +94326,8 @@ private:
 
             );
         }
-        case 28: {
-            LogStep(28, "KeySet Read (removed)");
+        case 30: {
+            LogStep(30, "KeySet Read (removed)");
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetRead::Type value;
             value.groupKeySetID = 417U;
@@ -94234,8 +94336,9 @@ private:
 
             );
         }
-        case 29: {
-            LogStep(29, "KeySet Read (not removed)");
+        case 31: {
+            LogStep(31, "KeySet Read (not removed) CacheAndSync");
+            VerifyOrDo(!ShouldSkip("GRPKEY.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetRead::Type value;
             value.groupKeySetID = 418U;
@@ -94244,8 +94347,19 @@ private:
 
             );
         }
-        case 30: {
-            LogStep(30, "Remove Group 1");
+        case 32: {
+            LogStep(32, "KeySet Read (not removed) TrustFirst");
+            VerifyOrDo(!ShouldSkip("GRPKEY.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GroupKeyManagement::Commands::KeySetRead::Type value;
+            value.groupKeySetID = 418U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id, GroupKeyManagement::Commands::KeySetRead::Id,
+                               value, chip::NullOptional
+
+            );
+        }
+        case 33: {
+            LogStep(33, "Remove Group 1");
             ListFreer listFreer;
             chip::app::Clusters::Groups::Commands::RemoveGroup::Type value;
             value.groupID = 257U;
@@ -94254,13 +94368,13 @@ private:
 
             );
         }
-        case 31: {
-            LogStep(31, "Read GroupTable 2");
+        case 34: {
+            LogStep(34, "Read GroupTable 2");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                  GroupKeyManagement::Attributes::GroupTable::Id, true, chip::NullOptional);
         }
-        case 32: {
-            LogStep(32, "Remove All");
+        case 35: {
+            LogStep(35, "Remove All");
             ListFreer listFreer;
             chip::app::Clusters::Groups::Commands::RemoveAllGroups::Type value;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), Groups::Id, Groups::Commands::RemoveAllGroups::Id, value,
@@ -94268,13 +94382,13 @@ private:
 
             );
         }
-        case 33: {
-            LogStep(33, "Read GroupTable 3");
+        case 36: {
+            LogStep(36, "Read GroupTable 3");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                  GroupKeyManagement::Attributes::GroupTable::Id, true, chip::NullOptional);
         }
-        case 34: {
-            LogStep(34, "KeySet Remove 2");
+        case 37: {
+            LogStep(37, "KeySet Remove 2");
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetRemove::Type value;
             value.groupKeySetID = 418U;
@@ -94283,8 +94397,8 @@ private:
 
             );
         }
-        case 35: {
-            LogStep(35, "KeySet Read (also removed)");
+        case 38: {
+            LogStep(38, "KeySet Read (also removed)");
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetRead::Type value;
             value.groupKeySetID = 418U;
@@ -94293,8 +94407,8 @@ private:
 
             );
         }
-        case 36: {
-            LogStep(36, "KeySet Write 1");
+        case 39: {
+            LogStep(39, "KeySet Write 1");
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetWrite::Type value;
 
@@ -94328,8 +94442,9 @@ private:
 
             );
         }
-        case 37: {
-            LogStep(37, "KeySet Write 2");
+        case 40: {
+            LogStep(40, "KeySet Write 2 CacheAndSync");
+            VerifyOrDo(!ShouldSkip("GRPKEY.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetWrite::Type value;
 
@@ -94363,8 +94478,44 @@ private:
 
             );
         }
-        case 38: {
-            LogStep(38, "Map Group 1 and Group 2 to KeySet 1 and group 2 to KeySet 2");
+        case 41: {
+            LogStep(41, "KeySet Write 2 TrustFirst");
+            VerifyOrDo(!ShouldSkip("!GRPKEY.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GroupKeyManagement::Commands::KeySetWrite::Type value;
+
+            value.groupKeySet.groupKeySetID = 418U;
+            value.groupKeySet.groupKeySecurityPolicy =
+                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicyEnum>(0);
+            value.groupKeySet.epochKey0.SetNonNull();
+            value.groupKeySet.epochKey0.Value() = chip::ByteSpan(
+                chip::Uint8::from_const_char(
+                    "\320\321\322\323\324\325\326\327\330\331\332\333\334\335\336\337garbage: not in length on purpose"),
+                16);
+            value.groupKeySet.epochStartTime0.SetNonNull();
+            value.groupKeySet.epochStartTime0.Value() = 2110000ULL;
+            value.groupKeySet.epochKey1.SetNonNull();
+            value.groupKeySet.epochKey1.Value() = chip::ByteSpan(
+                chip::Uint8::from_const_char(
+                    "\340\341\342\343\344\345\346\347\350\351\352\353\354\355\356\357garbage: not in length on purpose"),
+                16);
+            value.groupKeySet.epochStartTime1.SetNonNull();
+            value.groupKeySet.epochStartTime1.Value() = 2110001ULL;
+            value.groupKeySet.epochKey2.SetNonNull();
+            value.groupKeySet.epochKey2.Value() = chip::ByteSpan(
+                chip::Uint8::from_const_char(
+                    "\360\361\362\363\364\365\366\367\370\371\372\373\374\375\376\377garbage: not in length on purpose"),
+                16);
+            value.groupKeySet.epochStartTime2.SetNonNull();
+            value.groupKeySet.epochStartTime2.Value() = 2110002ULL;
+
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
+                               GroupKeyManagement::Commands::KeySetWrite::Id, value, chip::NullOptional
+
+            );
+        }
+        case 42: {
+            LogStep(42, "Map Group 1 and Group 2 to KeySet 1 and group 2 to KeySet 2");
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type> value;
 
@@ -94390,8 +94541,8 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                   GroupKeyManagement::Attributes::GroupKeyMap::Id, value, chip::NullOptional, chip::NullOptional);
         }
-        case 39: {
-            LogStep(39, "Remove keyset 1");
+        case 43: {
+            LogStep(43, "Remove keyset 1");
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetRemove::Type value;
             value.groupKeySetID = 417U;
@@ -94400,13 +94551,13 @@ private:
 
             );
         }
-        case 40: {
-            LogStep(40, "TH verifies GroupKeyMap entries for KeySet 1 have been removed");
+        case 44: {
+            LogStep(44, "TH verifies GroupKeyMap entries for KeySet 1 have been removed");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                  GroupKeyManagement::Attributes::GroupKeyMap::Id, true, chip::NullOptional);
         }
-        case 41: {
-            LogStep(41, "Remove keyset 2");
+        case 45: {
+            LogStep(45, "Remove keyset 2");
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetRemove::Type value;
             value.groupKeySetID = 418U;
@@ -94415,8 +94566,8 @@ private:
 
             );
         }
-        case 42: {
-            LogStep(42, "TH verifies GroupKeyMap entries for KeySet 2 have been removed");
+        case 46: {
+            LogStep(46, "TH verifies GroupKeyMap entries for KeySet 2 have been removed");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                  GroupKeyManagement::Attributes::GroupKeyMap::Id, true, chip::NullOptional);
         }
