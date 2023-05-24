@@ -106,7 +106,6 @@ public:
         printf("Test_TC_MEDIAPLAYBACK_1_7\n");
         printf("Test_TC_AUDIOOUTPUT_1_8\n");
         printf("Test_TC_TGTNAV_1_9\n");
-        printf("Test_TC_TGTNAV_8_2\n");
         printf("Test_TC_APBSC_1_10\n");
         printf("Test_TC_CONTENTLAUNCHER_1_11\n");
         printf("Test_TC_ALOGIN_1_12\n");
@@ -8316,256 +8315,496 @@ public:
             err = TestReadTheOptionalAttributeColorTemperatureMiredsInAttributeList_16();
             break;
         case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : Read the optional attribute(EnhancedCurrentHue) in AttributeList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Read the optional attribute(NumberOfPrimaries) in AttributeList\n");
+            if (ShouldSkip("CC.S.A0010")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeNumberOfPrimariesInAttributeList_17();
+            break;
+        case 18:
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Read the optional attribute(Primary1X) in AttributeList\n");
+            if (ShouldSkip("CC.S.A0011")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributePrimary1XInAttributeList_18();
+            break;
+        case 19:
+            ChipLogProgress(chipTool, " ***** Test Step 19 : Read the optional attribute(Primary1Y) in AttributeList\n");
+            if (ShouldSkip("CC.S.A0012")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributePrimary1YInAttributeList_19();
+            break;
+        case 20:
+            ChipLogProgress(chipTool, " ***** Test Step 20 : Read the optional attribute(Primary1Intensity) in AttributeList\n");
+            if (ShouldSkip("CC.S.A0013")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributePrimary1IntensityInAttributeList_20();
+            break;
+        case 21:
+            ChipLogProgress(chipTool, " ***** Test Step 21 : Read the optional attribute(Primary2X) in AttributeList\n");
+            if (ShouldSkip("CC.S.A0015")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributePrimary2XInAttributeList_21();
+            break;
+        case 22:
+            ChipLogProgress(chipTool, " ***** Test Step 22 : Read the optional attribute(Primary2Y) in AttributeList\n");
+            if (ShouldSkip("CC.S.A0016")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributePrimary2YInAttributeList_22();
+            break;
+        case 23:
+            ChipLogProgress(chipTool, " ***** Test Step 23 : Read the optional attribute(Primary2Intensity) in AttributeList\n");
+            if (ShouldSkip("CC.S.A0017")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributePrimary2IntensityInAttributeList_23();
+            break;
+        case 24:
+            ChipLogProgress(chipTool, " ***** Test Step 24 : Read the optional attribute(Primary3X) in AttributeList\n");
+            if (ShouldSkip("CC.S.A0019")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributePrimary3XInAttributeList_24();
+            break;
+        case 25:
+            ChipLogProgress(chipTool, " ***** Test Step 25 : Read the optional attribute(Primary3Y) in AttributeList\n");
+            if (ShouldSkip("CC.S.A001a")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributePrimary3YInAttributeList_25();
+            break;
+        case 26:
+            ChipLogProgress(chipTool, " ***** Test Step 26 : Read the optional attribute(Primary3Intensity) in AttributeList\n");
+            if (ShouldSkip("CC.S.A001b")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributePrimary3IntensityInAttributeList_26();
+            break;
+        case 27:
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Read the optional attribute(Primary4X) in AttributeList\n");
+            if (ShouldSkip("CC.S.A0020")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributePrimary4XInAttributeList_27();
+            break;
+        case 28:
+            ChipLogProgress(chipTool, " ***** Test Step 28 : Read the optional attribute(Primary4Y) in AttributeList\n");
+            if (ShouldSkip("CC.S.A0021")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributePrimary4YInAttributeList_28();
+            break;
+        case 29:
+            ChipLogProgress(chipTool, " ***** Test Step 29 : Read the optional attribute(Primary4Intensity) in AttributeList\n");
+            if (ShouldSkip("CC.S.A0022")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributePrimary4IntensityInAttributeList_29();
+            break;
+        case 30:
+            ChipLogProgress(chipTool, " ***** Test Step 30 : Read the optional attribute(Primary5X) in AttributeList\n");
+            if (ShouldSkip("CC.S.A0024")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributePrimary5XInAttributeList_30();
+            break;
+        case 31:
+            ChipLogProgress(chipTool, " ***** Test Step 31 : Read the optional attribute(Primary5Y) in AttributeList\n");
+            if (ShouldSkip("CC.S.A0025")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributePrimary5YInAttributeList_31();
+            break;
+        case 32:
+            ChipLogProgress(chipTool, " ***** Test Step 32 : Read the optional attribute(Primary5Intensity) in AttributeList\n");
+            if (ShouldSkip("CC.S.A0026")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributePrimary5IntensityInAttributeList_32();
+            break;
+        case 33:
+            ChipLogProgress(chipTool, " ***** Test Step 33 : Read the optional attribute(Primary6X) in AttributeList\n");
+            if (ShouldSkip("CC.S.A0028")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributePrimary6XInAttributeList_33();
+            break;
+        case 34:
+            ChipLogProgress(chipTool, " ***** Test Step 34 : Read the optional attribute(Primary6Y) in AttributeList\n");
+            if (ShouldSkip("CC.S.A0029")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributePrimary6YInAttributeList_34();
+            break;
+        case 35:
+            ChipLogProgress(chipTool, " ***** Test Step 35 : Read the optional attribute(Primary6Intensity) in AttributeList\n");
+            if (ShouldSkip("CC.S.A002a")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributePrimary6IntensityInAttributeList_35();
+            break;
+        case 36:
+            ChipLogProgress(chipTool, " ***** Test Step 36 : Read the optional attribute(WhitePointX) in AttributeList\n");
+            if (ShouldSkip("CC.S.A0030")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeWhitePointXInAttributeList_36();
+            break;
+        case 37:
+            ChipLogProgress(chipTool, " ***** Test Step 37 : Read the optional attribute(WhitePointY) in AttributeList\n");
+            if (ShouldSkip("CC.S.A0031")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeWhitePointYInAttributeList_37();
+            break;
+        case 38:
+            ChipLogProgress(chipTool, " ***** Test Step 38 : Read the optional attribute(ColorPointRX) in AttributeList\n");
+            if (ShouldSkip("CC.S.A0032")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeColorPointRXInAttributeList_38();
+            break;
+        case 39:
+            ChipLogProgress(chipTool, " ***** Test Step 39 : Read the optional attribute(ColorPointRY) in AttributeList\n");
+            if (ShouldSkip("CC.S.A0033")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeColorPointRYInAttributeList_39();
+            break;
+        case 40:
+            ChipLogProgress(chipTool, " ***** Test Step 40 : Read the optional attribute(ColorPointRIntensity) in AttributeList\n");
+            if (ShouldSkip("CC.S.A0034")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeColorPointRIntensityInAttributeList_40();
+            break;
+        case 41:
+            ChipLogProgress(chipTool, " ***** Test Step 41 : Read the optional attribute(ColorPointGX) in AttributeList\n");
+            if (ShouldSkip("CC.S.A0036")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeColorPointGXInAttributeList_41();
+            break;
+        case 42:
+            ChipLogProgress(chipTool, " ***** Test Step 42 : Read the optional attribute(ColorPointGY) in AttributeList\n");
+            if (ShouldSkip("CC.S.A0037")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeColorPointGYInAttributeList_42();
+            break;
+        case 43:
+            ChipLogProgress(chipTool, " ***** Test Step 43 : Read the optional attribute(ColorPointGIntensity) in AttributeList\n");
+            if (ShouldSkip("CC.S.A0038")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeColorPointGIntensityInAttributeList_43();
+            break;
+        case 44:
+            ChipLogProgress(chipTool, " ***** Test Step 44 : Read the optional attribute(ColorPointBX) in AttributeList\n");
+            if (ShouldSkip("CC.S.A003a")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeColorPointBXInAttributeList_44();
+            break;
+        case 45:
+            ChipLogProgress(chipTool, " ***** Test Step 45 : Read the optional attribute(ColorPointBY) in AttributeList\n");
+            if (ShouldSkip("CC.S.A003b")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeColorPointBYInAttributeList_45();
+            break;
+        case 46:
+            ChipLogProgress(chipTool, " ***** Test Step 46 : Read the optional attribute(ColorPointBIntensity) in AttributeList\n");
+            if (ShouldSkip("CC.S.A003c")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeColorPointBIntensityInAttributeList_46();
+            break;
+        case 47:
+            ChipLogProgress(chipTool, " ***** Test Step 47 : Read the optional attribute(EnhancedCurrentHue) in AttributeList\n");
             if (ShouldSkip("CC.S.A4000")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalAttributeEnhancedCurrentHueInAttributeList_17();
+            err = TestReadTheOptionalAttributeEnhancedCurrentHueInAttributeList_47();
             break;
-        case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : Read the optional attribute(ColorLoopActive) in AttributeList\n");
+        case 48:
+            ChipLogProgress(chipTool, " ***** Test Step 48 : Read the optional attribute(ColorLoopActive) in AttributeList\n");
             if (ShouldSkip("CC.S.A4002")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalAttributeColorLoopActiveInAttributeList_18();
+            err = TestReadTheOptionalAttributeColorLoopActiveInAttributeList_48();
             break;
-        case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : Read the optional attribute(ColorLoopDirection) in AttributeList\n");
+        case 49:
+            ChipLogProgress(chipTool, " ***** Test Step 49 : Read the optional attribute(ColorLoopDirection) in AttributeList\n");
             if (ShouldSkip("CC.S.A4003")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalAttributeColorLoopDirectionInAttributeList_19();
+            err = TestReadTheOptionalAttributeColorLoopDirectionInAttributeList_49();
             break;
-        case 20:
-            ChipLogProgress(chipTool, " ***** Test Step 20 : Read the optional attribute(ColorLoopTime) in AttributeList\n");
+        case 50:
+            ChipLogProgress(chipTool, " ***** Test Step 50 : Read the optional attribute(ColorLoopTime) in AttributeList\n");
             if (ShouldSkip("CC.S.A4004")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalAttributeColorLoopTimeInAttributeList_20();
+            err = TestReadTheOptionalAttributeColorLoopTimeInAttributeList_50();
             break;
-        case 21:
+        case 51:
             ChipLogProgress(
-                chipTool, " ***** Test Step 21 : Read the optional attribute(ColorLoopStartEnhancedHue) in AttributeList\n");
+                chipTool, " ***** Test Step 51 : Read the optional attribute(ColorLoopStartEnhancedHue) in AttributeList\n");
             if (ShouldSkip("CC.S.A4005")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalAttributeColorLoopStartEnhancedHueInAttributeList_21();
+            err = TestReadTheOptionalAttributeColorLoopStartEnhancedHueInAttributeList_51();
             break;
-        case 22:
+        case 52:
             ChipLogProgress(
-                chipTool, " ***** Test Step 22 : Read the optional attribute(ColorLoopStoredEnhancedHue) in AttributeList\n");
+                chipTool, " ***** Test Step 52 : Read the optional attribute(ColorLoopStoredEnhancedHue) in AttributeList\n");
             if (ShouldSkip("CC.S.A4006")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalAttributeColorLoopStoredEnhancedHueInAttributeList_22();
+            err = TestReadTheOptionalAttributeColorLoopStoredEnhancedHueInAttributeList_52();
             break;
-        case 23:
+        case 53:
             ChipLogProgress(
-                chipTool, " ***** Test Step 23 : Read the optional attribute(ColorTempPhysicalMinMireds) in AttributeList\n");
+                chipTool, " ***** Test Step 53 : Read the optional attribute(ColorTempPhysicalMinMireds) in AttributeList\n");
             if (ShouldSkip("CC.S.A400b")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalAttributeColorTempPhysicalMinMiredsInAttributeList_23();
+            err = TestReadTheOptionalAttributeColorTempPhysicalMinMiredsInAttributeList_53();
             break;
-        case 24:
+        case 54:
             ChipLogProgress(
-                chipTool, " ***** Test Step 24 : Read the optional attribute(ColorTempPhysicalMaxMireds) in AttributeList\n");
+                chipTool, " ***** Test Step 54 : Read the optional attribute(ColorTempPhysicalMaxMireds) in AttributeList\n");
             if (ShouldSkip("CC.S.A400c")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalAttributeColorTempPhysicalMaxMiredsInAttributeList_24();
+            err = TestReadTheOptionalAttributeColorTempPhysicalMaxMiredsInAttributeList_54();
             break;
-        case 25:
+        case 55:
             ChipLogProgress(
-                chipTool, " ***** Test Step 25 : Read the optional attribute(CoupleColorTempToLevelMinMireds) in AttributeList\n");
+                chipTool, " ***** Test Step 55 : Read the optional attribute(CoupleColorTempToLevelMinMireds) in AttributeList\n");
             if (ShouldSkip("CC.S.A400d")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalAttributeCoupleColorTempToLevelMinMiredsInAttributeList_25();
+            err = TestReadTheOptionalAttributeCoupleColorTempToLevelMinMiredsInAttributeList_55();
             break;
-        case 26:
+        case 56:
             ChipLogProgress(
-                chipTool, " ***** Test Step 26 : Read the optional attribute(StartUpColorTemperatureMireds) in AttributeList\n");
+                chipTool, " ***** Test Step 56 : Read the optional attribute(StartUpColorTemperatureMireds) in AttributeList\n");
             if (ShouldSkip("CC.S.A4010")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalAttributeStartUpColorTemperatureMiredsInAttributeList_26();
+            err = TestReadTheOptionalAttributeStartUpColorTemperatureMiredsInAttributeList_56();
             break;
-        case 27:
-            ChipLogProgress(chipTool, " ***** Test Step 27 : Read the global attribute: EventList\n");
-            err = TestReadTheGlobalAttributeEventList_27();
+        case 57:
+            ChipLogProgress(chipTool, " ***** Test Step 57 : Read the global attribute: EventList\n");
+            err = TestReadTheGlobalAttributeEventList_57();
             break;
-        case 28:
-            ChipLogProgress(chipTool, " ***** Test Step 28 : Read the optional command(MoveToHue) in AcceptedCommandList\n");
+        case 58:
+            ChipLogProgress(chipTool, " ***** Test Step 58 : Read the optional command(MoveToHue) in AcceptedCommandList\n");
             if (ShouldSkip("CC.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalCommandMoveToHueInAcceptedCommandList_28();
+            err = TestReadTheOptionalCommandMoveToHueInAcceptedCommandList_58();
             break;
-        case 29:
-            ChipLogProgress(chipTool, " ***** Test Step 29 : Read the optional command(MoveHue) in AcceptedCommandList\n");
+        case 59:
+            ChipLogProgress(chipTool, " ***** Test Step 59 : Read the optional command(MoveHue) in AcceptedCommandList\n");
             if (ShouldSkip("CC.S.C01.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalCommandMoveHueInAcceptedCommandList_29();
+            err = TestReadTheOptionalCommandMoveHueInAcceptedCommandList_59();
             break;
-        case 30:
-            ChipLogProgress(chipTool, " ***** Test Step 30 : Read the optional command(StepHue) in AcceptedCommandList\n");
+        case 60:
+            ChipLogProgress(chipTool, " ***** Test Step 60 : Read the optional command(StepHue) in AcceptedCommandList\n");
             if (ShouldSkip("CC.S.C02.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalCommandStepHueInAcceptedCommandList_30();
+            err = TestReadTheOptionalCommandStepHueInAcceptedCommandList_60();
             break;
-        case 31:
-            ChipLogProgress(chipTool, " ***** Test Step 31 : Read the optional command(MoveToSaturation) in AcceptedCommandList\n");
+        case 61:
+            ChipLogProgress(chipTool, " ***** Test Step 61 : Read the optional command(MoveToSaturation) in AcceptedCommandList\n");
             if (ShouldSkip("CC.S.C03.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalCommandMoveToSaturationInAcceptedCommandList_31();
+            err = TestReadTheOptionalCommandMoveToSaturationInAcceptedCommandList_61();
             break;
-        case 32:
-            ChipLogProgress(chipTool, " ***** Test Step 32 : Read the optional command(MoveSaturation) in AcceptedCommandList\n");
+        case 62:
+            ChipLogProgress(chipTool, " ***** Test Step 62 : Read the optional command(MoveSaturation) in AcceptedCommandList\n");
             if (ShouldSkip("CC.S.C04.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalCommandMoveSaturationInAcceptedCommandList_32();
+            err = TestReadTheOptionalCommandMoveSaturationInAcceptedCommandList_62();
             break;
-        case 33:
-            ChipLogProgress(chipTool, " ***** Test Step 33 : Read the optional command(StepSaturation) in AcceptedCommandList\n");
+        case 63:
+            ChipLogProgress(chipTool, " ***** Test Step 63 : Read the optional command(StepSaturation) in AcceptedCommandList\n");
             if (ShouldSkip("CC.S.C05.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalCommandStepSaturationInAcceptedCommandList_33();
+            err = TestReadTheOptionalCommandStepSaturationInAcceptedCommandList_63();
             break;
-        case 34:
+        case 64:
             ChipLogProgress(
-                chipTool, " ***** Test Step 34 : Read the optional command(MoveToHueAndSaturation) in AcceptedCommandList\n");
+                chipTool, " ***** Test Step 64 : Read the optional command(MoveToHueAndSaturation) in AcceptedCommandList\n");
             if (ShouldSkip("CC.S.C06.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalCommandMoveToHueAndSaturationInAcceptedCommandList_34();
+            err = TestReadTheOptionalCommandMoveToHueAndSaturationInAcceptedCommandList_64();
             break;
-        case 35:
-            ChipLogProgress(chipTool, " ***** Test Step 35 : Read the optional command(MoveToColor) in AcceptedCommandList\n");
+        case 65:
+            ChipLogProgress(chipTool, " ***** Test Step 65 : Read the optional command(MoveToColor) in AcceptedCommandList\n");
             if (ShouldSkip("CC.S.C07.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalCommandMoveToColorInAcceptedCommandList_35();
+            err = TestReadTheOptionalCommandMoveToColorInAcceptedCommandList_65();
             break;
-        case 36:
-            ChipLogProgress(chipTool, " ***** Test Step 36 : Read the optional command(MoveColor) in AcceptedCommandList\n");
+        case 66:
+            ChipLogProgress(chipTool, " ***** Test Step 66 : Read the optional command(MoveColor) in AcceptedCommandList\n");
             if (ShouldSkip("CC.S.C08.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalCommandMoveColorInAcceptedCommandList_36();
+            err = TestReadTheOptionalCommandMoveColorInAcceptedCommandList_66();
             break;
-        case 37:
-            ChipLogProgress(chipTool, " ***** Test Step 37 : Read the optional command(StepColor) in AcceptedCommandList\n");
+        case 67:
+            ChipLogProgress(chipTool, " ***** Test Step 67 : Read the optional command(StepColor) in AcceptedCommandList\n");
             if (ShouldSkip("CC.S.C09.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalCommandStepColorInAcceptedCommandList_37();
+            err = TestReadTheOptionalCommandStepColorInAcceptedCommandList_67();
             break;
-        case 38:
+        case 68:
             ChipLogProgress(
-                chipTool, " ***** Test Step 38 : Read the optional command(MoveToColorTemperature) in AcceptedCommandList\n");
+                chipTool, " ***** Test Step 68 : Read the optional command(MoveToColorTemperature) in AcceptedCommandList\n");
             if (ShouldSkip("CC.S.C0a.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalCommandMoveToColorTemperatureInAcceptedCommandList_38();
+            err = TestReadTheOptionalCommandMoveToColorTemperatureInAcceptedCommandList_68();
             break;
-        case 39:
+        case 69:
             ChipLogProgress(
-                chipTool, " ***** Test Step 39 : Read the optional command(EnhancedMoveToHue) in AcceptedCommandList\n");
+                chipTool, " ***** Test Step 69 : Read the optional command(EnhancedMoveToHue) in AcceptedCommandList\n");
             if (ShouldSkip("CC.S.C40.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalCommandEnhancedMoveToHueInAcceptedCommandList_39();
+            err = TestReadTheOptionalCommandEnhancedMoveToHueInAcceptedCommandList_69();
             break;
-        case 40:
-            ChipLogProgress(chipTool, " ***** Test Step 40 : Read the optional command(EnhancedMoveHue) in AcceptedCommandList\n");
+        case 70:
+            ChipLogProgress(chipTool, " ***** Test Step 70 : Read the optional command(EnhancedMoveHue) in AcceptedCommandList\n");
             if (ShouldSkip("CC.S.C41.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalCommandEnhancedMoveHueInAcceptedCommandList_40();
+            err = TestReadTheOptionalCommandEnhancedMoveHueInAcceptedCommandList_70();
             break;
-        case 41:
-            ChipLogProgress(chipTool, " ***** Test Step 41 : Read the optional command(EnhancedStepHue) in AcceptedCommandList\n");
+        case 71:
+            ChipLogProgress(chipTool, " ***** Test Step 71 : Read the optional command(EnhancedStepHue) in AcceptedCommandList\n");
             if (ShouldSkip("CC.S.C42.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalCommandEnhancedStepHueInAcceptedCommandList_41();
+            err = TestReadTheOptionalCommandEnhancedStepHueInAcceptedCommandList_71();
             break;
-        case 42:
+        case 72:
             ChipLogProgress(chipTool,
-                " ***** Test Step 42 : Read the optional command(EnhancedMoveToHueAndSaturation) in AcceptedCommandList\n");
+                " ***** Test Step 72 : Read the optional command(EnhancedMoveToHueAndSaturation) in AcceptedCommandList\n");
             if (ShouldSkip("CC.S.C43.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalCommandEnhancedMoveToHueAndSaturationInAcceptedCommandList_42();
+            err = TestReadTheOptionalCommandEnhancedMoveToHueAndSaturationInAcceptedCommandList_72();
             break;
-        case 43:
-            ChipLogProgress(chipTool, " ***** Test Step 43 : Read the optional command(ColorLoopSet) in AcceptedCommandList\n");
+        case 73:
+            ChipLogProgress(chipTool, " ***** Test Step 73 : Read the optional command(ColorLoopSet) in AcceptedCommandList\n");
             if (ShouldSkip("CC.S.C44.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalCommandColorLoopSetInAcceptedCommandList_43();
+            err = TestReadTheOptionalCommandColorLoopSetInAcceptedCommandList_73();
             break;
-        case 44:
-            ChipLogProgress(chipTool, " ***** Test Step 44 : Read the optional command(StopMoveStep) in AcceptedCommandList\n");
+        case 74:
+            ChipLogProgress(chipTool, " ***** Test Step 74 : Read the optional command(StopMoveStep) in AcceptedCommandList\n");
             if (ShouldSkip("CC.S.C47.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalCommandStopMoveStepInAcceptedCommandList_44();
+            err = TestReadTheOptionalCommandStopMoveStepInAcceptedCommandList_74();
             break;
-        case 45:
+        case 75:
             ChipLogProgress(
-                chipTool, " ***** Test Step 45 : Read the optional command(MoveColorTemperature) in AcceptedCommandList\n");
+                chipTool, " ***** Test Step 75 : Read the optional command(MoveColorTemperature) in AcceptedCommandList\n");
             if (ShouldSkip("CC.S.C4b.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalCommandMoveColorTemperatureInAcceptedCommandList_45();
+            err = TestReadTheOptionalCommandMoveColorTemperatureInAcceptedCommandList_75();
             break;
-        case 46:
+        case 76:
             ChipLogProgress(
-                chipTool, " ***** Test Step 46 : Read the optional command(StepColorTemperature) in AcceptedCommandList\n");
+                chipTool, " ***** Test Step 76 : Read the optional command(StepColorTemperature) in AcceptedCommandList\n");
             if (ShouldSkip("CC.S.C4c.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalCommandStepColorTemperatureInAcceptedCommandList_46();
+            err = TestReadTheOptionalCommandStepColorTemperatureInAcceptedCommandList_76();
             break;
-        case 47:
-            ChipLogProgress(chipTool, " ***** Test Step 47 : Read the global attribute: GeneratedCommandList\n");
-            err = TestReadTheGlobalAttributeGeneratedCommandList_47();
+        case 77:
+            ChipLogProgress(chipTool, " ***** Test Step 77 : Read the global attribute: GeneratedCommandList\n");
+            err = TestReadTheGlobalAttributeGeneratedCommandList_77();
             break;
         }
 
@@ -8722,6 +8961,96 @@ public:
         case 47:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 48:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 49:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 50:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 51:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 52:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 53:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 54:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 55:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 56:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 57:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 58:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 59:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 60:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 61:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 62:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 63:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 64:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 65:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 66:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 67:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 68:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 69:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 70:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 71:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 72:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 73:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 74:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 75:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 76:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 77:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -8735,7 +9064,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 48;
+    const uint16_t mTestCount = 78;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -9091,7 +9420,637 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeEnhancedCurrentHueInAttributeList_17()
+    CHIP_ERROR TestReadTheOptionalAttributeNumberOfPrimariesInAttributeList_17()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute(NumberOfPrimaries) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 16UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributePrimary1XInAttributeList_18()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute(Primary1X) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 17UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributePrimary1YInAttributeList_19()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute(Primary1Y) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 18UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributePrimary1IntensityInAttributeList_20()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute(Primary1Intensity) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 19UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributePrimary2XInAttributeList_21()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute(Primary2X) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 21UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributePrimary2YInAttributeList_22()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute(Primary2Y) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 22UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributePrimary2IntensityInAttributeList_23()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute(Primary2Intensity) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 23UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributePrimary3XInAttributeList_24()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute(Primary3X) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 25UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributePrimary3YInAttributeList_25()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute(Primary3Y) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 26UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributePrimary3IntensityInAttributeList_26()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute(Primary3Intensity) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 27UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributePrimary4XInAttributeList_27()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute(Primary4X) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 32UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributePrimary4YInAttributeList_28()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute(Primary4Y) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 33UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributePrimary4IntensityInAttributeList_29()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute(Primary4Intensity) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 34UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributePrimary5XInAttributeList_30()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute(Primary5X) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 36UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributePrimary5YInAttributeList_31()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute(Primary5Y) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 37UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributePrimary5IntensityInAttributeList_32()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute(Primary5Intensity) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 38UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributePrimary6XInAttributeList_33()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute(Primary6X) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 40UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributePrimary6YInAttributeList_34()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute(Primary6Y) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 41UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributePrimary6IntensityInAttributeList_35()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute(Primary6Intensity) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 42UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeWhitePointXInAttributeList_36()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute(WhitePointX) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 48UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeWhitePointYInAttributeList_37()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute(WhitePointY) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 49UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeColorPointRXInAttributeList_38()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute(ColorPointRX) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 50UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeColorPointRYInAttributeList_39()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute(ColorPointRY) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 51UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeColorPointRIntensityInAttributeList_40()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute(ColorPointRIntensity) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 52UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeColorPointGXInAttributeList_41()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute(ColorPointGX) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 54UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeColorPointGYInAttributeList_42()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute(ColorPointGY) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 55UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeColorPointGIntensityInAttributeList_43()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute(ColorPointGIntensity) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 56UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeColorPointBXInAttributeList_44()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute(ColorPointBX) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 58UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeColorPointBYInAttributeList_45()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute(ColorPointBY) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 59UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeColorPointBIntensityInAttributeList_46()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute(ColorPointBIntensity) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 60UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeEnhancedCurrentHueInAttributeList_47()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -9112,7 +10071,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeColorLoopActiveInAttributeList_18()
+    CHIP_ERROR TestReadTheOptionalAttributeColorLoopActiveInAttributeList_48()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -9133,7 +10092,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeColorLoopDirectionInAttributeList_19()
+    CHIP_ERROR TestReadTheOptionalAttributeColorLoopDirectionInAttributeList_49()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -9154,7 +10113,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeColorLoopTimeInAttributeList_20()
+    CHIP_ERROR TestReadTheOptionalAttributeColorLoopTimeInAttributeList_50()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -9175,7 +10134,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeColorLoopStartEnhancedHueInAttributeList_21()
+    CHIP_ERROR TestReadTheOptionalAttributeColorLoopStartEnhancedHueInAttributeList_51()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -9196,7 +10155,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeColorLoopStoredEnhancedHueInAttributeList_22()
+    CHIP_ERROR TestReadTheOptionalAttributeColorLoopStoredEnhancedHueInAttributeList_52()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -9217,7 +10176,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeColorTempPhysicalMinMiredsInAttributeList_23()
+    CHIP_ERROR TestReadTheOptionalAttributeColorTempPhysicalMinMiredsInAttributeList_53()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -9238,7 +10197,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeColorTempPhysicalMaxMiredsInAttributeList_24()
+    CHIP_ERROR TestReadTheOptionalAttributeColorTempPhysicalMaxMiredsInAttributeList_54()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -9259,7 +10218,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeCoupleColorTempToLevelMinMiredsInAttributeList_25()
+    CHIP_ERROR TestReadTheOptionalAttributeCoupleColorTempToLevelMinMiredsInAttributeList_55()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -9280,7 +10239,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeStartUpColorTemperatureMiredsInAttributeList_26()
+    CHIP_ERROR TestReadTheOptionalAttributeStartUpColorTemperatureMiredsInAttributeList_56()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -9301,7 +10260,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeEventList_27()
+    CHIP_ERROR TestReadTheGlobalAttributeEventList_57()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -9325,7 +10284,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalCommandMoveToHueInAcceptedCommandList_28()
+    CHIP_ERROR TestReadTheOptionalCommandMoveToHueInAcceptedCommandList_58()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -9346,7 +10305,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalCommandMoveHueInAcceptedCommandList_29()
+    CHIP_ERROR TestReadTheOptionalCommandMoveHueInAcceptedCommandList_59()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -9367,7 +10326,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalCommandStepHueInAcceptedCommandList_30()
+    CHIP_ERROR TestReadTheOptionalCommandStepHueInAcceptedCommandList_60()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -9388,7 +10347,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalCommandMoveToSaturationInAcceptedCommandList_31()
+    CHIP_ERROR TestReadTheOptionalCommandMoveToSaturationInAcceptedCommandList_61()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -9409,7 +10368,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalCommandMoveSaturationInAcceptedCommandList_32()
+    CHIP_ERROR TestReadTheOptionalCommandMoveSaturationInAcceptedCommandList_62()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -9430,7 +10389,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalCommandStepSaturationInAcceptedCommandList_33()
+    CHIP_ERROR TestReadTheOptionalCommandStepSaturationInAcceptedCommandList_63()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -9451,7 +10410,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalCommandMoveToHueAndSaturationInAcceptedCommandList_34()
+    CHIP_ERROR TestReadTheOptionalCommandMoveToHueAndSaturationInAcceptedCommandList_64()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -9472,7 +10431,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalCommandMoveToColorInAcceptedCommandList_35()
+    CHIP_ERROR TestReadTheOptionalCommandMoveToColorInAcceptedCommandList_65()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -9493,7 +10452,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalCommandMoveColorInAcceptedCommandList_36()
+    CHIP_ERROR TestReadTheOptionalCommandMoveColorInAcceptedCommandList_66()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -9514,7 +10473,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalCommandStepColorInAcceptedCommandList_37()
+    CHIP_ERROR TestReadTheOptionalCommandStepColorInAcceptedCommandList_67()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -9535,7 +10494,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalCommandMoveToColorTemperatureInAcceptedCommandList_38()
+    CHIP_ERROR TestReadTheOptionalCommandMoveToColorTemperatureInAcceptedCommandList_68()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -9556,7 +10515,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalCommandEnhancedMoveToHueInAcceptedCommandList_39()
+    CHIP_ERROR TestReadTheOptionalCommandEnhancedMoveToHueInAcceptedCommandList_69()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -9577,7 +10536,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalCommandEnhancedMoveHueInAcceptedCommandList_40()
+    CHIP_ERROR TestReadTheOptionalCommandEnhancedMoveHueInAcceptedCommandList_70()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -9598,7 +10557,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalCommandEnhancedStepHueInAcceptedCommandList_41()
+    CHIP_ERROR TestReadTheOptionalCommandEnhancedStepHueInAcceptedCommandList_71()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -9619,7 +10578,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalCommandEnhancedMoveToHueAndSaturationInAcceptedCommandList_42()
+    CHIP_ERROR TestReadTheOptionalCommandEnhancedMoveToHueAndSaturationInAcceptedCommandList_72()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -9640,7 +10599,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalCommandColorLoopSetInAcceptedCommandList_43()
+    CHIP_ERROR TestReadTheOptionalCommandColorLoopSetInAcceptedCommandList_73()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -9661,7 +10620,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalCommandStopMoveStepInAcceptedCommandList_44()
+    CHIP_ERROR TestReadTheOptionalCommandStopMoveStepInAcceptedCommandList_74()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -9682,7 +10641,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalCommandMoveColorTemperatureInAcceptedCommandList_45()
+    CHIP_ERROR TestReadTheOptionalCommandMoveColorTemperatureInAcceptedCommandList_75()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -9703,7 +10662,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalCommandStepColorTemperatureInAcceptedCommandList_46()
+    CHIP_ERROR TestReadTheOptionalCommandStepColorTemperatureInAcceptedCommandList_76()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -9724,7 +10683,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_47()
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_77()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -27953,24 +28912,37 @@ public:
             err = TestThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_15();
             break;
         case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : TH reads AcceptedCommandList from DUT\n");
-            if (ShouldSkip("( DGETH.S.F00 || DGETH.S.F01 ) && DGETH.S.Afff9")) {
+            ChipLogProgress(chipTool,
+                " ***** Test Step 16 : TH reads EventList attribute from DUT. 1.The list MAY contain values in the Manufacturer "
+                "Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI range (0x0001 - "
+                "0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test Vendor or invalid "
+                "range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is "
+                "the allowed MEI range (0x0001 - 0xFFF1)\n");
+            if (ShouldSkip("PICS_USER_PROMPT && DGETH.S.Afffa")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsAcceptedCommandListFromDut_16();
+            err = TestThReadsEventListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_16();
             break;
         case 17:
             ChipLogProgress(chipTool, " ***** Test Step 17 : TH reads AcceptedCommandList from DUT\n");
-            if (ShouldSkip("DGETH.S.Afff9 && !DGETH.S.F00 && !DGETH.S.F01")) {
+            if (ShouldSkip("( DGETH.S.F00 || DGETH.S.F01 ) && DGETH.S.Afff9")) {
                 NextTest();
                 return;
             }
             err = TestThReadsAcceptedCommandListFromDut_17();
             break;
         case 18:
+            ChipLogProgress(chipTool, " ***** Test Step 18 : TH reads AcceptedCommandList from DUT\n");
+            if (ShouldSkip("DGETH.S.Afff9 && !DGETH.S.F00 && !DGETH.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsAcceptedCommandListFromDut_18();
+            break;
+        case 19:
             ChipLogProgress(chipTool,
-                " ***** Test Step 18 : TH reads AcceptedCommandList attribute from DUT. 1.The list SHALL NOT contain any "
+                " ***** Test Step 19 : TH reads AcceptedCommandList attribute from DUT. 1.The list SHALL NOT contain any "
                 "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF). 2.The list MAY contain values in "
                 "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
                 "range (0x0001 - 0xFFF1), these values SHALL be ignored.3.The list SHALL NOT contain any values in the Test Vendor "
@@ -27980,11 +28952,11 @@ public:
                 NextTest();
                 return;
             }
-            err = TestThReadsAcceptedCommandListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_18();
+            err = TestThReadsAcceptedCommandListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_19();
             break;
-        case 19:
+        case 20:
             ChipLogProgress(chipTool,
-                " ***** Test Step 19 : TH reads GeneratedCommandList attribute from DUT. 1.The list MAY contain values in the "
+                " ***** Test Step 20 : TH reads GeneratedCommandList attribute from DUT. 1.The list MAY contain values in the "
                 "Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI range "
                 "(0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test Vendor or "
                 "invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where "
@@ -27993,20 +28965,7 @@ public:
                 NextTest();
                 return;
             }
-            err = TestThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_19();
-            break;
-        case 20:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 20 : TH reads EventList attribute from DUT. 1.The list MAY contain values in the Manufacturer "
-                "Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI range (0x0001 - "
-                "0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test Vendor or invalid "
-                "range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is "
-                "the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && DGETH.S.Afffa")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsEventListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_20();
+            err = TestThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_20();
             break;
         }
 
@@ -28460,7 +29419,18 @@ private:
         return UserPrompt("alpha", value);
     }
 
-    CHIP_ERROR TestThReadsAcceptedCommandListFromDut_16()
+    CHIP_ERROR
+    TestThReadsEventListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_16()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestThReadsAcceptedCommandListFromDut_17()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -28483,7 +29453,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsAcceptedCommandListFromDut_17()
+    CHIP_ERROR TestThReadsAcceptedCommandListFromDut_18()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -28510,7 +29480,7 @@ private:
     }
 
     CHIP_ERROR
-    TestThReadsAcceptedCommandListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_18()
+    TestThReadsAcceptedCommandListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_19()
     {
 
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
@@ -28521,18 +29491,7 @@ private:
     }
 
     CHIP_ERROR
-    TestThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_19()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestThReadsEventListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_20()
+    TestThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_20()
     {
 
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
@@ -42755,35 +43714,35 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: FeatureMap\n");
-            if (ShouldSkip(" !KEYPADINPUT.S.NV && KEYPADINPUT.S.LK && !KEYPADINPUT.S.NK ")) {
+            if (ShouldSkip(" !KEYPADINPUT.S.F00 && KEYPADINPUT.S.F01 && !KEYPADINPUT.S.F02 ")) {
                 NextTest();
                 return;
             }
             err = TestReadTheGlobalAttributeFeatureMap_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Given (KEYPADINPUT.S.NV) FeatureMap bit mask is set or not\n");
-            if (ShouldSkip("KEYPADINPUT.S.NV")) {
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Given (KEYPADINPUT.S.F00(NV)) FeatureMap bit mask is set or not\n");
+            if (ShouldSkip("KEYPADINPUT.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestGivenKeypadinputsnvFeatureMapBitMaskIsSetOrNot_3();
+            err = TestGivenKeypadinputsf00nvFeatureMapBitMaskIsSetOrNot_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Given (KEYPADINPUT.S.LK) FeatureMap bit mask is set or not\n");
-            if (ShouldSkip("KEYPADINPUT.S.LK")) {
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Given (KEYPADINPUT.S.F01(LK)) FeatureMap bit mask is set or not\n");
+            if (ShouldSkip("KEYPADINPUT.S.F01")) {
                 NextTest();
                 return;
             }
-            err = TestGivenKeypadinputslkFeatureMapBitMaskIsSetOrNot_4();
+            err = TestGivenKeypadinputsf01lkFeatureMapBitMaskIsSetOrNot_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Given (KEYPADINPUT.S.NK) FeatureMap bit mask is set or not\n");
-            if (ShouldSkip("KEYPADINPUT.S.NK")) {
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Given (KEYPADINPUT.S.F02(NK)) FeatureMap bit mask is set or not\n");
+            if (ShouldSkip("KEYPADINPUT.S.F02")) {
                 NextTest();
                 return;
             }
-            err = TestGivenKeypadinputsnkFeatureMapBitMaskIsSetOrNot_5();
+            err = TestGivenKeypadinputsf02nkFeatureMapBitMaskIsSetOrNot_5();
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Read the global attribute: AttributeList\n");
@@ -42918,7 +43877,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestGivenKeypadinputsnvFeatureMapBitMaskIsSetOrNot_3()
+    CHIP_ERROR TestGivenKeypadinputsf00nvFeatureMapBitMaskIsSetOrNot_3()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -42926,7 +43885,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Given (KEYPADINPUT.S.NV) FeatureMap bit mask is set or not Error: %@", err);
+            NSLog(@"Given (KEYPADINPUT.S.F00(NV)) FeatureMap bit mask is set or not Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -42937,7 +43896,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestGivenKeypadinputslkFeatureMapBitMaskIsSetOrNot_4()
+    CHIP_ERROR TestGivenKeypadinputsf01lkFeatureMapBitMaskIsSetOrNot_4()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -42945,7 +43904,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Given (KEYPADINPUT.S.LK) FeatureMap bit mask is set or not Error: %@", err);
+            NSLog(@"Given (KEYPADINPUT.S.F01(LK)) FeatureMap bit mask is set or not Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -42956,7 +43915,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestGivenKeypadinputsnkFeatureMapBitMaskIsSetOrNot_5()
+    CHIP_ERROR TestGivenKeypadinputsf02nkFeatureMapBitMaskIsSetOrNot_5()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -42964,7 +43923,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Given (KEYPADINPUT.S.NK) FeatureMap bit mask is set or not Error: %@", err);
+            NSLog(@"Given (KEYPADINPUT.S.F02(NK)) FeatureMap bit mask is set or not Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -43116,7 +44075,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: FeatureMap\n");
-            if (ShouldSkip("APPLAUNCHER.S.AP")) {
+            if (ShouldSkip("APPLAUNCHER.S.F00")) {
                 NextTest();
                 return;
             }
@@ -43124,7 +44083,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Read the global attribute: FeatureMap\n");
-            if (ShouldSkip(" !APPLAUNCHER.S.AP ")) {
+            if (ShouldSkip(" !APPLAUNCHER.S.F00 ")) {
                 NextTest();
                 return;
             }
@@ -43506,19 +44465,20 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: FeatureMap\n");
-            if (ShouldSkip(" !MEDIAINPUT.S.NU ")) {
+            if (ShouldSkip(" !MEDIAINPUT.S.F00 ")) {
                 NextTest();
                 return;
             }
             err = TestReadTheGlobalAttributeFeatureMap_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Given MEDIAINPUT.S.NU ensure featuremap has the correct bit set\n");
-            if (ShouldSkip("MEDIAINPUT.S.NU")) {
+            ChipLogProgress(
+                chipTool, " ***** Test Step 3 : Given MEDIAINPUT.S.F00(NU) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("MEDIAINPUT.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestGivenMediainputsnuEnsureFeaturemapHasTheCorrectBitSet_3();
+            err = TestGivenMediainputsf00nuEnsureFeaturemapHasTheCorrectBitSet_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Read the global attribute: AttributeList\n");
@@ -43669,7 +44629,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestGivenMediainputsnuEnsureFeaturemapHasTheCorrectBitSet_3()
+    CHIP_ERROR TestGivenMediainputsf00nuEnsureFeaturemapHasTheCorrectBitSet_3()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -43677,7 +44637,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Given MEDIAINPUT.S.NU ensure featuremap has the correct bit set Error: %@", err);
+            NSLog(@"Given MEDIAINPUT.S.F00(NU) ensure featuremap has the correct bit set Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -44182,27 +45142,27 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: FeatureMap\n");
-            if (ShouldSkip("( !CHANNEL.S.CL && !CHANNEL.S.LI )")) {
+            if (ShouldSkip("( !CHANNEL.S.F00 && !CHANNEL.S.F01 )")) {
                 NextTest();
                 return;
             }
             err = TestReadTheGlobalAttributeFeatureMap_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Given CHANNEL.S.CL ensure featuremap has the correct bit set\n");
-            if (ShouldSkip("CHANNEL.S.CL")) {
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Given CCHANNEL.S.F00(CL) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("CHANNEL.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestGivenChannelsclEnsureFeaturemapHasTheCorrectBitSet_3();
+            err = TestGivenCchannelsf00clEnsureFeaturemapHasTheCorrectBitSet_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Given CHANNEL.S.LI ensure featuremap has the correct bit set\n");
-            if (ShouldSkip("CHANNEL.S.LI")) {
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Given CHANNEL.S.F01(LI) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("CHANNEL.S.F01")) {
                 NextTest();
                 return;
             }
-            err = TestGivenChannelsliEnsureFeaturemapHasTheCorrectBitSet_4();
+            err = TestGivenChannelsf01liEnsureFeaturemapHasTheCorrectBitSet_4();
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: AttributeList\n");
@@ -44259,7 +45219,7 @@ public:
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : Read the global attribute: GeneratedCommandList\n");
-            if (ShouldSkip("( !CHANNEL.S.CL && !CHANNEL.S.LI )")) {
+            if (ShouldSkip("( !CHANNEL.S.F00 && !CHANNEL.S.F01 )")) {
                 NextTest();
                 return;
             }
@@ -44267,7 +45227,7 @@ public:
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : Read the global attribute: GeneratedCommandList\n");
-            if (ShouldSkip("CHANNEL.S.CL || CHANNEL.S.LI")) {
+            if (ShouldSkip("CHANNEL.S.F00 || CHANNEL.S.F01")) {
                 NextTest();
                 return;
             }
@@ -44409,7 +45369,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestGivenChannelsclEnsureFeaturemapHasTheCorrectBitSet_3()
+    CHIP_ERROR TestGivenCchannelsf00clEnsureFeaturemapHasTheCorrectBitSet_3()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -44417,7 +45377,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Given CHANNEL.S.CL ensure featuremap has the correct bit set Error: %@", err);
+            NSLog(@"Given CCHANNEL.S.F00(CL) ensure featuremap has the correct bit set Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -44428,7 +45388,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestGivenChannelsliEnsureFeaturemapHasTheCorrectBitSet_4()
+    CHIP_ERROR TestGivenChannelsf01liEnsureFeaturemapHasTheCorrectBitSet_4()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -44436,7 +45396,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Given CHANNEL.S.LI ensure featuremap has the correct bit set Error: %@", err);
+            NSLog(@"Given CHANNEL.S.F01(LI) ensure featuremap has the correct bit set Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -44717,27 +45677,29 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: FeatureMap\n");
-            if (ShouldSkip(" !MEDIAPLAYBACK.S.AS && !MEDIAPLAYBACK.S.VS ")) {
+            if (ShouldSkip(" !MEDIAPLAYBACK.S.F00 && !MEDIAPLAYBACK.S.F01 ")) {
                 NextTest();
                 return;
             }
             err = TestReadTheGlobalAttributeFeatureMap_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Given MEDIAPLAYBACK.S.AS ensure featuremap has the correct bit set\n");
-            if (ShouldSkip("MEDIAPLAYBACK.S.AS")) {
+            ChipLogProgress(
+                chipTool, " ***** Test Step 3 : Given MEDIAPLAYBACK.S.F00(AS) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("MEDIAPLAYBACK.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestGivenMediaplaybacksasEnsureFeaturemapHasTheCorrectBitSet_3();
+            err = TestGivenMediaplaybacksf00asEnsureFeaturemapHasTheCorrectBitSet_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Given MEDIAPLAYBACK.S.VS ensure featuremap has the correct bit set\n");
-            if (ShouldSkip("MEDIAPLAYBACK.S.VS")) {
+            ChipLogProgress(
+                chipTool, " ***** Test Step 4 : Given MEDIAPLAYBACK.S.F01(VS) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("MEDIAPLAYBACK.S.F01")) {
                 NextTest();
                 return;
             }
-            err = TestGivenMediaplaybacksvsEnsureFeaturemapHasTheCorrectBitSet_4();
+            err = TestGivenMediaplaybacksf01vsEnsureFeaturemapHasTheCorrectBitSet_4();
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: AttributeList\n");
@@ -45023,7 +45985,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestGivenMediaplaybacksasEnsureFeaturemapHasTheCorrectBitSet_3()
+    CHIP_ERROR TestGivenMediaplaybacksf00asEnsureFeaturemapHasTheCorrectBitSet_3()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -45031,7 +45993,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Given MEDIAPLAYBACK.S.AS ensure featuremap has the correct bit set Error: %@", err);
+            NSLog(@"Given MEDIAPLAYBACK.S.F00(AS) ensure featuremap has the correct bit set Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -45042,7 +46004,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestGivenMediaplaybacksvsEnsureFeaturemapHasTheCorrectBitSet_4()
+    CHIP_ERROR TestGivenMediaplaybacksf01vsEnsureFeaturemapHasTheCorrectBitSet_4()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -45050,7 +46012,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Given MEDIAPLAYBACK.S.VS ensure featuremap has the correct bit set Error: %@", err);
+            NSLog(@"Given MEDIAPLAYBACK.S.F01(VS) ensure featuremap has the correct bit set Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -45499,23 +46461,35 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: FeatureMap\n");
+            if (ShouldSkip("AUDIOOUTPUT.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheGlobalAttributeFeatureMap_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Read the global attribute: AttributeList\n");
-            err = TestReadTheGlobalAttributeAttributeList_3();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Read the global attribute: FeatureMap\n");
+            if (ShouldSkip(" !AUDIOOUTPUT.S.F00 ")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeFeatureMap_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Read the global attribute: AcceptedCommandList\n");
-            err = TestReadTheGlobalAttributeAcceptedCommandList_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Read the global attribute: AttributeList\n");
+            err = TestReadTheGlobalAttributeAttributeList_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: GeneratedCommandList\n");
-            err = TestReadTheGlobalAttributeGeneratedCommandList_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: AcceptedCommandList\n");
+            err = TestReadTheGlobalAttributeAcceptedCommandList_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Read the global attribute: EventList\n");
-            err = TestReadTheGlobalAttributeEventList_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Read the global attribute: GeneratedCommandList\n");
+            err = TestReadTheGlobalAttributeGeneratedCommandList_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Read the global attribute: EventList\n");
+            err = TestReadTheGlobalAttributeEventList_7();
             break;
         }
 
@@ -45549,6 +46523,9 @@ public:
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -45562,7 +46539,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 7;
+    const uint16_t mTestCount = 8;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -45614,16 +46591,32 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
-            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("featureMap", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("featureMap", [value unsignedIntValue], 3UL));
-
             NextTest();
         }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_3()
+    CHIP_ERROR TestReadTheGlobalAttributeFeatureMap_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterAudioOutput alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: FeatureMap Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_4()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -45651,7 +46644,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_4()
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_5()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -45672,7 +46665,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_5()
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_6()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -45696,7 +46689,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeEventList_6()
+    CHIP_ERROR TestReadTheGlobalAttributeEventList_7()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -46019,76 +47012,6 @@ private:
 
         return CHIP_NO_ERROR;
     }
-};
-
-class Test_TC_TGTNAV_8_2 : public TestCommandBridge {
-public:
-    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_TGTNAV_8_2()
-        : TestCommandBridge("Test_TC_TGTNAV_8_2")
-        , mTestIndex(0)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
-
-    ~Test_TC_TGTNAV_8_2() {}
-
-    /////////// TestCommand Interface /////////
-    void NextTest() override
-    {
-        CHIP_ERROR err = CHIP_NO_ERROR;
-
-        if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_TGTNAV_8_2\n");
-        }
-
-        if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_TGTNAV_8_2\n");
-            SetCommandExitStatus(CHIP_NO_ERROR);
-            return;
-        }
-
-        Wait();
-
-        // Ensure we increment mTestIndex before we start running the relevant
-        // command.  That way if we lose the timeslice after we send the message
-        // but before our function call returns, we won't end up with an
-        // incorrect mTestIndex value observed when we get the response.
-        switch (mTestIndex++) {
-        }
-
-        if (CHIP_NO_ERROR != err) {
-            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
-            SetCommandExitStatus(err);
-        }
-    }
-
-    void OnStatusUpdate(const chip::app::StatusIB & status) override
-    {
-        switch (mTestIndex - 1) {
-        }
-
-        // Go on to the next test.
-        ContinueOnChipMainThread(CHIP_NO_ERROR);
-    }
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 0;
-
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
 };
 
 class Test_TC_APBSC_1_10 : public TestCommandBridge {
@@ -46513,7 +47436,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: FeatureMap\n");
-            if (ShouldSkip("( !CONTENTLAUNCHER.S.CS && !CONTENTLAUNCHER.S.UP )")) {
+            if (ShouldSkip("( !CONTENTLAUNCHER.S.F00 && !CONTENTLAUNCHER.S.F01 )")) {
                 NextTest();
                 return;
             }
@@ -46521,21 +47444,21 @@ public:
             break;
         case 3:
             ChipLogProgress(
-                chipTool, " ***** Test Step 3 : Given CONTENTLAUNCHER.S.CS) ensure featuremap has the correct bit set\n");
-            if (ShouldSkip("CONTENTLAUNCHER.S.CS")) {
+                chipTool, " ***** Test Step 3 : Given CONTENTLAUNCHER.S.F00 (CS) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("CONTENTLAUNCHER.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestGivenContentlauncherscsEnsureFeaturemapHasTheCorrectBitSet_3();
+            err = TestGivenContentlaunchersf00CsEnsureFeaturemapHasTheCorrectBitSet_3();
             break;
         case 4:
             ChipLogProgress(
-                chipTool, " ***** Test Step 4 : Given CONTENTLAUNCHER.S.UP ensure featuremap has the correct bit set\n");
-            if (ShouldSkip("CONTENTLAUNCHER.S.UP")) {
+                chipTool, " ***** Test Step 4 : Given CONTENTLAUNCHER.S.F01(UP) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("CONTENTLAUNCHER.S.F01")) {
                 NextTest();
                 return;
             }
-            err = TestGivenContentlaunchersupEnsureFeaturemapHasTheCorrectBitSet_4();
+            err = TestGivenContentlaunchersf01upEnsureFeaturemapHasTheCorrectBitSet_4();
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: AttributeList\n");
@@ -46707,7 +47630,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestGivenContentlauncherscsEnsureFeaturemapHasTheCorrectBitSet_3()
+    CHIP_ERROR TestGivenContentlaunchersf00CsEnsureFeaturemapHasTheCorrectBitSet_3()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -46715,7 +47638,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Given CONTENTLAUNCHER.S.CS) ensure featuremap has the correct bit set Error: %@", err);
+            NSLog(@"Given CONTENTLAUNCHER.S.F00 (CS) ensure featuremap has the correct bit set Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -46726,7 +47649,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestGivenContentlaunchersupEnsureFeaturemapHasTheCorrectBitSet_4()
+    CHIP_ERROR TestGivenContentlaunchersf01upEnsureFeaturemapHasTheCorrectBitSet_4()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -46734,7 +47657,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Given CONTENTLAUNCHER.S.UP ensure featuremap has the correct bit set Error: %@", err);
+            NSLog(@"Given CONTENTLAUNCHER.S.F01(UP) ensure featuremap has the correct bit set Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -47328,7 +48251,7 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : TH sends CEC Settings Keys(0x0A) to DUT\n");
-            if (ShouldSkip("KEYPADINPUT.S.LK && KEYPADINPUT.S.C00.Rsp")) {
+            if (ShouldSkip("KEYPADINPUT.S.F01 && KEYPADINPUT.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
@@ -47336,7 +48259,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : TH sends CEC Home Keys(0x09) to DUT\n");
-            if (ShouldSkip("KEYPADINPUT.S.LK && KEYPADINPUT.S.C00.Rsp")) {
+            if (ShouldSkip("KEYPADINPUT.S.F01 && KEYPADINPUT.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
@@ -47487,7 +48410,7 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Send Numbers1\n");
-            if (ShouldSkip("KEYPADINPUT.S.C00.Rsp && KEYPADINPUT.S.NK")) {
+            if (ShouldSkip("KEYPADINPUT.S.C00.Rsp && KEYPADINPUT.S.F02")) {
                 NextTest();
                 return;
             }
@@ -47495,7 +48418,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Send Numbers2\n");
-            if (ShouldSkip("KEYPADINPUT.S.C00.Rsp && KEYPADINPUT.S.NK")) {
+            if (ShouldSkip("KEYPADINPUT.S.C00.Rsp && KEYPADINPUT.S.F02")) {
                 NextTest();
                 return;
             }
@@ -47503,7 +48426,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Send Numbers3\n");
-            if (ShouldSkip("KEYPADINPUT.S.C00.Rsp && KEYPADINPUT.S.NK")) {
+            if (ShouldSkip("KEYPADINPUT.S.C00.Rsp && KEYPADINPUT.S.F02")) {
                 NextTest();
                 return;
             }
@@ -47511,7 +48434,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Send Numbers4\n");
-            if (ShouldSkip("KEYPADINPUT.S.C00.Rsp && KEYPADINPUT.S.NK")) {
+            if (ShouldSkip("KEYPADINPUT.S.C00.Rsp && KEYPADINPUT.S.F02")) {
                 NextTest();
                 return;
             }
@@ -47519,7 +48442,7 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Send Numbers5\n");
-            if (ShouldSkip("KEYPADINPUT.S.C00.Rsp && KEYPADINPUT.S.NK")) {
+            if (ShouldSkip("KEYPADINPUT.S.C00.Rsp && KEYPADINPUT.S.F02")) {
                 NextTest();
                 return;
             }
@@ -47527,7 +48450,7 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Send Numbers6\n");
-            if (ShouldSkip("KEYPADINPUT.S.C00.Rsp && KEYPADINPUT.S.NK")) {
+            if (ShouldSkip("KEYPADINPUT.S.C00.Rsp && KEYPADINPUT.S.F02")) {
                 NextTest();
                 return;
             }
@@ -47535,7 +48458,7 @@ public:
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : Send Numbers7\n");
-            if (ShouldSkip("KEYPADINPUT.S.C00.Rsp && KEYPADINPUT.S.NK")) {
+            if (ShouldSkip("KEYPADINPUT.S.C00.Rsp && KEYPADINPUT.S.F02")) {
                 NextTest();
                 return;
             }
@@ -47543,7 +48466,7 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Send Numbers8\n");
-            if (ShouldSkip("KEYPADINPUT.S.C00.Rsp && KEYPADINPUT.S.NK")) {
+            if (ShouldSkip("KEYPADINPUT.S.C00.Rsp && KEYPADINPUT.S.F02")) {
                 NextTest();
                 return;
             }
@@ -47551,7 +48474,7 @@ public:
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Send Numbers9\n");
-            if (ShouldSkip("KEYPADINPUT.S.C00.Rsp && KEYPADINPUT.S.NK")) {
+            if (ShouldSkip("KEYPADINPUT.S.C00.Rsp && KEYPADINPUT.S.F02")) {
                 NextTest();
                 return;
             }
@@ -53086,12 +54009,16 @@ public:
             err = TestThReadsTheOptionalAttributeOnModeInAttributeListFromTheDut_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Read the global attribute: AcceptedCommandList\n");
-            err = TestReadTheGlobalAttributeAcceptedCommandList_7();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Read the global attribute: EventList\n");
+            err = TestReadTheGlobalAttributeEventList_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Read the global attribute: GeneratedCommandList\n");
-            err = TestReadTheGlobalAttributeGeneratedCommandList_8();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Read the global attribute: AcceptedCommandList\n");
+            err = TestReadTheGlobalAttributeAcceptedCommandList_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Read the global attribute: GeneratedCommandList\n");
+            err = TestReadTheGlobalAttributeGeneratedCommandList_9();
             break;
         }
 
@@ -53131,6 +54058,9 @@ public:
         case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -53144,7 +54074,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 9;
+    const uint16_t mTestCount = 10;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -53303,7 +54233,31 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_7()
+    CHIP_ERROR TestReadTheGlobalAttributeEventList_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterModeSelect alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: EventList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("EventList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("eventList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_8()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -53324,7 +54278,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_8()
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_9()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -65285,15 +66239,15 @@ private:
         ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySecurityPolicy =
             [NSNumber numberWithUnsignedChar:0U];
         ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey0 =
-            [[NSData alloc] initWithBytes:"0x00000000000000000000000000000001" length:34];
+            [[NSData alloc] initWithBytes:"\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01" length:16];
         ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime0 =
             [NSNumber numberWithUnsignedLongLong:111ULL];
         ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey1 =
-            [[NSData alloc] initWithBytes:"0x00000000000000000000000000000002" length:34];
+            [[NSData alloc] initWithBytes:"\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02" length:16];
         ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime1 =
             [NSNumber numberWithUnsignedLongLong:222ULL];
         ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey2 =
-            [[NSData alloc] initWithBytes:"0x00000000000000000000000000000003" length:34];
+            [[NSData alloc] initWithBytes:"\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x03" length:16];
         ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime2 =
             [NSNumber numberWithUnsignedLongLong:333ULL];
 
@@ -65335,15 +66289,15 @@ private:
         ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySecurityPolicy =
             [NSNumber numberWithUnsignedChar:0U];
         ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey0 =
-            [[NSData alloc] initWithBytes:"0xd0d1d2d3d4d5d6d7d8d9dadbdcdddedf" length:34];
+            [[NSData alloc] initWithBytes:"\xd0\xd1\xd2\xd3\xd4\xd5\xd6\xd7\xd8\xd9\xda\xdb\xdc\xdd\xde\xdf" length:16];
         ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime0 =
             [NSNumber numberWithUnsignedLongLong:2220000ULL];
         ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey1 =
-            [[NSData alloc] initWithBytes:"0xd1d1d2d3d4d5d6d7d8d9dadbdcdddedf" length:34];
+            [[NSData alloc] initWithBytes:"\xd1\xd1\xd2\xd3\xd4\xd5\xd6\xd7\xd8\xd9\xda\xdb\xdc\xdd\xde\xdf" length:16];
         ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime1 =
             [NSNumber numberWithUnsignedLongLong:2220001ULL];
         ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey2 =
-            [[NSData alloc] initWithBytes:"0xd2d1d2d3d4d5d6d7d8d9dadbdcdddedf" length:34];
+            [[NSData alloc] initWithBytes:"\xd2\xd1\xd2\xd3\xd4\xd5\xd6\xd7\xd8\xd9\xda\xdb\xdc\xdd\xde\xdf" length:16];
         ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime2 =
             [NSNumber numberWithUnsignedLongLong:2220002ULL];
 
@@ -75841,7 +76795,7 @@ public:
             break;
         case 14:
             ChipLogProgress(chipTool, " ***** Test Step 14 : 3a: TH reads OperationalStatus attribute's bit 0..1\n");
-            if (ShouldSkip("WNCV.S.A000a")) {
+            if (ShouldSkip("WNCV.S.A000a && PICS_SDK_CI_ONLY")) {
                 NextTest();
                 return;
             }
@@ -75850,7 +76804,7 @@ public:
         case 15:
             ChipLogProgress(
                 chipTool, " ***** Test Step 15 : 3a: TH reads OperationalStatus attribute's bit 2..3 (WNCV.S.F00(LF))\n");
-            if (ShouldSkip("WNCV.S.A000a && WNCV.S.F00")) {
+            if (ShouldSkip("WNCV.S.A000a && WNCV.S.F00 && PICS_SDK_CI_ONLY")) {
                 NextTest();
                 return;
             }
@@ -75859,7 +76813,7 @@ public:
         case 16:
             ChipLogProgress(
                 chipTool, " ***** Test Step 16 : 3a: TH reads OperationalStatus attribute's bit 2..3 (WNCV.S.F00(LF))\n");
-            if (ShouldSkip("WNCV.S.A000a && !WNCV.S.F00")) {
+            if (ShouldSkip("WNCV.S.A000a && !WNCV.S.F00 && PICS_SDK_CI_ONLY")) {
                 NextTest();
                 return;
             }
@@ -75868,7 +76822,7 @@ public:
         case 17:
             ChipLogProgress(
                 chipTool, " ***** Test Step 17 : 3a: TH reads OperationalStatus attribute's bit 4..5 (WNCV.S.F01(TL))\n");
-            if (ShouldSkip("WNCV.S.A000a && WNCV.S.F01")) {
+            if (ShouldSkip("WNCV.S.A000a && WNCV.S.F01 && PICS_SDK_CI_ONLY")) {
                 NextTest();
                 return;
             }
@@ -75877,95 +76831,103 @@ public:
         case 18:
             ChipLogProgress(
                 chipTool, " ***** Test Step 18 : 3a: TH reads OperationalStatus attribute's bit 4..5 (WNCV.S.F01(TL))\n");
-            if (ShouldSkip("WNCV.S.A000a && !WNCV.S.F01")) {
+            if (ShouldSkip("WNCV.S.A000a && !WNCV.S.F01 && PICS_SDK_CI_ONLY")) {
                 NextTest();
                 return;
             }
             err = Test3aThReadsOperationalStatusAttributesBit45Wncvsf01tl_18();
             break;
         case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : 3a2: DUT updates its attributes\n");
-            err = Test3a2DutUpdatesItsAttributes_19();
+            ChipLogProgress(chipTool, " ***** Test Step 19 : 3a: TH reads OperationalStatus attribute from DUT\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = Test3aThReadsOperationalStatusAttributeFromDut_19();
             break;
         case 20:
+            ChipLogProgress(chipTool, " ***** Test Step 20 : 3a2: DUT updates its attributes\n");
+            err = Test3a2DutUpdatesItsAttributes_20();
+            break;
+        case 21:
             ChipLogProgress(
-                chipTool, " ***** Test Step 20 : 3b: If (PA & LF) TH reads CurrentPositionLiftPercent100ths attribute from DUT\n");
+                chipTool, " ***** Test Step 21 : 3b: If (PA & LF) TH reads CurrentPositionLiftPercent100ths attribute from DUT\n");
             if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000e")) {
                 NextTest();
                 return;
             }
-            err = Test3bIfPaLfThReadsCurrentPositionLiftPercent100thsAttributeFromDut_20();
+            err = Test3bIfPaLfThReadsCurrentPositionLiftPercent100thsAttributeFromDut_21();
             break;
-        case 21:
+        case 22:
             ChipLogProgress(chipTool,
-                " ***** Test Step 21 : 3c: If (PA & LF) TH reads CurrentPositionLiftPercentage optional attribute from DUT\n");
+                " ***** Test Step 22 : 3c: If (PA & LF) TH reads CurrentPositionLiftPercentage optional attribute from DUT\n");
             if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A0008")) {
                 NextTest();
                 return;
             }
-            err = Test3cIfPaLfThReadsCurrentPositionLiftPercentageOptionalAttributeFromDut_21();
+            err = Test3cIfPaLfThReadsCurrentPositionLiftPercentageOptionalAttributeFromDut_22();
             break;
-        case 22:
+        case 23:
             ChipLogProgress(
-                chipTool, " ***** Test Step 22 : 3d: If (PA & TL) TH reads CurrentPositionTiltPercent100ths attribute from DUT\n");
+                chipTool, " ***** Test Step 23 : 3d: If (PA & TL) TH reads CurrentPositionTiltPercent100ths attribute from DUT\n");
             if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000f")) {
                 NextTest();
                 return;
             }
-            err = Test3dIfPaTlThReadsCurrentPositionTiltPercent100thsAttributeFromDut_22();
+            err = Test3dIfPaTlThReadsCurrentPositionTiltPercent100thsAttributeFromDut_23();
             break;
-        case 23:
+        case 24:
             ChipLogProgress(chipTool,
-                " ***** Test Step 23 : 3e: If (PA & LF) TH reads CurrentPositionTiltPercentage optional attribute from DUT\n");
+                " ***** Test Step 24 : 3e: If (PA & LF) TH reads CurrentPositionTiltPercentage optional attribute from DUT\n");
             if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A0009")) {
                 NextTest();
                 return;
             }
-            err = Test3eIfPaLfThReadsCurrentPositionTiltPercentageOptionalAttributeFromDut_23();
+            err = Test3eIfPaLfThReadsCurrentPositionTiltPercentageOptionalAttributeFromDut_24();
             break;
-        case 24:
-            ChipLogProgress(chipTool, " ***** Test Step 24 : 4a: TH sends a StopMotion command to DUT\n");
+        case 25:
+            ChipLogProgress(chipTool, " ***** Test Step 25 : 4a: TH sends a StopMotion command to DUT\n");
             if (ShouldSkip("WNCV.S.C02.Rsp")) {
                 NextTest();
                 return;
             }
-            err = Test4aThSendsAStopMotionCommandToDut_24();
-            break;
-        case 25:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 25 : 4b: TH waits for 3 seconds the end of inertial movement(s) on the device\n");
-            err = Test4bThWaitsFor3SecondsTheEndOfInertialMovementsOnTheDevice_25();
+            err = Test4aThSendsAStopMotionCommandToDut_25();
             break;
         case 26:
             ChipLogProgress(
-                chipTool, " ***** Test Step 26 : 4c: Verify DUT update OperationalStatus attribute to TH after a StopMotion\n");
+                chipTool, " ***** Test Step 26 : 4b: TH waits for 3 seconds the end of inertial movement(s) on the device\n");
+            err = Test4bThWaitsFor3SecondsTheEndOfInertialMovementsOnTheDevice_26();
+            break;
+        case 27:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 27 : 4c: Verify DUT update OperationalStatus attribute to TH after a StopMotion\n");
             if (ShouldSkip("WNCV.S.A000a")) {
                 NextTest();
                 return;
             }
-            err = Test4cVerifyDutUpdateOperationalStatusAttributeToThAfterAStopMotion_26();
-            break;
-        case 27:
-            ChipLogProgress(chipTool, " ***** Test Step 27 : 5a: TH waits for x seconds attributes update on the device\n");
-            err = Test5aThWaitsForXSecondsAttributesUpdateOnTheDevice_27();
+            err = Test4cVerifyDutUpdateOperationalStatusAttributeToThAfterAStopMotion_27();
             break;
         case 28:
+            ChipLogProgress(chipTool, " ***** Test Step 28 : 5a: TH waits for x seconds attributes update on the device\n");
+            err = Test5aThWaitsForXSecondsAttributesUpdateOnTheDevice_28();
+            break;
+        case 29:
             ChipLogProgress(
-                chipTool, " ***** Test Step 28 : 5b: If (PA & LF) TH reads TargetPositionLiftPercent100ths attribute from DUT\n");
+                chipTool, " ***** Test Step 29 : 5b: If (PA & LF) TH reads TargetPositionLiftPercent100ths attribute from DUT\n");
             if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000b")) {
                 NextTest();
                 return;
             }
-            err = Test5bIfPaLfThReadsTargetPositionLiftPercent100thsAttributeFromDut_28();
+            err = Test5bIfPaLfThReadsTargetPositionLiftPercent100thsAttributeFromDut_29();
             break;
-        case 29:
+        case 30:
             ChipLogProgress(
-                chipTool, " ***** Test Step 29 : 5c: If (PA & TL) TH reads TargetPositionTiltPercent100ths attribute from DUT\n");
+                chipTool, " ***** Test Step 30 : 5c: If (PA & TL) TH reads TargetPositionTiltPercent100ths attribute from DUT\n");
             if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000c")) {
                 NextTest();
                 return;
             }
-            err = Test5cIfPaTlThReadsTargetPositionTiltPercent100thsAttributeFromDut_29();
+            err = Test5cIfPaTlThReadsTargetPositionTiltPercent100thsAttributeFromDut_30();
             break;
         }
 
@@ -76068,6 +77030,9 @@ public:
         case 29:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 30:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -76081,7 +77046,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 30;
+    const uint16_t mTestCount = 31;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -76464,7 +77429,17 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test3a2DutUpdatesItsAttributes_19()
+    CHIP_ERROR Test3aThReadsOperationalStatusAttributeFromDut_19()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR Test3a2DutUpdatesItsAttributes_20()
     {
 
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
@@ -76472,7 +77447,7 @@ private:
         return WaitForMs("alpha", value);
     }
 
-    CHIP_ERROR Test3bIfPaLfThReadsCurrentPositionLiftPercent100thsAttributeFromDut_20()
+    CHIP_ERROR Test3bIfPaLfThReadsCurrentPositionLiftPercent100thsAttributeFromDut_21()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -76500,7 +77475,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test3cIfPaLfThReadsCurrentPositionLiftPercentageOptionalAttributeFromDut_21()
+    CHIP_ERROR Test3cIfPaLfThReadsCurrentPositionLiftPercentageOptionalAttributeFromDut_22()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -76527,7 +77502,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test3dIfPaTlThReadsCurrentPositionTiltPercent100thsAttributeFromDut_22()
+    CHIP_ERROR Test3dIfPaTlThReadsCurrentPositionTiltPercent100thsAttributeFromDut_23()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -76555,7 +77530,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test3eIfPaLfThReadsCurrentPositionTiltPercentageOptionalAttributeFromDut_23()
+    CHIP_ERROR Test3eIfPaLfThReadsCurrentPositionTiltPercentageOptionalAttributeFromDut_24()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -76582,7 +77557,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test4aThSendsAStopMotionCommandToDut_24()
+    CHIP_ERROR Test4aThSendsAStopMotionCommandToDut_25()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -76600,7 +77575,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test4bThWaitsFor3SecondsTheEndOfInertialMovementsOnTheDevice_25()
+    CHIP_ERROR Test4bThWaitsFor3SecondsTheEndOfInertialMovementsOnTheDevice_26()
     {
 
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
@@ -76608,7 +77583,7 @@ private:
         return WaitForMs("alpha", value);
     }
 
-    CHIP_ERROR Test4cVerifyDutUpdateOperationalStatusAttributeToThAfterAStopMotion_26()
+    CHIP_ERROR Test4cVerifyDutUpdateOperationalStatusAttributeToThAfterAStopMotion_27()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -76631,7 +77606,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test5aThWaitsForXSecondsAttributesUpdateOnTheDevice_27()
+    CHIP_ERROR Test5aThWaitsForXSecondsAttributesUpdateOnTheDevice_28()
     {
 
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
@@ -76639,7 +77614,7 @@ private:
         return WaitForMs("alpha", value);
     }
 
-    CHIP_ERROR Test5bIfPaLfThReadsTargetPositionLiftPercent100thsAttributeFromDut_28()
+    CHIP_ERROR Test5bIfPaLfThReadsTargetPositionLiftPercent100thsAttributeFromDut_29()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -76666,7 +77641,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test5cIfPaTlThReadsTargetPositionTiltPercent100thsAttributeFromDut_29()
+    CHIP_ERROR Test5cIfPaTlThReadsTargetPositionTiltPercent100thsAttributeFromDut_30()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -76829,7 +77804,7 @@ public:
             break;
         case 14:
             ChipLogProgress(chipTool, " ***** Test Step 14 : 3a: TH reads OperationalStatus attribute's bit 0..1\n");
-            if (ShouldSkip("WNCV.S.A000a")) {
+            if (ShouldSkip("WNCV.S.A000a && PICS_SDK_CI_ONLY")) {
                 NextTest();
                 return;
             }
@@ -76838,7 +77813,7 @@ public:
         case 15:
             ChipLogProgress(
                 chipTool, " ***** Test Step 15 : 3a: TH reads OperationalStatus attribute's bit 2..3 (WNCV.S.F00(LF))\n");
-            if (ShouldSkip("WNCV.S.A000a && WNCV.S.F00")) {
+            if (ShouldSkip("WNCV.S.A000a && WNCV.S.F00 && PICS_SDK_CI_ONLY")) {
                 NextTest();
                 return;
             }
@@ -76847,7 +77822,7 @@ public:
         case 16:
             ChipLogProgress(
                 chipTool, " ***** Test Step 16 : 3a: TH reads OperationalStatus attribute's bit 2..3 (WNCV.S.F00(LF))\n");
-            if (ShouldSkip("WNCV.S.A000a && !WNCV.S.F00")) {
+            if (ShouldSkip("WNCV.S.A000a && !WNCV.S.F00 && PICS_SDK_CI_ONLY")) {
                 NextTest();
                 return;
             }
@@ -76856,7 +77831,7 @@ public:
         case 17:
             ChipLogProgress(
                 chipTool, " ***** Test Step 17 : 3a: TH reads OperationalStatus attribute's bit 4..5 (WNCV.S.F01(TL))\n");
-            if (ShouldSkip("WNCV.S.A000a && WNCV.S.F01")) {
+            if (ShouldSkip("WNCV.S.A000a && WNCV.S.F01 && PICS_SDK_CI_ONLY")) {
                 NextTest();
                 return;
             }
@@ -76865,95 +77840,103 @@ public:
         case 18:
             ChipLogProgress(
                 chipTool, " ***** Test Step 18 : 3a: TH reads OperationalStatus attribute's bit 4..5 (WNCV.S.F01(TL))\n");
-            if (ShouldSkip("WNCV.S.A000a && !WNCV.S.F01")) {
+            if (ShouldSkip("WNCV.S.A000a && !WNCV.S.F01 && PICS_SDK_CI_ONLY")) {
                 NextTest();
                 return;
             }
             err = Test3aThReadsOperationalStatusAttributesBit45Wncvsf01tl_18();
             break;
         case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : 3a2: DUT updates its attributes\n");
-            err = Test3a2DutUpdatesItsAttributes_19();
+            ChipLogProgress(chipTool, " ***** Test Step 19 : 3a: TH reads OperationalStatus attribute from DUT\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = Test3aThReadsOperationalStatusAttributeFromDut_19();
             break;
         case 20:
+            ChipLogProgress(chipTool, " ***** Test Step 20 : 3a2: DUT updates its attributes\n");
+            err = Test3a2DutUpdatesItsAttributes_20();
+            break;
+        case 21:
             ChipLogProgress(
-                chipTool, " ***** Test Step 20 : 3b: If (PA & LF) TH reads CurrentPositionLiftPercent100ths attribute from DUT\n");
+                chipTool, " ***** Test Step 21 : 3b: If (PA & LF) TH reads CurrentPositionLiftPercent100ths attribute from DUT\n");
             if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000e")) {
                 NextTest();
                 return;
             }
-            err = Test3bIfPaLfThReadsCurrentPositionLiftPercent100thsAttributeFromDut_20();
+            err = Test3bIfPaLfThReadsCurrentPositionLiftPercent100thsAttributeFromDut_21();
             break;
-        case 21:
+        case 22:
             ChipLogProgress(chipTool,
-                " ***** Test Step 21 : 3c: If (PA & LF) TH reads CurrentPositionLiftPercentage optional attribute from DUT\n");
+                " ***** Test Step 22 : 3c: If (PA & LF) TH reads CurrentPositionLiftPercentage optional attribute from DUT\n");
             if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A0008")) {
                 NextTest();
                 return;
             }
-            err = Test3cIfPaLfThReadsCurrentPositionLiftPercentageOptionalAttributeFromDut_21();
+            err = Test3cIfPaLfThReadsCurrentPositionLiftPercentageOptionalAttributeFromDut_22();
             break;
-        case 22:
+        case 23:
             ChipLogProgress(
-                chipTool, " ***** Test Step 22 : 3d: If (PA & TL) TH reads CurrentPositionTiltPercent100ths attribute from DUT\n");
+                chipTool, " ***** Test Step 23 : 3d: If (PA & TL) TH reads CurrentPositionTiltPercent100ths attribute from DUT\n");
             if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000f")) {
                 NextTest();
                 return;
             }
-            err = Test3dIfPaTlThReadsCurrentPositionTiltPercent100thsAttributeFromDut_22();
+            err = Test3dIfPaTlThReadsCurrentPositionTiltPercent100thsAttributeFromDut_23();
             break;
-        case 23:
+        case 24:
             ChipLogProgress(chipTool,
-                " ***** Test Step 23 : 3e: If (PA & LF) TH reads CurrentPositionTiltPercentage optional attribute from DUT\n");
+                " ***** Test Step 24 : 3e: If (PA & LF) TH reads CurrentPositionTiltPercentage optional attribute from DUT\n");
             if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A0009")) {
                 NextTest();
                 return;
             }
-            err = Test3eIfPaLfThReadsCurrentPositionTiltPercentageOptionalAttributeFromDut_23();
+            err = Test3eIfPaLfThReadsCurrentPositionTiltPercentageOptionalAttributeFromDut_24();
             break;
-        case 24:
-            ChipLogProgress(chipTool, " ***** Test Step 24 : 4a: TH sends a StopMotion command to DUT\n");
+        case 25:
+            ChipLogProgress(chipTool, " ***** Test Step 25 : 4a: TH sends a StopMotion command to DUT\n");
             if (ShouldSkip("WNCV.S.C02.Rsp")) {
                 NextTest();
                 return;
             }
-            err = Test4aThSendsAStopMotionCommandToDut_24();
-            break;
-        case 25:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 25 : 4b: TH waits for 3 seconds the end of inertial movement(s) on the device\n");
-            err = Test4bThWaitsFor3SecondsTheEndOfInertialMovementsOnTheDevice_25();
+            err = Test4aThSendsAStopMotionCommandToDut_25();
             break;
         case 26:
             ChipLogProgress(
-                chipTool, " ***** Test Step 26 : 4c: Verify DUT update OperationalStatus attribute to TH after a StopMotion\n");
+                chipTool, " ***** Test Step 26 : 4b: TH waits for 3 seconds the end of inertial movement(s) on the device\n");
+            err = Test4bThWaitsFor3SecondsTheEndOfInertialMovementsOnTheDevice_26();
+            break;
+        case 27:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 27 : 4c: Verify DUT update OperationalStatus attribute to TH after a StopMotion\n");
             if (ShouldSkip("WNCV.S.A000a")) {
                 NextTest();
                 return;
             }
-            err = Test4cVerifyDutUpdateOperationalStatusAttributeToThAfterAStopMotion_26();
-            break;
-        case 27:
-            ChipLogProgress(chipTool, " ***** Test Step 27 : 5a: TH waits for x seconds attributes update on the device\n");
-            err = Test5aThWaitsForXSecondsAttributesUpdateOnTheDevice_27();
+            err = Test4cVerifyDutUpdateOperationalStatusAttributeToThAfterAStopMotion_27();
             break;
         case 28:
+            ChipLogProgress(chipTool, " ***** Test Step 28 : 5a: TH waits for x seconds attributes update on the device\n");
+            err = Test5aThWaitsForXSecondsAttributesUpdateOnTheDevice_28();
+            break;
+        case 29:
             ChipLogProgress(
-                chipTool, " ***** Test Step 28 : 5b: If (PA & LF) TH reads TargetPositionLiftPercent100ths attribute from DUT\n");
+                chipTool, " ***** Test Step 29 : 5b: If (PA & LF) TH reads TargetPositionLiftPercent100ths attribute from DUT\n");
             if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000b")) {
                 NextTest();
                 return;
             }
-            err = Test5bIfPaLfThReadsTargetPositionLiftPercent100thsAttributeFromDut_28();
+            err = Test5bIfPaLfThReadsTargetPositionLiftPercent100thsAttributeFromDut_29();
             break;
-        case 29:
+        case 30:
             ChipLogProgress(
-                chipTool, " ***** Test Step 29 : 5c: If (PA & TL) TH reads TargetPositionTiltPercent100ths attribute from DUT\n");
+                chipTool, " ***** Test Step 30 : 5c: If (PA & TL) TH reads TargetPositionTiltPercent100ths attribute from DUT\n");
             if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000c")) {
                 NextTest();
                 return;
             }
-            err = Test5cIfPaTlThReadsTargetPositionTiltPercent100thsAttributeFromDut_29();
+            err = Test5cIfPaTlThReadsTargetPositionTiltPercent100thsAttributeFromDut_30();
             break;
         }
 
@@ -77056,6 +78039,9 @@ public:
         case 29:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 30:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -77069,7 +78055,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 30;
+    const uint16_t mTestCount = 31;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -77452,7 +78438,17 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test3a2DutUpdatesItsAttributes_19()
+    CHIP_ERROR Test3aThReadsOperationalStatusAttributeFromDut_19()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR Test3a2DutUpdatesItsAttributes_20()
     {
 
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
@@ -77460,7 +78456,7 @@ private:
         return WaitForMs("alpha", value);
     }
 
-    CHIP_ERROR Test3bIfPaLfThReadsCurrentPositionLiftPercent100thsAttributeFromDut_20()
+    CHIP_ERROR Test3bIfPaLfThReadsCurrentPositionLiftPercent100thsAttributeFromDut_21()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -77488,7 +78484,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test3cIfPaLfThReadsCurrentPositionLiftPercentageOptionalAttributeFromDut_21()
+    CHIP_ERROR Test3cIfPaLfThReadsCurrentPositionLiftPercentageOptionalAttributeFromDut_22()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -77515,7 +78511,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test3dIfPaTlThReadsCurrentPositionTiltPercent100thsAttributeFromDut_22()
+    CHIP_ERROR Test3dIfPaTlThReadsCurrentPositionTiltPercent100thsAttributeFromDut_23()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -77543,7 +78539,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test3eIfPaLfThReadsCurrentPositionTiltPercentageOptionalAttributeFromDut_23()
+    CHIP_ERROR Test3eIfPaLfThReadsCurrentPositionTiltPercentageOptionalAttributeFromDut_24()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -77570,7 +78566,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test4aThSendsAStopMotionCommandToDut_24()
+    CHIP_ERROR Test4aThSendsAStopMotionCommandToDut_25()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -77588,7 +78584,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test4bThWaitsFor3SecondsTheEndOfInertialMovementsOnTheDevice_25()
+    CHIP_ERROR Test4bThWaitsFor3SecondsTheEndOfInertialMovementsOnTheDevice_26()
     {
 
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
@@ -77596,7 +78592,7 @@ private:
         return WaitForMs("alpha", value);
     }
 
-    CHIP_ERROR Test4cVerifyDutUpdateOperationalStatusAttributeToThAfterAStopMotion_26()
+    CHIP_ERROR Test4cVerifyDutUpdateOperationalStatusAttributeToThAfterAStopMotion_27()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -77619,7 +78615,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test5aThWaitsForXSecondsAttributesUpdateOnTheDevice_27()
+    CHIP_ERROR Test5aThWaitsForXSecondsAttributesUpdateOnTheDevice_28()
     {
 
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
@@ -77627,7 +78623,7 @@ private:
         return WaitForMs("alpha", value);
     }
 
-    CHIP_ERROR Test5bIfPaLfThReadsTargetPositionLiftPercent100thsAttributeFromDut_28()
+    CHIP_ERROR Test5bIfPaLfThReadsTargetPositionLiftPercent100thsAttributeFromDut_29()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -77654,7 +78650,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test5cIfPaTlThReadsTargetPositionTiltPercent100thsAttributeFromDut_29()
+    CHIP_ERROR Test5cIfPaTlThReadsTargetPositionTiltPercent100thsAttributeFromDut_30()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -144914,7 +145910,6 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_MEDIAPLAYBACK_1_7>(),
         make_unique<Test_TC_AUDIOOUTPUT_1_8>(),
         make_unique<Test_TC_TGTNAV_1_9>(),
-        make_unique<Test_TC_TGTNAV_8_2>(),
         make_unique<Test_TC_APBSC_1_10>(),
         make_unique<Test_TC_CONTENTLAUNCHER_1_11>(),
         make_unique<Test_TC_ALOGIN_1_12>(),
