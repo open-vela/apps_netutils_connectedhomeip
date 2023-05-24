@@ -1262,7 +1262,8 @@ private:
                 listHolder_0->mList[0].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(3);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(3);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNull();
@@ -1282,8 +1283,8 @@ private:
                     listHolder_3->mList[2].deviceType.SetNull();
 
                     listHolder_0->mList[0].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              3);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 3);
                 }
                 listHolder_0->mList[0].fabricIndex = 0U;
 
@@ -1305,7 +1306,8 @@ private:
                 listHolder_0->mList[1].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(3);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(3);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNull();
@@ -1325,8 +1327,8 @@ private:
                     listHolder_3->mList[2].deviceType.SetNull();
 
                     listHolder_0->mList[1].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              3);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 3);
                 }
                 listHolder_0->mList[1].fabricIndex = 0U;
 
@@ -1348,7 +1350,8 @@ private:
                 listHolder_0->mList[2].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(3);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(3);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNull();
@@ -1368,8 +1371,8 @@ private:
                     listHolder_3->mList[2].deviceType.SetNull();
 
                     listHolder_0->mList[2].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              3);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 3);
                 }
                 listHolder_0->mList[2].fabricIndex = 0U;
 
@@ -1391,7 +1394,8 @@ private:
                 listHolder_0->mList[3].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(3);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(3);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNull();
@@ -1411,8 +1415,8 @@ private:
                     listHolder_3->mList[2].deviceType.SetNull();
 
                     listHolder_0->mList[3].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              3);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 3);
                 }
                 listHolder_0->mList[3].fabricIndex = 0U;
 
@@ -1455,7 +1459,7 @@ private:
                 listHolder_0->mList[1].targets.SetNonNull();
 
                 listHolder_0->mList[1].targets.Value() =
-                    chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>();
+                    chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>();
                 listHolder_0->mList[1].fabricIndex = 0U;
 
                 value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
@@ -1613,7 +1617,8 @@ private:
                 listHolder_0->mList[1].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(1);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNull();
@@ -1621,8 +1626,8 @@ private:
                     listHolder_3->mList[0].deviceType.SetNull();
 
                     listHolder_0->mList[1].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              1);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 1);
                 }
                 listHolder_0->mList[1].fabricIndex = 0U;
 
@@ -1726,7 +1731,8 @@ private:
                 listHolder_0->mList[1].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(20);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(20);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNull();
@@ -1830,8 +1836,8 @@ private:
                     listHolder_3->mList[19].deviceType.SetNull();
 
                     listHolder_0->mList[1].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              20);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 20);
                 }
                 listHolder_0->mList[1].fabricIndex = 0U;
 
@@ -1864,7 +1870,8 @@ private:
                 listHolder_0->mList[0].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(3);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(3);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNull();
@@ -1884,8 +1891,8 @@ private:
                     listHolder_3->mList[2].deviceType.SetNull();
 
                     listHolder_0->mList[0].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              3);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 3);
                 }
                 listHolder_0->mList[0].fabricIndex = 0U;
 
@@ -1907,7 +1914,8 @@ private:
                 listHolder_0->mList[1].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(3);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(3);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNull();
@@ -1927,8 +1935,8 @@ private:
                     listHolder_3->mList[2].deviceType.SetNull();
 
                     listHolder_0->mList[1].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              3);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 3);
                 }
                 listHolder_0->mList[1].fabricIndex = 0U;
 
@@ -1950,7 +1958,8 @@ private:
                 listHolder_0->mList[2].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(3);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(3);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNull();
@@ -1970,8 +1979,8 @@ private:
                     listHolder_3->mList[2].deviceType.SetNull();
 
                     listHolder_0->mList[2].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              3);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 3);
                 }
                 listHolder_0->mList[2].fabricIndex = 0U;
 
@@ -1993,7 +2002,8 @@ private:
                 listHolder_0->mList[3].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(3);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(3);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNull();
@@ -2013,8 +2023,8 @@ private:
                     listHolder_3->mList[2].deviceType.SetNull();
 
                     listHolder_0->mList[3].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              3);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 3);
                 }
                 listHolder_0->mList[3].fabricIndex = 0U;
 
@@ -2036,7 +2046,8 @@ private:
                 listHolder_0->mList[4].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(3);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(3);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNull();
@@ -2056,8 +2067,8 @@ private:
                     listHolder_3->mList[2].deviceType.SetNull();
 
                     listHolder_0->mList[4].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              3);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 3);
                 }
                 listHolder_0->mList[4].fabricIndex = 0U;
 
@@ -4153,7 +4164,8 @@ private:
                 listHolder_0->mList[1].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(1);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNonNull();
@@ -4163,8 +4175,8 @@ private:
                     listHolder_3->mList[0].deviceType.SetNull();
 
                     listHolder_0->mList[1].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              1);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 1);
                 }
                 listHolder_0->mList[1].fabricIndex = CurrentFabricIndex;
 
@@ -4186,7 +4198,8 @@ private:
                 listHolder_0->mList[2].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(1);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNonNull();
@@ -4196,8 +4209,8 @@ private:
                     listHolder_3->mList[0].deviceType.SetNull();
 
                     listHolder_0->mList[2].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              1);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 1);
                 }
                 listHolder_0->mList[2].fabricIndex = CurrentFabricIndex;
 
@@ -4263,7 +4276,8 @@ private:
                 listHolder_0->mList[1].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(1);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNonNull();
@@ -4273,8 +4287,8 @@ private:
                     listHolder_3->mList[0].deviceType.SetNull();
 
                     listHolder_0->mList[1].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              1);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 1);
                 }
                 listHolder_0->mList[1].fabricIndex = CurrentFabricIndex;
 
@@ -4296,7 +4310,8 @@ private:
                 listHolder_0->mList[2].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(1);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNonNull();
@@ -4306,8 +4321,8 @@ private:
                     listHolder_3->mList[0].deviceType.SetNull();
 
                     listHolder_0->mList[2].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              1);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 1);
                 }
                 listHolder_0->mList[2].fabricIndex = CurrentFabricIndex;
 
@@ -4373,7 +4388,8 @@ private:
                 listHolder_0->mList[1].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(2);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(2);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNonNull();
@@ -4389,8 +4405,8 @@ private:
                     listHolder_3->mList[1].deviceType.Value() = 44UL;
 
                     listHolder_0->mList[1].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              2);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 2);
                 }
                 listHolder_0->mList[1].fabricIndex = CurrentFabricIndex;
 
@@ -4412,7 +4428,8 @@ private:
                 listHolder_0->mList[2].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(2);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(2);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNonNull();
@@ -4428,8 +4445,8 @@ private:
                     listHolder_3->mList[1].deviceType.Value() = 88UL;
 
                     listHolder_0->mList[2].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              2);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 2);
                 }
                 listHolder_0->mList[2].fabricIndex = CurrentFabricIndex;
 
@@ -4485,7 +4502,8 @@ private:
                 listHolder_0->mList[1].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(2);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(2);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNonNull();
@@ -4501,8 +4519,8 @@ private:
                     listHolder_3->mList[1].deviceType.Value() = 44UL;
 
                     listHolder_0->mList[1].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              2);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 2);
                 }
                 listHolder_0->mList[1].fabricIndex = CurrentFabricIndex;
 
@@ -4514,7 +4532,8 @@ private:
                 listHolder_0->mList[2].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(2);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(2);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNonNull();
@@ -4530,8 +4549,8 @@ private:
                     listHolder_3->mList[1].deviceType.Value() = 88UL;
 
                     listHolder_0->mList[2].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              2);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 2);
                 }
                 listHolder_0->mList[2].fabricIndex = CurrentFabricIndex;
 
@@ -5330,7 +5349,8 @@ private:
                 listHolder_0->mList[1].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(1);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNull();
@@ -5338,8 +5358,8 @@ private:
                     listHolder_3->mList[0].deviceType.SetNull();
 
                     listHolder_0->mList[1].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              1);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 1);
                 }
                 listHolder_0->mList[1].fabricIndex = CurrentFabricIndex;
 
@@ -5387,7 +5407,8 @@ private:
                 listHolder_0->mList[1].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(1);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNonNull();
@@ -5396,8 +5417,8 @@ private:
                     listHolder_3->mList[0].deviceType.SetNull();
 
                     listHolder_0->mList[1].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              1);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 1);
                 }
                 listHolder_0->mList[1].fabricIndex = CurrentFabricIndex;
 
@@ -5445,7 +5466,8 @@ private:
                 listHolder_0->mList[1].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(1);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNull();
@@ -5454,8 +5476,8 @@ private:
                     listHolder_3->mList[0].deviceType.SetNull();
 
                     listHolder_0->mList[1].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              1);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 1);
                 }
                 listHolder_0->mList[1].fabricIndex = CurrentFabricIndex;
 
@@ -5503,7 +5525,8 @@ private:
                 listHolder_0->mList[1].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(1);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNull();
@@ -5512,8 +5535,8 @@ private:
                     listHolder_3->mList[0].deviceType.Value() = 4294967295UL;
 
                     listHolder_0->mList[1].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              1);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 1);
                 }
                 listHolder_0->mList[1].fabricIndex = CurrentFabricIndex;
 
@@ -5561,7 +5584,8 @@ private:
                 listHolder_0->mList[1].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(1);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNull();
@@ -5571,8 +5595,8 @@ private:
                     listHolder_3->mList[0].deviceType.Value() = 33UL;
 
                     listHolder_0->mList[1].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              1);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 1);
                 }
                 listHolder_0->mList[1].fabricIndex = CurrentFabricIndex;
 
@@ -5620,7 +5644,8 @@ private:
                 listHolder_0->mList[1].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(1);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNonNull();
@@ -5631,8 +5656,8 @@ private:
                     listHolder_3->mList[0].deviceType.Value() = 33UL;
 
                     listHolder_0->mList[1].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              1);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 1);
                 }
                 listHolder_0->mList[1].fabricIndex = CurrentFabricIndex;
 
@@ -8076,7 +8101,8 @@ private:
                 listHolder_0->mList[0].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(1);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNull();
@@ -8085,8 +8111,8 @@ private:
                     listHolder_3->mList[0].deviceType.SetNull();
 
                     listHolder_0->mList[0].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              1);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 1);
                 }
                 listHolder_0->mList[0].fabricIndex = 1U;
 
@@ -8168,7 +8194,8 @@ private:
                 listHolder_0->mList[0].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(1);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNonNull();
@@ -8178,8 +8205,8 @@ private:
                     listHolder_3->mList[0].deviceType.SetNull();
 
                     listHolder_0->mList[0].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              1);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 1);
                 }
                 listHolder_0->mList[0].fabricIndex = 1U;
 
@@ -8198,7 +8225,8 @@ private:
                 listHolder_0->mList[1].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(1);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNull();
@@ -8207,8 +8235,8 @@ private:
                     listHolder_3->mList[0].deviceType.SetNull();
 
                     listHolder_0->mList[1].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              1);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 1);
                 }
                 listHolder_0->mList[1].fabricIndex = 1U;
 
@@ -8290,7 +8318,8 @@ private:
                 listHolder_0->mList[0].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(1);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNonNull();
@@ -8300,8 +8329,8 @@ private:
                     listHolder_3->mList[0].deviceType.SetNull();
 
                     listHolder_0->mList[0].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              1);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 1);
                 }
                 listHolder_0->mList[0].fabricIndex = 1U;
 
@@ -8320,7 +8349,8 @@ private:
                 listHolder_0->mList[1].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(1);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNull();
@@ -8329,8 +8359,8 @@ private:
                     listHolder_3->mList[0].deviceType.SetNull();
 
                     listHolder_0->mList[1].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              1);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 1);
                 }
                 listHolder_0->mList[1].fabricIndex = 1U;
 
@@ -8412,7 +8442,8 @@ private:
                 listHolder_0->mList[0].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(1);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNonNull();
@@ -8422,8 +8453,8 @@ private:
                     listHolder_3->mList[0].deviceType.SetNull();
 
                     listHolder_0->mList[0].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              1);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 1);
                 }
                 listHolder_0->mList[0].fabricIndex = 1U;
 
@@ -8442,7 +8473,8 @@ private:
                 listHolder_0->mList[1].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(1);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNull();
@@ -8451,8 +8483,8 @@ private:
                     listHolder_3->mList[0].deviceType.SetNull();
 
                     listHolder_0->mList[1].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              1);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 1);
                 }
                 listHolder_0->mList[1].fabricIndex = 1U;
 
@@ -8534,7 +8566,8 @@ private:
                 listHolder_0->mList[0].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(1);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNonNull();
@@ -8544,8 +8577,8 @@ private:
                     listHolder_3->mList[0].deviceType.SetNull();
 
                     listHolder_0->mList[0].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              1);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 1);
                 }
                 listHolder_0->mList[0].fabricIndex = 1U;
 
@@ -8903,7 +8936,8 @@ private:
                 listHolder_0->mList[0].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(1);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNonNull();
@@ -8913,8 +8947,8 @@ private:
                     listHolder_3->mList[0].deviceType.SetNull();
 
                     listHolder_0->mList[0].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              1);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 1);
                 }
                 listHolder_0->mList[0].fabricIndex = th1FabricIndex;
 
@@ -8926,7 +8960,8 @@ private:
                 listHolder_0->mList[1].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(1);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNonNull();
@@ -8936,8 +8971,8 @@ private:
                     listHolder_3->mList[0].deviceType.SetNull();
 
                     listHolder_0->mList[1].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              1);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 1);
                 }
                 listHolder_0->mList[1].fabricIndex = th1FabricIndex;
 
@@ -8978,7 +9013,8 @@ private:
                 listHolder_0->mList[0].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(1);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNonNull();
@@ -8988,8 +9024,8 @@ private:
                     listHolder_3->mList[0].deviceType.SetNull();
 
                     listHolder_0->mList[0].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              1);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 1);
                 }
                 listHolder_0->mList[0].fabricIndex = th2FabricIndex;
 
@@ -9001,7 +9037,8 @@ private:
                 listHolder_0->mList[1].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(1);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNonNull();
@@ -9011,8 +9048,8 @@ private:
                     listHolder_3->mList[0].deviceType.SetNull();
 
                     listHolder_0->mList[1].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              1);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 1);
                 }
                 listHolder_0->mList[1].fabricIndex = th2FabricIndex;
 
@@ -39338,7 +39375,8 @@ private:
                 listHolder_0->mList[1].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(1);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNonNull();
@@ -39347,8 +39385,8 @@ private:
                     listHolder_3->mList[0].deviceType.SetNull();
 
                     listHolder_0->mList[1].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              1);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 1);
                 }
                 listHolder_0->mList[1].fabricIndex = 1U;
 
@@ -77530,7 +77568,8 @@ private:
                 listHolder_0->mList[1].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(1);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNull();
@@ -77538,8 +77577,8 @@ private:
                     listHolder_3->mList[0].deviceType.SetNull();
 
                     listHolder_0->mList[1].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              1);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 1);
                 }
                 listHolder_0->mList[1].fabricIndex = 1U;
 
@@ -77582,7 +77621,8 @@ private:
                 listHolder_0->mList[1].targets.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    auto * listHolder_3 =
+                        new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(1);
                     listFreer.add(listHolder_3);
 
                     listHolder_3->mList[0].cluster.SetNull();
@@ -77592,8 +77632,8 @@ private:
                     listHolder_3->mList[0].deviceType.Value() = 33UL;
 
                     listHolder_0->mList[1].targets.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
-                                                                                                              1);
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlTargetStruct::Type>(
+                            listHolder_3->mList, 1);
                 }
                 listHolder_0->mList[1].fabricIndex = 1U;
 

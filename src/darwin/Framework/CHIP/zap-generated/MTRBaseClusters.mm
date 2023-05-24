@@ -11192,11 +11192,13 @@ using chip::System::Clock::Timeout;
                                     }
                                     listFreer.add(listHolder_3);
                                     for (size_t i_3 = 0; i_3 < element_0.targets.count; ++i_3) {
-                                        if (![element_0.targets[i_3] isKindOfClass:[MTRAccessControlClusterTarget class]]) {
+                                        if (![element_0.targets[i_3]
+                                                isKindOfClass:[MTRAccessControlClusterAccessControlTargetStruct class]]) {
                                             // Wrong kind of value.
                                             return CHIP_ERROR_INVALID_ARGUMENT;
                                         }
-                                        auto element_3 = (MTRAccessControlClusterTarget *) element_0.targets[i_3];
+                                        auto element_3
+                                            = (MTRAccessControlClusterAccessControlTargetStruct *) element_0.targets[i_3];
                                         if (element_3.cluster == nil) {
                                             listHolder_3->mList[i_3].cluster.SetNull();
                                         } else {

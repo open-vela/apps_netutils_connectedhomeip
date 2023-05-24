@@ -9617,8 +9617,8 @@ public:
                     { // Scope for our temporary variables
                         auto * array_3 = [NSMutableArray new];
                         for (auto & entry_3 : entry_0.targets.Value()) {
-                            MTRAccessControlClusterTarget * newElement_3;
-                            newElement_3 = [MTRAccessControlClusterTarget new];
+                            MTRAccessControlClusterAccessControlTargetStruct * newElement_3;
+                            newElement_3 = [MTRAccessControlClusterAccessControlTargetStruct new];
                             if (entry_3.cluster.IsNull()) {
                                 newElement_3.cluster = nil;
                             } else {
