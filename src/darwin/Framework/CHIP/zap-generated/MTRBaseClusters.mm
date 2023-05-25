@@ -1110,7 +1110,7 @@ using chip::System::Clock::Timeout;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = Groups::Attributes::NameSupport::TypeInfo;
-    return MTRReadAttribute<MTRInt8uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+    return MTRReadAttribute<MTRGroupsNameSupportAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -1119,7 +1119,7 @@ using chip::System::Clock::Timeout;
                                   reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = Groups::Attributes::NameSupport::TypeInfo;
-    MTRSubscribeAttribute<MTRInt8uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
+    MTRSubscribeAttribute<MTRGroupsNameSupportAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
 }
@@ -1129,9 +1129,9 @@ using chip::System::Clock::Timeout;
                                                 queue:(dispatch_queue_t)queue
                                            completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRInt8uAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRGroupsNameSupportAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(
-        clusterStateCacheContainer.baseDevice, ^(Int8uAttributeCallback successCb, MTRErrorCallback failureCb) {
+        clusterStateCacheContainer.baseDevice, ^(GroupsNameSupportAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = Groups::Attributes::NameSupport::TypeInfo;
