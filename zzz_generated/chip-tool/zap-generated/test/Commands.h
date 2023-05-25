@@ -95563,8 +95563,8 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    uint8_t NameSupportFeatureSupportedValue;
-    uint8_t NameSupportValue;
+    chip::BitMask<chip::app::Clusters::Groups::NameSupportBitmap> NameSupportFeatureSupportedValue;
+    chip::BitMask<chip::app::Clusters::Groups::NameSupportBitmap> NameSupportValue;
 
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
 
@@ -95585,7 +95585,7 @@ private:
         case 1:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::BitMask<chip::app::Clusters::Groups::NameSupportBitmap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("nameSupport", value, 128U));
                 NameSupportFeatureSupportedValue = value;
@@ -95594,7 +95594,7 @@ private:
         case 2:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::BitMask<chip::app::Clusters::Groups::NameSupportBitmap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("nameSupport", value, 0U));
                 NameSupportValue = value;
@@ -95606,7 +95606,7 @@ private:
         case 4:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::BitMask<chip::app::Clusters::Groups::NameSupportBitmap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("nameSupport", value, NameSupportFeatureSupportedValue));
             }
@@ -95614,7 +95614,7 @@ private:
         case 5:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::BitMask<chip::app::Clusters::Groups::NameSupportBitmap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("nameSupport", value, NameSupportValue));
             }
@@ -95657,8 +95657,8 @@ private:
             LogStep(3, "TH writes NameSupport attribute as 0x80 EXOR the value as read in step 1");
             VerifyOrDo(!ShouldSkip("G.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            uint8_t value;
-            value = 128U;
+            chip::BitMask<chip::app::Clusters::Groups::NameSupportBitmap> value;
+            value = static_cast<chip::BitMask<chip::app::Clusters::Groups::NameSupportBitmap>>(128U);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Groups::Id, Groups::Attributes::NameSupport::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
