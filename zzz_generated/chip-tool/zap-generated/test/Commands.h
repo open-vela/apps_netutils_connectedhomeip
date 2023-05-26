@@ -543,6 +543,7 @@ public:
         printf("Test_TC_BRBINFO_2_2\n");
         printf("Test_TC_BRBINFO_2_3\n");
         printf("Test_TC_ACE_1_2\n");
+        printf("Test_TC_ACE_1_6\n");
 
         return CHIP_NO_ERROR;
     }
@@ -8905,7 +8906,7 @@ private:
 class Test_TC_ACE_1_5Suite : public TestCommand
 {
 public:
-    Test_TC_ACE_1_5Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_ACE_1_5", 18, credsIssuerConfig)
+    Test_TC_ACE_1_5Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_ACE_1_5", 23, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -8992,6 +8993,10 @@ private:
             break;
         case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::CommissionerCommands::Commands::GetCommissionerNodeIdResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
@@ -8999,10 +9004,10 @@ private:
             }
             shouldContinue = true;
             break;
-        case 9:
+        case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 10:
+        case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::CommissionerCommands::Commands::GetCommissionerNodeIdResponse::DecodableType value;
@@ -9011,10 +9016,14 @@ private:
             }
             shouldContinue = true;
             break;
-        case 11:
+        case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 12:
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::app::Clusters::Descriptor::Structs::DeviceTypeStruct::DecodableType>
@@ -9022,28 +9031,40 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
             }
             break;
-        case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
-            break;
-        case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
-            break;
         case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::VendorId value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
             }
             break;
-        case 16:
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 17:
+        case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::OperationalCredentials::Commands::NOCResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
             }
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         default:
             LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
@@ -9073,7 +9094,7 @@ private:
                                  OperationalCredentials::Attributes::CurrentFabricIndex::Id, true, chip::NullOptional);
         }
         case 2: {
-            LogStep(2, "Step 3 & 4: TH1 puts DUT into commissioning mode, TH2 commissions DUT using admin node ID N2");
+            LogStep(2, "Step 2 & 3: TH1 puts DUT into commissioning mode, TH2 commissions DUT using admin node ID N2");
             VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
@@ -9133,17 +9154,28 @@ private:
         }
         case 7: {
             LogStep(7, "TH2 reads the fabric index");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityBeta, GetEndpoint(0), OperationalCredentials::Id,
                                  OperationalCredentials::Attributes::CurrentFabricIndex::Id, true, chip::NullOptional);
         }
         case 8: {
-            LogStep(8, "Read the commissioner node ID from the alpha fabric");
+            LogStep(8, "TH2 reads the fabric index");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 9: {
+            LogStep(9, "Read the commissioner node ID from the alpha fabric");
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::GetCommissionerNodeId::Type value;
             return GetCommissionerNodeId(kIdentityAlpha, value);
         }
-        case 9: {
-            LogStep(9, "TH1 writes ACL giving view privilege for descriptor cluster");
+        case 10: {
+            LogStep(10, "TH1 writes ACL giving view privilege for descriptor cluster");
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
@@ -9213,14 +9245,16 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 10: {
-            LogStep(10, "Read the commissioner node ID from the beta fabric");
+        case 11: {
+            LogStep(11, "Read the commissioner node ID from the beta fabric");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::GetCommissionerNodeId::Type value;
             return GetCommissionerNodeId(kIdentityBeta, value);
         }
-        case 11: {
-            LogStep(11, "TH2 writes ACL giving view privilge for basic cluster");
+        case 12: {
+            LogStep(12, "TH2 writes ACL giving view privilge for basic cluster");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
@@ -9290,28 +9324,60 @@ private:
             return WriteAttribute(kIdentityBeta, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 12: {
-            LogStep(12, "TH1 reads descriptor cluster - expect SUCCESS");
+        case 13: {
+            LogStep(13, "TH2 writes ACL giving view privilge for basic cluster");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 14: {
+            LogStep(14, "TH1 reads descriptor cluster - expect SUCCESS");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Descriptor::Id, Descriptor::Attributes::DeviceTypeList::Id, true,
                                  chip::NullOptional);
         }
-        case 13: {
-            LogStep(13, "TH1 reads basic cluster - expect UNSUPPORTED_ACCESS");
+        case 15: {
+            LogStep(15, "TH1 reads basic cluster - expect UNSUPPORTED_ACCESS");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::VendorID::Id,
                                  true, chip::NullOptional);
         }
-        case 14: {
-            LogStep(14, "TH2 reads descriptor cluster - expect UNSUPPORTED_ACCESS");
+        case 16: {
+            LogStep(16, "TH2 reads descriptor cluster - expect UNSUPPORTED_ACCESS");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityBeta, GetEndpoint(0), Descriptor::Id, Descriptor::Attributes::DeviceTypeList::Id, true,
                                  chip::NullOptional);
         }
-        case 15: {
-            LogStep(15, "TH2 reads basic cluster - expect SUCCESS");
+        case 17: {
+            LogStep(17, "TH2 reads descriptor cluster - expect UNSUPPORTED_ACCESS");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 18: {
+            LogStep(18, "TH2 reads basic cluster - expect SUCCESS");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityBeta, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::VendorID::Id,
                                  true, chip::NullOptional);
         }
-        case 16: {
-            LogStep(16, "TH1 resets ACL to default");
+        case 19: {
+            LogStep(19, "TH2 writes Extension attribute value as empty list");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 20: {
+            LogStep(20, "TH1 resets ACL to default");
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
@@ -9341,8 +9407,9 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 17: {
-            LogStep(17, "TH1 sends RemoveFabric command for TH2");
+        case 21: {
+            LogStep(21, "TH1 sends RemoveFabric command for TH2");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::OperationalCredentials::Commands::RemoveFabric::Type value;
             value.fabricIndex = th2FabricIndex;
@@ -9350,6 +9417,16 @@ private:
                                OperationalCredentials::Commands::RemoveFabric::Id, value, chip::NullOptional
 
             );
+        }
+        case 22: {
+            LogStep(22, "TH1 sends RemoveFabric command for TH2");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
         }
         }
         return CHIP_NO_ERROR;
@@ -118444,6 +118521,61 @@ private:
     }
 };
 
+class Test_TC_ACE_1_6Suite : public TestCommand
+{
+public:
+    Test_TC_ACE_1_6Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_ACE_1_6", 0, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_ACE_1_6Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {}
+        return CHIP_NO_ERROR;
+    }
+};
+
 #endif // CONFIG_ENABLE_YAML_TESTS
 
 void registerCommandsTests(Commands & commands, CredentialIssuerCommands * credsIssuerConfig)
@@ -118951,6 +119083,7 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_BRBINFO_2_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_BRBINFO_2_3Suite>(credsIssuerConfig),
         make_unique<Test_TC_ACE_1_2Suite>(credsIssuerConfig),
+        make_unique<Test_TC_ACE_1_6Suite>(credsIssuerConfig),
 #endif // CONFIG_ENABLE_YAML_TESTS
     };
 

@@ -5696,13 +5696,13 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool,
-                " ***** Test Step 2 : Step 3 & 4: TH1 puts DUT into commissioning mode, TH2 commissions DUT using admin node ID "
+                " ***** Test Step 2 : Step 2 & 3: TH1 puts DUT into commissioning mode, TH2 commissions DUT using admin node ID "
                 "N2\n");
             if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
                 NextTest();
                 return;
             }
-            err = TestStep34Th1PutsDutIntoCommissioningModeTh2CommissionsDutUsingAdminNodeIdN2_2();
+            err = TestStep23Th1PutsDutIntoCommissioningModeTh2CommissionsDutUsingAdminNodeIdN2_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Open Commissioning Window from alpha\n");
@@ -5738,47 +5738,111 @@ public:
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : TH2 reads the fabric index\n");
+            if (ShouldSkip("PICS_SDK_CI_ONLY")) {
+                NextTest();
+                return;
+            }
             err = TestTh2ReadsTheFabricIndex_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Read the commissioner node ID from the alpha fabric\n");
-            err = TestReadTheCommissionerNodeIdFromTheAlphaFabric_8();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : TH2 reads the fabric index\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestTh2ReadsTheFabricIndex_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : TH1 writes ACL giving view privilege for descriptor cluster\n");
-            err = TestTh1WritesAclGivingViewPrivilegeForDescriptorCluster_9();
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Read the commissioner node ID from the alpha fabric\n");
+            err = TestReadTheCommissionerNodeIdFromTheAlphaFabric_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Read the commissioner node ID from the beta fabric\n");
-            err = TestReadTheCommissionerNodeIdFromTheBetaFabric_10();
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH1 writes ACL giving view privilege for descriptor cluster\n");
+            err = TestTh1WritesAclGivingViewPrivilegeForDescriptorCluster_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : TH2 writes ACL giving view privilge for basic cluster\n");
-            err = TestTh2WritesAclGivingViewPrivilgeForBasicCluster_11();
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Read the commissioner node ID from the beta fabric\n");
+            if (ShouldSkip("PICS_SDK_CI_ONLY")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheCommissionerNodeIdFromTheBetaFabric_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : TH1 reads descriptor cluster - expect SUCCESS\n");
-            err = TestTh1ReadsDescriptorClusterExpectSuccess_12();
+            ChipLogProgress(chipTool, " ***** Test Step 12 : TH2 writes ACL giving view privilge for basic cluster\n");
+            if (ShouldSkip("PICS_SDK_CI_ONLY")) {
+                NextTest();
+                return;
+            }
+            err = TestTh2WritesAclGivingViewPrivilgeForBasicCluster_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : TH1 reads basic cluster - expect UNSUPPORTED_ACCESS\n");
-            err = TestTh1ReadsBasicClusterExpectUnsupportedAccess_13();
+            ChipLogProgress(chipTool, " ***** Test Step 13 : TH2 writes ACL giving view privilge for basic cluster\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestTh2WritesAclGivingViewPrivilgeForBasicCluster_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : TH2 reads descriptor cluster - expect UNSUPPORTED_ACCESS\n");
-            err = TestTh2ReadsDescriptorClusterExpectUnsupportedAccess_14();
+            ChipLogProgress(chipTool, " ***** Test Step 14 : TH1 reads descriptor cluster - expect SUCCESS\n");
+            err = TestTh1ReadsDescriptorClusterExpectSuccess_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : TH2 reads basic cluster - expect SUCCESS\n");
-            err = TestTh2ReadsBasicClusterExpectSuccess_15();
+            ChipLogProgress(chipTool, " ***** Test Step 15 : TH1 reads basic cluster - expect UNSUPPORTED_ACCESS\n");
+            err = TestTh1ReadsBasicClusterExpectUnsupportedAccess_15();
             break;
         case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : TH1 resets ACL to default\n");
-            err = TestTh1ResetsAclToDefault_16();
+            ChipLogProgress(chipTool, " ***** Test Step 16 : TH2 reads descriptor cluster - expect UNSUPPORTED_ACCESS\n");
+            if (ShouldSkip("PICS_SDK_CI_ONLY")) {
+                NextTest();
+                return;
+            }
+            err = TestTh2ReadsDescriptorClusterExpectUnsupportedAccess_16();
             break;
         case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : TH1 sends RemoveFabric command for TH2\n");
-            err = TestTh1SendsRemoveFabricCommandForTh2_17();
+            ChipLogProgress(chipTool, " ***** Test Step 17 : TH2 reads descriptor cluster - expect UNSUPPORTED_ACCESS\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestTh2ReadsDescriptorClusterExpectUnsupportedAccess_17();
+            break;
+        case 18:
+            ChipLogProgress(chipTool, " ***** Test Step 18 : TH2 reads basic cluster - expect SUCCESS\n");
+            if (ShouldSkip("PICS_SDK_CI_ONLY")) {
+                NextTest();
+                return;
+            }
+            err = TestTh2ReadsBasicClusterExpectSuccess_18();
+            break;
+        case 19:
+            ChipLogProgress(chipTool, " ***** Test Step 19 : TH2 writes Extension attribute value as empty list\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestTh2WritesExtensionAttributeValueAsEmptyList_19();
+            break;
+        case 20:
+            ChipLogProgress(chipTool, " ***** Test Step 20 : TH1 resets ACL to default\n");
+            err = TestTh1ResetsAclToDefault_20();
+            break;
+        case 21:
+            ChipLogProgress(chipTool, " ***** Test Step 21 : TH1 sends RemoveFabric command for TH2\n");
+            if (ShouldSkip("PICS_SDK_CI_ONLY")) {
+                NextTest();
+                return;
+            }
+            err = TestTh1SendsRemoveFabricCommandForTh2_21();
+            break;
+        case 22:
+            ChipLogProgress(chipTool, " ***** Test Step 22 : TH1 sends RemoveFabric command for TH2\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestTh1SendsRemoveFabricCommandForTh2_22();
             break;
         }
 
@@ -5831,18 +5895,33 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
             break;
         case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
             break;
         case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         }
@@ -5858,7 +5937,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 18;
+    const uint16_t mTestCount = 23;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -5902,7 +5981,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep34Th1PutsDutIntoCommissioningModeTh2CommissionsDutUsingAdminNodeIdN2_2()
+    CHIP_ERROR TestStep23Th1PutsDutIntoCommissioningModeTh2CommissionsDutUsingAdminNodeIdN2_2()
     {
 
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
@@ -5996,9 +6075,19 @@ private:
 
         return CHIP_NO_ERROR;
     }
+
+    CHIP_ERROR TestTh2ReadsTheFabricIndex_8()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
     NSNumber * _Nonnull commissionerNodeIdAlpha;
 
-    CHIP_ERROR TestReadTheCommissionerNodeIdFromTheAlphaFabric_8()
+    CHIP_ERROR TestReadTheCommissionerNodeIdFromTheAlphaFabric_9()
     {
 
         chip::app::Clusters::CommissionerCommands::Commands::GetCommissionerNodeId::Type value;
@@ -6010,7 +6099,7 @@ private:
         });
     }
 
-    CHIP_ERROR TestTh1WritesAclGivingViewPrivilegeForDescriptorCluster_9()
+    CHIP_ERROR TestTh1WritesAclGivingViewPrivilegeForDescriptorCluster_10()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -6069,7 +6158,7 @@ private:
     }
     NSNumber * _Nonnull commissionerNodeIdBeta;
 
-    CHIP_ERROR TestReadTheCommissionerNodeIdFromTheBetaFabric_10()
+    CHIP_ERROR TestReadTheCommissionerNodeIdFromTheBetaFabric_11()
     {
 
         chip::app::Clusters::CommissionerCommands::Commands::GetCommissionerNodeId::Type value;
@@ -6081,7 +6170,7 @@ private:
         });
     }
 
-    CHIP_ERROR TestTh2WritesAclGivingViewPrivilgeForBasicCluster_11()
+    CHIP_ERROR TestTh2WritesAclGivingViewPrivilgeForBasicCluster_12()
     {
 
         MTRBaseDevice * device = GetDevice("beta");
@@ -6139,7 +6228,17 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestTh1ReadsDescriptorClusterExpectSuccess_12()
+    CHIP_ERROR TestTh2WritesAclGivingViewPrivilgeForBasicCluster_13()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestTh1ReadsDescriptorClusterExpectSuccess_14()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -6157,7 +6256,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestTh1ReadsBasicClusterExpectUnsupportedAccess_13()
+    CHIP_ERROR TestTh1ReadsBasicClusterExpectUnsupportedAccess_15()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -6176,7 +6275,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestTh2ReadsDescriptorClusterExpectUnsupportedAccess_14()
+    CHIP_ERROR TestTh2ReadsDescriptorClusterExpectUnsupportedAccess_16()
     {
 
         MTRBaseDevice * device = GetDevice("beta");
@@ -6195,7 +6294,17 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestTh2ReadsBasicClusterExpectSuccess_15()
+    CHIP_ERROR TestTh2ReadsDescriptorClusterExpectUnsupportedAccess_17()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestTh2ReadsBasicClusterExpectSuccess_18()
     {
 
         MTRBaseDevice * device = GetDevice("beta");
@@ -6213,7 +6322,17 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestTh1ResetsAclToDefault_16()
+    CHIP_ERROR TestTh2WritesExtensionAttributeValueAsEmptyList_19()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestTh1ResetsAclToDefault_20()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -6248,7 +6367,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestTh1SendsRemoveFabricCommandForTh2_17()
+    CHIP_ERROR TestTh1SendsRemoveFabricCommandForTh2_21()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -6270,6 +6389,16 @@ private:
                              }];
 
         return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTh1SendsRemoveFabricCommandForTh2_22()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
     }
 };
 
