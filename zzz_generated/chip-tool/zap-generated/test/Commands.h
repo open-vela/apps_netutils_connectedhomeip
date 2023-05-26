@@ -28278,7 +28278,7 @@ private:
         case 2:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::Clusters::Identify::IdentifyTypeEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
@@ -28668,8 +28668,8 @@ private:
             VerifyOrDo(!ShouldSkip("I.S.C40.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::Identify::Commands::TriggerEffect::Type value;
-            value.effectIdentifier = static_cast<chip::app::Clusters::Identify::IdentifyEffectIdentifier>(0);
-            value.effectVariant    = static_cast<chip::app::Clusters::Identify::IdentifyEffectVariant>(0);
+            value.effectIdentifier = static_cast<chip::app::Clusters::Identify::EffectIdentifierEnum>(0);
+            value.effectVariant    = static_cast<chip::app::Clusters::Identify::EffectVariantEnum>(0);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), Identify::Id, Identify::Commands::TriggerEffect::Id, value,
                                chip::NullOptional
 
@@ -28692,8 +28692,8 @@ private:
             VerifyOrDo(!ShouldSkip("I.S.C40.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::Identify::Commands::TriggerEffect::Type value;
-            value.effectIdentifier = static_cast<chip::app::Clusters::Identify::IdentifyEffectIdentifier>(1);
-            value.effectVariant    = static_cast<chip::app::Clusters::Identify::IdentifyEffectVariant>(0);
+            value.effectIdentifier = static_cast<chip::app::Clusters::Identify::EffectIdentifierEnum>(1);
+            value.effectVariant    = static_cast<chip::app::Clusters::Identify::EffectVariantEnum>(0);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), Identify::Id, Identify::Commands::TriggerEffect::Id, value,
                                chip::NullOptional
 
@@ -28716,8 +28716,8 @@ private:
             VerifyOrDo(!ShouldSkip("I.S.C40.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::Identify::Commands::TriggerEffect::Type value;
-            value.effectIdentifier = static_cast<chip::app::Clusters::Identify::IdentifyEffectIdentifier>(2);
-            value.effectVariant    = static_cast<chip::app::Clusters::Identify::IdentifyEffectVariant>(0);
+            value.effectIdentifier = static_cast<chip::app::Clusters::Identify::EffectIdentifierEnum>(2);
+            value.effectVariant    = static_cast<chip::app::Clusters::Identify::EffectVariantEnum>(0);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), Identify::Id, Identify::Commands::TriggerEffect::Id, value,
                                chip::NullOptional
 
@@ -28740,8 +28740,8 @@ private:
             VerifyOrDo(!ShouldSkip("I.S.C40.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::Identify::Commands::TriggerEffect::Type value;
-            value.effectIdentifier = static_cast<chip::app::Clusters::Identify::IdentifyEffectIdentifier>(11);
-            value.effectVariant    = static_cast<chip::app::Clusters::Identify::IdentifyEffectVariant>(0);
+            value.effectIdentifier = static_cast<chip::app::Clusters::Identify::EffectIdentifierEnum>(11);
+            value.effectVariant    = static_cast<chip::app::Clusters::Identify::EffectVariantEnum>(0);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), Identify::Id, Identify::Commands::TriggerEffect::Id, value,
                                chip::NullOptional
 
@@ -28764,8 +28764,8 @@ private:
             VerifyOrDo(!ShouldSkip("I.S.C40.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::Identify::Commands::TriggerEffect::Type value;
-            value.effectIdentifier = static_cast<chip::app::Clusters::Identify::IdentifyEffectIdentifier>(1);
-            value.effectVariant    = static_cast<chip::app::Clusters::Identify::IdentifyEffectVariant>(0);
+            value.effectIdentifier = static_cast<chip::app::Clusters::Identify::EffectIdentifierEnum>(1);
+            value.effectVariant    = static_cast<chip::app::Clusters::Identify::EffectVariantEnum>(0);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), Identify::Id, Identify::Commands::TriggerEffect::Id, value,
                                chip::NullOptional
 
@@ -28788,8 +28788,8 @@ private:
             VerifyOrDo(!ShouldSkip("I.S.C40.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::Identify::Commands::TriggerEffect::Type value;
-            value.effectIdentifier = static_cast<chip::app::Clusters::Identify::IdentifyEffectIdentifier>(254);
-            value.effectVariant    = static_cast<chip::app::Clusters::Identify::IdentifyEffectVariant>(0);
+            value.effectIdentifier = static_cast<chip::app::Clusters::Identify::EffectIdentifierEnum>(254);
+            value.effectVariant    = static_cast<chip::app::Clusters::Identify::EffectVariantEnum>(0);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), Identify::Id, Identify::Commands::TriggerEffect::Id, value,
                                chip::NullOptional
 
@@ -28812,8 +28812,8 @@ private:
             VerifyOrDo(!ShouldSkip("I.S.C40.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::Identify::Commands::TriggerEffect::Type value;
-            value.effectIdentifier = static_cast<chip::app::Clusters::Identify::IdentifyEffectIdentifier>(1);
-            value.effectVariant    = static_cast<chip::app::Clusters::Identify::IdentifyEffectVariant>(0);
+            value.effectIdentifier = static_cast<chip::app::Clusters::Identify::EffectIdentifierEnum>(1);
+            value.effectVariant    = static_cast<chip::app::Clusters::Identify::EffectVariantEnum>(0);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), Identify::Id, Identify::Commands::TriggerEffect::Id, value,
                                chip::NullOptional
 
@@ -28836,8 +28836,8 @@ private:
             VerifyOrDo(!ShouldSkip("I.S.C40.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::Identify::Commands::TriggerEffect::Type value;
-            value.effectIdentifier = static_cast<chip::app::Clusters::Identify::IdentifyEffectIdentifier>(255);
-            value.effectVariant    = static_cast<chip::app::Clusters::Identify::IdentifyEffectVariant>(0);
+            value.effectIdentifier = static_cast<chip::app::Clusters::Identify::EffectIdentifierEnum>(255);
+            value.effectVariant    = static_cast<chip::app::Clusters::Identify::EffectVariantEnum>(0);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), Identify::Id, Identify::Commands::TriggerEffect::Id, value,
                                chip::NullOptional
 
@@ -28860,8 +28860,8 @@ private:
             VerifyOrDo(!ShouldSkip("I.S.C40.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::Identify::Commands::TriggerEffect::Type value;
-            value.effectIdentifier = static_cast<chip::app::Clusters::Identify::IdentifyEffectIdentifier>(0);
-            value.effectVariant    = static_cast<chip::app::Clusters::Identify::IdentifyEffectVariant>(66);
+            value.effectIdentifier = static_cast<chip::app::Clusters::Identify::EffectIdentifierEnum>(0);
+            value.effectVariant    = static_cast<chip::app::Clusters::Identify::EffectVariantEnum>(66);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), Identify::Id, Identify::Commands::TriggerEffect::Id, value,
                                chip::NullOptional
 
@@ -28884,8 +28884,8 @@ private:
             VerifyOrDo(!ShouldSkip("I.S.C40.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::Identify::Commands::TriggerEffect::Type value;
-            value.effectIdentifier = static_cast<chip::app::Clusters::Identify::IdentifyEffectIdentifier>(255);
-            value.effectVariant    = static_cast<chip::app::Clusters::Identify::IdentifyEffectVariant>(0);
+            value.effectIdentifier = static_cast<chip::app::Clusters::Identify::EffectIdentifierEnum>(255);
+            value.effectVariant    = static_cast<chip::app::Clusters::Identify::EffectVariantEnum>(0);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), Identify::Id, Identify::Commands::TriggerEffect::Id, value,
                                chip::NullOptional
 
