@@ -186,6 +186,7 @@ public:
         printf("Test_TC_DGTHREAD_2_2\n");
         printf("Test_TC_DGTHREAD_2_3\n");
         printf("Test_TC_DGTHREAD_2_4\n");
+        printf("Test_TC_TIMESYNC_1_1\n");
         printf("Test_TC_ULABEL_1_1\n");
         printf("Test_TC_ULABEL_2_1\n");
         printf("Test_TC_ULABEL_2_2\n");
@@ -54414,6 +54415,579 @@ private:
             VerifyOrDo(!ShouldSkip("DGTHREAD.S.A0006"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), ThreadNetworkDiagnostics::Id,
                                  ThreadNetworkDiagnostics::Attributes::OverrunCount::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_TIMESYNC_1_1Suite : public TestCommand
+{
+public:
+    Test_TC_TIMESYNC_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_TIMESYNC_1_1", 35, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_TIMESYNC_1_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 2U));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 1UL));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 2UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 4UL));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 4UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 8UL));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 8UL));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65530UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65532UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
+            }
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+            }
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 2UL));
+            }
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintContains("value", value, 5UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 6UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 7UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 8UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 10UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 11UL));
+            }
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 5UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 6UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 7UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 8UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 10UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 11UL));
+            }
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 12UL));
+            }
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 4UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 12UL));
+            }
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintContains("value", value, 9UL));
+            }
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 9UL));
+            }
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+            }
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 3UL));
+            }
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+            }
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+            }
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 2UL));
+            }
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
+            }
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 4UL));
+            }
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+            }
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
+            }
+            break;
+        case 28:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 4UL));
+            }
+            break;
+        case 29:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintContains("value", value, 5UL));
+            }
+            break;
+        case 30:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 5UL));
+            }
+            break;
+        case 31:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+            }
+            break;
+        case 32:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 1UL));
+            }
+            break;
+        case 33:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+            }
+            break;
+        case 34:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 3UL));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TS2: read the global attribute: ClusterRevision");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::ClusterRevision::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TS3: Given TIMESYNC.S.F00(TZ) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("TIMESYNC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "TS3: Given !TIMESYNC.S.F00(TZ) ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("!TIMESYNC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "TS3: Given TIMESYNC.S.F01(NTPC) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("TIMESYNC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "TS3: Given !TIMESYNC.S.F01(NTPC) ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("!TIMESYNC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "TS3: Given TIMESYNC.S.F02(NTPS) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("TIMESYNC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "TS3: Given !TIMESYNC.S.F02(NTPS) ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("!TIMESYNC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "TS3: Given TIMESYNC.S.F03(TSC) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("TIMESYNC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "TS3: Given !TIMESYNC.S.F03(TSC) ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("!TIMESYNC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "TS4: Check for mandatory attributes in AttributeList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11, "TS4: Check for optional attribute TimeSource in AttributeList");
+            VerifyOrDo(!ShouldSkip("TIMESYNC.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 12: {
+            LogStep(12, "TS4: Check for optional attribute TimeSource not in AttributeList");
+            VerifyOrDo(!ShouldSkip("!TIMESYNC.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 13: {
+            LogStep(13, "TS4: Check for TZ feature-based attributes in AttributeList");
+            VerifyOrDo(!ShouldSkip("TIMESYNC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 14: {
+            LogStep(14, "TS4: Check for TZ feature-based attributes not in AttributeList");
+            VerifyOrDo(!ShouldSkip("!TIMESYNC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 15: {
+            LogStep(15, "TS4: Check for NTPC feature-based attributes in AttributeList");
+            VerifyOrDo(!ShouldSkip("TIMESYNC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 16: {
+            LogStep(16, "TS4: Check for NTPC feature-based attributes not in AttributeList");
+            VerifyOrDo(!ShouldSkip("!TIMESYNC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 17: {
+            LogStep(17, "TS4: Check for NTPS feature-based attributes in AttributeList");
+            VerifyOrDo(!ShouldSkip("TIMESYNC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 18: {
+            LogStep(18, "TS4: Check for NTPS feature-based attributes not in AttributeList");
+            VerifyOrDo(!ShouldSkip("!TIMESYNC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 19: {
+            LogStep(19, "TS4: Check for TSC feature-based attributes in AttributeList");
+            VerifyOrDo(!ShouldSkip("TIMESYNC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 20: {
+            LogStep(20, "TS4: Check for TSC feature-based attributes not in AttributeList");
+            VerifyOrDo(!ShouldSkip("!TIMESYNC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 21: {
+            LogStep(21, "TS5: Check for mandatory events in EventList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::EventList::Id, true, chip::NullOptional);
+        }
+        case 22: {
+            LogStep(22, "TS5: Check for TZ feature-based events in EventList");
+            VerifyOrDo(!ShouldSkip("TIMESYNC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::EventList::Id, true, chip::NullOptional);
+        }
+        case 23: {
+            LogStep(23, "TS5: Check for TZ feature-based events not in EventList");
+            VerifyOrDo(!ShouldSkip("!TIMESYNC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::EventList::Id, true, chip::NullOptional);
+        }
+        case 24: {
+            LogStep(24, "TS5: Check for TSC feature-based events in EventList");
+            VerifyOrDo(!ShouldSkip("TIMESYNC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::EventList::Id, true, chip::NullOptional);
+        }
+        case 25: {
+            LogStep(25, "TS5: Check for TSC feature-based events not in EventList");
+            VerifyOrDo(!ShouldSkip("!TIMESYNC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::EventList::Id, true, chip::NullOptional);
+        }
+        case 26: {
+            LogStep(26, "TS6: Check for mandatory commands in AcceptedCommandList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 27: {
+            LogStep(27, "TS6: Check for TZ feature-based commands in AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("TIMESYNC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 28: {
+            LogStep(28, "TS6: Check for TZ feature-based commands in not AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("!TIMESYNC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 29: {
+            LogStep(29, "TS6: Check for NTPC feature-based commands in AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("TIMESYNC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 30: {
+            LogStep(30, "TS6: Check for NTPC feature-based commands in not AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("!TIMESYNC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 31: {
+            LogStep(31, "TS6: Check for TSC feature-based commands in AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("TIMESYNC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 32: {
+            LogStep(32, "TS6: Check for TSC feature-based commands in not AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("!TIMESYNC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 33: {
+            LogStep(33, "TS6: Check for TZ feature-based commands in AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("TIMESYNC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
+        }
+        case 34: {
+            LogStep(34, "TS6: Check for TZ feature-based commands in not AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("!TIMESYNC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
         }
         }
         return CHIP_NO_ERROR;
@@ -118737,6 +119311,7 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_DGTHREAD_2_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_DGTHREAD_2_3Suite>(credsIssuerConfig),
         make_unique<Test_TC_DGTHREAD_2_4Suite>(credsIssuerConfig),
+        make_unique<Test_TC_TIMESYNC_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_ULABEL_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_ULABEL_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_ULABEL_2_2Suite>(credsIssuerConfig),
