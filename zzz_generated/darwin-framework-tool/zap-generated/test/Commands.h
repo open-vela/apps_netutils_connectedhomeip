@@ -30767,7 +30767,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nonnull PacketRxCount;
+    NSNumber * _Nonnull PacketRxCountValue;
 
     CHIP_ERROR TestThReadsPacketRxCountAttributeValueFromDut_11()
     {
@@ -30784,7 +30784,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             {
-                PacketRxCount = value;
+                PacketRxCountValue = value;
             }
 
             NextTest();
@@ -30792,7 +30792,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nonnull PacketTxCount;
+    NSNumber * _Nonnull PacketTxCountValue;
 
     CHIP_ERROR TestThReadsPacketTxCountAttributeValueFromDut_12()
     {
@@ -30809,7 +30809,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             {
-                PacketTxCount = value;
+                PacketTxCountValue = value;
             }
 
             NextTest();
@@ -30817,7 +30817,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nonnull TxErrCount;
+    NSNumber * _Nonnull TxErrCountValue;
 
     CHIP_ERROR TestThReadsTxErrCountAttributeValueFromDut_13()
     {
@@ -30834,7 +30834,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             {
-                TxErrCount = value;
+                TxErrCountValue = value;
             }
 
             NextTest();
@@ -30842,7 +30842,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nonnull CollisionCount;
+    NSNumber * _Nonnull CollisionCountValue;
 
     CHIP_ERROR TestThReadsCollisionCountAttributeValueFromDut_14()
     {
@@ -30859,7 +30859,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             {
-                CollisionCount = value;
+                CollisionCountValue = value;
             }
 
             NextTest();
@@ -30867,7 +30867,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nonnull OverrunCount;
+    NSNumber * _Nonnull OverrunCountValue;
 
     CHIP_ERROR TestThReadsOverrunCountAttributeValueFromDut_15()
     {
@@ -30884,7 +30884,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             {
-                OverrunCount = value;
+                OverrunCountValue = value;
             }
 
             NextTest();
@@ -30947,7 +30947,7 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMaxValue<uint64_t>("txErrCount", [value unsignedLongLongValue], TxErrCount));
+            VerifyOrReturn(CheckConstraintMaxValue<uint64_t>("txErrCount", [value unsignedLongLongValue], TxErrCountValue));
 
             NextTest();
         }];
@@ -30969,7 +30969,7 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMaxValue<uint64_t>("collisionCount", [value unsignedLongLongValue], CollisionCount));
+            VerifyOrReturn(CheckConstraintMaxValue<uint64_t>("collisionCount", [value unsignedLongLongValue], CollisionCountValue));
 
             NextTest();
         }];
@@ -30991,7 +30991,7 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMaxValue<uint64_t>("overrunCount", [value unsignedLongLongValue], OverrunCount));
+            VerifyOrReturn(CheckConstraintMaxValue<uint64_t>("overrunCount", [value unsignedLongLongValue], OverrunCountValue));
 
             NextTest();
         }];

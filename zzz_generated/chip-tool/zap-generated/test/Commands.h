@@ -26030,11 +26030,11 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    uint64_t PacketRxCount;
-    uint64_t PacketTxCount;
-    uint64_t TxErrCount;
-    uint64_t CollisionCount;
-    uint64_t OverrunCount;
+    uint64_t PacketRxCountValue;
+    uint64_t PacketTxCountValue;
+    uint64_t TxErrCountValue;
+    uint64_t CollisionCountValue;
+    uint64_t OverrunCountValue;
 
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
 
@@ -26157,7 +26157,7 @@ private:
             {
                 uint64_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                PacketRxCount = value;
+                PacketRxCountValue = value;
             }
             break;
         case 12:
@@ -26165,7 +26165,7 @@ private:
             {
                 uint64_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                PacketTxCount = value;
+                PacketTxCountValue = value;
             }
             break;
         case 13:
@@ -26173,7 +26173,7 @@ private:
             {
                 uint64_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                TxErrCount = value;
+                TxErrCountValue = value;
             }
             break;
         case 14:
@@ -26181,7 +26181,7 @@ private:
             {
                 uint64_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                CollisionCount = value;
+                CollisionCountValue = value;
             }
             break;
         case 15:
@@ -26189,7 +26189,7 @@ private:
             {
                 uint64_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                OverrunCount = value;
+                OverrunCountValue = value;
             }
             break;
         case 16:
@@ -26208,7 +26208,7 @@ private:
             {
                 uint64_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, TxErrCount));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, TxErrCountValue));
             }
             break;
         case 20:
@@ -26216,7 +26216,7 @@ private:
             {
                 uint64_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, CollisionCount));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, CollisionCountValue));
             }
             break;
         case 21:
@@ -26224,7 +26224,7 @@ private:
             {
                 uint64_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, OverrunCount));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, OverrunCountValue));
             }
             break;
         default:
@@ -48324,15 +48324,15 @@ private:
     chip::Optional<uint16_t> mTimeout;
 
     int16_t AbsMinCoolSetpointLimitStep5;
-    int8_t MinSetpointDeadBand;
+    int8_t MinSetpointDeadBandValue;
     int16_t AbsMaxCoolSetpointLimitStep6;
-    int16_t MinCoolSetpointLimit;
-    int16_t MaxCoolSetpointLimit;
-    int16_t MaxHeatSetpointLimit;
-    int16_t OccupiedCoolingSetpoint;
-    int16_t AbsMinHeat;
-    int16_t AbsMaxHeat;
-    int16_t UnoccupiedCoolingSetpoint;
+    int16_t MinCoolSetpointLimitValue;
+    int16_t MaxCoolSetpointLimitValue;
+    int16_t MaxHeatSetpointLimitValue;
+    int16_t OccupiedCoolingSetpointValue;
+    int16_t AbsMinHeatValue;
+    int16_t AbsMaxHeatValue;
+    int16_t UnoccupiedCoolingSetpointValue;
 
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
 
@@ -48363,7 +48363,7 @@ private:
             {
                 int8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                MinSetpointDeadBand = value;
+                MinSetpointDeadBandValue = value;
             }
             break;
         case 3:
@@ -48379,7 +48379,7 @@ private:
             {
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                MinCoolSetpointLimit = value;
+                MinCoolSetpointLimitValue = value;
             }
             break;
         case 5:
@@ -48387,7 +48387,7 @@ private:
             {
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                MaxCoolSetpointLimit = value;
+                MaxCoolSetpointLimitValue = value;
             }
             break;
         case 6:
@@ -48395,7 +48395,7 @@ private:
             {
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                MaxHeatSetpointLimit = value;
+                MaxHeatSetpointLimitValue = value;
             }
             break;
         case 7:
@@ -48403,7 +48403,7 @@ private:
             {
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                OccupiedCoolingSetpoint = value;
+                OccupiedCoolingSetpointValue = value;
             }
             break;
         case 8:
@@ -48411,7 +48411,7 @@ private:
             {
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                AbsMinHeat = value;
+                AbsMinHeatValue = value;
             }
             break;
         case 9:
@@ -48419,7 +48419,7 @@ private:
             {
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                AbsMaxHeat = value;
+                AbsMaxHeatValue = value;
             }
             break;
         case 10:
@@ -48427,7 +48427,7 @@ private:
             {
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                UnoccupiedCoolingSetpoint = value;
+                UnoccupiedCoolingSetpointValue = value;
             }
             break;
         case 11:
@@ -48466,7 +48466,7 @@ private:
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, AbsMinCoolSetpointLimitStep5 - MinSetpointDeadBand));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, AbsMinCoolSetpointLimitStep5 - MinSetpointDeadBandValue));
             }
             break;
         case 15:
@@ -48564,8 +48564,8 @@ private:
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, MinCoolSetpointLimit));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxCoolSetpointLimit));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinCoolSetpointLimitValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxCoolSetpointLimitValue));
             }
             break;
         case 25:
@@ -48585,7 +48585,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, AbsMinCoolSetpointLimitStep5));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, OccupiedCoolingSetpoint - MinSetpointDeadBand));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, OccupiedCoolingSetpointValue - MinSetpointDeadBandValue));
             }
             break;
         case 27:
@@ -48604,8 +48604,8 @@ private:
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, AbsMinHeat));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, AbsMaxHeat));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, AbsMinHeatValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, AbsMaxHeatValue));
             }
             break;
         case 29:
@@ -48625,7 +48625,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 700));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, UnoccupiedCoolingSetpoint - MinSetpointDeadBand));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, UnoccupiedCoolingSetpointValue - MinSetpointDeadBandValue));
             }
             break;
         case 31:
@@ -48645,7 +48645,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 700));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, MinCoolSetpointLimit - MinSetpointDeadBand));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MinCoolSetpointLimitValue - MinSetpointDeadBandValue));
             }
             break;
         case 33:
@@ -48654,8 +48654,8 @@ private:
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, AbsMinHeat));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxHeatSetpointLimit));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, AbsMinHeatValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxHeatSetpointLimitValue));
             }
             break;
         case 34:
@@ -48685,7 +48685,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 700));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxCoolSetpointLimit - MinSetpointDeadBand));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxCoolSetpointLimitValue - MinSetpointDeadBandValue));
             }
             break;
         case 37:
@@ -48695,7 +48695,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, AbsMinCoolSetpointLimitStep5));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxCoolSetpointLimit));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxCoolSetpointLimitValue));
             }
             break;
         case 38:
@@ -48714,7 +48714,7 @@ private:
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, MinCoolSetpointLimit));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinCoolSetpointLimitValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, AbsMaxCoolSetpointLimitStep6));
             }
             break;
@@ -49489,18 +49489,18 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    int16_t MinCoolSetpointLimit;
-    int16_t MaxCoolSetpointLimit;
-    int8_t MinSetpointDeadBand;
-    int16_t MinHeatSetpointLimit;
-    int16_t UnoccupiedCoolingSetpoint;
-    int16_t MaxHeatSetpointLimit;
-    int16_t OccupiedHeatingSetpoint;
-    int16_t OccupiedCoolingSetpoint;
+    int16_t MinCoolSetpointLimitValue;
+    int16_t MaxCoolSetpointLimitValue;
+    int8_t MinSetpointDeadBandValue;
+    int16_t MinHeatSetpointLimitValue;
+    int16_t UnoccupiedCoolingSetpointValue;
+    int16_t MaxHeatSetpointLimitValue;
+    int16_t OccupiedHeatingSetpointValue;
+    int16_t OccupiedCoolingSetpointValue;
     int16_t AbsMinHeatSetpointLimitValue;
     int16_t AbsMaxHeatSetpointLimitValue;
-    int16_t AbsMinCoolSetpointLimit;
-    int16_t AbsMaxCoolSetpointLimit;
+    int16_t AbsMinCoolSetpointLimitValue;
+    int16_t AbsMaxCoolSetpointLimitValue;
 
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
 
@@ -49523,7 +49523,7 @@ private:
             {
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                MinCoolSetpointLimit = value;
+                MinCoolSetpointLimitValue = value;
             }
             break;
         case 2:
@@ -49531,7 +49531,7 @@ private:
             {
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                MaxCoolSetpointLimit = value;
+                MaxCoolSetpointLimitValue = value;
             }
             break;
         case 3:
@@ -49539,7 +49539,7 @@ private:
             {
                 int8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                MinSetpointDeadBand = value;
+                MinSetpointDeadBandValue = value;
             }
             break;
         case 4:
@@ -49547,7 +49547,7 @@ private:
             {
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                MinHeatSetpointLimit = value;
+                MinHeatSetpointLimitValue = value;
             }
             break;
         case 5:
@@ -49555,7 +49555,7 @@ private:
             {
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                UnoccupiedCoolingSetpoint = value;
+                UnoccupiedCoolingSetpointValue = value;
             }
             break;
         case 6:
@@ -49563,7 +49563,7 @@ private:
             {
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                MaxHeatSetpointLimit = value;
+                MaxHeatSetpointLimitValue = value;
             }
             break;
         case 7:
@@ -49571,7 +49571,7 @@ private:
             {
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                OccupiedHeatingSetpoint = value;
+                OccupiedHeatingSetpointValue = value;
             }
             break;
         case 8:
@@ -49579,7 +49579,7 @@ private:
             {
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                OccupiedCoolingSetpoint = value;
+                OccupiedCoolingSetpointValue = value;
             }
             break;
         case 9:
@@ -49603,7 +49603,7 @@ private:
             {
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                AbsMinCoolSetpointLimit = value;
+                AbsMinCoolSetpointLimitValue = value;
             }
             break;
         case 12:
@@ -49611,7 +49611,7 @@ private:
             {
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                AbsMaxCoolSetpointLimit = value;
+                AbsMaxCoolSetpointLimitValue = value;
             }
             break;
         case 13:
@@ -49620,8 +49620,8 @@ private:
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, MinCoolSetpointLimit));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxCoolSetpointLimit));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinCoolSetpointLimitValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxCoolSetpointLimitValue));
             }
             break;
         case 14:
@@ -49680,8 +49680,8 @@ private:
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, MinHeatSetpointLimit));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxHeatSetpointLimit));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinHeatSetpointLimitValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxHeatSetpointLimitValue));
             }
             break;
         case 27:
@@ -49743,8 +49743,8 @@ private:
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, MinCoolSetpointLimit));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxCoolSetpointLimit));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinCoolSetpointLimitValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxCoolSetpointLimitValue));
             }
             break;
         case 41:
@@ -49806,8 +49806,8 @@ private:
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, MinHeatSetpointLimit));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxHeatSetpointLimit));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinHeatSetpointLimitValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxHeatSetpointLimitValue));
             }
             break;
         case 55:
@@ -49870,7 +49870,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, AbsMinHeatSetpointLimitValue));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxHeatSetpointLimit));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxHeatSetpointLimitValue));
             }
             break;
         case 69:
@@ -49932,7 +49932,7 @@ private:
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, MinHeatSetpointLimit));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinHeatSetpointLimitValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, AbsMaxHeatSetpointLimitValue));
             }
             break;
@@ -49998,8 +49998,8 @@ private:
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, AbsMinCoolSetpointLimit));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxCoolSetpointLimit));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, AbsMinCoolSetpointLimitValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxCoolSetpointLimitValue));
             }
             break;
         case 98:
@@ -50058,8 +50058,8 @@ private:
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, MinCoolSetpointLimit));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, AbsMaxCoolSetpointLimit));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinCoolSetpointLimitValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, AbsMaxCoolSetpointLimitValue));
             }
             break;
         case 111:
@@ -50453,7 +50453,7 @@ private:
             VerifyOrDo(!ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0017"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             int16_t value;
-            value = static_cast<int16_t>(MaxCoolSetpointLimit + 1000);
+            value = static_cast<int16_t>(MaxCoolSetpointLimitValue + 1000);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id,
                                   Thermostat::Attributes::OccupiedCoolingSetpoint::Id, value, chip::NullOptional,
                                   chip::NullOptional);
@@ -50473,7 +50473,7 @@ private:
             VerifyOrDo(!ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0017"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             int16_t value;
-            value = MaxCoolSetpointLimit;
+            value = MaxCoolSetpointLimitValue;
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id,
                                   Thermostat::Attributes::OccupiedCoolingSetpoint::Id, value, chip::NullOptional,
                                   chip::NullOptional);
@@ -50494,7 +50494,7 @@ private:
             VerifyOrDo(!ShouldSkip("TSTAT.S.F01 && !TSTAT.S.F05 && TSTAT.S.A0017"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             int16_t value;
-            value = MinCoolSetpointLimit;
+            value = MinCoolSetpointLimitValue;
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id,
                                   Thermostat::Attributes::OccupiedCoolingSetpoint::Id, value, chip::NullOptional,
                                   chip::NullOptional);
@@ -50578,7 +50578,7 @@ private:
             VerifyOrDo(!ShouldSkip("TSTAT.S.F00 && TSTAT.S.A0016"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             int16_t value;
-            value = static_cast<int16_t>(MaxHeatSetpointLimit + 1000);
+            value = static_cast<int16_t>(MaxHeatSetpointLimitValue + 1000);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id,
                                   Thermostat::Attributes::OccupiedHeatingSetpoint::Id, value, chip::NullOptional,
                                   chip::NullOptional);
@@ -50599,7 +50599,7 @@ private:
             VerifyOrDo(!ShouldSkip("TSTAT.S.F00 && !TSTAT.S.F05 && TSTAT.S.A0016"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             int16_t value;
-            value = MaxHeatSetpointLimit;
+            value = MaxHeatSetpointLimitValue;
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id,
                                   Thermostat::Attributes::OccupiedHeatingSetpoint::Id, value, chip::NullOptional,
                                   chip::NullOptional);
@@ -50642,7 +50642,7 @@ private:
             VerifyOrDo(!ShouldSkip("TSTAT.S.F00 && TSTAT.S.A0015"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             int16_t value;
-            value = MinHeatSetpointLimit;
+            value = MinHeatSetpointLimitValue;
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id,
                                   Thermostat::Attributes::OccupiedHeatingSetpoint::Id, value, chip::NullOptional,
                                   chip::NullOptional);
@@ -50713,7 +50713,7 @@ private:
             VerifyOrDo(!ShouldSkip("TSTAT.S.F02 && TSTAT.S.F01 && TSTAT.S.A0018"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             int16_t value;
-            value = static_cast<int16_t>(MaxCoolSetpointLimit + 1000);
+            value = static_cast<int16_t>(MaxCoolSetpointLimitValue + 1000);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id,
                                   Thermostat::Attributes::UnoccupiedCoolingSetpoint::Id, value, chip::NullOptional,
                                   chip::NullOptional);
@@ -50735,7 +50735,7 @@ private:
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             int16_t value;
-            value = MaxCoolSetpointLimit;
+            value = MaxCoolSetpointLimitValue;
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id,
                                   Thermostat::Attributes::UnoccupiedCoolingSetpoint::Id, value, chip::NullOptional,
                                   chip::NullOptional);
@@ -50781,7 +50781,7 @@ private:
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             int16_t value;
-            value = MinCoolSetpointLimit;
+            value = MinCoolSetpointLimitValue;
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id,
                                   Thermostat::Attributes::UnoccupiedCoolingSetpoint::Id, value, chip::NullOptional,
                                   chip::NullOptional);
@@ -50852,7 +50852,7 @@ private:
             VerifyOrDo(!ShouldSkip("TSTAT.S.F02 && TSTAT.S.F00 && TSTAT.S.A0016"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             int16_t value;
-            value = static_cast<int16_t>(MaxHeatSetpointLimit + 1000);
+            value = static_cast<int16_t>(MaxHeatSetpointLimitValue + 1000);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id,
                                   Thermostat::Attributes::UnoccupiedHeatingSetpoint::Id, value, chip::NullOptional,
                                   chip::NullOptional);
@@ -50874,7 +50874,7 @@ private:
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             int16_t value;
-            value = MaxHeatSetpointLimit;
+            value = MaxHeatSetpointLimitValue;
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id,
                                   Thermostat::Attributes::UnoccupiedHeatingSetpoint::Id, value, chip::NullOptional,
                                   chip::NullOptional);
@@ -50918,7 +50918,7 @@ private:
             VerifyOrDo(!ShouldSkip("TSTAT.S.F02 && TSTAT.S.F00 && TSTAT.S.A0015"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             int16_t value;
-            value = MinHeatSetpointLimit;
+            value = MinHeatSetpointLimitValue;
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id,
                                   Thermostat::Attributes::UnoccupiedHeatingSetpoint::Id, value, chip::NullOptional,
                                   chip::NullOptional);
@@ -50998,7 +50998,7 @@ private:
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             int16_t value;
-            value = static_cast<int16_t>(MaxHeatSetpointLimit + 1000);
+            value = static_cast<int16_t>(MaxHeatSetpointLimitValue + 1000);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::MinHeatSetpointLimit::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
@@ -51018,7 +51018,7 @@ private:
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             int16_t value;
-            value = MaxHeatSetpointLimit;
+            value = MaxHeatSetpointLimitValue;
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::MinHeatSetpointLimit::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
@@ -51192,7 +51192,7 @@ private:
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             int16_t value;
-            value = MinHeatSetpointLimit;
+            value = MinHeatSetpointLimitValue;
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::MaxHeatSetpointLimit::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
@@ -51262,7 +51262,7 @@ private:
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             int16_t value;
-            value = static_cast<int16_t>(MaxCoolSetpointLimit + 1000);
+            value = static_cast<int16_t>(MaxCoolSetpointLimitValue + 1000);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::MinCoolSetpointLimit::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
@@ -51282,7 +51282,7 @@ private:
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             int16_t value;
-            value = MaxCoolSetpointLimit;
+            value = MaxCoolSetpointLimitValue;
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::MinCoolSetpointLimit::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
@@ -51302,7 +51302,7 @@ private:
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             int16_t value;
-            value = AbsMinCoolSetpointLimit;
+            value = AbsMinCoolSetpointLimitValue;
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::MinCoolSetpointLimit::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
@@ -51385,7 +51385,7 @@ private:
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             int16_t value;
-            value = static_cast<int16_t>(AbsMaxCoolSetpointLimit + 1000);
+            value = static_cast<int16_t>(AbsMaxCoolSetpointLimitValue + 1000);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::MaxCoolSetpointLimit::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
@@ -51405,7 +51405,7 @@ private:
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             int16_t value;
-            value = AbsMaxCoolSetpointLimit;
+            value = AbsMaxCoolSetpointLimitValue;
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::MaxCoolSetpointLimit::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
@@ -51435,7 +51435,7 @@ private:
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             int16_t value;
-            value = MinCoolSetpointLimit;
+            value = MinCoolSetpointLimitValue;
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::MaxCoolSetpointLimit::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
