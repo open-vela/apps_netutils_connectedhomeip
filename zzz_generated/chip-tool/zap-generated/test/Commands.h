@@ -538,6 +538,7 @@ public:
         printf("Test_TC_S_2_1\n");
         printf("Test_TC_S_2_2\n");
         printf("Test_TC_S_2_3\n");
+        printf("Test_TC_S_2_4\n");
         printf("Test_TC_S_3_1\n");
         printf("Test_TC_ACL_2_5\n");
         printf("Test_TC_ACL_2_6\n");
@@ -118601,7 +118602,7 @@ private:
 class Test_TC_S_2_1Suite : public TestCommand
 {
 public:
-    Test_TC_S_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_S_2_1", 0, credsIssuerConfig)
+    Test_TC_S_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_S_2_1", 10, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -118634,6 +118635,84 @@ private:
 
         switch (mTestIndex - 1)
         {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::GroupId value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "group_id", "groupid"));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                bool value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "uint8"));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("nameSupport", value, 128U));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap8", "uint8"));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("nameSupport", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap8", "uint8"));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<chip::NodeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "node_id", "nodeId"));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "uint16"));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "uint8"));
+            }
+            break;
         default:
             LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
         }
@@ -118648,7 +118727,69 @@ private:
     {
         using namespace chip::app::Clusters;
         switch (testIndex)
-        {}
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH reads from the DUT the (0x0000) SceneCount attribute");
+            VerifyOrDo(!ShouldSkip("S.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Attributes::SceneCount::Id, true,
+                                 chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TH reads from the DUT the (0x0001) CurrentScene attribute");
+            VerifyOrDo(!ShouldSkip("S.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Attributes::CurrentScene::Id, true,
+                                 chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "TH reads from the DUT the (0x0002) CurrentGroup attribute");
+            VerifyOrDo(!ShouldSkip("S.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Attributes::CurrentGroup::Id, true,
+                                 chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "TH reads from the DUT the (0x0003) SceneValid attribute");
+            VerifyOrDo(!ShouldSkip("S.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Attributes::SceneValid::Id, true,
+                                 chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "TH reads from the DUT the (0x0004) NameSupport attribute");
+            VerifyOrDo(!ShouldSkip("S.S.A0003 && S.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Attributes::NameSupport::Id, true,
+                                 chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "TH reads from the DUT the (0x0004) NameSupport attribute");
+            VerifyOrDo(!ShouldSkip("S.S.A0004 && (!S.S.F00)"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Attributes::NameSupport::Id, true,
+                                 chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "TH reads from the DUT the (0x0005) LastConfiguredBy attribute");
+            VerifyOrDo(!ShouldSkip("S.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Attributes::LastConfiguredBy::Id, true,
+                                 chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "TH reads from the DUT the (0x0006) SceneTableSize attribute");
+            VerifyOrDo(!ShouldSkip("S.S.A0006"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Attributes::SceneTableSize::Id, true,
+                                 chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "TH reads from the DUT the (0x0007) RemainingCapacity attribute");
+            VerifyOrDo(!ShouldSkip("S.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Attributes::RemainingCapacity::Id, true,
+                                 chip::NullOptional);
+        }
+        }
         return CHIP_NO_ERROR;
     }
 };
@@ -118656,7 +118797,7 @@ private:
 class Test_TC_S_2_2Suite : public TestCommand
 {
 public:
-    Test_TC_S_2_2Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_S_2_2", 0, credsIssuerConfig)
+    Test_TC_S_2_2Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_S_2_2", 50, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -118677,6 +118818,8 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
+    uint16_t maxScenes;
+
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
 
     //
@@ -118689,6 +118832,426 @@ private:
 
         switch (mTestIndex - 1)
         {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                maxScenes = value;
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Groups::Commands::AddGroupResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Scenes::Commands::RemoveAllScenesResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Scenes::Commands::GetSceneMembershipResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValueNonNull("capacity", value.capacity));
+                VerifyOrReturn(CheckValue("capacity.Value()", value.capacity.Value(), (maxScenes / 2)));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Scenes::Commands::StoreSceneResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
+                VerifyOrReturn(CheckValue("sceneID", value.sceneID, 1U));
+            }
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("sceneCount", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
+            }
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("currentScene", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
+            }
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::GroupId value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("currentGroup", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "group_id", "groupid"));
+            }
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                bool value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("sceneValid", value, true));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "uint8"));
+            }
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Scenes::Commands::ViewSceneResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
+                VerifyOrReturn(CheckValue("sceneID", value.sceneID, 1U));
+                VerifyOrReturn(CheckValuePresent("transitionTime", value.transitionTime));
+                VerifyOrReturn(CheckValue("transitionTime.Value()", value.transitionTime.Value(), 0U));
+                VerifyOrReturn(CheckValuePresent("extensionFieldSets", value.extensionFieldSets));
+                {
+                    auto iter_1 = value.extensionFieldSets.Value().begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value.extensionFieldSets.Value())>(
+                        "extensionFieldSets.Value()", iter_1, 0));
+                    VerifyOrReturn(CheckValue("extensionFieldSets.Value()[0].clusterID", iter_1.GetValue().clusterID, 6UL));
+                    {
+                        auto iter_3 = iter_1.GetValue().attributeValueList.begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_1.GetValue().attributeValueList)>(
+                            "extensionFieldSets.Value()[0].attributeValueList", iter_3, 0));
+                        VerifyOrReturn(CheckValuePresent("extensionFieldSets.Value()[0].attributeValueList[0].attributeID",
+                                                         iter_3.GetValue().attributeID));
+                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[0].attributeValueList[0].attributeID.Value()",
+                                                  iter_3.GetValue().attributeID.Value(), 0UL));
+                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[0].attributeValueList[0].attributeValue",
+                                                  iter_3.GetValue().attributeValue, 1UL));
+                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_1.GetValue().attributeValueList)>(
+                            "extensionFieldSets.Value()[0].attributeValueList", iter_3, 1));
+                    }
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value.extensionFieldSets.Value())>(
+                        "extensionFieldSets.Value()", iter_1, 1));
+                    VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].clusterID", iter_1.GetValue().clusterID, 8UL));
+                    {
+                        auto iter_3 = iter_1.GetValue().attributeValueList.begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_1.GetValue().attributeValueList)>(
+                            "extensionFieldSets.Value()[1].attributeValueList", iter_3, 0));
+                        VerifyOrReturn(CheckValuePresent("extensionFieldSets.Value()[1].attributeValueList[0].attributeID",
+                                                         iter_3.GetValue().attributeID));
+                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[0].attributeID.Value()",
+                                                  iter_3.GetValue().attributeID.Value(), 0UL));
+                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[0].attributeValue",
+                                                  iter_3.GetValue().attributeValue, 100UL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_1.GetValue().attributeValueList)>(
+                            "extensionFieldSets.Value()[1].attributeValueList", iter_3, 1));
+                        VerifyOrReturn(CheckValuePresent("extensionFieldSets.Value()[1].attributeValueList[1].attributeID",
+                                                         iter_3.GetValue().attributeID));
+                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[1].attributeID.Value()",
+                                                  iter_3.GetValue().attributeID.Value(), 1UL));
+                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[1].attributeValue",
+                                                  iter_3.GetValue().attributeValue, 0UL));
+                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_1.GetValue().attributeValueList)>(
+                            "extensionFieldSets.Value()[1].attributeValueList", iter_3, 2));
+                    }
+                    VerifyOrReturn(
+                        CheckNoMoreListItems<decltype(value.extensionFieldSets.Value())>("extensionFieldSets.Value()", iter_1, 2));
+                }
+            }
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Scenes::Commands::ViewSceneResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
+                VerifyOrReturn(CheckValue("sceneID", value.sceneID, 1U));
+                VerifyOrReturn(CheckValuePresent("transitionTime", value.transitionTime));
+                VerifyOrReturn(CheckValue("transitionTime.Value()", value.transitionTime.Value(), 0U));
+            }
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Scenes::Commands::GetSceneMembershipResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValueNonNull("capacity", value.capacity));
+                VerifyOrReturn(CheckValue("capacity.Value()", value.capacity.Value(), static_cast<uint8_t>((maxScenes / 2) - 1)));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
+                VerifyOrReturn(CheckValuePresent("sceneList", value.sceneList));
+                {
+                    auto iter_1 = value.sceneList.Value().begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value.sceneList.Value())>("sceneList.Value()", iter_1, 0));
+                    VerifyOrReturn(CheckValue("sceneList.Value()[0]", iter_1.GetValue(), 1U));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value.sceneList.Value())>("sceneList.Value()", iter_1, 1));
+                }
+            }
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Scenes::Commands::RemoveAllScenesResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
+            }
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Scenes::Commands::GetSceneMembershipResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValueNonNull("capacity", value.capacity));
+                VerifyOrReturn(CheckValue("capacity.Value()", value.capacity.Value(), (maxScenes / 2)));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
+            }
+            break;
+        case 28:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Scenes::Commands::AddSceneResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
+                VerifyOrReturn(CheckValue("sceneID", value.sceneID, 1U));
+            }
+            break;
+        case 29:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 30:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Scenes::Commands::GetSceneMembershipResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValueNonNull("capacity", value.capacity));
+                VerifyOrReturn(CheckValue("capacity.Value()", value.capacity.Value(), static_cast<uint8_t>((maxScenes / 2) - 1)));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
+                VerifyOrReturn(CheckValuePresent("sceneList", value.sceneList));
+                {
+                    auto iter_1 = value.sceneList.Value().begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value.sceneList.Value())>("sceneList.Value()", iter_1, 0));
+                    VerifyOrReturn(CheckValue("sceneList.Value()[0]", iter_1.GetValue(), 1U));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value.sceneList.Value())>("sceneList.Value()", iter_1, 1));
+                }
+            }
+            break;
+        case 31:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Scenes::Commands::RemoveSceneResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
+                VerifyOrReturn(CheckValue("sceneID", value.sceneID, 1U));
+            }
+            break;
+        case 32:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Scenes::Commands::GetSceneMembershipResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValueNonNull("capacity", value.capacity));
+                VerifyOrReturn(CheckValue("capacity.Value()", value.capacity.Value(), (maxScenes / 2)));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
+            }
+            break;
+        case 33:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 34:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 35:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
+            break;
+        case 36:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 37:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 38:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Scenes::Commands::StoreSceneResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
+                VerifyOrReturn(CheckValue("sceneID", value.sceneID, 1U));
+            }
+            break;
+        case 39:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 40:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 41:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Scenes::Commands::StoreSceneResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
+                VerifyOrReturn(CheckValue("sceneID", value.sceneID, 2U));
+            }
+            break;
+        case 42:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Scenes::Commands::GetSceneMembershipResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValueNonNull("capacity", value.capacity));
+                VerifyOrReturn(CheckValue("capacity.Value()", value.capacity.Value(), static_cast<uint8_t>((maxScenes / 2) - 2)));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
+                VerifyOrReturn(CheckValuePresent("sceneList", value.sceneList));
+                {
+                    auto iter_1 = value.sceneList.Value().begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value.sceneList.Value())>("sceneList.Value()", iter_1, 0));
+                    VerifyOrReturn(CheckValue("sceneList.Value()[0]", iter_1.GetValue(), 1U));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value.sceneList.Value())>("sceneList.Value()", iter_1, 1));
+                    VerifyOrReturn(CheckValue("sceneList.Value()[1]", iter_1.GetValue(), 2U));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value.sceneList.Value())>("sceneList.Value()", iter_1, 2));
+                }
+            }
+            break;
+        case 43:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Groups::Commands::AddGroupResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, 2U));
+            }
+            break;
+        case 44:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Scenes::Commands::RemoveAllScenesResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, 2U));
+            }
+            break;
+        case 45:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Scenes::Commands::GetSceneMembershipResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValueNonNull("capacity", value.capacity));
+                VerifyOrReturn(CheckValue("capacity.Value()", value.capacity.Value(), static_cast<uint8_t>((maxScenes / 2) - 2)));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, 2U));
+            }
+            break;
+        case 46:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 47:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 48:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Scenes::Commands::StoreSceneResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, 2U));
+                VerifyOrReturn(CheckValue("sceneID", value.sceneID, 3U));
+            }
+            break;
+        case 49:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Scenes::Commands::GetSceneMembershipResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValueNonNull("capacity", value.capacity));
+                VerifyOrReturn(CheckValue("capacity.Value()", value.capacity.Value(), static_cast<uint8_t>((maxScenes / 2) - 3)));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, 2U));
+                VerifyOrReturn(CheckValuePresent("sceneList", value.sceneList));
+                {
+                    auto iter_1 = value.sceneList.Value().begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value.sceneList.Value())>("sceneList.Value()", iter_1, 0));
+                    VerifyOrReturn(CheckValue("sceneList.Value()[0]", iter_1.GetValue(), 3U));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value.sceneList.Value())>("sceneList.Value()", iter_1, 1));
+                }
+            }
+            break;
         default:
             LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
         }
@@ -118703,7 +119266,674 @@ private:
     {
         using namespace chip::app::Clusters;
         switch (testIndex)
-        {}
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH sends a RemoveAllGroups command to DUT.");
+            VerifyOrDo(!ShouldSkip("G.S.C04.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Groups::Commands::RemoveAllGroups::Type value;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Groups::Id, Groups::Commands::RemoveAllGroups::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 2: {
+            LogStep(2, "TH reads from the DUT the (0x0006) SceneTableSize attribute");
+            VerifyOrDo(!ShouldSkip("S.S.A0006"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Attributes::SceneTableSize::Id, true,
+                                 chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "preparation step for using commands from Groups cluster: Add KeySet");
+            ListFreer listFreer;
+            chip::app::Clusters::GroupKeyManagement::Commands::KeySetWrite::Type value;
+
+            value.groupKeySet.groupKeySetID = 417U;
+            value.groupKeySet.groupKeySecurityPolicy =
+                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicyEnum>(0);
+            value.groupKeySet.epochKey0.SetNonNull();
+            value.groupKeySet.epochKey0.Value() = chip::ByteSpan(
+                chip::Uint8::from_const_char(
+                    "\240\241\242\243\244\245\246\247\250\251\252\253\254\255\256\257garbage: not in length on purpose"),
+                16);
+            value.groupKeySet.epochStartTime0.SetNonNull();
+            value.groupKeySet.epochStartTime0.Value() = 0ULL;
+            value.groupKeySet.epochKey1.SetNonNull();
+            value.groupKeySet.epochKey1.Value() = chip::ByteSpan(
+                chip::Uint8::from_const_char(
+                    "\260\261\262\263\264\265\266\267\270\271\272\273\274\275\276\277garbage: not in length on purpose"),
+                16);
+            value.groupKeySet.epochStartTime1.SetNonNull();
+            value.groupKeySet.epochStartTime1.Value() = 0ULL;
+            value.groupKeySet.epochKey2.SetNonNull();
+            value.groupKeySet.epochKey2.Value() = chip::ByteSpan(
+                chip::Uint8::from_const_char(
+                    "\300\301\302\303\304\305\306\307\310\311\312\313\314\315\316\317garbage: not in length on purpose"),
+                16);
+            value.groupKeySet.epochStartTime2.SetNonNull();
+            value.groupKeySet.epochStartTime2.Value() = 0ULL;
+
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
+                               GroupKeyManagement::Commands::KeySetWrite::Id, value, chip::NullOptional
+
+            );
+        }
+        case 4: {
+            LogStep(4, "Preparation step for using commands from Groups cluster: Write Group Keys");
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type> value;
+
+            {
+                auto * listHolder_0 = new ListHolder<chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>(2);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].groupId       = 1U;
+                listHolder_0->mList[0].groupKeySetID = 417U;
+                listHolder_0->mList[0].fabricIndex   = 1U;
+
+                listHolder_0->mList[1].groupId       = 2U;
+                listHolder_0->mList[1].groupKeySetID = 417U;
+                listHolder_0->mList[1].fabricIndex   = 1U;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>(
+                    listHolder_0->mList, 2);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
+                                  GroupKeyManagement::Attributes::GroupKeyMap::Id, value, chip::NullOptional, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "TH sends a AddGroup command to DUT with the GroupID field set to 0x0001.");
+            VerifyOrDo(!ShouldSkip("G.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Groups::Commands::AddGroup::Type value;
+            value.groupID   = 1U;
+            value.groupName = chip::Span<const char>("Group1garbage: not in length on purpose", 6);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Groups::Id, Groups::Commands::AddGroup::Id, value, chip::NullOptional
+
+            );
+        }
+        case 6: {
+            LogStep(6, "TH sends a RemoveAllScenes command to DUT with the GroupID field set to 0x0001.");
+            VerifyOrDo(!ShouldSkip("S.S.C03.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::RemoveAllScenes::Type value;
+            value.groupID = 1U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::RemoveAllScenes::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 7: {
+            LogStep(7, "TH sends a GetSceneMembership command to DUT with the GroupID field set to 0x0001.");
+            VerifyOrDo(!ShouldSkip("S.S.C06.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::GetSceneMembership::Type value;
+            value.groupID = 1U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::GetSceneMembership::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 8: {
+            LogStep(8, "TH configures AC1 on DUT for all implemented application clusters supporting scenes.");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LevelControl::Commands::MoveToLevelWithOnOff::Type value;
+            value.level = 100U;
+            value.transitionTime.SetNonNull();
+            value.transitionTime.Value() = 0U;
+            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevelWithOnOff::Id,
+                               value, chip::NullOptional
+
+            );
+        }
+        case 9: {
+            LogStep(9, "TH configures AC1 on DUT for all implemented application clusters supporting scenes.");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>(
+                "Please configure AC1 on DUT and enter 'y' after the configuration is completegarbage: not in length on purpose",
+                77);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 10: {
+            LogStep(10,
+                    "TH sends a StoreScene command to DUT with the GroupID field set to 0x0001 and the SceneID field set to 0x01.");
+            VerifyOrDo(!ShouldSkip("S.S.C04.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::StoreScene::Type value;
+            value.groupID = 1U;
+            value.sceneID = 1U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::StoreScene::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 11: {
+            LogStep(11, "TH configures AC2 on DUT for all implemented application clusters supporting scenes.");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LevelControl::Commands::MoveToLevelWithOnOff::Type value;
+            value.level = 200U;
+            value.transitionTime.SetNonNull();
+            value.transitionTime.Value() = 0U;
+            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevelWithOnOff::Id,
+                               value, chip::NullOptional
+
+            );
+        }
+        case 12: {
+            LogStep(12, "TH configures AC2 on DUT for all implemented application clusters supporting scenes.");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>(
+                "Please configure AC2 on DUT and enter 'y' after the configuration is completegarbage: not in length on purpose",
+                77);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 13: {
+            LogStep(
+                13,
+                "TH sends a RecallScene command to DUT with the GroupID field set to 0x0001 and the SceneID field set to 0x01.");
+            VerifyOrDo(!ShouldSkip("S.S.C05.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::RecallScene::Type value;
+            value.groupID = 1U;
+            value.sceneID = 1U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::RecallScene::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 14: {
+            LogStep(14, "TH reads the SceneCount attribute from DUT.");
+            VerifyOrDo(!ShouldSkip("S.S.A0000 && S.S.A0001 && S.S.A0002 && S.S.A0003"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Attributes::SceneCount::Id, true,
+                                 chip::NullOptional);
+        }
+        case 15: {
+            LogStep(15, "TH reads the CurrentScene attribute from DUT.");
+            VerifyOrDo(!ShouldSkip("S.S.A0000 && S.S.A0001 && S.S.A0002 && S.S.A0003"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Attributes::CurrentScene::Id, true,
+                                 chip::NullOptional);
+        }
+        case 16: {
+            LogStep(16, "TH reads the CurrentGroup attribute from DUT.");
+            VerifyOrDo(!ShouldSkip("S.S.A0000 && S.S.A0001 && S.S.A0002 && S.S.A0003"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Attributes::CurrentGroup::Id, true,
+                                 chip::NullOptional);
+        }
+        case 17: {
+            LogStep(17, "TH reads the SceneValid attribute from DUT.");
+            VerifyOrDo(!ShouldSkip("S.S.A0000 && S.S.A0001 && S.S.A0002 && S.S.A0003"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Attributes::SceneValid::Id, true,
+                                 chip::NullOptional);
+        }
+        case 18: {
+            LogStep(18, "Reboot target device");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
+            return Reboot(kIdentityAlpha, value);
+        }
+        case 19: {
+            LogStep(19, "Reboot target device(DUT)");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message =
+                chip::Span<const char>("Please reboot the DUT and enter 'y' after DUT startsgarbage: not in length on purpose", 52);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 20: {
+            LogStep(20, "TH configures AC2 on DUT for all implemented application clusters supporting scenes.");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LevelControl::Commands::MoveToLevelWithOnOff::Type value;
+            value.level = 200U;
+            value.transitionTime.SetNonNull();
+            value.transitionTime.Value() = 0U;
+            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevelWithOnOff::Id,
+                               value, chip::NullOptional
+
+            );
+        }
+        case 21: {
+            LogStep(21, "TH configures AC2 on DUT for all implemented application clusters supporting scenes.");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>(
+                "Please configure AC2 on DUT and enter 'y' after the configuration is completegarbage: not in length on purpose",
+                77);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 22: {
+            LogStep(
+                22,
+                "TH sends a RecallScene command to DUT with the GroupID field set to 0x0001 and the SceneID field set to 0x01.");
+            VerifyOrDo(!ShouldSkip("S.S.C05.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::RecallScene::Type value;
+            value.groupID = 1U;
+            value.sceneID = 1U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::RecallScene::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 23: {
+            LogStep(23,
+                    "TH sends a ViewScene command to DUT with the GroupID field set to 0x0001 and the SceneID field set to 0x01.");
+            VerifyOrDo(!ShouldSkip("S.S.C01.Rsp && PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::ViewScene::Type value;
+            value.groupID = 1U;
+            value.sceneID = 1U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::ViewScene::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 24: {
+            LogStep(24,
+                    "TH sends a ViewScene command to DUT with the GroupID field set to 0x0001 and the SceneID field set to 0x01.");
+            VerifyOrDo(!ShouldSkip("S.S.C01.Rsp && PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::ViewScene::Type value;
+            value.groupID = 1U;
+            value.sceneID = 1U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::ViewScene::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 25: {
+            LogStep(25, "TH sends a GetSceneMembership command to DUT with the GroupID field set to 0x0001.");
+            VerifyOrDo(!ShouldSkip("S.S.C06.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::GetSceneMembership::Type value;
+            value.groupID = 1U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::GetSceneMembership::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 26: {
+            LogStep(26, "TH sends a RemoveAllScenes command to DUT with the GroupID field set to 0x0001.");
+            VerifyOrDo(!ShouldSkip("S.S.C03.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::RemoveAllScenes::Type value;
+            value.groupID = 1U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::RemoveAllScenes::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 27: {
+            LogStep(27, "TH sends a GetSceneMembership command to DUT with the GroupID field set to 0x0001.");
+            VerifyOrDo(!ShouldSkip("S.S.C06.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::GetSceneMembership::Type value;
+            value.groupID = 1U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::GetSceneMembership::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 28: {
+            LogStep(28,
+                    "TH sends a AddScene command to DUT with the GroupID field set to 0x0001, the SceneID field set to 0x01, the "
+                    "TransitionTime field set to 0x0001 and a set of extension fields appropriate to AC1.");
+            VerifyOrDo(!ShouldSkip("S.S.C00.Rsp && && PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::AddScene::Type value;
+            value.groupID        = 1U;
+            value.sceneID        = 1U;
+            value.transitionTime = 1U;
+            value.sceneName      = chip::Span<const char>("Scene1garbage: not in length on purpose", 6);
+
+            {
+                auto * listHolder_0 = new ListHolder<chip::app::Clusters::Scenes::Structs::ExtensionFieldSet::Type>(2);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].clusterID = 6UL;
+
+                {
+                    auto * listHolder_2 = new ListHolder<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(1);
+                    listFreer.add(listHolder_2);
+
+                    listHolder_2->mList[0].attributeID.Emplace();
+                    listHolder_2->mList[0].attributeID.Value() = 0UL;
+                    listHolder_2->mList[0].attributeValue      = 1UL;
+
+                    listHolder_0->mList[0].attributeValueList =
+                        chip::app::DataModel::List<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(
+                            listHolder_2->mList, 1);
+                }
+
+                listHolder_0->mList[1].clusterID = 8UL;
+
+                {
+                    auto * listHolder_2 = new ListHolder<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(2);
+                    listFreer.add(listHolder_2);
+
+                    listHolder_2->mList[0].attributeID.Emplace();
+                    listHolder_2->mList[0].attributeID.Value() = 0UL;
+                    listHolder_2->mList[0].attributeValue      = 100UL;
+
+                    listHolder_2->mList[1].attributeID.Emplace();
+                    listHolder_2->mList[1].attributeID.Value() = 1UL;
+                    listHolder_2->mList[1].attributeValue      = 0UL;
+
+                    listHolder_0->mList[1].attributeValueList =
+                        chip::app::DataModel::List<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(
+                            listHolder_2->mList, 2);
+                }
+
+                value.extensionFieldSets =
+                    chip::app::DataModel::List<chip::app::Clusters::Scenes::Structs::ExtensionFieldSet::Type>(listHolder_0->mList,
+                                                                                                              2);
+            }
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::AddScene::Id, value, chip::NullOptional
+
+            );
+        }
+        case 29: {
+            LogStep(29,
+                    "TH sends a AddScene command to DUT with the GroupID field set to 0x0001, the SceneID field set to 0x01, the "
+                    "TransitionTime field set to 0x0001 and a set of extension fields appropriate to AC1.");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message =
+                chip::Span<const char>("Please execute the add scene command with extensionfieldsets in accordance with AC1 on DUT "
+                                       "and enter 'y' if the command is successfulgarbage: not in length on purpose",
+                                       133);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 30: {
+            LogStep(30, "TH sends a GetSceneMembership command to DUT with the GroupID field set to 0x0001.");
+            VerifyOrDo(!ShouldSkip("S.S.C06.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::GetSceneMembership::Type value;
+            value.groupID = 1U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::GetSceneMembership::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 31: {
+            LogStep(
+                31,
+                "TH sends a RemoveScene command to DUT with the GroupID field set to 0x0001 and the SceneID field set to 0x01.");
+            VerifyOrDo(!ShouldSkip("S.S.C02.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::RemoveScene::Type value;
+            value.groupID = 1U;
+            value.sceneID = 1U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::RemoveScene::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 32: {
+            LogStep(32, "TH sends a GetSceneMembership command to DUT with the GroupID field set to 0x0001.");
+            VerifyOrDo(!ShouldSkip("S.S.C06.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::GetSceneMembership::Type value;
+            value.groupID = 1U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::GetSceneMembership::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 33: {
+            LogStep(33, "TH configures AC2 on DUT for all implemented application clusters supporting scenes.");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LevelControl::Commands::MoveToLevelWithOnOff::Type value;
+            value.level = 200U;
+            value.transitionTime.SetNonNull();
+            value.transitionTime.Value() = 0U;
+            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevelWithOnOff::Id,
+                               value, chip::NullOptional
+
+            );
+        }
+        case 34: {
+            LogStep(34, "TH configures AC2 on DUT for all implemented application clusters supporting scenes.");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>(
+                "Please configure AC2 on DUT and enter 'y' after the configuration is completegarbage: not in length on purpose",
+                77);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 35: {
+            LogStep(
+                35,
+                "TH sends a RecallScene command to DUT with the GroupID field set to 0x0001 and the SceneID field set to 0x01.");
+            VerifyOrDo(!ShouldSkip("S.S.C05.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::RecallScene::Type value;
+            value.groupID = 1U;
+            value.sceneID = 1U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::RecallScene::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 36: {
+            LogStep(36, "TH configures AC1 on DUT for all implemented application clusters supporting scenes.");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LevelControl::Commands::MoveToLevelWithOnOff::Type value;
+            value.level = 100U;
+            value.transitionTime.SetNonNull();
+            value.transitionTime.Value() = 0U;
+            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevelWithOnOff::Id,
+                               value, chip::NullOptional
+
+            );
+        }
+        case 37: {
+            LogStep(37, "TH configures AC1 on DUT for all implemented application clusters supporting scenes.");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>(
+                "Please configure AC1 on DUT and enter 'y' after the configuration is completegarbage: not in length on purpose",
+                77);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 38: {
+            LogStep(38,
+                    "TH sends a StoreScene command to DUT with the GroupID field set to 0x0001 and the SceneID field set to 0x01.");
+            VerifyOrDo(!ShouldSkip("S.S.C04.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::StoreScene::Type value;
+            value.groupID = 1U;
+            value.sceneID = 1U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::StoreScene::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 39: {
+            LogStep(39, "TH configures AC2 on DUT for all implemented application clusters supporting scenes.");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LevelControl::Commands::MoveToLevelWithOnOff::Type value;
+            value.level = 200U;
+            value.transitionTime.SetNonNull();
+            value.transitionTime.Value() = 0U;
+            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevelWithOnOff::Id,
+                               value, chip::NullOptional
+
+            );
+        }
+        case 40: {
+            LogStep(40, "TH configures AC2 on DUT for all implemented application clusters supporting scenes.");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>(
+                "Please configure AC2 on DUT and enter 'y' after the configuration is completegarbage: not in length on purpose",
+                77);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 41: {
+            LogStep(41,
+                    "TH sends a StoreScene command to DUT with the GroupID field set to 0x0001 and the SceneID field set to 0x02.");
+            VerifyOrDo(!ShouldSkip("S.S.C04.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::StoreScene::Type value;
+            value.groupID = 1U;
+            value.sceneID = 2U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::StoreScene::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 42: {
+            LogStep(42, "TH sends a GetSceneMembership command to DUT with the GroupID field set to 0x0001.");
+            VerifyOrDo(!ShouldSkip("S.S.C06.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::GetSceneMembership::Type value;
+            value.groupID = 1U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::GetSceneMembership::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 43: {
+            LogStep(43, "If capacity allows, TH sends a AddGroup command to DUT with the GroupID field set to 0x0002.");
+            VerifyOrDo(!ShouldSkip("G.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Groups::Commands::AddGroup::Type value;
+            value.groupID   = 2U;
+            value.groupName = chip::Span<const char>("Group2garbage: not in length on purpose", 6);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Groups::Id, Groups::Commands::AddGroup::Id, value, chip::NullOptional
+
+            );
+        }
+        case 44: {
+            LogStep(44, "TH sends a RemoveAllScenes command to DUT with the GroupID field set to 0x0002.");
+            VerifyOrDo(!ShouldSkip("S.S.C03.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::RemoveAllScenes::Type value;
+            value.groupID = 2U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::RemoveAllScenes::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 45: {
+            LogStep(45, "TH sends a GetSceneMembership command to DUT with the GroupID field set to 0x0002.");
+            VerifyOrDo(!ShouldSkip("S.S.C06.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::GetSceneMembership::Type value;
+            value.groupID = 2U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::GetSceneMembership::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 46: {
+            LogStep(46, "TH configures AC3 on DUT for all implemented application clusters supporting scenes.");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LevelControl::Commands::MoveToLevelWithOnOff::Type value;
+            value.level = 1U;
+            value.transitionTime.SetNonNull();
+            value.transitionTime.Value() = 0U;
+            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevelWithOnOff::Id,
+                               value, chip::NullOptional
+
+            );
+        }
+        case 47: {
+            LogStep(47, "TH configures AC3 on DUT for all implemented application clusters supporting scenes.");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>(
+                "Please configure AC3 on DUT and enter 'y' after the configuration is completegarbage: not in length on purpose",
+                77);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 48: {
+            LogStep(48,
+                    "TH sends a StoreScene command to DUT with the GroupID field set to 0x0002 and the SceneID field set to 0x03.");
+            VerifyOrDo(!ShouldSkip("S.S.C04.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::StoreScene::Type value;
+            value.groupID = 2U;
+            value.sceneID = 3U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::StoreScene::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 49: {
+            LogStep(49, "TH sends a GetSceneMembership command to DUT with the GroupID field set to 0x0002.");
+            VerifyOrDo(!ShouldSkip("S.S.C06.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::GetSceneMembership::Type value;
+            value.groupID = 2U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::GetSceneMembership::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        }
         return CHIP_NO_ERROR;
     }
 };
@@ -118711,7 +119941,749 @@ private:
 class Test_TC_S_2_3Suite : public TestCommand
 {
 public:
-    Test_TC_S_2_3Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_S_2_3", 0, credsIssuerConfig)
+    Test_TC_S_2_3Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_S_2_3", 24, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("G1", 0, UINT16_MAX, &mG1);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_S_2_3Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mG1;
+    chip::Optional<uint16_t> mTimeout;
+
+    uint16_t maxScenes;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                maxScenes = value;
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Groups::Commands::AddGroupResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, mG1.HasValue() ? mG1.Value() : 1U));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Scenes::Commands::RemoveAllScenesResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, mG1.HasValue() ? mG1.Value() : 1U));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Scenes::Commands::GetSceneMembershipResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValueNonNull("capacity", value.capacity));
+                VerifyOrReturn(CheckValue("capacity.Value()", value.capacity.Value(), (maxScenes / 2)));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, mG1.HasValue() ? mG1.Value() : 1U));
+                VerifyOrReturn(CheckValuePresent("sceneList", value.sceneList));
+                {
+                    auto iter_1 = value.sceneList.Value().begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value.sceneList.Value())>("sceneList.Value()", iter_1, 0));
+                }
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Scenes::Commands::EnhancedAddSceneResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, mG1.HasValue() ? mG1.Value() : 1U));
+                VerifyOrReturn(CheckValue("sceneID", value.sceneID, 1U));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Scenes::Commands::AddSceneResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, mG1.HasValue() ? mG1.Value() : 1U));
+                VerifyOrReturn(CheckValue("sceneID", value.sceneID, 1U));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Scenes::Commands::EnhancedViewSceneResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, mG1.HasValue() ? mG1.Value() : 1U));
+                VerifyOrReturn(CheckValue("sceneID", value.sceneID, 1U));
+                VerifyOrReturn(CheckValuePresent("transitionTime", value.transitionTime));
+                VerifyOrReturn(CheckValue("transitionTime.Value()", value.transitionTime.Value(), 10U));
+                VerifyOrReturn(CheckValuePresent("extensionFieldSets", value.extensionFieldSets));
+                {
+                    auto iter_1 = value.extensionFieldSets.Value().begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value.extensionFieldSets.Value())>(
+                        "extensionFieldSets.Value()", iter_1, 0));
+                    VerifyOrReturn(CheckValue("extensionFieldSets.Value()[0].clusterID", iter_1.GetValue().clusterID, 6UL));
+                    {
+                        auto iter_3 = iter_1.GetValue().attributeValueList.begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_1.GetValue().attributeValueList)>(
+                            "extensionFieldSets.Value()[0].attributeValueList", iter_3, 0));
+                        VerifyOrReturn(CheckValuePresent("extensionFieldSets.Value()[0].attributeValueList[0].attributeID",
+                                                         iter_3.GetValue().attributeID));
+                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[0].attributeValueList[0].attributeID.Value()",
+                                                  iter_3.GetValue().attributeID.Value(), 0UL));
+                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[0].attributeValueList[0].attributeValue",
+                                                  iter_3.GetValue().attributeValue, 1UL));
+                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_1.GetValue().attributeValueList)>(
+                            "extensionFieldSets.Value()[0].attributeValueList", iter_3, 1));
+                    }
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value.extensionFieldSets.Value())>(
+                        "extensionFieldSets.Value()", iter_1, 1));
+                    VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].clusterID", iter_1.GetValue().clusterID, 8UL));
+                    {
+                        auto iter_3 = iter_1.GetValue().attributeValueList.begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_1.GetValue().attributeValueList)>(
+                            "extensionFieldSets.Value()[1].attributeValueList", iter_3, 0));
+                        VerifyOrReturn(CheckValuePresent("extensionFieldSets.Value()[1].attributeValueList[0].attributeID",
+                                                         iter_3.GetValue().attributeID));
+                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[0].attributeID.Value()",
+                                                  iter_3.GetValue().attributeID.Value(), 0UL));
+                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[0].attributeValue",
+                                                  iter_3.GetValue().attributeValue, 100UL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_1.GetValue().attributeValueList)>(
+                            "extensionFieldSets.Value()[1].attributeValueList", iter_3, 1));
+                        VerifyOrReturn(CheckValuePresent("extensionFieldSets.Value()[1].attributeValueList[1].attributeID",
+                                                         iter_3.GetValue().attributeID));
+                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[1].attributeID.Value()",
+                                                  iter_3.GetValue().attributeID.Value(), 1UL));
+                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[1].attributeValue",
+                                                  iter_3.GetValue().attributeValue, 0UL));
+                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_1.GetValue().attributeValueList)>(
+                            "extensionFieldSets.Value()[1].attributeValueList", iter_3, 2));
+                    }
+                    VerifyOrReturn(
+                        CheckNoMoreListItems<decltype(value.extensionFieldSets.Value())>("extensionFieldSets.Value()", iter_1, 2));
+                }
+            }
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Scenes::Commands::ViewSceneResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, mG1.HasValue() ? mG1.Value() : 1U));
+                VerifyOrReturn(CheckValue("sceneID", value.sceneID, 1U));
+                VerifyOrReturn(CheckValuePresent("transitionTime", value.transitionTime));
+                VerifyOrReturn(CheckValue("transitionTime.Value()", value.transitionTime.Value(), 1U));
+                VerifyOrReturn(CheckValuePresent("extensionFieldSets", value.extensionFieldSets));
+                {
+                    auto iter_1 = value.extensionFieldSets.Value().begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value.extensionFieldSets.Value())>(
+                        "extensionFieldSets.Value()", iter_1, 0));
+                    VerifyOrReturn(CheckValue("extensionFieldSets.Value()[0].clusterID", iter_1.GetValue().clusterID, 6UL));
+                    {
+                        auto iter_3 = iter_1.GetValue().attributeValueList.begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_1.GetValue().attributeValueList)>(
+                            "extensionFieldSets.Value()[0].attributeValueList", iter_3, 0));
+                        VerifyOrReturn(CheckValuePresent("extensionFieldSets.Value()[0].attributeValueList[0].attributeID",
+                                                         iter_3.GetValue().attributeID));
+                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[0].attributeValueList[0].attributeID.Value()",
+                                                  iter_3.GetValue().attributeID.Value(), 0UL));
+                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[0].attributeValueList[0].attributeValue",
+                                                  iter_3.GetValue().attributeValue, 1UL));
+                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_1.GetValue().attributeValueList)>(
+                            "extensionFieldSets.Value()[0].attributeValueList", iter_3, 1));
+                    }
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value.extensionFieldSets.Value())>(
+                        "extensionFieldSets.Value()", iter_1, 1));
+                    VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].clusterID", iter_1.GetValue().clusterID, 8UL));
+                    {
+                        auto iter_3 = iter_1.GetValue().attributeValueList.begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_1.GetValue().attributeValueList)>(
+                            "extensionFieldSets.Value()[1].attributeValueList", iter_3, 0));
+                        VerifyOrReturn(CheckValuePresent("extensionFieldSets.Value()[1].attributeValueList[0].attributeID",
+                                                         iter_3.GetValue().attributeID));
+                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[0].attributeID.Value()",
+                                                  iter_3.GetValue().attributeID.Value(), 0UL));
+                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[0].attributeValue",
+                                                  iter_3.GetValue().attributeValue, 100UL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_1.GetValue().attributeValueList)>(
+                            "extensionFieldSets.Value()[1].attributeValueList", iter_3, 1));
+                        VerifyOrReturn(CheckValuePresent("extensionFieldSets.Value()[1].attributeValueList[1].attributeID",
+                                                         iter_3.GetValue().attributeID));
+                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[1].attributeID.Value()",
+                                                  iter_3.GetValue().attributeID.Value(), 1UL));
+                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[1].attributeValue",
+                                                  iter_3.GetValue().attributeValue, 0UL));
+                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_1.GetValue().attributeValueList)>(
+                            "extensionFieldSets.Value()[1].attributeValueList", iter_3, 2));
+                    }
+                    VerifyOrReturn(
+                        CheckNoMoreListItems<decltype(value.extensionFieldSets.Value())>("extensionFieldSets.Value()", iter_1, 2));
+                }
+            }
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Scenes::Commands::GetSceneMembershipResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValueNonNull("capacity", value.capacity));
+                VerifyOrReturn(CheckValue("capacity.Value()", value.capacity.Value(), static_cast<uint8_t>((maxScenes / 2) - 1)));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, mG1.HasValue() ? mG1.Value() : 1U));
+                VerifyOrReturn(CheckValuePresent("sceneList", value.sceneList));
+                {
+                    auto iter_1 = value.sceneList.Value().begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value.sceneList.Value())>("sceneList.Value()", iter_1, 0));
+                    VerifyOrReturn(CheckValue("sceneList.Value()[0]", iter_1.GetValue(), 1U));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value.sceneList.Value())>("sceneList.Value()", iter_1, 1));
+                }
+            }
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<uint8_t> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
+                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 100U));
+            }
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Scenes::Commands::CopySceneResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValue("groupIdentifierFrom", value.groupIdentifierFrom, mG1.HasValue() ? mG1.Value() : 1U));
+                VerifyOrReturn(CheckValue("sceneIdentifierFrom", value.sceneIdentifierFrom, 1U));
+            }
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Scenes::Commands::GetSceneMembershipResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValueNonNull("capacity", value.capacity));
+                VerifyOrReturn(CheckValue("capacity.Value()", value.capacity.Value(), static_cast<uint8_t>((maxScenes / 2) - 2)));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, mG1.HasValue() ? mG1.Value() : 1U));
+                VerifyOrReturn(CheckValuePresent("sceneList", value.sceneList));
+                {
+                    auto iter_1 = value.sceneList.Value().begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value.sceneList.Value())>("sceneList.Value()", iter_1, 0));
+                    VerifyOrReturn(CheckValue("sceneList.Value()[0]", iter_1.GetValue(), 1U));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value.sceneList.Value())>("sceneList.Value()", iter_1, 1));
+                    VerifyOrReturn(CheckValue("sceneList.Value()[1]", iter_1.GetValue(), 2U));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value.sceneList.Value())>("sceneList.Value()", iter_1, 2));
+                }
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH reads from the DUT the (0x0006) SceneTableSize attribute");
+            VerifyOrDo(!ShouldSkip("S.S.A0006"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Attributes::SceneTableSize::Id, true,
+                                 chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "preparation step for using commands from Groups cluster: Add KeySet");
+            ListFreer listFreer;
+            chip::app::Clusters::GroupKeyManagement::Commands::KeySetWrite::Type value;
+
+            value.groupKeySet.groupKeySetID = 417U;
+            value.groupKeySet.groupKeySecurityPolicy =
+                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicyEnum>(0);
+            value.groupKeySet.epochKey0.SetNonNull();
+            value.groupKeySet.epochKey0.Value() = chip::ByteSpan(
+                chip::Uint8::from_const_char(
+                    "\240\241\242\243\244\245\246\247\250\251\252\253\254\255\256\257garbage: not in length on purpose"),
+                16);
+            value.groupKeySet.epochStartTime0.SetNonNull();
+            value.groupKeySet.epochStartTime0.Value() = 0ULL;
+            value.groupKeySet.epochKey1.SetNonNull();
+            value.groupKeySet.epochKey1.Value() = chip::ByteSpan(
+                chip::Uint8::from_const_char(
+                    "\260\261\262\263\264\265\266\267\270\271\272\273\274\275\276\277garbage: not in length on purpose"),
+                16);
+            value.groupKeySet.epochStartTime1.SetNonNull();
+            value.groupKeySet.epochStartTime1.Value() = 0ULL;
+            value.groupKeySet.epochKey2.SetNonNull();
+            value.groupKeySet.epochKey2.Value() = chip::ByteSpan(
+                chip::Uint8::from_const_char(
+                    "\300\301\302\303\304\305\306\307\310\311\312\313\314\315\316\317garbage: not in length on purpose"),
+                16);
+            value.groupKeySet.epochStartTime2.SetNonNull();
+            value.groupKeySet.epochStartTime2.Value() = 0ULL;
+
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
+                               GroupKeyManagement::Commands::KeySetWrite::Id, value, chip::NullOptional
+
+            );
+        }
+        case 3: {
+            LogStep(3, "Preparation step for using commands from Groups cluster: Write Group Keys");
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type> value;
+
+            {
+                auto * listHolder_0 = new ListHolder<chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>(1);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].groupId       = mG1.HasValue() ? mG1.Value() : 1U;
+                listHolder_0->mList[0].groupKeySetID = 417U;
+                listHolder_0->mList[0].fabricIndex   = 1U;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>(
+                    listHolder_0->mList, 1);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
+                                  GroupKeyManagement::Attributes::GroupKeyMap::Id, value, chip::NullOptional, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "TH sends a AddGroup command to DUT with the GroupID field set to G1.");
+            VerifyOrDo(!ShouldSkip("G.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Groups::Commands::AddGroup::Type value;
+            value.groupID   = mG1.HasValue() ? mG1.Value() : 1U;
+            value.groupName = chip::Span<const char>("Group1garbage: not in length on purpose", 6);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Groups::Id, Groups::Commands::AddGroup::Id, value, chip::NullOptional
+
+            );
+        }
+        case 5: {
+            LogStep(5, "TH sends a RemoveAllScenes command to DUT with the GroupID field set to G1.");
+            VerifyOrDo(!ShouldSkip("S.S.C03.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::RemoveAllScenes::Type value;
+            value.groupID = mG1.HasValue() ? mG1.Value() : 1U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::RemoveAllScenes::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 6: {
+            LogStep(6, "TH sends a GetSceneMembership command to DUT with the GroupID field set to G1.");
+            VerifyOrDo(!ShouldSkip("S.S.C06.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::GetSceneMembership::Type value;
+            value.groupID = mG1.HasValue() ? mG1.Value() : 1U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::GetSceneMembership::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 7: {
+            LogStep(7,
+                    "TH sends a EnhancedAddScene command to DUT with the GroupID field set to G1, the SceneID field set to 0x01, "
+                    "the TransitionTime field set to 0x000a (1s) and a set of extension fields appropriate to AC1.");
+            VerifyOrDo(!ShouldSkip("S.S.C40.Rsp && PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::EnhancedAddScene::Type value;
+            value.groupID        = mG1.HasValue() ? mG1.Value() : 1U;
+            value.sceneID        = 1U;
+            value.transitionTime = 10U;
+            value.sceneName      = chip::Span<const char>("Scene1garbage: not in length on purpose", 6);
+
+            {
+                auto * listHolder_0 = new ListHolder<chip::app::Clusters::Scenes::Structs::ExtensionFieldSet::Type>(2);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].clusterID = 6UL;
+
+                {
+                    auto * listHolder_2 = new ListHolder<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(1);
+                    listFreer.add(listHolder_2);
+
+                    listHolder_2->mList[0].attributeID.Emplace();
+                    listHolder_2->mList[0].attributeID.Value() = 0UL;
+                    listHolder_2->mList[0].attributeValue      = 1UL;
+
+                    listHolder_0->mList[0].attributeValueList =
+                        chip::app::DataModel::List<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(
+                            listHolder_2->mList, 1);
+                }
+
+                listHolder_0->mList[1].clusterID = 8UL;
+
+                {
+                    auto * listHolder_2 = new ListHolder<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(2);
+                    listFreer.add(listHolder_2);
+
+                    listHolder_2->mList[0].attributeID.Emplace();
+                    listHolder_2->mList[0].attributeID.Value() = 0UL;
+                    listHolder_2->mList[0].attributeValue      = 100UL;
+
+                    listHolder_2->mList[1].attributeID.Emplace();
+                    listHolder_2->mList[1].attributeID.Value() = 1UL;
+                    listHolder_2->mList[1].attributeValue      = 0UL;
+
+                    listHolder_0->mList[1].attributeValueList =
+                        chip::app::DataModel::List<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(
+                            listHolder_2->mList, 2);
+                }
+
+                value.extensionFieldSets =
+                    chip::app::DataModel::List<chip::app::Clusters::Scenes::Structs::ExtensionFieldSet::Type>(listHolder_0->mList,
+                                                                                                              2);
+            }
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::EnhancedAddScene::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 8: {
+            LogStep(8,
+                    "TH sends a AddScene command to DUT with the GroupID field set to G1, the SceneID field set to 0x01, the "
+                    "TransitionTime field set to 0x0001 (1s) and a set of extension fields appropriate to AC1.");
+            VerifyOrDo(!ShouldSkip("(!S.S.C40.Rsp) && PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::AddScene::Type value;
+            value.groupID        = mG1.HasValue() ? mG1.Value() : 1U;
+            value.sceneID        = 1U;
+            value.transitionTime = 1U;
+            value.sceneName      = chip::Span<const char>("Scene1garbage: not in length on purpose", 6);
+
+            {
+                auto * listHolder_0 = new ListHolder<chip::app::Clusters::Scenes::Structs::ExtensionFieldSet::Type>(2);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].clusterID = 6UL;
+
+                {
+                    auto * listHolder_2 = new ListHolder<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(1);
+                    listFreer.add(listHolder_2);
+
+                    listHolder_2->mList[0].attributeID.Emplace();
+                    listHolder_2->mList[0].attributeID.Value() = 0UL;
+                    listHolder_2->mList[0].attributeValue      = 1UL;
+
+                    listHolder_0->mList[0].attributeValueList =
+                        chip::app::DataModel::List<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(
+                            listHolder_2->mList, 1);
+                }
+
+                listHolder_0->mList[1].clusterID = 8UL;
+
+                {
+                    auto * listHolder_2 = new ListHolder<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(2);
+                    listFreer.add(listHolder_2);
+
+                    listHolder_2->mList[0].attributeID.Emplace();
+                    listHolder_2->mList[0].attributeID.Value() = 0UL;
+                    listHolder_2->mList[0].attributeValue      = 100UL;
+
+                    listHolder_2->mList[1].attributeID.Emplace();
+                    listHolder_2->mList[1].attributeID.Value() = 1UL;
+                    listHolder_2->mList[1].attributeValue      = 0UL;
+
+                    listHolder_0->mList[1].attributeValueList =
+                        chip::app::DataModel::List<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(
+                            listHolder_2->mList, 2);
+                }
+
+                value.extensionFieldSets =
+                    chip::app::DataModel::List<chip::app::Clusters::Scenes::Structs::ExtensionFieldSet::Type>(listHolder_0->mList,
+                                                                                                              2);
+            }
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::AddScene::Id, value, chip::NullOptional
+
+            );
+        }
+        case 9: {
+            LogStep(9,
+                    "TH sends a EnhancedAddScene command to DUT with the GroupID field set to G1, the SceneID field set to 0x01, "
+                    "the TransitionTime field set to 0x000a and a set of extension fields appropriate to AC1.");
+            VerifyOrDo(!ShouldSkip("S.S.C40.Rsp && PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message =
+                chip::Span<const char>("Please execute the enhanced add scene command with extensionfieldsets in accordance with "
+                                       "AC1 on DUT and enter 'y' if the command is successfulgarbage: not in length on purpose",
+                                       142);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 10: {
+            LogStep(10,
+                    "TH sends a AddScene command to DUT with the GroupID field set to G1, the SceneID field set to 0x01, the "
+                    "TransitionTime field set to 0x0001 and a set of extension fields appropriate to AC1.");
+            VerifyOrDo(!ShouldSkip("(!S.S.C40.Rsp) && PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message =
+                chip::Span<const char>("Please execute the add scene command with extensionfieldsets in accordance with AC1 on DUT "
+                                       "and enter 'y' if the command is successfulgarbage: not in length on purpose",
+                                       133);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 11: {
+            LogStep(
+                11,
+                "TH sends a EnhancedViewScene command to DUT with the GroupID field set to G1 and the SceneID field set to 0x01.");
+            VerifyOrDo(!ShouldSkip("S.S.C41.Rsp && PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::EnhancedViewScene::Type value;
+            value.groupID = mG1.HasValue() ? mG1.Value() : 1U;
+            value.sceneID = 1U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::EnhancedViewScene::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 12: {
+            LogStep(12, "TH sends a ViewScene command to DUT with the GroupID field set to G1 and the SceneID field set to 0x01.");
+            VerifyOrDo(!ShouldSkip("(!S.S.C41.Rsp) && PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::ViewScene::Type value;
+            value.groupID = mG1.HasValue() ? mG1.Value() : 1U;
+            value.sceneID = 1U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::ViewScene::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 13: {
+            LogStep(
+                13,
+                "TH sends a EnhancedViewScene command to DUT with the GroupID field set to G1 and the SceneID field set to 0x01.");
+            VerifyOrDo(!ShouldSkip("S.S.C41.Rsp && PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>(
+                "Please execute the ehanced-view-scene command and verify that the extensionfieldsets, status, groupID and SceneID "
+                "are in accordance with AC1 on DUT and enter 'y' if the command is successfulgarbage: not in length on purpose",
+                190);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 14: {
+            LogStep(14, "TH sends a ViewScene command to DUT with the GroupID field set to G1 and the SceneID field set to 0x01.");
+            VerifyOrDo(!ShouldSkip("(!S.S.C41.Rsp) && PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>(
+                "Please execute the view-scene command and verify that the extensionfieldsets, status, groupID and SceneID are in "
+                "accordance with AC1 on DUT and enter 'y' if the command is successfulgarbage: not in length on purpose",
+                182);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 15: {
+            LogStep(15, "TH sends a GetSceneMembership command to DUT with the GroupID field set to G1.");
+            VerifyOrDo(!ShouldSkip("S.S.C06.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::GetSceneMembership::Type value;
+            value.groupID = mG1.HasValue() ? mG1.Value() : 1U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::GetSceneMembership::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 16: {
+            LogStep(16, "TH configures AC2 on DUT for all implemented application clusters supporting scenes.");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LevelControl::Commands::MoveToLevelWithOnOff::Type value;
+            value.level = 200U;
+            value.transitionTime.SetNonNull();
+            value.transitionTime.Value() = 0U;
+            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevelWithOnOff::Id,
+                               value, chip::NullOptional
+
+            );
+        }
+        case 17: {
+            LogStep(17, "TH configures AC2 on DUT for all implemented application clusters supporting scenes.");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>(
+                "Please configure AC2 on DUT and enter 'y' after the configuration is completegarbage: not in length on purpose",
+                77);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 18: {
+            LogStep(
+                18,
+                "TH sends a RecallScene command to group G1 with the GroupID field set to G1 and the scene ID field set to 0x01.");
+            VerifyOrDo(!ShouldSkip("S.S.C05.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::RecallScene::Type value;
+            value.groupID = mG1.HasValue() ? mG1.Value() : 1U;
+            value.sceneID = 1U;
+            return SendGroupCommand(kIdentityAlpha, 1, Scenes::Id, Scenes::Commands::RecallScene::Id, value);
+        }
+        case 19: {
+            LogStep(19, "Wait 1s");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = 1000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 20: {
+            LogStep(20, "TH confirm the DUT reached AC1 (on level control cluster) after 1s");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
+                                 chip::NullOptional);
+        }
+        case 21: {
+            LogStep(21, "Verify DUT returns to AC1.");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Please confirm AC1 on DUT and enter 'y'.garbage: not in length on purpose", 40);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 22: {
+            LogStep(22,
+                    "TH sends a CopyScene command to DUT with the mode field set to 0x00, the group identifier from field set to "
+                    "G1, the scene identifier from field set to 0x01, the group identifier to field set to G1 and the scene "
+                    "identifier to field set to 0x02.");
+            VerifyOrDo(!ShouldSkip("S.S.C42.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::CopyScene::Type value;
+            value.mode                = static_cast<chip::BitMask<chip::app::Clusters::Scenes::ScenesCopyMode>>(0U);
+            value.groupIdentifierFrom = mG1.HasValue() ? mG1.Value() : 1U;
+            value.sceneIdentifierFrom = 1U;
+            value.groupIdentifierTo   = mG1.HasValue() ? mG1.Value() : 1U;
+            value.sceneIdentifierTo   = 2U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::CopyScene::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 23: {
+            LogStep(23, "TH sends a GetSceneMembership command to DUT with the GroupID field set to G1.");
+            VerifyOrDo(!ShouldSkip("S.S.C06.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::GetSceneMembership::Type value;
+            value.groupID = mG1.HasValue() ? mG1.Value() : 1U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::GetSceneMembership::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_S_2_4Suite : public TestCommand
+{
+public:
+    Test_TC_S_2_4Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_S_2_4", 27, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -118719,7 +120691,7 @@ public:
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
-    ~Test_TC_S_2_3Suite() {}
+    ~Test_TC_S_2_4Suite() {}
 
     chip::System::Clock::Timeout GetWaitDuration() const override
     {
@@ -118744,6 +120716,141 @@ private:
 
         switch (mTestIndex - 1)
         {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Groups::Commands::AddGroupResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Scenes::Commands::RemoveAllScenesResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Scenes::Commands::AddSceneResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
+                VerifyOrReturn(CheckValue("sceneID", value.sceneID, 1U));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Scenes::Commands::StoreSceneResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
+                VerifyOrReturn(CheckValue("sceneID", value.sceneID, 1U));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<uint8_t> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
+                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 200U));
+            }
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<uint8_t> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
+                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 100U));
+            }
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<uint8_t> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
+                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 100U));
+            }
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         default:
             LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
         }
@@ -118758,7 +120865,350 @@ private:
     {
         using namespace chip::app::Clusters;
         switch (testIndex)
-        {}
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH sends a RemoveAllGroups command to DUT.");
+            VerifyOrDo(!ShouldSkip("G.S.C04.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Groups::Commands::RemoveAllGroups::Type value;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Groups::Id, Groups::Commands::RemoveAllGroups::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 2: {
+            LogStep(2, "preparation step for using commands from Groups cluster: Add KeySet");
+            ListFreer listFreer;
+            chip::app::Clusters::GroupKeyManagement::Commands::KeySetWrite::Type value;
+
+            value.groupKeySet.groupKeySetID = 417U;
+            value.groupKeySet.groupKeySecurityPolicy =
+                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicyEnum>(0);
+            value.groupKeySet.epochKey0.SetNonNull();
+            value.groupKeySet.epochKey0.Value() = chip::ByteSpan(
+                chip::Uint8::from_const_char(
+                    "\240\241\242\243\244\245\246\247\250\251\252\253\254\255\256\257garbage: not in length on purpose"),
+                16);
+            value.groupKeySet.epochStartTime0.SetNonNull();
+            value.groupKeySet.epochStartTime0.Value() = 0ULL;
+            value.groupKeySet.epochKey1.SetNonNull();
+            value.groupKeySet.epochKey1.Value() = chip::ByteSpan(
+                chip::Uint8::from_const_char(
+                    "\260\261\262\263\264\265\266\267\270\271\272\273\274\275\276\277garbage: not in length on purpose"),
+                16);
+            value.groupKeySet.epochStartTime1.SetNonNull();
+            value.groupKeySet.epochStartTime1.Value() = 0ULL;
+            value.groupKeySet.epochKey2.SetNonNull();
+            value.groupKeySet.epochKey2.Value() = chip::ByteSpan(
+                chip::Uint8::from_const_char(
+                    "\300\301\302\303\304\305\306\307\310\311\312\313\314\315\316\317garbage: not in length on purpose"),
+                16);
+            value.groupKeySet.epochStartTime2.SetNonNull();
+            value.groupKeySet.epochStartTime2.Value() = 0ULL;
+
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
+                               GroupKeyManagement::Commands::KeySetWrite::Id, value, chip::NullOptional
+
+            );
+        }
+        case 3: {
+            LogStep(3, "Preparation step for using commands from Groups cluster: Write Group Keys");
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type> value;
+
+            {
+                auto * listHolder_0 = new ListHolder<chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>(1);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].groupId       = 1U;
+                listHolder_0->mList[0].groupKeySetID = 417U;
+                listHolder_0->mList[0].fabricIndex   = 1U;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>(
+                    listHolder_0->mList, 1);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
+                                  GroupKeyManagement::Attributes::GroupKeyMap::Id, value, chip::NullOptional, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "TH sends a AddGroup command to DUT with the GroupID field set to 0x0001.");
+            VerifyOrDo(!ShouldSkip("G.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Groups::Commands::AddGroup::Type value;
+            value.groupID   = 1U;
+            value.groupName = chip::Span<const char>("Group1garbage: not in length on purpose", 6);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Groups::Id, Groups::Commands::AddGroup::Id, value, chip::NullOptional
+
+            );
+        }
+        case 5: {
+            LogStep(5, "TH sends a RemoveAllScenes command to DUT with the GroupID field set to 0x0001.");
+            VerifyOrDo(!ShouldSkip("S.S.C03.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::RemoveAllScenes::Type value;
+            value.groupID = 1U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::RemoveAllScenes::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 6: {
+            LogStep(6,
+                    "TH sends a AddScene command to DUT with the GroupID field set to 0x0001, the SceneID field set to 0x01, the "
+                    "TransitionTime field set to 0x0001 and a set of extension fields appropriate to AC1.");
+            VerifyOrDo(!ShouldSkip("S.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::AddScene::Type value;
+            value.groupID        = 1U;
+            value.sceneID        = 1U;
+            value.transitionTime = 20U;
+            value.sceneName      = chip::Span<const char>("Scene1garbage: not in length on purpose", 6);
+
+            value.extensionFieldSets = chip::app::DataModel::List<chip::app::Clusters::Scenes::Structs::ExtensionFieldSet::Type>();
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::AddScene::Id, value, chip::NullOptional
+
+            );
+        }
+        case 7: {
+            LogStep(7, "TH configures AC1 on DUT for all implemented application clusters supporting scenes.");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LevelControl::Commands::MoveToLevelWithOnOff::Type value;
+            value.level = 100U;
+            value.transitionTime.SetNonNull();
+            value.transitionTime.Value() = 0U;
+            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevelWithOnOff::Id,
+                               value, chip::NullOptional
+
+            );
+        }
+        case 8: {
+            LogStep(8, "TH configures AC1 on DUT for all implemented application clusters supporting scenes.");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>(
+                "Please configure AC1 on DUT and enter 'y' after the configuration is completegarbage: not in length on purpose",
+                77);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 9: {
+            LogStep(9,
+                    "TH sends a StoreScene command to DUT with the GroupID field set to 0x0001 and the SceneID field set to 0x01.");
+            VerifyOrDo(!ShouldSkip("S.S.C04.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::StoreScene::Type value;
+            value.groupID = 1U;
+            value.sceneID = 1U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::StoreScene::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 10: {
+            LogStep(10, "TH configures AC2 on DUT for all implemented application clusters supporting scenes.");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LevelControl::Commands::MoveToLevelWithOnOff::Type value;
+            value.level = 200U;
+            value.transitionTime.SetNonNull();
+            value.transitionTime.Value() = 0U;
+            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevelWithOnOff::Id,
+                               value, chip::NullOptional
+
+            );
+        }
+        case 11: {
+            LogStep(11, "Wait 1s for level to change");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = 1000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 12: {
+            LogStep(12, "TH confirm the DUT reached AC2 (on level control cluster) after 1s, which is different from AC1");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
+                                 chip::NullOptional);
+        }
+        case 13: {
+            LogStep(13, "TH configures AC2 on DUT for all implemented application clusters supporting scenes.");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>(
+                "Please configure AC2 on DUT and enter 'y' after the configuration is completegarbage: not in length on purpose",
+                77);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 14: {
+            LogStep(14,
+                    "TH sends a RecallScene command to DUT with the GroupID field set to 0x0001 and the SceneID field set to 0x01 "
+                    "and the TransitionTime field omitted.");
+            VerifyOrDo(!ShouldSkip("S.S.C05.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::RecallScene::Type value;
+            value.groupID = 1U;
+            value.sceneID = 1U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::RecallScene::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 15: {
+            LogStep(15, "Wait 20s");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = 20000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 16: {
+            LogStep(16, "TH confirm the DUT reached AC1 (on level control cluster) after 20s");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
+                                 chip::NullOptional);
+        }
+        case 17: {
+            LogStep(17, "DUT transitions to AC1 over 20s.");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>(
+                "Please confirm that transition to AC1 was made over 20sgarbage: not in length on purpose", 55);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 18: {
+            LogStep(18, "TH configures AC2 on DUT for all implemented application clusters supporting scenes.");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LevelControl::Commands::MoveToLevelWithOnOff::Type value;
+            value.level = 200U;
+            value.transitionTime.SetNonNull();
+            value.transitionTime.Value() = 0U;
+            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevelWithOnOff::Id,
+                               value, chip::NullOptional
+
+            );
+        }
+        case 19: {
+            LogStep(19, "TH configures AC2 on DUT for all implemented application clusters supporting scenes.");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>(
+                "Please configure AC2 on DUT and enter 'y' after the configuration is completegarbage: not in length on purpose",
+                77);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 20: {
+            LogStep(20,
+                    "TH sends a RecallScene command to DUT with the GroupID field set to 0x0001, the SceneID field set to 0x01 and "
+                    "the TransitionTime field set to 0x0032 (5s).");
+            VerifyOrDo(!ShouldSkip("S.S.C05.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::RecallScene::Type value;
+            value.groupID = 1U;
+            value.sceneID = 1U;
+            value.transitionTime.Emplace();
+            value.transitionTime.Value().SetNonNull();
+            value.transitionTime.Value().Value() = 50U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::RecallScene::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 21: {
+            LogStep(21, "Wait 5s");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = 5000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 22: {
+            LogStep(22, "TH confirm the DUT reached AC2 (on level control cluster) after 5s");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
+                                 chip::NullOptional);
+        }
+        case 23: {
+            LogStep(23, "DUT transitions to AC1 over 5.");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>(
+                "Please confirm that transition to AC1 was made over 5sgarbage: not in length on purpose", 54);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 24: {
+            LogStep(24, "TH configures AC2 on DUT for all implemented application clusters supporting scenes.");
+            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LevelControl::Commands::MoveToLevelWithOnOff::Type value;
+            value.level = 200U;
+            value.transitionTime.SetNonNull();
+            value.transitionTime.Value() = 0U;
+            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevelWithOnOff::Id,
+                               value, chip::NullOptional
+
+            );
+        }
+        case 25: {
+            LogStep(25, "TH configures AC2 on DUT for all implemented application clusters supporting scenes.");
+            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>(
+                "Please configure AC2 on DUT and enter 'y' after the configuration is completegarbage: not in length on purpose",
+                77);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 26: {
+            LogStep(26,
+                    "TH sends a RecallScene command to DUT with the GroupID field set to 0x0001, the SceneID field set to 0x01 and "
+                    "the TransitionTime field set to null (no transition time override).");
+            VerifyOrDo(!ShouldSkip("S.S.C05.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::Scenes::Commands::RecallScene::Type value;
+            value.groupID = 1U;
+            value.sceneID = 1U;
+            value.transitionTime.Emplace();
+            value.transitionTime.Value().SetNull();
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::RecallScene::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        }
         return CHIP_NO_ERROR;
     }
 };
@@ -119652,6 +122102,7 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_S_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_S_2_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_S_2_3Suite>(credsIssuerConfig),
+        make_unique<Test_TC_S_2_4Suite>(credsIssuerConfig),
         make_unique<Test_TC_S_3_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_ACL_2_5Suite>(credsIssuerConfig),
         make_unique<Test_TC_ACL_2_6Suite>(credsIssuerConfig),

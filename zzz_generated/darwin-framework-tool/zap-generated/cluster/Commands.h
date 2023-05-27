@@ -1629,6 +1629,8 @@ public:
 | * SceneValid                                                        | 0x0003 |
 | * NameSupport                                                       | 0x0004 |
 | * LastConfiguredBy                                                  | 0x0005 |
+| * SceneTableSize                                                    | 0x0006 |
+| * RemainingCapacity                                                 | 0x0007 |
 | * GeneratedCommandList                                              | 0xFFF8 |
 | * AcceptedCommandList                                               | 0xFFF9 |
 | * EventList                                                         | 0xFFFA |
@@ -1687,15 +1689,7 @@ public:
                         } else {
                             newElement_2.attributeID = nil;
                         }
-                        { // Scope for our temporary variables
-                            auto * array_4 = [NSMutableArray new];
-                            for (auto & entry_4 : entry_2.attributeValue) {
-                                NSNumber * newElement_4;
-                                newElement_4 = [NSNumber numberWithUnsignedChar:entry_4];
-                                [array_4 addObject:newElement_4];
-                            }
-                            newElement_2.attributeValue = array_4;
-                        }
+                        newElement_2.attributeValue = [NSNumber numberWithUnsignedInt:entry_2.attributeValue];
                         [array_2 addObject:newElement_2];
                     }
                     newElement_0.attributeValueList = array_2;
@@ -2068,15 +2062,7 @@ public:
                         } else {
                             newElement_2.attributeID = nil;
                         }
-                        { // Scope for our temporary variables
-                            auto * array_4 = [NSMutableArray new];
-                            for (auto & entry_4 : entry_2.attributeValue) {
-                                NSNumber * newElement_4;
-                                newElement_4 = [NSNumber numberWithUnsignedChar:entry_4];
-                                [array_4 addObject:newElement_4];
-                            }
-                            newElement_2.attributeValue = array_4;
-                        }
+                        newElement_2.attributeValue = [NSNumber numberWithUnsignedInt:entry_2.attributeValue];
                         [array_2 addObject:newElement_2];
                     }
                     newElement_0.attributeValueList = array_2;
@@ -2601,6 +2587,138 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Scenes.LastConfiguredBy response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute SceneTableSize
+ */
+class ReadScenesSceneTableSize : public ReadAttribute {
+public:
+    ReadScenesSceneTableSize()
+        : ReadAttribute("scene-table-size")
+    {
+    }
+
+    ~ReadScenesSceneTableSize() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000005) ReadAttribute (0x00000006) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterScenes alloc] initWithDevice:device endpointID:@(endpointId) queue:callbackQueue];
+        [cluster readAttributeSceneTableSizeWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"Scenes.SceneTableSize response %@", [value description]);
+            if (error != nil) {
+                LogNSError("Scenes SceneTableSize read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeScenesSceneTableSize : public SubscribeAttribute {
+public:
+    SubscribeAttributeScenesSceneTableSize()
+        : SubscribeAttribute("scene-table-size")
+    {
+    }
+
+    ~SubscribeAttributeScenesSceneTableSize() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000005) ReportAttribute (0x00000006) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterScenes alloc] initWithDevice:device endpointID:@(endpointId) queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeSceneTableSizeWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"Scenes.SceneTableSize response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute RemainingCapacity
+ */
+class ReadScenesRemainingCapacity : public ReadAttribute {
+public:
+    ReadScenesRemainingCapacity()
+        : ReadAttribute("remaining-capacity")
+    {
+    }
+
+    ~ReadScenesRemainingCapacity() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000005) ReadAttribute (0x00000007) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterScenes alloc] initWithDevice:device endpointID:@(endpointId) queue:callbackQueue];
+        [cluster readAttributeRemainingCapacityWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"Scenes.RemainingCapacity response %@", [value description]);
+            if (error != nil) {
+                LogNSError("Scenes RemainingCapacity read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeScenesRemainingCapacity : public SubscribeAttribute {
+public:
+    SubscribeAttributeScenesRemainingCapacity()
+        : SubscribeAttribute("remaining-capacity")
+    {
+    }
+
+    ~SubscribeAttributeScenesRemainingCapacity() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000005) ReportAttribute (0x00000007) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterScenes alloc] initWithDevice:device endpointID:@(endpointId) queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeRemainingCapacityWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"Scenes.RemainingCapacity response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -158958,6 +159076,10 @@ void registerClusterScenes(Commands & commands)
         make_unique<SubscribeAttributeScenesNameSupport>(), //
         make_unique<ReadScenesLastConfiguredBy>(), //
         make_unique<SubscribeAttributeScenesLastConfiguredBy>(), //
+        make_unique<ReadScenesSceneTableSize>(), //
+        make_unique<SubscribeAttributeScenesSceneTableSize>(), //
+        make_unique<ReadScenesRemainingCapacity>(), //
+        make_unique<SubscribeAttributeScenesRemainingCapacity>(), //
         make_unique<ReadScenesGeneratedCommandList>(), //
         make_unique<SubscribeAttributeScenesGeneratedCommandList>(), //
         make_unique<ReadScenesAcceptedCommandList>(), //
