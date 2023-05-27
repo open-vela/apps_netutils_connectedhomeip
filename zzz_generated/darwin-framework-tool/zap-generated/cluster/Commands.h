@@ -81,6 +81,7 @@
 | RefrigeratorAlarm                                                   | 0x0057 |
 | AirQuality                                                          | 0x005B |
 | SmokeCoAlarm                                                        | 0x005C |
+| OperationalState                                                    | 0x0060 |
 | HepaFilterMonitoring                                                | 0x0071 |
 | ActivatedCarbonFilterMonitoring                                     | 0x0072 |
 | CeramicFilterMonitoring                                             | 0x0073 |
@@ -44144,6 +44145,1056 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"SmokeCOAlarm.ClusterRevision response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*----------------------------------------------------------------------------*\
+| Cluster OperationalState                                            | 0x0060 |
+|------------------------------------------------------------------------------|
+| Commands:                                                           |        |
+| * Pause                                                             |   0x00 |
+| * Stop                                                              |   0x01 |
+| * Start                                                             |   0x02 |
+| * Resume                                                            |   0x03 |
+|------------------------------------------------------------------------------|
+| Attributes:                                                         |        |
+| * PhaseList                                                         | 0x0000 |
+| * CurrentPhase                                                      | 0x0001 |
+| * CountdownTime                                                     | 0x0002 |
+| * OperationalStateList                                              | 0x0003 |
+| * OperationalState                                                  | 0x0004 |
+| * OperationalError                                                  | 0x0005 |
+| * GeneratedCommandList                                              | 0xFFF8 |
+| * AcceptedCommandList                                               | 0xFFF9 |
+| * EventList                                                         | 0xFFFA |
+| * AttributeList                                                     | 0xFFFB |
+| * FeatureMap                                                        | 0xFFFC |
+| * ClusterRevision                                                   | 0xFFFD |
+|------------------------------------------------------------------------------|
+| Events:                                                             |        |
+| * OperationalError                                                  | 0x0000 |
+| * OperationCompletion                                               | 0x0001 |
+\*----------------------------------------------------------------------------*/
+
+/*
+ * Command Pause
+ */
+class OperationalStatePause : public ClusterCommand {
+public:
+    OperationalStatePause()
+        : ClusterCommand("pause")
+    {
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000060) command (0x00000000) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterOperationalState alloc] initWithDevice:device
+                                                                            endpointID:@(endpointId)
+                                                                                 queue:callbackQueue];
+        __auto_type * params = [[MTROperationalStateClusterPauseParams alloc] init];
+        params.timedInvokeTimeoutMs
+            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        uint16_t repeatCount = mRepeatCount.ValueOr(1);
+        uint16_t __block responsesNeeded = repeatCount;
+        while (repeatCount--) {
+            [cluster pauseWithParams:params
+                          completion:^(MTROperationalStateClusterOperationalCommandResponseParams * _Nullable values,
+                              NSError * _Nullable error) {
+                              NSLog(@"Values: %@", values);
+                              responsesNeeded--;
+                              if (error != nil) {
+                                  mError = error;
+                                  LogNSError("Error", error);
+                              }
+                              if (responsesNeeded == 0) {
+                                  SetCommandExitStatus(mError);
+                              }
+                          }];
+        }
+        return CHIP_NO_ERROR;
+    }
+
+private:
+};
+
+/*
+ * Command Stop
+ */
+class OperationalStateStop : public ClusterCommand {
+public:
+    OperationalStateStop()
+        : ClusterCommand("stop")
+    {
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000060) command (0x00000001) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterOperationalState alloc] initWithDevice:device
+                                                                            endpointID:@(endpointId)
+                                                                                 queue:callbackQueue];
+        __auto_type * params = [[MTROperationalStateClusterStopParams alloc] init];
+        params.timedInvokeTimeoutMs
+            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        uint16_t repeatCount = mRepeatCount.ValueOr(1);
+        uint16_t __block responsesNeeded = repeatCount;
+        while (repeatCount--) {
+            [cluster stopWithParams:params
+                         completion:^(MTROperationalStateClusterOperationalCommandResponseParams * _Nullable values,
+                             NSError * _Nullable error) {
+                             NSLog(@"Values: %@", values);
+                             responsesNeeded--;
+                             if (error != nil) {
+                                 mError = error;
+                                 LogNSError("Error", error);
+                             }
+                             if (responsesNeeded == 0) {
+                                 SetCommandExitStatus(mError);
+                             }
+                         }];
+        }
+        return CHIP_NO_ERROR;
+    }
+
+private:
+};
+
+/*
+ * Command Start
+ */
+class OperationalStateStart : public ClusterCommand {
+public:
+    OperationalStateStart()
+        : ClusterCommand("start")
+    {
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000060) command (0x00000002) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterOperationalState alloc] initWithDevice:device
+                                                                            endpointID:@(endpointId)
+                                                                                 queue:callbackQueue];
+        __auto_type * params = [[MTROperationalStateClusterStartParams alloc] init];
+        params.timedInvokeTimeoutMs
+            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        uint16_t repeatCount = mRepeatCount.ValueOr(1);
+        uint16_t __block responsesNeeded = repeatCount;
+        while (repeatCount--) {
+            [cluster startWithParams:params
+                          completion:^(MTROperationalStateClusterOperationalCommandResponseParams * _Nullable values,
+                              NSError * _Nullable error) {
+                              NSLog(@"Values: %@", values);
+                              responsesNeeded--;
+                              if (error != nil) {
+                                  mError = error;
+                                  LogNSError("Error", error);
+                              }
+                              if (responsesNeeded == 0) {
+                                  SetCommandExitStatus(mError);
+                              }
+                          }];
+        }
+        return CHIP_NO_ERROR;
+    }
+
+private:
+};
+
+/*
+ * Command Resume
+ */
+class OperationalStateResume : public ClusterCommand {
+public:
+    OperationalStateResume()
+        : ClusterCommand("resume")
+    {
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000060) command (0x00000003) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterOperationalState alloc] initWithDevice:device
+                                                                            endpointID:@(endpointId)
+                                                                                 queue:callbackQueue];
+        __auto_type * params = [[MTROperationalStateClusterResumeParams alloc] init];
+        params.timedInvokeTimeoutMs
+            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        uint16_t repeatCount = mRepeatCount.ValueOr(1);
+        uint16_t __block responsesNeeded = repeatCount;
+        while (repeatCount--) {
+            [cluster resumeWithParams:params
+                           completion:^(MTROperationalStateClusterOperationalCommandResponseParams * _Nullable values,
+                               NSError * _Nullable error) {
+                               NSLog(@"Values: %@", values);
+                               responsesNeeded--;
+                               if (error != nil) {
+                                   mError = error;
+                                   LogNSError("Error", error);
+                               }
+                               if (responsesNeeded == 0) {
+                                   SetCommandExitStatus(mError);
+                               }
+                           }];
+        }
+        return CHIP_NO_ERROR;
+    }
+
+private:
+};
+
+/*
+ * Attribute PhaseList
+ */
+class ReadOperationalStatePhaseList : public ReadAttribute {
+public:
+    ReadOperationalStatePhaseList()
+        : ReadAttribute("phase-list")
+    {
+    }
+
+    ~ReadOperationalStatePhaseList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000060) ReadAttribute (0x00000000) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterOperationalState alloc] initWithDevice:device
+                                                                            endpointID:@(endpointId)
+                                                                                 queue:callbackQueue];
+        [cluster readAttributePhaseListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"OperationalState.PhaseList response %@", [value description]);
+            if (error != nil) {
+                LogNSError("OperationalState PhaseList read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeOperationalStatePhaseList : public SubscribeAttribute {
+public:
+    SubscribeAttributeOperationalStatePhaseList()
+        : SubscribeAttribute("phase-list")
+    {
+    }
+
+    ~SubscribeAttributeOperationalStatePhaseList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000060) ReportAttribute (0x00000000) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterOperationalState alloc] initWithDevice:device
+                                                                            endpointID:@(endpointId)
+                                                                                 queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributePhaseListWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"OperationalState.PhaseList response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute CurrentPhase
+ */
+class ReadOperationalStateCurrentPhase : public ReadAttribute {
+public:
+    ReadOperationalStateCurrentPhase()
+        : ReadAttribute("current-phase")
+    {
+    }
+
+    ~ReadOperationalStateCurrentPhase() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000060) ReadAttribute (0x00000001) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterOperationalState alloc] initWithDevice:device
+                                                                            endpointID:@(endpointId)
+                                                                                 queue:callbackQueue];
+        [cluster readAttributeCurrentPhaseWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"OperationalState.CurrentPhase response %@", [value description]);
+            if (error != nil) {
+                LogNSError("OperationalState CurrentPhase read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeOperationalStateCurrentPhase : public SubscribeAttribute {
+public:
+    SubscribeAttributeOperationalStateCurrentPhase()
+        : SubscribeAttribute("current-phase")
+    {
+    }
+
+    ~SubscribeAttributeOperationalStateCurrentPhase() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000060) ReportAttribute (0x00000001) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterOperationalState alloc] initWithDevice:device
+                                                                            endpointID:@(endpointId)
+                                                                                 queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeCurrentPhaseWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"OperationalState.CurrentPhase response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute CountdownTime
+ */
+class ReadOperationalStateCountdownTime : public ReadAttribute {
+public:
+    ReadOperationalStateCountdownTime()
+        : ReadAttribute("countdown-time")
+    {
+    }
+
+    ~ReadOperationalStateCountdownTime() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000060) ReadAttribute (0x00000002) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterOperationalState alloc] initWithDevice:device
+                                                                            endpointID:@(endpointId)
+                                                                                 queue:callbackQueue];
+        [cluster readAttributeCountdownTimeWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"OperationalState.CountdownTime response %@", [value description]);
+            if (error != nil) {
+                LogNSError("OperationalState CountdownTime read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeOperationalStateCountdownTime : public SubscribeAttribute {
+public:
+    SubscribeAttributeOperationalStateCountdownTime()
+        : SubscribeAttribute("countdown-time")
+    {
+    }
+
+    ~SubscribeAttributeOperationalStateCountdownTime() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000060) ReportAttribute (0x00000002) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterOperationalState alloc] initWithDevice:device
+                                                                            endpointID:@(endpointId)
+                                                                                 queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeCountdownTimeWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"OperationalState.CountdownTime response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute OperationalStateList
+ */
+class ReadOperationalStateOperationalStateList : public ReadAttribute {
+public:
+    ReadOperationalStateOperationalStateList()
+        : ReadAttribute("operational-state-list")
+    {
+    }
+
+    ~ReadOperationalStateOperationalStateList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000060) ReadAttribute (0x00000003) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterOperationalState alloc] initWithDevice:device
+                                                                            endpointID:@(endpointId)
+                                                                                 queue:callbackQueue];
+        [cluster readAttributeOperationalStateListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"OperationalState.OperationalStateList response %@", [value description]);
+            if (error != nil) {
+                LogNSError("OperationalState OperationalStateList read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeOperationalStateOperationalStateList : public SubscribeAttribute {
+public:
+    SubscribeAttributeOperationalStateOperationalStateList()
+        : SubscribeAttribute("operational-state-list")
+    {
+    }
+
+    ~SubscribeAttributeOperationalStateOperationalStateList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000060) ReportAttribute (0x00000003) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterOperationalState alloc] initWithDevice:device
+                                                                            endpointID:@(endpointId)
+                                                                                 queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeOperationalStateListWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"OperationalState.OperationalStateList response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute OperationalState
+ */
+class ReadOperationalStateOperationalState : public ReadAttribute {
+public:
+    ReadOperationalStateOperationalState()
+        : ReadAttribute("operational-state")
+    {
+    }
+
+    ~ReadOperationalStateOperationalState() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000060) ReadAttribute (0x00000004) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterOperationalState alloc] initWithDevice:device
+                                                                            endpointID:@(endpointId)
+                                                                                 queue:callbackQueue];
+        [cluster readAttributeOperationalStateWithCompletion:^(
+            MTROperationalStateClusterOperationalStateStruct * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"OperationalState.OperationalState response %@", [value description]);
+            if (error != nil) {
+                LogNSError("OperationalState OperationalState read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeOperationalStateOperationalState : public SubscribeAttribute {
+public:
+    SubscribeAttributeOperationalStateOperationalState()
+        : SubscribeAttribute("operational-state")
+    {
+    }
+
+    ~SubscribeAttributeOperationalStateOperationalState() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000060) ReportAttribute (0x00000004) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterOperationalState alloc] initWithDevice:device
+                                                                            endpointID:@(endpointId)
+                                                                                 queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeOperationalStateWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(MTROperationalStateClusterOperationalStateStruct * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"OperationalState.OperationalState response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute OperationalError
+ */
+class ReadOperationalStateOperationalError : public ReadAttribute {
+public:
+    ReadOperationalStateOperationalError()
+        : ReadAttribute("operational-error")
+    {
+    }
+
+    ~ReadOperationalStateOperationalError() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000060) ReadAttribute (0x00000005) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterOperationalState alloc] initWithDevice:device
+                                                                            endpointID:@(endpointId)
+                                                                                 queue:callbackQueue];
+        [cluster readAttributeOperationalErrorWithCompletion:^(
+            MTROperationalStateClusterErrorStateStruct * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"OperationalState.OperationalError response %@", [value description]);
+            if (error != nil) {
+                LogNSError("OperationalState OperationalError read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeOperationalStateOperationalError : public SubscribeAttribute {
+public:
+    SubscribeAttributeOperationalStateOperationalError()
+        : SubscribeAttribute("operational-error")
+    {
+    }
+
+    ~SubscribeAttributeOperationalStateOperationalError() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000060) ReportAttribute (0x00000005) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterOperationalState alloc] initWithDevice:device
+                                                                            endpointID:@(endpointId)
+                                                                                 queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeOperationalErrorWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(MTROperationalStateClusterErrorStateStruct * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"OperationalState.OperationalError response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute GeneratedCommandList
+ */
+class ReadOperationalStateGeneratedCommandList : public ReadAttribute {
+public:
+    ReadOperationalStateGeneratedCommandList()
+        : ReadAttribute("generated-command-list")
+    {
+    }
+
+    ~ReadOperationalStateGeneratedCommandList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000060) ReadAttribute (0x0000FFF8) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterOperationalState alloc] initWithDevice:device
+                                                                            endpointID:@(endpointId)
+                                                                                 queue:callbackQueue];
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"OperationalState.GeneratedCommandList response %@", [value description]);
+            if (error != nil) {
+                LogNSError("OperationalState GeneratedCommandList read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeOperationalStateGeneratedCommandList : public SubscribeAttribute {
+public:
+    SubscribeAttributeOperationalStateGeneratedCommandList()
+        : SubscribeAttribute("generated-command-list")
+    {
+    }
+
+    ~SubscribeAttributeOperationalStateGeneratedCommandList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000060) ReportAttribute (0x0000FFF8) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterOperationalState alloc] initWithDevice:device
+                                                                            endpointID:@(endpointId)
+                                                                                 queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeGeneratedCommandListWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"OperationalState.GeneratedCommandList response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute AcceptedCommandList
+ */
+class ReadOperationalStateAcceptedCommandList : public ReadAttribute {
+public:
+    ReadOperationalStateAcceptedCommandList()
+        : ReadAttribute("accepted-command-list")
+    {
+    }
+
+    ~ReadOperationalStateAcceptedCommandList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000060) ReadAttribute (0x0000FFF9) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterOperationalState alloc] initWithDevice:device
+                                                                            endpointID:@(endpointId)
+                                                                                 queue:callbackQueue];
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"OperationalState.AcceptedCommandList response %@", [value description]);
+            if (error != nil) {
+                LogNSError("OperationalState AcceptedCommandList read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeOperationalStateAcceptedCommandList : public SubscribeAttribute {
+public:
+    SubscribeAttributeOperationalStateAcceptedCommandList()
+        : SubscribeAttribute("accepted-command-list")
+    {
+    }
+
+    ~SubscribeAttributeOperationalStateAcceptedCommandList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000060) ReportAttribute (0x0000FFF9) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterOperationalState alloc] initWithDevice:device
+                                                                            endpointID:@(endpointId)
+                                                                                 queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeAcceptedCommandListWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"OperationalState.AcceptedCommandList response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute EventList
+ */
+class ReadOperationalStateEventList : public ReadAttribute {
+public:
+    ReadOperationalStateEventList()
+        : ReadAttribute("event-list")
+    {
+    }
+
+    ~ReadOperationalStateEventList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000060) ReadAttribute (0x0000FFFA) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterOperationalState alloc] initWithDevice:device
+                                                                            endpointID:@(endpointId)
+                                                                                 queue:callbackQueue];
+        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"OperationalState.EventList response %@", [value description]);
+            if (error != nil) {
+                LogNSError("OperationalState EventList read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeOperationalStateEventList : public SubscribeAttribute {
+public:
+    SubscribeAttributeOperationalStateEventList()
+        : SubscribeAttribute("event-list")
+    {
+    }
+
+    ~SubscribeAttributeOperationalStateEventList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000060) ReportAttribute (0x0000FFFA) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterOperationalState alloc] initWithDevice:device
+                                                                            endpointID:@(endpointId)
+                                                                                 queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeEventListWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"OperationalState.EventList response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute AttributeList
+ */
+class ReadOperationalStateAttributeList : public ReadAttribute {
+public:
+    ReadOperationalStateAttributeList()
+        : ReadAttribute("attribute-list")
+    {
+    }
+
+    ~ReadOperationalStateAttributeList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000060) ReadAttribute (0x0000FFFB) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterOperationalState alloc] initWithDevice:device
+                                                                            endpointID:@(endpointId)
+                                                                                 queue:callbackQueue];
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"OperationalState.AttributeList response %@", [value description]);
+            if (error != nil) {
+                LogNSError("OperationalState AttributeList read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeOperationalStateAttributeList : public SubscribeAttribute {
+public:
+    SubscribeAttributeOperationalStateAttributeList()
+        : SubscribeAttribute("attribute-list")
+    {
+    }
+
+    ~SubscribeAttributeOperationalStateAttributeList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000060) ReportAttribute (0x0000FFFB) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterOperationalState alloc] initWithDevice:device
+                                                                            endpointID:@(endpointId)
+                                                                                 queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeAttributeListWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"OperationalState.AttributeList response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute FeatureMap
+ */
+class ReadOperationalStateFeatureMap : public ReadAttribute {
+public:
+    ReadOperationalStateFeatureMap()
+        : ReadAttribute("feature-map")
+    {
+    }
+
+    ~ReadOperationalStateFeatureMap() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000060) ReadAttribute (0x0000FFFC) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterOperationalState alloc] initWithDevice:device
+                                                                            endpointID:@(endpointId)
+                                                                                 queue:callbackQueue];
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"OperationalState.FeatureMap response %@", [value description]);
+            if (error != nil) {
+                LogNSError("OperationalState FeatureMap read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeOperationalStateFeatureMap : public SubscribeAttribute {
+public:
+    SubscribeAttributeOperationalStateFeatureMap()
+        : SubscribeAttribute("feature-map")
+    {
+    }
+
+    ~SubscribeAttributeOperationalStateFeatureMap() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000060) ReportAttribute (0x0000FFFC) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterOperationalState alloc] initWithDevice:device
+                                                                            endpointID:@(endpointId)
+                                                                                 queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeFeatureMapWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"OperationalState.FeatureMap response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute ClusterRevision
+ */
+class ReadOperationalStateClusterRevision : public ReadAttribute {
+public:
+    ReadOperationalStateClusterRevision()
+        : ReadAttribute("cluster-revision")
+    {
+    }
+
+    ~ReadOperationalStateClusterRevision() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000060) ReadAttribute (0x0000FFFD) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterOperationalState alloc] initWithDevice:device
+                                                                            endpointID:@(endpointId)
+                                                                                 queue:callbackQueue];
+        [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"OperationalState.ClusterRevision response %@", [value description]);
+            if (error != nil) {
+                LogNSError("OperationalState ClusterRevision read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeOperationalStateClusterRevision : public SubscribeAttribute {
+public:
+    SubscribeAttributeOperationalStateClusterRevision()
+        : SubscribeAttribute("cluster-revision")
+    {
+    }
+
+    ~SubscribeAttributeOperationalStateClusterRevision() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000060) ReportAttribute (0x0000FFFD) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterOperationalState alloc] initWithDevice:device
+                                                                            endpointID:@(endpointId)
+                                                                                 queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeClusterRevisionWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"OperationalState.ClusterRevision response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -160785,6 +161836,51 @@ void registerClusterSmokeCoAlarm(Commands & commands)
 
     commands.Register(clusterName, clusterCommands);
 }
+void registerClusterOperationalState(Commands & commands)
+{
+    using namespace chip::app::Clusters::OperationalState;
+
+    const char * clusterName = "OperationalState";
+
+    commands_list clusterCommands = {
+        make_unique<ClusterCommand>(Id), //
+        make_unique<OperationalStatePause>(), //
+        make_unique<OperationalStateStop>(), //
+        make_unique<OperationalStateStart>(), //
+        make_unique<OperationalStateResume>(), //
+        make_unique<ReadAttribute>(Id), //
+        make_unique<ReadOperationalStatePhaseList>(), //
+        make_unique<WriteAttribute>(Id), //
+        make_unique<SubscribeAttribute>(Id), //
+        make_unique<SubscribeAttributeOperationalStatePhaseList>(), //
+        make_unique<ReadOperationalStateCurrentPhase>(), //
+        make_unique<SubscribeAttributeOperationalStateCurrentPhase>(), //
+        make_unique<ReadOperationalStateCountdownTime>(), //
+        make_unique<SubscribeAttributeOperationalStateCountdownTime>(), //
+        make_unique<ReadOperationalStateOperationalStateList>(), //
+        make_unique<SubscribeAttributeOperationalStateOperationalStateList>(), //
+        make_unique<ReadOperationalStateOperationalState>(), //
+        make_unique<SubscribeAttributeOperationalStateOperationalState>(), //
+        make_unique<ReadOperationalStateOperationalError>(), //
+        make_unique<SubscribeAttributeOperationalStateOperationalError>(), //
+        make_unique<ReadOperationalStateGeneratedCommandList>(), //
+        make_unique<SubscribeAttributeOperationalStateGeneratedCommandList>(), //
+        make_unique<ReadOperationalStateAcceptedCommandList>(), //
+        make_unique<SubscribeAttributeOperationalStateAcceptedCommandList>(), //
+        make_unique<ReadOperationalStateEventList>(), //
+        make_unique<SubscribeAttributeOperationalStateEventList>(), //
+        make_unique<ReadOperationalStateAttributeList>(), //
+        make_unique<SubscribeAttributeOperationalStateAttributeList>(), //
+        make_unique<ReadOperationalStateFeatureMap>(), //
+        make_unique<SubscribeAttributeOperationalStateFeatureMap>(), //
+        make_unique<ReadOperationalStateClusterRevision>(), //
+        make_unique<SubscribeAttributeOperationalStateClusterRevision>(), //
+        make_unique<ReadEvent>(Id), //
+        make_unique<SubscribeEvent>(Id), //
+    };
+
+    commands.Register(clusterName, clusterCommands);
+}
 void registerClusterHepaFilterMonitoring(Commands & commands)
 {
     using namespace chip::app::Clusters::HepaFilterMonitoring;
@@ -165120,6 +166216,7 @@ void registerClusters(Commands & commands)
     registerClusterRefrigeratorAlarm(commands);
     registerClusterAirQuality(commands);
     registerClusterSmokeCoAlarm(commands);
+    registerClusterOperationalState(commands);
     registerClusterHepaFilterMonitoring(commands);
     registerClusterActivatedCarbonFilterMonitoring(commands);
     registerClusterCeramicFilterMonitoring(commands);
