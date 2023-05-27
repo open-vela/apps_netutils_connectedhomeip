@@ -50136,6 +50136,711 @@ using chip::System::Clock::Timeout;
 
 @end
 
+@implementation MTRBaseClusterOperationalState
+
+- (instancetype)initWithDevice:(MTRBaseDevice *)device endpointID:(NSNumber *)endpointID queue:(dispatch_queue_t)queue
+{
+    if (self = [super initWithQueue:queue]) {
+        if (device == nil) {
+            return nil;
+        }
+
+        _device = device;
+        _endpoint = [endpointID unsignedShortValue];
+    }
+    return self;
+}
+
+- (void)pauseWithCompletion:(void (^)(MTROperationalStateClusterOperationalCommandResponseParams * _Nullable data,
+                                NSError * _Nullable error))completion
+{
+    [self pauseWithParams:nil completion:completion];
+}
+- (void)pauseWithParams:(MTROperationalStateClusterPauseParams * _Nullable)params
+             completion:(void (^)(MTROperationalStateClusterOperationalCommandResponseParams * _Nullable data,
+                            NSError * _Nullable error))completion
+{
+    // Make a copy of params before we go async.
+    params = [params copy];
+    auto * bridge = new MTROperationalStateClusterOperationalCommandResponseCallbackBridge(self.callbackQueue, completion,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session,
+            OperationalStateClusterOperationalCommandResponseCallbackType successCb, MTRErrorCallback failureCb,
+            MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTROperationalStateClusterOperationalCommandResponseCallbackBridge *>(bridge);
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
+            ListFreer listFreer;
+            OperationalState::Commands::Pause::Type request;
+            if (params != nil) {
+                if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
+                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
+                }
+            }
+
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
+        });
+    std::move(*bridge).DispatchAction(self.device);
+}
+
+- (void)stopWithCompletion:(void (^)(MTROperationalStateClusterOperationalCommandResponseParams * _Nullable data,
+                               NSError * _Nullable error))completion
+{
+    [self stopWithParams:nil completion:completion];
+}
+- (void)stopWithParams:(MTROperationalStateClusterStopParams * _Nullable)params
+            completion:(void (^)(MTROperationalStateClusterOperationalCommandResponseParams * _Nullable data,
+                           NSError * _Nullable error))completion
+{
+    // Make a copy of params before we go async.
+    params = [params copy];
+    auto * bridge = new MTROperationalStateClusterOperationalCommandResponseCallbackBridge(self.callbackQueue, completion,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session,
+            OperationalStateClusterOperationalCommandResponseCallbackType successCb, MTRErrorCallback failureCb,
+            MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTROperationalStateClusterOperationalCommandResponseCallbackBridge *>(bridge);
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
+            ListFreer listFreer;
+            OperationalState::Commands::Stop::Type request;
+            if (params != nil) {
+                if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
+                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
+                }
+            }
+
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
+        });
+    std::move(*bridge).DispatchAction(self.device);
+}
+
+- (void)startWithCompletion:(void (^)(MTROperationalStateClusterOperationalCommandResponseParams * _Nullable data,
+                                NSError * _Nullable error))completion
+{
+    [self startWithParams:nil completion:completion];
+}
+- (void)startWithParams:(MTROperationalStateClusterStartParams * _Nullable)params
+             completion:(void (^)(MTROperationalStateClusterOperationalCommandResponseParams * _Nullable data,
+                            NSError * _Nullable error))completion
+{
+    // Make a copy of params before we go async.
+    params = [params copy];
+    auto * bridge = new MTROperationalStateClusterOperationalCommandResponseCallbackBridge(self.callbackQueue, completion,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session,
+            OperationalStateClusterOperationalCommandResponseCallbackType successCb, MTRErrorCallback failureCb,
+            MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTROperationalStateClusterOperationalCommandResponseCallbackBridge *>(bridge);
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
+            ListFreer listFreer;
+            OperationalState::Commands::Start::Type request;
+            if (params != nil) {
+                if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
+                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
+                }
+            }
+
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
+        });
+    std::move(*bridge).DispatchAction(self.device);
+}
+
+- (void)resumeWithCompletion:(void (^)(MTROperationalStateClusterOperationalCommandResponseParams * _Nullable data,
+                                 NSError * _Nullable error))completion
+{
+    [self resumeWithParams:nil completion:completion];
+}
+- (void)resumeWithParams:(MTROperationalStateClusterResumeParams * _Nullable)params
+              completion:(void (^)(MTROperationalStateClusterOperationalCommandResponseParams * _Nullable data,
+                             NSError * _Nullable error))completion
+{
+    // Make a copy of params before we go async.
+    params = [params copy];
+    auto * bridge = new MTROperationalStateClusterOperationalCommandResponseCallbackBridge(self.callbackQueue, completion,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session,
+            OperationalStateClusterOperationalCommandResponseCallbackType successCb, MTRErrorCallback failureCb,
+            MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTROperationalStateClusterOperationalCommandResponseCallbackBridge *>(bridge);
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
+            ListFreer listFreer;
+            OperationalState::Commands::Resume::Type request;
+            if (params != nil) {
+                if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
+                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
+                }
+            }
+
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
+        });
+    std::move(*bridge).DispatchAction(self.device);
+}
+
+- (void)readAttributePhaseListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
+{
+    MTRReadParams * params = [[MTRReadParams alloc] init];
+    using TypeInfo = OperationalState::Attributes::PhaseList::TypeInfo;
+    return MTRReadAttribute<MTROperationalStatePhaseListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
+        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
+- (void)subscribeAttributePhaseListWithParams:(MTRSubscribeParams * _Nonnull)params
+                      subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                reportHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
+{
+    using TypeInfo = OperationalState::Attributes::PhaseList::TypeInfo;
+    MTRSubscribeAttribute<MTROperationalStatePhaseListListAttributeCallbackSubscriptionBridge, NSArray, TypeInfo::DecodableType>(
+        params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
+        TypeInfo::GetAttributeId());
+}
+
++ (void)readAttributePhaseListWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                           endpoint:(NSNumber *)endpoint
+                                              queue:(dispatch_queue_t)queue
+                                         completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
+{
+    auto * bridge = new MTROperationalStatePhaseListListAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
+        ^(OperationalStatePhaseListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+            if (clusterStateCacheContainer.cppClusterStateCache) {
+                chip::app::ConcreteAttributePath path;
+                using TypeInfo = OperationalState::Attributes::PhaseList::TypeInfo;
+                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+                path.mClusterId = TypeInfo::GetClusterId();
+                path.mAttributeId = TypeInfo::GetAttributeId();
+                TypeInfo::DecodableType value;
+                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+                if (err == CHIP_NO_ERROR) {
+                    successCb(bridge, value);
+                }
+                return err;
+            }
+            return CHIP_ERROR_NOT_FOUND;
+        });
+}
+
+- (void)readAttributeCurrentPhaseWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
+{
+    MTRReadParams * params = [[MTRReadParams alloc] init];
+    using TypeInfo = OperationalState::Attributes::CurrentPhase::TypeInfo;
+    return MTRReadAttribute<MTRNullableInt8uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
+- (void)subscribeAttributeCurrentPhaseWithParams:(MTRSubscribeParams * _Nonnull)params
+                         subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                   reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
+{
+    using TypeInfo = OperationalState::Attributes::CurrentPhase::TypeInfo;
+    MTRSubscribeAttribute<MTRNullableInt8uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
+        subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
+        TypeInfo::GetAttributeId());
+}
+
++ (void)readAttributeCurrentPhaseWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                              endpoint:(NSNumber *)endpoint
+                                                 queue:(dispatch_queue_t)queue
+                                            completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
+{
+    auto * bridge = new MTRNullableInt8uAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(
+        clusterStateCacheContainer.baseDevice, ^(NullableInt8uAttributeCallback successCb, MTRErrorCallback failureCb) {
+            if (clusterStateCacheContainer.cppClusterStateCache) {
+                chip::app::ConcreteAttributePath path;
+                using TypeInfo = OperationalState::Attributes::CurrentPhase::TypeInfo;
+                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+                path.mClusterId = TypeInfo::GetClusterId();
+                path.mAttributeId = TypeInfo::GetAttributeId();
+                TypeInfo::DecodableType value;
+                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+                if (err == CHIP_NO_ERROR) {
+                    successCb(bridge, value);
+                }
+                return err;
+            }
+            return CHIP_ERROR_NOT_FOUND;
+        });
+}
+
+- (void)readAttributeCountdownTimeWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
+{
+    MTRReadParams * params = [[MTRReadParams alloc] init];
+    using TypeInfo = OperationalState::Attributes::CountdownTime::TypeInfo;
+    return MTRReadAttribute<MTRNullableInt32uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
+- (void)subscribeAttributeCountdownTimeWithParams:(MTRSubscribeParams * _Nonnull)params
+                          subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                    reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
+{
+    using TypeInfo = OperationalState::Attributes::CountdownTime::TypeInfo;
+    MTRSubscribeAttribute<MTRNullableInt32uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
+        subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
+        TypeInfo::GetAttributeId());
+}
+
++ (void)readAttributeCountdownTimeWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                               endpoint:(NSNumber *)endpoint
+                                                  queue:(dispatch_queue_t)queue
+                                             completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
+{
+    auto * bridge = new MTRNullableInt32uAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(
+        clusterStateCacheContainer.baseDevice, ^(NullableInt32uAttributeCallback successCb, MTRErrorCallback failureCb) {
+            if (clusterStateCacheContainer.cppClusterStateCache) {
+                chip::app::ConcreteAttributePath path;
+                using TypeInfo = OperationalState::Attributes::CountdownTime::TypeInfo;
+                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+                path.mClusterId = TypeInfo::GetClusterId();
+                path.mAttributeId = TypeInfo::GetAttributeId();
+                TypeInfo::DecodableType value;
+                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+                if (err == CHIP_NO_ERROR) {
+                    successCb(bridge, value);
+                }
+                return err;
+            }
+            return CHIP_ERROR_NOT_FOUND;
+        });
+}
+
+- (void)readAttributeOperationalStateListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
+{
+    MTRReadParams * params = [[MTRReadParams alloc] init];
+    using TypeInfo = OperationalState::Attributes::OperationalStateList::TypeInfo;
+    return MTRReadAttribute<MTROperationalStateOperationalStateListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
+        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
+- (void)subscribeAttributeOperationalStateListWithParams:(MTRSubscribeParams * _Nonnull)params
+                                 subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                           reportHandler:
+                                               (void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
+{
+    using TypeInfo = OperationalState::Attributes::OperationalStateList::TypeInfo;
+    MTRSubscribeAttribute<MTROperationalStateOperationalStateListListAttributeCallbackSubscriptionBridge, NSArray,
+        TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
+        TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
++ (void)readAttributeOperationalStateListWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                                      endpoint:(NSNumber *)endpoint
+                                                         queue:(dispatch_queue_t)queue
+                                                    completion:
+                                                        (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
+{
+    auto * bridge = new MTROperationalStateOperationalStateListListAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
+        ^(OperationalStateOperationalStateListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+            if (clusterStateCacheContainer.cppClusterStateCache) {
+                chip::app::ConcreteAttributePath path;
+                using TypeInfo = OperationalState::Attributes::OperationalStateList::TypeInfo;
+                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+                path.mClusterId = TypeInfo::GetClusterId();
+                path.mAttributeId = TypeInfo::GetAttributeId();
+                TypeInfo::DecodableType value;
+                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+                if (err == CHIP_NO_ERROR) {
+                    successCb(bridge, value);
+                }
+                return err;
+            }
+            return CHIP_ERROR_NOT_FOUND;
+        });
+}
+
+- (void)readAttributeOperationalStateWithCompletion:(void (^)(MTROperationalStateClusterOperationalStateStruct * _Nullable value,
+                                                        NSError * _Nullable error))completion
+{
+    MTRReadParams * params = [[MTRReadParams alloc] init];
+    using TypeInfo = OperationalState::Attributes::OperationalState::TypeInfo;
+    return MTRReadAttribute<MTROperationalStateOperationalStateStructAttributeCallbackBridge,
+        MTROperationalStateClusterOperationalStateStruct, TypeInfo::DecodableType>(
+        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
+- (void)subscribeAttributeOperationalStateWithParams:(MTRSubscribeParams * _Nonnull)params
+                             subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                       reportHandler:(void (^)(MTROperationalStateClusterOperationalStateStruct * _Nullable value,
+                                                         NSError * _Nullable error))reportHandler
+{
+    using TypeInfo = OperationalState::Attributes::OperationalState::TypeInfo;
+    MTRSubscribeAttribute<MTROperationalStateOperationalStateStructAttributeCallbackSubscriptionBridge,
+        MTROperationalStateClusterOperationalStateStruct, TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler,
+        self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
++ (void)readAttributeOperationalStateWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                                  endpoint:(NSNumber *)endpoint
+                                                     queue:(dispatch_queue_t)queue
+                                                completion:
+                                                    (void (^)(MTROperationalStateClusterOperationalStateStruct * _Nullable value,
+                                                        NSError * _Nullable error))completion
+{
+    auto * bridge = new MTROperationalStateOperationalStateStructAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
+        ^(OperationalStateOperationalStateStructAttributeCallback successCb, MTRErrorCallback failureCb) {
+            if (clusterStateCacheContainer.cppClusterStateCache) {
+                chip::app::ConcreteAttributePath path;
+                using TypeInfo = OperationalState::Attributes::OperationalState::TypeInfo;
+                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+                path.mClusterId = TypeInfo::GetClusterId();
+                path.mAttributeId = TypeInfo::GetAttributeId();
+                TypeInfo::DecodableType value;
+                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+                if (err == CHIP_NO_ERROR) {
+                    successCb(bridge, value);
+                }
+                return err;
+            }
+            return CHIP_ERROR_NOT_FOUND;
+        });
+}
+
+- (void)readAttributeOperationalErrorWithCompletion:(void (^)(MTROperationalStateClusterErrorStateStruct * _Nullable value,
+                                                        NSError * _Nullable error))completion
+{
+    MTRReadParams * params = [[MTRReadParams alloc] init];
+    using TypeInfo = OperationalState::Attributes::OperationalError::TypeInfo;
+    return MTRReadAttribute<MTROperationalStateOperationalErrorStructAttributeCallbackBridge,
+        MTROperationalStateClusterErrorStateStruct, TypeInfo::DecodableType>(
+        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
+- (void)subscribeAttributeOperationalErrorWithParams:(MTRSubscribeParams * _Nonnull)params
+                             subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                       reportHandler:(void (^)(MTROperationalStateClusterErrorStateStruct * _Nullable value,
+                                                         NSError * _Nullable error))reportHandler
+{
+    using TypeInfo = OperationalState::Attributes::OperationalError::TypeInfo;
+    MTRSubscribeAttribute<MTROperationalStateOperationalErrorStructAttributeCallbackSubscriptionBridge,
+        MTROperationalStateClusterErrorStateStruct, TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler,
+        self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
++ (void)readAttributeOperationalErrorWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                                  endpoint:(NSNumber *)endpoint
+                                                     queue:(dispatch_queue_t)queue
+                                                completion:(void (^)(MTROperationalStateClusterErrorStateStruct * _Nullable value,
+                                                               NSError * _Nullable error))completion
+{
+    auto * bridge = new MTROperationalStateOperationalErrorStructAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
+        ^(OperationalStateOperationalErrorStructAttributeCallback successCb, MTRErrorCallback failureCb) {
+            if (clusterStateCacheContainer.cppClusterStateCache) {
+                chip::app::ConcreteAttributePath path;
+                using TypeInfo = OperationalState::Attributes::OperationalError::TypeInfo;
+                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+                path.mClusterId = TypeInfo::GetClusterId();
+                path.mAttributeId = TypeInfo::GetAttributeId();
+                TypeInfo::DecodableType value;
+                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+                if (err == CHIP_NO_ERROR) {
+                    successCb(bridge, value);
+                }
+                return err;
+            }
+            return CHIP_ERROR_NOT_FOUND;
+        });
+}
+
+- (void)readAttributeGeneratedCommandListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
+{
+    MTRReadParams * params = [[MTRReadParams alloc] init];
+    using TypeInfo = OperationalState::Attributes::GeneratedCommandList::TypeInfo;
+    return MTRReadAttribute<MTROperationalStateGeneratedCommandListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
+        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
+- (void)subscribeAttributeGeneratedCommandListWithParams:(MTRSubscribeParams * _Nonnull)params
+                                 subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                           reportHandler:
+                                               (void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
+{
+    using TypeInfo = OperationalState::Attributes::GeneratedCommandList::TypeInfo;
+    MTRSubscribeAttribute<MTROperationalStateGeneratedCommandListListAttributeCallbackSubscriptionBridge, NSArray,
+        TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
+        TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
++ (void)readAttributeGeneratedCommandListWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                                      endpoint:(NSNumber *)endpoint
+                                                         queue:(dispatch_queue_t)queue
+                                                    completion:
+                                                        (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
+{
+    auto * bridge = new MTROperationalStateGeneratedCommandListListAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
+        ^(OperationalStateGeneratedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+            if (clusterStateCacheContainer.cppClusterStateCache) {
+                chip::app::ConcreteAttributePath path;
+                using TypeInfo = OperationalState::Attributes::GeneratedCommandList::TypeInfo;
+                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+                path.mClusterId = TypeInfo::GetClusterId();
+                path.mAttributeId = TypeInfo::GetAttributeId();
+                TypeInfo::DecodableType value;
+                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+                if (err == CHIP_NO_ERROR) {
+                    successCb(bridge, value);
+                }
+                return err;
+            }
+            return CHIP_ERROR_NOT_FOUND;
+        });
+}
+
+- (void)readAttributeAcceptedCommandListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
+{
+    MTRReadParams * params = [[MTRReadParams alloc] init];
+    using TypeInfo = OperationalState::Attributes::AcceptedCommandList::TypeInfo;
+    return MTRReadAttribute<MTROperationalStateAcceptedCommandListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
+        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
+- (void)subscribeAttributeAcceptedCommandListWithParams:(MTRSubscribeParams * _Nonnull)params
+                                subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                          reportHandler:
+                                              (void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
+{
+    using TypeInfo = OperationalState::Attributes::AcceptedCommandList::TypeInfo;
+    MTRSubscribeAttribute<MTROperationalStateAcceptedCommandListListAttributeCallbackSubscriptionBridge, NSArray,
+        TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
+        TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
++ (void)readAttributeAcceptedCommandListWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                                     endpoint:(NSNumber *)endpoint
+                                                        queue:(dispatch_queue_t)queue
+                                                   completion:
+                                                       (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
+{
+    auto * bridge = new MTROperationalStateAcceptedCommandListListAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
+        ^(OperationalStateAcceptedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+            if (clusterStateCacheContainer.cppClusterStateCache) {
+                chip::app::ConcreteAttributePath path;
+                using TypeInfo = OperationalState::Attributes::AcceptedCommandList::TypeInfo;
+                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+                path.mClusterId = TypeInfo::GetClusterId();
+                path.mAttributeId = TypeInfo::GetAttributeId();
+                TypeInfo::DecodableType value;
+                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+                if (err == CHIP_NO_ERROR) {
+                    successCb(bridge, value);
+                }
+                return err;
+            }
+            return CHIP_ERROR_NOT_FOUND;
+        });
+}
+
+- (void)readAttributeEventListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
+{
+    MTRReadParams * params = [[MTRReadParams alloc] init];
+    using TypeInfo = OperationalState::Attributes::EventList::TypeInfo;
+    return MTRReadAttribute<MTROperationalStateEventListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
+        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
+- (void)subscribeAttributeEventListWithParams:(MTRSubscribeParams * _Nonnull)params
+                      subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                reportHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
+{
+    using TypeInfo = OperationalState::Attributes::EventList::TypeInfo;
+    MTRSubscribeAttribute<MTROperationalStateEventListListAttributeCallbackSubscriptionBridge, NSArray, TypeInfo::DecodableType>(
+        params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
+        TypeInfo::GetAttributeId());
+}
+
++ (void)readAttributeEventListWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                           endpoint:(NSNumber *)endpoint
+                                              queue:(dispatch_queue_t)queue
+                                         completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
+{
+    auto * bridge = new MTROperationalStateEventListListAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
+        ^(OperationalStateEventListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+            if (clusterStateCacheContainer.cppClusterStateCache) {
+                chip::app::ConcreteAttributePath path;
+                using TypeInfo = OperationalState::Attributes::EventList::TypeInfo;
+                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+                path.mClusterId = TypeInfo::GetClusterId();
+                path.mAttributeId = TypeInfo::GetAttributeId();
+                TypeInfo::DecodableType value;
+                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+                if (err == CHIP_NO_ERROR) {
+                    successCb(bridge, value);
+                }
+                return err;
+            }
+            return CHIP_ERROR_NOT_FOUND;
+        });
+}
+
+- (void)readAttributeAttributeListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
+{
+    MTRReadParams * params = [[MTRReadParams alloc] init];
+    using TypeInfo = OperationalState::Attributes::AttributeList::TypeInfo;
+    return MTRReadAttribute<MTROperationalStateAttributeListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
+        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
+- (void)subscribeAttributeAttributeListWithParams:(MTRSubscribeParams * _Nonnull)params
+                          subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                    reportHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
+{
+    using TypeInfo = OperationalState::Attributes::AttributeList::TypeInfo;
+    MTRSubscribeAttribute<MTROperationalStateAttributeListListAttributeCallbackSubscriptionBridge, NSArray,
+        TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
+        TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
++ (void)readAttributeAttributeListWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                               endpoint:(NSNumber *)endpoint
+                                                  queue:(dispatch_queue_t)queue
+                                             completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
+{
+    auto * bridge = new MTROperationalStateAttributeListListAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
+        ^(OperationalStateAttributeListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+            if (clusterStateCacheContainer.cppClusterStateCache) {
+                chip::app::ConcreteAttributePath path;
+                using TypeInfo = OperationalState::Attributes::AttributeList::TypeInfo;
+                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+                path.mClusterId = TypeInfo::GetClusterId();
+                path.mAttributeId = TypeInfo::GetAttributeId();
+                TypeInfo::DecodableType value;
+                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+                if (err == CHIP_NO_ERROR) {
+                    successCb(bridge, value);
+                }
+                return err;
+            }
+            return CHIP_ERROR_NOT_FOUND;
+        });
+}
+
+- (void)readAttributeFeatureMapWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
+{
+    MTRReadParams * params = [[MTRReadParams alloc] init];
+    using TypeInfo = OperationalState::Attributes::FeatureMap::TypeInfo;
+    return MTRReadAttribute<MTRInt32uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
+- (void)subscribeAttributeFeatureMapWithParams:(MTRSubscribeParams * _Nonnull)params
+                       subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                 reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
+{
+    using TypeInfo = OperationalState::Attributes::FeatureMap::TypeInfo;
+    MTRSubscribeAttribute<MTRInt32uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
+        subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
+        TypeInfo::GetAttributeId());
+}
+
++ (void)readAttributeFeatureMapWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                            endpoint:(NSNumber *)endpoint
+                                               queue:(dispatch_queue_t)queue
+                                          completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
+{
+    auto * bridge = new MTRInt32uAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(
+        clusterStateCacheContainer.baseDevice, ^(Int32uAttributeCallback successCb, MTRErrorCallback failureCb) {
+            if (clusterStateCacheContainer.cppClusterStateCache) {
+                chip::app::ConcreteAttributePath path;
+                using TypeInfo = OperationalState::Attributes::FeatureMap::TypeInfo;
+                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+                path.mClusterId = TypeInfo::GetClusterId();
+                path.mAttributeId = TypeInfo::GetAttributeId();
+                TypeInfo::DecodableType value;
+                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+                if (err == CHIP_NO_ERROR) {
+                    successCb(bridge, value);
+                }
+                return err;
+            }
+            return CHIP_ERROR_NOT_FOUND;
+        });
+}
+
+- (void)readAttributeClusterRevisionWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
+{
+    MTRReadParams * params = [[MTRReadParams alloc] init];
+    using TypeInfo = OperationalState::Attributes::ClusterRevision::TypeInfo;
+    return MTRReadAttribute<MTRInt16uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
+- (void)subscribeAttributeClusterRevisionWithParams:(MTRSubscribeParams * _Nonnull)params
+                            subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                      reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
+{
+    using TypeInfo = OperationalState::Attributes::ClusterRevision::TypeInfo;
+    MTRSubscribeAttribute<MTRInt16uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
+        subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
+        TypeInfo::GetAttributeId());
+}
+
++ (void)readAttributeClusterRevisionWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                                 endpoint:(NSNumber *)endpoint
+                                                    queue:(dispatch_queue_t)queue
+                                               completion:
+                                                   (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
+{
+    auto * bridge = new MTRInt16uAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(
+        clusterStateCacheContainer.baseDevice, ^(Int16uAttributeCallback successCb, MTRErrorCallback failureCb) {
+            if (clusterStateCacheContainer.cppClusterStateCache) {
+                chip::app::ConcreteAttributePath path;
+                using TypeInfo = OperationalState::Attributes::ClusterRevision::TypeInfo;
+                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+                path.mClusterId = TypeInfo::GetClusterId();
+                path.mAttributeId = TypeInfo::GetAttributeId();
+                TypeInfo::DecodableType value;
+                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+                if (err == CHIP_NO_ERROR) {
+                    successCb(bridge, value);
+                }
+                return err;
+            }
+            return CHIP_ERROR_NOT_FOUND;
+        });
+}
+
+@end
+
 @implementation MTRBaseClusterHEPAFilterMonitoring
 
 - (instancetype)initWithDevice:(MTRBaseDevice *)device endpointID:(NSNumber *)endpointID queue:(dispatch_queue_t)queue
