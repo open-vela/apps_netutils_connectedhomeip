@@ -1821,30 +1821,7 @@ using chip::System::Clock::Timeout;
                                         auto & definedValue_4 = listHolder_2->mList[i_2].attributeID.Emplace();
                                         definedValue_4 = element_2.attributeID.unsignedIntValue;
                                     }
-                                    {
-                                        using ListType_4
-                                            = std::remove_reference_t<decltype(listHolder_2->mList[i_2].attributeValue)>;
-                                        using ListMemberType_4 = ListMemberTypeGetter<ListType_4>::Type;
-                                        if (element_2.attributeValue.count != 0) {
-                                            auto * listHolder_4 = new ListHolder<ListMemberType_4>(element_2.attributeValue.count);
-                                            if (listHolder_4 == nullptr || listHolder_4->mList == nullptr) {
-                                                return CHIP_ERROR_INVALID_ARGUMENT;
-                                            }
-                                            listFreer.add(listHolder_4);
-                                            for (size_t i_4 = 0; i_4 < element_2.attributeValue.count; ++i_4) {
-                                                if (![element_2.attributeValue[i_4] isKindOfClass:[NSNumber class]]) {
-                                                    // Wrong kind of value.
-                                                    return CHIP_ERROR_INVALID_ARGUMENT;
-                                                }
-                                                auto element_4 = (NSNumber *) element_2.attributeValue[i_4];
-                                                listHolder_4->mList[i_4] = element_4.unsignedCharValue;
-                                            }
-                                            listHolder_2->mList[i_2].attributeValue
-                                                = ListType_4(listHolder_4->mList, element_2.attributeValue.count);
-                                        } else {
-                                            listHolder_2->mList[i_2].attributeValue = ListType_4();
-                                        }
-                                    }
+                                    listHolder_2->mList[i_2].attributeValue = element_2.attributeValue.unsignedIntValue;
                                 }
                                 listHolder_0->mList[i_0].attributeValueList
                                     = ListType_2(listHolder_2->mList, element_0.attributeValueList.count);
@@ -2153,30 +2130,7 @@ using chip::System::Clock::Timeout;
                                         auto & definedValue_4 = listHolder_2->mList[i_2].attributeID.Emplace();
                                         definedValue_4 = element_2.attributeID.unsignedIntValue;
                                     }
-                                    {
-                                        using ListType_4
-                                            = std::remove_reference_t<decltype(listHolder_2->mList[i_2].attributeValue)>;
-                                        using ListMemberType_4 = ListMemberTypeGetter<ListType_4>::Type;
-                                        if (element_2.attributeValue.count != 0) {
-                                            auto * listHolder_4 = new ListHolder<ListMemberType_4>(element_2.attributeValue.count);
-                                            if (listHolder_4 == nullptr || listHolder_4->mList == nullptr) {
-                                                return CHIP_ERROR_INVALID_ARGUMENT;
-                                            }
-                                            listFreer.add(listHolder_4);
-                                            for (size_t i_4 = 0; i_4 < element_2.attributeValue.count; ++i_4) {
-                                                if (![element_2.attributeValue[i_4] isKindOfClass:[NSNumber class]]) {
-                                                    // Wrong kind of value.
-                                                    return CHIP_ERROR_INVALID_ARGUMENT;
-                                                }
-                                                auto element_4 = (NSNumber *) element_2.attributeValue[i_4];
-                                                listHolder_4->mList[i_4] = element_4.unsignedCharValue;
-                                            }
-                                            listHolder_2->mList[i_2].attributeValue
-                                                = ListType_4(listHolder_4->mList, element_2.attributeValue.count);
-                                        } else {
-                                            listHolder_2->mList[i_2].attributeValue = ListType_4();
-                                        }
-                                    }
+                                    listHolder_2->mList[i_2].attributeValue = element_2.attributeValue.unsignedIntValue;
                                 }
                                 listHolder_0->mList[i_0].attributeValueList
                                     = ListType_2(listHolder_2->mList, element_0.attributeValueList.count);
@@ -2516,6 +2470,93 @@ using chip::System::Clock::Timeout;
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = Scenes::Attributes::LastConfiguredBy::TypeInfo;
+                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+                path.mClusterId = TypeInfo::GetClusterId();
+                path.mAttributeId = TypeInfo::GetAttributeId();
+                TypeInfo::DecodableType value;
+                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+                if (err == CHIP_NO_ERROR) {
+                    successCb(bridge, value);
+                }
+                return err;
+            }
+            return CHIP_ERROR_NOT_FOUND;
+        });
+}
+
+- (void)readAttributeSceneTableSizeWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
+{
+    MTRReadParams * params = [[MTRReadParams alloc] init];
+    using TypeInfo = Scenes::Attributes::SceneTableSize::TypeInfo;
+    return MTRReadAttribute<MTRInt16uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
+- (void)subscribeAttributeSceneTableSizeWithParams:(MTRSubscribeParams * _Nonnull)params
+                           subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                     reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
+{
+    using TypeInfo = Scenes::Attributes::SceneTableSize::TypeInfo;
+    MTRSubscribeAttribute<MTRInt16uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
+        subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
+        TypeInfo::GetAttributeId());
+}
+
++ (void)readAttributeSceneTableSizeWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                                endpoint:(NSNumber *)endpoint
+                                                   queue:(dispatch_queue_t)queue
+                                              completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
+{
+    auto * bridge = new MTRInt16uAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(
+        clusterStateCacheContainer.baseDevice, ^(Int16uAttributeCallback successCb, MTRErrorCallback failureCb) {
+            if (clusterStateCacheContainer.cppClusterStateCache) {
+                chip::app::ConcreteAttributePath path;
+                using TypeInfo = Scenes::Attributes::SceneTableSize::TypeInfo;
+                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+                path.mClusterId = TypeInfo::GetClusterId();
+                path.mAttributeId = TypeInfo::GetAttributeId();
+                TypeInfo::DecodableType value;
+                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+                if (err == CHIP_NO_ERROR) {
+                    successCb(bridge, value);
+                }
+                return err;
+            }
+            return CHIP_ERROR_NOT_FOUND;
+        });
+}
+
+- (void)readAttributeRemainingCapacityWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
+{
+    MTRReadParams * params = [[MTRReadParams alloc] init];
+    using TypeInfo = Scenes::Attributes::RemainingCapacity::TypeInfo;
+    return MTRReadAttribute<MTRInt8uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
+- (void)subscribeAttributeRemainingCapacityWithParams:(MTRSubscribeParams * _Nonnull)params
+                              subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                        reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
+{
+    using TypeInfo = Scenes::Attributes::RemainingCapacity::TypeInfo;
+    MTRSubscribeAttribute<MTRInt8uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
+        subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
+        TypeInfo::GetAttributeId());
+}
+
++ (void)readAttributeRemainingCapacityWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                                   endpoint:(NSNumber *)endpoint
+                                                      queue:(dispatch_queue_t)queue
+                                                 completion:
+                                                     (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
+{
+    auto * bridge = new MTRInt8uAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(
+        clusterStateCacheContainer.baseDevice, ^(Int8uAttributeCallback successCb, MTRErrorCallback failureCb) {
+            if (clusterStateCacheContainer.cppClusterStateCache) {
+                chip::app::ConcreteAttributePath path;
+                using TypeInfo = Scenes::Attributes::RemainingCapacity::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
