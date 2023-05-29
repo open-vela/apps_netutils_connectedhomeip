@@ -30210,26 +30210,32 @@ MTR_DEPRECATED("Please use MTRBaseClusterUnitTesting", ios(16.1, 16.4), macos(13
 @end
 
 typedef NS_ENUM(uint8_t, MTRIdentifyEffectIdentifier) {
-    MTRIdentifyEffectIdentifierBlink MTR_NEWLY_AVAILABLE = 0x00,
-    MTRIdentifyEffectIdentifierBreathe MTR_NEWLY_AVAILABLE = 0x01,
-    MTRIdentifyEffectIdentifierOkay MTR_NEWLY_AVAILABLE = 0x02,
-    MTRIdentifyEffectIdentifierChannelChange MTR_NEWLY_AVAILABLE = 0x0B,
-    MTRIdentifyEffectIdentifierFinishEffect MTR_NEWLY_AVAILABLE = 0xFE,
-    MTRIdentifyEffectIdentifierStopEffect MTR_NEWLY_AVAILABLE = 0xFF,
-} MTR_NEWLY_AVAILABLE;
+    MTRIdentifyEffectIdentifierBlink API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x00,
+    MTRIdentifyEffectIdentifierBreathe API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x01,
+    MTRIdentifyEffectIdentifierOkay API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x02,
+    MTRIdentifyEffectIdentifierChannelChange API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x0B,
+    MTRIdentifyEffectIdentifierFinishEffect API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0xFE,
+    MTRIdentifyEffectIdentifierStopEffect API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0xFF,
+} API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 typedef NS_ENUM(uint8_t, MTRIdentifyEffectVariant) {
-    MTRIdentifyEffectVariantDefault MTR_NEWLY_AVAILABLE = 0x00,
-} MTR_NEWLY_AVAILABLE;
+    MTRIdentifyEffectVariantDefault API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x00,
+} API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 typedef NS_ENUM(uint8_t, MTRIdentifyType) {
-    MTRIdentifyTypeNone MTR_NEWLY_AVAILABLE = 0x00,
+    MTRIdentifyTypeNone API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x00,
     MTRIdentifyTypeLightOutput MTR_NEWLY_AVAILABLE = 0x01,
+    MTRIdentifyTypeVisibleLight API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
+        MTR_NEWLY_DEPRECATED("Please use MTRIdentifyTypeLightOutput")
+    = 0x01,
     MTRIdentifyTypeVisibleIndicator MTR_NEWLY_AVAILABLE = 0x02,
-    MTRIdentifyTypeAudibleBeep MTR_NEWLY_AVAILABLE = 0x03,
-    MTRIdentifyTypeDisplay MTR_NEWLY_AVAILABLE = 0x04,
-    MTRIdentifyTypeActuator MTR_NEWLY_AVAILABLE = 0x05,
-} MTR_NEWLY_AVAILABLE;
+    MTRIdentifyTypeVisibleLED API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
+        MTR_NEWLY_DEPRECATED("Please use MTRIdentifyTypeVisibleIndicator")
+    = 0x02,
+    MTRIdentifyTypeAudibleBeep API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x03,
+    MTRIdentifyTypeDisplay API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x04,
+    MTRIdentifyTypeActuator API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x05,
+} API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 typedef NS_OPTIONS(uint32_t, MTRGroupsFeature) {
     MTRGroupsFeatureGroupNames MTR_NEWLY_AVAILABLE = 0x1,
