@@ -29556,7 +29556,7 @@ using chip::System::Clock::Timeout;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = ThreadNetworkDiagnostics::Attributes::RoutingRole::TypeInfo;
-    return MTRReadAttribute<MTRNullableThreadNetworkDiagnosticsClusterRoutingRoleAttributeCallbackBridge, NSNumber,
+    return MTRReadAttribute<MTRNullableThreadNetworkDiagnosticsClusterRoutingRoleEnumAttributeCallbackBridge, NSNumber,
         TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -29566,7 +29566,7 @@ using chip::System::Clock::Timeout;
                                   reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = ThreadNetworkDiagnostics::Attributes::RoutingRole::TypeInfo;
-    MTRSubscribeAttribute<MTRNullableThreadNetworkDiagnosticsClusterRoutingRoleAttributeCallbackSubscriptionBridge, NSNumber,
+    MTRSubscribeAttribute<MTRNullableThreadNetworkDiagnosticsClusterRoutingRoleEnumAttributeCallbackSubscriptionBridge, NSNumber,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -29576,9 +29576,9 @@ using chip::System::Clock::Timeout;
                                                 queue:(dispatch_queue_t)queue
                                            completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRNullableThreadNetworkDiagnosticsClusterRoutingRoleAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRNullableThreadNetworkDiagnosticsClusterRoutingRoleEnumAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(NullableThreadNetworkDiagnosticsClusterRoutingRoleAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(NullableThreadNetworkDiagnosticsClusterRoutingRoleEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = ThreadNetworkDiagnostics::Attributes::RoutingRole::TypeInfo;
