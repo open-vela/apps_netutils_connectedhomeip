@@ -70204,6 +70204,7 @@ public:
 | Cluster FanControl                                                  | 0x0202 |
 |------------------------------------------------------------------------------|
 | Commands:                                                           |        |
+| * Step                                                              |   0x00 |
 |------------------------------------------------------------------------------|
 | Attributes:                                                         |        |
 | * FanMode                                                           | 0x0000 |
@@ -70217,6 +70218,7 @@ public:
 | * RockSetting                                                       | 0x0008 |
 | * WindSupport                                                       | 0x0009 |
 | * WindSetting                                                       | 0x000A |
+| * AirflowDirection                                                  | 0x000B |
 | * GeneratedCommandList                                              | 0xFFF8 |
 | * AcceptedCommandList                                               | 0xFFF9 |
 | * EventList                                                         | 0xFFFA |
@@ -70226,6 +70228,64 @@ public:
 |------------------------------------------------------------------------------|
 | Events:                                                             |        |
 \*----------------------------------------------------------------------------*/
+
+/*
+ * Command Step
+ */
+class FanControlStep : public ClusterCommand {
+public:
+    FanControlStep()
+        : ClusterCommand("step")
+    {
+        AddArgument("Direction", 0, UINT8_MAX, &mRequest.direction);
+        AddArgument("Wrap", 0, 1, &mRequest.wrap);
+        AddArgument("LowestOff", 0, 1, &mRequest.lowestOff);
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000202) command (0x00000000) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterFanControl alloc] initWithDevice:device
+                                                                      endpointID:@(endpointId)
+                                                                           queue:callbackQueue];
+        __auto_type * params = [[MTRFanControlClusterStepParams alloc] init];
+        params.timedInvokeTimeoutMs
+            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.direction = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.direction)];
+        if (mRequest.wrap.HasValue()) {
+            params.wrap = [NSNumber numberWithBool:mRequest.wrap.Value()];
+        } else {
+            params.wrap = nil;
+        }
+        if (mRequest.lowestOff.HasValue()) {
+            params.lowestOff = [NSNumber numberWithBool:mRequest.lowestOff.Value()];
+        } else {
+            params.lowestOff = nil;
+        }
+        uint16_t repeatCount = mRepeatCount.ValueOr(1);
+        uint16_t __block responsesNeeded = repeatCount;
+        while (repeatCount--) {
+            [cluster stepWithParams:params
+                         completion:^(NSError * _Nullable error) {
+                             responsesNeeded--;
+                             if (error != nil) {
+                                 mError = error;
+                                 LogNSError("Error", error);
+                             }
+                             if (responsesNeeded == 0) {
+                                 SetCommandExitStatus(mError);
+                             }
+                         }];
+        }
+        return CHIP_NO_ERROR;
+    }
+
+private:
+    chip::app::Clusters::FanControl::Commands::Step::Type mRequest;
+};
 
 /*
  * Attribute FanMode
@@ -71230,6 +71290,116 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"FanControl.WindSetting response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute AirflowDirection
+ */
+class ReadFanControlAirflowDirection : public ReadAttribute {
+public:
+    ReadFanControlAirflowDirection()
+        : ReadAttribute("airflow-direction")
+    {
+    }
+
+    ~ReadFanControlAirflowDirection() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000202) ReadAttribute (0x0000000B) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterFanControl alloc] initWithDevice:device
+                                                                      endpointID:@(endpointId)
+                                                                           queue:callbackQueue];
+        [cluster readAttributeAirflowDirectionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"FanControl.AirflowDirection response %@", [value description]);
+            if (error != nil) {
+                LogNSError("FanControl AirflowDirection read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class WriteFanControlAirflowDirection : public WriteAttribute {
+public:
+    WriteFanControlAirflowDirection()
+        : WriteAttribute("airflow-direction")
+    {
+        AddArgument("attr-name", "airflow-direction");
+        AddArgument("attr-value", 0, UINT8_MAX, &mValue);
+        WriteAttribute::AddArguments();
+    }
+
+    ~WriteFanControlAirflowDirection() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000202) WriteAttribute (0x0000000B) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterFanControl alloc] initWithDevice:device
+                                                                      endpointID:@(endpointId)
+                                                                           queue:callbackQueue];
+        __auto_type * params = [[MTRWriteParams alloc] init];
+        params.timedWriteTimeout
+            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
+        NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
+
+        [cluster writeAttributeAirflowDirectionWithValue:value
+                                                  params:params
+                                              completion:^(NSError * _Nullable error) {
+                                                  if (error != nil) {
+                                                      LogNSError("FanControl AirflowDirection write Error", error);
+                                                  }
+                                                  SetCommandExitStatus(error);
+                                              }];
+        return CHIP_NO_ERROR;
+    }
+
+private:
+    uint8_t mValue;
+};
+
+class SubscribeAttributeFanControlAirflowDirection : public SubscribeAttribute {
+public:
+    SubscribeAttributeFanControlAirflowDirection()
+        : SubscribeAttribute("airflow-direction")
+    {
+    }
+
+    ~SubscribeAttributeFanControlAirflowDirection() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000202) ReportAttribute (0x0000000B) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterFanControl alloc] initWithDevice:device
+                                                                      endpointID:@(endpointId)
+                                                                           queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeAirflowDirectionWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"FanControl.AirflowDirection response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -162828,6 +162998,7 @@ void registerClusterFanControl(Commands & commands)
 
     commands_list clusterCommands = {
         make_unique<ClusterCommand>(Id), //
+        make_unique<FanControlStep>(), //
         make_unique<ReadAttribute>(Id), //
         make_unique<ReadFanControlFanMode>(), //
         make_unique<WriteAttribute>(Id), //
@@ -162859,6 +163030,9 @@ void registerClusterFanControl(Commands & commands)
         make_unique<ReadFanControlWindSetting>(), //
         make_unique<WriteFanControlWindSetting>(), //
         make_unique<SubscribeAttributeFanControlWindSetting>(), //
+        make_unique<ReadFanControlAirflowDirection>(), //
+        make_unique<WriteFanControlAirflowDirection>(), //
+        make_unique<SubscribeAttributeFanControlAirflowDirection>(), //
         make_unique<ReadFanControlGeneratedCommandList>(), //
         make_unique<SubscribeAttributeFanControlGeneratedCommandList>(), //
         make_unique<ReadFanControlAcceptedCommandList>(), //
