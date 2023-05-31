@@ -32999,9 +32999,9 @@ typedef NS_OPTIONS(uint32_t, MTRColorControlFeature) {
 } API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 typedef NS_ENUM(uint8_t, MTRIlluminanceMeasurementLightSensorType) {
-    MTRIlluminanceMeasurementLightSensorTypePhotodiode API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x00,
-    MTRIlluminanceMeasurementLightSensorTypeCMOS API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x01,
-} API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
+    MTRIlluminanceMeasurementLightSensorTypePhotodiode MTR_NEWLY_AVAILABLE = 0x00,
+    MTRIlluminanceMeasurementLightSensorTypeCMOS MTR_NEWLY_AVAILABLE = 0x01,
+} MTR_NEWLY_AVAILABLE;
 
 typedef NS_OPTIONS(uint32_t, MTRPressureMeasurementFeature) {
     MTRPressureMeasurementFeatureExtended MTR_NEWLY_AVAILABLE = 0x1,

@@ -87913,7 +87913,8 @@ using chip::System::Clock::Timeout;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = IlluminanceMeasurement::Attributes::LightSensorType::TypeInfo;
-    return MTRReadAttribute<MTRNullableInt8uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+    return MTRReadAttribute<MTRNullableIlluminanceMeasurementClusterLightSensorTypeEnumAttributeCallbackBridge, NSNumber,
+        TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -87922,9 +87923,9 @@ using chip::System::Clock::Timeout;
                                       reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = IlluminanceMeasurement::Attributes::LightSensorType::TypeInfo;
-    MTRSubscribeAttribute<MTRNullableInt8uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
-        subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
-        TypeInfo::GetAttributeId());
+    MTRSubscribeAttribute<MTRNullableIlluminanceMeasurementClusterLightSensorTypeEnumAttributeCallbackSubscriptionBridge, NSNumber,
+        TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
+        TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
 + (void)readAttributeLightSensorTypeWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
@@ -87933,9 +87934,9 @@ using chip::System::Clock::Timeout;
                                                completion:
                                                    (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRNullableInt8uAttributeCallbackBridge(queue, completion);
-    std::move(*bridge).DispatchLocalAction(
-        clusterStateCacheContainer.baseDevice, ^(NullableInt8uAttributeCallback successCb, MTRErrorCallback failureCb) {
+    auto * bridge = new MTRNullableIlluminanceMeasurementClusterLightSensorTypeEnumAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
+        ^(NullableIlluminanceMeasurementClusterLightSensorTypeEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = IlluminanceMeasurement::Attributes::LightSensorType::TypeInfo;
