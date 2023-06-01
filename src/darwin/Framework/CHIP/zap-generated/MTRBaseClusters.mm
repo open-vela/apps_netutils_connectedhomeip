@@ -25579,7 +25579,7 @@ using chip::System::Clock::Timeout;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = NetworkCommissioning::Attributes::LastNetworkingStatus::TypeInfo;
-    return MTRReadAttribute<MTRNullableNetworkCommissioningClusterNetworkCommissioningStatusAttributeCallbackBridge, NSNumber,
+    return MTRReadAttribute<MTRNullableNetworkCommissioningClusterNetworkCommissioningStatusEnumAttributeCallbackBridge, NSNumber,
         TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -25590,7 +25590,7 @@ using chip::System::Clock::Timeout;
                                                (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = NetworkCommissioning::Attributes::LastNetworkingStatus::TypeInfo;
-    MTRSubscribeAttribute<MTRNullableNetworkCommissioningClusterNetworkCommissioningStatusAttributeCallbackSubscriptionBridge,
+    MTRSubscribeAttribute<MTRNullableNetworkCommissioningClusterNetworkCommissioningStatusEnumAttributeCallbackSubscriptionBridge,
         NSNumber, TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device,
         self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -25601,9 +25601,11 @@ using chip::System::Clock::Timeout;
                                                     completion:
                                                         (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRNullableNetworkCommissioningClusterNetworkCommissioningStatusAttributeCallbackBridge(queue, completion);
+    auto * bridge
+        = new MTRNullableNetworkCommissioningClusterNetworkCommissioningStatusEnumAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(NullableNetworkCommissioningClusterNetworkCommissioningStatusAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(NullableNetworkCommissioningClusterNetworkCommissioningStatusEnumAttributeCallback successCb,
+            MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = NetworkCommissioning::Attributes::LastNetworkingStatus::TypeInfo;
