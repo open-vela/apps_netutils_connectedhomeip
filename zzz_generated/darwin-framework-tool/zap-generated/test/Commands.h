@@ -133343,7 +133343,7 @@ public:
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads the FeatureMap from DUT\n");
             if (ShouldSkip(" !DRLK.S.F00 && !DRLK.S.F01 && !DRLK.S.F02 && !DRLK.S.F04 && !DRLK.S.F05 && !DRLK.S.F06 && !DRLK.S.F07 "
-                           "&& !DRLK.S.F08 && !DRLK.S.F0a && !DRLK.S.F0b ")) {
+                           "&& !DRLK.S.F08 && !DRLK.S.F0a && !DRLK.S.F0b && !DRLK.S.F0c ")) {
                 NextTest();
                 return;
             }
@@ -133430,272 +133430,289 @@ public:
             err = TestGivenDRLKSF0bHDSCHEnsureFeaturemapHasTheCorrectBitSet_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : TH reads AttributeList from DUT\n");
-            err = TestThReadsAttributeListFromDut_13();
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Given DRLK.S.F0c(UBOLT) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("DRLK.S.F0c")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenDRLKSF0cUBOLTEnsureFeaturemapHasTheCorrectBitSet_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : TH reads Feature dependent(DRLK.S.F05) attributes in AttributeList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 14 : TH reads AttributeList from DUT\n");
+            err = TestThReadsAttributeListFromDut_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : TH reads Feature dependent(DRLK.S.F05) attributes in AttributeList\n");
             if (ShouldSkip("DRLK.S.F05")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFeatureDependentDRLKSF05AttributesInAttributeList_14();
+            err = TestThReadsFeatureDependentDRLKSF05AttributesInAttributeList_15();
             break;
-        case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : TH reads Feature dependent(DRLK.S.F08) attributes in AttributeList\n");
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : TH reads Feature dependent(DRLK.S.F08) attributes in AttributeList\n");
             if (ShouldSkip("DRLK.S.F08")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFeatureDependentDRLKSF08AttributesInAttributeList_15();
+            err = TestThReadsFeatureDependentDRLKSF08AttributesInAttributeList_16();
             break;
-        case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : TH reads Feature dependent(DRLK.S.F00) attributes in AttributeList\n");
+        case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : TH reads Feature dependent(DRLK.S.F00) attributes in AttributeList\n");
             if (ShouldSkip("DRLK.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFeatureDependentDRLKSF00AttributesInAttributeList_16();
+            err = TestThReadsFeatureDependentDRLKSF00AttributesInAttributeList_17();
             break;
-        case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : TH reads Feature dependent(DRLK.S.F01) attributes in AttributeList\n");
+        case 18:
+            ChipLogProgress(chipTool, " ***** Test Step 18 : TH reads Feature dependent(DRLK.S.F01) attributes in AttributeList\n");
             if (ShouldSkip("DRLK.S.F01")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFeatureDependentDRLKSF01AttributesInAttributeList_17();
+            err = TestThReadsFeatureDependentDRLKSF01AttributesInAttributeList_18();
             break;
-        case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : TH reads Feature dependent(DRLK.S.F04) attribute in AttributeList\n");
+        case 19:
+            ChipLogProgress(chipTool, " ***** Test Step 19 : TH reads Feature dependent(DRLK.S.F04) attribute in AttributeList\n");
             if (ShouldSkip("DRLK.S.F04")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFeatureDependentDRLKSF04AttributeInAttributeList_18();
+            err = TestThReadsFeatureDependentDRLKSF04AttributeInAttributeList_19();
             break;
-        case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : TH reads Feature dependent(DRLK.S.F0a) attribute in AttributeList\n");
+        case 20:
+            ChipLogProgress(chipTool, " ***** Test Step 20 : TH reads Feature dependent(DRLK.S.F0a) attribute in AttributeList\n");
             if (ShouldSkip("DRLK.S.F0a")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFeatureDependentDRLKSF0aAttributeInAttributeList_19();
+            err = TestThReadsFeatureDependentDRLKSF0aAttributeInAttributeList_20();
             break;
-        case 20:
-            ChipLogProgress(chipTool, " ***** Test Step 20 : TH reads Feature dependent(DRLK.S.F0b) attribute in AttributeList\n");
+        case 21:
+            ChipLogProgress(chipTool, " ***** Test Step 21 : TH reads Feature dependent(DRLK.S.F0b) attribute in AttributeList\n");
             if (ShouldSkip("DRLK.S.F0b")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFeatureDependentDRLKSF0bAttributeInAttributeList_20();
+            err = TestThReadsFeatureDependentDRLKSF0bAttributeInAttributeList_21();
             break;
-        case 21:
+        case 22:
             ChipLogProgress(chipTool,
-                " ***** Test Step 21 : TH reads Feature dependent(DRLK.S.F00 or DRLK.S.F01) attributes in AttributeList\n");
+                " ***** Test Step 22 : TH reads Feature dependent(DRLK.S.F00 or DRLK.S.F01) attributes in AttributeList\n");
             if (ShouldSkip("DRLK.S.F00 || DRLK.S.F01")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFeatureDependentDRLKSF00OrDrlksf01AttributesInAttributeList_21();
+            err = TestThReadsFeatureDependentDRLKSF00OrDrlksf01AttributesInAttributeList_22();
             break;
-        case 22:
+        case 23:
             ChipLogProgress(chipTool,
-                " ***** Test Step 22 : TH reads Feature dependent(DRLK.S.F07 or DRLK.S.F00) attribute in AttributeList\n");
+                " ***** Test Step 23 : TH reads Feature dependent(DRLK.S.F07 or DRLK.S.F00) attribute in AttributeList\n");
             if (ShouldSkip("DRLK.S.F07 || DRLK.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFeatureDependentDRLKSF07OrDrlksf00AttributeInAttributeList_22();
+            err = TestThReadsFeatureDependentDRLKSF07OrDrlksf00AttributeInAttributeList_23();
             break;
-        case 23:
-            ChipLogProgress(chipTool, " ***** Test Step 23 : TH reads optional attribute(Language) in AttributeList\n");
+        case 24:
+            ChipLogProgress(chipTool, " ***** Test Step 24 : TH reads optional attribute(Language) in AttributeList\n");
             if (ShouldSkip("DRLK.S.A0021")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsOptionalAttributeLanguageInAttributeList_23();
+            err = TestThReadsOptionalAttributeLanguageInAttributeList_24();
             break;
-        case 24:
-            ChipLogProgress(chipTool, " ***** Test Step 24 : TH reads optional attribute(LEDSettings) in AttributeList\n");
+        case 25:
+            ChipLogProgress(chipTool, " ***** Test Step 25 : TH reads optional attribute(LEDSettings) in AttributeList\n");
             if (ShouldSkip("DRLK.S.A0022")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsOptionalAttributeLEDSettingsInAttributeList_24();
+            err = TestThReadsOptionalAttributeLEDSettingsInAttributeList_25();
             break;
-        case 25:
-            ChipLogProgress(chipTool, " ***** Test Step 25 : TH reads optional attribute(AutoRelockTime) in AttributeList\n");
+        case 26:
+            ChipLogProgress(chipTool, " ***** Test Step 26 : TH reads optional attribute(AutoRelockTime) in AttributeList\n");
             if (ShouldSkip("DRLK.S.A0023")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsOptionalAttributeAutoRelockTimeInAttributeList_25();
+            err = TestThReadsOptionalAttributeAutoRelockTimeInAttributeList_26();
             break;
-        case 26:
-            ChipLogProgress(chipTool, " ***** Test Step 26 : TH reads optional attribute(SoundVolume) in AttributeList\n");
+        case 27:
+            ChipLogProgress(chipTool, " ***** Test Step 27 : TH reads optional attribute(SoundVolume) in AttributeList\n");
             if (ShouldSkip("DRLK.S.A0024")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsOptionalAttributeSoundVolumeInAttributeList_26();
+            err = TestThReadsOptionalAttributeSoundVolumeInAttributeList_27();
             break;
-        case 27:
+        case 28:
             ChipLogProgress(
-                chipTool, " ***** Test Step 27 : TH reads optional attribute(DefaultConfigurationRegister) in AttributeList\n");
+                chipTool, " ***** Test Step 28 : TH reads optional attribute(DefaultConfigurationRegister) in AttributeList\n");
             if (ShouldSkip("DRLK.S.A0027")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsOptionalAttributeDefaultConfigurationRegisterInAttributeList_27();
+            err = TestThReadsOptionalAttributeDefaultConfigurationRegisterInAttributeList_28();
             break;
-        case 28:
+        case 29:
             ChipLogProgress(
-                chipTool, " ***** Test Step 28 : TH reads optional attribute(EnableLocalProgramming) in AttributeList\n");
+                chipTool, " ***** Test Step 29 : TH reads optional attribute(EnableLocalProgramming) in AttributeList\n");
             if (ShouldSkip("DRLK.S.A0028")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsOptionalAttributeEnableLocalProgrammingInAttributeList_28();
+            err = TestThReadsOptionalAttributeEnableLocalProgrammingInAttributeList_29();
             break;
-        case 29:
+        case 30:
             ChipLogProgress(
-                chipTool, " ***** Test Step 29 : TH reads optional attribute(EnableOneTouchLocking) in AttributeList\n");
+                chipTool, " ***** Test Step 30 : TH reads optional attribute(EnableOneTouchLocking) in AttributeList\n");
             if (ShouldSkip("DRLK.S.A0029")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsOptionalAttributeEnableOneTouchLockingInAttributeList_29();
+            err = TestThReadsOptionalAttributeEnableOneTouchLockingInAttributeList_30();
             break;
-        case 30:
+        case 31:
             ChipLogProgress(
-                chipTool, " ***** Test Step 30 : TH reads optional attribute(EnableInsideStatusLED) in AttributeList\n");
+                chipTool, " ***** Test Step 31 : TH reads optional attribute(EnableInsideStatusLED) in AttributeList\n");
             if (ShouldSkip("DRLK.S.A002a")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsOptionalAttributeEnableInsideStatusLEDInAttributeList_30();
+            err = TestThReadsOptionalAttributeEnableInsideStatusLEDInAttributeList_31();
             break;
-        case 31:
+        case 32:
             ChipLogProgress(
-                chipTool, " ***** Test Step 31 : TH reads optional attribute(EnablePrivacyModeButton) in AttributeList\n");
+                chipTool, " ***** Test Step 32 : TH reads optional attribute(EnablePrivacyModeButton) in AttributeList\n");
             if (ShouldSkip("DRLK.S.A002b")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsOptionalAttributeEnablePrivacyModeButtonInAttributeList_31();
+            err = TestThReadsOptionalAttributeEnablePrivacyModeButtonInAttributeList_32();
             break;
-        case 32:
+        case 33:
             ChipLogProgress(
-                chipTool, " ***** Test Step 32 : TH reads optional attribute(LocalProgrammingFeatures) in AttributeList\n");
+                chipTool, " ***** Test Step 33 : TH reads optional attribute(LocalProgrammingFeatures) in AttributeList\n");
             if (ShouldSkip("DRLK.S.A002c")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsOptionalAttributeLocalProgrammingFeaturesInAttributeList_32();
-            break;
-        case 33:
-            ChipLogProgress(chipTool, " ***** Test Step 33 : TH reads EventList from DUT\n");
-            err = TestThReadsEventListFromDut_33();
+            err = TestThReadsOptionalAttributeLocalProgrammingFeaturesInAttributeList_33();
             break;
         case 34:
-            ChipLogProgress(chipTool, " ***** Test Step 34 : TH reads optional event(Door position sensor) in EventList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 34 : TH reads EventList from DUT\n");
+            err = TestThReadsEventListFromDut_34();
+            break;
+        case 35:
+            ChipLogProgress(chipTool, " ***** Test Step 35 : TH reads optional event(Door position sensor) in EventList\n");
             if (ShouldSkip("DRLK.S.F05")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsOptionalEventDoorPositionSensorInEventList_34();
+            err = TestThReadsOptionalEventDoorPositionSensorInEventList_35();
             break;
-        case 35:
-            ChipLogProgress(chipTool, " ***** Test Step 35 : TH reads optional event(User commands and database) in EventList\n");
+        case 36:
+            ChipLogProgress(chipTool, " ***** Test Step 36 : TH reads optional event(User commands and database) in EventList\n");
             if (ShouldSkip("DRLK.S.F08")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsOptionalEventUserCommandsAndDatabaseInEventList_35();
-            break;
-        case 36:
-            ChipLogProgress(chipTool, " ***** Test Step 36 : TH reads AcceptedCommandList from DUT\n");
-            err = TestThReadsAcceptedCommandListFromDut_36();
+            err = TestThReadsOptionalEventUserCommandsAndDatabaseInEventList_36();
             break;
         case 37:
+            ChipLogProgress(chipTool, " ***** Test Step 37 : TH reads AcceptedCommandList from DUT\n");
+            err = TestThReadsAcceptedCommandListFromDut_37();
+            break;
+        case 38:
             ChipLogProgress(
-                chipTool, " ***** Test Step 37 : TH reads Feature dependent commands(DRLK.S.F04) in AcceptedCommandList\n");
+                chipTool, " ***** Test Step 38 : TH reads Feature dependent commands(DRLK.S.F04) in AcceptedCommandList\n");
             if (ShouldSkip("DRLK.S.F04")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFeatureDependentCommandsDRLKSF04InAcceptedCommandList_37();
+            err = TestThReadsFeatureDependentCommandsDRLKSF04InAcceptedCommandList_38();
             break;
-        case 38:
+        case 39:
             ChipLogProgress(
-                chipTool, " ***** Test Step 38 : TH reads Feature dependent commands(DRLK.S.F0a) in AcceptedCommandList\n");
+                chipTool, " ***** Test Step 39 : TH reads Feature dependent commands(DRLK.S.F0a) in AcceptedCommandList\n");
             if (ShouldSkip("DRLK.S.F0a")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFeatureDependentCommandsDRLKSF0aInAcceptedCommandList_38();
+            err = TestThReadsFeatureDependentCommandsDRLKSF0aInAcceptedCommandList_39();
             break;
-        case 39:
+        case 40:
             ChipLogProgress(
-                chipTool, " ***** Test Step 39 : TH reads Feature dependent commands(DRLK.S.F0b) in AcceptedCommandList\n");
+                chipTool, " ***** Test Step 40 : TH reads Feature dependent commands(DRLK.S.F0b) in AcceptedCommandList\n");
             if (ShouldSkip("DRLK.S.F0b")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFeatureDependentCommandsDRLKSF0bInAcceptedCommandList_39();
+            err = TestThReadsFeatureDependentCommandsDRLKSF0bInAcceptedCommandList_40();
             break;
-        case 40:
+        case 41:
             ChipLogProgress(
-                chipTool, " ***** Test Step 40 : TH reads Feature dependent commands(DRLK.S.F08) in AcceptedCommandList\n");
+                chipTool, " ***** Test Step 41 : TH reads Feature dependent commands(DRLK.S.F0c) in AcceptedCommandList\n");
+            if (ShouldSkip("DRLK.S.F0c")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFeatureDependentCommandsDRLKSF0cInAcceptedCommandList_41();
+            break;
+        case 42:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 42 : TH reads Feature dependent commands(DRLK.S.F08) in AcceptedCommandList\n");
             if (ShouldSkip("DRLK.S.F08")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFeatureDependentCommandsDRLKSF08InAcceptedCommandList_40();
+            err = TestThReadsFeatureDependentCommandsDRLKSF08InAcceptedCommandList_42();
             break;
-        case 41:
-            ChipLogProgress(chipTool, " ***** Test Step 41 : TH reads optional commands(DRLK.S.C03.Rsp) in AcceptedCommandList\n");
+        case 43:
+            ChipLogProgress(chipTool, " ***** Test Step 43 : TH reads optional commands(DRLK.S.C03.Rsp) in AcceptedCommandList\n");
             if (ShouldSkip("DRLK.S.C03.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsOptionalCommandsDRLKSC03RspInAcceptedCommandList_41();
+            err = TestThReadsOptionalCommandsDRLKSC03RspInAcceptedCommandList_43();
             break;
-        case 42:
+        case 44:
             ChipLogProgress(
-                chipTool, " ***** Test Step 42 : TH reads Feature dependent command(DRLK.S.F04) in GeneratedCommandList\n");
+                chipTool, " ***** Test Step 44 : TH reads Feature dependent command(DRLK.S.F04) in GeneratedCommandList\n");
             if (ShouldSkip("DRLK.S.F04")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFeatureDependentCommandDRLKSF04InGeneratedCommandList_42();
+            err = TestThReadsFeatureDependentCommandDRLKSF04InGeneratedCommandList_44();
             break;
-        case 43:
+        case 45:
             ChipLogProgress(
-                chipTool, " ***** Test Step 43 : TH reads Feature dependent command(DRLK.S.F0a) in GeneratedCommandList\n");
+                chipTool, " ***** Test Step 45 : TH reads Feature dependent command(DRLK.S.F0a) in GeneratedCommandList\n");
             if (ShouldSkip("DRLK.S.F0a")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFeatureDependentCommandDRLKSF0aInGeneratedCommandList_43();
+            err = TestThReadsFeatureDependentCommandDRLKSF0aInGeneratedCommandList_45();
             break;
-        case 44:
+        case 46:
             ChipLogProgress(
-                chipTool, " ***** Test Step 44 : TH reads Feature dependent command(DRLK.S.F0b) in GeneratedCommandList\n");
+                chipTool, " ***** Test Step 46 : TH reads Feature dependent command(DRLK.S.F0b) in GeneratedCommandList\n");
             if (ShouldSkip("DRLK.S.F0b")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFeatureDependentCommandDRLKSF0bInGeneratedCommandList_44();
+            err = TestThReadsFeatureDependentCommandDRLKSF0bInGeneratedCommandList_46();
             break;
-        case 45:
+        case 47:
             ChipLogProgress(
-                chipTool, " ***** Test Step 45 : TH reads Feature dependent command(DRLK.S.F08) in GeneratedCommandList\n");
+                chipTool, " ***** Test Step 47 : TH reads Feature dependent command(DRLK.S.F08) in GeneratedCommandList\n");
             if (ShouldSkip("DRLK.S.F08")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFeatureDependentCommandDRLKSF08InGeneratedCommandList_45();
+            err = TestThReadsFeatureDependentCommandDRLKSF08InGeneratedCommandList_47();
             break;
         }
 
@@ -133846,6 +133863,12 @@ public:
         case 45:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 46:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 47:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -133859,7 +133882,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 46;
+    const uint16_t mTestCount = 48;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -133888,7 +133911,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 6U));
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 7U));
             }
 
             VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
@@ -134112,7 +134135,26 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsAttributeListFromDut_13()
+    CHIP_ERROR TestGivenDRLKSF0cUBOLTEnsureFeaturemapHasTheCorrectBitSet_13()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given DRLK.S.F0c(UBOLT) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsAttributeListFromDut_14()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -134143,7 +134185,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFeatureDependentDRLKSF05AttributesInAttributeList_14()
+    CHIP_ERROR TestThReadsFeatureDependentDRLKSF05AttributesInAttributeList_15()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -134164,7 +134206,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFeatureDependentDRLKSF08AttributesInAttributeList_15()
+    CHIP_ERROR TestThReadsFeatureDependentDRLKSF08AttributesInAttributeList_16()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -134187,7 +134229,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFeatureDependentDRLKSF00AttributesInAttributeList_16()
+    CHIP_ERROR TestThReadsFeatureDependentDRLKSF00AttributesInAttributeList_17()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -134210,7 +134252,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFeatureDependentDRLKSF01AttributesInAttributeList_17()
+    CHIP_ERROR TestThReadsFeatureDependentDRLKSF01AttributesInAttributeList_18()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -134233,7 +134275,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFeatureDependentDRLKSF04AttributeInAttributeList_18()
+    CHIP_ERROR TestThReadsFeatureDependentDRLKSF04AttributeInAttributeList_19()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -134254,7 +134296,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFeatureDependentDRLKSF0aAttributeInAttributeList_19()
+    CHIP_ERROR TestThReadsFeatureDependentDRLKSF0aAttributeInAttributeList_20()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -134275,7 +134317,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFeatureDependentDRLKSF0bAttributeInAttributeList_20()
+    CHIP_ERROR TestThReadsFeatureDependentDRLKSF0bAttributeInAttributeList_21()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -134296,7 +134338,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFeatureDependentDRLKSF00OrDrlksf01AttributesInAttributeList_21()
+    CHIP_ERROR TestThReadsFeatureDependentDRLKSF00OrDrlksf01AttributesInAttributeList_22()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -134318,7 +134360,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFeatureDependentDRLKSF07OrDrlksf00AttributeInAttributeList_22()
+    CHIP_ERROR TestThReadsFeatureDependentDRLKSF07OrDrlksf00AttributeInAttributeList_23()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -134339,7 +134381,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionalAttributeLanguageInAttributeList_23()
+    CHIP_ERROR TestThReadsOptionalAttributeLanguageInAttributeList_24()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -134360,7 +134402,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionalAttributeLEDSettingsInAttributeList_24()
+    CHIP_ERROR TestThReadsOptionalAttributeLEDSettingsInAttributeList_25()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -134381,7 +134423,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionalAttributeAutoRelockTimeInAttributeList_25()
+    CHIP_ERROR TestThReadsOptionalAttributeAutoRelockTimeInAttributeList_26()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -134402,7 +134444,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionalAttributeSoundVolumeInAttributeList_26()
+    CHIP_ERROR TestThReadsOptionalAttributeSoundVolumeInAttributeList_27()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -134423,7 +134465,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionalAttributeDefaultConfigurationRegisterInAttributeList_27()
+    CHIP_ERROR TestThReadsOptionalAttributeDefaultConfigurationRegisterInAttributeList_28()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -134444,7 +134486,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionalAttributeEnableLocalProgrammingInAttributeList_28()
+    CHIP_ERROR TestThReadsOptionalAttributeEnableLocalProgrammingInAttributeList_29()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -134465,7 +134507,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionalAttributeEnableOneTouchLockingInAttributeList_29()
+    CHIP_ERROR TestThReadsOptionalAttributeEnableOneTouchLockingInAttributeList_30()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -134486,7 +134528,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionalAttributeEnableInsideStatusLEDInAttributeList_30()
+    CHIP_ERROR TestThReadsOptionalAttributeEnableInsideStatusLEDInAttributeList_31()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -134507,7 +134549,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionalAttributeEnablePrivacyModeButtonInAttributeList_31()
+    CHIP_ERROR TestThReadsOptionalAttributeEnablePrivacyModeButtonInAttributeList_32()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -134528,7 +134570,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionalAttributeLocalProgrammingFeaturesInAttributeList_32()
+    CHIP_ERROR TestThReadsOptionalAttributeLocalProgrammingFeaturesInAttributeList_33()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -134549,7 +134591,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsEventListFromDut_33()
+    CHIP_ERROR TestThReadsEventListFromDut_34()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -134572,7 +134614,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionalEventDoorPositionSensorInEventList_34()
+    CHIP_ERROR TestThReadsOptionalEventDoorPositionSensorInEventList_35()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -134593,7 +134635,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionalEventUserCommandsAndDatabaseInEventList_35()
+    CHIP_ERROR TestThReadsOptionalEventUserCommandsAndDatabaseInEventList_36()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -134614,7 +134656,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsAcceptedCommandListFromDut_36()
+    CHIP_ERROR TestThReadsAcceptedCommandListFromDut_37()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -134636,7 +134678,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFeatureDependentCommandsDRLKSF04InAcceptedCommandList_37()
+    CHIP_ERROR TestThReadsFeatureDependentCommandsDRLKSF04InAcceptedCommandList_38()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -134659,7 +134701,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFeatureDependentCommandsDRLKSF0aInAcceptedCommandList_38()
+    CHIP_ERROR TestThReadsFeatureDependentCommandsDRLKSF0aInAcceptedCommandList_39()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -134682,7 +134724,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFeatureDependentCommandsDRLKSF0bInAcceptedCommandList_39()
+    CHIP_ERROR TestThReadsFeatureDependentCommandsDRLKSF0bInAcceptedCommandList_40()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -134705,7 +134747,28 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFeatureDependentCommandsDRLKSF08InAcceptedCommandList_40()
+    CHIP_ERROR TestThReadsFeatureDependentCommandsDRLKSF0cInAcceptedCommandList_41()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads Feature dependent commands(DRLK.S.F0c) in AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 39UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFeatureDependentCommandsDRLKSF08InAcceptedCommandList_42()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -134731,7 +134794,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionalCommandsDRLKSC03RspInAcceptedCommandList_41()
+    CHIP_ERROR TestThReadsOptionalCommandsDRLKSC03RspInAcceptedCommandList_43()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -134752,7 +134815,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFeatureDependentCommandDRLKSF04InGeneratedCommandList_42()
+    CHIP_ERROR TestThReadsFeatureDependentCommandDRLKSF04InGeneratedCommandList_44()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -134773,7 +134836,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFeatureDependentCommandDRLKSF0aInGeneratedCommandList_43()
+    CHIP_ERROR TestThReadsFeatureDependentCommandDRLKSF0aInGeneratedCommandList_45()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -134794,7 +134857,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFeatureDependentCommandDRLKSF0bInGeneratedCommandList_44()
+    CHIP_ERROR TestThReadsFeatureDependentCommandDRLKSF0bInGeneratedCommandList_46()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -134815,7 +134878,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFeatureDependentCommandDRLKSF08InGeneratedCommandList_45()
+    CHIP_ERROR TestThReadsFeatureDependentCommandDRLKSF08InGeneratedCommandList_47()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
