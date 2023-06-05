@@ -76742,7 +76742,7 @@ class TestModeSelectClusterSuite : public TestCommand
 {
 public:
     TestModeSelectClusterSuite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("TestModeSelectCluster", 32, credsIssuerConfig)
+        TestCommand("TestModeSelectCluster", 31, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -76793,15 +76793,6 @@ private:
         case 2:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<uint16_t> value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValueNonNull("standardNamespace", value));
-                VerifyOrReturn(CheckValue("standardNamespace.Value()", value.Value(), 0U));
-            }
-            break;
-        case 3:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
                 chip::app::DataModel::DecodableList<chip::app::Clusters::ModeSelect::Structs::ModeOptionStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
@@ -76812,36 +76803,36 @@ private:
                         CheckValueAsString("supportedModes[0].label", iter_0.GetValue().label, chip::CharSpan("Black", 5)));
                     VerifyOrReturn(CheckValue("supportedModes[0].mode", iter_0.GetValue().mode, 0U));
                     {
-                        auto iter_2 = iter_0.GetValue().semanticTags.begin();
-                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().semanticTags)>(
-                            "supportedModes[0].semanticTags", iter_2, 0));
-                        VerifyOrReturn(CheckValue("supportedModes[0].semanticTags[0].value", iter_2.GetValue().value, 0U));
-                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_0.GetValue().semanticTags)>(
-                            "supportedModes[0].semanticTags", iter_2, 1));
+                        auto iter_2 = iter_0.GetValue().modeTags.begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().modeTags)>("supportedModes[0].modeTags",
+                                                                                                      iter_2, 0));
+                        VerifyOrReturn(CheckValue("supportedModes[0].modeTags[0].value", iter_2.GetValue().value, 0U));
+                        VerifyOrReturn(
+                            CheckNoMoreListItems<decltype(iter_0.GetValue().modeTags)>("supportedModes[0].modeTags", iter_2, 1));
                     }
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("supportedModes", iter_0, 1));
                     VerifyOrReturn(
                         CheckValueAsString("supportedModes[1].label", iter_0.GetValue().label, chip::CharSpan("Cappuccino", 10)));
                     VerifyOrReturn(CheckValue("supportedModes[1].mode", iter_0.GetValue().mode, 4U));
                     {
-                        auto iter_2 = iter_0.GetValue().semanticTags.begin();
-                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().semanticTags)>(
-                            "supportedModes[1].semanticTags", iter_2, 0));
-                        VerifyOrReturn(CheckValue("supportedModes[1].semanticTags[0].value", iter_2.GetValue().value, 0U));
-                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_0.GetValue().semanticTags)>(
-                            "supportedModes[1].semanticTags", iter_2, 1));
+                        auto iter_2 = iter_0.GetValue().modeTags.begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().modeTags)>("supportedModes[1].modeTags",
+                                                                                                      iter_2, 0));
+                        VerifyOrReturn(CheckValue("supportedModes[1].modeTags[0].value", iter_2.GetValue().value, 0U));
+                        VerifyOrReturn(
+                            CheckNoMoreListItems<decltype(iter_0.GetValue().modeTags)>("supportedModes[1].modeTags", iter_2, 1));
                     }
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("supportedModes", iter_0, 2));
                     VerifyOrReturn(
                         CheckValueAsString("supportedModes[2].label", iter_0.GetValue().label, chip::CharSpan("Espresso", 8)));
                     VerifyOrReturn(CheckValue("supportedModes[2].mode", iter_0.GetValue().mode, 7U));
                     {
-                        auto iter_2 = iter_0.GetValue().semanticTags.begin();
-                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().semanticTags)>(
-                            "supportedModes[2].semanticTags", iter_2, 0));
-                        VerifyOrReturn(CheckValue("supportedModes[2].semanticTags[0].value", iter_2.GetValue().value, 0U));
-                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_0.GetValue().semanticTags)>(
-                            "supportedModes[2].semanticTags", iter_2, 1));
+                        auto iter_2 = iter_0.GetValue().modeTags.begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().modeTags)>("supportedModes[2].modeTags",
+                                                                                                      iter_2, 0));
+                        VerifyOrReturn(CheckValue("supportedModes[2].modeTags[0].value", iter_2.GetValue().value, 0U));
+                        VerifyOrReturn(
+                            CheckNoMoreListItems<decltype(iter_0.GetValue().modeTags)>("supportedModes[2].modeTags", iter_2, 1));
                     }
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("supportedModes", iter_0, 3));
                 }
@@ -76850,7 +76841,7 @@ private:
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 3));
             }
             break;
-        case 4:
+        case 3:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint8_t value;
@@ -76858,7 +76849,7 @@ private:
                 VerifyOrReturn(CheckValue("currentMode", value, 0U));
             }
             break;
-        case 5:
+        case 4:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
@@ -76867,7 +76858,7 @@ private:
                 VerifyOrReturn(CheckValue("startUpMode.Value()", value.Value(), 0U));
             }
             break;
-        case 6:
+        case 5:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
@@ -76875,10 +76866,10 @@ private:
                 VerifyOrReturn(CheckValueNull("onMode", value));
             }
             break;
-        case 7:
+        case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 8:
+        case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint8_t value;
@@ -76887,16 +76878,16 @@ private:
                 currentModeBeforeToggle = value;
             }
             break;
-        case 9:
+        case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint8_t value;
@@ -76904,13 +76895,13 @@ private:
                 VerifyOrReturn(CheckValue("currentMode", value, currentModeBeforeToggle));
             }
             break;
-        case 13:
+        case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
-        case 14:
+        case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 15:
+        case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
@@ -76920,13 +76911,13 @@ private:
                 OnModeValue = value;
             }
             break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint8_t value;
@@ -76934,13 +76925,13 @@ private:
                 VerifyOrReturn(CheckValue("currentMode", value, OnModeValue));
             }
             break;
-        case 19:
+        case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
-        case 20:
+        case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 21:
+        case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
@@ -76948,6 +76939,9 @@ private:
                 VerifyOrReturn(CheckValueNonNull("startUpMode", value));
                 VerifyOrReturn(CheckValue("startUpMode.Value()", value.Value(), 7U));
             }
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -76957,6 +76951,7 @@ private:
             break;
         case 24:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         case 25:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -76964,28 +76959,24 @@ private:
             break;
         case 26:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 27:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("currentMode", value, 4U));
             }
             break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         case 28:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         case 29:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             shouldContinue = true;
             break;
         case 30:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 31:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint8_t value;
@@ -77021,32 +77012,27 @@ private:
                                  chip::NullOptional);
         }
         case 2: {
-            LogStep(2, "Read StandardNamespace");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ModeSelect::Id, ModeSelect::Attributes::StandardNamespace::Id,
-                                 true, chip::NullOptional);
-        }
-        case 3: {
-            LogStep(3, "Read SupportedModes");
+            LogStep(2, "Read SupportedModes");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ModeSelect::Id, ModeSelect::Attributes::SupportedModes::Id, true,
                                  chip::NullOptional);
         }
-        case 4: {
-            LogStep(4, "Read CurrentMode");
+        case 3: {
+            LogStep(3, "Read CurrentMode");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ModeSelect::Id, ModeSelect::Attributes::CurrentMode::Id, true,
                                  chip::NullOptional);
         }
-        case 5: {
-            LogStep(5, "Read StartUpMode");
+        case 4: {
+            LogStep(4, "Read StartUpMode");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ModeSelect::Id, ModeSelect::Attributes::StartUpMode::Id, true,
                                  chip::NullOptional);
         }
-        case 6: {
-            LogStep(6, "Read OnMode");
+        case 5: {
+            LogStep(5, "Read OnMode");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ModeSelect::Id, ModeSelect::Attributes::OnMode::Id, true,
                                  chip::NullOptional);
         }
-        case 7: {
-            LogStep(7, "Change to Supported Mode");
+        case 6: {
+            LogStep(6, "Change to Supported Mode");
             ListFreer listFreer;
             chip::app::Clusters::ModeSelect::Commands::ChangeToMode::Type value;
             value.newMode = 4U;
@@ -77055,13 +77041,13 @@ private:
 
             );
         }
-        case 8: {
-            LogStep(8, "Verify Current Mode Change");
+        case 7: {
+            LogStep(7, "Verify Current Mode Change");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ModeSelect::Id, ModeSelect::Attributes::CurrentMode::Id, true,
                                  chip::NullOptional);
         }
-        case 9: {
-            LogStep(9, "Change to Unsupported Mode");
+        case 8: {
+            LogStep(8, "Change to Unsupported Mode");
             ListFreer listFreer;
             chip::app::Clusters::ModeSelect::Commands::ChangeToMode::Type value;
             value.newMode = 2U;
@@ -77070,29 +77056,29 @@ private:
 
             );
         }
-        case 10: {
-            LogStep(10, "Toggle OnOff");
+        case 9: {
+            LogStep(9, "Toggle OnOff");
             ListFreer listFreer;
             chip::app::Clusters::OnOff::Commands::Off::Type value;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), OnOff::Id, OnOff::Commands::Off::Id, value, chip::NullOptional
+
+            );
+        }
+        case 10: {
+            LogStep(10, "Toggle OnOff");
+            ListFreer listFreer;
+            chip::app::Clusters::OnOff::Commands::On::Type value;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), OnOff::Id, OnOff::Commands::On::Id, value, chip::NullOptional
 
             );
         }
         case 11: {
-            LogStep(11, "Toggle OnOff");
-            ListFreer listFreer;
-            chip::app::Clusters::OnOff::Commands::On::Type value;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), OnOff::Id, OnOff::Commands::On::Id, value, chip::NullOptional
-
-            );
-        }
-        case 12: {
-            LogStep(12, "Verify Current Mode does not change when OnMode is null");
+            LogStep(11, "Verify Current Mode does not change when OnMode is null");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ModeSelect::Id, ModeSelect::Attributes::CurrentMode::Id, true,
                                  chip::NullOptional);
         }
-        case 13: {
-            LogStep(13, "Change to Unsupported OnMode");
+        case 12: {
+            LogStep(12, "Change to Unsupported OnMode");
             ListFreer listFreer;
             chip::app::DataModel::Nullable<uint8_t> value;
             value.SetNonNull();
@@ -77100,8 +77086,8 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), ModeSelect::Id, ModeSelect::Attributes::OnMode::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 14: {
-            LogStep(14, "Change OnMode");
+        case 13: {
+            LogStep(13, "Change OnMode");
             ListFreer listFreer;
             chip::app::DataModel::Nullable<uint8_t> value;
             value.SetNonNull();
@@ -77109,34 +77095,34 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), ModeSelect::Id, ModeSelect::Attributes::OnMode::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 15: {
-            LogStep(15, "Verify OnMode");
+        case 14: {
+            LogStep(14, "Verify OnMode");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ModeSelect::Id, ModeSelect::Attributes::OnMode::Id, true,
                                  chip::NullOptional);
         }
-        case 16: {
-            LogStep(16, "Toggle OnOff");
+        case 15: {
+            LogStep(15, "Toggle OnOff");
             ListFreer listFreer;
             chip::app::Clusters::OnOff::Commands::Off::Type value;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), OnOff::Id, OnOff::Commands::Off::Id, value, chip::NullOptional
 
             );
         }
-        case 17: {
-            LogStep(17, "Toggle OnOff");
+        case 16: {
+            LogStep(16, "Toggle OnOff");
             ListFreer listFreer;
             chip::app::Clusters::OnOff::Commands::On::Type value;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), OnOff::Id, OnOff::Commands::On::Id, value, chip::NullOptional
 
             );
         }
-        case 18: {
-            LogStep(18, "Verify Current Mode Changes if OnMode is not null");
+        case 17: {
+            LogStep(17, "Verify Current Mode Changes if OnMode is not null");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ModeSelect::Id, ModeSelect::Attributes::CurrentMode::Id, true,
                                  chip::NullOptional);
         }
-        case 19: {
-            LogStep(19, "Change to Unsupported StartUp Mode");
+        case 18: {
+            LogStep(18, "Change to Unsupported StartUp Mode");
             ListFreer listFreer;
             chip::app::DataModel::Nullable<uint8_t> value;
             value.SetNonNull();
@@ -77144,8 +77130,8 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), ModeSelect::Id, ModeSelect::Attributes::StartUpMode::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 20: {
-            LogStep(20, "Change to Supported StartUp Mode");
+        case 19: {
+            LogStep(19, "Change to Supported StartUp Mode");
             ListFreer listFreer;
             chip::app::DataModel::Nullable<uint8_t> value;
             value.SetNonNull();
@@ -77153,13 +77139,13 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), ModeSelect::Id, ModeSelect::Attributes::StartUpMode::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 21: {
-            LogStep(21, "Verify StartUp Mode Change");
+        case 20: {
+            LogStep(20, "Verify StartUp Mode Change");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ModeSelect::Id, ModeSelect::Attributes::StartUpMode::Id, true,
                                  chip::NullOptional);
         }
-        case 22: {
-            LogStep(22, "Change CurrentMode to another value");
+        case 21: {
+            LogStep(21, "Change CurrentMode to another value");
             ListFreer listFreer;
             chip::app::Clusters::ModeSelect::Commands::ChangeToMode::Type value;
             value.newMode = 0U;
@@ -77168,8 +77154,8 @@ private:
 
             );
         }
-        case 23: {
-            LogStep(23, "Change On Mode");
+        case 22: {
+            LogStep(22, "Change On Mode");
             ListFreer listFreer;
             chip::app::DataModel::Nullable<uint8_t> value;
             value.SetNonNull();
@@ -77177,8 +77163,8 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), ModeSelect::Id, ModeSelect::Attributes::OnMode::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 24: {
-            LogStep(24, "Set StartUpOnOff");
+        case 23: {
+            LogStep(23, "Set StartUpOnOff");
             ListFreer listFreer;
             chip::app::DataModel::Nullable<chip::app::Clusters::OnOff::OnOffStartUpOnOff> value;
             value.SetNonNull();
@@ -77186,47 +77172,47 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), OnOff::Id, OnOff::Attributes::StartUpOnOff::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 25: {
-            LogStep(25, "Reboot target device");
+        case 24: {
+            LogStep(24, "Reboot target device");
             ListFreer listFreer;
             chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
             return Reboot(kIdentityAlpha, value);
         }
-        case 26: {
-            LogStep(26, "Wait for the commissioned device to be retrieved");
+        case 25: {
+            LogStep(25, "Wait for the commissioned device to be retrieved");
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
             value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
             return WaitForCommissionee(kIdentityAlpha, value);
         }
-        case 27: {
-            LogStep(27, "Verify Current Mode Change based on OnMode, as it overwrites StartUpMode");
+        case 26: {
+            LogStep(26, "Verify Current Mode Change based on OnMode, as it overwrites StartUpMode");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ModeSelect::Id, ModeSelect::Attributes::CurrentMode::Id, true,
                                  chip::NullOptional);
         }
-        case 28: {
-            LogStep(28, "Change On Mode to Null");
+        case 27: {
+            LogStep(27, "Change On Mode to Null");
             ListFreer listFreer;
             chip::app::DataModel::Nullable<uint8_t> value;
             value.SetNull();
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), ModeSelect::Id, ModeSelect::Attributes::OnMode::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 29: {
-            LogStep(29, "Reboot target device");
+        case 28: {
+            LogStep(28, "Reboot target device");
             ListFreer listFreer;
             chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
             return Reboot(kIdentityAlpha, value);
         }
-        case 30: {
-            LogStep(30, "Wait for the commissioned device to be retrieved");
+        case 29: {
+            LogStep(29, "Wait for the commissioned device to be retrieved");
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
             value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
             return WaitForCommissionee(kIdentityAlpha, value);
         }
-        case 31: {
-            LogStep(31, "Verify Current Mode Change based on new StartUp Mode");
+        case 30: {
+            LogStep(30, "Verify Current Mode Change based on new StartUp Mode");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ModeSelect::Id, ModeSelect::Attributes::CurrentMode::Id, true,
                                  chip::NullOptional);
         }
