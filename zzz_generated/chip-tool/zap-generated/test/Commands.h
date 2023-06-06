@@ -75,6 +75,7 @@ public:
         printf("Test_TC_CC_8_1\n");
         printf("TestColorControl_9_1\n");
         printf("TestColorControl_9_2\n");
+        printf("TestIcdManagementCluster\n");
         printf("Test_TC_OPCREDS_1_2\n");
         printf("Test_TC_BINFO_1_1\n");
         printf("Test_TC_BINFO_2_1\n");
@@ -22975,6 +22976,530 @@ private:
         case 30: {
             LogStep(30, "Check on/off attribute value is false after off command");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OnOff::Id, OnOff::Attributes::OnOff::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class TestIcdManagementClusterSuite : public TestCommand
+{
+public:
+    TestIcdManagementClusterSuite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("TestIcdManagementCluster", 26, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~TestIcdManagementClusterSuite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("idleModeInterval", value, 500UL));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("activeModeInterval", value, 300UL));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("activeModeThreshold", value, 300U));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("ICDCounter", value, 0UL));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("clientsSupportedPerFabric", value, 2U));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::IcdManagement::Structs::MonitoringRegistrationStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("registeredClients", iter_0, 0));
+                }
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::IcdManagement::Commands::RegisterClientResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("ICDCounter", value.ICDCounter, 0UL));
+            }
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::IcdManagement::Commands::RegisterClientResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("ICDCounter", value.ICDCounter, 0UL));
+            }
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_RESOURCE_EXHAUSTED));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::IcdManagement::Structs::MonitoringRegistrationStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("registeredClients", iter_0, 0));
+                    VerifyOrReturn(CheckValue("registeredClients[0].checkInNodeID", iter_0.GetValue().checkInNodeID, 101ULL));
+                    VerifyOrReturn(
+                        CheckValue("registeredClients[0].monitoredSubject", iter_0.GetValue().monitoredSubject, 1001ULL));
+                    VerifyOrReturn(CheckValueAsString(
+                        "registeredClients[0].key", iter_0.GetValue().key,
+                        chip::ByteSpan(
+                            chip::Uint8::from_const_char("\020\021\022\023\024\025\026\027\030\031\032\033\034\035\036\037"), 16)));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("registeredClients", iter_0, 1));
+                    VerifyOrReturn(CheckValue("registeredClients[1].checkInNodeID", iter_0.GetValue().checkInNodeID, 201ULL));
+                    VerifyOrReturn(
+                        CheckValue("registeredClients[1].monitoredSubject", iter_0.GetValue().monitoredSubject, 2001ULL));
+                    VerifyOrReturn(CheckValueAsString("registeredClients[1].key", iter_0.GetValue().key,
+                                                      chip::ByteSpan(chip::Uint8::from_const_char(" !\042#$%&'()*+,-./"), 16)));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("registeredClients", iter_0, 2));
+                }
+            }
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::IcdManagement::Commands::RegisterClientResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("ICDCounter", value.ICDCounter, 0UL));
+            }
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::IcdManagement::Structs::MonitoringRegistrationStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("registeredClients", iter_0, 0));
+                    VerifyOrReturn(CheckValue("registeredClients[0].checkInNodeID", iter_0.GetValue().checkInNodeID, 101ULL));
+                    VerifyOrReturn(
+                        CheckValue("registeredClients[0].monitoredSubject", iter_0.GetValue().monitoredSubject, 1002ULL));
+                    VerifyOrReturn(CheckValueAsString(
+                        "registeredClients[0].key", iter_0.GetValue().key,
+                        chip::ByteSpan(chip::Uint8::from_const_char("\001\021!1AQaq\201\221\241\261\301\321\341\361"), 16)));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("registeredClients", iter_0, 1));
+                    VerifyOrReturn(CheckValue("registeredClients[1].checkInNodeID", iter_0.GetValue().checkInNodeID, 201ULL));
+                    VerifyOrReturn(
+                        CheckValue("registeredClients[1].monitoredSubject", iter_0.GetValue().monitoredSubject, 2001ULL));
+                    VerifyOrReturn(CheckValueAsString("registeredClients[1].key", iter_0.GetValue().key,
+                                                      chip::ByteSpan(chip::Uint8::from_const_char(" !\042#$%&'()*+,-./"), 16)));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("registeredClients", iter_0, 2));
+                }
+            }
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::IcdManagement::Commands::RegisterClientResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("ICDCounter", value.ICDCounter, 0UL));
+            }
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::IcdManagement::Structs::MonitoringRegistrationStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("registeredClients", iter_0, 0));
+                    VerifyOrReturn(CheckValue("registeredClients[0].checkInNodeID", iter_0.GetValue().checkInNodeID, 101ULL));
+                    VerifyOrReturn(
+                        CheckValue("registeredClients[0].monitoredSubject", iter_0.GetValue().monitoredSubject, 1002ULL));
+                    VerifyOrReturn(CheckValueAsString(
+                        "registeredClients[0].key", iter_0.GetValue().key,
+                        chip::ByteSpan(chip::Uint8::from_const_char("\001\021!1AQaq\201\221\241\261\301\321\341\361"), 16)));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("registeredClients", iter_0, 1));
+                    VerifyOrReturn(CheckValue("registeredClients[1].checkInNodeID", iter_0.GetValue().checkInNodeID, 201ULL));
+                    VerifyOrReturn(
+                        CheckValue("registeredClients[1].monitoredSubject", iter_0.GetValue().monitoredSubject, 2002ULL));
+                    VerifyOrReturn(CheckValueAsString(
+                        "registeredClients[1].key", iter_0.GetValue().key,
+                        chip::ByteSpan(chip::Uint8::from_const_char("\002\022\0422BRbr\202\222\242\262\302\322\342/"), 16)));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("registeredClients", iter_0, 2));
+                }
+            }
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::IcdManagement::Structs::MonitoringRegistrationStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("registeredClients", iter_0, 0));
+                    VerifyOrReturn(CheckValue("registeredClients[0].checkInNodeID", iter_0.GetValue().checkInNodeID, 201ULL));
+                    VerifyOrReturn(
+                        CheckValue("registeredClients[0].monitoredSubject", iter_0.GetValue().monitoredSubject, 2002ULL));
+                    VerifyOrReturn(CheckValueAsString(
+                        "registeredClients[0].key", iter_0.GetValue().key,
+                        chip::ByteSpan(chip::Uint8::from_const_char("\002\022\0422BRbr\202\222\242\262\302\322\342/"), 16)));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("registeredClients", iter_0, 1));
+                }
+            }
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::IcdManagement::Structs::MonitoringRegistrationStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("registeredClients", iter_0, 0));
+                }
+            }
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Read IdleModeInterval");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), IcdManagement::Id, IcdManagement::Attributes::IdleModeInterval::Id,
+                                 true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Read ActiveModeInterval");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), IcdManagement::Id,
+                                 IcdManagement::Attributes::ActiveModeInterval::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "Read ActiveModeThreshold");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), IcdManagement::Id,
+                                 IcdManagement::Attributes::ActiveModeThreshold::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "Read ICDCounter");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), IcdManagement::Id, IcdManagement::Attributes::ICDCounter::Id, true,
+                                 chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "Read ClientsSupportedPerFabric");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), IcdManagement::Id,
+                                 IcdManagement::Attributes::ClientsSupportedPerFabric::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "Unregister 1.0");
+            ListFreer listFreer;
+            chip::app::Clusters::IcdManagement::Commands::UnregisterClient::Type value;
+            value.checkInNodeID = 101ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), IcdManagement::Id, IcdManagement::Commands::UnregisterClient::Id,
+                               value, chip::NullOptional
+
+            );
+        }
+        case 7: {
+            LogStep(7, "Unregister 2.0");
+            ListFreer listFreer;
+            chip::app::Clusters::IcdManagement::Commands::UnregisterClient::Type value;
+            value.checkInNodeID = 102ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), IcdManagement::Id, IcdManagement::Commands::UnregisterClient::Id,
+                               value, chip::NullOptional
+
+            );
+        }
+        case 8: {
+            LogStep(8, "Unregister 3.0");
+            ListFreer listFreer;
+            chip::app::Clusters::IcdManagement::Commands::UnregisterClient::Type value;
+            value.checkInNodeID = 102ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), IcdManagement::Id, IcdManagement::Commands::UnregisterClient::Id,
+                               value, chip::NullOptional
+
+            );
+        }
+        case 9: {
+            LogStep(9, "Read RegisteredClients");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), IcdManagement::Id,
+                                 IcdManagement::Attributes::RegisteredClients::Id, true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "Register 1.0 (key too short)");
+            ListFreer listFreer;
+            chip::app::Clusters::IcdManagement::Commands::RegisterClient::Type value;
+            value.checkInNodeID    = 101ULL;
+            value.monitoredSubject = 1001ULL;
+            value.key =
+                chip::ByteSpan(chip::Uint8::from_const_char(
+                                   "\020\021\022\023\024\025\026\027\030\031\032\033\034\035\036garbage: not in length on purpose"),
+                               15);
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), IcdManagement::Id, IcdManagement::Commands::RegisterClient::Id,
+                               value, chip::NullOptional
+
+            );
+        }
+        case 11: {
+            LogStep(11, "Register 1.0 (key too long)");
+            ListFreer listFreer;
+            chip::app::Clusters::IcdManagement::Commands::RegisterClient::Type value;
+            value.checkInNodeID    = 101ULL;
+            value.monitoredSubject = 1001ULL;
+            value.key              = chip::ByteSpan(
+                chip::Uint8::from_const_char(
+                    "\020\021\022\023\024\025\026\027\030\031\032\033\034\035\036\037\377garbage: not in length on purpose"),
+                17);
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), IcdManagement::Id, IcdManagement::Commands::RegisterClient::Id,
+                               value, chip::NullOptional
+
+            );
+        }
+        case 12: {
+            LogStep(12, "Register 1.1");
+            ListFreer listFreer;
+            chip::app::Clusters::IcdManagement::Commands::RegisterClient::Type value;
+            value.checkInNodeID    = 101ULL;
+            value.monitoredSubject = 1001ULL;
+            value.key              = chip::ByteSpan(
+                chip::Uint8::from_const_char(
+                    "\020\021\022\023\024\025\026\027\030\031\032\033\034\035\036\037garbage: not in length on purpose"),
+                16);
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), IcdManagement::Id, IcdManagement::Commands::RegisterClient::Id,
+                               value, chip::NullOptional
+
+            );
+        }
+        case 13: {
+            LogStep(13, "Register 2.1");
+            ListFreer listFreer;
+            chip::app::Clusters::IcdManagement::Commands::RegisterClient::Type value;
+            value.checkInNodeID    = 201ULL;
+            value.monitoredSubject = 2001ULL;
+            value.key = chip::ByteSpan(chip::Uint8::from_const_char(" !\042#$%&'()*+,-./garbage: not in length on purpose"), 16);
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), IcdManagement::Id, IcdManagement::Commands::RegisterClient::Id,
+                               value, chip::NullOptional
+
+            );
+        }
+        case 14: {
+            LogStep(14, "Register 3.1");
+            ListFreer listFreer;
+            chip::app::Clusters::IcdManagement::Commands::RegisterClient::Type value;
+            value.checkInNodeID    = 301ULL;
+            value.monitoredSubject = 3001ULL;
+            value.key = chip::ByteSpan(chip::Uint8::from_const_char("0123456789:;<=>?garbage: not in length on purpose"), 16);
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), IcdManagement::Id, IcdManagement::Commands::RegisterClient::Id,
+                               value, chip::NullOptional
+
+            );
+        }
+        case 15: {
+            LogStep(15, "Read RegisteredClients");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), IcdManagement::Id,
+                                 IcdManagement::Attributes::RegisteredClients::Id, true, chip::NullOptional);
+        }
+        case 16: {
+            LogStep(16, "Register 1.1");
+            ListFreer listFreer;
+            chip::app::Clusters::IcdManagement::Commands::RegisterClient::Type value;
+            value.checkInNodeID    = 101ULL;
+            value.monitoredSubject = 1002ULL;
+            value.key              = chip::ByteSpan(
+                chip::Uint8::from_const_char("\001\021!1AQaq\201\221\241\261\301\321\341\361garbage: not in length on purpose"),
+                16);
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), IcdManagement::Id, IcdManagement::Commands::RegisterClient::Id,
+                               value, chip::NullOptional
+
+            );
+        }
+        case 17: {
+            LogStep(17, "Read RegisteredClients");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), IcdManagement::Id,
+                                 IcdManagement::Attributes::RegisteredClients::Id, true, chip::NullOptional);
+        }
+        case 18: {
+            LogStep(18, "Register 2.2 (wrong verification key)");
+            ListFreer listFreer;
+            chip::app::Clusters::IcdManagement::Commands::RegisterClient::Type value;
+            value.checkInNodeID    = 201ULL;
+            value.monitoredSubject = 2002ULL;
+            value.key              = chip::ByteSpan(
+                chip::Uint8::from_const_char("\002\022\0422BRbr\202\222\242\262\302\322\342/garbage: not in length on purpose"),
+                16);
+            value.verificationKey.Emplace();
+            value.verificationKey.Value() =
+                chip::ByteSpan(chip::Uint8::from_const_char(" !\042#$%&'()*+,-//garbage: not in length on purpose"), 16);
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), IcdManagement::Id, IcdManagement::Commands::RegisterClient::Id,
+                               value, chip::NullOptional
+
+            );
+        }
+        case 19: {
+            LogStep(19, "Read RegisteredClients");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), IcdManagement::Id,
+                                 IcdManagement::Attributes::RegisteredClients::Id, true, chip::NullOptional);
+        }
+        case 20: {
+            LogStep(20, "Unregister 1.1 (wrong key)");
+            ListFreer listFreer;
+            chip::app::Clusters::IcdManagement::Commands::UnregisterClient::Type value;
+            value.checkInNodeID = 101ULL;
+            value.key.Emplace();
+            value.key.Value() = chip::ByteSpan(
+                chip::Uint8::from_const_char("\001!!1AQaq\201\221\241\261\301\321\341\361garbage: not in length on purpose"), 16);
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), IcdManagement::Id, IcdManagement::Commands::UnregisterClient::Id,
+                               value, chip::NullOptional
+
+            );
+        }
+        case 21: {
+            LogStep(21, "Read RegisteredClients");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), IcdManagement::Id,
+                                 IcdManagement::Attributes::RegisteredClients::Id, true, chip::NullOptional);
+        }
+        case 22: {
+            LogStep(22, "Unregister 2.1");
+            ListFreer listFreer;
+            chip::app::Clusters::IcdManagement::Commands::UnregisterClient::Type value;
+            value.checkInNodeID = 201ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), IcdManagement::Id, IcdManagement::Commands::UnregisterClient::Id,
+                               value, chip::NullOptional
+
+            );
+        }
+        case 23: {
+            LogStep(23, "Read RegisteredClients");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), IcdManagement::Id,
+                                 IcdManagement::Attributes::RegisteredClients::Id, true, chip::NullOptional);
+        }
+        case 24: {
+            LogStep(24, "Unregister 1.3");
+            ListFreer listFreer;
+            chip::app::Clusters::IcdManagement::Commands::UnregisterClient::Type value;
+            value.checkInNodeID = 101ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), IcdManagement::Id, IcdManagement::Commands::UnregisterClient::Id,
+                               value, chip::NullOptional
+
+            );
+        }
+        case 25: {
+            LogStep(25, "Unregister 2.2");
+            ListFreer listFreer;
+            chip::app::Clusters::IcdManagement::Commands::UnregisterClient::Type value;
+            value.checkInNodeID = 102ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), IcdManagement::Id, IcdManagement::Commands::UnregisterClient::Id,
+                               value, chip::NullOptional
+
+            );
         }
         }
         return CHIP_NO_ERROR;
@@ -122112,6 +122637,7 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_CC_8_1Suite>(credsIssuerConfig),
         make_unique<TestColorControl_9_1Suite>(credsIssuerConfig),
         make_unique<TestColorControl_9_2Suite>(credsIssuerConfig),
+        make_unique<TestIcdManagementClusterSuite>(credsIssuerConfig),
         make_unique<Test_TC_OPCREDS_1_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_BINFO_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_BINFO_2_1Suite>(credsIssuerConfig),
