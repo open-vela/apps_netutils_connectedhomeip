@@ -51119,89 +51119,12 @@ using chip::System::Clock::Timeout;
     return self;
 }
 
-- (void)resetWithParams:(MTRRefrigeratorAlarmClusterResetParams *)params completion:(MTRStatusCompletion)completion
-{
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
-            MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            RefrigeratorAlarm::Commands::Reset::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.alarms = static_cast<std::remove_reference_t<decltype(request.alarms)>>(params.alarms.unsignedIntValue);
-            if (params.mask != nil) {
-                auto & definedValue_0 = request.mask.Emplace();
-                definedValue_0 = static_cast<std::remove_reference_t<decltype(definedValue_0)>>(params.mask.unsignedIntValue);
-            }
-
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
-                timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
-}
-
 - (void)readAttributeMaskWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = RefrigeratorAlarm::Attributes::Mask::TypeInfo;
     return MTRReadAttribute<MTRRefrigeratorAlarmMaskAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
-}
-
-- (void)writeAttributeMaskWithValue:(NSNumber * _Nonnull)value completion:(MTRStatusCompletion)completion
-{
-    [self writeAttributeMaskWithValue:(NSNumber * _Nonnull) value params:nil completion:completion];
-}
-- (void)writeAttributeMaskWithValue:(NSNumber * _Nonnull)value
-                             params:(MTRWriteParams * _Nullable)params
-                         completion:(MTRStatusCompletion)completion
-{
-    // Make a copy of params before we go async.
-    params = [params copy];
-    value = [value copy];
-
-    auto * bridge = new MTRDefaultSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable ignored, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, DefaultSuccessCallbackType successCb,
-            MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            chip::Optional<uint16_t> timedWriteTimeout;
-            if (params != nil) {
-                if (params.timedWriteTimeout != nil) {
-                    timedWriteTimeout.SetValue(params.timedWriteTimeout.unsignedShortValue);
-                }
-            }
-
-            ListFreer listFreer;
-            using TypeInfo = RefrigeratorAlarm::Attributes::Mask::TypeInfo;
-            TypeInfo::Type cppValue;
-            cppValue = static_cast<std::remove_reference_t<decltype(cppValue)>>(value.unsignedIntValue);
-
-            chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
 }
 
 - (void)subscribeAttributeMaskWithParams:(MTRSubscribeParams * _Nonnull)params
@@ -51225,49 +51148,6 @@ using chip::System::Clock::Timeout;
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = RefrigeratorAlarm::Attributes::Mask::TypeInfo;
-                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
-                path.mClusterId = TypeInfo::GetClusterId();
-                path.mAttributeId = TypeInfo::GetAttributeId();
-                TypeInfo::DecodableType value;
-                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
-                if (err == CHIP_NO_ERROR) {
-                    successCb(bridge, value);
-                }
-                return err;
-            }
-            return CHIP_ERROR_NOT_FOUND;
-        });
-}
-
-- (void)readAttributeLatchWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
-{
-    MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = RefrigeratorAlarm::Attributes::Latch::TypeInfo;
-    return MTRReadAttribute<MTRRefrigeratorAlarmLatchAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
-        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
-}
-
-- (void)subscribeAttributeLatchWithParams:(MTRSubscribeParams * _Nonnull)params
-                  subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
-                            reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
-{
-    using TypeInfo = RefrigeratorAlarm::Attributes::Latch::TypeInfo;
-    MTRSubscribeAttribute<MTRRefrigeratorAlarmLatchAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
-        subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
-        TypeInfo::GetAttributeId());
-}
-
-+ (void)readAttributeLatchWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
-                                       endpoint:(NSNumber *)endpoint
-                                          queue:(dispatch_queue_t)queue
-                                     completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
-{
-    auto * bridge = new MTRRefrigeratorAlarmLatchAttributeCallbackBridge(queue, completion);
-    std::move(*bridge).DispatchLocalAction(
-        clusterStateCacheContainer.baseDevice, ^(RefrigeratorAlarmLatchAttributeCallback successCb, MTRErrorCallback failureCb) {
-            if (clusterStateCacheContainer.cppClusterStateCache) {
-                chip::app::ConcreteAttributePath path;
-                using TypeInfo = RefrigeratorAlarm::Attributes::Latch::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();

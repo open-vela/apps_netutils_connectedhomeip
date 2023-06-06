@@ -8821,20 +8821,8 @@ MTR_NEWLY_AVAILABLE
                               endpointID:(NSNumber *)endpointID
                                    queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER MTR_NEWLY_AVAILABLE;
 
-/**
- * Command Reset
- *
- * Reset alarm
- */
-- (void)resetWithParams:(MTRRefrigeratorAlarmClusterResetParams *)params
-             completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
-
 - (void)readAttributeMaskWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
     MTR_NEWLY_AVAILABLE;
-- (void)writeAttributeMaskWithValue:(NSNumber * _Nonnull)value completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
-- (void)writeAttributeMaskWithValue:(NSNumber * _Nonnull)value
-                             params:(MTRWriteParams * _Nullable)params
-                         completion:(MTRStatusCompletion)completion MTR_NEWLY_AVAILABLE;
 - (void)subscribeAttributeMaskWithParams:(MTRSubscribeParams *)params
                  subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                            reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
@@ -8843,18 +8831,6 @@ MTR_NEWLY_AVAILABLE
                                       endpoint:(NSNumber *)endpoint
                                          queue:(dispatch_queue_t)queue
                                     completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
-    MTR_NEWLY_AVAILABLE;
-
-- (void)readAttributeLatchWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
-    MTR_NEWLY_AVAILABLE;
-- (void)subscribeAttributeLatchWithParams:(MTRSubscribeParams *)params
-                  subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
-                            reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
-    MTR_NEWLY_AVAILABLE;
-+ (void)readAttributeLatchWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
-                                       endpoint:(NSNumber *)endpoint
-                                          queue:(dispatch_queue_t)queue
-                                     completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
     MTR_NEWLY_AVAILABLE;
 
 - (void)readAttributeStateWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
