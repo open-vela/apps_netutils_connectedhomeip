@@ -7226,10 +7226,13 @@ API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  *
  * Return the list of Group Key Sets associated with the accessing fabric
  */
-- (void)keySetReadAllIndicesWithParams:(MTRGroupKeyManagementClusterKeySetReadAllIndicesParams *)params
+- (void)keySetReadAllIndicesWithParams:(MTRGroupKeyManagementClusterKeySetReadAllIndicesParams * _Nullable)params
                             completion:(void (^)(MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams * _Nullable data,
                                            NSError * _Nullable error))completion
     API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
+- (void)keySetReadAllIndicesWithCompletion:
+    (void (^)(MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams * _Nullable data, NSError * _Nullable error))completion
+    MTR_NEWLY_AVAILABLE;
 
 - (void)readAttributeGroupKeyMapWithParams:(MTRReadParams * _Nullable)params
                                 completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
@@ -44702,7 +44705,7 @@ typedef NS_ENUM(uint8_t, MTRFaultInjectionFaultType) {
              completionHandler:(MTRStatusCompletion)completionHandler
     MTR_DEPRECATED(
         "Please use keySetRemoveWithParams:completion:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
-- (void)keySetReadAllIndicesWithParams:(MTRGroupKeyManagementClusterKeySetReadAllIndicesParams *)params
+- (void)keySetReadAllIndicesWithParams:(MTRGroupKeyManagementClusterKeySetReadAllIndicesParams * _Nullable)params
                      completionHandler:(void (^)(MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams * _Nullable data,
                                            NSError * _Nullable error))completionHandler
     MTR_DEPRECATED("Please use keySetReadAllIndicesWithParams:completion:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4),

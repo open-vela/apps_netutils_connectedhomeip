@@ -37219,9 +37219,7 @@ class GroupKeyManagementKeySetReadAllIndices : public ClusterCommand {
 public:
     GroupKeyManagementKeySetReadAllIndices()
         : ClusterCommand("key-set-read-all-indices")
-        , mComplex_GroupKeySetIDs(&mRequest.groupKeySetIDs)
     {
-        AddArgument("GroupKeySetIDs", &mComplex_GroupKeySetIDs);
         ClusterCommand::AddArguments();
     }
 
@@ -37236,15 +37234,6 @@ public:
         __auto_type * params = [[MTRGroupKeyManagementClusterKeySetReadAllIndicesParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        { // Scope for our temporary variables
-            auto * array_0 = [NSMutableArray new];
-            for (auto & entry_0 : mRequest.groupKeySetIDs) {
-                NSNumber * newElement_0;
-                newElement_0 = [NSNumber numberWithUnsignedShort:entry_0];
-                [array_0 addObject:newElement_0];
-            }
-            params.groupKeySetIDs = array_0;
-        }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -37267,8 +37256,6 @@ public:
     }
 
 private:
-    chip::app::Clusters::GroupKeyManagement::Commands::KeySetReadAllIndices::Type mRequest;
-    TypedComplexArgument<chip::app::DataModel::List<const uint16_t>> mComplex_GroupKeySetIDs;
 };
 
 /*

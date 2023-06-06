@@ -43825,7 +43825,12 @@ using chip::System::Clock::Timeout;
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)keySetReadAllIndicesWithParams:(MTRGroupKeyManagementClusterKeySetReadAllIndicesParams *)params
+- (void)keySetReadAllIndicesWithCompletion:
+    (void (^)(MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams * _Nullable data, NSError * _Nullable error))completion
+{
+    [self keySetReadAllIndicesWithParams:nil completion:completion];
+}
+- (void)keySetReadAllIndicesWithParams:(MTRGroupKeyManagementClusterKeySetReadAllIndicesParams * _Nullable)params
                             completion:(void (^)(MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams * _Nullable data,
                                            NSError * _Nullable error))completion
 {
@@ -43850,28 +43855,6 @@ using chip::System::Clock::Timeout;
                     // int when converted to ms.
                     auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
                     invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            {
-                using ListType_0 = std::remove_reference_t<decltype(request.groupKeySetIDs)>;
-                using ListMemberType_0 = ListMemberTypeGetter<ListType_0>::Type;
-                if (params.groupKeySetIDs.count != 0) {
-                    auto * listHolder_0 = new ListHolder<ListMemberType_0>(params.groupKeySetIDs.count);
-                    if (listHolder_0 == nullptr || listHolder_0->mList == nullptr) {
-                        return CHIP_ERROR_INVALID_ARGUMENT;
-                    }
-                    listFreer.add(listHolder_0);
-                    for (size_t i_0 = 0; i_0 < params.groupKeySetIDs.count; ++i_0) {
-                        if (![params.groupKeySetIDs[i_0] isKindOfClass:[NSNumber class]]) {
-                            // Wrong kind of value.
-                            return CHIP_ERROR_INVALID_ARGUMENT;
-                        }
-                        auto element_0 = (NSNumber *) params.groupKeySetIDs[i_0];
-                        listHolder_0->mList[i_0] = element_0.unsignedShortValue;
-                    }
-                    request.groupKeySetIDs = ListType_0(listHolder_0->mList, params.groupKeySetIDs.count);
-                } else {
-                    request.groupKeySetIDs = ListType_0();
                 }
             }
 
@@ -44406,7 +44389,7 @@ using chip::System::Clock::Timeout;
 {
     [self keySetRemoveWithParams:params completion:completionHandler];
 }
-- (void)keySetReadAllIndicesWithParams:(MTRGroupKeyManagementClusterKeySetReadAllIndicesParams *)params
+- (void)keySetReadAllIndicesWithParams:(MTRGroupKeyManagementClusterKeySetReadAllIndicesParams * _Nullable)params
                      completionHandler:(void (^)(MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams * _Nullable data,
                                            NSError * _Nullable error))completionHandler
 {

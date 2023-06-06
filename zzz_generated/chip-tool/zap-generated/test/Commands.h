@@ -94954,7 +94954,7 @@ class TestGroupKeyManagementClusterSuite : public TestCommand
 {
 public:
     TestGroupKeyManagementClusterSuite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("TestGroupKeyManagementCluster", 47, credsIssuerConfig)
+        TestCommand("TestGroupKeyManagementCluster", 48, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -95057,18 +95057,28 @@ private:
             }
             break;
         case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::GroupKeyManagement::Commands::KeySetReadAllIndicesResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintContains("value", value.groupKeySetIDs, 417U));
+                VerifyOrReturn(CheckConstraintContains("value", value.groupKeySetIDs, 418U));
+                VerifyOrReturn(CheckConstraintContains("value", value.groupKeySetIDs, 0U));
+            }
             break;
         case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -95097,7 +95107,7 @@ private:
                 }
             }
             break;
-        case 17:
+        case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -95142,7 +95152,7 @@ private:
                 }
             }
             break;
-        case 18:
+        case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -95171,7 +95181,7 @@ private:
                 }
             }
             break;
-        case 19:
+        case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -95216,7 +95226,7 @@ private:
                 }
             }
             break;
-        case 20:
+        case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::Groups::Commands::AddGroupResponse::DecodableType value;
@@ -95225,7 +95235,7 @@ private:
                 VerifyOrReturn(CheckValue("groupID", value.groupID, 257U));
             }
             break;
-        case 21:
+        case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::Groups::Commands::AddGroupResponse::DecodableType value;
@@ -95234,7 +95244,7 @@ private:
                 VerifyOrReturn(CheckValue("groupID", value.groupID, 258U));
             }
             break;
-        case 22:
+        case 23:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::Groups::Commands::AddGroupResponse::DecodableType value;
@@ -95243,7 +95253,7 @@ private:
                 VerifyOrReturn(CheckValue("groupID", value.groupID, 259U));
             }
             break;
-        case 23:
+        case 24:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::Groups::Commands::AddGroupResponse::DecodableType value;
@@ -95252,7 +95262,7 @@ private:
                 VerifyOrReturn(CheckValue("groupID", value.groupID, 260U));
             }
             break;
-        case 24:
+        case 25:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::Groups::Commands::AddGroupResponse::DecodableType value;
@@ -95261,7 +95271,7 @@ private:
                 VerifyOrReturn(CheckValue("groupID", value.groupID, 261U));
             }
             break;
-        case 25:
+        case 26:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -95330,7 +95340,7 @@ private:
                 }
             }
             break;
-        case 26:
+        case 27:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -95413,7 +95423,7 @@ private:
                 }
             }
             break;
-        case 27:
+        case 28:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -95440,7 +95450,7 @@ private:
                 }
             }
             break;
-        case 28:
+        case 29:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -95523,13 +95533,13 @@ private:
                 }
             }
             break;
-        case 29:
+        case 30:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 30:
+        case 31:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
             break;
-        case 31:
+        case 32:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::GroupKeyManagement::Commands::KeySetReadResponse::DecodableType value;
@@ -95550,7 +95560,7 @@ private:
                     CheckValue("groupKeySet.epochStartTime2.Value()", value.groupKeySet.epochStartTime2.Value(), 2110002ULL));
             }
             break;
-        case 32:
+        case 33:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::GroupKeyManagement::Commands::KeySetReadResponse::DecodableType value;
@@ -95571,7 +95581,7 @@ private:
                     CheckValue("groupKeySet.epochStartTime2.Value()", value.groupKeySet.epochStartTime2.Value(), 2110002ULL));
             }
             break;
-        case 33:
+        case 34:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::Groups::Commands::RemoveGroupResponse::DecodableType value;
@@ -95580,7 +95590,7 @@ private:
                 VerifyOrReturn(CheckValue("groupID", value.groupID, 257U));
             }
             break;
-        case 34:
+        case 35:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -95635,10 +95645,10 @@ private:
                 }
             }
             break;
-        case 35:
+        case 36:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 36:
+        case 37:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -95651,14 +95661,11 @@ private:
                 }
             }
             break;
-        case 37:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         case 38:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 39:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
             break;
         case 40:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -95673,6 +95680,9 @@ private:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 44:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 45:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -95689,10 +95699,10 @@ private:
                 }
             }
             break;
-        case 45:
+        case 46:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 46:
+        case 47:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -95949,7 +95959,16 @@ private:
             );
         }
         case 12: {
-            LogStep(12, "Write Group Keys (invalid)");
+            LogStep(12, "KeySet Read All Indices");
+            ListFreer listFreer;
+            chip::app::Clusters::GroupKeyManagement::Commands::KeySetReadAllIndices::Type value;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
+                               GroupKeyManagement::Commands::KeySetReadAllIndices::Id, value, chip::NullOptional
+
+            );
+        }
+        case 13: {
+            LogStep(13, "Write Group Keys (invalid)");
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type> value;
 
@@ -95967,8 +95986,8 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                   GroupKeyManagement::Attributes::GroupKeyMap::Id, value, chip::NullOptional, chip::NullOptional);
         }
-        case 13: {
-            LogStep(13, "Write Group Keys (too many)");
+        case 14: {
+            LogStep(14, "Write Group Keys (too many)");
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type> value;
 
@@ -96038,8 +96057,8 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                   GroupKeyManagement::Attributes::GroupKeyMap::Id, value, chip::NullOptional, chip::NullOptional);
         }
-        case 14: {
-            LogStep(14, "Write Group Keys on alpha");
+        case 15: {
+            LogStep(15, "Write Group Keys on alpha");
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type> value;
 
@@ -96069,8 +96088,8 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                   GroupKeyManagement::Attributes::GroupKeyMap::Id, value, chip::NullOptional, chip::NullOptional);
         }
-        case 15: {
-            LogStep(15, "Write Group Keys on beta");
+        case 16: {
+            LogStep(16, "Write Group Keys on beta");
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type> value;
 
@@ -96100,28 +96119,28 @@ private:
             return WriteAttribute(kIdentityBeta, GetEndpoint(0), GroupKeyManagement::Id,
                                   GroupKeyManagement::Attributes::GroupKeyMap::Id, value, chip::NullOptional, chip::NullOptional);
         }
-        case 16: {
-            LogStep(16, "Read Group Keys on alpha");
+        case 17: {
+            LogStep(17, "Read Group Keys on alpha");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                  GroupKeyManagement::Attributes::GroupKeyMap::Id, true, chip::NullOptional);
-        }
-        case 17: {
-            LogStep(17, "Read Group Keys on alpha without fabric filtering");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
-                                 GroupKeyManagement::Attributes::GroupKeyMap::Id, false, chip::NullOptional);
         }
         case 18: {
-            LogStep(18, "Read Group Keys on beta");
+            LogStep(18, "Read Group Keys on alpha without fabric filtering");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
+                                 GroupKeyManagement::Attributes::GroupKeyMap::Id, false, chip::NullOptional);
+        }
+        case 19: {
+            LogStep(19, "Read Group Keys on beta");
             return ReadAttribute(kIdentityBeta, GetEndpoint(0), GroupKeyManagement::Id,
                                  GroupKeyManagement::Attributes::GroupKeyMap::Id, true, chip::NullOptional);
         }
-        case 19: {
-            LogStep(19, "Read Group Keys on beta without fabric filtering");
+        case 20: {
+            LogStep(20, "Read Group Keys on beta without fabric filtering");
             return ReadAttribute(kIdentityBeta, GetEndpoint(0), GroupKeyManagement::Id,
                                  GroupKeyManagement::Attributes::GroupKeyMap::Id, false, chip::NullOptional);
         }
-        case 20: {
-            LogStep(20, "Add Group 1");
+        case 21: {
+            LogStep(21, "Add Group 1");
             ListFreer listFreer;
             chip::app::Clusters::Groups::Commands::AddGroup::Type value;
             value.groupID   = 257U;
@@ -96130,8 +96149,8 @@ private:
 
             );
         }
-        case 21: {
-            LogStep(21, "Add Group 2");
+        case 22: {
+            LogStep(22, "Add Group 2");
             ListFreer listFreer;
             chip::app::Clusters::Groups::Commands::AddGroup::Type value;
             value.groupID   = 258U;
@@ -96140,8 +96159,8 @@ private:
 
             );
         }
-        case 22: {
-            LogStep(22, "Add Group 3");
+        case 23: {
+            LogStep(23, "Add Group 3");
             ListFreer listFreer;
             chip::app::Clusters::Groups::Commands::AddGroup::Type value;
             value.groupID   = 259U;
@@ -96150,8 +96169,8 @@ private:
 
             );
         }
-        case 23: {
-            LogStep(23, "Add Group 4");
+        case 24: {
+            LogStep(24, "Add Group 4");
             ListFreer listFreer;
             chip::app::Clusters::Groups::Commands::AddGroup::Type value;
             value.groupID   = 260U;
@@ -96160,8 +96179,8 @@ private:
 
             );
         }
-        case 24: {
-            LogStep(24, "Add Group 5");
+        case 25: {
+            LogStep(25, "Add Group 5");
             ListFreer listFreer;
             chip::app::Clusters::Groups::Commands::AddGroup::Type value;
             value.groupID   = 261U;
@@ -96170,28 +96189,28 @@ private:
 
             );
         }
-        case 25: {
-            LogStep(25, "Read GroupTable from alpha");
+        case 26: {
+            LogStep(26, "Read GroupTable from alpha");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                  GroupKeyManagement::Attributes::GroupTable::Id, true, chip::NullOptional);
-        }
-        case 26: {
-            LogStep(26, "Read GroupTable from alpha without fabric filtering");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
-                                 GroupKeyManagement::Attributes::GroupTable::Id, false, chip::NullOptional);
         }
         case 27: {
-            LogStep(27, "Read GroupTable from beta");
+            LogStep(27, "Read GroupTable from alpha without fabric filtering");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
+                                 GroupKeyManagement::Attributes::GroupTable::Id, false, chip::NullOptional);
+        }
+        case 28: {
+            LogStep(28, "Read GroupTable from beta");
             return ReadAttribute(kIdentityBeta, GetEndpoint(0), GroupKeyManagement::Id,
                                  GroupKeyManagement::Attributes::GroupTable::Id, true, chip::NullOptional);
         }
-        case 28: {
-            LogStep(28, "Read GroupTable from beta without fabric filtering");
+        case 29: {
+            LogStep(29, "Read GroupTable from beta without fabric filtering");
             return ReadAttribute(kIdentityBeta, GetEndpoint(0), GroupKeyManagement::Id,
                                  GroupKeyManagement::Attributes::GroupTable::Id, false, chip::NullOptional);
         }
-        case 29: {
-            LogStep(29, "KeySet Remove 1");
+        case 30: {
+            LogStep(30, "KeySet Remove 1");
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetRemove::Type value;
             value.groupKeySetID = 417U;
@@ -96200,8 +96219,8 @@ private:
 
             );
         }
-        case 30: {
-            LogStep(30, "KeySet Read (removed)");
+        case 31: {
+            LogStep(31, "KeySet Read (removed)");
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetRead::Type value;
             value.groupKeySetID = 417U;
@@ -96210,19 +96229,8 @@ private:
 
             );
         }
-        case 31: {
-            LogStep(31, "KeySet Read (not removed) CacheAndSync");
-            VerifyOrDo(!ShouldSkip("GRPKEY.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::GroupKeyManagement::Commands::KeySetRead::Type value;
-            value.groupKeySetID = 418U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id, GroupKeyManagement::Commands::KeySetRead::Id,
-                               value, chip::NullOptional
-
-            );
-        }
         case 32: {
-            LogStep(32, "KeySet Read (not removed) TrustFirst");
+            LogStep(32, "KeySet Read (not removed) CacheAndSync");
             VerifyOrDo(!ShouldSkip("GRPKEY.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetRead::Type value;
@@ -96233,46 +96241,8 @@ private:
             );
         }
         case 33: {
-            LogStep(33, "Remove Group 1");
-            ListFreer listFreer;
-            chip::app::Clusters::Groups::Commands::RemoveGroup::Type value;
-            value.groupID = 257U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Groups::Id, Groups::Commands::RemoveGroup::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 34: {
-            LogStep(34, "Read GroupTable 2");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
-                                 GroupKeyManagement::Attributes::GroupTable::Id, true, chip::NullOptional);
-        }
-        case 35: {
-            LogStep(35, "Remove All");
-            ListFreer listFreer;
-            chip::app::Clusters::Groups::Commands::RemoveAllGroups::Type value;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Groups::Id, Groups::Commands::RemoveAllGroups::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 36: {
-            LogStep(36, "Read GroupTable 3");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
-                                 GroupKeyManagement::Attributes::GroupTable::Id, true, chip::NullOptional);
-        }
-        case 37: {
-            LogStep(37, "KeySet Remove 2");
-            ListFreer listFreer;
-            chip::app::Clusters::GroupKeyManagement::Commands::KeySetRemove::Type value;
-            value.groupKeySetID = 418U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
-                               GroupKeyManagement::Commands::KeySetRemove::Id, value, chip::NullOptional
-
-            );
-        }
-        case 38: {
-            LogStep(38, "KeySet Read (also removed)");
+            LogStep(33, "KeySet Read (not removed) TrustFirst");
+            VerifyOrDo(!ShouldSkip("GRPKEY.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetRead::Type value;
             value.groupKeySetID = 418U;
@@ -96281,8 +96251,57 @@ private:
 
             );
         }
+        case 34: {
+            LogStep(34, "Remove Group 1");
+            ListFreer listFreer;
+            chip::app::Clusters::Groups::Commands::RemoveGroup::Type value;
+            value.groupID = 257U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Groups::Id, Groups::Commands::RemoveGroup::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 35: {
+            LogStep(35, "Read GroupTable 2");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
+                                 GroupKeyManagement::Attributes::GroupTable::Id, true, chip::NullOptional);
+        }
+        case 36: {
+            LogStep(36, "Remove All");
+            ListFreer listFreer;
+            chip::app::Clusters::Groups::Commands::RemoveAllGroups::Type value;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Groups::Id, Groups::Commands::RemoveAllGroups::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 37: {
+            LogStep(37, "Read GroupTable 3");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
+                                 GroupKeyManagement::Attributes::GroupTable::Id, true, chip::NullOptional);
+        }
+        case 38: {
+            LogStep(38, "KeySet Remove 2");
+            ListFreer listFreer;
+            chip::app::Clusters::GroupKeyManagement::Commands::KeySetRemove::Type value;
+            value.groupKeySetID = 418U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
+                               GroupKeyManagement::Commands::KeySetRemove::Id, value, chip::NullOptional
+
+            );
+        }
         case 39: {
-            LogStep(39, "KeySet Write 1");
+            LogStep(39, "KeySet Read (also removed)");
+            ListFreer listFreer;
+            chip::app::Clusters::GroupKeyManagement::Commands::KeySetRead::Type value;
+            value.groupKeySetID = 418U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id, GroupKeyManagement::Commands::KeySetRead::Id,
+                               value, chip::NullOptional
+
+            );
+        }
+        case 40: {
+            LogStep(40, "KeySet Write 1");
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetWrite::Type value;
 
@@ -96316,8 +96335,8 @@ private:
 
             );
         }
-        case 40: {
-            LogStep(40, "KeySet Write 2 CacheAndSync");
+        case 41: {
+            LogStep(41, "KeySet Write 2 CacheAndSync");
             VerifyOrDo(!ShouldSkip("GRPKEY.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetWrite::Type value;
@@ -96352,8 +96371,8 @@ private:
 
             );
         }
-        case 41: {
-            LogStep(41, "KeySet Write 2 TrustFirst");
+        case 42: {
+            LogStep(42, "KeySet Write 2 TrustFirst");
             VerifyOrDo(!ShouldSkip("!GRPKEY.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetWrite::Type value;
@@ -96388,8 +96407,8 @@ private:
 
             );
         }
-        case 42: {
-            LogStep(42, "Map Group 1 and Group 2 to KeySet 1 and group 2 to KeySet 2");
+        case 43: {
+            LogStep(43, "Map Group 1 and Group 2 to KeySet 1 and group 2 to KeySet 2");
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type> value;
 
@@ -96415,8 +96434,8 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                   GroupKeyManagement::Attributes::GroupKeyMap::Id, value, chip::NullOptional, chip::NullOptional);
         }
-        case 43: {
-            LogStep(43, "Remove keyset 1");
+        case 44: {
+            LogStep(44, "Remove keyset 1");
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetRemove::Type value;
             value.groupKeySetID = 417U;
@@ -96425,13 +96444,13 @@ private:
 
             );
         }
-        case 44: {
-            LogStep(44, "TH verifies GroupKeyMap entries for KeySet 1 have been removed");
+        case 45: {
+            LogStep(45, "TH verifies GroupKeyMap entries for KeySet 1 have been removed");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                  GroupKeyManagement::Attributes::GroupKeyMap::Id, true, chip::NullOptional);
         }
-        case 45: {
-            LogStep(45, "Remove keyset 2");
+        case 46: {
+            LogStep(46, "Remove keyset 2");
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetRemove::Type value;
             value.groupKeySetID = 418U;
@@ -96440,8 +96459,8 @@ private:
 
             );
         }
-        case 46: {
-            LogStep(46, "TH verifies GroupKeyMap entries for KeySet 2 have been removed");
+        case 47: {
+            LogStep(47, "TH verifies GroupKeyMap entries for KeySet 2 have been removed");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                  GroupKeyManagement::Attributes::GroupKeyMap::Id, true, chip::NullOptional);
         }

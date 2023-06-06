@@ -143853,160 +143853,164 @@ public:
             err = TestKeySetRead_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : Write Group Keys (invalid)\n");
-            err = TestWriteGroupKeysInvalid_12();
+            ChipLogProgress(chipTool, " ***** Test Step 12 : KeySet Read All Indices\n");
+            err = TestKeySetReadAllIndices_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Write Group Keys (too many)\n");
-            err = TestWriteGroupKeysTooMany_13();
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Write Group Keys (invalid)\n");
+            err = TestWriteGroupKeysInvalid_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : Write Group Keys on alpha\n");
-            err = TestWriteGroupKeysOnAlpha_14();
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Write Group Keys (too many)\n");
+            err = TestWriteGroupKeysTooMany_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : Write Group Keys on beta\n");
-            err = TestWriteGroupKeysOnBeta_15();
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Write Group Keys on alpha\n");
+            err = TestWriteGroupKeysOnAlpha_15();
             break;
         case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : Read Group Keys on alpha\n");
-            err = TestReadGroupKeysOnAlpha_16();
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Write Group Keys on beta\n");
+            err = TestWriteGroupKeysOnBeta_16();
             break;
         case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : Read Group Keys on alpha without fabric filtering\n");
-            err = TestReadGroupKeysOnAlphaWithoutFabricFiltering_17();
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Read Group Keys on alpha\n");
+            err = TestReadGroupKeysOnAlpha_17();
             break;
         case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : Read Group Keys on beta\n");
-            err = TestReadGroupKeysOnBeta_18();
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Read Group Keys on alpha without fabric filtering\n");
+            err = TestReadGroupKeysOnAlphaWithoutFabricFiltering_18();
             break;
         case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : Read Group Keys on beta without fabric filtering\n");
-            err = TestReadGroupKeysOnBetaWithoutFabricFiltering_19();
+            ChipLogProgress(chipTool, " ***** Test Step 19 : Read Group Keys on beta\n");
+            err = TestReadGroupKeysOnBeta_19();
             break;
         case 20:
-            ChipLogProgress(chipTool, " ***** Test Step 20 : Add Group 1\n");
-            err = TestAddGroup1_20();
+            ChipLogProgress(chipTool, " ***** Test Step 20 : Read Group Keys on beta without fabric filtering\n");
+            err = TestReadGroupKeysOnBetaWithoutFabricFiltering_20();
             break;
         case 21:
-            ChipLogProgress(chipTool, " ***** Test Step 21 : Add Group 2\n");
-            err = TestAddGroup2_21();
+            ChipLogProgress(chipTool, " ***** Test Step 21 : Add Group 1\n");
+            err = TestAddGroup1_21();
             break;
         case 22:
-            ChipLogProgress(chipTool, " ***** Test Step 22 : Add Group 3\n");
-            err = TestAddGroup3_22();
+            ChipLogProgress(chipTool, " ***** Test Step 22 : Add Group 2\n");
+            err = TestAddGroup2_22();
             break;
         case 23:
-            ChipLogProgress(chipTool, " ***** Test Step 23 : Add Group 4\n");
-            err = TestAddGroup4_23();
+            ChipLogProgress(chipTool, " ***** Test Step 23 : Add Group 3\n");
+            err = TestAddGroup3_23();
             break;
         case 24:
-            ChipLogProgress(chipTool, " ***** Test Step 24 : Add Group 5\n");
-            err = TestAddGroup5_24();
+            ChipLogProgress(chipTool, " ***** Test Step 24 : Add Group 4\n");
+            err = TestAddGroup4_24();
             break;
         case 25:
-            ChipLogProgress(chipTool, " ***** Test Step 25 : Read GroupTable from alpha\n");
-            err = TestReadGroupTableFromAlpha_25();
+            ChipLogProgress(chipTool, " ***** Test Step 25 : Add Group 5\n");
+            err = TestAddGroup5_25();
             break;
         case 26:
-            ChipLogProgress(chipTool, " ***** Test Step 26 : Read GroupTable from alpha without fabric filtering\n");
-            err = TestReadGroupTableFromAlphaWithoutFabricFiltering_26();
+            ChipLogProgress(chipTool, " ***** Test Step 26 : Read GroupTable from alpha\n");
+            err = TestReadGroupTableFromAlpha_26();
             break;
         case 27:
-            ChipLogProgress(chipTool, " ***** Test Step 27 : Read GroupTable from beta\n");
-            err = TestReadGroupTableFromBeta_27();
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Read GroupTable from alpha without fabric filtering\n");
+            err = TestReadGroupTableFromAlphaWithoutFabricFiltering_27();
             break;
         case 28:
-            ChipLogProgress(chipTool, " ***** Test Step 28 : Read GroupTable from beta without fabric filtering\n");
-            err = TestReadGroupTableFromBetaWithoutFabricFiltering_28();
+            ChipLogProgress(chipTool, " ***** Test Step 28 : Read GroupTable from beta\n");
+            err = TestReadGroupTableFromBeta_28();
             break;
         case 29:
-            ChipLogProgress(chipTool, " ***** Test Step 29 : KeySet Remove 1\n");
-            err = TestKeySetRemove1_29();
+            ChipLogProgress(chipTool, " ***** Test Step 29 : Read GroupTable from beta without fabric filtering\n");
+            err = TestReadGroupTableFromBetaWithoutFabricFiltering_29();
             break;
         case 30:
-            ChipLogProgress(chipTool, " ***** Test Step 30 : KeySet Read (removed)\n");
-            err = TestKeySetReadRemoved_30();
+            ChipLogProgress(chipTool, " ***** Test Step 30 : KeySet Remove 1\n");
+            err = TestKeySetRemove1_30();
             break;
         case 31:
-            ChipLogProgress(chipTool, " ***** Test Step 31 : KeySet Read (not removed) CacheAndSync\n");
-            if (ShouldSkip("GRPKEY.S.F00")) {
-                NextTest();
-                return;
-            }
-            err = TestKeySetReadNotRemovedCacheAndSync_31();
+            ChipLogProgress(chipTool, " ***** Test Step 31 : KeySet Read (removed)\n");
+            err = TestKeySetReadRemoved_31();
             break;
         case 32:
-            ChipLogProgress(chipTool, " ***** Test Step 32 : KeySet Read (not removed) TrustFirst\n");
+            ChipLogProgress(chipTool, " ***** Test Step 32 : KeySet Read (not removed) CacheAndSync\n");
             if (ShouldSkip("GRPKEY.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestKeySetReadNotRemovedTrustFirst_32();
+            err = TestKeySetReadNotRemovedCacheAndSync_32();
             break;
         case 33:
-            ChipLogProgress(chipTool, " ***** Test Step 33 : Remove Group 1\n");
-            err = TestRemoveGroup1_33();
-            break;
-        case 34:
-            ChipLogProgress(chipTool, " ***** Test Step 34 : Read GroupTable 2\n");
-            err = TestReadGroupTable2_34();
-            break;
-        case 35:
-            ChipLogProgress(chipTool, " ***** Test Step 35 : Remove All\n");
-            err = TestRemoveAll_35();
-            break;
-        case 36:
-            ChipLogProgress(chipTool, " ***** Test Step 36 : Read GroupTable 3\n");
-            err = TestReadGroupTable3_36();
-            break;
-        case 37:
-            ChipLogProgress(chipTool, " ***** Test Step 37 : KeySet Remove 2\n");
-            err = TestKeySetRemove2_37();
-            break;
-        case 38:
-            ChipLogProgress(chipTool, " ***** Test Step 38 : KeySet Read (also removed)\n");
-            err = TestKeySetReadAlsoRemoved_38();
-            break;
-        case 39:
-            ChipLogProgress(chipTool, " ***** Test Step 39 : KeySet Write 1\n");
-            err = TestKeySetWrite1_39();
-            break;
-        case 40:
-            ChipLogProgress(chipTool, " ***** Test Step 40 : KeySet Write 2 CacheAndSync\n");
+            ChipLogProgress(chipTool, " ***** Test Step 33 : KeySet Read (not removed) TrustFirst\n");
             if (ShouldSkip("GRPKEY.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestKeySetWrite2CacheAndSync_40();
+            err = TestKeySetReadNotRemovedTrustFirst_33();
+            break;
+        case 34:
+            ChipLogProgress(chipTool, " ***** Test Step 34 : Remove Group 1\n");
+            err = TestRemoveGroup1_34();
+            break;
+        case 35:
+            ChipLogProgress(chipTool, " ***** Test Step 35 : Read GroupTable 2\n");
+            err = TestReadGroupTable2_35();
+            break;
+        case 36:
+            ChipLogProgress(chipTool, " ***** Test Step 36 : Remove All\n");
+            err = TestRemoveAll_36();
+            break;
+        case 37:
+            ChipLogProgress(chipTool, " ***** Test Step 37 : Read GroupTable 3\n");
+            err = TestReadGroupTable3_37();
+            break;
+        case 38:
+            ChipLogProgress(chipTool, " ***** Test Step 38 : KeySet Remove 2\n");
+            err = TestKeySetRemove2_38();
+            break;
+        case 39:
+            ChipLogProgress(chipTool, " ***** Test Step 39 : KeySet Read (also removed)\n");
+            err = TestKeySetReadAlsoRemoved_39();
+            break;
+        case 40:
+            ChipLogProgress(chipTool, " ***** Test Step 40 : KeySet Write 1\n");
+            err = TestKeySetWrite1_40();
             break;
         case 41:
-            ChipLogProgress(chipTool, " ***** Test Step 41 : KeySet Write 2 TrustFirst\n");
+            ChipLogProgress(chipTool, " ***** Test Step 41 : KeySet Write 2 CacheAndSync\n");
+            if (ShouldSkip("GRPKEY.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestKeySetWrite2CacheAndSync_41();
+            break;
+        case 42:
+            ChipLogProgress(chipTool, " ***** Test Step 42 : KeySet Write 2 TrustFirst\n");
             if (ShouldSkip("!GRPKEY.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestKeySetWrite2TrustFirst_41();
-            break;
-        case 42:
-            ChipLogProgress(chipTool, " ***** Test Step 42 : Map Group 1 and Group 2 to KeySet 1 and group 2 to KeySet 2\n");
-            err = TestMapGroup1AndGroup2ToKeySet1AndGroup2ToKeySet2_42();
+            err = TestKeySetWrite2TrustFirst_42();
             break;
         case 43:
-            ChipLogProgress(chipTool, " ***** Test Step 43 : Remove keyset 1\n");
-            err = TestRemoveKeyset1_43();
+            ChipLogProgress(chipTool, " ***** Test Step 43 : Map Group 1 and Group 2 to KeySet 1 and group 2 to KeySet 2\n");
+            err = TestMapGroup1AndGroup2ToKeySet1AndGroup2ToKeySet2_43();
             break;
         case 44:
-            ChipLogProgress(chipTool, " ***** Test Step 44 : TH verifies GroupKeyMap entries for KeySet 1 have been removed\n");
-            err = TestThVerifiesGroupKeyMapEntriesForKeySet1HaveBeenRemoved_44();
+            ChipLogProgress(chipTool, " ***** Test Step 44 : Remove keyset 1\n");
+            err = TestRemoveKeyset1_44();
             break;
         case 45:
-            ChipLogProgress(chipTool, " ***** Test Step 45 : Remove keyset 2\n");
-            err = TestRemoveKeyset2_45();
+            ChipLogProgress(chipTool, " ***** Test Step 45 : TH verifies GroupKeyMap entries for KeySet 1 have been removed\n");
+            err = TestThVerifiesGroupKeyMapEntriesForKeySet1HaveBeenRemoved_45();
             break;
         case 46:
-            ChipLogProgress(chipTool, " ***** Test Step 46 : TH verifies GroupKeyMap entries for KeySet 2 have been removed\n");
-            err = TestThVerifiesGroupKeyMapEntriesForKeySet2HaveBeenRemoved_46();
+            ChipLogProgress(chipTool, " ***** Test Step 46 : Remove keyset 2\n");
+            err = TestRemoveKeyset2_46();
+            break;
+        case 47:
+            ChipLogProgress(chipTool, " ***** Test Step 47 : TH verifies GroupKeyMap entries for KeySet 2 have been removed\n");
+            err = TestThVerifiesGroupKeyMapEntriesForKeySet2HaveBeenRemoved_47();
             break;
         }
 
@@ -144056,13 +144060,13 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -144110,10 +144114,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 30:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 31:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
             break;
         case 32:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -144134,10 +144138,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 38:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 39:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
             break;
         case 40:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -144160,6 +144164,9 @@ public:
         case 46:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 47:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -144173,7 +144180,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 47;
+    const uint16_t mTestCount = 48;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -144524,7 +144531,32 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteGroupKeysInvalid_12()
+    CHIP_ERROR TestKeySetReadAllIndices_12()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster keySetReadAllIndicesWithCompletion:^(
+            MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams * _Nullable values, NSError * _Nullable err) {
+            NSLog(@"KeySet Read All Indices Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintContains("groupKeySetIDs", values.groupKeySetIDs, 417U));
+            VerifyOrReturn(CheckConstraintContains("groupKeySetIDs", values.groupKeySetIDs, 418U));
+            VerifyOrReturn(CheckConstraintContains("groupKeySetIDs", values.groupKeySetIDs, 0U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWriteGroupKeysInvalid_13()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -144559,7 +144591,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteGroupKeysTooMany_13()
+    CHIP_ERROR TestWriteGroupKeysTooMany_14()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -144659,7 +144691,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteGroupKeysOnAlpha_14()
+    CHIP_ERROR TestWriteGroupKeysOnAlpha_15()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -144705,7 +144737,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteGroupKeysOnBeta_15()
+    CHIP_ERROR TestWriteGroupKeysOnBeta_16()
     {
 
         MTRBaseDevice * device = GetDevice("beta");
@@ -144751,7 +144783,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadGroupKeysOnAlpha_16()
+    CHIP_ERROR TestReadGroupKeysOnAlpha_17()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -144813,7 +144845,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadGroupKeysOnAlphaWithoutFabricFiltering_17()
+    CHIP_ERROR TestReadGroupKeysOnAlphaWithoutFabricFiltering_18()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -144907,7 +144939,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadGroupKeysOnBeta_18()
+    CHIP_ERROR TestReadGroupKeysOnBeta_19()
     {
 
         MTRBaseDevice * device = GetDevice("beta");
@@ -144969,7 +145001,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadGroupKeysOnBetaWithoutFabricFiltering_19()
+    CHIP_ERROR TestReadGroupKeysOnBetaWithoutFabricFiltering_20()
     {
 
         MTRBaseDevice * device = GetDevice("beta");
@@ -145063,7 +145095,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestAddGroup1_20()
+    CHIP_ERROR TestAddGroup1_21()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -145095,7 +145127,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestAddGroup2_21()
+    CHIP_ERROR TestAddGroup2_22()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -145127,7 +145159,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestAddGroup3_22()
+    CHIP_ERROR TestAddGroup3_23()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -145159,7 +145191,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestAddGroup4_23()
+    CHIP_ERROR TestAddGroup4_24()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -145191,7 +145223,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestAddGroup5_24()
+    CHIP_ERROR TestAddGroup5_25()
     {
 
         MTRBaseDevice * device = GetDevice("beta");
@@ -145223,7 +145255,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadGroupTableFromAlpha_25()
+    CHIP_ERROR TestReadGroupTableFromAlpha_26()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -145312,7 +145344,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadGroupTableFromAlphaWithoutFabricFiltering_26()
+    CHIP_ERROR TestReadGroupTableFromAlphaWithoutFabricFiltering_27()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -145416,7 +145448,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadGroupTableFromBeta_27()
+    CHIP_ERROR TestReadGroupTableFromBeta_28()
     {
 
         MTRBaseDevice * device = GetDevice("beta");
@@ -145460,7 +145492,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadGroupTableFromBetaWithoutFabricFiltering_28()
+    CHIP_ERROR TestReadGroupTableFromBetaWithoutFabricFiltering_29()
     {
 
         MTRBaseDevice * device = GetDevice("beta");
@@ -145564,7 +145596,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetRemove1_29()
+    CHIP_ERROR TestKeySetRemove1_30()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -145587,7 +145619,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetReadRemoved_30()
+    CHIP_ERROR TestKeySetReadRemoved_31()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -145614,7 +145646,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetReadNotRemovedCacheAndSync_31()
+    CHIP_ERROR TestKeySetReadNotRemovedCacheAndSync_32()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -145665,7 +145697,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetReadNotRemovedTrustFirst_32()
+    CHIP_ERROR TestKeySetReadNotRemovedTrustFirst_33()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -145716,7 +145748,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestRemoveGroup1_33()
+    CHIP_ERROR TestRemoveGroup1_34()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -145747,7 +145779,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadGroupTable2_34()
+    CHIP_ERROR TestReadGroupTable2_35()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -145821,7 +145853,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestRemoveAll_35()
+    CHIP_ERROR TestRemoveAll_36()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -145839,7 +145871,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadGroupTable3_36()
+    CHIP_ERROR TestReadGroupTable3_37()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -145868,7 +145900,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetRemove2_37()
+    CHIP_ERROR TestKeySetRemove2_38()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -145891,7 +145923,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetReadAlsoRemoved_38()
+    CHIP_ERROR TestKeySetReadAlsoRemoved_39()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -145918,7 +145950,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetWrite1_39()
+    CHIP_ERROR TestKeySetWrite1_40()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -145958,7 +145990,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetWrite2CacheAndSync_40()
+    CHIP_ERROR TestKeySetWrite2CacheAndSync_41()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -145998,7 +146030,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetWrite2TrustFirst_41()
+    CHIP_ERROR TestKeySetWrite2TrustFirst_42()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -146038,7 +146070,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestMapGroup1AndGroup2ToKeySet1AndGroup2ToKeySet2_42()
+    CHIP_ERROR TestMapGroup1AndGroup2ToKeySet1AndGroup2ToKeySet2_43()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -146079,7 +146111,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestRemoveKeyset1_43()
+    CHIP_ERROR TestRemoveKeyset1_44()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -146102,7 +146134,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThVerifiesGroupKeyMapEntriesForKeySet1HaveBeenRemoved_44()
+    CHIP_ERROR TestThVerifiesGroupKeyMapEntriesForKeySet1HaveBeenRemoved_45()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -146140,7 +146172,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestRemoveKeyset2_45()
+    CHIP_ERROR TestRemoveKeyset2_46()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -146163,7 +146195,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThVerifiesGroupKeyMapEntriesForKeySet2HaveBeenRemoved_46()
+    CHIP_ERROR TestThVerifiesGroupKeyMapEntriesForKeySet2HaveBeenRemoved_47()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
