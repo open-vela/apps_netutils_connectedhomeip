@@ -7730,16 +7730,6 @@ API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  */
 - (void)changeToModeWithParams:(MTRModeSelectClusterChangeToModeParams *)params
                     completion:(MTRStatusCompletion)completion API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
-/**
- * Command ChangeToModeWithStatus
- *
- * This command is used to change device modes using the same mechanism and semantics as ChangeToMode, and additionally obtaining a
- response with an ability for clients to determine causes of failures with fine-grained details. For status response depending on
- NewMode field, see ChangeToMode command. On receipt of this command the device SHALL respond with a ChangeToModeResponse command.
- */
-- (void)changeToModeWithStatusWithParams:(MTRModeSelectClusterChangeToModeWithStatusParams *)params
-                              completion:(void (^)(MTRModeSelectClusterChangeToModeResponseParams * _Nullable data,
-                                             NSError * _Nullable error))completion MTR_NEWLY_AVAILABLE;
 
 - (void)readAttributeDescriptionWithCompletion:(void (^)(NSString * _Nullable value, NSError * _Nullable error))completion
     API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
@@ -31561,28 +31551,11 @@ typedef NS_ENUM(uint8_t, MTRGroupKeyManagementGroupKeySecurityPolicy) {
     MTRGroupKeyManagementGroupKeySecurityPolicyCacheAndSync API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x01,
 } API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
-typedef NS_ENUM(uint16_t, MTRModeSelectModeTag) {
-    MTRModeSelectModeTagAuto MTR_NEWLY_AVAILABLE = 0x00,
-    MTRModeSelectModeTagQuick MTR_NEWLY_AVAILABLE = 0x01,
-    MTRModeSelectModeTagQuiet MTR_NEWLY_AVAILABLE = 0x02,
-    MTRModeSelectModeTagLowNoise MTR_NEWLY_AVAILABLE = 0x03,
-    MTRModeSelectModeTagLowEnergy MTR_NEWLY_AVAILABLE = 0x04,
-    MTRModeSelectModeTagVacation MTR_NEWLY_AVAILABLE = 0x05,
-    MTRModeSelectModeTagMin MTR_NEWLY_AVAILABLE = 0x06,
-    MTRModeSelectModeTagMax MTR_NEWLY_AVAILABLE = 0x07,
-    MTRModeSelectModeTagNight MTR_NEWLY_AVAILABLE = 0x08,
-    MTRModeSelectModeTagDay MTR_NEWLY_AVAILABLE = 0x09,
-} MTR_NEWLY_AVAILABLE;
-
-typedef NS_ENUM(uint8_t, MTRModeSelectStatusCode) {
-    MTRModeSelectStatusCodeSuccess MTR_NEWLY_AVAILABLE = 0x00,
-    MTRModeSelectStatusCodeUnsupportedMode MTR_NEWLY_AVAILABLE = 0x01,
-    MTRModeSelectStatusCodeGenericFailure MTR_NEWLY_AVAILABLE = 0x02,
-} MTR_NEWLY_AVAILABLE;
-
 typedef NS_OPTIONS(uint32_t, MTRModeSelectFeature) {
     MTRModeSelectFeatureOnOff MTR_NEWLY_AVAILABLE = 0x1,
-    MTRModeSelectFeatureExtendedStatus MTR_NEWLY_AVAILABLE = 0x2,
+    MTRModeSelectFeatureDEPONOFF API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
+        MTR_NEWLY_DEPRECATED("Please use MTRModeSelectFeatureOnOff")
+    = 0x1,
 } API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 typedef NS_OPTIONS(uint32_t, MTRTemperatureControlFeature) {

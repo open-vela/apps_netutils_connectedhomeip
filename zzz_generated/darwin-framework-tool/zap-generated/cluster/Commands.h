@@ -39674,54 +39674,6 @@ private:
 };
 
 /*
- * Command ChangeToModeWithStatus
- */
-class ModeSelectChangeToModeWithStatus : public ClusterCommand {
-public:
-    ModeSelectChangeToModeWithStatus()
-        : ClusterCommand("change-to-mode-with-status")
-    {
-        AddArgument("NewMode", 0, UINT8_MAX, &mRequest.newMode);
-        ClusterCommand::AddArguments();
-    }
-
-    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
-    {
-        ChipLogProgress(chipTool, "Sending cluster (0x00000050) command (0x00000001) on endpoint %u", endpointId);
-
-        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterModeSelect alloc] initWithDevice:device
-                                                                      endpointID:@(endpointId)
-                                                                           queue:callbackQueue];
-        __auto_type * params = [[MTRModeSelectClusterChangeToModeWithStatusParams alloc] init];
-        params.timedInvokeTimeoutMs
-            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.newMode = [NSNumber numberWithUnsignedChar:mRequest.newMode];
-        uint16_t repeatCount = mRepeatCount.ValueOr(1);
-        uint16_t __block responsesNeeded = repeatCount;
-        while (repeatCount--) {
-            [cluster changeToModeWithStatusWithParams:params
-                                           completion:^(MTRModeSelectClusterChangeToModeResponseParams * _Nullable values,
-                                               NSError * _Nullable error) {
-                                               NSLog(@"Values: %@", values);
-                                               responsesNeeded--;
-                                               if (error != nil) {
-                                                   mError = error;
-                                                   LogNSError("Error", error);
-                                               }
-                                               if (responsesNeeded == 0) {
-                                                   SetCommandExitStatus(mError);
-                                               }
-                                           }];
-        }
-        return CHIP_NO_ERROR;
-    }
-
-private:
-    chip::app::Clusters::ModeSelect::Commands::ChangeToModeWithStatus::Type mRequest;
-};
-
-/*
  * Attribute Description
  */
 class ReadModeSelectDescription : public ReadAttribute {
@@ -161689,7 +161641,6 @@ void registerClusterModeSelect(Commands & commands)
     commands_list clusterCommands = {
         make_unique<ClusterCommand>(Id), //
         make_unique<ModeSelectChangeToMode>(), //
-        make_unique<ModeSelectChangeToModeWithStatus>(), //
         make_unique<ReadAttribute>(Id), //
         make_unique<ReadModeSelectDescription>(), //
         make_unique<WriteAttribute>(Id), //
