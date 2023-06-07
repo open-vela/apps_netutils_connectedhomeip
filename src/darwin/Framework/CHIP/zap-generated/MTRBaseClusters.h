@@ -7978,19 +7978,17 @@ MTR_NEWLY_AVAILABLE
                                     completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
     MTR_NEWLY_AVAILABLE;
 
-- (void)readAttributeCurrentTemperatureLevelIndexWithCompletion:(void (^)(NSNumber * _Nullable value,
-                                                                    NSError * _Nullable error))completion MTR_NEWLY_AVAILABLE;
-- (void)subscribeAttributeCurrentTemperatureLevelIndexWithParams:(MTRSubscribeParams *)params
-                                         subscriptionEstablished:
-                                             (MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
-                                                   reportHandler:(void (^)(NSNumber * _Nullable value,
-                                                                     NSError * _Nullable error))reportHandler MTR_NEWLY_AVAILABLE;
-+ (void)readAttributeCurrentTemperatureLevelIndexWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
-                                                              endpoint:(NSNumber *)endpoint
-                                                                 queue:(dispatch_queue_t)queue
-                                                            completion:(void (^)(NSNumber * _Nullable value,
-                                                                           NSError * _Nullable error))completion
-    MTR_NEWLY_AVAILABLE;
+- (void)readAttributeSelectedTemperatureLevelWithCompletion:(void (^)(NSNumber * _Nullable value,
+                                                                NSError * _Nullable error))completion MTR_NEWLY_AVAILABLE;
+- (void)subscribeAttributeSelectedTemperatureLevelWithParams:(MTRSubscribeParams *)params
+                                     subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                               reportHandler:(void (^)(NSNumber * _Nullable value,
+                                                                 NSError * _Nullable error))reportHandler MTR_NEWLY_AVAILABLE;
++ (void)readAttributeSelectedTemperatureLevelWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                                          endpoint:(NSNumber *)endpoint
+                                                             queue:(dispatch_queue_t)queue
+                                                        completion:(void (^)(NSNumber * _Nullable value,
+                                                                       NSError * _Nullable error))completion MTR_NEWLY_AVAILABLE;
 
 - (void)readAttributeSupportedTemperatureLevelsWithCompletion:(void (^)(NSArray * _Nullable value,
                                                                   NSError * _Nullable error))completion MTR_NEWLY_AVAILABLE;
@@ -31590,6 +31588,7 @@ typedef NS_OPTIONS(uint32_t, MTRModeSelectFeature) {
 typedef NS_OPTIONS(uint32_t, MTRTemperatureControlFeature) {
     MTRTemperatureControlFeatureTemperatureNumber MTR_NEWLY_AVAILABLE = 0x1,
     MTRTemperatureControlFeatureTemperatureLevel MTR_NEWLY_AVAILABLE = 0x2,
+    MTRTemperatureControlFeatureTemperatureStep MTR_NEWLY_AVAILABLE = 0x4,
 } MTR_NEWLY_AVAILABLE;
 
 typedef NS_OPTIONS(uint32_t, MTRRefrigeratorAlarmAlarmMap) {

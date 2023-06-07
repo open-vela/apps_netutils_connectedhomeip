@@ -40652,7 +40652,7 @@ public:
 | * MinTemperature                                                    | 0x0001 |
 | * MaxTemperature                                                    | 0x0002 |
 | * Step                                                              | 0x0003 |
-| * CurrentTemperatureLevelIndex                                      | 0x0004 |
+| * SelectedTemperatureLevel                                          | 0x0004 |
 | * SupportedTemperatureLevels                                        | 0x0005 |
 | * GeneratedCommandList                                              | 0xFFF8 |
 | * AcceptedCommandList                                               | 0xFFF9 |
@@ -41001,16 +41001,16 @@ public:
 };
 
 /*
- * Attribute CurrentTemperatureLevelIndex
+ * Attribute SelectedTemperatureLevel
  */
-class ReadTemperatureControlCurrentTemperatureLevelIndex : public ReadAttribute {
+class ReadTemperatureControlSelectedTemperatureLevel : public ReadAttribute {
 public:
-    ReadTemperatureControlCurrentTemperatureLevelIndex()
-        : ReadAttribute("current-temperature-level-index")
+    ReadTemperatureControlSelectedTemperatureLevel()
+        : ReadAttribute("selected-temperature-level")
     {
     }
 
-    ~ReadTemperatureControlCurrentTemperatureLevelIndex() {}
+    ~ReadTemperatureControlSelectedTemperatureLevel() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -41020,10 +41020,10 @@ public:
         __auto_type * cluster = [[MTRBaseClusterTemperatureControl alloc] initWithDevice:device
                                                                               endpointID:@(endpointId)
                                                                                    queue:callbackQueue];
-        [cluster readAttributeCurrentTemperatureLevelIndexWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TemperatureControl.CurrentTemperatureLevelIndex response %@", [value description]);
+        [cluster readAttributeSelectedTemperatureLevelWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"TemperatureControl.SelectedTemperatureLevel response %@", [value description]);
             if (error != nil) {
-                LogNSError("TemperatureControl CurrentTemperatureLevelIndex read Error", error);
+                LogNSError("TemperatureControl SelectedTemperatureLevel read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -41031,14 +41031,14 @@ public:
     }
 };
 
-class SubscribeAttributeTemperatureControlCurrentTemperatureLevelIndex : public SubscribeAttribute {
+class SubscribeAttributeTemperatureControlSelectedTemperatureLevel : public SubscribeAttribute {
 public:
-    SubscribeAttributeTemperatureControlCurrentTemperatureLevelIndex()
-        : SubscribeAttribute("current-temperature-level-index")
+    SubscribeAttributeTemperatureControlSelectedTemperatureLevel()
+        : SubscribeAttribute("selected-temperature-level")
     {
     }
 
-    ~SubscribeAttributeTemperatureControlCurrentTemperatureLevelIndex() {}
+    ~SubscribeAttributeTemperatureControlSelectedTemperatureLevel() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -41057,12 +41057,12 @@ public:
         if (mAutoResubscribe.HasValue()) {
             params.resubscribeAutomatically = mAutoResubscribe.Value();
         }
-        [cluster subscribeAttributeCurrentTemperatureLevelIndexWithParams:params
+        [cluster subscribeAttributeSelectedTemperatureLevelWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TemperatureControl.CurrentTemperatureLevelIndex response %@", [value description]);
+                NSLog(@"TemperatureControl.SelectedTemperatureLevel response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -161743,8 +161743,8 @@ void registerClusterTemperatureControl(Commands & commands)
         make_unique<SubscribeAttributeTemperatureControlMaxTemperature>(), //
         make_unique<ReadTemperatureControlStep>(), //
         make_unique<SubscribeAttributeTemperatureControlStep>(), //
-        make_unique<ReadTemperatureControlCurrentTemperatureLevelIndex>(), //
-        make_unique<SubscribeAttributeTemperatureControlCurrentTemperatureLevelIndex>(), //
+        make_unique<ReadTemperatureControlSelectedTemperatureLevel>(), //
+        make_unique<SubscribeAttributeTemperatureControlSelectedTemperatureLevel>(), //
         make_unique<ReadTemperatureControlSupportedTemperatureLevels>(), //
         make_unique<SubscribeAttributeTemperatureControlSupportedTemperatureLevels>(), //
         make_unique<ReadTemperatureControlGeneratedCommandList>(), //
