@@ -48115,39 +48115,38 @@ using chip::System::Clock::Timeout;
         });
 }
 
-- (void)readAttributeCurrentTemperatureLevelIndexWithCompletion:(void (^)(NSNumber * _Nullable value,
-                                                                    NSError * _Nullable error))completion
+- (void)readAttributeSelectedTemperatureLevelWithCompletion:(void (^)(
+                                                                NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = TemperatureControl::Attributes::CurrentTemperatureLevelIndex::TypeInfo;
+    using TypeInfo = TemperatureControl::Attributes::SelectedTemperatureLevel::TypeInfo;
     return MTRReadAttribute<MTRInt8uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
-- (void)subscribeAttributeCurrentTemperatureLevelIndexWithParams:(MTRSubscribeParams * _Nonnull)params
-                                         subscriptionEstablished:
-                                             (MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
-                                                   reportHandler:(void (^)(NSNumber * _Nullable value,
-                                                                     NSError * _Nullable error))reportHandler
+- (void)subscribeAttributeSelectedTemperatureLevelWithParams:(MTRSubscribeParams * _Nonnull)params
+                                     subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                               reportHandler:
+                                                   (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = TemperatureControl::Attributes::CurrentTemperatureLevelIndex::TypeInfo;
+    using TypeInfo = TemperatureControl::Attributes::SelectedTemperatureLevel::TypeInfo;
     MTRSubscribeAttribute<MTRInt8uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
 }
 
-+ (void)readAttributeCurrentTemperatureLevelIndexWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
-                                                              endpoint:(NSNumber *)endpoint
-                                                                 queue:(dispatch_queue_t)queue
-                                                            completion:(void (^)(NSNumber * _Nullable value,
-                                                                           NSError * _Nullable error))completion
++ (void)readAttributeSelectedTemperatureLevelWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                                          endpoint:(NSNumber *)endpoint
+                                                             queue:(dispatch_queue_t)queue
+                                                        completion:(void (^)(NSNumber * _Nullable value,
+                                                                       NSError * _Nullable error))completion
 {
     auto * bridge = new MTRInt8uAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(
         clusterStateCacheContainer.baseDevice, ^(Int8uAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = TemperatureControl::Attributes::CurrentTemperatureLevelIndex::TypeInfo;
+                using TypeInfo = TemperatureControl::Attributes::SelectedTemperatureLevel::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
