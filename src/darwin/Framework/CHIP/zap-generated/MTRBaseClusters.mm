@@ -46713,41 +46713,6 @@ using chip::System::Clock::Timeout;
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)changeToModeWithStatusWithParams:(MTRModeSelectClusterChangeToModeWithStatusParams *)params
-                              completion:(void (^)(MTRModeSelectClusterChangeToModeResponseParams * _Nullable data,
-                                             NSError * _Nullable error))completion
-{
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRModeSelectClusterChangeToModeResponseCallbackBridge(self.callbackQueue, completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            ModeSelectClusterChangeToModeResponseCallbackType successCb, MTRErrorCallback failureCb,
-            MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRModeSelectClusterChangeToModeResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            ModeSelect::Commands::ChangeToModeWithStatus::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.newMode = params.newMode.unsignedCharValue;
-
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
-                timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
-}
-
 - (void)readAttributeDescriptionWithCompletion:(void (^)(NSString * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
@@ -47362,17 +47327,6 @@ using chip::System::Clock::Timeout;
              completionHandler:(MTRStatusCompletion)completionHandler
 {
     [self changeToModeWithParams:params completion:completionHandler];
-}
-- (void)changeToModeWithStatusWithParams:(MTRModeSelectClusterChangeToModeWithStatusParams *)params
-                       completionHandler:(void (^)(MTRModeSelectClusterChangeToModeResponseParams * _Nullable data,
-                                             NSError * _Nullable error))completionHandler
-{
-    [self changeToModeWithStatusWithParams:params
-                                completion:^(
-                                    MTRModeSelectClusterChangeToModeResponseParams * _Nullable data, NSError * _Nullable error) {
-                                    // Cast is safe because subclass does not add any selectors.
-                                    completionHandler(static_cast<MTRModeSelectClusterChangeToModeResponseParams *>(data), error);
-                                }];
 }
 
 - (void)readAttributeDescriptionWithCompletionHandler:(void (^)(
