@@ -275,6 +275,30 @@ public:
         printf("TestGroupKeyManagementCluster\n");
         printf("Test_TC_G_1_1\n");
         printf("Test_TC_G_2_1\n");
+        printf("Test_TC_ACFREMON_1_1\n");
+        printf("Test_TC_ACFREMON_2_1\n");
+        printf("Test_TC_CFREMON_1_1\n");
+        printf("Test_TC_CFREMON_2_1\n");
+        printf("Test_TC_ESFREMON_1_1\n");
+        printf("Test_TC_ESFREMON_2_1\n");
+        printf("Test_TC_FTREMON_1_1\n");
+        printf("Test_TC_FTREMON_2_1\n");
+        printf("Test_TC_HEPAFREMON_1_1\n");
+        printf("Test_TC_HEPAFREMON_2_1\n");
+        printf("Test_TC_INKCREMON_1_1\n");
+        printf("Test_TC_INKCREMON_2_1\n");
+        printf("Test_TC_IONFREMON_1_1\n");
+        printf("Test_TC_IONFREMON_2_1\n");
+        printf("Test_TC_OZFREMON_1_1\n");
+        printf("Test_TC_OZFREMON_2_1\n");
+        printf("Test_TC_TCREMON_1_1\n");
+        printf("Test_TC_TCREMON_2_1\n");
+        printf("Test_TC_UVFREMON_1_1\n");
+        printf("Test_TC_UVFREMON_2_1\n");
+        printf("Test_TC_WTREMON_1_1\n");
+        printf("Test_TC_WTREMON_2_1\n");
+        printf("Test_TC_ZEOFREMON_1_1\n");
+        printf("Test_TC_ZEOFREMON_2_1\n");
 
         return CHIP_NO_ERROR;
     }
@@ -97318,6 +97342,4446 @@ private:
     }
 };
 
+class Test_TC_ACFREMON_1_1Suite : public TestCommand
+{
+public:
+    Test_TC_ACFREMON_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_ACFREMON_1_1", 12, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_ACFREMON_1_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("featureMap", value, 0UL));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65530UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65532UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("eventList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Read the global attribute: ClusterRevision");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
+                                 ActivatedCarbonFilterMonitoring::Attributes::ClusterRevision::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Read the global attribute: FeatureMap");
+            VerifyOrDo(!ShouldSkip("!ACFREMON.S.F00 && !ACFREMON.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
+                                 ActivatedCarbonFilterMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "Given ACFREMON.S.F00(Condition) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("ACFREMON.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
+                                 ActivatedCarbonFilterMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "Given ACFREMON.S.F01(Warning) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("ACFREMON.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
+                                 ActivatedCarbonFilterMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "Read the global attribute: AttributeList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
+                                 ActivatedCarbonFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "Read the feature dependent(ACFREMON.S.F00) attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("ACFREMON.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
+                                 ActivatedCarbonFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "Read the optional attribute InPlaceIndicator (ACFREMON.S.A0002) in AttributeList");
+            VerifyOrDo(!ShouldSkip("ACFREMON.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
+                                 ActivatedCarbonFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "Read the global attribute: AcceptedCommandList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
+                                 ActivatedCarbonFilterMonitoring::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "Read the optional command (ResetCondition) in AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("ACFREMON.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
+                                 ActivatedCarbonFilterMonitoring::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "Read the global attribute: GeneratedCommandList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
+                                 ActivatedCarbonFilterMonitoring::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11, "TH reads EventList attribute from DUT");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
+                                 ActivatedCarbonFilterMonitoring::Attributes::EventList::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_ACFREMON_2_1Suite : public TestCommand
+{
+public:
+    Test_TC_ACFREMON_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_ACFREMON_2_1", 5, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_ACFREMON_2_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::Percent value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "percent", "percent"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 100U));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::ActivatedCarbonFilterMonitoring::DegradationDirectionEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 1U));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::ActivatedCarbonFilterMonitoring::ChangeIndicationEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                bool value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH reads from the DUT the Condition attribute.");
+            VerifyOrDo(!ShouldSkip("ACFREMON.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
+                                 ActivatedCarbonFilterMonitoring::Attributes::Condition::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TH reads from the DUT the DegradationDirection attribute..");
+            VerifyOrDo(!ShouldSkip("ACFREMON.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
+                                 ActivatedCarbonFilterMonitoring::Attributes::DegradationDirection::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "TH reads from the DUT the ChangeIndication attribute.");
+            VerifyOrDo(!ShouldSkip("ACFREMON.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
+                                 ActivatedCarbonFilterMonitoring::Attributes::ChangeIndication::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "TH reads from the DUT the InPlaceIndicator attribute");
+            VerifyOrDo(!ShouldSkip("ACFREMON.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
+                                 ActivatedCarbonFilterMonitoring::Attributes::InPlaceIndicator::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_CFREMON_1_1Suite : public TestCommand
+{
+public:
+    Test_TC_CFREMON_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_CFREMON_1_1", 12, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_CFREMON_1_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("featureMap", value, 0UL));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65530UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65532UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("eventList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Read the global attribute: ClusterRevision");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CeramicFilterMonitoring::Id,
+                                 CeramicFilterMonitoring::Attributes::ClusterRevision::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Read the global attribute: FeatureMap");
+            VerifyOrDo(!ShouldSkip("!CFREMON.S.F00 && !CFREMON.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CeramicFilterMonitoring::Id,
+                                 CeramicFilterMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "Given CFREMON.S.F00(Condition) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("CFREMON.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CeramicFilterMonitoring::Id,
+                                 CeramicFilterMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "Given CFREMON.S.F01(Warning) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("CFREMON.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CeramicFilterMonitoring::Id,
+                                 CeramicFilterMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "Read the global attribute: AttributeList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CeramicFilterMonitoring::Id,
+                                 CeramicFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "Read the feature dependent(CFREMON.S.F00) attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("CFREMON.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CeramicFilterMonitoring::Id,
+                                 CeramicFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "Read the optional attribute InPlaceIndicator (CFREMON.S.A0002) in AttributeList");
+            VerifyOrDo(!ShouldSkip("CFREMON.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CeramicFilterMonitoring::Id,
+                                 CeramicFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "Read the global attribute: AcceptedCommandList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CeramicFilterMonitoring::Id,
+                                 CeramicFilterMonitoring::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "Read the optional command (ResetCondition) in AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("CFREMON.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CeramicFilterMonitoring::Id,
+                                 CeramicFilterMonitoring::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "Read the global attribute: GeneratedCommandList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CeramicFilterMonitoring::Id,
+                                 CeramicFilterMonitoring::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11, "TH reads EventList attribute from DUT");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CeramicFilterMonitoring::Id,
+                                 CeramicFilterMonitoring::Attributes::EventList::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_CFREMON_2_1Suite : public TestCommand
+{
+public:
+    Test_TC_CFREMON_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_CFREMON_2_1", 5, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_CFREMON_2_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::Percent value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "percent", "percent"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 100U));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::CeramicFilterMonitoring::DegradationDirectionEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 1U));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::CeramicFilterMonitoring::ChangeIndicationEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                bool value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH reads from the DUT the Condition attribute.");
+            VerifyOrDo(!ShouldSkip("CFREMON.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CeramicFilterMonitoring::Id,
+                                 CeramicFilterMonitoring::Attributes::Condition::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TH reads from the DUT the DegradationDirection attribute..");
+            VerifyOrDo(!ShouldSkip("CFREMON.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CeramicFilterMonitoring::Id,
+                                 CeramicFilterMonitoring::Attributes::DegradationDirection::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "TH reads from the DUT the ChangeIndication attribute.");
+            VerifyOrDo(!ShouldSkip("CFREMON.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CeramicFilterMonitoring::Id,
+                                 CeramicFilterMonitoring::Attributes::ChangeIndication::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "TH reads from the DUT the InPlaceIndicator attribute");
+            VerifyOrDo(!ShouldSkip("CFREMON.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CeramicFilterMonitoring::Id,
+                                 CeramicFilterMonitoring::Attributes::InPlaceIndicator::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_ESFREMON_1_1Suite : public TestCommand
+{
+public:
+    Test_TC_ESFREMON_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_ESFREMON_1_1", 12, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_ESFREMON_1_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("featureMap", value, 0UL));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65530UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65532UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("eventList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Read the global attribute: ClusterRevision");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ElectrostaticFilterMonitoring::Id,
+                                 ElectrostaticFilterMonitoring::Attributes::ClusterRevision::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Read the global attribute: FeatureMap");
+            VerifyOrDo(!ShouldSkip("!ESFREMON.S.F00 && !ESFREMON.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ElectrostaticFilterMonitoring::Id,
+                                 ElectrostaticFilterMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "Given ESFREMON.S.F00(Condition) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("ESFREMON.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ElectrostaticFilterMonitoring::Id,
+                                 ElectrostaticFilterMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "Given ESFREMON.S.F01(Warning) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("ESFREMON.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ElectrostaticFilterMonitoring::Id,
+                                 ElectrostaticFilterMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "Read the global attribute: AttributeList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ElectrostaticFilterMonitoring::Id,
+                                 ElectrostaticFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "Read the feature dependent(ESFREMON.S.F00) attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("ESFREMON.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ElectrostaticFilterMonitoring::Id,
+                                 ElectrostaticFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "Read the optional attribute InPlaceIndicator (ESFREMON.S.A0002) in AttributeList");
+            VerifyOrDo(!ShouldSkip("ESFREMON.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ElectrostaticFilterMonitoring::Id,
+                                 ElectrostaticFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "Read the global attribute: AcceptedCommandList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ElectrostaticFilterMonitoring::Id,
+                                 ElectrostaticFilterMonitoring::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "Read the optional command (ResetCondition) in AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("ESFREMON.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ElectrostaticFilterMonitoring::Id,
+                                 ElectrostaticFilterMonitoring::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "Read the global attribute: GeneratedCommandList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ElectrostaticFilterMonitoring::Id,
+                                 ElectrostaticFilterMonitoring::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11, "TH reads EventList attribute from DUT");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ElectrostaticFilterMonitoring::Id,
+                                 ElectrostaticFilterMonitoring::Attributes::EventList::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_ESFREMON_2_1Suite : public TestCommand
+{
+public:
+    Test_TC_ESFREMON_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_ESFREMON_2_1", 5, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_ESFREMON_2_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::Percent value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "percent", "percent"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 100U));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::ElectrostaticFilterMonitoring::DegradationDirectionEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 1U));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::ElectrostaticFilterMonitoring::ChangeIndicationEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                bool value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH reads from the DUT the Condition attribute.");
+            VerifyOrDo(!ShouldSkip("ESFREMON.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ElectrostaticFilterMonitoring::Id,
+                                 ElectrostaticFilterMonitoring::Attributes::Condition::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TH reads from the DUT the DegradationDirection attribute..");
+            VerifyOrDo(!ShouldSkip("ESFREMON.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ElectrostaticFilterMonitoring::Id,
+                                 ElectrostaticFilterMonitoring::Attributes::DegradationDirection::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "TH reads from the DUT the ChangeIndication attribute.");
+            VerifyOrDo(!ShouldSkip("ESFREMON.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ElectrostaticFilterMonitoring::Id,
+                                 ElectrostaticFilterMonitoring::Attributes::ChangeIndication::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "TH reads from the DUT the InPlaceIndicator attribute");
+            VerifyOrDo(!ShouldSkip("ESFREMON.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ElectrostaticFilterMonitoring::Id,
+                                 ElectrostaticFilterMonitoring::Attributes::InPlaceIndicator::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_FTREMON_1_1Suite : public TestCommand
+{
+public:
+    Test_TC_FTREMON_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_FTREMON_1_1", 12, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_FTREMON_1_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("featureMap", value, 0UL));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65530UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65532UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("eventList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Read the global attribute: ClusterRevision");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FuelTankMonitoring::Id,
+                                 FuelTankMonitoring::Attributes::ClusterRevision::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Read the global attribute: FeatureMap");
+            VerifyOrDo(!ShouldSkip("!FTREMON.S.F00 && !FTREMON.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FuelTankMonitoring::Id,
+                                 FuelTankMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "Given FTREMON.S.F00(Condition) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("FTREMON.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FuelTankMonitoring::Id,
+                                 FuelTankMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "Given FTREMON.S.F01(Warning) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("FTREMON.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FuelTankMonitoring::Id,
+                                 FuelTankMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "Read the global attribute: AttributeList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FuelTankMonitoring::Id,
+                                 FuelTankMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "Read the feature dependent(FTREMON.S.F00) attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("FTREMON.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FuelTankMonitoring::Id,
+                                 FuelTankMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "Read the optional attribute InPlaceIndicator (FTREMON.S.A0002) in AttributeList");
+            VerifyOrDo(!ShouldSkip("FTREMON.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FuelTankMonitoring::Id,
+                                 FuelTankMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "Read the global attribute: AcceptedCommandList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FuelTankMonitoring::Id,
+                                 FuelTankMonitoring::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "Read the optional command (ResetCondition) in AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("FTREMON.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FuelTankMonitoring::Id,
+                                 FuelTankMonitoring::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "Read the global attribute: GeneratedCommandList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FuelTankMonitoring::Id,
+                                 FuelTankMonitoring::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11, "TH reads EventList attribute from DUT");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FuelTankMonitoring::Id,
+                                 FuelTankMonitoring::Attributes::EventList::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_FTREMON_2_1Suite : public TestCommand
+{
+public:
+    Test_TC_FTREMON_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_FTREMON_2_1", 5, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_FTREMON_2_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::Percent value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "percent", "percent"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 100U));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::FuelTankMonitoring::DegradationDirectionEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 1U));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::FuelTankMonitoring::ChangeIndicationEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                bool value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH reads from the DUT the Condition attribute.");
+            VerifyOrDo(!ShouldSkip("FTREMON.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FuelTankMonitoring::Id,
+                                 FuelTankMonitoring::Attributes::Condition::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TH reads from the DUT the DegradationDirection attribute..");
+            VerifyOrDo(!ShouldSkip("FTREMON.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FuelTankMonitoring::Id,
+                                 FuelTankMonitoring::Attributes::DegradationDirection::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "TH reads from the DUT the ChangeIndication attribute.");
+            VerifyOrDo(!ShouldSkip("FTREMON.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FuelTankMonitoring::Id,
+                                 FuelTankMonitoring::Attributes::ChangeIndication::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "TH reads from the DUT the InPlaceIndicator attribute");
+            VerifyOrDo(!ShouldSkip("FTREMON.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FuelTankMonitoring::Id,
+                                 FuelTankMonitoring::Attributes::InPlaceIndicator::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_HEPAFREMON_1_1Suite : public TestCommand
+{
+public:
+    Test_TC_HEPAFREMON_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_HEPAFREMON_1_1", 12, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_HEPAFREMON_1_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("featureMap", value, 0UL));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65530UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65532UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("eventList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Read the global attribute: ClusterRevision");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
+                                 HepaFilterMonitoring::Attributes::ClusterRevision::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Read the global attribute: FeatureMap");
+            VerifyOrDo(!ShouldSkip("!HEPAFREMON.S.F00 && !HEPAFREMON.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
+                                 HepaFilterMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "Given HEPAFREMON.S.F00(Condition) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("HEPAFREMON.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
+                                 HepaFilterMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "Given HEPAFREMON.S.F01(Warning) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("HEPAFREMON.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
+                                 HepaFilterMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "Read the global attribute: AttributeList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
+                                 HepaFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "Read the feature dependent(HEPAFREMON.S.F00) attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("HEPAFREMON.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
+                                 HepaFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "Read the optional attribute InPlaceIndicator (HEPAFREMON.S.A0002) in AttributeList");
+            VerifyOrDo(!ShouldSkip("HEPAFREMON.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
+                                 HepaFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "Read the global attribute: AcceptedCommandList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
+                                 HepaFilterMonitoring::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "Read the optional command (ResetCondition) in AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("HEPAFREMON.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
+                                 HepaFilterMonitoring::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "Read the global attribute: GeneratedCommandList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
+                                 HepaFilterMonitoring::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11, "TH reads EventList attribute from DUT");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
+                                 HepaFilterMonitoring::Attributes::EventList::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_HEPAFREMON_2_1Suite : public TestCommand
+{
+public:
+    Test_TC_HEPAFREMON_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_HEPAFREMON_2_1", 5, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_HEPAFREMON_2_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::Percent value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "percent", "percent"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 100U));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::HepaFilterMonitoring::DegradationDirectionEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 1U));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::HepaFilterMonitoring::ChangeIndicationEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                bool value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH reads from the DUT the Condition attribute.");
+            VerifyOrDo(!ShouldSkip("HEPAFREMON.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
+                                 HepaFilterMonitoring::Attributes::Condition::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TH reads from the DUT the DegradationDirection attribute..");
+            VerifyOrDo(!ShouldSkip("HEPAFREMON.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
+                                 HepaFilterMonitoring::Attributes::DegradationDirection::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "TH reads from the DUT the ChangeIndication attribute.");
+            VerifyOrDo(!ShouldSkip("HEPAFREMON.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
+                                 HepaFilterMonitoring::Attributes::ChangeIndication::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "TH reads from the DUT the InPlaceIndicator attribute");
+            VerifyOrDo(!ShouldSkip("HEPAFREMON.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
+                                 HepaFilterMonitoring::Attributes::InPlaceIndicator::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_INKCREMON_1_1Suite : public TestCommand
+{
+public:
+    Test_TC_INKCREMON_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_INKCREMON_1_1", 12, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_INKCREMON_1_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("featureMap", value, 0UL));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65530UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65532UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("eventList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Read the global attribute: ClusterRevision");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), InkCartridgeMonitoring::Id,
+                                 InkCartridgeMonitoring::Attributes::ClusterRevision::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Read the global attribute: FeatureMap");
+            VerifyOrDo(!ShouldSkip("!INKCREMON.S.F00 && !INKCREMON.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), InkCartridgeMonitoring::Id,
+                                 InkCartridgeMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "Given INKCREMON.S.F00(Condition) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("INKCREMON.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), InkCartridgeMonitoring::Id,
+                                 InkCartridgeMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "Given INKCREMON.S.F01(Warning) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("INKCREMON.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), InkCartridgeMonitoring::Id,
+                                 InkCartridgeMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "Read the global attribute: AttributeList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), InkCartridgeMonitoring::Id,
+                                 InkCartridgeMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "Read the feature dependent(INKCREMON.S.F00) attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("INKCREMON.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), InkCartridgeMonitoring::Id,
+                                 InkCartridgeMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "Read the optional attribute InPlaceIndicator (INKCREMON.S.A0002) in AttributeList");
+            VerifyOrDo(!ShouldSkip("INKCREMON.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), InkCartridgeMonitoring::Id,
+                                 InkCartridgeMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "Read the global attribute: AcceptedCommandList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), InkCartridgeMonitoring::Id,
+                                 InkCartridgeMonitoring::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "Read the optional command (ResetCondition) in AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("INKCREMON.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), InkCartridgeMonitoring::Id,
+                                 InkCartridgeMonitoring::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "Read the global attribute: GeneratedCommandList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), InkCartridgeMonitoring::Id,
+                                 InkCartridgeMonitoring::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11, "TH reads EventList attribute from DUT");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), InkCartridgeMonitoring::Id,
+                                 InkCartridgeMonitoring::Attributes::EventList::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_INKCREMON_2_1Suite : public TestCommand
+{
+public:
+    Test_TC_INKCREMON_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_INKCREMON_2_1", 5, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_INKCREMON_2_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::Percent value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "percent", "percent"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 100U));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::InkCartridgeMonitoring::DegradationDirectionEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 1U));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::InkCartridgeMonitoring::ChangeIndicationEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                bool value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH reads from the DUT the Condition attribute.");
+            VerifyOrDo(!ShouldSkip("INKCREMON.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), InkCartridgeMonitoring::Id,
+                                 InkCartridgeMonitoring::Attributes::Condition::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TH reads from the DUT the DegradationDirection attribute..");
+            VerifyOrDo(!ShouldSkip("INKCREMON.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), InkCartridgeMonitoring::Id,
+                                 InkCartridgeMonitoring::Attributes::DegradationDirection::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "TH reads from the DUT the ChangeIndication attribute.");
+            VerifyOrDo(!ShouldSkip("INKCREMON.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), InkCartridgeMonitoring::Id,
+                                 InkCartridgeMonitoring::Attributes::ChangeIndication::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "TH reads from the DUT the InPlaceIndicator attribute");
+            VerifyOrDo(!ShouldSkip("INKCREMON.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), InkCartridgeMonitoring::Id,
+                                 InkCartridgeMonitoring::Attributes::InPlaceIndicator::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_IONFREMON_1_1Suite : public TestCommand
+{
+public:
+    Test_TC_IONFREMON_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_IONFREMON_1_1", 12, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_IONFREMON_1_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("featureMap", value, 0UL));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65530UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65532UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("eventList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Read the global attribute: ClusterRevision");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), IonizingFilterMonitoring::Id,
+                                 IonizingFilterMonitoring::Attributes::ClusterRevision::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Read the global attribute: FeatureMap");
+            VerifyOrDo(!ShouldSkip("!IONFREMON.S.F00 && !IONFREMON.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), IonizingFilterMonitoring::Id,
+                                 IonizingFilterMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "Given IONFREMON.S.F00(Condition) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("IONFREMON.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), IonizingFilterMonitoring::Id,
+                                 IonizingFilterMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "Given IONFREMON.S.F01(Warning) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("IONFREMON.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), IonizingFilterMonitoring::Id,
+                                 IonizingFilterMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "Read the global attribute: AttributeList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), IonizingFilterMonitoring::Id,
+                                 IonizingFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "Read the feature dependent(IONFREMON.S.F00) attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("IONFREMON.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), IonizingFilterMonitoring::Id,
+                                 IonizingFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "Read the optional attribute InPlaceIndicator (IONFREMON.S.A0002) in AttributeList");
+            VerifyOrDo(!ShouldSkip("IONFREMON.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), IonizingFilterMonitoring::Id,
+                                 IonizingFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "Read the global attribute: AcceptedCommandList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), IonizingFilterMonitoring::Id,
+                                 IonizingFilterMonitoring::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "Read the optional command (ResetCondition) in AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("IONFREMON.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), IonizingFilterMonitoring::Id,
+                                 IonizingFilterMonitoring::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "Read the global attribute: GeneratedCommandList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), IonizingFilterMonitoring::Id,
+                                 IonizingFilterMonitoring::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11, "TH reads EventList attribute from DUT");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), IonizingFilterMonitoring::Id,
+                                 IonizingFilterMonitoring::Attributes::EventList::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_IONFREMON_2_1Suite : public TestCommand
+{
+public:
+    Test_TC_IONFREMON_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_IONFREMON_2_1", 5, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_IONFREMON_2_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::Percent value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "percent", "percent"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 100U));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::IonizingFilterMonitoring::DegradationDirectionEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 1U));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::IonizingFilterMonitoring::ChangeIndicationEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                bool value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH reads from the DUT the Condition attribute.");
+            VerifyOrDo(!ShouldSkip("IONFREMON.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), IonizingFilterMonitoring::Id,
+                                 IonizingFilterMonitoring::Attributes::Condition::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TH reads from the DUT the DegradationDirection attribute..");
+            VerifyOrDo(!ShouldSkip("IONFREMON.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), IonizingFilterMonitoring::Id,
+                                 IonizingFilterMonitoring::Attributes::DegradationDirection::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "TH reads from the DUT the ChangeIndication attribute.");
+            VerifyOrDo(!ShouldSkip("IONFREMON.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), IonizingFilterMonitoring::Id,
+                                 IonizingFilterMonitoring::Attributes::ChangeIndication::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "TH reads from the DUT the InPlaceIndicator attribute");
+            VerifyOrDo(!ShouldSkip("IONFREMON.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), IonizingFilterMonitoring::Id,
+                                 IonizingFilterMonitoring::Attributes::InPlaceIndicator::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_OZFREMON_1_1Suite : public TestCommand
+{
+public:
+    Test_TC_OZFREMON_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_OZFREMON_1_1", 12, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_OZFREMON_1_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("featureMap", value, 0UL));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65530UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65532UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("eventList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Read the global attribute: ClusterRevision");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneFilterMonitoring::Id,
+                                 OzoneFilterMonitoring::Attributes::ClusterRevision::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Read the global attribute: FeatureMap");
+            VerifyOrDo(!ShouldSkip("!OZFREMON.S.F00 && !OZFREMON.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneFilterMonitoring::Id,
+                                 OzoneFilterMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "Given OZFREMON.S.F00(Condition) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("OZFREMON.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneFilterMonitoring::Id,
+                                 OzoneFilterMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "Given OZFREMON.S.F01(Warning) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("OZFREMON.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneFilterMonitoring::Id,
+                                 OzoneFilterMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "Read the global attribute: AttributeList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneFilterMonitoring::Id,
+                                 OzoneFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "Read the feature dependent(OZFREMON.S.F00) attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("OZFREMON.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneFilterMonitoring::Id,
+                                 OzoneFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "Read the optional attribute InPlaceIndicator (OZFREMON.S.A0002) in AttributeList");
+            VerifyOrDo(!ShouldSkip("OZFREMON.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneFilterMonitoring::Id,
+                                 OzoneFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "Read the global attribute: AcceptedCommandList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneFilterMonitoring::Id,
+                                 OzoneFilterMonitoring::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "Read the optional command (ResetCondition) in AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("OZFREMON.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneFilterMonitoring::Id,
+                                 OzoneFilterMonitoring::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "Read the global attribute: GeneratedCommandList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneFilterMonitoring::Id,
+                                 OzoneFilterMonitoring::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11, "TH reads EventList attribute from DUT");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneFilterMonitoring::Id,
+                                 OzoneFilterMonitoring::Attributes::EventList::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_OZFREMON_2_1Suite : public TestCommand
+{
+public:
+    Test_TC_OZFREMON_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_OZFREMON_2_1", 5, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_OZFREMON_2_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::Percent value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "percent", "percent"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 100U));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::OzoneFilterMonitoring::DegradationDirectionEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 1U));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::OzoneFilterMonitoring::ChangeIndicationEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                bool value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH reads from the DUT the Condition attribute.");
+            VerifyOrDo(!ShouldSkip("OZFREMON.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneFilterMonitoring::Id,
+                                 OzoneFilterMonitoring::Attributes::Condition::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TH reads from the DUT the DegradationDirection attribute..");
+            VerifyOrDo(!ShouldSkip("OZFREMON.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneFilterMonitoring::Id,
+                                 OzoneFilterMonitoring::Attributes::DegradationDirection::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "TH reads from the DUT the ChangeIndication attribute.");
+            VerifyOrDo(!ShouldSkip("OZFREMON.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneFilterMonitoring::Id,
+                                 OzoneFilterMonitoring::Attributes::ChangeIndication::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "TH reads from the DUT the InPlaceIndicator attribute");
+            VerifyOrDo(!ShouldSkip("OZFREMON.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneFilterMonitoring::Id,
+                                 OzoneFilterMonitoring::Attributes::InPlaceIndicator::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_TCREMON_1_1Suite : public TestCommand
+{
+public:
+    Test_TC_TCREMON_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_TCREMON_1_1", 12, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_TCREMON_1_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("featureMap", value, 0UL));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65530UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65532UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("eventList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Read the global attribute: ClusterRevision");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TonerCartridgeMonitoring::Id,
+                                 TonerCartridgeMonitoring::Attributes::ClusterRevision::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Read the global attribute: FeatureMap");
+            VerifyOrDo(!ShouldSkip("!TCREMON.S.F00 && !TCREMON.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TonerCartridgeMonitoring::Id,
+                                 TonerCartridgeMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "Given TCREMON.S.F00(Condition) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("TCREMON.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TonerCartridgeMonitoring::Id,
+                                 TonerCartridgeMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "Given TCREMON.S.F01(Warning) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("TCREMON.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TonerCartridgeMonitoring::Id,
+                                 TonerCartridgeMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "Read the global attribute: AttributeList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TonerCartridgeMonitoring::Id,
+                                 TonerCartridgeMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "Read the feature dependent(TCREMON.S.F00) attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TCREMON.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TonerCartridgeMonitoring::Id,
+                                 TonerCartridgeMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "Read the optional attribute InPlaceIndicator (TCREMON.S.A0002) in AttributeList");
+            VerifyOrDo(!ShouldSkip("TCREMON.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TonerCartridgeMonitoring::Id,
+                                 TonerCartridgeMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "Read the global attribute: AcceptedCommandList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TonerCartridgeMonitoring::Id,
+                                 TonerCartridgeMonitoring::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "Read the optional command (ResetCondition) in AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("TCREMON.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TonerCartridgeMonitoring::Id,
+                                 TonerCartridgeMonitoring::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "Read the global attribute: GeneratedCommandList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TonerCartridgeMonitoring::Id,
+                                 TonerCartridgeMonitoring::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11, "TH reads EventList attribute from DUT");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TonerCartridgeMonitoring::Id,
+                                 TonerCartridgeMonitoring::Attributes::EventList::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_TCREMON_2_1Suite : public TestCommand
+{
+public:
+    Test_TC_TCREMON_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_TCREMON_2_1", 5, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_TCREMON_2_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::Percent value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "percent", "percent"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 100U));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::TonerCartridgeMonitoring::DegradationDirectionEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 1U));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::TonerCartridgeMonitoring::ChangeIndicationEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                bool value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH reads from the DUT the Condition attribute.");
+            VerifyOrDo(!ShouldSkip("TCREMON.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TonerCartridgeMonitoring::Id,
+                                 TonerCartridgeMonitoring::Attributes::Condition::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TH reads from the DUT the DegradationDirection attribute..");
+            VerifyOrDo(!ShouldSkip("TCREMON.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TonerCartridgeMonitoring::Id,
+                                 TonerCartridgeMonitoring::Attributes::DegradationDirection::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "TH reads from the DUT the ChangeIndication attribute.");
+            VerifyOrDo(!ShouldSkip("TCREMON.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TonerCartridgeMonitoring::Id,
+                                 TonerCartridgeMonitoring::Attributes::ChangeIndication::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "TH reads from the DUT the InPlaceIndicator attribute");
+            VerifyOrDo(!ShouldSkip("TCREMON.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TonerCartridgeMonitoring::Id,
+                                 TonerCartridgeMonitoring::Attributes::InPlaceIndicator::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_UVFREMON_1_1Suite : public TestCommand
+{
+public:
+    Test_TC_UVFREMON_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_UVFREMON_1_1", 12, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_UVFREMON_1_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("featureMap", value, 0UL));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65530UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65532UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("eventList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Read the global attribute: ClusterRevision");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UvFilterMonitoring::Id,
+                                 UvFilterMonitoring::Attributes::ClusterRevision::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Read the global attribute: FeatureMap");
+            VerifyOrDo(!ShouldSkip("!UVFREMON.S.F00 && !UVFREMON.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UvFilterMonitoring::Id,
+                                 UvFilterMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "Given UVFREMON.S.F00(Condition) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("UVFREMON.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UvFilterMonitoring::Id,
+                                 UvFilterMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "Given UVFREMON.S.F01(Warning) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("UVFREMON.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UvFilterMonitoring::Id,
+                                 UvFilterMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "Read the global attribute: AttributeList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UvFilterMonitoring::Id,
+                                 UvFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "Read the feature dependent(UVFREMON.S.F00) attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("UVFREMON.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UvFilterMonitoring::Id,
+                                 UvFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "Read the optional attribute InPlaceIndicator (UVFREMON.S.A0002) in AttributeList");
+            VerifyOrDo(!ShouldSkip("UVFREMON.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UvFilterMonitoring::Id,
+                                 UvFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "Read the global attribute: AcceptedCommandList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UvFilterMonitoring::Id,
+                                 UvFilterMonitoring::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "Read the optional command (ResetCondition) in AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("UVFREMON.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UvFilterMonitoring::Id,
+                                 UvFilterMonitoring::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "Read the global attribute: GeneratedCommandList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UvFilterMonitoring::Id,
+                                 UvFilterMonitoring::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11, "TH reads EventList attribute from DUT");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UvFilterMonitoring::Id,
+                                 UvFilterMonitoring::Attributes::EventList::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_UVFREMON_2_1Suite : public TestCommand
+{
+public:
+    Test_TC_UVFREMON_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_UVFREMON_2_1", 5, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_UVFREMON_2_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::Percent value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "percent", "percent"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 100U));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::UvFilterMonitoring::DegradationDirectionEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 1U));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::UvFilterMonitoring::ChangeIndicationEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                bool value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH reads from the DUT the Condition attribute.");
+            VerifyOrDo(!ShouldSkip("UVFREMON.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UvFilterMonitoring::Id,
+                                 UvFilterMonitoring::Attributes::Condition::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TH reads from the DUT the DegradationDirection attribute..");
+            VerifyOrDo(!ShouldSkip("UVFREMON.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UvFilterMonitoring::Id,
+                                 UvFilterMonitoring::Attributes::DegradationDirection::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "TH reads from the DUT the ChangeIndication attribute.");
+            VerifyOrDo(!ShouldSkip("UVFREMON.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UvFilterMonitoring::Id,
+                                 UvFilterMonitoring::Attributes::ChangeIndication::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "TH reads from the DUT the InPlaceIndicator attribute");
+            VerifyOrDo(!ShouldSkip("UVFREMON.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UvFilterMonitoring::Id,
+                                 UvFilterMonitoring::Attributes::InPlaceIndicator::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_WTREMON_1_1Suite : public TestCommand
+{
+public:
+    Test_TC_WTREMON_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_WTREMON_1_1", 12, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_WTREMON_1_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("featureMap", value, 0UL));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65530UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65532UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("eventList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Read the global attribute: ClusterRevision");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WaterTankMonitoring::Id,
+                                 WaterTankMonitoring::Attributes::ClusterRevision::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Read the global attribute: FeatureMap");
+            VerifyOrDo(!ShouldSkip("!WTREMON.S.F00 && !WTREMON.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WaterTankMonitoring::Id,
+                                 WaterTankMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "Given WTREMON.S.F00(Condition) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("WTREMON.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WaterTankMonitoring::Id,
+                                 WaterTankMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "Given WTREMON.S.F01(Warning) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("WTREMON.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WaterTankMonitoring::Id,
+                                 WaterTankMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "Read the global attribute: AttributeList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WaterTankMonitoring::Id,
+                                 WaterTankMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "Read the feature dependent(WTREMON.S.F00) attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("WTREMON.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WaterTankMonitoring::Id,
+                                 WaterTankMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "Read the optional attribute InPlaceIndicator (WTREMON.S.A0002) in AttributeList");
+            VerifyOrDo(!ShouldSkip("WTREMON.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WaterTankMonitoring::Id,
+                                 WaterTankMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "Read the global attribute: AcceptedCommandList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WaterTankMonitoring::Id,
+                                 WaterTankMonitoring::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "Read the optional command (ResetCondition) in AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("WTREMON.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WaterTankMonitoring::Id,
+                                 WaterTankMonitoring::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "Read the global attribute: GeneratedCommandList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WaterTankMonitoring::Id,
+                                 WaterTankMonitoring::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11, "TH reads EventList attribute from DUT");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WaterTankMonitoring::Id,
+                                 WaterTankMonitoring::Attributes::EventList::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_WTREMON_2_1Suite : public TestCommand
+{
+public:
+    Test_TC_WTREMON_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_WTREMON_2_1", 5, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_WTREMON_2_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::Percent value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "percent", "percent"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 100U));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::WaterTankMonitoring::DegradationDirectionEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 1U));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::WaterTankMonitoring::ChangeIndicationEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                bool value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH reads from the DUT the Condition attribute.");
+            VerifyOrDo(!ShouldSkip("WTREMON.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WaterTankMonitoring::Id,
+                                 WaterTankMonitoring::Attributes::Condition::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TH reads from the DUT the DegradationDirection attribute..");
+            VerifyOrDo(!ShouldSkip("WTREMON.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WaterTankMonitoring::Id,
+                                 WaterTankMonitoring::Attributes::DegradationDirection::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "TH reads from the DUT the ChangeIndication attribute.");
+            VerifyOrDo(!ShouldSkip("WTREMON.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WaterTankMonitoring::Id,
+                                 WaterTankMonitoring::Attributes::ChangeIndication::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "TH reads from the DUT the InPlaceIndicator attribute");
+            VerifyOrDo(!ShouldSkip("WTREMON.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WaterTankMonitoring::Id,
+                                 WaterTankMonitoring::Attributes::InPlaceIndicator::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_ZEOFREMON_1_1Suite : public TestCommand
+{
+public:
+    Test_TC_ZEOFREMON_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_ZEOFREMON_1_1", 12, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_ZEOFREMON_1_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("featureMap", value, 0UL));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65530UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65532UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("eventList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Read the global attribute: ClusterRevision");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ZeoliteFilterMonitoring::Id,
+                                 ZeoliteFilterMonitoring::Attributes::ClusterRevision::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Read the global attribute: FeatureMap");
+            VerifyOrDo(!ShouldSkip("!ZEOFREMON.S.F00 && !ZEOFREMON.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ZeoliteFilterMonitoring::Id,
+                                 ZeoliteFilterMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "Given ZEOFREMON.S.F00(Condition) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("ZEOFREMON.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ZeoliteFilterMonitoring::Id,
+                                 ZeoliteFilterMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "Given ZEOFREMON.S.F01(Warning) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("ZEOFREMON.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ZeoliteFilterMonitoring::Id,
+                                 ZeoliteFilterMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "Read the global attribute: AttributeList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ZeoliteFilterMonitoring::Id,
+                                 ZeoliteFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "Read the feature dependent(ZEOFREMON.S.F00) attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("ZEOFREMON.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ZeoliteFilterMonitoring::Id,
+                                 ZeoliteFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "Read the optional attribute InPlaceIndicator (ZEOFREMON.S.A0002) in AttributeList");
+            VerifyOrDo(!ShouldSkip("ZEOFREMON.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ZeoliteFilterMonitoring::Id,
+                                 ZeoliteFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "Read the global attribute: AcceptedCommandList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ZeoliteFilterMonitoring::Id,
+                                 ZeoliteFilterMonitoring::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "Read the optional command (ResetCondition) in AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("ZEOFREMON.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ZeoliteFilterMonitoring::Id,
+                                 ZeoliteFilterMonitoring::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "Read the global attribute: GeneratedCommandList");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ZeoliteFilterMonitoring::Id,
+                                 ZeoliteFilterMonitoring::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11, "TH reads EventList attribute from DUT");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ZeoliteFilterMonitoring::Id,
+                                 ZeoliteFilterMonitoring::Attributes::EventList::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_ZEOFREMON_2_1Suite : public TestCommand
+{
+public:
+    Test_TC_ZEOFREMON_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_ZEOFREMON_2_1", 5, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_ZEOFREMON_2_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::Percent value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "percent", "percent"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 100U));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::ZeoliteFilterMonitoring::DegradationDirectionEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 1U));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::ZeoliteFilterMonitoring::ChangeIndicationEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                bool value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH reads from the DUT the Condition attribute.");
+            VerifyOrDo(!ShouldSkip("ZEOFREMON.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ZeoliteFilterMonitoring::Id,
+                                 ZeoliteFilterMonitoring::Attributes::Condition::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TH reads from the DUT the DegradationDirection attribute..");
+            VerifyOrDo(!ShouldSkip("ZEOFREMON.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ZeoliteFilterMonitoring::Id,
+                                 ZeoliteFilterMonitoring::Attributes::DegradationDirection::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "TH reads from the DUT the ChangeIndication attribute.");
+            VerifyOrDo(!ShouldSkip("ZEOFREMON.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ZeoliteFilterMonitoring::Id,
+                                 ZeoliteFilterMonitoring::Attributes::ChangeIndication::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "TH reads from the DUT the InPlaceIndicator attribute");
+            VerifyOrDo(!ShouldSkip("ZEOFREMON.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ZeoliteFilterMonitoring::Id,
+                                 ZeoliteFilterMonitoring::Attributes::InPlaceIndicator::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
 class Test_TC_DD_1_5Suite : public TestCommand
 {
 public:
@@ -122837,6 +127301,30 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<TestGroupKeyManagementClusterSuite>(credsIssuerConfig),
         make_unique<Test_TC_G_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_G_2_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_ACFREMON_1_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_ACFREMON_2_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_CFREMON_1_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_CFREMON_2_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_ESFREMON_1_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_ESFREMON_2_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_FTREMON_1_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_FTREMON_2_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_HEPAFREMON_1_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_HEPAFREMON_2_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_INKCREMON_1_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_INKCREMON_2_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_IONFREMON_1_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_IONFREMON_2_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_OZFREMON_1_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_OZFREMON_2_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_TCREMON_1_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_TCREMON_2_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_UVFREMON_1_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_UVFREMON_2_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_WTREMON_1_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_WTREMON_2_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_ZEOFREMON_1_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_ZEOFREMON_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_DD_1_5Suite>(credsIssuerConfig),
         make_unique<Test_TC_DD_1_6Suite>(credsIssuerConfig),
         make_unique<Test_TC_DD_1_7Suite>(credsIssuerConfig),

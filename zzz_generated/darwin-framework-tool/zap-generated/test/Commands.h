@@ -245,6 +245,30 @@ public:
         printf("TestGroupsCluster\n");
         printf("TestGroupKeyManagementCluster\n");
         printf("Test_TC_G_1_1\n");
+        printf("Test_TC_ACFREMON_1_1\n");
+        printf("Test_TC_ACFREMON_2_1\n");
+        printf("Test_TC_CFREMON_1_1\n");
+        printf("Test_TC_CFREMON_2_1\n");
+        printf("Test_TC_ESFREMON_1_1\n");
+        printf("Test_TC_ESFREMON_2_1\n");
+        printf("Test_TC_FTREMON_1_1\n");
+        printf("Test_TC_FTREMON_2_1\n");
+        printf("Test_TC_HEPAFREMON_1_1\n");
+        printf("Test_TC_HEPAFREMON_2_1\n");
+        printf("Test_TC_INKCREMON_1_1\n");
+        printf("Test_TC_INKCREMON_2_1\n");
+        printf("Test_TC_IONFREMON_1_1\n");
+        printf("Test_TC_IONFREMON_2_1\n");
+        printf("Test_TC_OZFREMON_1_1\n");
+        printf("Test_TC_OZFREMON_2_1\n");
+        printf("Test_TC_TCREMON_1_1\n");
+        printf("Test_TC_TCREMON_2_1\n");
+        printf("Test_TC_UVFREMON_1_1\n");
+        printf("Test_TC_UVFREMON_2_1\n");
+        printf("Test_TC_WTREMON_1_1\n");
+        printf("Test_TC_WTREMON_2_1\n");
+        printf("Test_TC_ZEOFREMON_1_1\n");
+        printf("Test_TC_ZEOFREMON_2_1\n");
 
         return CHIP_NO_ERROR;
     }
@@ -146536,6 +146560,8142 @@ private:
     }
 };
 
+class Test_TC_ACFREMON_1_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_ACFREMON_1_1()
+        : TestCommandBridge("Test_TC_ACFREMON_1_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_ACFREMON_1_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_ACFREMON_1_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_ACFREMON_1_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read the global attribute: ClusterRevision\n");
+            err = TestReadTheGlobalAttributeClusterRevision_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: FeatureMap\n");
+            if (ShouldSkip("!ACFREMON.S.F00 && !ACFREMON.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeFeatureMap_2();
+            break;
+        case 3:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 3 : Given ACFREMON.S.F00(Condition) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("ACFREMON.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenACFREMONSF00ConditionEnsureFeaturemapHasTheCorrectBitSet_3();
+            break;
+        case 4:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 4 : Given ACFREMON.S.F01(Warning) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("ACFREMON.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenACFREMONSF01WarningEnsureFeaturemapHasTheCorrectBitSet_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: AttributeList\n");
+            err = TestReadTheGlobalAttributeAttributeList_5();
+            break;
+        case 6:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 6 : Read the feature dependent(ACFREMON.S.F00) attribute in AttributeList\n");
+            if (ShouldSkip("ACFREMON.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheFeatureDependentACFREMONSF00AttributeInAttributeList_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 7 : Read the optional attribute InPlaceIndicator (ACFREMON.S.A0002) in AttributeList\n");
+            if (ShouldSkip("ACFREMON.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeInPlaceIndicatorAcfremonsa0002InAttributeList_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Read the global attribute: AcceptedCommandList\n");
+            err = TestReadTheGlobalAttributeAcceptedCommandList_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Read the optional command (ResetCondition) in AcceptedCommandList\n");
+            if (ShouldSkip("ACFREMON.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalCommandResetConditionInAcceptedCommandList_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Read the global attribute: GeneratedCommandList\n");
+            err = TestReadTheGlobalAttributeGeneratedCommandList_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : TH reads EventList attribute from DUT\n");
+            err = TestThReadsEventListAttributeFromDut_11();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 12;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterActivatedCarbonFilterMonitoring alloc] initWithDevice:device
+                                                                                           endpointID:@(1)
+                                                                                                queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: ClusterRevision Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeFeatureMap_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterActivatedCarbonFilterMonitoring alloc] initWithDevice:device
+                                                                                           endpointID:@(1)
+                                                                                                queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: FeatureMap Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 0UL));
+            }
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenACFREMONSF00ConditionEnsureFeaturemapHasTheCorrectBitSet_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterActivatedCarbonFilterMonitoring alloc] initWithDevice:device
+                                                                                           endpointID:@(1)
+                                                                                                queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given ACFREMON.S.F00(Condition) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenACFREMONSF01WarningEnsureFeaturemapHasTheCorrectBitSet_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterActivatedCarbonFilterMonitoring alloc] initWithDevice:device
+                                                                                           endpointID:@(1)
+                                                                                                queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given ACFREMON.S.F01(Warning) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterActivatedCarbonFilterMonitoring alloc] initWithDevice:device
+                                                                                           endpointID:@(1)
+                                                                                                queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65530UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheFeatureDependentACFREMONSF00AttributeInAttributeList_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterActivatedCarbonFilterMonitoring alloc] initWithDevice:device
+                                                                                           endpointID:@(1)
+                                                                                                queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the feature dependent(ACFREMON.S.F00) attribute in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeInPlaceIndicatorAcfremonsa0002InAttributeList_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterActivatedCarbonFilterMonitoring alloc] initWithDevice:device
+                                                                                           endpointID:@(1)
+                                                                                                queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute InPlaceIndicator (ACFREMON.S.A0002) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 3UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterActivatedCarbonFilterMonitoring alloc] initWithDevice:device
+                                                                                           endpointID:@(1)
+                                                                                                queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalCommandResetConditionInAcceptedCommandList_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterActivatedCarbonFilterMonitoring alloc] initWithDevice:device
+                                                                                           endpointID:@(1)
+                                                                                                queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional command (ResetCondition) in AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 0UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterActivatedCarbonFilterMonitoring alloc] initWithDevice:device
+                                                                                           endpointID:@(1)
+                                                                                                queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: GeneratedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsEventListAttributeFromDut_11()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterActivatedCarbonFilterMonitoring alloc] initWithDevice:device
+                                                                                           endpointID:@(1)
+                                                                                                queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads EventList attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("EventList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("eventList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_ACFREMON_2_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_ACFREMON_2_1()
+        : TestCommandBridge("Test_TC_ACFREMON_2_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_ACFREMON_2_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_ACFREMON_2_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_ACFREMON_2_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads from the DUT the Condition attribute.\n");
+            if (ShouldSkip("ACFREMON.S.A0000")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheConditionAttribute_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads from the DUT the DegradationDirection attribute..\n");
+            if (ShouldSkip("ACFREMON.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheDegradationDirectionAttribute_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads from the DUT the ChangeIndication attribute.\n");
+            if (ShouldSkip("ACFREMON.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheChangeIndicationAttribute_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads from the DUT the InPlaceIndicator attribute\n");
+            if (ShouldSkip("ACFREMON.S.A0003")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheInPlaceIndicatorAttribute_4();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 5;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheConditionAttribute_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterActivatedCarbonFilterMonitoring alloc] initWithDevice:device
+                                                                                           endpointID:@(1)
+                                                                                                queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeConditionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the Condition attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("condition", "percent", "percent"));
+            VerifyOrReturn(CheckConstraintMinValue<chip::Percent>("condition", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<chip::Percent>("condition", [value unsignedCharValue], 100U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheDegradationDirectionAttribute_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterActivatedCarbonFilterMonitoring alloc] initWithDevice:device
+                                                                                           endpointID:@(1)
+                                                                                                queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeDegradationDirectionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the DegradationDirection attribute.. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("degradationDirection", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("degradationDirection", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("degradationDirection", [value unsignedCharValue], 1U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheChangeIndicationAttribute_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterActivatedCarbonFilterMonitoring alloc] initWithDevice:device
+                                                                                           endpointID:@(1)
+                                                                                                queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeChangeIndicationWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the ChangeIndication attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("changeIndication", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("changeIndication", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("changeIndication", [value unsignedCharValue], 2U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheInPlaceIndicatorAttribute_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterActivatedCarbonFilterMonitoring alloc] initWithDevice:device
+                                                                                           endpointID:@(1)
+                                                                                                queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeInPlaceIndicatorWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the InPlaceIndicator attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("inPlaceIndicator", "boolean", "boolean"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_CFREMON_1_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_CFREMON_1_1()
+        : TestCommandBridge("Test_TC_CFREMON_1_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_CFREMON_1_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_CFREMON_1_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_CFREMON_1_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read the global attribute: ClusterRevision\n");
+            err = TestReadTheGlobalAttributeClusterRevision_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: FeatureMap\n");
+            if (ShouldSkip("!CFREMON.S.F00 && !CFREMON.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeFeatureMap_2();
+            break;
+        case 3:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 3 : Given CFREMON.S.F00(Condition) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("CFREMON.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenCFREMONSF00ConditionEnsureFeaturemapHasTheCorrectBitSet_3();
+            break;
+        case 4:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 4 : Given CFREMON.S.F01(Warning) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("CFREMON.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenCFREMONSF01WarningEnsureFeaturemapHasTheCorrectBitSet_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: AttributeList\n");
+            err = TestReadTheGlobalAttributeAttributeList_5();
+            break;
+        case 6:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 6 : Read the feature dependent(CFREMON.S.F00) attribute in AttributeList\n");
+            if (ShouldSkip("CFREMON.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheFeatureDependentCFREMONSF00AttributeInAttributeList_6();
+            break;
+        case 7:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 7 : Read the optional attribute InPlaceIndicator (CFREMON.S.A0002) in AttributeList\n");
+            if (ShouldSkip("CFREMON.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeInPlaceIndicatorCfremonsa0002InAttributeList_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Read the global attribute: AcceptedCommandList\n");
+            err = TestReadTheGlobalAttributeAcceptedCommandList_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Read the optional command (ResetCondition) in AcceptedCommandList\n");
+            if (ShouldSkip("CFREMON.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalCommandResetConditionInAcceptedCommandList_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Read the global attribute: GeneratedCommandList\n");
+            err = TestReadTheGlobalAttributeGeneratedCommandList_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : TH reads EventList attribute from DUT\n");
+            err = TestThReadsEventListAttributeFromDut_11();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 12;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCeramicFilterMonitoring alloc] initWithDevice:device
+                                                                                   endpointID:@(1)
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: ClusterRevision Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeFeatureMap_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCeramicFilterMonitoring alloc] initWithDevice:device
+                                                                                   endpointID:@(1)
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: FeatureMap Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 0UL));
+            }
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenCFREMONSF00ConditionEnsureFeaturemapHasTheCorrectBitSet_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCeramicFilterMonitoring alloc] initWithDevice:device
+                                                                                   endpointID:@(1)
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given CFREMON.S.F00(Condition) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenCFREMONSF01WarningEnsureFeaturemapHasTheCorrectBitSet_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCeramicFilterMonitoring alloc] initWithDevice:device
+                                                                                   endpointID:@(1)
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given CFREMON.S.F01(Warning) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCeramicFilterMonitoring alloc] initWithDevice:device
+                                                                                   endpointID:@(1)
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65530UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheFeatureDependentCFREMONSF00AttributeInAttributeList_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCeramicFilterMonitoring alloc] initWithDevice:device
+                                                                                   endpointID:@(1)
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the feature dependent(CFREMON.S.F00) attribute in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeInPlaceIndicatorCfremonsa0002InAttributeList_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCeramicFilterMonitoring alloc] initWithDevice:device
+                                                                                   endpointID:@(1)
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute InPlaceIndicator (CFREMON.S.A0002) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 3UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCeramicFilterMonitoring alloc] initWithDevice:device
+                                                                                   endpointID:@(1)
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalCommandResetConditionInAcceptedCommandList_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCeramicFilterMonitoring alloc] initWithDevice:device
+                                                                                   endpointID:@(1)
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional command (ResetCondition) in AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 0UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCeramicFilterMonitoring alloc] initWithDevice:device
+                                                                                   endpointID:@(1)
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: GeneratedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsEventListAttributeFromDut_11()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCeramicFilterMonitoring alloc] initWithDevice:device
+                                                                                   endpointID:@(1)
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads EventList attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("EventList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("eventList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_CFREMON_2_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_CFREMON_2_1()
+        : TestCommandBridge("Test_TC_CFREMON_2_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_CFREMON_2_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_CFREMON_2_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_CFREMON_2_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads from the DUT the Condition attribute.\n");
+            if (ShouldSkip("CFREMON.S.A0000")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheConditionAttribute_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads from the DUT the DegradationDirection attribute..\n");
+            if (ShouldSkip("CFREMON.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheDegradationDirectionAttribute_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads from the DUT the ChangeIndication attribute.\n");
+            if (ShouldSkip("CFREMON.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheChangeIndicationAttribute_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads from the DUT the InPlaceIndicator attribute\n");
+            if (ShouldSkip("CFREMON.S.A0003")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheInPlaceIndicatorAttribute_4();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 5;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheConditionAttribute_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCeramicFilterMonitoring alloc] initWithDevice:device
+                                                                                   endpointID:@(1)
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeConditionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the Condition attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("condition", "percent", "percent"));
+            VerifyOrReturn(CheckConstraintMinValue<chip::Percent>("condition", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<chip::Percent>("condition", [value unsignedCharValue], 100U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheDegradationDirectionAttribute_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCeramicFilterMonitoring alloc] initWithDevice:device
+                                                                                   endpointID:@(1)
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeDegradationDirectionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the DegradationDirection attribute.. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("degradationDirection", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("degradationDirection", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("degradationDirection", [value unsignedCharValue], 1U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheChangeIndicationAttribute_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCeramicFilterMonitoring alloc] initWithDevice:device
+                                                                                   endpointID:@(1)
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeChangeIndicationWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the ChangeIndication attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("changeIndication", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("changeIndication", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("changeIndication", [value unsignedCharValue], 2U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheInPlaceIndicatorAttribute_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCeramicFilterMonitoring alloc] initWithDevice:device
+                                                                                   endpointID:@(1)
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeInPlaceIndicatorWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the InPlaceIndicator attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("inPlaceIndicator", "boolean", "boolean"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_ESFREMON_1_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_ESFREMON_1_1()
+        : TestCommandBridge("Test_TC_ESFREMON_1_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_ESFREMON_1_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_ESFREMON_1_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_ESFREMON_1_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read the global attribute: ClusterRevision\n");
+            err = TestReadTheGlobalAttributeClusterRevision_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: FeatureMap\n");
+            if (ShouldSkip("!ESFREMON.S.F00 && !ESFREMON.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeFeatureMap_2();
+            break;
+        case 3:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 3 : Given ESFREMON.S.F00(Condition) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("ESFREMON.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenESFREMONSF00ConditionEnsureFeaturemapHasTheCorrectBitSet_3();
+            break;
+        case 4:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 4 : Given ESFREMON.S.F01(Warning) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("ESFREMON.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenESFREMONSF01WarningEnsureFeaturemapHasTheCorrectBitSet_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: AttributeList\n");
+            err = TestReadTheGlobalAttributeAttributeList_5();
+            break;
+        case 6:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 6 : Read the feature dependent(ESFREMON.S.F00) attribute in AttributeList\n");
+            if (ShouldSkip("ESFREMON.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheFeatureDependentESFREMONSF00AttributeInAttributeList_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 7 : Read the optional attribute InPlaceIndicator (ESFREMON.S.A0002) in AttributeList\n");
+            if (ShouldSkip("ESFREMON.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeInPlaceIndicatorEsfremonsa0002InAttributeList_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Read the global attribute: AcceptedCommandList\n");
+            err = TestReadTheGlobalAttributeAcceptedCommandList_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Read the optional command (ResetCondition) in AcceptedCommandList\n");
+            if (ShouldSkip("ESFREMON.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalCommandResetConditionInAcceptedCommandList_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Read the global attribute: GeneratedCommandList\n");
+            err = TestReadTheGlobalAttributeGeneratedCommandList_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : TH reads EventList attribute from DUT\n");
+            err = TestThReadsEventListAttributeFromDut_11();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 12;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterElectrostaticFilterMonitoring alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: ClusterRevision Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeFeatureMap_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterElectrostaticFilterMonitoring alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: FeatureMap Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 0UL));
+            }
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenESFREMONSF00ConditionEnsureFeaturemapHasTheCorrectBitSet_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterElectrostaticFilterMonitoring alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given ESFREMON.S.F00(Condition) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenESFREMONSF01WarningEnsureFeaturemapHasTheCorrectBitSet_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterElectrostaticFilterMonitoring alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given ESFREMON.S.F01(Warning) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterElectrostaticFilterMonitoring alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65530UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheFeatureDependentESFREMONSF00AttributeInAttributeList_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterElectrostaticFilterMonitoring alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the feature dependent(ESFREMON.S.F00) attribute in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeInPlaceIndicatorEsfremonsa0002InAttributeList_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterElectrostaticFilterMonitoring alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute InPlaceIndicator (ESFREMON.S.A0002) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 3UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterElectrostaticFilterMonitoring alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalCommandResetConditionInAcceptedCommandList_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterElectrostaticFilterMonitoring alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional command (ResetCondition) in AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 0UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterElectrostaticFilterMonitoring alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: GeneratedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsEventListAttributeFromDut_11()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterElectrostaticFilterMonitoring alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads EventList attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("EventList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("eventList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_ESFREMON_2_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_ESFREMON_2_1()
+        : TestCommandBridge("Test_TC_ESFREMON_2_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_ESFREMON_2_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_ESFREMON_2_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_ESFREMON_2_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads from the DUT the Condition attribute.\n");
+            if (ShouldSkip("ESFREMON.S.A0000")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheConditionAttribute_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads from the DUT the DegradationDirection attribute..\n");
+            if (ShouldSkip("ESFREMON.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheDegradationDirectionAttribute_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads from the DUT the ChangeIndication attribute.\n");
+            if (ShouldSkip("ESFREMON.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheChangeIndicationAttribute_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads from the DUT the InPlaceIndicator attribute\n");
+            if (ShouldSkip("ESFREMON.S.A0003")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheInPlaceIndicatorAttribute_4();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 5;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheConditionAttribute_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterElectrostaticFilterMonitoring alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeConditionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the Condition attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("condition", "percent", "percent"));
+            VerifyOrReturn(CheckConstraintMinValue<chip::Percent>("condition", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<chip::Percent>("condition", [value unsignedCharValue], 100U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheDegradationDirectionAttribute_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterElectrostaticFilterMonitoring alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeDegradationDirectionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the DegradationDirection attribute.. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("degradationDirection", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("degradationDirection", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("degradationDirection", [value unsignedCharValue], 1U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheChangeIndicationAttribute_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterElectrostaticFilterMonitoring alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeChangeIndicationWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the ChangeIndication attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("changeIndication", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("changeIndication", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("changeIndication", [value unsignedCharValue], 2U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheInPlaceIndicatorAttribute_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterElectrostaticFilterMonitoring alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeInPlaceIndicatorWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the InPlaceIndicator attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("inPlaceIndicator", "boolean", "boolean"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_FTREMON_1_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_FTREMON_1_1()
+        : TestCommandBridge("Test_TC_FTREMON_1_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_FTREMON_1_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_FTREMON_1_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_FTREMON_1_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read the global attribute: ClusterRevision\n");
+            err = TestReadTheGlobalAttributeClusterRevision_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: FeatureMap\n");
+            if (ShouldSkip("!FTREMON.S.F00 && !FTREMON.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeFeatureMap_2();
+            break;
+        case 3:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 3 : Given FTREMON.S.F00(Condition) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("FTREMON.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenFTREMONSF00ConditionEnsureFeaturemapHasTheCorrectBitSet_3();
+            break;
+        case 4:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 4 : Given FTREMON.S.F01(Warning) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("FTREMON.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenFTREMONSF01WarningEnsureFeaturemapHasTheCorrectBitSet_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: AttributeList\n");
+            err = TestReadTheGlobalAttributeAttributeList_5();
+            break;
+        case 6:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 6 : Read the feature dependent(FTREMON.S.F00) attribute in AttributeList\n");
+            if (ShouldSkip("FTREMON.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheFeatureDependentFTREMONSF00AttributeInAttributeList_6();
+            break;
+        case 7:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 7 : Read the optional attribute InPlaceIndicator (FTREMON.S.A0002) in AttributeList\n");
+            if (ShouldSkip("FTREMON.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeInPlaceIndicatorFtremonsa0002InAttributeList_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Read the global attribute: AcceptedCommandList\n");
+            err = TestReadTheGlobalAttributeAcceptedCommandList_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Read the optional command (ResetCondition) in AcceptedCommandList\n");
+            if (ShouldSkip("FTREMON.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalCommandResetConditionInAcceptedCommandList_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Read the global attribute: GeneratedCommandList\n");
+            err = TestReadTheGlobalAttributeGeneratedCommandList_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : TH reads EventList attribute from DUT\n");
+            err = TestThReadsEventListAttributeFromDut_11();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 12;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFuelTankMonitoring alloc] initWithDevice:device
+                                                                              endpointID:@(1)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: ClusterRevision Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeFeatureMap_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFuelTankMonitoring alloc] initWithDevice:device
+                                                                              endpointID:@(1)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: FeatureMap Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 0UL));
+            }
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenFTREMONSF00ConditionEnsureFeaturemapHasTheCorrectBitSet_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFuelTankMonitoring alloc] initWithDevice:device
+                                                                              endpointID:@(1)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given FTREMON.S.F00(Condition) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenFTREMONSF01WarningEnsureFeaturemapHasTheCorrectBitSet_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFuelTankMonitoring alloc] initWithDevice:device
+                                                                              endpointID:@(1)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given FTREMON.S.F01(Warning) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFuelTankMonitoring alloc] initWithDevice:device
+                                                                              endpointID:@(1)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65530UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheFeatureDependentFTREMONSF00AttributeInAttributeList_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFuelTankMonitoring alloc] initWithDevice:device
+                                                                              endpointID:@(1)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the feature dependent(FTREMON.S.F00) attribute in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeInPlaceIndicatorFtremonsa0002InAttributeList_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFuelTankMonitoring alloc] initWithDevice:device
+                                                                              endpointID:@(1)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute InPlaceIndicator (FTREMON.S.A0002) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 3UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFuelTankMonitoring alloc] initWithDevice:device
+                                                                              endpointID:@(1)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalCommandResetConditionInAcceptedCommandList_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFuelTankMonitoring alloc] initWithDevice:device
+                                                                              endpointID:@(1)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional command (ResetCondition) in AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 0UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFuelTankMonitoring alloc] initWithDevice:device
+                                                                              endpointID:@(1)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: GeneratedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsEventListAttributeFromDut_11()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFuelTankMonitoring alloc] initWithDevice:device
+                                                                              endpointID:@(1)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads EventList attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("EventList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("eventList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_FTREMON_2_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_FTREMON_2_1()
+        : TestCommandBridge("Test_TC_FTREMON_2_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_FTREMON_2_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_FTREMON_2_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_FTREMON_2_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads from the DUT the Condition attribute.\n");
+            if (ShouldSkip("FTREMON.S.A0000")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheConditionAttribute_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads from the DUT the DegradationDirection attribute..\n");
+            if (ShouldSkip("FTREMON.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheDegradationDirectionAttribute_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads from the DUT the ChangeIndication attribute.\n");
+            if (ShouldSkip("FTREMON.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheChangeIndicationAttribute_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads from the DUT the InPlaceIndicator attribute\n");
+            if (ShouldSkip("FTREMON.S.A0003")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheInPlaceIndicatorAttribute_4();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 5;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheConditionAttribute_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFuelTankMonitoring alloc] initWithDevice:device
+                                                                              endpointID:@(1)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeConditionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the Condition attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("condition", "percent", "percent"));
+            VerifyOrReturn(CheckConstraintMinValue<chip::Percent>("condition", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<chip::Percent>("condition", [value unsignedCharValue], 100U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheDegradationDirectionAttribute_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFuelTankMonitoring alloc] initWithDevice:device
+                                                                              endpointID:@(1)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeDegradationDirectionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the DegradationDirection attribute.. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("degradationDirection", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("degradationDirection", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("degradationDirection", [value unsignedCharValue], 1U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheChangeIndicationAttribute_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFuelTankMonitoring alloc] initWithDevice:device
+                                                                              endpointID:@(1)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeChangeIndicationWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the ChangeIndication attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("changeIndication", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("changeIndication", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("changeIndication", [value unsignedCharValue], 2U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheInPlaceIndicatorAttribute_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFuelTankMonitoring alloc] initWithDevice:device
+                                                                              endpointID:@(1)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeInPlaceIndicatorWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the InPlaceIndicator attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("inPlaceIndicator", "boolean", "boolean"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_HEPAFREMON_1_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_HEPAFREMON_1_1()
+        : TestCommandBridge("Test_TC_HEPAFREMON_1_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_HEPAFREMON_1_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_HEPAFREMON_1_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_HEPAFREMON_1_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read the global attribute: ClusterRevision\n");
+            err = TestReadTheGlobalAttributeClusterRevision_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: FeatureMap\n");
+            if (ShouldSkip("!HEPAFREMON.S.F00 && !HEPAFREMON.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeFeatureMap_2();
+            break;
+        case 3:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 3 : Given HEPAFREMON.S.F00(Condition) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("HEPAFREMON.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenHEPAFREMONSF00ConditionEnsureFeaturemapHasTheCorrectBitSet_3();
+            break;
+        case 4:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 4 : Given HEPAFREMON.S.F01(Warning) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("HEPAFREMON.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenHEPAFREMONSF01WarningEnsureFeaturemapHasTheCorrectBitSet_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: AttributeList\n");
+            err = TestReadTheGlobalAttributeAttributeList_5();
+            break;
+        case 6:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 6 : Read the feature dependent(HEPAFREMON.S.F00) attribute in AttributeList\n");
+            if (ShouldSkip("HEPAFREMON.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheFeatureDependentHEPAFREMONSF00AttributeInAttributeList_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 7 : Read the optional attribute InPlaceIndicator (HEPAFREMON.S.A0002) in AttributeList\n");
+            if (ShouldSkip("HEPAFREMON.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeInPlaceIndicatorHepafremonsa0002InAttributeList_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Read the global attribute: AcceptedCommandList\n");
+            err = TestReadTheGlobalAttributeAcceptedCommandList_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Read the optional command (ResetCondition) in AcceptedCommandList\n");
+            if (ShouldSkip("HEPAFREMON.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalCommandResetConditionInAcceptedCommandList_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Read the global attribute: GeneratedCommandList\n");
+            err = TestReadTheGlobalAttributeGeneratedCommandList_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : TH reads EventList attribute from DUT\n");
+            err = TestThReadsEventListAttributeFromDut_11();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 12;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterHEPAFilterMonitoring alloc] initWithDevice:device
+                                                                                endpointID:@(1)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: ClusterRevision Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeFeatureMap_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterHEPAFilterMonitoring alloc] initWithDevice:device
+                                                                                endpointID:@(1)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: FeatureMap Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 0UL));
+            }
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenHEPAFREMONSF00ConditionEnsureFeaturemapHasTheCorrectBitSet_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterHEPAFilterMonitoring alloc] initWithDevice:device
+                                                                                endpointID:@(1)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given HEPAFREMON.S.F00(Condition) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenHEPAFREMONSF01WarningEnsureFeaturemapHasTheCorrectBitSet_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterHEPAFilterMonitoring alloc] initWithDevice:device
+                                                                                endpointID:@(1)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given HEPAFREMON.S.F01(Warning) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterHEPAFilterMonitoring alloc] initWithDevice:device
+                                                                                endpointID:@(1)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65530UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheFeatureDependentHEPAFREMONSF00AttributeInAttributeList_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterHEPAFilterMonitoring alloc] initWithDevice:device
+                                                                                endpointID:@(1)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the feature dependent(HEPAFREMON.S.F00) attribute in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeInPlaceIndicatorHepafremonsa0002InAttributeList_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterHEPAFilterMonitoring alloc] initWithDevice:device
+                                                                                endpointID:@(1)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute InPlaceIndicator (HEPAFREMON.S.A0002) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 3UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterHEPAFilterMonitoring alloc] initWithDevice:device
+                                                                                endpointID:@(1)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalCommandResetConditionInAcceptedCommandList_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterHEPAFilterMonitoring alloc] initWithDevice:device
+                                                                                endpointID:@(1)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional command (ResetCondition) in AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 0UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterHEPAFilterMonitoring alloc] initWithDevice:device
+                                                                                endpointID:@(1)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: GeneratedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsEventListAttributeFromDut_11()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterHEPAFilterMonitoring alloc] initWithDevice:device
+                                                                                endpointID:@(1)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads EventList attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("EventList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("eventList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_HEPAFREMON_2_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_HEPAFREMON_2_1()
+        : TestCommandBridge("Test_TC_HEPAFREMON_2_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_HEPAFREMON_2_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_HEPAFREMON_2_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_HEPAFREMON_2_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads from the DUT the Condition attribute.\n");
+            if (ShouldSkip("HEPAFREMON.S.A0000")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheConditionAttribute_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads from the DUT the DegradationDirection attribute..\n");
+            if (ShouldSkip("HEPAFREMON.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheDegradationDirectionAttribute_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads from the DUT the ChangeIndication attribute.\n");
+            if (ShouldSkip("HEPAFREMON.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheChangeIndicationAttribute_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads from the DUT the InPlaceIndicator attribute\n");
+            if (ShouldSkip("HEPAFREMON.S.A0003")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheInPlaceIndicatorAttribute_4();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 5;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheConditionAttribute_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterHEPAFilterMonitoring alloc] initWithDevice:device
+                                                                                endpointID:@(1)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeConditionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the Condition attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("condition", "percent", "percent"));
+            VerifyOrReturn(CheckConstraintMinValue<chip::Percent>("condition", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<chip::Percent>("condition", [value unsignedCharValue], 100U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheDegradationDirectionAttribute_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterHEPAFilterMonitoring alloc] initWithDevice:device
+                                                                                endpointID:@(1)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeDegradationDirectionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the DegradationDirection attribute.. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("degradationDirection", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("degradationDirection", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("degradationDirection", [value unsignedCharValue], 1U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheChangeIndicationAttribute_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterHEPAFilterMonitoring alloc] initWithDevice:device
+                                                                                endpointID:@(1)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeChangeIndicationWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the ChangeIndication attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("changeIndication", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("changeIndication", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("changeIndication", [value unsignedCharValue], 2U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheInPlaceIndicatorAttribute_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterHEPAFilterMonitoring alloc] initWithDevice:device
+                                                                                endpointID:@(1)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeInPlaceIndicatorWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the InPlaceIndicator attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("inPlaceIndicator", "boolean", "boolean"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_INKCREMON_1_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_INKCREMON_1_1()
+        : TestCommandBridge("Test_TC_INKCREMON_1_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_INKCREMON_1_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_INKCREMON_1_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_INKCREMON_1_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read the global attribute: ClusterRevision\n");
+            err = TestReadTheGlobalAttributeClusterRevision_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: FeatureMap\n");
+            if (ShouldSkip("!INKCREMON.S.F00 && !INKCREMON.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeFeatureMap_2();
+            break;
+        case 3:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 3 : Given INKCREMON.S.F00(Condition) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("INKCREMON.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenINKCREMONSF00ConditionEnsureFeaturemapHasTheCorrectBitSet_3();
+            break;
+        case 4:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 4 : Given INKCREMON.S.F01(Warning) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("INKCREMON.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenINKCREMONSF01WarningEnsureFeaturemapHasTheCorrectBitSet_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: AttributeList\n");
+            err = TestReadTheGlobalAttributeAttributeList_5();
+            break;
+        case 6:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 6 : Read the feature dependent(INKCREMON.S.F00) attribute in AttributeList\n");
+            if (ShouldSkip("INKCREMON.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheFeatureDependentINKCREMONSF00AttributeInAttributeList_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 7 : Read the optional attribute InPlaceIndicator (INKCREMON.S.A0002) in AttributeList\n");
+            if (ShouldSkip("INKCREMON.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeInPlaceIndicatorInkcremonsa0002InAttributeList_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Read the global attribute: AcceptedCommandList\n");
+            err = TestReadTheGlobalAttributeAcceptedCommandList_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Read the optional command (ResetCondition) in AcceptedCommandList\n");
+            if (ShouldSkip("INKCREMON.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalCommandResetConditionInAcceptedCommandList_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Read the global attribute: GeneratedCommandList\n");
+            err = TestReadTheGlobalAttributeGeneratedCommandList_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : TH reads EventList attribute from DUT\n");
+            err = TestThReadsEventListAttributeFromDut_11();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 12;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterInkCartridgeMonitoring alloc] initWithDevice:device
+                                                                                  endpointID:@(1)
+                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: ClusterRevision Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeFeatureMap_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterInkCartridgeMonitoring alloc] initWithDevice:device
+                                                                                  endpointID:@(1)
+                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: FeatureMap Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 0UL));
+            }
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenINKCREMONSF00ConditionEnsureFeaturemapHasTheCorrectBitSet_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterInkCartridgeMonitoring alloc] initWithDevice:device
+                                                                                  endpointID:@(1)
+                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given INKCREMON.S.F00(Condition) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenINKCREMONSF01WarningEnsureFeaturemapHasTheCorrectBitSet_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterInkCartridgeMonitoring alloc] initWithDevice:device
+                                                                                  endpointID:@(1)
+                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given INKCREMON.S.F01(Warning) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterInkCartridgeMonitoring alloc] initWithDevice:device
+                                                                                  endpointID:@(1)
+                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65530UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheFeatureDependentINKCREMONSF00AttributeInAttributeList_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterInkCartridgeMonitoring alloc] initWithDevice:device
+                                                                                  endpointID:@(1)
+                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the feature dependent(INKCREMON.S.F00) attribute in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeInPlaceIndicatorInkcremonsa0002InAttributeList_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterInkCartridgeMonitoring alloc] initWithDevice:device
+                                                                                  endpointID:@(1)
+                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute InPlaceIndicator (INKCREMON.S.A0002) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 3UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterInkCartridgeMonitoring alloc] initWithDevice:device
+                                                                                  endpointID:@(1)
+                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalCommandResetConditionInAcceptedCommandList_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterInkCartridgeMonitoring alloc] initWithDevice:device
+                                                                                  endpointID:@(1)
+                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional command (ResetCondition) in AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 0UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterInkCartridgeMonitoring alloc] initWithDevice:device
+                                                                                  endpointID:@(1)
+                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: GeneratedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsEventListAttributeFromDut_11()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterInkCartridgeMonitoring alloc] initWithDevice:device
+                                                                                  endpointID:@(1)
+                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads EventList attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("EventList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("eventList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_INKCREMON_2_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_INKCREMON_2_1()
+        : TestCommandBridge("Test_TC_INKCREMON_2_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_INKCREMON_2_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_INKCREMON_2_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_INKCREMON_2_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads from the DUT the Condition attribute.\n");
+            if (ShouldSkip("INKCREMON.S.A0000")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheConditionAttribute_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads from the DUT the DegradationDirection attribute..\n");
+            if (ShouldSkip("INKCREMON.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheDegradationDirectionAttribute_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads from the DUT the ChangeIndication attribute.\n");
+            if (ShouldSkip("INKCREMON.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheChangeIndicationAttribute_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads from the DUT the InPlaceIndicator attribute\n");
+            if (ShouldSkip("INKCREMON.S.A0003")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheInPlaceIndicatorAttribute_4();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 5;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheConditionAttribute_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterInkCartridgeMonitoring alloc] initWithDevice:device
+                                                                                  endpointID:@(1)
+                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeConditionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the Condition attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("condition", "percent", "percent"));
+            VerifyOrReturn(CheckConstraintMinValue<chip::Percent>("condition", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<chip::Percent>("condition", [value unsignedCharValue], 100U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheDegradationDirectionAttribute_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterInkCartridgeMonitoring alloc] initWithDevice:device
+                                                                                  endpointID:@(1)
+                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeDegradationDirectionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the DegradationDirection attribute.. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("degradationDirection", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("degradationDirection", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("degradationDirection", [value unsignedCharValue], 1U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheChangeIndicationAttribute_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterInkCartridgeMonitoring alloc] initWithDevice:device
+                                                                                  endpointID:@(1)
+                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeChangeIndicationWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the ChangeIndication attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("changeIndication", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("changeIndication", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("changeIndication", [value unsignedCharValue], 2U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheInPlaceIndicatorAttribute_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterInkCartridgeMonitoring alloc] initWithDevice:device
+                                                                                  endpointID:@(1)
+                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeInPlaceIndicatorWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the InPlaceIndicator attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("inPlaceIndicator", "boolean", "boolean"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_IONFREMON_1_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_IONFREMON_1_1()
+        : TestCommandBridge("Test_TC_IONFREMON_1_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_IONFREMON_1_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_IONFREMON_1_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_IONFREMON_1_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read the global attribute: ClusterRevision\n");
+            err = TestReadTheGlobalAttributeClusterRevision_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: FeatureMap\n");
+            if (ShouldSkip("!IONFREMON.S.F00 && !IONFREMON.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeFeatureMap_2();
+            break;
+        case 3:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 3 : Given IONFREMON.S.F00(Condition) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("IONFREMON.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenIONFREMONSF00ConditionEnsureFeaturemapHasTheCorrectBitSet_3();
+            break;
+        case 4:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 4 : Given IONFREMON.S.F01(Warning) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("IONFREMON.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenIONFREMONSF01WarningEnsureFeaturemapHasTheCorrectBitSet_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: AttributeList\n");
+            err = TestReadTheGlobalAttributeAttributeList_5();
+            break;
+        case 6:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 6 : Read the feature dependent(IONFREMON.S.F00) attribute in AttributeList\n");
+            if (ShouldSkip("IONFREMON.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheFeatureDependentIONFREMONSF00AttributeInAttributeList_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 7 : Read the optional attribute InPlaceIndicator (IONFREMON.S.A0002) in AttributeList\n");
+            if (ShouldSkip("IONFREMON.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeInPlaceIndicatorIonfremonsa0002InAttributeList_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Read the global attribute: AcceptedCommandList\n");
+            err = TestReadTheGlobalAttributeAcceptedCommandList_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Read the optional command (ResetCondition) in AcceptedCommandList\n");
+            if (ShouldSkip("IONFREMON.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalCommandResetConditionInAcceptedCommandList_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Read the global attribute: GeneratedCommandList\n");
+            err = TestReadTheGlobalAttributeGeneratedCommandList_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : TH reads EventList attribute from DUT\n");
+            err = TestThReadsEventListAttributeFromDut_11();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 12;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterIonizingFilterMonitoring alloc] initWithDevice:device
+                                                                                    endpointID:@(1)
+                                                                                         queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: ClusterRevision Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeFeatureMap_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterIonizingFilterMonitoring alloc] initWithDevice:device
+                                                                                    endpointID:@(1)
+                                                                                         queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: FeatureMap Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 0UL));
+            }
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenIONFREMONSF00ConditionEnsureFeaturemapHasTheCorrectBitSet_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterIonizingFilterMonitoring alloc] initWithDevice:device
+                                                                                    endpointID:@(1)
+                                                                                         queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given IONFREMON.S.F00(Condition) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenIONFREMONSF01WarningEnsureFeaturemapHasTheCorrectBitSet_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterIonizingFilterMonitoring alloc] initWithDevice:device
+                                                                                    endpointID:@(1)
+                                                                                         queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given IONFREMON.S.F01(Warning) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterIonizingFilterMonitoring alloc] initWithDevice:device
+                                                                                    endpointID:@(1)
+                                                                                         queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65530UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheFeatureDependentIONFREMONSF00AttributeInAttributeList_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterIonizingFilterMonitoring alloc] initWithDevice:device
+                                                                                    endpointID:@(1)
+                                                                                         queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the feature dependent(IONFREMON.S.F00) attribute in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeInPlaceIndicatorIonfremonsa0002InAttributeList_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterIonizingFilterMonitoring alloc] initWithDevice:device
+                                                                                    endpointID:@(1)
+                                                                                         queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute InPlaceIndicator (IONFREMON.S.A0002) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 3UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterIonizingFilterMonitoring alloc] initWithDevice:device
+                                                                                    endpointID:@(1)
+                                                                                         queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalCommandResetConditionInAcceptedCommandList_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterIonizingFilterMonitoring alloc] initWithDevice:device
+                                                                                    endpointID:@(1)
+                                                                                         queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional command (ResetCondition) in AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 0UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterIonizingFilterMonitoring alloc] initWithDevice:device
+                                                                                    endpointID:@(1)
+                                                                                         queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: GeneratedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsEventListAttributeFromDut_11()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterIonizingFilterMonitoring alloc] initWithDevice:device
+                                                                                    endpointID:@(1)
+                                                                                         queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads EventList attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("EventList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("eventList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_IONFREMON_2_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_IONFREMON_2_1()
+        : TestCommandBridge("Test_TC_IONFREMON_2_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_IONFREMON_2_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_IONFREMON_2_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_IONFREMON_2_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads from the DUT the Condition attribute.\n");
+            if (ShouldSkip("IONFREMON.S.A0000")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheConditionAttribute_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads from the DUT the DegradationDirection attribute..\n");
+            if (ShouldSkip("IONFREMON.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheDegradationDirectionAttribute_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads from the DUT the ChangeIndication attribute.\n");
+            if (ShouldSkip("IONFREMON.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheChangeIndicationAttribute_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads from the DUT the InPlaceIndicator attribute\n");
+            if (ShouldSkip("IONFREMON.S.A0003")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheInPlaceIndicatorAttribute_4();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 5;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheConditionAttribute_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterIonizingFilterMonitoring alloc] initWithDevice:device
+                                                                                    endpointID:@(1)
+                                                                                         queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeConditionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the Condition attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("condition", "percent", "percent"));
+            VerifyOrReturn(CheckConstraintMinValue<chip::Percent>("condition", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<chip::Percent>("condition", [value unsignedCharValue], 100U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheDegradationDirectionAttribute_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterIonizingFilterMonitoring alloc] initWithDevice:device
+                                                                                    endpointID:@(1)
+                                                                                         queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeDegradationDirectionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the DegradationDirection attribute.. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("degradationDirection", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("degradationDirection", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("degradationDirection", [value unsignedCharValue], 1U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheChangeIndicationAttribute_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterIonizingFilterMonitoring alloc] initWithDevice:device
+                                                                                    endpointID:@(1)
+                                                                                         queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeChangeIndicationWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the ChangeIndication attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("changeIndication", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("changeIndication", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("changeIndication", [value unsignedCharValue], 2U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheInPlaceIndicatorAttribute_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterIonizingFilterMonitoring alloc] initWithDevice:device
+                                                                                    endpointID:@(1)
+                                                                                         queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeInPlaceIndicatorWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the InPlaceIndicator attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("inPlaceIndicator", "boolean", "boolean"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_OZFREMON_1_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_OZFREMON_1_1()
+        : TestCommandBridge("Test_TC_OZFREMON_1_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_OZFREMON_1_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_OZFREMON_1_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_OZFREMON_1_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read the global attribute: ClusterRevision\n");
+            err = TestReadTheGlobalAttributeClusterRevision_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: FeatureMap\n");
+            if (ShouldSkip("!OZFREMON.S.F00 && !OZFREMON.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeFeatureMap_2();
+            break;
+        case 3:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 3 : Given OZFREMON.S.F00(Condition) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("OZFREMON.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenOZFREMONSF00ConditionEnsureFeaturemapHasTheCorrectBitSet_3();
+            break;
+        case 4:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 4 : Given OZFREMON.S.F01(Warning) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("OZFREMON.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenOZFREMONSF01WarningEnsureFeaturemapHasTheCorrectBitSet_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: AttributeList\n");
+            err = TestReadTheGlobalAttributeAttributeList_5();
+            break;
+        case 6:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 6 : Read the feature dependent(OZFREMON.S.F00) attribute in AttributeList\n");
+            if (ShouldSkip("OZFREMON.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheFeatureDependentOZFREMONSF00AttributeInAttributeList_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 7 : Read the optional attribute InPlaceIndicator (OZFREMON.S.A0002) in AttributeList\n");
+            if (ShouldSkip("OZFREMON.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeInPlaceIndicatorOzfremonsa0002InAttributeList_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Read the global attribute: AcceptedCommandList\n");
+            err = TestReadTheGlobalAttributeAcceptedCommandList_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Read the optional command (ResetCondition) in AcceptedCommandList\n");
+            if (ShouldSkip("OZFREMON.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalCommandResetConditionInAcceptedCommandList_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Read the global attribute: GeneratedCommandList\n");
+            err = TestReadTheGlobalAttributeGeneratedCommandList_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : TH reads EventList attribute from DUT\n");
+            err = TestThReadsEventListAttributeFromDut_11();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 12;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneFilterMonitoring alloc] initWithDevice:device
+                                                                                 endpointID:@(1)
+                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: ClusterRevision Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeFeatureMap_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneFilterMonitoring alloc] initWithDevice:device
+                                                                                 endpointID:@(1)
+                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: FeatureMap Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 0UL));
+            }
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenOZFREMONSF00ConditionEnsureFeaturemapHasTheCorrectBitSet_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneFilterMonitoring alloc] initWithDevice:device
+                                                                                 endpointID:@(1)
+                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given OZFREMON.S.F00(Condition) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenOZFREMONSF01WarningEnsureFeaturemapHasTheCorrectBitSet_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneFilterMonitoring alloc] initWithDevice:device
+                                                                                 endpointID:@(1)
+                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given OZFREMON.S.F01(Warning) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneFilterMonitoring alloc] initWithDevice:device
+                                                                                 endpointID:@(1)
+                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65530UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheFeatureDependentOZFREMONSF00AttributeInAttributeList_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneFilterMonitoring alloc] initWithDevice:device
+                                                                                 endpointID:@(1)
+                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the feature dependent(OZFREMON.S.F00) attribute in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeInPlaceIndicatorOzfremonsa0002InAttributeList_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneFilterMonitoring alloc] initWithDevice:device
+                                                                                 endpointID:@(1)
+                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute InPlaceIndicator (OZFREMON.S.A0002) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 3UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneFilterMonitoring alloc] initWithDevice:device
+                                                                                 endpointID:@(1)
+                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalCommandResetConditionInAcceptedCommandList_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneFilterMonitoring alloc] initWithDevice:device
+                                                                                 endpointID:@(1)
+                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional command (ResetCondition) in AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 0UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneFilterMonitoring alloc] initWithDevice:device
+                                                                                 endpointID:@(1)
+                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: GeneratedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsEventListAttributeFromDut_11()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneFilterMonitoring alloc] initWithDevice:device
+                                                                                 endpointID:@(1)
+                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads EventList attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("EventList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("eventList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_OZFREMON_2_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_OZFREMON_2_1()
+        : TestCommandBridge("Test_TC_OZFREMON_2_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_OZFREMON_2_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_OZFREMON_2_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_OZFREMON_2_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads from the DUT the Condition attribute.\n");
+            if (ShouldSkip("OZFREMON.S.A0000")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheConditionAttribute_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads from the DUT the DegradationDirection attribute..\n");
+            if (ShouldSkip("OZFREMON.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheDegradationDirectionAttribute_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads from the DUT the ChangeIndication attribute.\n");
+            if (ShouldSkip("OZFREMON.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheChangeIndicationAttribute_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads from the DUT the InPlaceIndicator attribute\n");
+            if (ShouldSkip("OZFREMON.S.A0003")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheInPlaceIndicatorAttribute_4();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 5;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheConditionAttribute_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneFilterMonitoring alloc] initWithDevice:device
+                                                                                 endpointID:@(1)
+                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeConditionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the Condition attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("condition", "percent", "percent"));
+            VerifyOrReturn(CheckConstraintMinValue<chip::Percent>("condition", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<chip::Percent>("condition", [value unsignedCharValue], 100U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheDegradationDirectionAttribute_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneFilterMonitoring alloc] initWithDevice:device
+                                                                                 endpointID:@(1)
+                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeDegradationDirectionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the DegradationDirection attribute.. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("degradationDirection", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("degradationDirection", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("degradationDirection", [value unsignedCharValue], 1U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheChangeIndicationAttribute_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneFilterMonitoring alloc] initWithDevice:device
+                                                                                 endpointID:@(1)
+                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeChangeIndicationWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the ChangeIndication attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("changeIndication", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("changeIndication", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("changeIndication", [value unsignedCharValue], 2U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheInPlaceIndicatorAttribute_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneFilterMonitoring alloc] initWithDevice:device
+                                                                                 endpointID:@(1)
+                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeInPlaceIndicatorWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the InPlaceIndicator attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("inPlaceIndicator", "boolean", "boolean"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_TCREMON_1_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_TCREMON_1_1()
+        : TestCommandBridge("Test_TC_TCREMON_1_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_TCREMON_1_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_TCREMON_1_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_TCREMON_1_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read the global attribute: ClusterRevision\n");
+            err = TestReadTheGlobalAttributeClusterRevision_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: FeatureMap\n");
+            if (ShouldSkip("!TCREMON.S.F00 && !TCREMON.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeFeatureMap_2();
+            break;
+        case 3:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 3 : Given TCREMON.S.F00(Condition) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("TCREMON.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenTCREMONSF00ConditionEnsureFeaturemapHasTheCorrectBitSet_3();
+            break;
+        case 4:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 4 : Given TCREMON.S.F01(Warning) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("TCREMON.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenTCREMONSF01WarningEnsureFeaturemapHasTheCorrectBitSet_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: AttributeList\n");
+            err = TestReadTheGlobalAttributeAttributeList_5();
+            break;
+        case 6:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 6 : Read the feature dependent(TCREMON.S.F00) attribute in AttributeList\n");
+            if (ShouldSkip("TCREMON.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheFeatureDependentTCREMONSF00AttributeInAttributeList_6();
+            break;
+        case 7:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 7 : Read the optional attribute InPlaceIndicator (TCREMON.S.A0002) in AttributeList\n");
+            if (ShouldSkip("TCREMON.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeInPlaceIndicatorTcremonsa0002InAttributeList_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Read the global attribute: AcceptedCommandList\n");
+            err = TestReadTheGlobalAttributeAcceptedCommandList_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Read the optional command (ResetCondition) in AcceptedCommandList\n");
+            if (ShouldSkip("TCREMON.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalCommandResetConditionInAcceptedCommandList_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Read the global attribute: GeneratedCommandList\n");
+            err = TestReadTheGlobalAttributeGeneratedCommandList_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : TH reads EventList attribute from DUT\n");
+            err = TestThReadsEventListAttributeFromDut_11();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 12;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterTonerCartridgeMonitoring alloc] initWithDevice:device
+                                                                                    endpointID:@(1)
+                                                                                         queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: ClusterRevision Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeFeatureMap_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterTonerCartridgeMonitoring alloc] initWithDevice:device
+                                                                                    endpointID:@(1)
+                                                                                         queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: FeatureMap Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 0UL));
+            }
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenTCREMONSF00ConditionEnsureFeaturemapHasTheCorrectBitSet_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterTonerCartridgeMonitoring alloc] initWithDevice:device
+                                                                                    endpointID:@(1)
+                                                                                         queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given TCREMON.S.F00(Condition) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenTCREMONSF01WarningEnsureFeaturemapHasTheCorrectBitSet_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterTonerCartridgeMonitoring alloc] initWithDevice:device
+                                                                                    endpointID:@(1)
+                                                                                         queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given TCREMON.S.F01(Warning) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterTonerCartridgeMonitoring alloc] initWithDevice:device
+                                                                                    endpointID:@(1)
+                                                                                         queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65530UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheFeatureDependentTCREMONSF00AttributeInAttributeList_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterTonerCartridgeMonitoring alloc] initWithDevice:device
+                                                                                    endpointID:@(1)
+                                                                                         queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the feature dependent(TCREMON.S.F00) attribute in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeInPlaceIndicatorTcremonsa0002InAttributeList_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterTonerCartridgeMonitoring alloc] initWithDevice:device
+                                                                                    endpointID:@(1)
+                                                                                         queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute InPlaceIndicator (TCREMON.S.A0002) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 3UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterTonerCartridgeMonitoring alloc] initWithDevice:device
+                                                                                    endpointID:@(1)
+                                                                                         queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalCommandResetConditionInAcceptedCommandList_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterTonerCartridgeMonitoring alloc] initWithDevice:device
+                                                                                    endpointID:@(1)
+                                                                                         queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional command (ResetCondition) in AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 0UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterTonerCartridgeMonitoring alloc] initWithDevice:device
+                                                                                    endpointID:@(1)
+                                                                                         queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: GeneratedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsEventListAttributeFromDut_11()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterTonerCartridgeMonitoring alloc] initWithDevice:device
+                                                                                    endpointID:@(1)
+                                                                                         queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads EventList attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("EventList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("eventList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_TCREMON_2_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_TCREMON_2_1()
+        : TestCommandBridge("Test_TC_TCREMON_2_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_TCREMON_2_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_TCREMON_2_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_TCREMON_2_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads from the DUT the Condition attribute.\n");
+            if (ShouldSkip("TCREMON.S.A0000")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheConditionAttribute_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads from the DUT the DegradationDirection attribute..\n");
+            if (ShouldSkip("TCREMON.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheDegradationDirectionAttribute_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads from the DUT the ChangeIndication attribute.\n");
+            if (ShouldSkip("TCREMON.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheChangeIndicationAttribute_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads from the DUT the InPlaceIndicator attribute\n");
+            if (ShouldSkip("TCREMON.S.A0003")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheInPlaceIndicatorAttribute_4();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 5;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheConditionAttribute_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterTonerCartridgeMonitoring alloc] initWithDevice:device
+                                                                                    endpointID:@(1)
+                                                                                         queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeConditionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the Condition attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("condition", "percent", "percent"));
+            VerifyOrReturn(CheckConstraintMinValue<chip::Percent>("condition", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<chip::Percent>("condition", [value unsignedCharValue], 100U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheDegradationDirectionAttribute_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterTonerCartridgeMonitoring alloc] initWithDevice:device
+                                                                                    endpointID:@(1)
+                                                                                         queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeDegradationDirectionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the DegradationDirection attribute.. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("degradationDirection", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("degradationDirection", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("degradationDirection", [value unsignedCharValue], 1U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheChangeIndicationAttribute_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterTonerCartridgeMonitoring alloc] initWithDevice:device
+                                                                                    endpointID:@(1)
+                                                                                         queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeChangeIndicationWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the ChangeIndication attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("changeIndication", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("changeIndication", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("changeIndication", [value unsignedCharValue], 2U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheInPlaceIndicatorAttribute_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterTonerCartridgeMonitoring alloc] initWithDevice:device
+                                                                                    endpointID:@(1)
+                                                                                         queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeInPlaceIndicatorWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the InPlaceIndicator attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("inPlaceIndicator", "boolean", "boolean"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_UVFREMON_1_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_UVFREMON_1_1()
+        : TestCommandBridge("Test_TC_UVFREMON_1_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_UVFREMON_1_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_UVFREMON_1_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_UVFREMON_1_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read the global attribute: ClusterRevision\n");
+            err = TestReadTheGlobalAttributeClusterRevision_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: FeatureMap\n");
+            if (ShouldSkip("!UVFREMON.S.F00 && !UVFREMON.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeFeatureMap_2();
+            break;
+        case 3:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 3 : Given UVFREMON.S.F00(Condition) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("UVFREMON.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenUVFREMONSF00ConditionEnsureFeaturemapHasTheCorrectBitSet_3();
+            break;
+        case 4:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 4 : Given UVFREMON.S.F01(Warning) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("UVFREMON.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenUVFREMONSF01WarningEnsureFeaturemapHasTheCorrectBitSet_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: AttributeList\n");
+            err = TestReadTheGlobalAttributeAttributeList_5();
+            break;
+        case 6:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 6 : Read the feature dependent(UVFREMON.S.F00) attribute in AttributeList\n");
+            if (ShouldSkip("UVFREMON.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheFeatureDependentUVFREMONSF00AttributeInAttributeList_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 7 : Read the optional attribute InPlaceIndicator (UVFREMON.S.A0002) in AttributeList\n");
+            if (ShouldSkip("UVFREMON.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeInPlaceIndicatorUvfremonsa0002InAttributeList_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Read the global attribute: AcceptedCommandList\n");
+            err = TestReadTheGlobalAttributeAcceptedCommandList_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Read the optional command (ResetCondition) in AcceptedCommandList\n");
+            if (ShouldSkip("UVFREMON.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalCommandResetConditionInAcceptedCommandList_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Read the global attribute: GeneratedCommandList\n");
+            err = TestReadTheGlobalAttributeGeneratedCommandList_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : TH reads EventList attribute from DUT\n");
+            err = TestThReadsEventListAttributeFromDut_11();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 12;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUVFilterMonitoring alloc] initWithDevice:device
+                                                                              endpointID:@(1)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: ClusterRevision Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeFeatureMap_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUVFilterMonitoring alloc] initWithDevice:device
+                                                                              endpointID:@(1)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: FeatureMap Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 0UL));
+            }
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenUVFREMONSF00ConditionEnsureFeaturemapHasTheCorrectBitSet_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUVFilterMonitoring alloc] initWithDevice:device
+                                                                              endpointID:@(1)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given UVFREMON.S.F00(Condition) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenUVFREMONSF01WarningEnsureFeaturemapHasTheCorrectBitSet_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUVFilterMonitoring alloc] initWithDevice:device
+                                                                              endpointID:@(1)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given UVFREMON.S.F01(Warning) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUVFilterMonitoring alloc] initWithDevice:device
+                                                                              endpointID:@(1)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65530UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheFeatureDependentUVFREMONSF00AttributeInAttributeList_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUVFilterMonitoring alloc] initWithDevice:device
+                                                                              endpointID:@(1)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the feature dependent(UVFREMON.S.F00) attribute in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeInPlaceIndicatorUvfremonsa0002InAttributeList_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUVFilterMonitoring alloc] initWithDevice:device
+                                                                              endpointID:@(1)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute InPlaceIndicator (UVFREMON.S.A0002) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 3UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUVFilterMonitoring alloc] initWithDevice:device
+                                                                              endpointID:@(1)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalCommandResetConditionInAcceptedCommandList_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUVFilterMonitoring alloc] initWithDevice:device
+                                                                              endpointID:@(1)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional command (ResetCondition) in AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 0UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUVFilterMonitoring alloc] initWithDevice:device
+                                                                              endpointID:@(1)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: GeneratedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsEventListAttributeFromDut_11()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUVFilterMonitoring alloc] initWithDevice:device
+                                                                              endpointID:@(1)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads EventList attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("EventList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("eventList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_UVFREMON_2_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_UVFREMON_2_1()
+        : TestCommandBridge("Test_TC_UVFREMON_2_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_UVFREMON_2_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_UVFREMON_2_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_UVFREMON_2_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads from the DUT the Condition attribute.\n");
+            if (ShouldSkip("UVFREMON.S.A0000")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheConditionAttribute_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads from the DUT the DegradationDirection attribute..\n");
+            if (ShouldSkip("UVFREMON.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheDegradationDirectionAttribute_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads from the DUT the ChangeIndication attribute.\n");
+            if (ShouldSkip("UVFREMON.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheChangeIndicationAttribute_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads from the DUT the InPlaceIndicator attribute\n");
+            if (ShouldSkip("UVFREMON.S.A0003")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheInPlaceIndicatorAttribute_4();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 5;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheConditionAttribute_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUVFilterMonitoring alloc] initWithDevice:device
+                                                                              endpointID:@(1)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeConditionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the Condition attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("condition", "percent", "percent"));
+            VerifyOrReturn(CheckConstraintMinValue<chip::Percent>("condition", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<chip::Percent>("condition", [value unsignedCharValue], 100U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheDegradationDirectionAttribute_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUVFilterMonitoring alloc] initWithDevice:device
+                                                                              endpointID:@(1)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeDegradationDirectionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the DegradationDirection attribute.. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("degradationDirection", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("degradationDirection", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("degradationDirection", [value unsignedCharValue], 1U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheChangeIndicationAttribute_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUVFilterMonitoring alloc] initWithDevice:device
+                                                                              endpointID:@(1)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeChangeIndicationWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the ChangeIndication attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("changeIndication", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("changeIndication", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("changeIndication", [value unsignedCharValue], 2U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheInPlaceIndicatorAttribute_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUVFilterMonitoring alloc] initWithDevice:device
+                                                                              endpointID:@(1)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeInPlaceIndicatorWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the InPlaceIndicator attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("inPlaceIndicator", "boolean", "boolean"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_WTREMON_1_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_WTREMON_1_1()
+        : TestCommandBridge("Test_TC_WTREMON_1_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_WTREMON_1_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_WTREMON_1_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_WTREMON_1_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read the global attribute: ClusterRevision\n");
+            err = TestReadTheGlobalAttributeClusterRevision_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: FeatureMap\n");
+            if (ShouldSkip("!WTREMON.S.F00 && !WTREMON.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeFeatureMap_2();
+            break;
+        case 3:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 3 : Given WTREMON.S.F00(Condition) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("WTREMON.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenWTREMONSF00ConditionEnsureFeaturemapHasTheCorrectBitSet_3();
+            break;
+        case 4:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 4 : Given WTREMON.S.F01(Warning) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("WTREMON.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenWTREMONSF01WarningEnsureFeaturemapHasTheCorrectBitSet_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: AttributeList\n");
+            err = TestReadTheGlobalAttributeAttributeList_5();
+            break;
+        case 6:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 6 : Read the feature dependent(WTREMON.S.F00) attribute in AttributeList\n");
+            if (ShouldSkip("WTREMON.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheFeatureDependentWTREMONSF00AttributeInAttributeList_6();
+            break;
+        case 7:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 7 : Read the optional attribute InPlaceIndicator (WTREMON.S.A0002) in AttributeList\n");
+            if (ShouldSkip("WTREMON.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeInPlaceIndicatorWtremonsa0002InAttributeList_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Read the global attribute: AcceptedCommandList\n");
+            err = TestReadTheGlobalAttributeAcceptedCommandList_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Read the optional command (ResetCondition) in AcceptedCommandList\n");
+            if (ShouldSkip("WTREMON.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalCommandResetConditionInAcceptedCommandList_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Read the global attribute: GeneratedCommandList\n");
+            err = TestReadTheGlobalAttributeGeneratedCommandList_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : TH reads EventList attribute from DUT\n");
+            err = TestThReadsEventListAttributeFromDut_11();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 12;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterWaterTankMonitoring alloc] initWithDevice:device
+                                                                               endpointID:@(1)
+                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: ClusterRevision Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeFeatureMap_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterWaterTankMonitoring alloc] initWithDevice:device
+                                                                               endpointID:@(1)
+                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: FeatureMap Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 0UL));
+            }
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenWTREMONSF00ConditionEnsureFeaturemapHasTheCorrectBitSet_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterWaterTankMonitoring alloc] initWithDevice:device
+                                                                               endpointID:@(1)
+                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given WTREMON.S.F00(Condition) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenWTREMONSF01WarningEnsureFeaturemapHasTheCorrectBitSet_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterWaterTankMonitoring alloc] initWithDevice:device
+                                                                               endpointID:@(1)
+                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given WTREMON.S.F01(Warning) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterWaterTankMonitoring alloc] initWithDevice:device
+                                                                               endpointID:@(1)
+                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65530UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheFeatureDependentWTREMONSF00AttributeInAttributeList_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterWaterTankMonitoring alloc] initWithDevice:device
+                                                                               endpointID:@(1)
+                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the feature dependent(WTREMON.S.F00) attribute in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeInPlaceIndicatorWtremonsa0002InAttributeList_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterWaterTankMonitoring alloc] initWithDevice:device
+                                                                               endpointID:@(1)
+                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute InPlaceIndicator (WTREMON.S.A0002) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 3UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterWaterTankMonitoring alloc] initWithDevice:device
+                                                                               endpointID:@(1)
+                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalCommandResetConditionInAcceptedCommandList_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterWaterTankMonitoring alloc] initWithDevice:device
+                                                                               endpointID:@(1)
+                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional command (ResetCondition) in AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 0UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterWaterTankMonitoring alloc] initWithDevice:device
+                                                                               endpointID:@(1)
+                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: GeneratedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsEventListAttributeFromDut_11()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterWaterTankMonitoring alloc] initWithDevice:device
+                                                                               endpointID:@(1)
+                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads EventList attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("EventList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("eventList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_WTREMON_2_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_WTREMON_2_1()
+        : TestCommandBridge("Test_TC_WTREMON_2_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_WTREMON_2_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_WTREMON_2_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_WTREMON_2_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads from the DUT the Condition attribute.\n");
+            if (ShouldSkip("WTREMON.S.A0000")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheConditionAttribute_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads from the DUT the DegradationDirection attribute..\n");
+            if (ShouldSkip("WTREMON.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheDegradationDirectionAttribute_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads from the DUT the ChangeIndication attribute.\n");
+            if (ShouldSkip("WTREMON.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheChangeIndicationAttribute_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads from the DUT the InPlaceIndicator attribute\n");
+            if (ShouldSkip("WTREMON.S.A0003")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheInPlaceIndicatorAttribute_4();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 5;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheConditionAttribute_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterWaterTankMonitoring alloc] initWithDevice:device
+                                                                               endpointID:@(1)
+                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeConditionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the Condition attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("condition", "percent", "percent"));
+            VerifyOrReturn(CheckConstraintMinValue<chip::Percent>("condition", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<chip::Percent>("condition", [value unsignedCharValue], 100U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheDegradationDirectionAttribute_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterWaterTankMonitoring alloc] initWithDevice:device
+                                                                               endpointID:@(1)
+                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeDegradationDirectionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the DegradationDirection attribute.. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("degradationDirection", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("degradationDirection", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("degradationDirection", [value unsignedCharValue], 1U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheChangeIndicationAttribute_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterWaterTankMonitoring alloc] initWithDevice:device
+                                                                               endpointID:@(1)
+                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeChangeIndicationWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the ChangeIndication attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("changeIndication", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("changeIndication", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("changeIndication", [value unsignedCharValue], 2U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheInPlaceIndicatorAttribute_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterWaterTankMonitoring alloc] initWithDevice:device
+                                                                               endpointID:@(1)
+                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeInPlaceIndicatorWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the InPlaceIndicator attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("inPlaceIndicator", "boolean", "boolean"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_ZEOFREMON_1_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_ZEOFREMON_1_1()
+        : TestCommandBridge("Test_TC_ZEOFREMON_1_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_ZEOFREMON_1_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_ZEOFREMON_1_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_ZEOFREMON_1_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read the global attribute: ClusterRevision\n");
+            err = TestReadTheGlobalAttributeClusterRevision_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: FeatureMap\n");
+            if (ShouldSkip("!ZEOFREMON.S.F00 && !ZEOFREMON.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeFeatureMap_2();
+            break;
+        case 3:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 3 : Given ZEOFREMON.S.F00(Condition) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("ZEOFREMON.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenZEOFREMONSF00ConditionEnsureFeaturemapHasTheCorrectBitSet_3();
+            break;
+        case 4:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 4 : Given ZEOFREMON.S.F01(Warning) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("ZEOFREMON.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenZEOFREMONSF01WarningEnsureFeaturemapHasTheCorrectBitSet_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: AttributeList\n");
+            err = TestReadTheGlobalAttributeAttributeList_5();
+            break;
+        case 6:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 6 : Read the feature dependent(ZEOFREMON.S.F00) attribute in AttributeList\n");
+            if (ShouldSkip("ZEOFREMON.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheFeatureDependentZEOFREMONSF00AttributeInAttributeList_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 7 : Read the optional attribute InPlaceIndicator (ZEOFREMON.S.A0002) in AttributeList\n");
+            if (ShouldSkip("ZEOFREMON.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeInPlaceIndicatorZeofremonsa0002InAttributeList_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Read the global attribute: AcceptedCommandList\n");
+            err = TestReadTheGlobalAttributeAcceptedCommandList_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Read the optional command (ResetCondition) in AcceptedCommandList\n");
+            if (ShouldSkip("ZEOFREMON.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalCommandResetConditionInAcceptedCommandList_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Read the global attribute: GeneratedCommandList\n");
+            err = TestReadTheGlobalAttributeGeneratedCommandList_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : TH reads EventList attribute from DUT\n");
+            err = TestThReadsEventListAttributeFromDut_11();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 12;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterZeoliteFilterMonitoring alloc] initWithDevice:device
+                                                                                   endpointID:@(1)
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: ClusterRevision Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeFeatureMap_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterZeoliteFilterMonitoring alloc] initWithDevice:device
+                                                                                   endpointID:@(1)
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: FeatureMap Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 0UL));
+            }
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenZEOFREMONSF00ConditionEnsureFeaturemapHasTheCorrectBitSet_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterZeoliteFilterMonitoring alloc] initWithDevice:device
+                                                                                   endpointID:@(1)
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given ZEOFREMON.S.F00(Condition) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenZEOFREMONSF01WarningEnsureFeaturemapHasTheCorrectBitSet_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterZeoliteFilterMonitoring alloc] initWithDevice:device
+                                                                                   endpointID:@(1)
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given ZEOFREMON.S.F01(Warning) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterZeoliteFilterMonitoring alloc] initWithDevice:device
+                                                                                   endpointID:@(1)
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65530UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheFeatureDependentZEOFREMONSF00AttributeInAttributeList_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterZeoliteFilterMonitoring alloc] initWithDevice:device
+                                                                                   endpointID:@(1)
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the feature dependent(ZEOFREMON.S.F00) attribute in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeInPlaceIndicatorZeofremonsa0002InAttributeList_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterZeoliteFilterMonitoring alloc] initWithDevice:device
+                                                                                   endpointID:@(1)
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute InPlaceIndicator (ZEOFREMON.S.A0002) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 3UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterZeoliteFilterMonitoring alloc] initWithDevice:device
+                                                                                   endpointID:@(1)
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalCommandResetConditionInAcceptedCommandList_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterZeoliteFilterMonitoring alloc] initWithDevice:device
+                                                                                   endpointID:@(1)
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional command (ResetCondition) in AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 0UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterZeoliteFilterMonitoring alloc] initWithDevice:device
+                                                                                   endpointID:@(1)
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: GeneratedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsEventListAttributeFromDut_11()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterZeoliteFilterMonitoring alloc] initWithDevice:device
+                                                                                   endpointID:@(1)
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads EventList attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("EventList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("eventList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_ZEOFREMON_2_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_ZEOFREMON_2_1()
+        : TestCommandBridge("Test_TC_ZEOFREMON_2_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_ZEOFREMON_2_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_ZEOFREMON_2_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_ZEOFREMON_2_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads from the DUT the Condition attribute.\n");
+            if (ShouldSkip("ZEOFREMON.S.A0000")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheConditionAttribute_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads from the DUT the DegradationDirection attribute..\n");
+            if (ShouldSkip("ZEOFREMON.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheDegradationDirectionAttribute_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads from the DUT the ChangeIndication attribute.\n");
+            if (ShouldSkip("ZEOFREMON.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheChangeIndicationAttribute_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads from the DUT the InPlaceIndicator attribute\n");
+            if (ShouldSkip("ZEOFREMON.S.A0003")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheInPlaceIndicatorAttribute_4();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 5;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheConditionAttribute_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterZeoliteFilterMonitoring alloc] initWithDevice:device
+                                                                                   endpointID:@(1)
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeConditionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the Condition attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("condition", "percent", "percent"));
+            VerifyOrReturn(CheckConstraintMinValue<chip::Percent>("condition", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<chip::Percent>("condition", [value unsignedCharValue], 100U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheDegradationDirectionAttribute_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterZeoliteFilterMonitoring alloc] initWithDevice:device
+                                                                                   endpointID:@(1)
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeDegradationDirectionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the DegradationDirection attribute.. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("degradationDirection", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("degradationDirection", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("degradationDirection", [value unsignedCharValue], 1U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheChangeIndicationAttribute_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterZeoliteFilterMonitoring alloc] initWithDevice:device
+                                                                                   endpointID:@(1)
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeChangeIndicationWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the ChangeIndication attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("changeIndication", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("changeIndication", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("changeIndication", [value unsignedCharValue], 2U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheInPlaceIndicatorAttribute_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterZeoliteFilterMonitoring alloc] initWithDevice:device
+                                                                                   endpointID:@(1)
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeInPlaceIndicatorWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the InPlaceIndicator attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("inPlaceIndicator", "boolean", "boolean"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
 #endif // CONFIG_ENABLE_YAML_TESTS
 
 void registerCommandsTests(Commands & commands)
@@ -146755,6 +154915,30 @@ void registerCommandsTests(Commands & commands)
         make_unique<TestGroupsCluster>(),
         make_unique<TestGroupKeyManagementCluster>(),
         make_unique<Test_TC_G_1_1>(),
+        make_unique<Test_TC_ACFREMON_1_1>(),
+        make_unique<Test_TC_ACFREMON_2_1>(),
+        make_unique<Test_TC_CFREMON_1_1>(),
+        make_unique<Test_TC_CFREMON_2_1>(),
+        make_unique<Test_TC_ESFREMON_1_1>(),
+        make_unique<Test_TC_ESFREMON_2_1>(),
+        make_unique<Test_TC_FTREMON_1_1>(),
+        make_unique<Test_TC_FTREMON_2_1>(),
+        make_unique<Test_TC_HEPAFREMON_1_1>(),
+        make_unique<Test_TC_HEPAFREMON_2_1>(),
+        make_unique<Test_TC_INKCREMON_1_1>(),
+        make_unique<Test_TC_INKCREMON_2_1>(),
+        make_unique<Test_TC_IONFREMON_1_1>(),
+        make_unique<Test_TC_IONFREMON_2_1>(),
+        make_unique<Test_TC_OZFREMON_1_1>(),
+        make_unique<Test_TC_OZFREMON_2_1>(),
+        make_unique<Test_TC_TCREMON_1_1>(),
+        make_unique<Test_TC_TCREMON_2_1>(),
+        make_unique<Test_TC_UVFREMON_1_1>(),
+        make_unique<Test_TC_UVFREMON_2_1>(),
+        make_unique<Test_TC_WTREMON_1_1>(),
+        make_unique<Test_TC_WTREMON_2_1>(),
+        make_unique<Test_TC_ZEOFREMON_1_1>(),
+        make_unique<Test_TC_ZEOFREMON_2_1>(),
 #endif // CONFIG_ENABLE_YAML_TESTS
     };
 
