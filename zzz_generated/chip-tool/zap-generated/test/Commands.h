@@ -73275,6 +73275,10 @@ private:
         case 2:
             switch (mTestSubStepIndex)
             {
+            case 0:
+                VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_CLUSTER));
+                mTestSubStepIndex++;
+                break;
             default:
                 LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
                 break;
@@ -73460,7 +73464,7 @@ private:
         }
         case 2: {
             LogStep(2, "Check reading events from an invalid endpoint");
-            mTestSubStepCount = 0;
+            mTestSubStepCount = 1;
             return ReadEvent(kIdentityAlpha, GetEndpoint(0), UnitTesting::Id, UnitTesting::Events::TestEvent::Id, false,
                              chip::NullOptional);
         }
