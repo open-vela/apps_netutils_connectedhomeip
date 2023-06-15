@@ -72397,7 +72397,7 @@ private:
 class TestConstraintsSuite : public TestCommand
 {
 public:
-    TestConstraintsSuite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("TestConstraints", 55, credsIssuerConfig)
+    TestConstraintsSuite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("TestConstraints", 57, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -72512,8 +72512,20 @@ private:
             break;
         case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("bitmap32", value, 1UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 5UL));
+            }
             break;
         case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -72521,7 +72533,7 @@ private:
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 5UL));
             }
             break;
-        case 14:
+        case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -72529,7 +72541,7 @@ private:
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 5UL));
             }
             break;
-        case 15:
+        case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -72537,13 +72549,13 @@ private:
                 VerifyOrReturn(CheckConstraintNotValue("value", value, 6UL));
             }
             break;
-        case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::CharSpan value;
@@ -72551,7 +72563,7 @@ private:
                 VerifyOrReturn(CheckConstraintMinLength("value", value, 5));
             }
             break;
-        case 19:
+        case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::CharSpan value;
@@ -72559,7 +72571,7 @@ private:
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 20));
             }
             break;
-        case 20:
+        case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::CharSpan value;
@@ -72567,24 +72579,12 @@ private:
                 VerifyOrReturn(CheckConstraintStartsWith("value", value, "**"));
             }
             break;
-        case 21:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::CharSpan value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintEndsWith("value", value, "**"));
-            }
-            break;
-        case 22:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         case 23:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintIsLowerCase("value", value, true));
-                VerifyOrReturn(CheckConstraintIsUpperCase("value", value, false));
+                VerifyOrReturn(CheckConstraintEndsWith("value", value, "**"));
             }
             break;
         case 24:
@@ -72595,8 +72595,8 @@ private:
             {
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintIsUpperCase("value", value, true));
-                VerifyOrReturn(CheckConstraintIsLowerCase("value", value, false));
+                VerifyOrReturn(CheckConstraintIsLowerCase("value", value, true));
+                VerifyOrReturn(CheckConstraintIsUpperCase("value", value, false));
             }
             break;
         case 26:
@@ -72607,7 +72607,7 @@ private:
             {
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintIsUpperCase("value", value, false));
+                VerifyOrReturn(CheckConstraintIsUpperCase("value", value, true));
                 VerifyOrReturn(CheckConstraintIsLowerCase("value", value, false));
             }
             break;
@@ -72619,8 +72619,8 @@ private:
             {
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintIsUpperCase("value", value, true));
-                VerifyOrReturn(CheckConstraintIsLowerCase("value", value, true));
+                VerifyOrReturn(CheckConstraintIsUpperCase("value", value, false));
+                VerifyOrReturn(CheckConstraintIsLowerCase("value", value, false));
             }
             break;
         case 30:
@@ -72644,7 +72644,7 @@ private:
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintIsUpperCase("value", value, true));
-                VerifyOrReturn(CheckConstraintIsLowerCase("value", value, false));
+                VerifyOrReturn(CheckConstraintIsLowerCase("value", value, true));
             }
             break;
         case 34:
@@ -72655,8 +72655,8 @@ private:
             {
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintIsUpperCase("value", value, false));
-                VerifyOrReturn(CheckConstraintIsLowerCase("value", value, true));
+                VerifyOrReturn(CheckConstraintIsUpperCase("value", value, true));
+                VerifyOrReturn(CheckConstraintIsLowerCase("value", value, false));
             }
             break;
         case 36:
@@ -72667,7 +72667,7 @@ private:
             {
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintIsUpperCase("value", value, true));
+                VerifyOrReturn(CheckConstraintIsUpperCase("value", value, false));
                 VerifyOrReturn(CheckConstraintIsLowerCase("value", value, true));
             }
             break;
@@ -72679,7 +72679,8 @@ private:
             {
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintIsHexString("value", value, false));
+                VerifyOrReturn(CheckConstraintIsUpperCase("value", value, true));
+                VerifyOrReturn(CheckConstraintIsLowerCase("value", value, true));
             }
             break;
         case 40:
@@ -72690,7 +72691,7 @@ private:
             {
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintIsHexString("value", value, true));
+                VerifyOrReturn(CheckConstraintIsHexString("value", value, false));
             }
             break;
         case 42:
@@ -72699,10 +72700,9 @@ private:
         case 43:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<uint8_t> value;
+                chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValueNonNull("nullableInt8u", value));
-                VerifyOrReturn(CheckValue("nullableInt8u.Value()", value.Value(), 0U));
+                VerifyOrReturn(CheckConstraintIsHexString("value", value, true));
             }
             break;
         case 44:
@@ -72713,6 +72713,8 @@ private:
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("nullableInt8u", value));
+                VerifyOrReturn(CheckValue("nullableInt8u.Value()", value.Value(), 0U));
             }
             break;
         case 46:
@@ -72731,11 +72733,8 @@ private:
         case 49:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<chip::ByteSpan> value;
+                chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValueNonNull("nullableOctetString", value));
-                VerifyOrReturn(CheckValueAsString("nullableOctetString.Value()", value.Value(),
-                                                  chip::ByteSpan(chip::Uint8::from_const_char(""), 0)));
             }
             break;
         case 50:
@@ -72746,6 +72745,9 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::ByteSpan> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("nullableOctetString", value));
+                VerifyOrReturn(CheckValueAsString("nullableOctetString.Value()", value.Value(),
+                                                  chip::ByteSpan(chip::Uint8::from_const_char(""), 0)));
             }
             break;
         case 52:
@@ -72759,6 +72761,16 @@ private:
             }
             break;
         case 54:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 55:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<chip::ByteSpan> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+            }
+            break;
+        case 56:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         default:
@@ -72853,82 +72865,82 @@ private:
                                  chip::NullOptional);
         }
         case 11: {
-            LogStep(11, "Write attribute BITMAP32 Back to Default Value");
+            LogStep(11, "Write attribute BITMAP32 with MaskVal1");
+            ListFreer listFreer;
+            chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap> value;
+            value = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap>>(1UL);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap32::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 12: {
+            LogStep(12, "Read attribute BITMAP32 with MaskVal1 and ensure Maskval1 or MaskVal3 are set");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap32::Id, true,
+                                 chip::NullOptional);
+        }
+        case 13: {
+            LogStep(13, "Write attribute BITMAP32 Back to Default Value");
             ListFreer listFreer;
             chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap> value;
             value = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap>>(0UL);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap32::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 12: {
-            LogStep(12, "Write attribute INT32U Value");
+        case 14: {
+            LogStep(14, "Write attribute INT32U Value");
             ListFreer listFreer;
             uint32_t value;
             value = 5UL;
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int32u::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 13: {
-            LogStep(13, "Read attribute INT32U Value MinValue Constraints");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int32u::Id, true,
-                                 chip::NullOptional);
-        }
-        case 14: {
-            LogStep(14, "Read attribute INT32U Value MaxValue Constraints");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int32u::Id, true,
-                                 chip::NullOptional);
-        }
         case 15: {
-            LogStep(15, "Read attribute INT32U Value NotValue Constraints");
+            LogStep(15, "Read attribute INT32U Value MinValue Constraints");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int32u::Id, true,
                                  chip::NullOptional);
         }
         case 16: {
-            LogStep(16, "Write attribute INT32U Value Back to Default Value");
+            LogStep(16, "Read attribute INT32U Value MaxValue Constraints");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int32u::Id, true,
+                                 chip::NullOptional);
+        }
+        case 17: {
+            LogStep(17, "Read attribute INT32U Value NotValue Constraints");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int32u::Id, true,
+                                 chip::NullOptional);
+        }
+        case 18: {
+            LogStep(18, "Write attribute INT32U Value Back to Default Value");
             ListFreer listFreer;
             uint32_t value;
             value = 0UL;
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int32u::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 17: {
-            LogStep(17, "Write attribute CHAR_STRING Value");
+        case 19: {
+            LogStep(19, "Write attribute CHAR_STRING Value");
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("** Test **garbage: not in length on purpose", 10);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 18: {
-            LogStep(18, "Read attribute CHAR_STRING Value MinLength Constraints");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, true,
-                                 chip::NullOptional);
-        }
-        case 19: {
-            LogStep(19, "Read attribute CHAR_STRING Value MaxLength Constraints");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, true,
-                                 chip::NullOptional);
-        }
         case 20: {
-            LogStep(20, "Read attribute CHAR_STRING Value StartsWith Constraints");
+            LogStep(20, "Read attribute CHAR_STRING Value MinLength Constraints");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, true,
                                  chip::NullOptional);
         }
         case 21: {
-            LogStep(21, "Read attribute CHAR_STRING Value EndsWith Constraints");
+            LogStep(21, "Read attribute CHAR_STRING Value MaxLength Constraints");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, true,
                                  chip::NullOptional);
         }
         case 22: {
-            LogStep(22, "Write attribute CHAR_STRING Value");
-            ListFreer listFreer;
-            chip::CharSpan value;
-            value = chip::Span<const char>("lowercasegarbage: not in length on purpose", 9);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            LogStep(22, "Read attribute CHAR_STRING Value StartsWith Constraints");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, true,
+                                 chip::NullOptional);
         }
         case 23: {
-            LogStep(23, "Read attribute CHAR_STRING Value isLowerCase/isUpperCase Constraints");
+            LogStep(23, "Read attribute CHAR_STRING Value EndsWith Constraints");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, true,
                                  chip::NullOptional);
         }
@@ -72936,7 +72948,7 @@ private:
             LogStep(24, "Write attribute CHAR_STRING Value");
             ListFreer listFreer;
             chip::CharSpan value;
-            value = chip::Span<const char>("UPPERCASEgarbage: not in length on purpose", 9);
+            value = chip::Span<const char>("lowercasegarbage: not in length on purpose", 9);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
@@ -72949,7 +72961,7 @@ private:
             LogStep(26, "Write attribute CHAR_STRING Value");
             ListFreer listFreer;
             chip::CharSpan value;
-            value = chip::Span<const char>("lowUPPERgarbage: not in length on purpose", 8);
+            value = chip::Span<const char>("UPPERCASEgarbage: not in length on purpose", 9);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
@@ -72959,10 +72971,10 @@ private:
                                  chip::NullOptional);
         }
         case 28: {
-            LogStep(28, "Write attribute CHAR_STRING Value with only digits");
+            LogStep(28, "Write attribute CHAR_STRING Value");
             ListFreer listFreer;
             chip::CharSpan value;
-            value = chip::Span<const char>("1234567890garbage: not in length on purpose", 10);
+            value = chip::Span<const char>("lowUPPERgarbage: not in length on purpose", 8);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
@@ -72972,10 +72984,10 @@ private:
                                  chip::NullOptional);
         }
         case 30: {
-            LogStep(30, "Write attribute CHAR_STRING Value with only non-letters");
+            LogStep(30, "Write attribute CHAR_STRING Value with only digits");
             ListFreer listFreer;
             chip::CharSpan value;
-            value = chip::Span<const char>("12.4,76:garbage: not in length on purpose", 8);
+            value = chip::Span<const char>("1234567890garbage: not in length on purpose", 10);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
@@ -72985,10 +72997,10 @@ private:
                                  chip::NullOptional);
         }
         case 32: {
-            LogStep(32, "Write attribute CHAR_STRING Value with uppercase letters and symbols");
+            LogStep(32, "Write attribute CHAR_STRING Value with only non-letters");
             ListFreer listFreer;
             chip::CharSpan value;
-            value = chip::Span<const char>("ABC;.* garbage: not in length on purpose", 7);
+            value = chip::Span<const char>("12.4,76:garbage: not in length on purpose", 8);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
@@ -72998,10 +73010,10 @@ private:
                                  chip::NullOptional);
         }
         case 34: {
-            LogStep(34, "Write attribute CHAR_STRING Value with lowercase letters and symbols");
+            LogStep(34, "Write attribute CHAR_STRING Value with uppercase letters and symbols");
             ListFreer listFreer;
             chip::CharSpan value;
-            value = chip::Span<const char>("abc;.* garbage: not in length on purpose", 7);
+            value = chip::Span<const char>("ABC;.* garbage: not in length on purpose", 7);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
@@ -73011,10 +73023,10 @@ private:
                                  chip::NullOptional);
         }
         case 36: {
-            LogStep(36, "Write attribute CHAR_STRING Value which is empty");
+            LogStep(36, "Write attribute CHAR_STRING Value with lowercase letters and symbols");
             ListFreer listFreer;
             chip::CharSpan value;
-            value = chip::Span<const char>("garbage: not in length on purpose", 0);
+            value = chip::Span<const char>("abc;.* garbage: not in length on purpose", 7);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
@@ -73024,15 +73036,15 @@ private:
                                  chip::NullOptional);
         }
         case 38: {
-            LogStep(38, "Write attribute CHAR_STRING Value");
+            LogStep(38, "Write attribute CHAR_STRING Value which is empty");
             ListFreer listFreer;
             chip::CharSpan value;
-            value = chip::Span<const char>("ABCDEF012Vgarbage: not in length on purpose", 10);
+            value = chip::Span<const char>("garbage: not in length on purpose", 0);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 39: {
-            LogStep(39, "Read attribute CHAR_STRING Value isHexString Constraints");
+            LogStep(39, "Read attribute CHAR_STRING Value isLowerCase/isUpperCase Constraints");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, true,
                                  chip::NullOptional);
         }
@@ -73040,7 +73052,7 @@ private:
             LogStep(40, "Write attribute CHAR_STRING Value");
             ListFreer listFreer;
             chip::CharSpan value;
-            value = chip::Span<const char>("ABCDEF0123garbage: not in length on purpose", 10);
+            value = chip::Span<const char>("ABCDEF012Vgarbage: not in length on purpose", 10);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
@@ -73050,37 +73062,37 @@ private:
                                  chip::NullOptional);
         }
         case 42: {
-            LogStep(42, "Write attribute CHAR_STRING Value Back to Default Value");
+            LogStep(42, "Write attribute CHAR_STRING Value");
+            ListFreer listFreer;
+            chip::CharSpan value;
+            value = chip::Span<const char>("ABCDEF0123garbage: not in length on purpose", 10);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 43: {
+            LogStep(43, "Read attribute CHAR_STRING Value isHexString Constraints");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, true,
+                                 chip::NullOptional);
+        }
+        case 44: {
+            LogStep(44, "Write attribute CHAR_STRING Value Back to Default Value");
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("garbage: not in length on purpose", 0);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 43: {
-            LogStep(43, "Read attribute NULLABLE_INT8U Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt8u::Id, true,
-                                 chip::NullOptional);
-        }
-        case 44: {
-            LogStep(44, "Write attribute NULLABLE_INT8U with a value");
-            ListFreer listFreer;
-            chip::app::DataModel::Nullable<uint8_t> value;
-            value.SetNonNull();
-            value.Value() = 0U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt8u::Id,
-                                  value, chip::NullOptional, chip::NullOptional);
-        }
         case 45: {
-            LogStep(45, "Read attribute NULLABLE_INT8U with a value");
+            LogStep(45, "Read attribute NULLABLE_INT8U Default Value");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt8u::Id, true,
                                  chip::NullOptional);
         }
         case 46: {
-            LogStep(46, "Write attribute NULLABLE_INT8U without a value");
+            LogStep(46, "Write attribute NULLABLE_INT8U with a value");
             ListFreer listFreer;
             chip::app::DataModel::Nullable<uint8_t> value;
-            value.SetNull();
+            value.SetNonNull();
+            value.Value() = 0U;
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt8u::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
@@ -73090,7 +73102,20 @@ private:
                                  chip::NullOptional);
         }
         case 48: {
-            LogStep(48, "Write attribute NULLABLE_INT8U back to Default Value");
+            LogStep(48, "Write attribute NULLABLE_INT8U without a value");
+            ListFreer listFreer;
+            chip::app::DataModel::Nullable<uint8_t> value;
+            value.SetNull();
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt8u::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
+        }
+        case 49: {
+            LogStep(49, "Read attribute NULLABLE_INT8U with a value");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt8u::Id, true,
+                                 chip::NullOptional);
+        }
+        case 50: {
+            LogStep(50, "Write attribute NULLABLE_INT8U back to Default Value");
             ListFreer listFreer;
             chip::app::DataModel::Nullable<uint8_t> value;
             value.SetNonNull();
@@ -73098,22 +73123,8 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt8u::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
-        case 49: {
-            LogStep(49, "Read attribute NULLABLE_OCTET_STRING Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableOctetString::Id,
-                                 true, chip::NullOptional);
-        }
-        case 50: {
-            LogStep(50, "Write attribute NULLABLE_OCTET_STRING");
-            ListFreer listFreer;
-            chip::app::DataModel::Nullable<chip::ByteSpan> value;
-            value.SetNonNull();
-            value.Value() = chip::ByteSpan(chip::Uint8::from_const_char("TestValuegarbage: not in length on purpose"), 9);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableOctetString::Id,
-                                  value, chip::NullOptional, chip::NullOptional);
-        }
         case 51: {
-            LogStep(51, "Read attribute NULLABLE_OCTET_STRING");
+            LogStep(51, "Read attribute NULLABLE_OCTET_STRING Default Value");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableOctetString::Id,
                                  true, chip::NullOptional);
         }
@@ -73121,7 +73132,8 @@ private:
             LogStep(52, "Write attribute NULLABLE_OCTET_STRING");
             ListFreer listFreer;
             chip::app::DataModel::Nullable<chip::ByteSpan> value;
-            value.SetNull();
+            value.SetNonNull();
+            value.Value() = chip::ByteSpan(chip::Uint8::from_const_char("TestValuegarbage: not in length on purpose"), 9);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableOctetString::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
@@ -73131,7 +73143,20 @@ private:
                                  true, chip::NullOptional);
         }
         case 54: {
-            LogStep(54, "Write attribute NULLABLE_OCTET_STRING back to Default Value");
+            LogStep(54, "Write attribute NULLABLE_OCTET_STRING");
+            ListFreer listFreer;
+            chip::app::DataModel::Nullable<chip::ByteSpan> value;
+            value.SetNull();
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableOctetString::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
+        }
+        case 55: {
+            LogStep(55, "Read attribute NULLABLE_OCTET_STRING");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableOctetString::Id,
+                                 true, chip::NullOptional);
+        }
+        case 56: {
+            LogStep(56, "Write attribute NULLABLE_OCTET_STRING back to Default Value");
             ListFreer listFreer;
             chip::app::DataModel::Nullable<chip::ByteSpan> value;
             value.SetNonNull();
