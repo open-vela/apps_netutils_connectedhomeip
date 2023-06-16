@@ -50705,7 +50705,7 @@ using chip::System::Clock::Timeout;
 
 @end
 
-@implementation MTRBaseClusterRoboticVacuumOperationalState
+@implementation MTRBaseClusterRVCOperationalState
 
 - (instancetype)initWithDevice:(MTRBaseDevice *)device endpointID:(NSNumber *)endpointID queue:(dispatch_queue_t)queue
 {
@@ -50720,28 +50720,26 @@ using chip::System::Clock::Timeout;
     return self;
 }
 
-- (void)pauseWithCompletion:(void (^)(MTRRoboticVacuumOperationalStateClusterOperationalCommandResponseParams * _Nullable data,
+- (void)pauseWithCompletion:(void (^)(MTRRVCOperationalStateClusterOperationalCommandResponseParams * _Nullable data,
                                 NSError * _Nullable error))completion
 {
     [self pauseWithParams:nil completion:completion];
 }
-- (void)pauseWithParams:(MTRRoboticVacuumOperationalStateClusterPauseParams * _Nullable)params
-             completion:(void (^)(MTRRoboticVacuumOperationalStateClusterOperationalCommandResponseParams * _Nullable data,
+- (void)pauseWithParams:(MTRRVCOperationalStateClusterPauseParams * _Nullable)params
+             completion:(void (^)(MTRRVCOperationalStateClusterOperationalCommandResponseParams * _Nullable data,
                             NSError * _Nullable error))completion
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRRoboticVacuumOperationalStateClusterOperationalCommandResponseCallbackBridge(self.callbackQueue,
-        completion,
+    auto * bridge = new MTRRVCOperationalStateClusterOperationalCommandResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            RoboticVacuumOperationalStateClusterOperationalCommandResponseCallbackType successCb, MTRErrorCallback failureCb,
+            RVCOperationalStateClusterOperationalCommandResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge
-                = static_cast<MTRRoboticVacuumOperationalStateClusterOperationalCommandResponseCallbackBridge *>(bridge);
+            auto * typedBridge = static_cast<MTRRVCOperationalStateClusterOperationalCommandResponseCallbackBridge *>(bridge);
             Optional<uint16_t> timedInvokeTimeoutMs;
             Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
-            RoboticVacuumOperationalState::Commands::Pause::Type request;
+            RvcOperationalState::Commands::Pause::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
@@ -50761,28 +50759,26 @@ using chip::System::Clock::Timeout;
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)stopWithCompletion:(void (^)(MTRRoboticVacuumOperationalStateClusterOperationalCommandResponseParams * _Nullable data,
+- (void)stopWithCompletion:(void (^)(MTRRVCOperationalStateClusterOperationalCommandResponseParams * _Nullable data,
                                NSError * _Nullable error))completion
 {
     [self stopWithParams:nil completion:completion];
 }
-- (void)stopWithParams:(MTRRoboticVacuumOperationalStateClusterStopParams * _Nullable)params
-            completion:(void (^)(MTRRoboticVacuumOperationalStateClusterOperationalCommandResponseParams * _Nullable data,
+- (void)stopWithParams:(MTRRVCOperationalStateClusterStopParams * _Nullable)params
+            completion:(void (^)(MTRRVCOperationalStateClusterOperationalCommandResponseParams * _Nullable data,
                            NSError * _Nullable error))completion
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRRoboticVacuumOperationalStateClusterOperationalCommandResponseCallbackBridge(self.callbackQueue,
-        completion,
+    auto * bridge = new MTRRVCOperationalStateClusterOperationalCommandResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            RoboticVacuumOperationalStateClusterOperationalCommandResponseCallbackType successCb, MTRErrorCallback failureCb,
+            RVCOperationalStateClusterOperationalCommandResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge
-                = static_cast<MTRRoboticVacuumOperationalStateClusterOperationalCommandResponseCallbackBridge *>(bridge);
+            auto * typedBridge = static_cast<MTRRVCOperationalStateClusterOperationalCommandResponseCallbackBridge *>(bridge);
             Optional<uint16_t> timedInvokeTimeoutMs;
             Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
-            RoboticVacuumOperationalState::Commands::Stop::Type request;
+            RvcOperationalState::Commands::Stop::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
@@ -50802,28 +50798,26 @@ using chip::System::Clock::Timeout;
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)startWithCompletion:(void (^)(MTRRoboticVacuumOperationalStateClusterOperationalCommandResponseParams * _Nullable data,
+- (void)startWithCompletion:(void (^)(MTRRVCOperationalStateClusterOperationalCommandResponseParams * _Nullable data,
                                 NSError * _Nullable error))completion
 {
     [self startWithParams:nil completion:completion];
 }
-- (void)startWithParams:(MTRRoboticVacuumOperationalStateClusterStartParams * _Nullable)params
-             completion:(void (^)(MTRRoboticVacuumOperationalStateClusterOperationalCommandResponseParams * _Nullable data,
+- (void)startWithParams:(MTRRVCOperationalStateClusterStartParams * _Nullable)params
+             completion:(void (^)(MTRRVCOperationalStateClusterOperationalCommandResponseParams * _Nullable data,
                             NSError * _Nullable error))completion
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRRoboticVacuumOperationalStateClusterOperationalCommandResponseCallbackBridge(self.callbackQueue,
-        completion,
+    auto * bridge = new MTRRVCOperationalStateClusterOperationalCommandResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            RoboticVacuumOperationalStateClusterOperationalCommandResponseCallbackType successCb, MTRErrorCallback failureCb,
+            RVCOperationalStateClusterOperationalCommandResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge
-                = static_cast<MTRRoboticVacuumOperationalStateClusterOperationalCommandResponseCallbackBridge *>(bridge);
+            auto * typedBridge = static_cast<MTRRVCOperationalStateClusterOperationalCommandResponseCallbackBridge *>(bridge);
             Optional<uint16_t> timedInvokeTimeoutMs;
             Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
-            RoboticVacuumOperationalState::Commands::Start::Type request;
+            RvcOperationalState::Commands::Start::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
@@ -50843,28 +50837,26 @@ using chip::System::Clock::Timeout;
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)resumeWithCompletion:(void (^)(MTRRoboticVacuumOperationalStateClusterOperationalCommandResponseParams * _Nullable data,
+- (void)resumeWithCompletion:(void (^)(MTRRVCOperationalStateClusterOperationalCommandResponseParams * _Nullable data,
                                  NSError * _Nullable error))completion
 {
     [self resumeWithParams:nil completion:completion];
 }
-- (void)resumeWithParams:(MTRRoboticVacuumOperationalStateClusterResumeParams * _Nullable)params
-              completion:(void (^)(MTRRoboticVacuumOperationalStateClusterOperationalCommandResponseParams * _Nullable data,
+- (void)resumeWithParams:(MTRRVCOperationalStateClusterResumeParams * _Nullable)params
+              completion:(void (^)(MTRRVCOperationalStateClusterOperationalCommandResponseParams * _Nullable data,
                              NSError * _Nullable error))completion
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRRoboticVacuumOperationalStateClusterOperationalCommandResponseCallbackBridge(self.callbackQueue,
-        completion,
+    auto * bridge = new MTRRVCOperationalStateClusterOperationalCommandResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            RoboticVacuumOperationalStateClusterOperationalCommandResponseCallbackType successCb, MTRErrorCallback failureCb,
+            RVCOperationalStateClusterOperationalCommandResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge
-                = static_cast<MTRRoboticVacuumOperationalStateClusterOperationalCommandResponseCallbackBridge *>(bridge);
+            auto * typedBridge = static_cast<MTRRVCOperationalStateClusterOperationalCommandResponseCallbackBridge *>(bridge);
             Optional<uint16_t> timedInvokeTimeoutMs;
             Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
-            RoboticVacuumOperationalState::Commands::Resume::Type request;
+            RvcOperationalState::Commands::Resume::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
@@ -50887,8 +50879,8 @@ using chip::System::Clock::Timeout;
 - (void)readAttributePhaseListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = RoboticVacuumOperationalState::Attributes::PhaseList::TypeInfo;
-    return MTRReadAttribute<MTRRoboticVacuumOperationalStatePhaseListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
+    using TypeInfo = RvcOperationalState::Attributes::PhaseList::TypeInfo;
+    return MTRReadAttribute<MTRRVCOperationalStatePhaseListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -50896,10 +50888,10 @@ using chip::System::Clock::Timeout;
                       subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                 reportHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = RoboticVacuumOperationalState::Attributes::PhaseList::TypeInfo;
-    MTRSubscribeAttribute<MTRRoboticVacuumOperationalStatePhaseListListAttributeCallbackSubscriptionBridge, NSArray,
-        TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
-        TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+    using TypeInfo = RvcOperationalState::Attributes::PhaseList::TypeInfo;
+    MTRSubscribeAttribute<MTRRVCOperationalStatePhaseListListAttributeCallbackSubscriptionBridge, NSArray, TypeInfo::DecodableType>(
+        params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
+        TypeInfo::GetAttributeId());
 }
 
 + (void)readAttributePhaseListWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
@@ -50907,12 +50899,12 @@ using chip::System::Clock::Timeout;
                                               queue:(dispatch_queue_t)queue
                                          completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRRoboticVacuumOperationalStatePhaseListListAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRRVCOperationalStatePhaseListListAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(RoboticVacuumOperationalStatePhaseListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(RVCOperationalStatePhaseListListAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = RoboticVacuumOperationalState::Attributes::PhaseList::TypeInfo;
+                using TypeInfo = RvcOperationalState::Attributes::PhaseList::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -50930,7 +50922,7 @@ using chip::System::Clock::Timeout;
 - (void)readAttributeCurrentPhaseWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = RoboticVacuumOperationalState::Attributes::CurrentPhase::TypeInfo;
+    using TypeInfo = RvcOperationalState::Attributes::CurrentPhase::TypeInfo;
     return MTRReadAttribute<MTRNullableInt8uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -50939,7 +50931,7 @@ using chip::System::Clock::Timeout;
                          subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                    reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = RoboticVacuumOperationalState::Attributes::CurrentPhase::TypeInfo;
+    using TypeInfo = RvcOperationalState::Attributes::CurrentPhase::TypeInfo;
     MTRSubscribeAttribute<MTRNullableInt8uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
@@ -50955,7 +50947,7 @@ using chip::System::Clock::Timeout;
         clusterStateCacheContainer.baseDevice, ^(NullableInt8uAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = RoboticVacuumOperationalState::Attributes::CurrentPhase::TypeInfo;
+                using TypeInfo = RvcOperationalState::Attributes::CurrentPhase::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -50973,7 +50965,7 @@ using chip::System::Clock::Timeout;
 - (void)readAttributeCountdownTimeWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = RoboticVacuumOperationalState::Attributes::CountdownTime::TypeInfo;
+    using TypeInfo = RvcOperationalState::Attributes::CountdownTime::TypeInfo;
     return MTRReadAttribute<MTRNullableInt32uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -50982,7 +50974,7 @@ using chip::System::Clock::Timeout;
                           subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                     reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = RoboticVacuumOperationalState::Attributes::CountdownTime::TypeInfo;
+    using TypeInfo = RvcOperationalState::Attributes::CountdownTime::TypeInfo;
     MTRSubscribeAttribute<MTRNullableInt32uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
@@ -50998,7 +50990,7 @@ using chip::System::Clock::Timeout;
         clusterStateCacheContainer.baseDevice, ^(NullableInt32uAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = RoboticVacuumOperationalState::Attributes::CountdownTime::TypeInfo;
+                using TypeInfo = RvcOperationalState::Attributes::CountdownTime::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -51016,8 +51008,8 @@ using chip::System::Clock::Timeout;
 - (void)readAttributeOperationalStateListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = RoboticVacuumOperationalState::Attributes::OperationalStateList::TypeInfo;
-    return MTRReadAttribute<MTRRoboticVacuumOperationalStateOperationalStateListListAttributeCallbackBridge, NSArray,
+    using TypeInfo = RvcOperationalState::Attributes::OperationalStateList::TypeInfo;
+    return MTRReadAttribute<MTRRVCOperationalStateOperationalStateListListAttributeCallbackBridge, NSArray,
         TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -51027,8 +51019,8 @@ using chip::System::Clock::Timeout;
                                            reportHandler:
                                                (void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = RoboticVacuumOperationalState::Attributes::OperationalStateList::TypeInfo;
-    MTRSubscribeAttribute<MTRRoboticVacuumOperationalStateOperationalStateListListAttributeCallbackSubscriptionBridge, NSArray,
+    using TypeInfo = RvcOperationalState::Attributes::OperationalStateList::TypeInfo;
+    MTRSubscribeAttribute<MTRRVCOperationalStateOperationalStateListListAttributeCallbackSubscriptionBridge, NSArray,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -51039,12 +51031,12 @@ using chip::System::Clock::Timeout;
                                                     completion:
                                                         (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRRoboticVacuumOperationalStateOperationalStateListListAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRRVCOperationalStateOperationalStateListListAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(RoboticVacuumOperationalStateOperationalStateListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(RVCOperationalStateOperationalStateListListAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = RoboticVacuumOperationalState::Attributes::OperationalStateList::TypeInfo;
+                using TypeInfo = RvcOperationalState::Attributes::OperationalStateList::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -51059,44 +51051,41 @@ using chip::System::Clock::Timeout;
         });
 }
 
-- (void)readAttributeOperationalStateWithCompletion:
-    (void (^)(MTRRoboticVacuumOperationalStateClusterOperationalStateStruct * _Nullable value, NSError * _Nullable error))completion
+- (void)readAttributeOperationalStateWithCompletion:(void (^)(MTRRVCOperationalStateClusterOperationalStateStruct * _Nullable value,
+                                                        NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = RoboticVacuumOperationalState::Attributes::OperationalState::TypeInfo;
-    return MTRReadAttribute<MTRRoboticVacuumOperationalStateOperationalStateStructAttributeCallbackBridge,
-        MTRRoboticVacuumOperationalStateClusterOperationalStateStruct, TypeInfo::DecodableType>(
+    using TypeInfo = RvcOperationalState::Attributes::OperationalState::TypeInfo;
+    return MTRReadAttribute<MTRRVCOperationalStateOperationalStateStructAttributeCallbackBridge,
+        MTRRVCOperationalStateClusterOperationalStateStruct, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
 - (void)subscribeAttributeOperationalStateWithParams:(MTRSubscribeParams * _Nonnull)params
                              subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                        reportHandler:
-                                           (void (^)(
-                                               MTRRoboticVacuumOperationalStateClusterOperationalStateStruct * _Nullable value,
+                                           (void (^)(MTRRVCOperationalStateClusterOperationalStateStruct * _Nullable value,
                                                NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = RoboticVacuumOperationalState::Attributes::OperationalState::TypeInfo;
-    MTRSubscribeAttribute<MTRRoboticVacuumOperationalStateOperationalStateStructAttributeCallbackSubscriptionBridge,
-        MTRRoboticVacuumOperationalStateClusterOperationalStateStruct, TypeInfo::DecodableType>(params, subscriptionEstablished,
+    using TypeInfo = RvcOperationalState::Attributes::OperationalState::TypeInfo;
+    MTRSubscribeAttribute<MTRRVCOperationalStateOperationalStateStructAttributeCallbackSubscriptionBridge,
+        MTRRVCOperationalStateClusterOperationalStateStruct, TypeInfo::DecodableType>(params, subscriptionEstablished,
         reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
-+ (void)
-    readAttributeOperationalStateWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
-                                              endpoint:(NSNumber *)endpoint
-                                                 queue:(dispatch_queue_t)queue
-                                            completion:
-                                                (void (^)(
-                                                    MTRRoboticVacuumOperationalStateClusterOperationalStateStruct * _Nullable value,
-                                                    NSError * _Nullable error))completion
++ (void)readAttributeOperationalStateWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                                  endpoint:(NSNumber *)endpoint
+                                                     queue:(dispatch_queue_t)queue
+                                                completion:
+                                                    (void (^)(MTRRVCOperationalStateClusterOperationalStateStruct * _Nullable value,
+                                                        NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRRoboticVacuumOperationalStateOperationalStateStructAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRRVCOperationalStateOperationalStateStructAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(RoboticVacuumOperationalStateOperationalStateStructAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(RVCOperationalStateOperationalStateStructAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = RoboticVacuumOperationalState::Attributes::OperationalState::TypeInfo;
+                using TypeInfo = RvcOperationalState::Attributes::OperationalState::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -51111,42 +51100,40 @@ using chip::System::Clock::Timeout;
         });
 }
 
-- (void)readAttributeOperationalErrorWithCompletion:
-    (void (^)(MTRRoboticVacuumOperationalStateClusterErrorStateStruct * _Nullable value, NSError * _Nullable error))completion
+- (void)readAttributeOperationalErrorWithCompletion:(void (^)(MTRRVCOperationalStateClusterErrorStateStruct * _Nullable value,
+                                                        NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = RoboticVacuumOperationalState::Attributes::OperationalError::TypeInfo;
-    return MTRReadAttribute<MTRRoboticVacuumOperationalStateOperationalErrorStructAttributeCallbackBridge,
-        MTRRoboticVacuumOperationalStateClusterErrorStateStruct, TypeInfo::DecodableType>(
+    using TypeInfo = RvcOperationalState::Attributes::OperationalError::TypeInfo;
+    return MTRReadAttribute<MTRRVCOperationalStateOperationalErrorStructAttributeCallbackBridge,
+        MTRRVCOperationalStateClusterErrorStateStruct, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
 - (void)subscribeAttributeOperationalErrorWithParams:(MTRSubscribeParams * _Nonnull)params
                              subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
-                                       reportHandler:
-                                           (void (^)(MTRRoboticVacuumOperationalStateClusterErrorStateStruct * _Nullable value,
-                                               NSError * _Nullable error))reportHandler
+                                       reportHandler:(void (^)(MTRRVCOperationalStateClusterErrorStateStruct * _Nullable value,
+                                                         NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = RoboticVacuumOperationalState::Attributes::OperationalError::TypeInfo;
-    MTRSubscribeAttribute<MTRRoboticVacuumOperationalStateOperationalErrorStructAttributeCallbackSubscriptionBridge,
-        MTRRoboticVacuumOperationalStateClusterErrorStateStruct, TypeInfo::DecodableType>(params, subscriptionEstablished,
-        reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+    using TypeInfo = RvcOperationalState::Attributes::OperationalError::TypeInfo;
+    MTRSubscribeAttribute<MTRRVCOperationalStateOperationalErrorStructAttributeCallbackSubscriptionBridge,
+        MTRRVCOperationalStateClusterErrorStateStruct, TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler,
+        self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
 + (void)readAttributeOperationalErrorWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
                                                   endpoint:(NSNumber *)endpoint
                                                      queue:(dispatch_queue_t)queue
                                                 completion:
-                                                    (void (^)(
-                                                        MTRRoboticVacuumOperationalStateClusterErrorStateStruct * _Nullable value,
+                                                    (void (^)(MTRRVCOperationalStateClusterErrorStateStruct * _Nullable value,
                                                         NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRRoboticVacuumOperationalStateOperationalErrorStructAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRRVCOperationalStateOperationalErrorStructAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(RoboticVacuumOperationalStateOperationalErrorStructAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(RVCOperationalStateOperationalErrorStructAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = RoboticVacuumOperationalState::Attributes::OperationalError::TypeInfo;
+                using TypeInfo = RvcOperationalState::Attributes::OperationalError::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -51164,8 +51151,8 @@ using chip::System::Clock::Timeout;
 - (void)readAttributeGeneratedCommandListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = RoboticVacuumOperationalState::Attributes::GeneratedCommandList::TypeInfo;
-    return MTRReadAttribute<MTRRoboticVacuumOperationalStateGeneratedCommandListListAttributeCallbackBridge, NSArray,
+    using TypeInfo = RvcOperationalState::Attributes::GeneratedCommandList::TypeInfo;
+    return MTRReadAttribute<MTRRVCOperationalStateGeneratedCommandListListAttributeCallbackBridge, NSArray,
         TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -51175,8 +51162,8 @@ using chip::System::Clock::Timeout;
                                            reportHandler:
                                                (void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = RoboticVacuumOperationalState::Attributes::GeneratedCommandList::TypeInfo;
-    MTRSubscribeAttribute<MTRRoboticVacuumOperationalStateGeneratedCommandListListAttributeCallbackSubscriptionBridge, NSArray,
+    using TypeInfo = RvcOperationalState::Attributes::GeneratedCommandList::TypeInfo;
+    MTRSubscribeAttribute<MTRRVCOperationalStateGeneratedCommandListListAttributeCallbackSubscriptionBridge, NSArray,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -51187,12 +51174,12 @@ using chip::System::Clock::Timeout;
                                                     completion:
                                                         (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRRoboticVacuumOperationalStateGeneratedCommandListListAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRRVCOperationalStateGeneratedCommandListListAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(RoboticVacuumOperationalStateGeneratedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(RVCOperationalStateGeneratedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = RoboticVacuumOperationalState::Attributes::GeneratedCommandList::TypeInfo;
+                using TypeInfo = RvcOperationalState::Attributes::GeneratedCommandList::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -51210,9 +51197,8 @@ using chip::System::Clock::Timeout;
 - (void)readAttributeAcceptedCommandListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = RoboticVacuumOperationalState::Attributes::AcceptedCommandList::TypeInfo;
-    return MTRReadAttribute<MTRRoboticVacuumOperationalStateAcceptedCommandListListAttributeCallbackBridge, NSArray,
-        TypeInfo::DecodableType>(
+    using TypeInfo = RvcOperationalState::Attributes::AcceptedCommandList::TypeInfo;
+    return MTRReadAttribute<MTRRVCOperationalStateAcceptedCommandListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -51221,8 +51207,8 @@ using chip::System::Clock::Timeout;
                                           reportHandler:
                                               (void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = RoboticVacuumOperationalState::Attributes::AcceptedCommandList::TypeInfo;
-    MTRSubscribeAttribute<MTRRoboticVacuumOperationalStateAcceptedCommandListListAttributeCallbackSubscriptionBridge, NSArray,
+    using TypeInfo = RvcOperationalState::Attributes::AcceptedCommandList::TypeInfo;
+    MTRSubscribeAttribute<MTRRVCOperationalStateAcceptedCommandListListAttributeCallbackSubscriptionBridge, NSArray,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -51233,12 +51219,12 @@ using chip::System::Clock::Timeout;
                                                    completion:
                                                        (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRRoboticVacuumOperationalStateAcceptedCommandListListAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRRVCOperationalStateAcceptedCommandListListAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(RoboticVacuumOperationalStateAcceptedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(RVCOperationalStateAcceptedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = RoboticVacuumOperationalState::Attributes::AcceptedCommandList::TypeInfo;
+                using TypeInfo = RvcOperationalState::Attributes::AcceptedCommandList::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -51256,8 +51242,8 @@ using chip::System::Clock::Timeout;
 - (void)readAttributeEventListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = RoboticVacuumOperationalState::Attributes::EventList::TypeInfo;
-    return MTRReadAttribute<MTRRoboticVacuumOperationalStateEventListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
+    using TypeInfo = RvcOperationalState::Attributes::EventList::TypeInfo;
+    return MTRReadAttribute<MTRRVCOperationalStateEventListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -51265,10 +51251,10 @@ using chip::System::Clock::Timeout;
                       subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                 reportHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = RoboticVacuumOperationalState::Attributes::EventList::TypeInfo;
-    MTRSubscribeAttribute<MTRRoboticVacuumOperationalStateEventListListAttributeCallbackSubscriptionBridge, NSArray,
-        TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
-        TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+    using TypeInfo = RvcOperationalState::Attributes::EventList::TypeInfo;
+    MTRSubscribeAttribute<MTRRVCOperationalStateEventListListAttributeCallbackSubscriptionBridge, NSArray, TypeInfo::DecodableType>(
+        params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
+        TypeInfo::GetAttributeId());
 }
 
 + (void)readAttributeEventListWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
@@ -51276,12 +51262,12 @@ using chip::System::Clock::Timeout;
                                               queue:(dispatch_queue_t)queue
                                          completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRRoboticVacuumOperationalStateEventListListAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRRVCOperationalStateEventListListAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(RoboticVacuumOperationalStateEventListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(RVCOperationalStateEventListListAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = RoboticVacuumOperationalState::Attributes::EventList::TypeInfo;
+                using TypeInfo = RvcOperationalState::Attributes::EventList::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -51299,9 +51285,8 @@ using chip::System::Clock::Timeout;
 - (void)readAttributeAttributeListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = RoboticVacuumOperationalState::Attributes::AttributeList::TypeInfo;
-    return MTRReadAttribute<MTRRoboticVacuumOperationalStateAttributeListListAttributeCallbackBridge, NSArray,
-        TypeInfo::DecodableType>(
+    using TypeInfo = RvcOperationalState::Attributes::AttributeList::TypeInfo;
+    return MTRReadAttribute<MTRRVCOperationalStateAttributeListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -51309,8 +51294,8 @@ using chip::System::Clock::Timeout;
                           subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                     reportHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = RoboticVacuumOperationalState::Attributes::AttributeList::TypeInfo;
-    MTRSubscribeAttribute<MTRRoboticVacuumOperationalStateAttributeListListAttributeCallbackSubscriptionBridge, NSArray,
+    using TypeInfo = RvcOperationalState::Attributes::AttributeList::TypeInfo;
+    MTRSubscribeAttribute<MTRRVCOperationalStateAttributeListListAttributeCallbackSubscriptionBridge, NSArray,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -51320,12 +51305,12 @@ using chip::System::Clock::Timeout;
                                                   queue:(dispatch_queue_t)queue
                                              completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRRoboticVacuumOperationalStateAttributeListListAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRRVCOperationalStateAttributeListListAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(RoboticVacuumOperationalStateAttributeListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(RVCOperationalStateAttributeListListAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = RoboticVacuumOperationalState::Attributes::AttributeList::TypeInfo;
+                using TypeInfo = RvcOperationalState::Attributes::AttributeList::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -51343,7 +51328,7 @@ using chip::System::Clock::Timeout;
 - (void)readAttributeFeatureMapWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = RoboticVacuumOperationalState::Attributes::FeatureMap::TypeInfo;
+    using TypeInfo = RvcOperationalState::Attributes::FeatureMap::TypeInfo;
     return MTRReadAttribute<MTRInt32uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -51352,7 +51337,7 @@ using chip::System::Clock::Timeout;
                        subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                  reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = RoboticVacuumOperationalState::Attributes::FeatureMap::TypeInfo;
+    using TypeInfo = RvcOperationalState::Attributes::FeatureMap::TypeInfo;
     MTRSubscribeAttribute<MTRInt32uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
@@ -51368,7 +51353,7 @@ using chip::System::Clock::Timeout;
         clusterStateCacheContainer.baseDevice, ^(Int32uAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = RoboticVacuumOperationalState::Attributes::FeatureMap::TypeInfo;
+                using TypeInfo = RvcOperationalState::Attributes::FeatureMap::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -51386,7 +51371,7 @@ using chip::System::Clock::Timeout;
 - (void)readAttributeClusterRevisionWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = RoboticVacuumOperationalState::Attributes::ClusterRevision::TypeInfo;
+    using TypeInfo = RvcOperationalState::Attributes::ClusterRevision::TypeInfo;
     return MTRReadAttribute<MTRInt16uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -51395,7 +51380,7 @@ using chip::System::Clock::Timeout;
                             subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                       reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = RoboticVacuumOperationalState::Attributes::ClusterRevision::TypeInfo;
+    using TypeInfo = RvcOperationalState::Attributes::ClusterRevision::TypeInfo;
     MTRSubscribeAttribute<MTRInt16uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
@@ -51412,7 +51397,7 @@ using chip::System::Clock::Timeout;
         clusterStateCacheContainer.baseDevice, ^(Int16uAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = RoboticVacuumOperationalState::Attributes::ClusterRevision::TypeInfo;
+                using TypeInfo = RvcOperationalState::Attributes::ClusterRevision::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
