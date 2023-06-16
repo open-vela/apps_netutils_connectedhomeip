@@ -8737,12 +8737,12 @@ MTR_NEWLY_AVAILABLE
 @end
 
 /**
- * Cluster Robotic Vacuum Operational State
+ * Cluster RVC Operational State
  *
  * This cluster supports remotely monitoring and, where supported, changing the operational state of a Robotic Vacuum.
  */
 MTR_NEWLY_AVAILABLE
-@interface MTRBaseClusterRoboticVacuumOperationalState : MTRCluster
+@interface MTRBaseClusterRVCOperationalState : MTRCluster
 
 - (instancetype _Nullable)initWithDevice:(MTRBaseDevice *)device
                               endpointID:(NSNumber *)endpointID
@@ -8753,20 +8753,20 @@ MTR_NEWLY_AVAILABLE
  *
  * Upon receipt, the device SHALL pause its operation if it is possible based on the current function of the server.
  */
-- (void)pauseWithParams:(MTRRoboticVacuumOperationalStateClusterPauseParams * _Nullable)params
-             completion:(void (^)(MTRRoboticVacuumOperationalStateClusterOperationalCommandResponseParams * _Nullable data,
+- (void)pauseWithParams:(MTRRVCOperationalStateClusterPauseParams * _Nullable)params
+             completion:(void (^)(MTRRVCOperationalStateClusterOperationalCommandResponseParams * _Nullable data,
                             NSError * _Nullable error))completion MTR_NEWLY_AVAILABLE;
-- (void)pauseWithCompletion:(void (^)(MTRRoboticVacuumOperationalStateClusterOperationalCommandResponseParams * _Nullable data,
+- (void)pauseWithCompletion:(void (^)(MTRRVCOperationalStateClusterOperationalCommandResponseParams * _Nullable data,
                                 NSError * _Nullable error))completion MTR_NEWLY_AVAILABLE;
 /**
  * Command Stop
  *
  * Upon receipt, the device SHALL stop its operation if it is at a position where it is safe to do so and/or permitted.
  */
-- (void)stopWithParams:(MTRRoboticVacuumOperationalStateClusterStopParams * _Nullable)params
-            completion:(void (^)(MTRRoboticVacuumOperationalStateClusterOperationalCommandResponseParams * _Nullable data,
+- (void)stopWithParams:(MTRRVCOperationalStateClusterStopParams * _Nullable)params
+            completion:(void (^)(MTRRVCOperationalStateClusterOperationalCommandResponseParams * _Nullable data,
                            NSError * _Nullable error))completion MTR_NEWLY_AVAILABLE;
-- (void)stopWithCompletion:(void (^)(MTRRoboticVacuumOperationalStateClusterOperationalCommandResponseParams * _Nullable data,
+- (void)stopWithCompletion:(void (^)(MTRRVCOperationalStateClusterOperationalCommandResponseParams * _Nullable data,
                                NSError * _Nullable error))completion MTR_NEWLY_AVAILABLE;
 /**
  * Command Start
@@ -8774,10 +8774,10 @@ MTR_NEWLY_AVAILABLE
  * Upon receipt, the device SHALL start its operation if it is safe to do so and the device is in an operational state from which it
  * can be started.
  */
-- (void)startWithParams:(MTRRoboticVacuumOperationalStateClusterStartParams * _Nullable)params
-             completion:(void (^)(MTRRoboticVacuumOperationalStateClusterOperationalCommandResponseParams * _Nullable data,
+- (void)startWithParams:(MTRRVCOperationalStateClusterStartParams * _Nullable)params
+             completion:(void (^)(MTRRVCOperationalStateClusterOperationalCommandResponseParams * _Nullable data,
                             NSError * _Nullable error))completion MTR_NEWLY_AVAILABLE;
-- (void)startWithCompletion:(void (^)(MTRRoboticVacuumOperationalStateClusterOperationalCommandResponseParams * _Nullable data,
+- (void)startWithCompletion:(void (^)(MTRRVCOperationalStateClusterOperationalCommandResponseParams * _Nullable data,
                                 NSError * _Nullable error))completion MTR_NEWLY_AVAILABLE;
 /**
  * Command Resume
@@ -8785,10 +8785,10 @@ MTR_NEWLY_AVAILABLE
  * Upon receipt, the device SHALL resume its operation from the point it was at when it received the Pause command, or from the
  * point when it was paused by means outside of this cluster (for example by manual button press).
  */
-- (void)resumeWithParams:(MTRRoboticVacuumOperationalStateClusterResumeParams * _Nullable)params
-              completion:(void (^)(MTRRoboticVacuumOperationalStateClusterOperationalCommandResponseParams * _Nullable data,
+- (void)resumeWithParams:(MTRRVCOperationalStateClusterResumeParams * _Nullable)params
+              completion:(void (^)(MTRRVCOperationalStateClusterOperationalCommandResponseParams * _Nullable data,
                              NSError * _Nullable error))completion MTR_NEWLY_AVAILABLE;
-- (void)resumeWithCompletion:(void (^)(MTRRoboticVacuumOperationalStateClusterOperationalCommandResponseParams * _Nullable data,
+- (void)resumeWithCompletion:(void (^)(MTRRVCOperationalStateClusterOperationalCommandResponseParams * _Nullable data,
                                  NSError * _Nullable error))completion MTR_NEWLY_AVAILABLE;
 
 - (void)readAttributePhaseListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
@@ -8839,38 +8839,31 @@ MTR_NEWLY_AVAILABLE
                                                     completion:(void (^)(NSArray * _Nullable value,
                                                                    NSError * _Nullable error))completion MTR_NEWLY_AVAILABLE;
 
-- (void)readAttributeOperationalStateWithCompletion:
-    (void (^)(MTRRoboticVacuumOperationalStateClusterOperationalStateStruct * _Nullable value, NSError * _Nullable error))completion
-    MTR_NEWLY_AVAILABLE;
+- (void)readAttributeOperationalStateWithCompletion:(void (^)(MTRRVCOperationalStateClusterOperationalStateStruct * _Nullable value,
+                                                        NSError * _Nullable error))completion MTR_NEWLY_AVAILABLE;
 - (void)subscribeAttributeOperationalStateWithParams:(MTRSubscribeParams *)params
                              subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                        reportHandler:
-                                           (void (^)(
-                                               MTRRoboticVacuumOperationalStateClusterOperationalStateStruct * _Nullable value,
+                                           (void (^)(MTRRVCOperationalStateClusterOperationalStateStruct * _Nullable value,
                                                NSError * _Nullable error))reportHandler MTR_NEWLY_AVAILABLE;
-+ (void)
-    readAttributeOperationalStateWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
-                                              endpoint:(NSNumber *)endpoint
-                                                 queue:(dispatch_queue_t)queue
-                                            completion:
-                                                (void (^)(
-                                                    MTRRoboticVacuumOperationalStateClusterOperationalStateStruct * _Nullable value,
-                                                    NSError * _Nullable error))completion MTR_NEWLY_AVAILABLE;
++ (void)readAttributeOperationalStateWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                                  endpoint:(NSNumber *)endpoint
+                                                     queue:(dispatch_queue_t)queue
+                                                completion:
+                                                    (void (^)(MTRRVCOperationalStateClusterOperationalStateStruct * _Nullable value,
+                                                        NSError * _Nullable error))completion MTR_NEWLY_AVAILABLE;
 
-- (void)readAttributeOperationalErrorWithCompletion:
-    (void (^)(MTRRoboticVacuumOperationalStateClusterErrorStateStruct * _Nullable value, NSError * _Nullable error))completion
-    MTR_NEWLY_AVAILABLE;
+- (void)readAttributeOperationalErrorWithCompletion:(void (^)(MTRRVCOperationalStateClusterErrorStateStruct * _Nullable value,
+                                                        NSError * _Nullable error))completion MTR_NEWLY_AVAILABLE;
 - (void)subscribeAttributeOperationalErrorWithParams:(MTRSubscribeParams *)params
                              subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
-                                       reportHandler:
-                                           (void (^)(MTRRoboticVacuumOperationalStateClusterErrorStateStruct * _Nullable value,
-                                               NSError * _Nullable error))reportHandler MTR_NEWLY_AVAILABLE;
+                                       reportHandler:(void (^)(MTRRVCOperationalStateClusterErrorStateStruct * _Nullable value,
+                                                         NSError * _Nullable error))reportHandler MTR_NEWLY_AVAILABLE;
 + (void)readAttributeOperationalErrorWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
                                                   endpoint:(NSNumber *)endpoint
                                                      queue:(dispatch_queue_t)queue
                                                 completion:
-                                                    (void (^)(
-                                                        MTRRoboticVacuumOperationalStateClusterErrorStateStruct * _Nullable value,
+                                                    (void (^)(MTRRVCOperationalStateClusterErrorStateStruct * _Nullable value,
                                                         NSError * _Nullable error))completion MTR_NEWLY_AVAILABLE;
 
 - (void)readAttributeGeneratedCommandListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
@@ -24653,21 +24646,21 @@ typedef NS_ENUM(uint8_t, MTROperationalState) {
     MTROperationalStateError MTR_NEWLY_AVAILABLE = 0x03,
 } MTR_NEWLY_AVAILABLE;
 
-typedef NS_ENUM(uint8_t, MTRRoboticVacuumOperationalStateErrorState) {
-    MTRRoboticVacuumOperationalStateErrorStateFailedToFindChargingDock MTR_NEWLY_AVAILABLE = 0x40,
-    MTRRoboticVacuumOperationalStateErrorStateStuck MTR_NEWLY_AVAILABLE = 0x41,
-    MTRRoboticVacuumOperationalStateErrorStateDustBinMissing MTR_NEWLY_AVAILABLE = 0x42,
-    MTRRoboticVacuumOperationalStateErrorStateDustBinFull MTR_NEWLY_AVAILABLE = 0x43,
-    MTRRoboticVacuumOperationalStateErrorStateWaterTankEmpty MTR_NEWLY_AVAILABLE = 0x44,
-    MTRRoboticVacuumOperationalStateErrorStateWaterTankMissing MTR_NEWLY_AVAILABLE = 0x45,
-    MTRRoboticVacuumOperationalStateErrorStateWaterTankLidOpen MTR_NEWLY_AVAILABLE = 0x46,
-    MTRRoboticVacuumOperationalStateErrorStateMopCleaningPadMissing MTR_NEWLY_AVAILABLE = 0x47,
+typedef NS_ENUM(uint8_t, MTRRVCOperationalStateErrorState) {
+    MTRRVCOperationalStateErrorStateFailedToFindChargingDock MTR_NEWLY_AVAILABLE = 0x40,
+    MTRRVCOperationalStateErrorStateStuck MTR_NEWLY_AVAILABLE = 0x41,
+    MTRRVCOperationalStateErrorStateDustBinMissing MTR_NEWLY_AVAILABLE = 0x42,
+    MTRRVCOperationalStateErrorStateDustBinFull MTR_NEWLY_AVAILABLE = 0x43,
+    MTRRVCOperationalStateErrorStateWaterTankEmpty MTR_NEWLY_AVAILABLE = 0x44,
+    MTRRVCOperationalStateErrorStateWaterTankMissing MTR_NEWLY_AVAILABLE = 0x45,
+    MTRRVCOperationalStateErrorStateWaterTankLidOpen MTR_NEWLY_AVAILABLE = 0x46,
+    MTRRVCOperationalStateErrorStateMopCleaningPadMissing MTR_NEWLY_AVAILABLE = 0x47,
 } MTR_NEWLY_AVAILABLE;
 
-typedef NS_ENUM(uint8_t, MTRRoboticVacuumOperationalStateOperationalState) {
-    MTRRoboticVacuumOperationalStateOperationalStateSeekingCharger MTR_NEWLY_AVAILABLE = 0x40,
-    MTRRoboticVacuumOperationalStateOperationalStateCharging MTR_NEWLY_AVAILABLE = 0x41,
-    MTRRoboticVacuumOperationalStateOperationalStateDocked MTR_NEWLY_AVAILABLE = 0x42,
+typedef NS_ENUM(uint8_t, MTRRVCOperationalStateOperationalState) {
+    MTRRVCOperationalStateOperationalStateSeekingCharger MTR_NEWLY_AVAILABLE = 0x40,
+    MTRRVCOperationalStateOperationalStateCharging MTR_NEWLY_AVAILABLE = 0x41,
+    MTRRVCOperationalStateOperationalStateDocked MTR_NEWLY_AVAILABLE = 0x42,
 } MTR_NEWLY_AVAILABLE;
 
 typedef NS_ENUM(uint8_t, MTRHEPAFilterMonitoringChangeIndication) {
