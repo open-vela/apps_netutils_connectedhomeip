@@ -75,6 +75,26 @@ public:
         printf("Test_TC_CC_8_1\n");
         printf("TestColorControl_9_1\n");
         printf("TestColorControl_9_2\n");
+        printf("Test_TC_CDOCONC_1_1\n");
+        printf("Test_TC_CDOCONC_2_1\n");
+        printf("Test_TC_CMOCONC_1_1\n");
+        printf("Test_TC_CMOCONC_2_1\n");
+        printf("Test_TC_FLDCONC_1_1\n");
+        printf("Test_TC_FLDCONC_2_1\n");
+        printf("Test_TC_NDOCONC_1_1\n");
+        printf("Test_TC_NDOCONC_2_1\n");
+        printf("Test_TC_OZCONC_1_1\n");
+        printf("Test_TC_OZCONC_2_1\n");
+        printf("Test_TC_PMHCONC_1_1\n");
+        printf("Test_TC_PMHCONC_2_1\n");
+        printf("Test_TC_PMICONC_1_1\n");
+        printf("Test_TC_PMICONC_2_1\n");
+        printf("Test_TC_PMKCONC_1_1\n");
+        printf("Test_TC_PMKCONC_2_1\n");
+        printf("Test_TC_RNCONC_1_1\n");
+        printf("Test_TC_RNCONC_2_1\n");
+        printf("Test_TC_TVOCCONC_1_1\n");
+        printf("Test_TC_TVOCCONC_2_1\n");
         printf("TestIcdManagementCluster\n");
         printf("Test_TC_OPCREDS_1_2\n");
         printf("Test_TC_BINFO_1_1\n");
@@ -23000,6 +23020,7535 @@ private:
         case 30: {
             LogStep(30, "Check on/off attribute value is false after off command");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OnOff::Id, OnOff::Attributes::OnOff::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_CDOCONC_1_1Suite : public TestCommand
+{
+public:
+    Test_TC_CDOCONC_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_CDOCONC_1_1", 28, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_CDOCONC_1_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 1UL));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 2UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 4UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 4UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 8UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 8UL));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 16UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 16UL));
+            }
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 32UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 32UL));
+            }
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 9UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65530UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65532UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
+            }
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 7UL));
+            }
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 7UL));
+            }
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 8UL));
+            }
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 7UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 8UL));
+            }
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
+            }
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 3UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 4UL));
+            }
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 5UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 6UL));
+            }
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 5UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 6UL));
+            }
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 10UL));
+            }
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 10UL));
+            }
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("eventList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acceptedCommandList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Read the global attribute: ClusterRevision");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffd"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::ClusterRevision::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Given CDOCONC.S.F00(MEA) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffc && CDOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "Given CDOCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffc && !CDOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "Given CDOCONC.S.F01(LEV) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffc && CDOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "Given CDOCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffc && !CDOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "Given CDOCONC.S.F02(MED) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffc && CDOCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "Given CDOCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffc && !CDOCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "Given CDOCONC.S.F03(CRI) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffc && CDOCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "Given CDOCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffc && !CDOCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "Given CDOCONC.S.F04(PEA) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffc && CDOCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11, "Given CDOCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffc && !CDOCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 12: {
+            LogStep(12, "Given CDOCONC.S.F05(AVG) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffc && CDOCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 13: {
+            LogStep(13, "Given CDOCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffc && !CDOCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 14: {
+            LogStep(14, "Read the global attribute: AttributeList");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffb"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 15: {
+            LogStep(15, "Read the optional attribute Uncertainty in AttributeList");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffb && CDOCONC.S.A0007 && CDOCONC.S.F00"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 16: {
+            LogStep(16, "Check the optional attribute Uncertainty is excluded from AttributeList when CDOCONC.S.A0007 is not set");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffb && !CDOCONC.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 17: {
+            LogStep(17,
+                    "Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue and "
+                    "Measurement Unit in AttributeList");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffb && CDOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 18: {
+            LogStep(18,
+                    "Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are excluded "
+                    "from AttributeList when CDOCONC.S.F00 (MEA) is not set");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffb && !CDOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 19: {
+            LogStep(19,
+                    "Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in AttributeList");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffb && CDOCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 20: {
+            LogStep(20,
+                    "Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when CDOCONC.S.F04 "
+                    "(PEA) is not set");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffb && !CDOCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 21: {
+            LogStep(
+                21,
+                "Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in AttributeList");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffb && CDOCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 22: {
+            LogStep(22,
+                    "Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
+                    "CDOCONC.S.F05 (AVG) is not set");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffb && !CDOCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 23: {
+            LogStep(23, "Read the optional, feature dependent attribute LevelValue in AttributeList");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffb && CDOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 24: {
+            LogStep(24, "Check that LevelValue is excluded from AttributeList when CDOCONC.S.F01 (LEV) is not set");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffb && !CDOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 25: {
+            LogStep(25, "Read the global attribute: EventList");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffa"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::EventList::Id, true, chip::NullOptional);
+        }
+        case 26: {
+            LogStep(26, "Read the global attribute: AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afff9"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::AcceptedCommandList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 27: {
+            LogStep(27, "Read the global attribute: GeneratedCommandList");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afff8"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::GeneratedCommandList::Id, true,
+                                 chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_CDOCONC_2_1Suite : public TestCommand
+{
+public:
+    Test_TC_CDOCONC_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_CDOCONC_2_1", 11, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_CDOCONC_2_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::app::DataModel::Nullable<float> MinMeasuredValue;
+    chip::app::DataModel::Nullable<float> MaxMeasuredValue;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0.0f));
+                MinMeasuredValue = value;
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                MaxMeasuredValue = value;
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxMeasuredValue));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxMeasuredValue));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxMeasuredValue));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::CarbonDioxideConcentrationMeasurement::MeasurementUnitEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 7U));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::CarbonDioxideConcentrationMeasurement::MeasurementMediumEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::CarbonDioxideConcentrationMeasurement::LevelValueEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 4U));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH reads from the DUT the MinMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::MinMeasuredValue::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TH reads from the DUT the MaxMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::MaxMeasuredValue::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "TH reads from the DUT the MeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::MeasuredValue::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "TH reads from the DUT the PeakMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::PeakMeasuredValue::Id, true,
+                                 chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "TH reads from the DUT the PeakMeasuredValueWindow attribute.");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.A0004"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::PeakMeasuredValueWindow::Id, true,
+                                 chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "TH reads from the DUT the AverageMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::AverageMeasuredValue::Id, true,
+                                 chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "TH reads from the DUT the AverageMeasuredValueWindow attribute.");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.A0006"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::AverageMeasuredValueWindow::Id, true,
+                                 chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "TH reads from the DUT the MeasurementUnit attribute.");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::MeasurementUnit::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "TH reads from the DUT the MeasurementMedium attribute.");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.A0009"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::MeasurementMedium::Id, true,
+                                 chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "TH reads from the DUT the LevelValue attribute.");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.A000a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::LevelValue::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_CMOCONC_1_1Suite : public TestCommand
+{
+public:
+    Test_TC_CMOCONC_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_CMOCONC_1_1", 28, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_CMOCONC_1_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 1UL));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 2UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 4UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 4UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 8UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 8UL));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 16UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 16UL));
+            }
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 32UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 32UL));
+            }
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 9UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65530UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65532UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
+            }
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 7UL));
+            }
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 7UL));
+            }
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 8UL));
+            }
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 7UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 8UL));
+            }
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
+            }
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 3UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 4UL));
+            }
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 5UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 6UL));
+            }
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 5UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 6UL));
+            }
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 10UL));
+            }
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 10UL));
+            }
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("eventList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acceptedCommandList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Read the global attribute: ClusterRevision");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffd"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::ClusterRevision::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Given CMOCONC.S.F00(MEA) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffc && CMOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "Given CMOCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffc && !CMOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "Given CMOCONC.S.F01(LEV) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffc && CMOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "Given CMOCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffc && !CMOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "Given CMOCONC.S.F02(MED) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffc && CMOCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "Given CMOCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffc && !CMOCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "Given CMOCONC.S.F03(CRI) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffc && CMOCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "Given CMOCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffc && !CMOCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "Given CMOCONC.S.F04(PEA) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffc && CMOCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11, "Given CMOCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffc && !CMOCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 12: {
+            LogStep(12, "Given CMOCONC.S.F05(AVG) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffc && CMOCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 13: {
+            LogStep(13, "Given CMOCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffc && !CMOCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 14: {
+            LogStep(14, "Read the global attribute: AttributeList");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffb"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 15: {
+            LogStep(15, "Read the optional attribute Uncertainty in AttributeList");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffb && CMOCONC.S.A0007 && CMOCONC.S.F00"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 16: {
+            LogStep(16, "Check the optional attribute Uncertainty is excluded from AttributeList when CMOCONC.S.A0007 is not set");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffb && !CMOCONC.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 17: {
+            LogStep(17,
+                    "Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue and "
+                    "Measurement Unit in AttributeList");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffb && CMOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 18: {
+            LogStep(18,
+                    "Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are excluded "
+                    "from AttributeList when CMOCONC.S.F00 (MEA) is not set");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffb && !CMOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 19: {
+            LogStep(19,
+                    "Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in AttributeList");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffb && CMOCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 20: {
+            LogStep(20,
+                    "Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when CMOCONC.S.F04 "
+                    "(PEA) is not set");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffb && !CMOCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 21: {
+            LogStep(
+                21,
+                "Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in AttributeList");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffb && CMOCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 22: {
+            LogStep(22,
+                    "Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
+                    "CMOCONC.S.F05 (AVG) is not set");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffb && !CMOCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 23: {
+            LogStep(23, "Read the optional, feature dependent attribute LevelValue in AttributeList");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffb && CMOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 24: {
+            LogStep(24, "Check that LevelValue is excluded from AttributeList when CMOCONC.S.F01 (LEV) is not set");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffb && !CMOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 25: {
+            LogStep(25, "Read the global attribute: EventList");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffa"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::EventList::Id, true, chip::NullOptional);
+        }
+        case 26: {
+            LogStep(26, "Read the global attribute: AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afff9"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::AcceptedCommandList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 27: {
+            LogStep(27, "Read the global attribute: GeneratedCommandList");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afff8"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::GeneratedCommandList::Id, true,
+                                 chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_CMOCONC_2_1Suite : public TestCommand
+{
+public:
+    Test_TC_CMOCONC_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_CMOCONC_2_1", 11, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_CMOCONC_2_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::app::DataModel::Nullable<float> MinMeasuredValue;
+    chip::app::DataModel::Nullable<float> MaxMeasuredValue;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0.0f));
+                MinMeasuredValue = value;
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                MaxMeasuredValue = value;
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxMeasuredValue));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxMeasuredValue));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxMeasuredValue));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::CarbonMonoxideConcentrationMeasurement::MeasurementUnitEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 7U));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::CarbonMonoxideConcentrationMeasurement::MeasurementMediumEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::CarbonMonoxideConcentrationMeasurement::LevelValueEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 4U));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH reads from the DUT the MinMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::MinMeasuredValue::Id, true,
+                                 chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TH reads from the DUT the MaxMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::MaxMeasuredValue::Id, true,
+                                 chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "TH reads from the DUT the MeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::MeasuredValue::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "TH reads from the DUT the PeakMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::PeakMeasuredValue::Id, true,
+                                 chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "TH reads from the DUT the PeakMeasuredValueWindow attribute.");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.A0004"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::PeakMeasuredValueWindow::Id, true,
+                                 chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "TH reads from the DUT the AverageMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::AverageMeasuredValue::Id, true,
+                                 chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "TH reads from the DUT the AverageMeasuredValueWindow attribute.");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.A0006"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::AverageMeasuredValueWindow::Id, true,
+                                 chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "TH reads from the DUT the MeasurementUnit attribute.");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::MeasurementUnit::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "TH reads from the DUT the MeasurementMedium attribute.");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.A0009"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::MeasurementMedium::Id, true,
+                                 chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "TH reads from the DUT the LevelValue attribute.");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.A000a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::LevelValue::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_FLDCONC_1_1Suite : public TestCommand
+{
+public:
+    Test_TC_FLDCONC_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_FLDCONC_1_1", 28, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_FLDCONC_1_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 1UL));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 2UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 4UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 4UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 8UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 8UL));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 16UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 16UL));
+            }
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 32UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 32UL));
+            }
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 9UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65530UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65532UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
+            }
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 7UL));
+            }
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 7UL));
+            }
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 8UL));
+            }
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 7UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 8UL));
+            }
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
+            }
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 3UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 4UL));
+            }
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 5UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 6UL));
+            }
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 5UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 6UL));
+            }
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 10UL));
+            }
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 10UL));
+            }
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("eventList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acceptedCommandList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Read the global attribute: ClusterRevision");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffd"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::ClusterRevision::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Given FLDCONC.S.F00(MEA) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffc && FLDCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "Given FLDCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffc && !FLDCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "Given FLDCONC.S.F01(LEV) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffc && FLDCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "Given FLDCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffc && !FLDCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "Given FLDCONC.S.F02(MED) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffc && FLDCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "Given FLDCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffc && !FLDCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "Given FLDCONC.S.F03(CRI) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffc && FLDCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "Given FLDCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffc && !FLDCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "Given FLDCONC.S.F04(PEA) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffc && FLDCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11, "Given FLDCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffc && !FLDCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 12: {
+            LogStep(12, "Given FLDCONC.S.F05(AVG) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffc && FLDCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 13: {
+            LogStep(13, "Given FLDCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffc && !FLDCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 14: {
+            LogStep(14, "Read the global attribute: AttributeList");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffb"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 15: {
+            LogStep(15, "Read the optional attribute Uncertainty in AttributeList");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffb && FLDCONC.S.A0007 && FLDCONC.S.F00"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 16: {
+            LogStep(16, "Check the optional attribute Uncertainty is excluded from AttributeList when FLDCONC.S.A0007 is not set");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffb && !FLDCONC.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 17: {
+            LogStep(17,
+                    "Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue and "
+                    "Measurement Unit in AttributeList");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffb && FLDCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 18: {
+            LogStep(18,
+                    "Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are excluded "
+                    "from AttributeList when FLDCONC.S.F00 (MEA) is not set");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffb && !FLDCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 19: {
+            LogStep(19,
+                    "Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in AttributeList");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffb && FLDCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 20: {
+            LogStep(20,
+                    "Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when FLDCONC.S.F04 "
+                    "(PEA) is not set");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffb && !FLDCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 21: {
+            LogStep(
+                21,
+                "Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in AttributeList");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffb && FLDCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 22: {
+            LogStep(22,
+                    "Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
+                    "FLDCONC.S.F05 (AVG) is not set");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffb && !FLDCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 23: {
+            LogStep(23, "Read the optional, feature dependent attribute LevelValue in AttributeList");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffb && FLDCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 24: {
+            LogStep(24, "Check that LevelValue is excluded from AttributeList when FLDCONC.S.F01 (LEV) is not set");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffb && !FLDCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 25: {
+            LogStep(25, "Read the global attribute: EventList");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffa"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::EventList::Id, true, chip::NullOptional);
+        }
+        case 26: {
+            LogStep(26, "Read the global attribute: AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afff9"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::AcceptedCommandList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 27: {
+            LogStep(27, "Read the global attribute: GeneratedCommandList");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afff8"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::GeneratedCommandList::Id, true,
+                                 chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_FLDCONC_2_1Suite : public TestCommand
+{
+public:
+    Test_TC_FLDCONC_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_FLDCONC_2_1", 11, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_FLDCONC_2_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::app::DataModel::Nullable<float> MinMeasuredValue;
+    chip::app::DataModel::Nullable<float> MaxMeasuredValue;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0.0f));
+                MinMeasuredValue = value;
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                MaxMeasuredValue = value;
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxMeasuredValue));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxMeasuredValue));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxMeasuredValue));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::FormaldehydeConcentrationMeasurement::MeasurementUnitEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 7U));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::FormaldehydeConcentrationMeasurement::MeasurementMediumEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::FormaldehydeConcentrationMeasurement::LevelValueEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 4U));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH reads from the DUT the MinMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::MinMeasuredValue::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TH reads from the DUT the MaxMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::MaxMeasuredValue::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "TH reads from the DUT the MeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::MeasuredValue::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "TH reads from the DUT the PeakMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::PeakMeasuredValue::Id, true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "TH reads from the DUT the PeakMeasuredValueWindow attribute.");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.A0004"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::PeakMeasuredValueWindow::Id, true,
+                                 chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "TH reads from the DUT the AverageMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::AverageMeasuredValue::Id, true,
+                                 chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "TH reads from the DUT the AverageMeasuredValueWindow attribute.");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.A0006"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::AverageMeasuredValueWindow::Id, true,
+                                 chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "TH reads from the DUT the MeasurementUnit attribute.");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::MeasurementUnit::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "TH reads from the DUT the MeasurementMedium attribute.");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.A0009"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::MeasurementMedium::Id, true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "TH reads from the DUT the LevelValue attribute.");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.A000a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::LevelValue::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_NDOCONC_1_1Suite : public TestCommand
+{
+public:
+    Test_TC_NDOCONC_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_NDOCONC_1_1", 28, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_NDOCONC_1_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 1UL));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 2UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 4UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 4UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 8UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 8UL));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 16UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 16UL));
+            }
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 32UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 32UL));
+            }
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 9UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65530UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65532UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
+            }
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 7UL));
+            }
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 7UL));
+            }
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 8UL));
+            }
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 7UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 8UL));
+            }
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
+            }
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 3UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 4UL));
+            }
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 5UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 6UL));
+            }
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 5UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 6UL));
+            }
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 10UL));
+            }
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 10UL));
+            }
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("eventList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acceptedCommandList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Read the global attribute: ClusterRevision");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffd"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::ClusterRevision::Id, true,
+                                 chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Given NDOCONC.S.F00(MEA) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffc && NDOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "Given NDOCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffc && !NDOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "Given NDOCONC.S.F01(LEV) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffc && NDOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "Given NDOCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffc && !NDOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "Given NDOCONC.S.F02(MED) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffc && NDOCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "Given NDOCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffc && !NDOCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "Given NDOCONC.S.F03(CRI) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffc && NDOCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "Given NDOCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffc && !NDOCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "Given NDOCONC.S.F04(PEA) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffc && NDOCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11, "Given NDOCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffc && !NDOCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 12: {
+            LogStep(12, "Given NDOCONC.S.F05(AVG) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffc && NDOCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 13: {
+            LogStep(13, "Given NDOCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffc && !NDOCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 14: {
+            LogStep(14, "Read the global attribute: AttributeList");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffb"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 15: {
+            LogStep(15, "Read the optional attribute Uncertainty in AttributeList");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffb && NDOCONC.S.A0007 && NDOCONC.S.F00"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 16: {
+            LogStep(16, "Check the optional attribute Uncertainty is excluded from AttributeList when NDOCONC.S.A0007 is not set");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffb && !NDOCONC.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 17: {
+            LogStep(17,
+                    "Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue and "
+                    "Measurement Unit in AttributeList");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffb && NDOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 18: {
+            LogStep(18,
+                    "Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are excluded "
+                    "from AttributeList when NDOCONC.S.F00 (MEA) is not set");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffb && !NDOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 19: {
+            LogStep(19,
+                    "Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in AttributeList");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffb && NDOCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 20: {
+            LogStep(20,
+                    "Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when NDOCONC.S.F04 "
+                    "(PEA) is not set");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffb && !NDOCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 21: {
+            LogStep(
+                21,
+                "Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in AttributeList");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffb && NDOCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 22: {
+            LogStep(22,
+                    "Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
+                    "NDOCONC.S.F05 (AVG) is not set");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffb && !NDOCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 23: {
+            LogStep(23, "Read the optional, feature dependent attribute LevelValue in AttributeList");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffb && NDOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 24: {
+            LogStep(24, "Check that LevelValue is excluded from AttributeList when NDOCONC.S.F01 (LEV) is not set");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffb && !NDOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 25: {
+            LogStep(25, "Read the global attribute: EventList");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffa"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::EventList::Id, true, chip::NullOptional);
+        }
+        case 26: {
+            LogStep(26, "Read the global attribute: AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afff9"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::AcceptedCommandList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 27: {
+            LogStep(27, "Read the global attribute: GeneratedCommandList");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afff8"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::GeneratedCommandList::Id, true,
+                                 chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_NDOCONC_2_1Suite : public TestCommand
+{
+public:
+    Test_TC_NDOCONC_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_NDOCONC_2_1", 11, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_NDOCONC_2_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::app::DataModel::Nullable<float> MinMeasuredValue;
+    chip::app::DataModel::Nullable<float> MaxMeasuredValue;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0.0f));
+                MinMeasuredValue = value;
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                MaxMeasuredValue = value;
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxMeasuredValue));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxMeasuredValue));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxMeasuredValue));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::NitrogenDioxideConcentrationMeasurement::MeasurementUnitEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 7U));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::NitrogenDioxideConcentrationMeasurement::MeasurementMediumEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::NitrogenDioxideConcentrationMeasurement::LevelValueEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 4U));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH reads from the DUT the MinMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::MinMeasuredValue::Id, true,
+                                 chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TH reads from the DUT the MaxMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::MaxMeasuredValue::Id, true,
+                                 chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "TH reads from the DUT the MeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::MeasuredValue::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "TH reads from the DUT the PeakMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::PeakMeasuredValue::Id, true,
+                                 chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "TH reads from the DUT the PeakMeasuredValueWindow attribute.");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.A0004"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::PeakMeasuredValueWindow::Id, true,
+                                 chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "TH reads from the DUT the AverageMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::AverageMeasuredValue::Id, true,
+                                 chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "TH reads from the DUT the AverageMeasuredValueWindow attribute.");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.A0006"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::AverageMeasuredValueWindow::Id, true,
+                                 chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "TH reads from the DUT the MeasurementUnit attribute.");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::MeasurementUnit::Id, true,
+                                 chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "TH reads from the DUT the MeasurementMedium attribute.");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.A0009"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::MeasurementMedium::Id, true,
+                                 chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "TH reads from the DUT the LevelValue attribute.");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.A000a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::LevelValue::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_OZCONC_1_1Suite : public TestCommand
+{
+public:
+    Test_TC_OZCONC_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_OZCONC_1_1", 28, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_OZCONC_1_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 1UL));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 2UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 4UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 4UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 8UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 8UL));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 16UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 16UL));
+            }
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 32UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 32UL));
+            }
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 9UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65530UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65532UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
+            }
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 7UL));
+            }
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 7UL));
+            }
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 8UL));
+            }
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 7UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 8UL));
+            }
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
+            }
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 3UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 4UL));
+            }
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 5UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 6UL));
+            }
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 5UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 6UL));
+            }
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 10UL));
+            }
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 10UL));
+            }
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("eventList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acceptedCommandList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Read the global attribute: ClusterRevision");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffd"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::ClusterRevision::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Given OZCONC.S.F00(MEA) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffc && OZCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "Given OZCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffc && !OZCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "Given OZCONC.S.F01(LEV) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffc && OZCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "Given OZCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffc && !OZCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "Given OZCONC.S.F02(MED) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffc && OZCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "Given OZCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffc && !OZCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "Given OZCONC.S.F03(CRI) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffc && OZCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "Given OZCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffc && !OZCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "Given OZCONC.S.F04(PEA) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffc && OZCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11, "Given OZCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffc && !OZCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 12: {
+            LogStep(12, "Given OZCONC.S.F05(AVG) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffc && OZCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 13: {
+            LogStep(13, "Given OZCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffc && !OZCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 14: {
+            LogStep(14, "Read the global attribute: AttributeList");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffb"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 15: {
+            LogStep(15, "Read the optional attribute Uncertainty in AttributeList");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffb && OZCONC.S.A0007 && OZCONC.S.F00"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 16: {
+            LogStep(16, "Check the optional attribute Uncertainty is excluded from AttributeList when OZCONC.S.A0007 is not set");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffb && !OZCONC.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 17: {
+            LogStep(17,
+                    "Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue and "
+                    "Measurement Unit in AttributeList");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffb && OZCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 18: {
+            LogStep(18,
+                    "Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are excluded "
+                    "from AttributeList when OZCONC.S.F00 (MEA) is not set");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffb && !OZCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 19: {
+            LogStep(19,
+                    "Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in AttributeList");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffb && OZCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 20: {
+            LogStep(20,
+                    "Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when OZCONC.S.F04 "
+                    "(PEA) is not set");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffb && !OZCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 21: {
+            LogStep(
+                21,
+                "Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in AttributeList");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffb && OZCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 22: {
+            LogStep(22,
+                    "Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
+                    "OZCONC.S.F05 (AVG) is not set");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffb && !OZCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 23: {
+            LogStep(23, "Read the optional, feature dependent attribute LevelValue in AttributeList");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffb && OZCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 24: {
+            LogStep(24, "Check that LevelValue is excluded from AttributeList when OZCONC.S.F01 (LEV) is not set");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffb && !OZCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 25: {
+            LogStep(25, "Read the global attribute: EventList");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffa"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::EventList::Id, true, chip::NullOptional);
+        }
+        case 26: {
+            LogStep(26, "Read the global attribute: AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.Afff9"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 27: {
+            LogStep(27, "Read the global attribute: GeneratedCommandList");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.Afff8"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_OZCONC_2_1Suite : public TestCommand
+{
+public:
+    Test_TC_OZCONC_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_OZCONC_2_1", 11, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_OZCONC_2_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::app::DataModel::Nullable<float> MinMeasuredValue;
+    chip::app::DataModel::Nullable<float> MaxMeasuredValue;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0.0f));
+                MinMeasuredValue = value;
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                MaxMeasuredValue = value;
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxMeasuredValue));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxMeasuredValue));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxMeasuredValue));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::OzoneConcentrationMeasurement::MeasurementUnitEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 7U));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::OzoneConcentrationMeasurement::MeasurementMediumEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::OzoneConcentrationMeasurement::LevelValueEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 4U));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH reads from the DUT the MinMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::MinMeasuredValue::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TH reads from the DUT the MaxMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::MaxMeasuredValue::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "TH reads from the DUT the MeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::MeasuredValue::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "TH reads from the DUT the PeakMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::PeakMeasuredValue::Id, true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "TH reads from the DUT the PeakMeasuredValueWindow attribute.");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.A0004"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::PeakMeasuredValueWindow::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "TH reads from the DUT the AverageMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::AverageMeasuredValue::Id, true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "TH reads from the DUT the AverageMeasuredValueWindow attribute.");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.A0006"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::AverageMeasuredValueWindow::Id, true,
+                                 chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "TH reads from the DUT the MeasurementUnit attribute.");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::MeasurementUnit::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "TH reads from the DUT the MeasurementMedium attribute.");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.A0009"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::MeasurementMedium::Id, true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "TH reads from the DUT the LevelValue attribute.");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.A000a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::LevelValue::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_PMHCONC_1_1Suite : public TestCommand
+{
+public:
+    Test_TC_PMHCONC_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_PMHCONC_1_1", 28, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_PMHCONC_1_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 1UL));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 2UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 4UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 4UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 8UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 8UL));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 16UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 16UL));
+            }
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 32UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 32UL));
+            }
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 9UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65530UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65532UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
+            }
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 7UL));
+            }
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 7UL));
+            }
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 8UL));
+            }
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 7UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 8UL));
+            }
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
+            }
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 3UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 4UL));
+            }
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 5UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 6UL));
+            }
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 5UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 6UL));
+            }
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 10UL));
+            }
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 10UL));
+            }
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("eventList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acceptedCommandList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Read the global attribute: ClusterRevision");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffd"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::ClusterRevision::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Given PMHCONC.S.F00(MEA) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffc && PMHCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "Given PMHCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffc && !PMHCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "Given PMHCONC.S.F01(LEV) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffc && PMHCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "Given PMHCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffc && !PMHCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "Given PMHCONC.S.F02(MED) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffc && PMHCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "Given PMHCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffc && !PMHCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "Given PMHCONC.S.F03(CRI) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffc && PMHCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "Given PMHCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffc && !PMHCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "Given PMHCONC.S.F04(PEA) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffc && PMHCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11, "Given PMHCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffc && !PMHCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 12: {
+            LogStep(12, "Given PMHCONC.S.F05(AVG) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffc && PMHCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 13: {
+            LogStep(13, "Given PMHCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffc && !PMHCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 14: {
+            LogStep(14, "Read the global attribute: AttributeList");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffb"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 15: {
+            LogStep(15, "Read the optional attribute Uncertainty in AttributeList");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffb && PMHCONC.S.A0007 && PMHCONC.S.F00"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 16: {
+            LogStep(16, "Check the optional attribute Uncertainty is excluded from AttributeList when PMHCONC.S.A0007 is not set");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffb && !PMHCONC.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 17: {
+            LogStep(17,
+                    "Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue and "
+                    "Measurement Unit in AttributeList");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffb && PMHCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 18: {
+            LogStep(18,
+                    "Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are excluded "
+                    "from AttributeList when PMHCONC.S.F00 (MEA) is not set");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffb && !PMHCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 19: {
+            LogStep(19,
+                    "Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in AttributeList");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffb && PMHCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 20: {
+            LogStep(20,
+                    "Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when PMHCONC.S.F04 "
+                    "(PEA) is not set");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffb && !PMHCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 21: {
+            LogStep(
+                21,
+                "Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in AttributeList");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffb && PMHCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 22: {
+            LogStep(22,
+                    "Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
+                    "PMHCONC.S.F05 (AVG) is not set");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffb && !PMHCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 23: {
+            LogStep(23, "Read the optional, feature dependent attribute LevelValue in AttributeList");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffb && PMHCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 24: {
+            LogStep(24, "Check that LevelValue is excluded from AttributeList when PMHCONC.S.F01 (LEV) is not set");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffb && !PMHCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 25: {
+            LogStep(25, "Read the global attribute: EventList");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffa"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::EventList::Id, true, chip::NullOptional);
+        }
+        case 26: {
+            LogStep(26, "Read the global attribute: AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afff9"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 27: {
+            LogStep(27, "Read the global attribute: GeneratedCommandList");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afff8"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_PMHCONC_2_1Suite : public TestCommand
+{
+public:
+    Test_TC_PMHCONC_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_PMHCONC_2_1", 11, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_PMHCONC_2_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::app::DataModel::Nullable<float> MinMeasuredValue;
+    chip::app::DataModel::Nullable<float> MaxMeasuredValue;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0.0f));
+                MinMeasuredValue = value;
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                MaxMeasuredValue = value;
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxMeasuredValue));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxMeasuredValue));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxMeasuredValue));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Pm1ConcentrationMeasurement::MeasurementUnitEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 7U));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Pm1ConcentrationMeasurement::MeasurementMediumEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Pm1ConcentrationMeasurement::LevelValueEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 4U));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH reads from the DUT the MinMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::MinMeasuredValue::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TH reads from the DUT the MaxMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::MaxMeasuredValue::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "TH reads from the DUT the MeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::MeasuredValue::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "TH reads from the DUT the PeakMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::PeakMeasuredValue::Id, true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "TH reads from the DUT the PeakMeasuredValueWindow attribute.");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.A0004"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::PeakMeasuredValueWindow::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "TH reads from the DUT the AverageMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::AverageMeasuredValue::Id, true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "TH reads from the DUT the AverageMeasuredValueWindow attribute.");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.A0006"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::AverageMeasuredValueWindow::Id, true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "TH reads from the DUT the MeasurementUnit attribute.");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::MeasurementUnit::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "TH reads from the DUT the MeasurementMedium attribute.");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.A0009"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::MeasurementMedium::Id, true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "TH reads from the DUT the LevelValue attribute.");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.A000a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::LevelValue::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_PMICONC_1_1Suite : public TestCommand
+{
+public:
+    Test_TC_PMICONC_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_PMICONC_1_1", 28, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_PMICONC_1_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 1UL));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 2UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 4UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 4UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 8UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 8UL));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 16UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 16UL));
+            }
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 32UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 32UL));
+            }
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 9UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65530UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65532UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
+            }
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 7UL));
+            }
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 7UL));
+            }
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 8UL));
+            }
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 7UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 8UL));
+            }
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
+            }
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 3UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 4UL));
+            }
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 5UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 6UL));
+            }
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 5UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 6UL));
+            }
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 10UL));
+            }
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 10UL));
+            }
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("eventList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acceptedCommandList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Read the global attribute: ClusterRevision");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffd"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::ClusterRevision::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Given PMICONC.S.F00(MEA) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffc && PMICONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "Given PMICONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffc && !PMICONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "Given PMICONC.S.F01(LEV) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffc && PMICONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "Given PMICONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffc && !PMICONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "Given PMICONC.S.F02(MED) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffc && PMICONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "Given PMICONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffc && !PMICONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "Given PMICONC.S.F03(CRI) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffc && PMICONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "Given PMICONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffc && !PMICONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "Given PMICONC.S.F04(PEA) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffc && PMICONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11, "Given PMICONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffc && !PMICONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 12: {
+            LogStep(12, "Given PMICONC.S.F05(AVG) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffc && PMICONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 13: {
+            LogStep(13, "Given PMICONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffc && !PMICONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 14: {
+            LogStep(14, "Read the global attribute: AttributeList");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffb"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 15: {
+            LogStep(15, "Read the optional attribute Uncertainty in AttributeList");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffb && PMICONC.S.A0007 && PMICONC.S.F00"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 16: {
+            LogStep(16, "Check the optional attribute Uncertainty is excluded from AttributeList when PMICONC.S.A0007 is not set");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffb && !PMICONC.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 17: {
+            LogStep(17,
+                    "Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue and "
+                    "Measurement Unit in AttributeList");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffb && PMICONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 18: {
+            LogStep(18,
+                    "Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are excluded "
+                    "from AttributeList when PMICONC.S.F00 (MEA) is not set");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffb && !PMICONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 19: {
+            LogStep(19,
+                    "Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in AttributeList");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffb && PMICONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 20: {
+            LogStep(20,
+                    "Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when PMICONC.S.F04 "
+                    "(PEA) is not set");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffb && !PMICONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 21: {
+            LogStep(
+                21,
+                "Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in AttributeList");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffb && PMICONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 22: {
+            LogStep(22,
+                    "Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
+                    "PMICONC.S.F05 (AVG) is not set");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffb && !PMICONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 23: {
+            LogStep(23, "Read the optional, feature dependent attribute LevelValue in AttributeList");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffb && PMICONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 24: {
+            LogStep(24, "Check that LevelValue is excluded from AttributeList when PMICONC.S.F01 (LEV) is not set");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffb && !PMICONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 25: {
+            LogStep(25, "Read the global attribute: EventList");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffa"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::EventList::Id, true, chip::NullOptional);
+        }
+        case 26: {
+            LogStep(26, "Read the global attribute: AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.Afff9"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 27: {
+            LogStep(27, "Read the global attribute: GeneratedCommandList");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.Afff8"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_PMICONC_2_1Suite : public TestCommand
+{
+public:
+    Test_TC_PMICONC_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_PMICONC_2_1", 11, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_PMICONC_2_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::app::DataModel::Nullable<float> MinMeasuredValue;
+    chip::app::DataModel::Nullable<float> MaxMeasuredValue;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0.0f));
+                MinMeasuredValue = value;
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                MaxMeasuredValue = value;
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxMeasuredValue));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxMeasuredValue));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxMeasuredValue));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Pm25ConcentrationMeasurement::MeasurementUnitEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 7U));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Pm25ConcentrationMeasurement::MeasurementMediumEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Pm25ConcentrationMeasurement::LevelValueEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 4U));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH reads from the DUT the MinMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::MinMeasuredValue::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TH reads from the DUT the MaxMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::MaxMeasuredValue::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "TH reads from the DUT the MeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::MeasuredValue::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "TH reads from the DUT the PeakMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::PeakMeasuredValue::Id, true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "TH reads from the DUT the PeakMeasuredValueWindow attribute.");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.A0004"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::PeakMeasuredValueWindow::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "TH reads from the DUT the AverageMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::AverageMeasuredValue::Id, true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "TH reads from the DUT the AverageMeasuredValueWindow attribute.");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.A0006"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::AverageMeasuredValueWindow::Id, true,
+                                 chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "TH reads from the DUT the MeasurementUnit attribute.");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::MeasurementUnit::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "TH reads from the DUT the MeasurementMedium attribute.");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.A0009"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::MeasurementMedium::Id, true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "TH reads from the DUT the LevelValue attribute.");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.A000a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::LevelValue::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_PMKCONC_1_1Suite : public TestCommand
+{
+public:
+    Test_TC_PMKCONC_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_PMKCONC_1_1", 28, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_PMKCONC_1_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 1UL));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 2UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 4UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 4UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 8UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 8UL));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 16UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 16UL));
+            }
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 32UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 32UL));
+            }
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 9UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65530UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65532UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
+            }
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 7UL));
+            }
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 7UL));
+            }
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 8UL));
+            }
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 7UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 8UL));
+            }
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
+            }
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 3UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 4UL));
+            }
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 5UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 6UL));
+            }
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 5UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 6UL));
+            }
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 10UL));
+            }
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 10UL));
+            }
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("eventList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acceptedCommandList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Read the global attribute: ClusterRevision");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffd"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::ClusterRevision::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Given PMKCONC.S.F00(MEA) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffc && PMKCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "Given PMKCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffc && !PMKCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "Given PMKCONC.S.F01(LEV) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffc && PMKCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "Given PMKCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffc && !PMKCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "Given PMKCONC.S.F02(MED) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffc && PMKCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "Given PMKCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffc && !PMKCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "Given PMKCONC.S.F03(CRI) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffc && PMKCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "Given PMKCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffc && !PMKCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "Given PMKCONC.S.F04(PEA) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffc && PMKCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11, "Given PMKCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffc && !PMKCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 12: {
+            LogStep(12, "Given PMKCONC.S.F05(AVG) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffc && PMKCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 13: {
+            LogStep(13, "Given PMKCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffc && !PMKCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 14: {
+            LogStep(14, "Read the global attribute: AttributeList");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffb"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 15: {
+            LogStep(15, "Read the optional attribute Uncertainty in AttributeList");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffb && PMKCONC.S.A0007 && PMKCONC.S.F00"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 16: {
+            LogStep(16, "Check the optional attribute Uncertainty is excluded from AttributeList when PMKCONC.S.A0007 is not set");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffb && !PMKCONC.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 17: {
+            LogStep(17,
+                    "Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue and "
+                    "Measurement Unit in AttributeList");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffb && PMKCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 18: {
+            LogStep(18,
+                    "Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are excluded "
+                    "from AttributeList when PMKCONC.S.F00 (MEA) is not set");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffb && !PMKCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 19: {
+            LogStep(19,
+                    "Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in AttributeList");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffb && PMKCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 20: {
+            LogStep(20,
+                    "Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when PMKCONC.S.F04 "
+                    "(PEA) is not set");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffb && !PMKCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 21: {
+            LogStep(
+                21,
+                "Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in AttributeList");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffb && PMKCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 22: {
+            LogStep(22,
+                    "Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
+                    "PMKCONC.S.F05 (AVG) is not set");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffb && !PMKCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 23: {
+            LogStep(23, "Read the optional, feature dependent attribute LevelValue in AttributeList");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffb && PMKCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 24: {
+            LogStep(24, "Check that LevelValue is excluded from AttributeList when PMKCONC.S.F01 (LEV) is not set");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffb && !PMKCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 25: {
+            LogStep(25, "Read the global attribute: EventList");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffa"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::EventList::Id, true, chip::NullOptional);
+        }
+        case 26: {
+            LogStep(26, "Read the global attribute: AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afff9"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 27: {
+            LogStep(27, "Read the global attribute: GeneratedCommandList");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afff8"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_PMKCONC_2_1Suite : public TestCommand
+{
+public:
+    Test_TC_PMKCONC_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_PMKCONC_2_1", 11, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_PMKCONC_2_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::app::DataModel::Nullable<float> MinMeasuredValue;
+    chip::app::DataModel::Nullable<float> MaxMeasuredValue;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0.0f));
+                MinMeasuredValue = value;
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                MaxMeasuredValue = value;
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxMeasuredValue));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxMeasuredValue));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxMeasuredValue));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Pm10ConcentrationMeasurement::MeasurementUnitEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 7U));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Pm10ConcentrationMeasurement::MeasurementMediumEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Pm10ConcentrationMeasurement::LevelValueEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 4U));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH reads from the DUT the MinMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::MinMeasuredValue::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TH reads from the DUT the MaxMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::MaxMeasuredValue::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "TH reads from the DUT the MeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::MeasuredValue::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "TH reads from the DUT the PeakMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::PeakMeasuredValue::Id, true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "TH reads from the DUT the PeakMeasuredValueWindow attribute.");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.A0004"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::PeakMeasuredValueWindow::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "TH reads from the DUT the AverageMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::AverageMeasuredValue::Id, true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "TH reads from the DUT the AverageMeasuredValueWindow attribute.");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.A0006"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::AverageMeasuredValueWindow::Id, true,
+                                 chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "TH reads from the DUT the MeasurementUnit attribute.");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::MeasurementUnit::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "TH reads from the DUT the MeasurementMedium attribute.");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.A0009"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::MeasurementMedium::Id, true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "TH reads from the DUT the LevelValue attribute.");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.A000a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::LevelValue::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_RNCONC_1_1Suite : public TestCommand
+{
+public:
+    Test_TC_RNCONC_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_RNCONC_1_1", 28, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_RNCONC_1_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 1UL));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 2UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 4UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 4UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 8UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 8UL));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 16UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 16UL));
+            }
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 32UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 32UL));
+            }
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 9UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65530UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65532UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
+            }
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 7UL));
+            }
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 7UL));
+            }
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 8UL));
+            }
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 7UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 8UL));
+            }
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
+            }
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 3UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 4UL));
+            }
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 5UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 6UL));
+            }
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 5UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 6UL));
+            }
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 10UL));
+            }
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 10UL));
+            }
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("eventList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acceptedCommandList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Read the global attribute: ClusterRevision");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffd"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::ClusterRevision::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Given RNCONC.S.F00(MEA) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffc && RNCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "Given RNCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffc && !RNCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "Given RNCONC.S.F01(LEV) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffc && RNCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "Given RNCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffc && !RNCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "Given RNCONC.S.F02(MED) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffc && RNCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "Given RNCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffc && !RNCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "Given RNCONC.S.F03(CRI) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffc && RNCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "Given RNCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffc && !RNCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "Given RNCONC.S.F04(PEA) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffc && RNCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11, "Given RNCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffc && !RNCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 12: {
+            LogStep(12, "Given RNCONC.S.F05(AVG) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffc && RNCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 13: {
+            LogStep(13, "Given RNCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffc && !RNCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 14: {
+            LogStep(14, "Read the global attribute: AttributeList");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffb"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 15: {
+            LogStep(15, "Read the optional attribute Uncertainty in AttributeList");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffb && RNCONC.S.A0007 && RNCONC.S.F00"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 16: {
+            LogStep(16, "Check the optional attribute Uncertainty is excluded from AttributeList when RNCONC.S.A0007 is not set");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffb && !RNCONC.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 17: {
+            LogStep(17,
+                    "Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue and "
+                    "Measurement Unit in AttributeList");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffb && RNCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 18: {
+            LogStep(18,
+                    "Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are excluded "
+                    "from AttributeList when RNCONC.S.F00 (MEA) is not set");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffb && !RNCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 19: {
+            LogStep(19,
+                    "Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in AttributeList");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffb && RNCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 20: {
+            LogStep(20,
+                    "Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when RNCONC.S.F04 "
+                    "(PEA) is not set");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffb && !RNCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 21: {
+            LogStep(
+                21,
+                "Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in AttributeList");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffb && RNCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 22: {
+            LogStep(22,
+                    "Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
+                    "RNCONC.S.F05 (AVG) is not set");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffb && !RNCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 23: {
+            LogStep(23, "Read the optional, feature dependent attribute LevelValue in AttributeList");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffb && RNCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 24: {
+            LogStep(24, "Check that LevelValue is excluded from AttributeList when RNCONC.S.F01 (LEV) is not set");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffb && !RNCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 25: {
+            LogStep(25, "Read the global attribute: EventList");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffa"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::EventList::Id, true, chip::NullOptional);
+        }
+        case 26: {
+            LogStep(26, "Read the global attribute: AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.Afff9"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 27: {
+            LogStep(27, "Read the global attribute: GeneratedCommandList");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.Afff8"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_RNCONC_2_1Suite : public TestCommand
+{
+public:
+    Test_TC_RNCONC_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_RNCONC_2_1", 11, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_RNCONC_2_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::app::DataModel::Nullable<float> MinMeasuredValue;
+    chip::app::DataModel::Nullable<float> MaxMeasuredValue;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0.0f));
+                MinMeasuredValue = value;
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                MaxMeasuredValue = value;
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxMeasuredValue));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxMeasuredValue));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxMeasuredValue));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::RadonConcentrationMeasurement::MeasurementUnitEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 7U));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::RadonConcentrationMeasurement::MeasurementMediumEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::RadonConcentrationMeasurement::LevelValueEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 4U));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH reads from the DUT the MinMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::MinMeasuredValue::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TH reads from the DUT the MaxMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::MaxMeasuredValue::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "TH reads from the DUT the MeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::MeasuredValue::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "TH reads from the DUT the PeakMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::PeakMeasuredValue::Id, true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "TH reads from the DUT the PeakMeasuredValueWindow attribute.");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.A0004"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::PeakMeasuredValueWindow::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "TH reads from the DUT the AverageMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::AverageMeasuredValue::Id, true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "TH reads from the DUT the AverageMeasuredValueWindow attribute.");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.A0006"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::AverageMeasuredValueWindow::Id, true,
+                                 chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "TH reads from the DUT the MeasurementUnit attribute.");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::MeasurementUnit::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "TH reads from the DUT the MeasurementMedium attribute.");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.A0009"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::MeasurementMedium::Id, true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "TH reads from the DUT the LevelValue attribute.");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.A000a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::LevelValue::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_TVOCCONC_1_1Suite : public TestCommand
+{
+public:
+    Test_TC_TVOCCONC_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_TVOCCONC_1_1", 28, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_TVOCCONC_1_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 1UL));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 2UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 4UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 4UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 8UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 8UL));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 16UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 16UL));
+            }
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 32UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 32UL));
+            }
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 9UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65530UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65532UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
+            }
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 7UL));
+            }
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 7UL));
+            }
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 8UL));
+            }
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 7UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 8UL));
+            }
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
+            }
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 3UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 4UL));
+            }
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 5UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 6UL));
+            }
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 5UL));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 6UL));
+            }
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 10UL));
+            }
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 10UL));
+            }
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("eventList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acceptedCommandList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Read the global attribute: ClusterRevision");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffd"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::ClusterRevision::Id, true,
+                                 chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Given TVOCCONC.S.F00(MEA) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffc && TVOCCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::FeatureMap::Id, true,
+                                 chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "Given TVOCCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffc && !TVOCCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::FeatureMap::Id, true,
+                                 chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "Given TVOCCONC.S.F01(LEV) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffc && TVOCCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::FeatureMap::Id, true,
+                                 chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "Given TVOCCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffc && !TVOCCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::FeatureMap::Id, true,
+                                 chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "Given TVOCCONC.S.F02(MED) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffc && TVOCCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::FeatureMap::Id, true,
+                                 chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "Given TVOCCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffc && !TVOCCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::FeatureMap::Id, true,
+                                 chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "Given TVOCCONC.S.F03(CRI) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffc && TVOCCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::FeatureMap::Id, true,
+                                 chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "Given TVOCCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffc && !TVOCCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::FeatureMap::Id, true,
+                                 chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "Given TVOCCONC.S.F04(PEA) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffc && TVOCCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::FeatureMap::Id, true,
+                                 chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11, "Given TVOCCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffc && !TVOCCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::FeatureMap::Id, true,
+                                 chip::NullOptional);
+        }
+        case 12: {
+            LogStep(12, "Given TVOCCONC.S.F05(AVG) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffc && TVOCCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::FeatureMap::Id, true,
+                                 chip::NullOptional);
+        }
+        case 13: {
+            LogStep(13, "Given TVOCCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffc && !TVOCCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::FeatureMap::Id, true,
+                                 chip::NullOptional);
+        }
+        case 14: {
+            LogStep(14, "Read the global attribute: AttributeList");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffb"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 15: {
+            LogStep(15, "Read the optional attribute Uncertainty in AttributeList");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffb && TVOCCONC.S.A0007 && TVOCCONC.S.F00"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 16: {
+            LogStep(16, "Check the optional attribute Uncertainty is excluded from AttributeList when TVOCCONC.S.A0007 is not set");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffb && !TVOCCONC.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 17: {
+            LogStep(17,
+                    "Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue and "
+                    "Measurement Unit in AttributeList");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffb && TVOCCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 18: {
+            LogStep(18,
+                    "Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are excluded "
+                    "from AttributeList when TVOCCONC.S.F00 (MEA) is not set");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffb && !TVOCCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 19: {
+            LogStep(19,
+                    "Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in AttributeList");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffb && TVOCCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 20: {
+            LogStep(20,
+                    "Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when TVOCCONC.S.F04 "
+                    "(PEA) is not set");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffb && !TVOCCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 21: {
+            LogStep(
+                21,
+                "Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in AttributeList");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffb && TVOCCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 22: {
+            LogStep(22,
+                    "Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
+                    "TVOCCONC.S.F05 (AVG) is not set");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffb && !TVOCCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 23: {
+            LogStep(23, "Read the optional, feature dependent attribute LevelValue in AttributeList");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffb && TVOCCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 24: {
+            LogStep(24, "Check that LevelValue is excluded from AttributeList when TVOCCONC.S.F01 (LEV) is not set");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffb && !TVOCCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 25: {
+            LogStep(25, "Read the global attribute: EventList");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffa"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::EventList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 26: {
+            LogStep(26, "Read the global attribute: AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afff9"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::AcceptedCommandList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 27: {
+            LogStep(27, "Read the global attribute: GeneratedCommandList");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afff8"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::GeneratedCommandList::Id, true,
+                                 chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_TVOCCONC_2_1Suite : public TestCommand
+{
+public:
+    Test_TC_TVOCCONC_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_TVOCCONC_2_1", 11, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_TVOCCONC_2_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::app::DataModel::Nullable<float> MinMeasuredValue;
+    chip::app::DataModel::Nullable<float> MaxMeasuredValue;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0.0f));
+                MinMeasuredValue = value;
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                MaxMeasuredValue = value;
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxMeasuredValue));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxMeasuredValue));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<float> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxMeasuredValue));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::TotalVolatileOrganicCompoundsConcentrationMeasurement::MeasurementUnitEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 7U));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::TotalVolatileOrganicCompoundsConcentrationMeasurement::MeasurementMediumEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::TotalVolatileOrganicCompoundsConcentrationMeasurement::LevelValueEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 4U));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH reads from the DUT the MinMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::MinMeasuredValue::Id, true,
+                                 chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TH reads from the DUT the MaxMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::MaxMeasuredValue::Id, true,
+                                 chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "TH reads from the DUT the MeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::MeasuredValue::Id, true,
+                                 chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "TH reads from the DUT the PeakMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::PeakMeasuredValue::Id, true,
+                                 chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "TH reads from the DUT the PeakMeasuredValueWindow attribute.");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.A0004"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::PeakMeasuredValueWindow::Id,
+                                 true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "TH reads from the DUT the AverageMeasuredValue attribute.");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::AverageMeasuredValue::Id, true,
+                                 chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "TH reads from the DUT the AverageMeasuredValueWindow attribute.");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.A0006"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::AverageMeasuredValueWindow::Id,
+                                 true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "TH reads from the DUT the MeasurementUnit attribute.");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::MeasurementUnit::Id, true,
+                                 chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "TH reads from the DUT the MeasurementMedium attribute.");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.A0009"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::MeasurementMedium::Id, true,
+                                 chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "TH reads from the DUT the LevelValue attribute.");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.A000a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::LevelValue::Id, true,
+                                 chip::NullOptional);
         }
         }
         return CHIP_NO_ERROR;
@@ -127130,6 +134679,26 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_CC_8_1Suite>(credsIssuerConfig),
         make_unique<TestColorControl_9_1Suite>(credsIssuerConfig),
         make_unique<TestColorControl_9_2Suite>(credsIssuerConfig),
+        make_unique<Test_TC_CDOCONC_1_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_CDOCONC_2_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_CMOCONC_1_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_CMOCONC_2_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_FLDCONC_1_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_FLDCONC_2_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_NDOCONC_1_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_NDOCONC_2_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_OZCONC_1_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_OZCONC_2_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_PMHCONC_1_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_PMHCONC_2_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_PMICONC_1_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_PMICONC_2_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_PMKCONC_1_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_PMKCONC_2_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_RNCONC_1_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_RNCONC_2_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_TVOCCONC_1_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_TVOCCONC_2_1Suite>(credsIssuerConfig),
         make_unique<TestIcdManagementClusterSuite>(credsIssuerConfig),
         make_unique<Test_TC_OPCREDS_1_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_BINFO_1_1Suite>(credsIssuerConfig),
