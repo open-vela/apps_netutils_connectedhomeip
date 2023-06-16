@@ -77,14 +77,14 @@
 | BooleanState                                                        | 0x0045 |
 | IcdManagement                                                       | 0x0046 |
 | ModeSelect                                                          | 0x0050 |
-| LaundryWasherModeSelect                                             | 0x0051 |
-| RefrigeratorAndTemperatureControlledCabinetModeSelect               | 0x0052 |
+| LaundryWasherMode                                                   | 0x0051 |
+| RefrigeratorAndTemperatureControlledCabinetMode                     | 0x0052 |
 | WasherControls                                                      | 0x0053 |
-| RvcRunModeSelect                                                    | 0x0054 |
-| RvcCleanModeSelect                                                  | 0x0055 |
+| RvcRunMode                                                          | 0x0054 |
+| RvcCleanMode                                                        | 0x0055 |
 | TemperatureControl                                                  | 0x0056 |
 | RefrigeratorAlarm                                                   | 0x0057 |
-| DishwasherModeSelect                                                | 0x0059 |
+| DishwasherMode                                                      | 0x0059 |
 | AirQuality                                                          | 0x005B |
 | SmokeCoAlarm                                                        | 0x005C |
 | OperationalState                                                    | 0x0060 |
@@ -39610,7 +39610,6 @@ public:
 |------------------------------------------------------------------------------|
 | Commands:                                                           |        |
 | * ChangeToMode                                                      |   0x00 |
-| * ChangeToModeWithStatus                                            |   0x01 |
 |------------------------------------------------------------------------------|
 | Attributes:                                                         |        |
 | * Description                                                       | 0x0000 |

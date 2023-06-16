@@ -127252,121 +127252,125 @@ public:
             err = TestReadDescription_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Read SupportedModes\n");
-            err = TestReadSupportedModes_2();
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read StandardNamespace\n");
+            err = TestReadStandardNamespace_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Read CurrentMode\n");
-            err = TestReadCurrentMode_3();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Read SupportedModes\n");
+            err = TestReadSupportedModes_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Read StartUpMode\n");
-            err = TestReadStartUpMode_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Read CurrentMode\n");
+            err = TestReadCurrentMode_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Read OnMode\n");
-            err = TestReadOnMode_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Read StartUpMode\n");
+            err = TestReadStartUpMode_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Change to Supported Mode\n");
-            err = TestChangeToSupportedMode_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Read OnMode\n");
+            err = TestReadOnMode_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Verify Current Mode Change\n");
-            err = TestVerifyCurrentModeChange_7();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Change to Supported Mode\n");
+            err = TestChangeToSupportedMode_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Change to Unsupported Mode\n");
-            err = TestChangeToUnsupportedMode_8();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Verify Current Mode Change\n");
+            err = TestVerifyCurrentModeChange_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Toggle OnOff\n");
-            err = TestToggleOnOff_9();
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Change to Unsupported Mode\n");
+            err = TestChangeToUnsupportedMode_9();
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : Toggle OnOff\n");
             err = TestToggleOnOff_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Verify Current Mode does not change when OnMode is null\n");
-            err = TestVerifyCurrentModeDoesNotChangeWhenOnModeIsNull_11();
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Toggle OnOff\n");
+            err = TestToggleOnOff_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : Change to Unsupported OnMode\n");
-            err = TestChangeToUnsupportedOnMode_12();
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Verify Current Mode does not change when OnMode is null\n");
+            err = TestVerifyCurrentModeDoesNotChangeWhenOnModeIsNull_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Change OnMode\n");
-            err = TestChangeOnMode_13();
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Change to Unsupported OnMode\n");
+            err = TestChangeToUnsupportedOnMode_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : Verify OnMode\n");
-            err = TestVerifyOnMode_14();
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Change OnMode\n");
+            err = TestChangeOnMode_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : Toggle OnOff\n");
-            err = TestToggleOnOff_15();
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Verify OnMode\n");
+            err = TestVerifyOnMode_15();
             break;
         case 16:
             ChipLogProgress(chipTool, " ***** Test Step 16 : Toggle OnOff\n");
             err = TestToggleOnOff_16();
             break;
         case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : Verify Current Mode Changes if OnMode is not null\n");
-            err = TestVerifyCurrentModeChangesIfOnModeIsNotNull_17();
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Toggle OnOff\n");
+            err = TestToggleOnOff_17();
             break;
         case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : Change to Unsupported StartUp Mode\n");
-            err = TestChangeToUnsupportedStartUpMode_18();
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Verify Current Mode Changes if OnMode is not null\n");
+            err = TestVerifyCurrentModeChangesIfOnModeIsNotNull_18();
             break;
         case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : Change to Supported StartUp Mode\n");
-            err = TestChangeToSupportedStartUpMode_19();
+            ChipLogProgress(chipTool, " ***** Test Step 19 : Change to Unsupported StartUp Mode\n");
+            err = TestChangeToUnsupportedStartUpMode_19();
             break;
         case 20:
-            ChipLogProgress(chipTool, " ***** Test Step 20 : Verify StartUp Mode Change\n");
-            err = TestVerifyStartUpModeChange_20();
+            ChipLogProgress(chipTool, " ***** Test Step 20 : Change to Supported StartUp Mode\n");
+            err = TestChangeToSupportedStartUpMode_20();
             break;
         case 21:
-            ChipLogProgress(chipTool, " ***** Test Step 21 : Change CurrentMode to another value\n");
-            err = TestChangeCurrentModeToAnotherValue_21();
+            ChipLogProgress(chipTool, " ***** Test Step 21 : Verify StartUp Mode Change\n");
+            err = TestVerifyStartUpModeChange_21();
             break;
         case 22:
-            ChipLogProgress(chipTool, " ***** Test Step 22 : Change On Mode\n");
-            err = TestChangeOnMode_22();
+            ChipLogProgress(chipTool, " ***** Test Step 22 : Change CurrentMode to another value\n");
+            err = TestChangeCurrentModeToAnotherValue_22();
             break;
         case 23:
-            ChipLogProgress(chipTool, " ***** Test Step 23 : Set StartUpOnOff\n");
-            err = TestSetStartUpOnOff_23();
+            ChipLogProgress(chipTool, " ***** Test Step 23 : Change On Mode\n");
+            err = TestChangeOnMode_23();
             break;
         case 24:
-            ChipLogProgress(chipTool, " ***** Test Step 24 : Reboot target device\n");
-            err = TestRebootTargetDevice_24();
+            ChipLogProgress(chipTool, " ***** Test Step 24 : Set StartUpOnOff\n");
+            err = TestSetStartUpOnOff_24();
             break;
         case 25:
-            ChipLogProgress(chipTool, " ***** Test Step 25 : Wait for the commissioned device to be retrieved\n");
-            err = TestWaitForTheCommissionedDeviceToBeRetrieved_25();
+            ChipLogProgress(chipTool, " ***** Test Step 25 : Reboot target device\n");
+            err = TestRebootTargetDevice_25();
             break;
         case 26:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 26 : Verify Current Mode Change based on OnMode, as it overwrites StartUpMode\n");
-            err = TestVerifyCurrentModeChangeBasedOnOnModeAsItOverwritesStartUpMode_26();
+            ChipLogProgress(chipTool, " ***** Test Step 26 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_26();
             break;
         case 27:
-            ChipLogProgress(chipTool, " ***** Test Step 27 : Change On Mode to Null\n");
-            err = TestChangeOnModeToNull_27();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 27 : Verify Current Mode Change based on OnMode, as it overwrites StartUpMode\n");
+            err = TestVerifyCurrentModeChangeBasedOnOnModeAsItOverwritesStartUpMode_27();
             break;
         case 28:
-            ChipLogProgress(chipTool, " ***** Test Step 28 : Reboot target device\n");
-            err = TestRebootTargetDevice_28();
+            ChipLogProgress(chipTool, " ***** Test Step 28 : Change On Mode to Null\n");
+            err = TestChangeOnModeToNull_28();
             break;
         case 29:
-            ChipLogProgress(chipTool, " ***** Test Step 29 : Wait for the commissioned device to be retrieved\n");
-            err = TestWaitForTheCommissionedDeviceToBeRetrieved_29();
+            ChipLogProgress(chipTool, " ***** Test Step 29 : Reboot target device\n");
+            err = TestRebootTargetDevice_29();
             break;
         case 30:
-            ChipLogProgress(chipTool, " ***** Test Step 30 : Verify Current Mode Change based on new StartUp Mode\n");
-            err = TestVerifyCurrentModeChangeBasedOnNewStartUpMode_30();
+            ChipLogProgress(chipTool, " ***** Test Step 30 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_30();
+            break;
+        case 31:
+            ChipLogProgress(chipTool, " ***** Test Step 31 : Verify Current Mode Change based on new StartUp Mode\n");
+            err = TestVerifyCurrentModeChangeBasedOnNewStartUpMode_31();
             break;
         }
 
@@ -127404,10 +127408,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -127416,10 +127420,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -127434,10 +127438,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 18:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 19:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -127472,6 +127476,9 @@ public:
         case 30:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 31:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -127485,7 +127492,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 31;
+    const uint16_t mTestCount = 32;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -127523,7 +127530,31 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadSupportedModes_2()
+    CHIP_ERROR TestReadStandardNamespace_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterModeSelect alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeStandardNamespaceWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read StandardNamespace Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("StandardNamespace", actualValue));
+                VerifyOrReturn(CheckValue("StandardNamespace", actualValue, 0U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadSupportedModes_3()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -127541,28 +127572,31 @@ private:
                 VerifyOrReturn(
                     CheckValueAsString("Label", ((MTRModeSelectClusterModeOptionStruct *) actualValue[0]).label, @"Black"));
                 VerifyOrReturn(CheckValue("Mode", ((MTRModeSelectClusterModeOptionStruct *) actualValue[0]).mode, 0U));
-                VerifyOrReturn(CheckValue("ModeTags", [((MTRModeSelectClusterModeOptionStruct *) actualValue[0]).modeTags count],
-                    static_cast<uint32_t>(1)));
+                VerifyOrReturn(CheckValue("SemanticTags",
+                    [((MTRModeSelectClusterModeOptionStruct *) actualValue[0]).semanticTags count], static_cast<uint32_t>(1)));
                 VerifyOrReturn(CheckValue("Value",
-                    ((MTRModeSelectClusterModeTagStruct *) ((MTRModeSelectClusterModeOptionStruct *) actualValue[0]).modeTags[0])
+                    ((MTRModeSelectClusterSemanticTagStruct *) ((MTRModeSelectClusterModeOptionStruct *) actualValue[0])
+                            .semanticTags[0])
                         .value,
                     0U));
                 VerifyOrReturn(
                     CheckValueAsString("Label", ((MTRModeSelectClusterModeOptionStruct *) actualValue[1]).label, @"Cappuccino"));
                 VerifyOrReturn(CheckValue("Mode", ((MTRModeSelectClusterModeOptionStruct *) actualValue[1]).mode, 4U));
-                VerifyOrReturn(CheckValue("ModeTags", [((MTRModeSelectClusterModeOptionStruct *) actualValue[1]).modeTags count],
-                    static_cast<uint32_t>(1)));
+                VerifyOrReturn(CheckValue("SemanticTags",
+                    [((MTRModeSelectClusterModeOptionStruct *) actualValue[1]).semanticTags count], static_cast<uint32_t>(1)));
                 VerifyOrReturn(CheckValue("Value",
-                    ((MTRModeSelectClusterModeTagStruct *) ((MTRModeSelectClusterModeOptionStruct *) actualValue[1]).modeTags[0])
+                    ((MTRModeSelectClusterSemanticTagStruct *) ((MTRModeSelectClusterModeOptionStruct *) actualValue[1])
+                            .semanticTags[0])
                         .value,
                     0U));
                 VerifyOrReturn(
                     CheckValueAsString("Label", ((MTRModeSelectClusterModeOptionStruct *) actualValue[2]).label, @"Espresso"));
                 VerifyOrReturn(CheckValue("Mode", ((MTRModeSelectClusterModeOptionStruct *) actualValue[2]).mode, 7U));
-                VerifyOrReturn(CheckValue("ModeTags", [((MTRModeSelectClusterModeOptionStruct *) actualValue[2]).modeTags count],
-                    static_cast<uint32_t>(1)));
+                VerifyOrReturn(CheckValue("SemanticTags",
+                    [((MTRModeSelectClusterModeOptionStruct *) actualValue[2]).semanticTags count], static_cast<uint32_t>(1)));
                 VerifyOrReturn(CheckValue("Value",
-                    ((MTRModeSelectClusterModeTagStruct *) ((MTRModeSelectClusterModeOptionStruct *) actualValue[2]).modeTags[0])
+                    ((MTRModeSelectClusterSemanticTagStruct *) ((MTRModeSelectClusterModeOptionStruct *) actualValue[2])
+                            .semanticTags[0])
                         .value,
                     0U));
             }
@@ -127576,7 +127610,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadCurrentMode_3()
+    CHIP_ERROR TestReadCurrentMode_4()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -127599,7 +127633,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadStartUpMode_4()
+    CHIP_ERROR TestReadStartUpMode_5()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -127623,7 +127657,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadOnMode_5()
+    CHIP_ERROR TestReadOnMode_6()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -127646,7 +127680,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestChangeToSupportedMode_6()
+    CHIP_ERROR TestChangeToSupportedMode_7()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -127668,7 +127702,7 @@ private:
     }
     NSNumber * _Nonnull currentModeBeforeToggle;
 
-    CHIP_ERROR TestVerifyCurrentModeChange_7()
+    CHIP_ERROR TestVerifyCurrentModeChange_8()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -127694,7 +127728,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestChangeToUnsupportedMode_8()
+    CHIP_ERROR TestChangeToUnsupportedMode_9()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -127718,7 +127752,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestToggleOnOff_9()
+    CHIP_ERROR TestToggleOnOff_10()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -127736,7 +127770,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestToggleOnOff_10()
+    CHIP_ERROR TestToggleOnOff_11()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -127754,7 +127788,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyCurrentModeDoesNotChangeWhenOnModeIsNull_11()
+    CHIP_ERROR TestVerifyCurrentModeDoesNotChangeWhenOnModeIsNull_12()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -127777,7 +127811,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestChangeToUnsupportedOnMode_12()
+    CHIP_ERROR TestChangeToUnsupportedOnMode_13()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -127802,7 +127836,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestChangeOnMode_13()
+    CHIP_ERROR TestChangeOnMode_14()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -127824,7 +127858,7 @@ private:
     }
     NSNumber * _Nullable OnModeValue;
 
-    CHIP_ERROR TestVerifyOnMode_14()
+    CHIP_ERROR TestVerifyOnMode_15()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -127851,7 +127885,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestToggleOnOff_15()
+    CHIP_ERROR TestToggleOnOff_16()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -127869,7 +127903,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestToggleOnOff_16()
+    CHIP_ERROR TestToggleOnOff_17()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -127887,7 +127921,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyCurrentModeChangesIfOnModeIsNotNull_17()
+    CHIP_ERROR TestVerifyCurrentModeChangesIfOnModeIsNotNull_18()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -127910,7 +127944,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestChangeToUnsupportedStartUpMode_18()
+    CHIP_ERROR TestChangeToUnsupportedStartUpMode_19()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -127935,7 +127969,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestChangeToSupportedStartUpMode_19()
+    CHIP_ERROR TestChangeToSupportedStartUpMode_20()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -127956,7 +127990,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyStartUpModeChange_20()
+    CHIP_ERROR TestVerifyStartUpModeChange_21()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -127980,7 +128014,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestChangeCurrentModeToAnotherValue_21()
+    CHIP_ERROR TestChangeCurrentModeToAnotherValue_22()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -128001,7 +128035,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestChangeOnMode_22()
+    CHIP_ERROR TestChangeOnMode_23()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -128022,7 +128056,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSetStartUpOnOff_23()
+    CHIP_ERROR TestSetStartUpOnOff_24()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -128043,14 +128077,14 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestRebootTargetDevice_24()
+    CHIP_ERROR TestRebootTargetDevice_25()
     {
 
         chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
         return Reboot("alpha", value);
     }
 
-    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_25()
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_26()
     {
 
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
@@ -128058,7 +128092,7 @@ private:
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestVerifyCurrentModeChangeBasedOnOnModeAsItOverwritesStartUpMode_26()
+    CHIP_ERROR TestVerifyCurrentModeChangeBasedOnOnModeAsItOverwritesStartUpMode_27()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -128081,7 +128115,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestChangeOnModeToNull_27()
+    CHIP_ERROR TestChangeOnModeToNull_28()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -128102,14 +128136,14 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestRebootTargetDevice_28()
+    CHIP_ERROR TestRebootTargetDevice_29()
     {
 
         chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
         return Reboot("alpha", value);
     }
 
-    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_29()
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_30()
     {
 
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
@@ -128117,7 +128151,7 @@ private:
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestVerifyCurrentModeChangeBasedOnNewStartUpMode_30()
+    CHIP_ERROR TestVerifyCurrentModeChangeBasedOnNewStartUpMode_31()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
