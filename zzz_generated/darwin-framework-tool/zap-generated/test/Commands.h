@@ -66,6 +66,26 @@ public:
         printf("Test_TC_CC_7_4\n");
         printf("TestColorControl_9_1\n");
         printf("TestColorControl_9_2\n");
+        printf("Test_TC_CDOCONC_1_1\n");
+        printf("Test_TC_CDOCONC_2_1\n");
+        printf("Test_TC_CMOCONC_1_1\n");
+        printf("Test_TC_CMOCONC_2_1\n");
+        printf("Test_TC_FLDCONC_1_1\n");
+        printf("Test_TC_FLDCONC_2_1\n");
+        printf("Test_TC_NDOCONC_1_1\n");
+        printf("Test_TC_NDOCONC_2_1\n");
+        printf("Test_TC_OZCONC_1_1\n");
+        printf("Test_TC_OZCONC_2_1\n");
+        printf("Test_TC_PMHCONC_1_1\n");
+        printf("Test_TC_PMHCONC_2_1\n");
+        printf("Test_TC_PMICONC_1_1\n");
+        printf("Test_TC_PMICONC_2_1\n");
+        printf("Test_TC_PMKCONC_1_1\n");
+        printf("Test_TC_PMKCONC_2_1\n");
+        printf("Test_TC_RNCONC_1_1\n");
+        printf("Test_TC_RNCONC_2_1\n");
+        printf("Test_TC_TVOCCONC_1_1\n");
+        printf("Test_TC_TVOCCONC_2_1\n");
         printf("Test_TC_OPCREDS_1_2\n");
         printf("Test_TC_BINFO_1_1\n");
         printf("Test_TC_CNET_1_3\n");
@@ -26818,6 +26838,15091 @@ private:
                 id actualValue = value;
                 VerifyOrReturn(CheckValue("OnOff", actualValue, 0));
             }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_CDOCONC_1_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_CDOCONC_1_1()
+        : TestCommandBridge("Test_TC_CDOCONC_1_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_CDOCONC_1_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_CDOCONC_1_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_CDOCONC_1_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read the global attribute: ClusterRevision\n");
+            if (ShouldSkip("CDOCONC.S.Afffd")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeClusterRevision_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Given CDOCONC.S.F00(MEA) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("CDOCONC.S.Afffc && CDOCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenCdoconcsf00meaEnsureFeaturemapHasTheCorrectBitSet_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 3 : Given CDOCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("CDOCONC.S.Afffc && !CDOCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenCdoconcsf00meaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Given CDOCONC.S.F01(LEV) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("CDOCONC.S.Afffc && CDOCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenCdoconcsf01levEnsureFeaturemapHasTheCorrectBitSet_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 5 : Given CDOCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("CDOCONC.S.Afffc && !CDOCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenCdoconcsf01levIsNotSetEnsureFeaturemapHasTheCorrectBitClear_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Given CDOCONC.S.F02(MED) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("CDOCONC.S.Afffc && CDOCONC.S.F02")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenCdoconcsf02medEnsureFeaturemapHasTheCorrectBitSet_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 7 : Given CDOCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("CDOCONC.S.Afffc && !CDOCONC.S.F02")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenCdoconcsf02medIsNotSetEnsureFeaturemapHasTheCorrectBitClear_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Given CDOCONC.S.F03(CRI) ensure featuremap has the correct bits set\n");
+            if (ShouldSkip("CDOCONC.S.Afffc && CDOCONC.S.F03")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenCdoconcsf03criEnsureFeaturemapHasTheCorrectBitsSet_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 9 : Given CDOCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("CDOCONC.S.Afffc && !CDOCONC.S.F03")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenCdoconcsf03criIsNotSetEnsureFeaturemapHasTheCorrectBitClear_9();
+            break;
+        case 10:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 10 : Given CDOCONC.S.F04(PEA) ensure featuremap has the correct bits set\n");
+            if (ShouldSkip("CDOCONC.S.Afffc && CDOCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenCdoconcsf04peaEnsureFeaturemapHasTheCorrectBitsSet_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 11 : Given CDOCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("CDOCONC.S.Afffc && !CDOCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenCdoconcsf04peaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_11();
+            break;
+        case 12:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 12 : Given CDOCONC.S.F05(AVG) ensure featuremap has the correct bits set\n");
+            if (ShouldSkip("CDOCONC.S.Afffc && CDOCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenCdoconcsf05avgEnsureFeaturemapHasTheCorrectBitsSet_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 13 : Given CDOCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("CDOCONC.S.Afffc && !CDOCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenCdoconcsf05avgIsNotSetEnsureFeaturemapHasTheCorrectBitClear_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Read the global attribute: AttributeList\n");
+            if (ShouldSkip("CDOCONC.S.Afffb")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeAttributeList_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Read the optional attribute Uncertainty in AttributeList\n");
+            if (ShouldSkip("CDOCONC.S.Afffb && CDOCONC.S.A0007 && CDOCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeUncertaintyInAttributeList_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 16 : Check the optional attribute Uncertainty is excluded from AttributeList when "
+                "CDOCONC.S.A0007 is not set\n");
+            if (ShouldSkip("CDOCONC.S.Afffb && !CDOCONC.S.A0007")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckTheOptionalAttributeUncertaintyIsExcludedFromAttributeListWhenCdoconcsa0007IsNotSet_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 17 : Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, "
+                "MaxMeasuredValue and Measurement Unit in AttributeList\n");
+            if (ShouldSkip("CDOCONC.S.Afffb && CDOCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributesMeasuredValueMinMeasuredValueMaxMeasuredValueAndMeasurementUnitInAttributeList_17();
+            break;
+        case 18:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 18 : Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and "
+                "Uncertainty are excluded from AttributeList when CDOCONC.S.F00 (MEA) is not set\n");
+            if (ShouldSkip("CDOCONC.S.Afffb && !CDOCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatMeasuredValueMinMeasuredValueMaxMeasuredValueMeasurementUnitAndUncertaintyAreExcludedFromAttributeListWhenCdoconcsf00MeaIsNotSet_18();
+            break;
+        case 19:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 19 : Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow "
+                "in AttributeList\n");
+            if (ShouldSkip("CDOCONC.S.Afffb && CDOCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributesPeakMeasuredValuePeakMeasuredValueWindowInAttributeList_19();
+            break;
+        case 20:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 20 : Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when "
+                "CDOCONC.S.F04 (PEA) is not set\n");
+            if (ShouldSkip("CDOCONC.S.Afffb && !CDOCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatPeakMeasuredValuePeakMeasuredValueWindowAreExcludedFromAttributeListWhenCdoconcsf04PeaIsNotSet_20();
+            break;
+        case 21:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 21 : Read the optional, feature dependent attributes AverageMeasuredValue "
+                "AverageMeasuredValueWindow in AttributeList\n");
+            if (ShouldSkip("CDOCONC.S.Afffb && CDOCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributesAverageMeasuredValueAverageMeasuredValueWindowInAttributeList_21();
+            break;
+        case 22:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 22 : Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from "
+                "AttributeList when CDOCONC.S.F05 (AVG) is not set\n");
+            if (ShouldSkip("CDOCONC.S.Afffb && !CDOCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatAverageMeasuredValueAndAverageMeasuredValueWindowAreExcludedFromAttributeListWhenCdoconcsf05AvgIsNotSet_22();
+            break;
+        case 23:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 23 : Read the optional, feature dependent attribute LevelValue in AttributeList\n");
+            if (ShouldSkip("CDOCONC.S.Afffb && CDOCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributeLevelValueInAttributeList_23();
+            break;
+        case 24:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 24 : Check that LevelValue is excluded from AttributeList when CDOCONC.S.F01 (LEV) is not set\n");
+            if (ShouldSkip("CDOCONC.S.Afffb && !CDOCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatLevelValueIsExcludedFromAttributeListWhenCdoconcsf01LevIsNotSet_24();
+            break;
+        case 25:
+            ChipLogProgress(chipTool, " ***** Test Step 25 : Read the global attribute: EventList\n");
+            if (ShouldSkip("CDOCONC.S.Afffa")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeEventList_25();
+            break;
+        case 26:
+            ChipLogProgress(chipTool, " ***** Test Step 26 : Read the global attribute: AcceptedCommandList\n");
+            if (ShouldSkip("CDOCONC.S.Afff9")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeAcceptedCommandList_26();
+            break;
+        case 27:
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Read the global attribute: GeneratedCommandList\n");
+            if (ShouldSkip("CDOCONC.S.Afff8")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeGeneratedCommandList_27();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 28;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: ClusterRevision Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenCdoconcsf00meaEnsureFeaturemapHasTheCorrectBitSet_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given CDOCONC.S.F00(MEA) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenCdoconcsf00meaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given CDOCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenCdoconcsf01levEnsureFeaturemapHasTheCorrectBitSet_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given CDOCONC.S.F01(LEV) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenCdoconcsf01levIsNotSetEnsureFeaturemapHasTheCorrectBitClear_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given CDOCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenCdoconcsf02medEnsureFeaturemapHasTheCorrectBitSet_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given CDOCONC.S.F02(MED) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenCdoconcsf02medIsNotSetEnsureFeaturemapHasTheCorrectBitClear_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given CDOCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenCdoconcsf03criEnsureFeaturemapHasTheCorrectBitsSet_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given CDOCONC.S.F03(CRI) ensure featuremap has the correct bits set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenCdoconcsf03criIsNotSetEnsureFeaturemapHasTheCorrectBitClear_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given CDOCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenCdoconcsf04peaEnsureFeaturemapHasTheCorrectBitsSet_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given CDOCONC.S.F04(PEA) ensure featuremap has the correct bits set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenCdoconcsf04peaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_11()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given CDOCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenCdoconcsf05avgEnsureFeaturemapHasTheCorrectBitsSet_12()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given CDOCONC.S.F05(AVG) ensure featuremap has the correct bits set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenCdoconcsf05avgIsNotSetEnsureFeaturemapHasTheCorrectBitClear_13()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given CDOCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_14()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 9UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65530UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeUncertaintyInAttributeList_15()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute Uncertainty in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 7UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckTheOptionalAttributeUncertaintyIsExcludedFromAttributeListWhenCdoconcsa0007IsNotSet_16()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check the optional attribute Uncertainty is excluded from AttributeList when CDOCONC.S.A0007 is not set Error: "
+                  @"%@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 7UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestReadTheOptionalFeatureDependentAttributesMeasuredValueMinMeasuredValueMaxMeasuredValueAndMeasurementUnitInAttributeList_17()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue and "
+                  @"Measurement Unit in AttributeList Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 8UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestCheckThatMeasuredValueMinMeasuredValueMaxMeasuredValueMeasurementUnitAndUncertaintyAreExcludedFromAttributeListWhenCdoconcsf00MeaIsNotSet_18()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are excluded "
+                  @"from AttributeList when CDOCONC.S.F00 (MEA) is not set Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 1UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 7UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 8UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalFeatureDependentAttributesPeakMeasuredValuePeakMeasuredValueWindowInAttributeList_19()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in AttributeList "
+                  @"Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 3UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 4UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckThatPeakMeasuredValuePeakMeasuredValueWindowAreExcludedFromAttributeListWhenCdoconcsf04PeaIsNotSet_20()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when CDOCONC.S.F04 "
+                  @"(PEA) is not set Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 3UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 4UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalFeatureDependentAttributesAverageMeasuredValueAverageMeasuredValueWindowInAttributeList_21()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in "
+                  @"AttributeList Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 5UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 6UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestCheckThatAverageMeasuredValueAndAverageMeasuredValueWindowAreExcludedFromAttributeListWhenCdoconcsf05AvgIsNotSet_22()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
+                  @"CDOCONC.S.F05 (AVG) is not set Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 5UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 6UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalFeatureDependentAttributeLevelValueInAttributeList_23()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attribute LevelValue in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 10UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckThatLevelValueIsExcludedFromAttributeListWhenCdoconcsf01LevIsNotSet_24()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that LevelValue is excluded from AttributeList when CDOCONC.S.F01 (LEV) is not set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 10UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeEventList_25()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: EventList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("EventList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("eventList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_26()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("AcceptedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_27()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: GeneratedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_CDOCONC_2_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_CDOCONC_2_1()
+        : TestCommandBridge("Test_TC_CDOCONC_2_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_CDOCONC_2_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_CDOCONC_2_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_CDOCONC_2_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads from the DUT the MinMeasuredValue attribute.\n");
+            if (ShouldSkip("CDOCONC.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMinMeasuredValueAttribute_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads from the DUT the MaxMeasuredValue attribute.\n");
+            if (ShouldSkip("CDOCONC.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMaxMeasuredValueAttribute_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads from the DUT the MeasuredValue attribute.\n");
+            if (ShouldSkip("CDOCONC.S.A0000")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMeasuredValueAttribute_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads from the DUT the PeakMeasuredValue attribute.\n");
+            if (ShouldSkip("CDOCONC.S.A0003")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutThePeakMeasuredValueAttribute_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads from the DUT the PeakMeasuredValueWindow attribute.\n");
+            if (ShouldSkip("CDOCONC.S.A0004")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutThePeakMeasuredValueWindowAttribute_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH reads from the DUT the AverageMeasuredValue attribute.\n");
+            if (ShouldSkip("CDOCONC.S.A0005")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheAverageMeasuredValueAttribute_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH reads from the DUT the AverageMeasuredValueWindow attribute.\n");
+            if (ShouldSkip("CDOCONC.S.A0006")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheAverageMeasuredValueWindowAttribute_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : TH reads from the DUT the MeasurementUnit attribute.\n");
+            if (ShouldSkip("CDOCONC.S.A0008")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMeasurementUnitAttribute_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : TH reads from the DUT the MeasurementMedium attribute.\n");
+            if (ShouldSkip("CDOCONC.S.A0009")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMeasurementMediumAttribute_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH reads from the DUT the LevelValue attribute.\n");
+            if (ShouldSkip("CDOCONC.S.A000a")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheLevelValueAttribute_10();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 11;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+    NSNumber * _Nullable MinMeasuredValue;
+
+    CHIP_ERROR TestThReadsFromTheDutTheMinMeasuredValueAttribute_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMinMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MinMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("minMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("minMeasuredValue", [value floatValue], 0.0f));
+            }
+            {
+                MinMeasuredValue = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+    NSNumber * _Nullable MaxMeasuredValue;
+
+    CHIP_ERROR TestThReadsFromTheDutTheMaxMeasuredValueAttribute_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMaxMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MaxMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("maxMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("maxMeasuredValue", [value floatValue], MinMeasuredValue));
+            }
+            {
+                MaxMeasuredValue = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheMeasuredValueAttribute_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("measuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("measuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("measuredValue", [value floatValue], MaxMeasuredValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutThePeakMeasuredValueAttribute_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePeakMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the PeakMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("peakMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("peakMeasuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("peakMeasuredValue", [value floatValue], MaxMeasuredValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutThePeakMeasuredValueWindowAttribute_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePeakMeasuredValueWindowWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the PeakMeasuredValueWindow attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("peakMeasuredValueWindow", "elapsed_s", "elapsed_s"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheAverageMeasuredValueAttribute_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAverageMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the AverageMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("averageMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("averageMeasuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("averageMeasuredValue", [value floatValue], MaxMeasuredValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheAverageMeasuredValueWindowAttribute_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAverageMeasuredValueWindowWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the AverageMeasuredValueWindow attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("averageMeasuredValueWindow", "elapsed_s", "elapsed_s"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheMeasurementUnitAttribute_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMeasurementUnitWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MeasurementUnit attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("measurementUnit", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("measurementUnit", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("measurementUnit", [value unsignedCharValue], 7U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheMeasurementMediumAttribute_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMeasurementMediumWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MeasurementMedium attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("measurementMedium", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("measurementMedium", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("measurementMedium", [value unsignedCharValue], 2U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheLevelValueAttribute_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                 endpointID:@(1)
+                                                                                                      queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeLevelValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the LevelValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("levelValue", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("levelValue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("levelValue", [value unsignedCharValue], 4U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_CMOCONC_1_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_CMOCONC_1_1()
+        : TestCommandBridge("Test_TC_CMOCONC_1_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_CMOCONC_1_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_CMOCONC_1_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_CMOCONC_1_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read the global attribute: ClusterRevision\n");
+            if (ShouldSkip("CMOCONC.S.Afffd")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeClusterRevision_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Given CMOCONC.S.F00(MEA) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("CMOCONC.S.Afffc && CMOCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenCmoconcsf00meaEnsureFeaturemapHasTheCorrectBitSet_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 3 : Given CMOCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("CMOCONC.S.Afffc && !CMOCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenCmoconcsf00meaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Given CMOCONC.S.F01(LEV) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("CMOCONC.S.Afffc && CMOCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenCmoconcsf01levEnsureFeaturemapHasTheCorrectBitSet_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 5 : Given CMOCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("CMOCONC.S.Afffc && !CMOCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenCmoconcsf01levIsNotSetEnsureFeaturemapHasTheCorrectBitClear_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Given CMOCONC.S.F02(MED) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("CMOCONC.S.Afffc && CMOCONC.S.F02")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenCmoconcsf02medEnsureFeaturemapHasTheCorrectBitSet_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 7 : Given CMOCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("CMOCONC.S.Afffc && !CMOCONC.S.F02")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenCmoconcsf02medIsNotSetEnsureFeaturemapHasTheCorrectBitClear_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Given CMOCONC.S.F03(CRI) ensure featuremap has the correct bits set\n");
+            if (ShouldSkip("CMOCONC.S.Afffc && CMOCONC.S.F03")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenCmoconcsf03criEnsureFeaturemapHasTheCorrectBitsSet_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 9 : Given CMOCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("CMOCONC.S.Afffc && !CMOCONC.S.F03")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenCmoconcsf03criIsNotSetEnsureFeaturemapHasTheCorrectBitClear_9();
+            break;
+        case 10:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 10 : Given CMOCONC.S.F04(PEA) ensure featuremap has the correct bits set\n");
+            if (ShouldSkip("CMOCONC.S.Afffc && CMOCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenCmoconcsf04peaEnsureFeaturemapHasTheCorrectBitsSet_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 11 : Given CMOCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("CMOCONC.S.Afffc && !CMOCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenCmoconcsf04peaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_11();
+            break;
+        case 12:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 12 : Given CMOCONC.S.F05(AVG) ensure featuremap has the correct bits set\n");
+            if (ShouldSkip("CMOCONC.S.Afffc && CMOCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenCmoconcsf05avgEnsureFeaturemapHasTheCorrectBitsSet_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 13 : Given CMOCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("CMOCONC.S.Afffc && !CMOCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenCmoconcsf05avgIsNotSetEnsureFeaturemapHasTheCorrectBitClear_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Read the global attribute: AttributeList\n");
+            if (ShouldSkip("CMOCONC.S.Afffb")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeAttributeList_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Read the optional attribute Uncertainty in AttributeList\n");
+            if (ShouldSkip("CMOCONC.S.Afffb && CMOCONC.S.A0007 && CMOCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeUncertaintyInAttributeList_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 16 : Check the optional attribute Uncertainty is excluded from AttributeList when "
+                "CMOCONC.S.A0007 is not set\n");
+            if (ShouldSkip("CMOCONC.S.Afffb && !CMOCONC.S.A0007")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckTheOptionalAttributeUncertaintyIsExcludedFromAttributeListWhenCmoconcsa0007IsNotSet_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 17 : Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, "
+                "MaxMeasuredValue and Measurement Unit in AttributeList\n");
+            if (ShouldSkip("CMOCONC.S.Afffb && CMOCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributesMeasuredValueMinMeasuredValueMaxMeasuredValueAndMeasurementUnitInAttributeList_17();
+            break;
+        case 18:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 18 : Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and "
+                "Uncertainty are excluded from AttributeList when CMOCONC.S.F00 (MEA) is not set\n");
+            if (ShouldSkip("CMOCONC.S.Afffb && !CMOCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatMeasuredValueMinMeasuredValueMaxMeasuredValueMeasurementUnitAndUncertaintyAreExcludedFromAttributeListWhenCmoconcsf00MeaIsNotSet_18();
+            break;
+        case 19:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 19 : Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow "
+                "in AttributeList\n");
+            if (ShouldSkip("CMOCONC.S.Afffb && CMOCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributesPeakMeasuredValuePeakMeasuredValueWindowInAttributeList_19();
+            break;
+        case 20:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 20 : Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when "
+                "CMOCONC.S.F04 (PEA) is not set\n");
+            if (ShouldSkip("CMOCONC.S.Afffb && !CMOCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatPeakMeasuredValuePeakMeasuredValueWindowAreExcludedFromAttributeListWhenCmoconcsf04PeaIsNotSet_20();
+            break;
+        case 21:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 21 : Read the optional, feature dependent attributes AverageMeasuredValue "
+                "AverageMeasuredValueWindow in AttributeList\n");
+            if (ShouldSkip("CMOCONC.S.Afffb && CMOCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributesAverageMeasuredValueAverageMeasuredValueWindowInAttributeList_21();
+            break;
+        case 22:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 22 : Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from "
+                "AttributeList when CMOCONC.S.F05 (AVG) is not set\n");
+            if (ShouldSkip("CMOCONC.S.Afffb && !CMOCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatAverageMeasuredValueAndAverageMeasuredValueWindowAreExcludedFromAttributeListWhenCmoconcsf05AvgIsNotSet_22();
+            break;
+        case 23:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 23 : Read the optional, feature dependent attribute LevelValue in AttributeList\n");
+            if (ShouldSkip("CMOCONC.S.Afffb && CMOCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributeLevelValueInAttributeList_23();
+            break;
+        case 24:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 24 : Check that LevelValue is excluded from AttributeList when CMOCONC.S.F01 (LEV) is not set\n");
+            if (ShouldSkip("CMOCONC.S.Afffb && !CMOCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatLevelValueIsExcludedFromAttributeListWhenCmoconcsf01LevIsNotSet_24();
+            break;
+        case 25:
+            ChipLogProgress(chipTool, " ***** Test Step 25 : Read the global attribute: EventList\n");
+            if (ShouldSkip("CMOCONC.S.Afffa")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeEventList_25();
+            break;
+        case 26:
+            ChipLogProgress(chipTool, " ***** Test Step 26 : Read the global attribute: AcceptedCommandList\n");
+            if (ShouldSkip("CMOCONC.S.Afff9")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeAcceptedCommandList_26();
+            break;
+        case 27:
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Read the global attribute: GeneratedCommandList\n");
+            if (ShouldSkip("CMOCONC.S.Afff8")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeGeneratedCommandList_27();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 28;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: ClusterRevision Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenCmoconcsf00meaEnsureFeaturemapHasTheCorrectBitSet_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given CMOCONC.S.F00(MEA) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenCmoconcsf00meaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given CMOCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenCmoconcsf01levEnsureFeaturemapHasTheCorrectBitSet_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given CMOCONC.S.F01(LEV) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenCmoconcsf01levIsNotSetEnsureFeaturemapHasTheCorrectBitClear_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given CMOCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenCmoconcsf02medEnsureFeaturemapHasTheCorrectBitSet_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given CMOCONC.S.F02(MED) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenCmoconcsf02medIsNotSetEnsureFeaturemapHasTheCorrectBitClear_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given CMOCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenCmoconcsf03criEnsureFeaturemapHasTheCorrectBitsSet_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given CMOCONC.S.F03(CRI) ensure featuremap has the correct bits set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenCmoconcsf03criIsNotSetEnsureFeaturemapHasTheCorrectBitClear_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given CMOCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenCmoconcsf04peaEnsureFeaturemapHasTheCorrectBitsSet_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given CMOCONC.S.F04(PEA) ensure featuremap has the correct bits set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenCmoconcsf04peaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_11()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given CMOCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenCmoconcsf05avgEnsureFeaturemapHasTheCorrectBitsSet_12()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given CMOCONC.S.F05(AVG) ensure featuremap has the correct bits set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenCmoconcsf05avgIsNotSetEnsureFeaturemapHasTheCorrectBitClear_13()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given CMOCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_14()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 9UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65530UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeUncertaintyInAttributeList_15()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute Uncertainty in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 7UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckTheOptionalAttributeUncertaintyIsExcludedFromAttributeListWhenCmoconcsa0007IsNotSet_16()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check the optional attribute Uncertainty is excluded from AttributeList when CMOCONC.S.A0007 is not set Error: "
+                  @"%@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 7UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestReadTheOptionalFeatureDependentAttributesMeasuredValueMinMeasuredValueMaxMeasuredValueAndMeasurementUnitInAttributeList_17()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue and "
+                  @"Measurement Unit in AttributeList Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 8UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestCheckThatMeasuredValueMinMeasuredValueMaxMeasuredValueMeasurementUnitAndUncertaintyAreExcludedFromAttributeListWhenCmoconcsf00MeaIsNotSet_18()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are excluded "
+                  @"from AttributeList when CMOCONC.S.F00 (MEA) is not set Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 1UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 7UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 8UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalFeatureDependentAttributesPeakMeasuredValuePeakMeasuredValueWindowInAttributeList_19()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in AttributeList "
+                  @"Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 3UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 4UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckThatPeakMeasuredValuePeakMeasuredValueWindowAreExcludedFromAttributeListWhenCmoconcsf04PeaIsNotSet_20()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when CMOCONC.S.F04 "
+                  @"(PEA) is not set Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 3UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 4UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalFeatureDependentAttributesAverageMeasuredValueAverageMeasuredValueWindowInAttributeList_21()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in "
+                  @"AttributeList Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 5UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 6UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestCheckThatAverageMeasuredValueAndAverageMeasuredValueWindowAreExcludedFromAttributeListWhenCmoconcsf05AvgIsNotSet_22()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
+                  @"CMOCONC.S.F05 (AVG) is not set Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 5UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 6UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalFeatureDependentAttributeLevelValueInAttributeList_23()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attribute LevelValue in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 10UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckThatLevelValueIsExcludedFromAttributeListWhenCmoconcsf01LevIsNotSet_24()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that LevelValue is excluded from AttributeList when CMOCONC.S.F01 (LEV) is not set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 10UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeEventList_25()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: EventList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("EventList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("eventList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_26()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("AcceptedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_27()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: GeneratedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_CMOCONC_2_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_CMOCONC_2_1()
+        : TestCommandBridge("Test_TC_CMOCONC_2_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_CMOCONC_2_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_CMOCONC_2_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_CMOCONC_2_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads from the DUT the MinMeasuredValue attribute.\n");
+            if (ShouldSkip("CMOCONC.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMinMeasuredValueAttribute_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads from the DUT the MaxMeasuredValue attribute.\n");
+            if (ShouldSkip("CMOCONC.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMaxMeasuredValueAttribute_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads from the DUT the MeasuredValue attribute.\n");
+            if (ShouldSkip("CMOCONC.S.A0000")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMeasuredValueAttribute_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads from the DUT the PeakMeasuredValue attribute.\n");
+            if (ShouldSkip("CMOCONC.S.A0003")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutThePeakMeasuredValueAttribute_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads from the DUT the PeakMeasuredValueWindow attribute.\n");
+            if (ShouldSkip("CMOCONC.S.A0004")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutThePeakMeasuredValueWindowAttribute_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH reads from the DUT the AverageMeasuredValue attribute.\n");
+            if (ShouldSkip("CMOCONC.S.A0005")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheAverageMeasuredValueAttribute_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH reads from the DUT the AverageMeasuredValueWindow attribute.\n");
+            if (ShouldSkip("CMOCONC.S.A0006")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheAverageMeasuredValueWindowAttribute_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : TH reads from the DUT the MeasurementUnit attribute.\n");
+            if (ShouldSkip("CMOCONC.S.A0008")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMeasurementUnitAttribute_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : TH reads from the DUT the MeasurementMedium attribute.\n");
+            if (ShouldSkip("CMOCONC.S.A0009")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMeasurementMediumAttribute_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH reads from the DUT the LevelValue attribute.\n");
+            if (ShouldSkip("CMOCONC.S.A000a")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheLevelValueAttribute_10();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 11;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+    NSNumber * _Nullable MinMeasuredValue;
+
+    CHIP_ERROR TestThReadsFromTheDutTheMinMeasuredValueAttribute_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMinMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MinMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("minMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("minMeasuredValue", [value floatValue], 0.0f));
+            }
+            {
+                MinMeasuredValue = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+    NSNumber * _Nullable MaxMeasuredValue;
+
+    CHIP_ERROR TestThReadsFromTheDutTheMaxMeasuredValueAttribute_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMaxMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MaxMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("maxMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("maxMeasuredValue", [value floatValue], MinMeasuredValue));
+            }
+            {
+                MaxMeasuredValue = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheMeasuredValueAttribute_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("measuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("measuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("measuredValue", [value floatValue], MaxMeasuredValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutThePeakMeasuredValueAttribute_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePeakMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the PeakMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("peakMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("peakMeasuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("peakMeasuredValue", [value floatValue], MaxMeasuredValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutThePeakMeasuredValueWindowAttribute_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePeakMeasuredValueWindowWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the PeakMeasuredValueWindow attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("peakMeasuredValueWindow", "elapsed_s", "elapsed_s"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheAverageMeasuredValueAttribute_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAverageMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the AverageMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("averageMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("averageMeasuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("averageMeasuredValue", [value floatValue], MaxMeasuredValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheAverageMeasuredValueWindowAttribute_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAverageMeasuredValueWindowWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the AverageMeasuredValueWindow attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("averageMeasuredValueWindow", "elapsed_s", "elapsed_s"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheMeasurementUnitAttribute_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMeasurementUnitWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MeasurementUnit attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("measurementUnit", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("measurementUnit", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("measurementUnit", [value unsignedCharValue], 7U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheMeasurementMediumAttribute_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMeasurementMediumWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MeasurementMedium attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("measurementMedium", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("measurementMedium", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("measurementMedium", [value unsignedCharValue], 2U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheLevelValueAttribute_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterCarbonMonoxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                  endpointID:@(1)
+                                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeLevelValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the LevelValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("levelValue", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("levelValue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("levelValue", [value unsignedCharValue], 4U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_FLDCONC_1_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_FLDCONC_1_1()
+        : TestCommandBridge("Test_TC_FLDCONC_1_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_FLDCONC_1_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_FLDCONC_1_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_FLDCONC_1_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read the global attribute: ClusterRevision\n");
+            if (ShouldSkip("FLDCONC.S.Afffd")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeClusterRevision_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Given FLDCONC.S.F00(MEA) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("FLDCONC.S.Afffc && FLDCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenFldconcsf00meaEnsureFeaturemapHasTheCorrectBitSet_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 3 : Given FLDCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("FLDCONC.S.Afffc && !FLDCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenFldconcsf00meaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Given FLDCONC.S.F01(LEV) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("FLDCONC.S.Afffc && FLDCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenFldconcsf01levEnsureFeaturemapHasTheCorrectBitSet_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 5 : Given FLDCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("FLDCONC.S.Afffc && !FLDCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenFldconcsf01levIsNotSetEnsureFeaturemapHasTheCorrectBitClear_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Given FLDCONC.S.F02(MED) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("FLDCONC.S.Afffc && FLDCONC.S.F02")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenFldconcsf02medEnsureFeaturemapHasTheCorrectBitSet_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 7 : Given FLDCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("FLDCONC.S.Afffc && !FLDCONC.S.F02")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenFldconcsf02medIsNotSetEnsureFeaturemapHasTheCorrectBitClear_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Given FLDCONC.S.F03(CRI) ensure featuremap has the correct bits set\n");
+            if (ShouldSkip("FLDCONC.S.Afffc && FLDCONC.S.F03")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenFldconcsf03criEnsureFeaturemapHasTheCorrectBitsSet_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 9 : Given FLDCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("FLDCONC.S.Afffc && !FLDCONC.S.F03")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenFldconcsf03criIsNotSetEnsureFeaturemapHasTheCorrectBitClear_9();
+            break;
+        case 10:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 10 : Given FLDCONC.S.F04(PEA) ensure featuremap has the correct bits set\n");
+            if (ShouldSkip("FLDCONC.S.Afffc && FLDCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenFldconcsf04peaEnsureFeaturemapHasTheCorrectBitsSet_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 11 : Given FLDCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("FLDCONC.S.Afffc && !FLDCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenFldconcsf04peaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_11();
+            break;
+        case 12:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 12 : Given FLDCONC.S.F05(AVG) ensure featuremap has the correct bits set\n");
+            if (ShouldSkip("FLDCONC.S.Afffc && FLDCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenFldconcsf05avgEnsureFeaturemapHasTheCorrectBitsSet_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 13 : Given FLDCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("FLDCONC.S.Afffc && !FLDCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenFldconcsf05avgIsNotSetEnsureFeaturemapHasTheCorrectBitClear_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Read the global attribute: AttributeList\n");
+            if (ShouldSkip("FLDCONC.S.Afffb")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeAttributeList_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Read the optional attribute Uncertainty in AttributeList\n");
+            if (ShouldSkip("FLDCONC.S.Afffb && FLDCONC.S.A0007 && FLDCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeUncertaintyInAttributeList_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 16 : Check the optional attribute Uncertainty is excluded from AttributeList when "
+                "FLDCONC.S.A0007 is not set\n");
+            if (ShouldSkip("FLDCONC.S.Afffb && !FLDCONC.S.A0007")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckTheOptionalAttributeUncertaintyIsExcludedFromAttributeListWhenFldconcsa0007IsNotSet_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 17 : Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, "
+                "MaxMeasuredValue and Measurement Unit in AttributeList\n");
+            if (ShouldSkip("FLDCONC.S.Afffb && FLDCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributesMeasuredValueMinMeasuredValueMaxMeasuredValueAndMeasurementUnitInAttributeList_17();
+            break;
+        case 18:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 18 : Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and "
+                "Uncertainty are excluded from AttributeList when FLDCONC.S.F00 (MEA) is not set\n");
+            if (ShouldSkip("FLDCONC.S.Afffb && !FLDCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatMeasuredValueMinMeasuredValueMaxMeasuredValueMeasurementUnitAndUncertaintyAreExcludedFromAttributeListWhenFldconcsf00MeaIsNotSet_18();
+            break;
+        case 19:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 19 : Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow "
+                "in AttributeList\n");
+            if (ShouldSkip("FLDCONC.S.Afffb && FLDCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributesPeakMeasuredValuePeakMeasuredValueWindowInAttributeList_19();
+            break;
+        case 20:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 20 : Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when "
+                "FLDCONC.S.F04 (PEA) is not set\n");
+            if (ShouldSkip("FLDCONC.S.Afffb && !FLDCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatPeakMeasuredValuePeakMeasuredValueWindowAreExcludedFromAttributeListWhenFldconcsf04PeaIsNotSet_20();
+            break;
+        case 21:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 21 : Read the optional, feature dependent attributes AverageMeasuredValue "
+                "AverageMeasuredValueWindow in AttributeList\n");
+            if (ShouldSkip("FLDCONC.S.Afffb && FLDCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributesAverageMeasuredValueAverageMeasuredValueWindowInAttributeList_21();
+            break;
+        case 22:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 22 : Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from "
+                "AttributeList when FLDCONC.S.F05 (AVG) is not set\n");
+            if (ShouldSkip("FLDCONC.S.Afffb && !FLDCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatAverageMeasuredValueAndAverageMeasuredValueWindowAreExcludedFromAttributeListWhenFldconcsf05AvgIsNotSet_22();
+            break;
+        case 23:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 23 : Read the optional, feature dependent attribute LevelValue in AttributeList\n");
+            if (ShouldSkip("FLDCONC.S.Afffb && FLDCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributeLevelValueInAttributeList_23();
+            break;
+        case 24:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 24 : Check that LevelValue is excluded from AttributeList when FLDCONC.S.F01 (LEV) is not set\n");
+            if (ShouldSkip("FLDCONC.S.Afffb && !FLDCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatLevelValueIsExcludedFromAttributeListWhenFldconcsf01LevIsNotSet_24();
+            break;
+        case 25:
+            ChipLogProgress(chipTool, " ***** Test Step 25 : Read the global attribute: EventList\n");
+            if (ShouldSkip("FLDCONC.S.Afffa")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeEventList_25();
+            break;
+        case 26:
+            ChipLogProgress(chipTool, " ***** Test Step 26 : Read the global attribute: AcceptedCommandList\n");
+            if (ShouldSkip("FLDCONC.S.Afff9")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeAcceptedCommandList_26();
+            break;
+        case 27:
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Read the global attribute: GeneratedCommandList\n");
+            if (ShouldSkip("FLDCONC.S.Afff8")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeGeneratedCommandList_27();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 28;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: ClusterRevision Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenFldconcsf00meaEnsureFeaturemapHasTheCorrectBitSet_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given FLDCONC.S.F00(MEA) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenFldconcsf00meaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given FLDCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenFldconcsf01levEnsureFeaturemapHasTheCorrectBitSet_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given FLDCONC.S.F01(LEV) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenFldconcsf01levIsNotSetEnsureFeaturemapHasTheCorrectBitClear_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given FLDCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenFldconcsf02medEnsureFeaturemapHasTheCorrectBitSet_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given FLDCONC.S.F02(MED) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenFldconcsf02medIsNotSetEnsureFeaturemapHasTheCorrectBitClear_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given FLDCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenFldconcsf03criEnsureFeaturemapHasTheCorrectBitsSet_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given FLDCONC.S.F03(CRI) ensure featuremap has the correct bits set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenFldconcsf03criIsNotSetEnsureFeaturemapHasTheCorrectBitClear_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given FLDCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenFldconcsf04peaEnsureFeaturemapHasTheCorrectBitsSet_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given FLDCONC.S.F04(PEA) ensure featuremap has the correct bits set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenFldconcsf04peaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_11()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given FLDCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenFldconcsf05avgEnsureFeaturemapHasTheCorrectBitsSet_12()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given FLDCONC.S.F05(AVG) ensure featuremap has the correct bits set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenFldconcsf05avgIsNotSetEnsureFeaturemapHasTheCorrectBitClear_13()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given FLDCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_14()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 9UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65530UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeUncertaintyInAttributeList_15()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute Uncertainty in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 7UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckTheOptionalAttributeUncertaintyIsExcludedFromAttributeListWhenFldconcsa0007IsNotSet_16()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check the optional attribute Uncertainty is excluded from AttributeList when FLDCONC.S.A0007 is not set Error: "
+                  @"%@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 7UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestReadTheOptionalFeatureDependentAttributesMeasuredValueMinMeasuredValueMaxMeasuredValueAndMeasurementUnitInAttributeList_17()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue and "
+                  @"Measurement Unit in AttributeList Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 8UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestCheckThatMeasuredValueMinMeasuredValueMaxMeasuredValueMeasurementUnitAndUncertaintyAreExcludedFromAttributeListWhenFldconcsf00MeaIsNotSet_18()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are excluded "
+                  @"from AttributeList when FLDCONC.S.F00 (MEA) is not set Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 1UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 7UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 8UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalFeatureDependentAttributesPeakMeasuredValuePeakMeasuredValueWindowInAttributeList_19()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in AttributeList "
+                  @"Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 3UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 4UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckThatPeakMeasuredValuePeakMeasuredValueWindowAreExcludedFromAttributeListWhenFldconcsf04PeaIsNotSet_20()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when FLDCONC.S.F04 "
+                  @"(PEA) is not set Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 3UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 4UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalFeatureDependentAttributesAverageMeasuredValueAverageMeasuredValueWindowInAttributeList_21()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in "
+                  @"AttributeList Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 5UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 6UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestCheckThatAverageMeasuredValueAndAverageMeasuredValueWindowAreExcludedFromAttributeListWhenFldconcsf05AvgIsNotSet_22()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
+                  @"FLDCONC.S.F05 (AVG) is not set Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 5UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 6UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalFeatureDependentAttributeLevelValueInAttributeList_23()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attribute LevelValue in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 10UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckThatLevelValueIsExcludedFromAttributeListWhenFldconcsf01LevIsNotSet_24()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that LevelValue is excluded from AttributeList when FLDCONC.S.F01 (LEV) is not set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 10UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeEventList_25()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: EventList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("EventList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("eventList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_26()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("AcceptedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_27()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: GeneratedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_FLDCONC_2_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_FLDCONC_2_1()
+        : TestCommandBridge("Test_TC_FLDCONC_2_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_FLDCONC_2_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_FLDCONC_2_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_FLDCONC_2_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads from the DUT the MinMeasuredValue attribute.\n");
+            if (ShouldSkip("FLDCONC.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMinMeasuredValueAttribute_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads from the DUT the MaxMeasuredValue attribute.\n");
+            if (ShouldSkip("FLDCONC.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMaxMeasuredValueAttribute_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads from the DUT the MeasuredValue attribute.\n");
+            if (ShouldSkip("FLDCONC.S.A0000")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMeasuredValueAttribute_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads from the DUT the PeakMeasuredValue attribute.\n");
+            if (ShouldSkip("FLDCONC.S.A0003")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutThePeakMeasuredValueAttribute_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads from the DUT the PeakMeasuredValueWindow attribute.\n");
+            if (ShouldSkip("FLDCONC.S.A0004")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutThePeakMeasuredValueWindowAttribute_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH reads from the DUT the AverageMeasuredValue attribute.\n");
+            if (ShouldSkip("FLDCONC.S.A0005")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheAverageMeasuredValueAttribute_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH reads from the DUT the AverageMeasuredValueWindow attribute.\n");
+            if (ShouldSkip("FLDCONC.S.A0006")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheAverageMeasuredValueWindowAttribute_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : TH reads from the DUT the MeasurementUnit attribute.\n");
+            if (ShouldSkip("FLDCONC.S.A0008")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMeasurementUnitAttribute_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : TH reads from the DUT the MeasurementMedium attribute.\n");
+            if (ShouldSkip("FLDCONC.S.A0009")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMeasurementMediumAttribute_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH reads from the DUT the LevelValue attribute.\n");
+            if (ShouldSkip("FLDCONC.S.A000a")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheLevelValueAttribute_10();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 11;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+    NSNumber * _Nullable MinMeasuredValue;
+
+    CHIP_ERROR TestThReadsFromTheDutTheMinMeasuredValueAttribute_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMinMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MinMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("minMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("minMeasuredValue", [value floatValue], 0.0f));
+            }
+            {
+                MinMeasuredValue = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+    NSNumber * _Nullable MaxMeasuredValue;
+
+    CHIP_ERROR TestThReadsFromTheDutTheMaxMeasuredValueAttribute_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMaxMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MaxMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("maxMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("maxMeasuredValue", [value floatValue], MinMeasuredValue));
+            }
+            {
+                MaxMeasuredValue = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheMeasuredValueAttribute_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("measuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("measuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("measuredValue", [value floatValue], MaxMeasuredValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutThePeakMeasuredValueAttribute_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePeakMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the PeakMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("peakMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("peakMeasuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("peakMeasuredValue", [value floatValue], MaxMeasuredValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutThePeakMeasuredValueWindowAttribute_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePeakMeasuredValueWindowWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the PeakMeasuredValueWindow attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("peakMeasuredValueWindow", "elapsed_s", "elapsed_s"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheAverageMeasuredValueAttribute_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAverageMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the AverageMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("averageMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("averageMeasuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("averageMeasuredValue", [value floatValue], MaxMeasuredValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheAverageMeasuredValueWindowAttribute_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAverageMeasuredValueWindowWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the AverageMeasuredValueWindow attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("averageMeasuredValueWindow", "elapsed_s", "elapsed_s"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheMeasurementUnitAttribute_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMeasurementUnitWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MeasurementUnit attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("measurementUnit", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("measurementUnit", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("measurementUnit", [value unsignedCharValue], 7U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheMeasurementMediumAttribute_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMeasurementMediumWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MeasurementMedium attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("measurementMedium", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("measurementMedium", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("measurementMedium", [value unsignedCharValue], 2U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheLevelValueAttribute_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFormaldehydeConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                endpointID:@(1)
+                                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeLevelValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the LevelValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("levelValue", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("levelValue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("levelValue", [value unsignedCharValue], 4U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_NDOCONC_1_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_NDOCONC_1_1()
+        : TestCommandBridge("Test_TC_NDOCONC_1_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_NDOCONC_1_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_NDOCONC_1_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_NDOCONC_1_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read the global attribute: ClusterRevision\n");
+            if (ShouldSkip("NDOCONC.S.Afffd")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeClusterRevision_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Given NDOCONC.S.F00(MEA) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("NDOCONC.S.Afffc && NDOCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenNdoconcsf00meaEnsureFeaturemapHasTheCorrectBitSet_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 3 : Given NDOCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("NDOCONC.S.Afffc && !NDOCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenNdoconcsf00meaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Given NDOCONC.S.F01(LEV) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("NDOCONC.S.Afffc && NDOCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenNdoconcsf01levEnsureFeaturemapHasTheCorrectBitSet_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 5 : Given NDOCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("NDOCONC.S.Afffc && !NDOCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenNdoconcsf01levIsNotSetEnsureFeaturemapHasTheCorrectBitClear_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Given NDOCONC.S.F02(MED) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("NDOCONC.S.Afffc && NDOCONC.S.F02")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenNdoconcsf02medEnsureFeaturemapHasTheCorrectBitSet_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 7 : Given NDOCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("NDOCONC.S.Afffc && !NDOCONC.S.F02")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenNdoconcsf02medIsNotSetEnsureFeaturemapHasTheCorrectBitClear_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Given NDOCONC.S.F03(CRI) ensure featuremap has the correct bits set\n");
+            if (ShouldSkip("NDOCONC.S.Afffc && NDOCONC.S.F03")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenNdoconcsf03criEnsureFeaturemapHasTheCorrectBitsSet_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 9 : Given NDOCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("NDOCONC.S.Afffc && !NDOCONC.S.F03")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenNdoconcsf03criIsNotSetEnsureFeaturemapHasTheCorrectBitClear_9();
+            break;
+        case 10:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 10 : Given NDOCONC.S.F04(PEA) ensure featuremap has the correct bits set\n");
+            if (ShouldSkip("NDOCONC.S.Afffc && NDOCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenNdoconcsf04peaEnsureFeaturemapHasTheCorrectBitsSet_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 11 : Given NDOCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("NDOCONC.S.Afffc && !NDOCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenNdoconcsf04peaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_11();
+            break;
+        case 12:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 12 : Given NDOCONC.S.F05(AVG) ensure featuremap has the correct bits set\n");
+            if (ShouldSkip("NDOCONC.S.Afffc && NDOCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenNdoconcsf05avgEnsureFeaturemapHasTheCorrectBitsSet_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 13 : Given NDOCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("NDOCONC.S.Afffc && !NDOCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenNdoconcsf05avgIsNotSetEnsureFeaturemapHasTheCorrectBitClear_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Read the global attribute: AttributeList\n");
+            if (ShouldSkip("NDOCONC.S.Afffb")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeAttributeList_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Read the optional attribute Uncertainty in AttributeList\n");
+            if (ShouldSkip("NDOCONC.S.Afffb && NDOCONC.S.A0007 && NDOCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeUncertaintyInAttributeList_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 16 : Check the optional attribute Uncertainty is excluded from AttributeList when "
+                "NDOCONC.S.A0007 is not set\n");
+            if (ShouldSkip("NDOCONC.S.Afffb && !NDOCONC.S.A0007")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckTheOptionalAttributeUncertaintyIsExcludedFromAttributeListWhenNdoconcsa0007IsNotSet_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 17 : Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, "
+                "MaxMeasuredValue and Measurement Unit in AttributeList\n");
+            if (ShouldSkip("NDOCONC.S.Afffb && NDOCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributesMeasuredValueMinMeasuredValueMaxMeasuredValueAndMeasurementUnitInAttributeList_17();
+            break;
+        case 18:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 18 : Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and "
+                "Uncertainty are excluded from AttributeList when NDOCONC.S.F00 (MEA) is not set\n");
+            if (ShouldSkip("NDOCONC.S.Afffb && !NDOCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatMeasuredValueMinMeasuredValueMaxMeasuredValueMeasurementUnitAndUncertaintyAreExcludedFromAttributeListWhenNdoconcsf00MeaIsNotSet_18();
+            break;
+        case 19:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 19 : Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow "
+                "in AttributeList\n");
+            if (ShouldSkip("NDOCONC.S.Afffb && NDOCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributesPeakMeasuredValuePeakMeasuredValueWindowInAttributeList_19();
+            break;
+        case 20:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 20 : Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when "
+                "NDOCONC.S.F04 (PEA) is not set\n");
+            if (ShouldSkip("NDOCONC.S.Afffb && !NDOCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatPeakMeasuredValuePeakMeasuredValueWindowAreExcludedFromAttributeListWhenNdoconcsf04PeaIsNotSet_20();
+            break;
+        case 21:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 21 : Read the optional, feature dependent attributes AverageMeasuredValue "
+                "AverageMeasuredValueWindow in AttributeList\n");
+            if (ShouldSkip("NDOCONC.S.Afffb && NDOCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributesAverageMeasuredValueAverageMeasuredValueWindowInAttributeList_21();
+            break;
+        case 22:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 22 : Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from "
+                "AttributeList when NDOCONC.S.F05 (AVG) is not set\n");
+            if (ShouldSkip("NDOCONC.S.Afffb && !NDOCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatAverageMeasuredValueAndAverageMeasuredValueWindowAreExcludedFromAttributeListWhenNdoconcsf05AvgIsNotSet_22();
+            break;
+        case 23:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 23 : Read the optional, feature dependent attribute LevelValue in AttributeList\n");
+            if (ShouldSkip("NDOCONC.S.Afffb && NDOCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributeLevelValueInAttributeList_23();
+            break;
+        case 24:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 24 : Check that LevelValue is excluded from AttributeList when NDOCONC.S.F01 (LEV) is not set\n");
+            if (ShouldSkip("NDOCONC.S.Afffb && !NDOCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatLevelValueIsExcludedFromAttributeListWhenNdoconcsf01LevIsNotSet_24();
+            break;
+        case 25:
+            ChipLogProgress(chipTool, " ***** Test Step 25 : Read the global attribute: EventList\n");
+            if (ShouldSkip("NDOCONC.S.Afffa")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeEventList_25();
+            break;
+        case 26:
+            ChipLogProgress(chipTool, " ***** Test Step 26 : Read the global attribute: AcceptedCommandList\n");
+            if (ShouldSkip("NDOCONC.S.Afff9")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeAcceptedCommandList_26();
+            break;
+        case 27:
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Read the global attribute: GeneratedCommandList\n");
+            if (ShouldSkip("NDOCONC.S.Afff8")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeGeneratedCommandList_27();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 28;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: ClusterRevision Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenNdoconcsf00meaEnsureFeaturemapHasTheCorrectBitSet_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given NDOCONC.S.F00(MEA) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenNdoconcsf00meaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given NDOCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenNdoconcsf01levEnsureFeaturemapHasTheCorrectBitSet_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given NDOCONC.S.F01(LEV) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenNdoconcsf01levIsNotSetEnsureFeaturemapHasTheCorrectBitClear_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given NDOCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenNdoconcsf02medEnsureFeaturemapHasTheCorrectBitSet_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given NDOCONC.S.F02(MED) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenNdoconcsf02medIsNotSetEnsureFeaturemapHasTheCorrectBitClear_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given NDOCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenNdoconcsf03criEnsureFeaturemapHasTheCorrectBitsSet_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given NDOCONC.S.F03(CRI) ensure featuremap has the correct bits set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenNdoconcsf03criIsNotSetEnsureFeaturemapHasTheCorrectBitClear_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given NDOCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenNdoconcsf04peaEnsureFeaturemapHasTheCorrectBitsSet_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given NDOCONC.S.F04(PEA) ensure featuremap has the correct bits set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenNdoconcsf04peaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_11()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given NDOCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenNdoconcsf05avgEnsureFeaturemapHasTheCorrectBitsSet_12()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given NDOCONC.S.F05(AVG) ensure featuremap has the correct bits set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenNdoconcsf05avgIsNotSetEnsureFeaturemapHasTheCorrectBitClear_13()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given NDOCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_14()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 9UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65530UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeUncertaintyInAttributeList_15()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute Uncertainty in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 7UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckTheOptionalAttributeUncertaintyIsExcludedFromAttributeListWhenNdoconcsa0007IsNotSet_16()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check the optional attribute Uncertainty is excluded from AttributeList when NDOCONC.S.A0007 is not set Error: "
+                  @"%@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 7UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestReadTheOptionalFeatureDependentAttributesMeasuredValueMinMeasuredValueMaxMeasuredValueAndMeasurementUnitInAttributeList_17()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue and "
+                  @"Measurement Unit in AttributeList Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 8UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestCheckThatMeasuredValueMinMeasuredValueMaxMeasuredValueMeasurementUnitAndUncertaintyAreExcludedFromAttributeListWhenNdoconcsf00MeaIsNotSet_18()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are excluded "
+                  @"from AttributeList when NDOCONC.S.F00 (MEA) is not set Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 1UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 7UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 8UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalFeatureDependentAttributesPeakMeasuredValuePeakMeasuredValueWindowInAttributeList_19()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in AttributeList "
+                  @"Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 3UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 4UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckThatPeakMeasuredValuePeakMeasuredValueWindowAreExcludedFromAttributeListWhenNdoconcsf04PeaIsNotSet_20()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when NDOCONC.S.F04 "
+                  @"(PEA) is not set Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 3UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 4UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalFeatureDependentAttributesAverageMeasuredValueAverageMeasuredValueWindowInAttributeList_21()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in "
+                  @"AttributeList Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 5UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 6UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestCheckThatAverageMeasuredValueAndAverageMeasuredValueWindowAreExcludedFromAttributeListWhenNdoconcsf05AvgIsNotSet_22()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
+                  @"NDOCONC.S.F05 (AVG) is not set Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 5UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 6UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalFeatureDependentAttributeLevelValueInAttributeList_23()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attribute LevelValue in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 10UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckThatLevelValueIsExcludedFromAttributeListWhenNdoconcsf01LevIsNotSet_24()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that LevelValue is excluded from AttributeList when NDOCONC.S.F01 (LEV) is not set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 10UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeEventList_25()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: EventList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("EventList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("eventList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_26()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("AcceptedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_27()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: GeneratedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_NDOCONC_2_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_NDOCONC_2_1()
+        : TestCommandBridge("Test_TC_NDOCONC_2_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_NDOCONC_2_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_NDOCONC_2_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_NDOCONC_2_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads from the DUT the MinMeasuredValue attribute.\n");
+            if (ShouldSkip("NDOCONC.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMinMeasuredValueAttribute_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads from the DUT the MaxMeasuredValue attribute.\n");
+            if (ShouldSkip("NDOCONC.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMaxMeasuredValueAttribute_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads from the DUT the MeasuredValue attribute.\n");
+            if (ShouldSkip("NDOCONC.S.A0000")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMeasuredValueAttribute_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads from the DUT the PeakMeasuredValue attribute.\n");
+            if (ShouldSkip("NDOCONC.S.A0003")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutThePeakMeasuredValueAttribute_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads from the DUT the PeakMeasuredValueWindow attribute.\n");
+            if (ShouldSkip("NDOCONC.S.A0004")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutThePeakMeasuredValueWindowAttribute_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH reads from the DUT the AverageMeasuredValue attribute.\n");
+            if (ShouldSkip("NDOCONC.S.A0005")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheAverageMeasuredValueAttribute_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH reads from the DUT the AverageMeasuredValueWindow attribute.\n");
+            if (ShouldSkip("NDOCONC.S.A0006")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheAverageMeasuredValueWindowAttribute_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : TH reads from the DUT the MeasurementUnit attribute.\n");
+            if (ShouldSkip("NDOCONC.S.A0008")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMeasurementUnitAttribute_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : TH reads from the DUT the MeasurementMedium attribute.\n");
+            if (ShouldSkip("NDOCONC.S.A0009")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMeasurementMediumAttribute_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH reads from the DUT the LevelValue attribute.\n");
+            if (ShouldSkip("NDOCONC.S.A000a")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheLevelValueAttribute_10();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 11;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+    NSNumber * _Nullable MinMeasuredValue;
+
+    CHIP_ERROR TestThReadsFromTheDutTheMinMeasuredValueAttribute_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMinMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MinMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("minMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("minMeasuredValue", [value floatValue], 0.0f));
+            }
+            {
+                MinMeasuredValue = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+    NSNumber * _Nullable MaxMeasuredValue;
+
+    CHIP_ERROR TestThReadsFromTheDutTheMaxMeasuredValueAttribute_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMaxMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MaxMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("maxMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("maxMeasuredValue", [value floatValue], MinMeasuredValue));
+            }
+            {
+                MaxMeasuredValue = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheMeasuredValueAttribute_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("measuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("measuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("measuredValue", [value floatValue], MaxMeasuredValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutThePeakMeasuredValueAttribute_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePeakMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the PeakMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("peakMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("peakMeasuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("peakMeasuredValue", [value floatValue], MaxMeasuredValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutThePeakMeasuredValueWindowAttribute_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePeakMeasuredValueWindowWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the PeakMeasuredValueWindow attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("peakMeasuredValueWindow", "elapsed_s", "elapsed_s"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheAverageMeasuredValueAttribute_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAverageMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the AverageMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("averageMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("averageMeasuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("averageMeasuredValue", [value floatValue], MaxMeasuredValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheAverageMeasuredValueWindowAttribute_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAverageMeasuredValueWindowWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the AverageMeasuredValueWindow attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("averageMeasuredValueWindow", "elapsed_s", "elapsed_s"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheMeasurementUnitAttribute_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMeasurementUnitWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MeasurementUnit attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("measurementUnit", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("measurementUnit", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("measurementUnit", [value unsignedCharValue], 7U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheMeasurementMediumAttribute_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMeasurementMediumWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MeasurementMedium attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("measurementMedium", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("measurementMedium", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("measurementMedium", [value unsignedCharValue], 2U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheLevelValueAttribute_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNitrogenDioxideConcentrationMeasurement alloc] initWithDevice:device
+                                                                                                   endpointID:@(1)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeLevelValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the LevelValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("levelValue", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("levelValue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("levelValue", [value unsignedCharValue], 4U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_OZCONC_1_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_OZCONC_1_1()
+        : TestCommandBridge("Test_TC_OZCONC_1_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_OZCONC_1_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_OZCONC_1_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_OZCONC_1_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read the global attribute: ClusterRevision\n");
+            if (ShouldSkip("OZCONC.S.Afffd")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeClusterRevision_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Given OZCONC.S.F00(MEA) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("OZCONC.S.Afffc && OZCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenOzconcsf00meaEnsureFeaturemapHasTheCorrectBitSet_2();
+            break;
+        case 3:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 3 : Given OZCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("OZCONC.S.Afffc && !OZCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenOzconcsf00meaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Given OZCONC.S.F01(LEV) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("OZCONC.S.Afffc && OZCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenOzconcsf01levEnsureFeaturemapHasTheCorrectBitSet_4();
+            break;
+        case 5:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 5 : Given OZCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("OZCONC.S.Afffc && !OZCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenOzconcsf01levIsNotSetEnsureFeaturemapHasTheCorrectBitClear_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Given OZCONC.S.F02(MED) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("OZCONC.S.Afffc && OZCONC.S.F02")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenOzconcsf02medEnsureFeaturemapHasTheCorrectBitSet_6();
+            break;
+        case 7:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 7 : Given OZCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("OZCONC.S.Afffc && !OZCONC.S.F02")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenOzconcsf02medIsNotSetEnsureFeaturemapHasTheCorrectBitClear_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Given OZCONC.S.F03(CRI) ensure featuremap has the correct bits set\n");
+            if (ShouldSkip("OZCONC.S.Afffc && OZCONC.S.F03")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenOzconcsf03criEnsureFeaturemapHasTheCorrectBitsSet_8();
+            break;
+        case 9:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 9 : Given OZCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("OZCONC.S.Afffc && !OZCONC.S.F03")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenOzconcsf03criIsNotSetEnsureFeaturemapHasTheCorrectBitClear_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Given OZCONC.S.F04(PEA) ensure featuremap has the correct bits set\n");
+            if (ShouldSkip("OZCONC.S.Afffc && OZCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenOzconcsf04peaEnsureFeaturemapHasTheCorrectBitsSet_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 11 : Given OZCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("OZCONC.S.Afffc && !OZCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenOzconcsf04peaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Given OZCONC.S.F05(AVG) ensure featuremap has the correct bits set\n");
+            if (ShouldSkip("OZCONC.S.Afffc && OZCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenOzconcsf05avgEnsureFeaturemapHasTheCorrectBitsSet_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 13 : Given OZCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("OZCONC.S.Afffc && !OZCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenOzconcsf05avgIsNotSetEnsureFeaturemapHasTheCorrectBitClear_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Read the global attribute: AttributeList\n");
+            if (ShouldSkip("OZCONC.S.Afffb")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeAttributeList_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Read the optional attribute Uncertainty in AttributeList\n");
+            if (ShouldSkip("OZCONC.S.Afffb && OZCONC.S.A0007 && OZCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeUncertaintyInAttributeList_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 16 : Check the optional attribute Uncertainty is excluded from AttributeList when OZCONC.S.A0007 "
+                "is not set\n");
+            if (ShouldSkip("OZCONC.S.Afffb && !OZCONC.S.A0007")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckTheOptionalAttributeUncertaintyIsExcludedFromAttributeListWhenOzconcsa0007IsNotSet_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 17 : Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, "
+                "MaxMeasuredValue and Measurement Unit in AttributeList\n");
+            if (ShouldSkip("OZCONC.S.Afffb && OZCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributesMeasuredValueMinMeasuredValueMaxMeasuredValueAndMeasurementUnitInAttributeList_17();
+            break;
+        case 18:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 18 : Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and "
+                "Uncertainty are excluded from AttributeList when OZCONC.S.F00 (MEA) is not set\n");
+            if (ShouldSkip("OZCONC.S.Afffb && !OZCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatMeasuredValueMinMeasuredValueMaxMeasuredValueMeasurementUnitAndUncertaintyAreExcludedFromAttributeListWhenOzconcsf00MeaIsNotSet_18();
+            break;
+        case 19:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 19 : Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow "
+                "in AttributeList\n");
+            if (ShouldSkip("OZCONC.S.Afffb && OZCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributesPeakMeasuredValuePeakMeasuredValueWindowInAttributeList_19();
+            break;
+        case 20:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 20 : Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when "
+                "OZCONC.S.F04 (PEA) is not set\n");
+            if (ShouldSkip("OZCONC.S.Afffb && !OZCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatPeakMeasuredValuePeakMeasuredValueWindowAreExcludedFromAttributeListWhenOzconcsf04PeaIsNotSet_20();
+            break;
+        case 21:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 21 : Read the optional, feature dependent attributes AverageMeasuredValue "
+                "AverageMeasuredValueWindow in AttributeList\n");
+            if (ShouldSkip("OZCONC.S.Afffb && OZCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributesAverageMeasuredValueAverageMeasuredValueWindowInAttributeList_21();
+            break;
+        case 22:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 22 : Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from "
+                "AttributeList when OZCONC.S.F05 (AVG) is not set\n");
+            if (ShouldSkip("OZCONC.S.Afffb && !OZCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatAverageMeasuredValueAndAverageMeasuredValueWindowAreExcludedFromAttributeListWhenOzconcsf05AvgIsNotSet_22();
+            break;
+        case 23:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 23 : Read the optional, feature dependent attribute LevelValue in AttributeList\n");
+            if (ShouldSkip("OZCONC.S.Afffb && OZCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributeLevelValueInAttributeList_23();
+            break;
+        case 24:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 24 : Check that LevelValue is excluded from AttributeList when OZCONC.S.F01 (LEV) is not set\n");
+            if (ShouldSkip("OZCONC.S.Afffb && !OZCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatLevelValueIsExcludedFromAttributeListWhenOzconcsf01LevIsNotSet_24();
+            break;
+        case 25:
+            ChipLogProgress(chipTool, " ***** Test Step 25 : Read the global attribute: EventList\n");
+            if (ShouldSkip("OZCONC.S.Afffa")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeEventList_25();
+            break;
+        case 26:
+            ChipLogProgress(chipTool, " ***** Test Step 26 : Read the global attribute: AcceptedCommandList\n");
+            if (ShouldSkip("OZCONC.S.Afff9")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeAcceptedCommandList_26();
+            break;
+        case 27:
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Read the global attribute: GeneratedCommandList\n");
+            if (ShouldSkip("OZCONC.S.Afff8")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeGeneratedCommandList_27();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 28;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: ClusterRevision Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenOzconcsf00meaEnsureFeaturemapHasTheCorrectBitSet_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given OZCONC.S.F00(MEA) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenOzconcsf00meaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given OZCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenOzconcsf01levEnsureFeaturemapHasTheCorrectBitSet_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given OZCONC.S.F01(LEV) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenOzconcsf01levIsNotSetEnsureFeaturemapHasTheCorrectBitClear_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given OZCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenOzconcsf02medEnsureFeaturemapHasTheCorrectBitSet_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given OZCONC.S.F02(MED) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenOzconcsf02medIsNotSetEnsureFeaturemapHasTheCorrectBitClear_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given OZCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenOzconcsf03criEnsureFeaturemapHasTheCorrectBitsSet_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given OZCONC.S.F03(CRI) ensure featuremap has the correct bits set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenOzconcsf03criIsNotSetEnsureFeaturemapHasTheCorrectBitClear_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given OZCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenOzconcsf04peaEnsureFeaturemapHasTheCorrectBitsSet_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given OZCONC.S.F04(PEA) ensure featuremap has the correct bits set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenOzconcsf04peaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_11()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given OZCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenOzconcsf05avgEnsureFeaturemapHasTheCorrectBitsSet_12()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given OZCONC.S.F05(AVG) ensure featuremap has the correct bits set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenOzconcsf05avgIsNotSetEnsureFeaturemapHasTheCorrectBitClear_13()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given OZCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_14()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 9UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65530UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeUncertaintyInAttributeList_15()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute Uncertainty in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 7UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckTheOptionalAttributeUncertaintyIsExcludedFromAttributeListWhenOzconcsa0007IsNotSet_16()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(
+                @"Check the optional attribute Uncertainty is excluded from AttributeList when OZCONC.S.A0007 is not set Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 7UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestReadTheOptionalFeatureDependentAttributesMeasuredValueMinMeasuredValueMaxMeasuredValueAndMeasurementUnitInAttributeList_17()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue and "
+                  @"Measurement Unit in AttributeList Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 8UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestCheckThatMeasuredValueMinMeasuredValueMaxMeasuredValueMeasurementUnitAndUncertaintyAreExcludedFromAttributeListWhenOzconcsf00MeaIsNotSet_18()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are excluded "
+                  @"from AttributeList when OZCONC.S.F00 (MEA) is not set Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 1UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 7UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 8UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalFeatureDependentAttributesPeakMeasuredValuePeakMeasuredValueWindowInAttributeList_19()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in AttributeList "
+                  @"Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 3UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 4UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckThatPeakMeasuredValuePeakMeasuredValueWindowAreExcludedFromAttributeListWhenOzconcsf04PeaIsNotSet_20()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when OZCONC.S.F04 (PEA) "
+                  @"is not set Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 3UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 4UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalFeatureDependentAttributesAverageMeasuredValueAverageMeasuredValueWindowInAttributeList_21()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in "
+                  @"AttributeList Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 5UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 6UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestCheckThatAverageMeasuredValueAndAverageMeasuredValueWindowAreExcludedFromAttributeListWhenOzconcsf05AvgIsNotSet_22()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
+                  @"OZCONC.S.F05 (AVG) is not set Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 5UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 6UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalFeatureDependentAttributeLevelValueInAttributeList_23()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attribute LevelValue in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 10UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckThatLevelValueIsExcludedFromAttributeListWhenOzconcsf01LevIsNotSet_24()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that LevelValue is excluded from AttributeList when OZCONC.S.F01 (LEV) is not set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 10UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeEventList_25()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: EventList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("EventList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("eventList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_26()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("AcceptedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_27()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: GeneratedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_OZCONC_2_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_OZCONC_2_1()
+        : TestCommandBridge("Test_TC_OZCONC_2_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_OZCONC_2_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_OZCONC_2_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_OZCONC_2_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads from the DUT the MinMeasuredValue attribute.\n");
+            if (ShouldSkip("OZCONC.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMinMeasuredValueAttribute_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads from the DUT the MaxMeasuredValue attribute.\n");
+            if (ShouldSkip("OZCONC.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMaxMeasuredValueAttribute_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads from the DUT the MeasuredValue attribute.\n");
+            if (ShouldSkip("OZCONC.S.A0000")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMeasuredValueAttribute_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads from the DUT the PeakMeasuredValue attribute.\n");
+            if (ShouldSkip("OZCONC.S.A0003")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutThePeakMeasuredValueAttribute_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads from the DUT the PeakMeasuredValueWindow attribute.\n");
+            if (ShouldSkip("OZCONC.S.A0004")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutThePeakMeasuredValueWindowAttribute_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH reads from the DUT the AverageMeasuredValue attribute.\n");
+            if (ShouldSkip("OZCONC.S.A0005")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheAverageMeasuredValueAttribute_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH reads from the DUT the AverageMeasuredValueWindow attribute.\n");
+            if (ShouldSkip("OZCONC.S.A0006")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheAverageMeasuredValueWindowAttribute_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : TH reads from the DUT the MeasurementUnit attribute.\n");
+            if (ShouldSkip("OZCONC.S.A0008")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMeasurementUnitAttribute_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : TH reads from the DUT the MeasurementMedium attribute.\n");
+            if (ShouldSkip("OZCONC.S.A0009")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMeasurementMediumAttribute_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH reads from the DUT the LevelValue attribute.\n");
+            if (ShouldSkip("OZCONC.S.A000a")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheLevelValueAttribute_10();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 11;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+    NSNumber * _Nullable MinMeasuredValue;
+
+    CHIP_ERROR TestThReadsFromTheDutTheMinMeasuredValueAttribute_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMinMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MinMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("minMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("minMeasuredValue", [value floatValue], 0.0f));
+            }
+            {
+                MinMeasuredValue = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+    NSNumber * _Nullable MaxMeasuredValue;
+
+    CHIP_ERROR TestThReadsFromTheDutTheMaxMeasuredValueAttribute_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMaxMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MaxMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("maxMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("maxMeasuredValue", [value floatValue], MinMeasuredValue));
+            }
+            {
+                MaxMeasuredValue = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheMeasuredValueAttribute_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("measuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("measuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("measuredValue", [value floatValue], MaxMeasuredValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutThePeakMeasuredValueAttribute_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePeakMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the PeakMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("peakMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("peakMeasuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("peakMeasuredValue", [value floatValue], MaxMeasuredValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutThePeakMeasuredValueWindowAttribute_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePeakMeasuredValueWindowWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the PeakMeasuredValueWindow attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("peakMeasuredValueWindow", "elapsed_s", "elapsed_s"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheAverageMeasuredValueAttribute_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAverageMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the AverageMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("averageMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("averageMeasuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("averageMeasuredValue", [value floatValue], MaxMeasuredValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheAverageMeasuredValueWindowAttribute_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAverageMeasuredValueWindowWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the AverageMeasuredValueWindow attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("averageMeasuredValueWindow", "elapsed_s", "elapsed_s"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheMeasurementUnitAttribute_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMeasurementUnitWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MeasurementUnit attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("measurementUnit", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("measurementUnit", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("measurementUnit", [value unsignedCharValue], 7U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheMeasurementMediumAttribute_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMeasurementMediumWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MeasurementMedium attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("measurementMedium", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("measurementMedium", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("measurementMedium", [value unsignedCharValue], 2U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheLevelValueAttribute_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOzoneConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeLevelValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the LevelValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("levelValue", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("levelValue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("levelValue", [value unsignedCharValue], 4U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_PMHCONC_1_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_PMHCONC_1_1()
+        : TestCommandBridge("Test_TC_PMHCONC_1_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_PMHCONC_1_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_PMHCONC_1_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_PMHCONC_1_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read the global attribute: ClusterRevision\n");
+            if (ShouldSkip("PMHCONC.S.Afffd")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeClusterRevision_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Given PMHCONC.S.F00(MEA) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("PMHCONC.S.Afffc && PMHCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmhconcsf00meaEnsureFeaturemapHasTheCorrectBitSet_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 3 : Given PMHCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("PMHCONC.S.Afffc && !PMHCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmhconcsf00meaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Given PMHCONC.S.F01(LEV) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("PMHCONC.S.Afffc && PMHCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmhconcsf01levEnsureFeaturemapHasTheCorrectBitSet_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 5 : Given PMHCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("PMHCONC.S.Afffc && !PMHCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmhconcsf01levIsNotSetEnsureFeaturemapHasTheCorrectBitClear_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Given PMHCONC.S.F02(MED) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("PMHCONC.S.Afffc && PMHCONC.S.F02")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmhconcsf02medEnsureFeaturemapHasTheCorrectBitSet_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 7 : Given PMHCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("PMHCONC.S.Afffc && !PMHCONC.S.F02")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmhconcsf02medIsNotSetEnsureFeaturemapHasTheCorrectBitClear_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Given PMHCONC.S.F03(CRI) ensure featuremap has the correct bits set\n");
+            if (ShouldSkip("PMHCONC.S.Afffc && PMHCONC.S.F03")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmhconcsf03criEnsureFeaturemapHasTheCorrectBitsSet_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 9 : Given PMHCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("PMHCONC.S.Afffc && !PMHCONC.S.F03")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmhconcsf03criIsNotSetEnsureFeaturemapHasTheCorrectBitClear_9();
+            break;
+        case 10:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 10 : Given PMHCONC.S.F04(PEA) ensure featuremap has the correct bits set\n");
+            if (ShouldSkip("PMHCONC.S.Afffc && PMHCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmhconcsf04peaEnsureFeaturemapHasTheCorrectBitsSet_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 11 : Given PMHCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("PMHCONC.S.Afffc && !PMHCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmhconcsf04peaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_11();
+            break;
+        case 12:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 12 : Given PMHCONC.S.F05(AVG) ensure featuremap has the correct bits set\n");
+            if (ShouldSkip("PMHCONC.S.Afffc && PMHCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmhconcsf05avgEnsureFeaturemapHasTheCorrectBitsSet_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 13 : Given PMHCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("PMHCONC.S.Afffc && !PMHCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmhconcsf05avgIsNotSetEnsureFeaturemapHasTheCorrectBitClear_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Read the global attribute: AttributeList\n");
+            if (ShouldSkip("PMHCONC.S.Afffb")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeAttributeList_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Read the optional attribute Uncertainty in AttributeList\n");
+            if (ShouldSkip("PMHCONC.S.Afffb && PMHCONC.S.A0007 && PMHCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeUncertaintyInAttributeList_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 16 : Check the optional attribute Uncertainty is excluded from AttributeList when "
+                "PMHCONC.S.A0007 is not set\n");
+            if (ShouldSkip("PMHCONC.S.Afffb && !PMHCONC.S.A0007")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckTheOptionalAttributeUncertaintyIsExcludedFromAttributeListWhenPmhconcsa0007IsNotSet_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 17 : Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, "
+                "MaxMeasuredValue and Measurement Unit in AttributeList\n");
+            if (ShouldSkip("PMHCONC.S.Afffb && PMHCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributesMeasuredValueMinMeasuredValueMaxMeasuredValueAndMeasurementUnitInAttributeList_17();
+            break;
+        case 18:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 18 : Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and "
+                "Uncertainty are excluded from AttributeList when PMHCONC.S.F00 (MEA) is not set\n");
+            if (ShouldSkip("PMHCONC.S.Afffb && !PMHCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatMeasuredValueMinMeasuredValueMaxMeasuredValueMeasurementUnitAndUncertaintyAreExcludedFromAttributeListWhenPmhconcsf00MeaIsNotSet_18();
+            break;
+        case 19:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 19 : Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow "
+                "in AttributeList\n");
+            if (ShouldSkip("PMHCONC.S.Afffb && PMHCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributesPeakMeasuredValuePeakMeasuredValueWindowInAttributeList_19();
+            break;
+        case 20:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 20 : Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when "
+                "PMHCONC.S.F04 (PEA) is not set\n");
+            if (ShouldSkip("PMHCONC.S.Afffb && !PMHCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatPeakMeasuredValuePeakMeasuredValueWindowAreExcludedFromAttributeListWhenPmhconcsf04PeaIsNotSet_20();
+            break;
+        case 21:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 21 : Read the optional, feature dependent attributes AverageMeasuredValue "
+                "AverageMeasuredValueWindow in AttributeList\n");
+            if (ShouldSkip("PMHCONC.S.Afffb && PMHCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributesAverageMeasuredValueAverageMeasuredValueWindowInAttributeList_21();
+            break;
+        case 22:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 22 : Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from "
+                "AttributeList when PMHCONC.S.F05 (AVG) is not set\n");
+            if (ShouldSkip("PMHCONC.S.Afffb && !PMHCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatAverageMeasuredValueAndAverageMeasuredValueWindowAreExcludedFromAttributeListWhenPmhconcsf05AvgIsNotSet_22();
+            break;
+        case 23:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 23 : Read the optional, feature dependent attribute LevelValue in AttributeList\n");
+            if (ShouldSkip("PMHCONC.S.Afffb && PMHCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributeLevelValueInAttributeList_23();
+            break;
+        case 24:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 24 : Check that LevelValue is excluded from AttributeList when PMHCONC.S.F01 (LEV) is not set\n");
+            if (ShouldSkip("PMHCONC.S.Afffb && !PMHCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatLevelValueIsExcludedFromAttributeListWhenPmhconcsf01LevIsNotSet_24();
+            break;
+        case 25:
+            ChipLogProgress(chipTool, " ***** Test Step 25 : Read the global attribute: EventList\n");
+            if (ShouldSkip("PMHCONC.S.Afffa")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeEventList_25();
+            break;
+        case 26:
+            ChipLogProgress(chipTool, " ***** Test Step 26 : Read the global attribute: AcceptedCommandList\n");
+            if (ShouldSkip("PMHCONC.S.Afff9")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeAcceptedCommandList_26();
+            break;
+        case 27:
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Read the global attribute: GeneratedCommandList\n");
+            if (ShouldSkip("PMHCONC.S.Afff8")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeGeneratedCommandList_27();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 28;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: ClusterRevision Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmhconcsf00meaEnsureFeaturemapHasTheCorrectBitSet_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMHCONC.S.F00(MEA) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmhconcsf00meaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMHCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmhconcsf01levEnsureFeaturemapHasTheCorrectBitSet_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMHCONC.S.F01(LEV) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmhconcsf01levIsNotSetEnsureFeaturemapHasTheCorrectBitClear_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMHCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmhconcsf02medEnsureFeaturemapHasTheCorrectBitSet_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMHCONC.S.F02(MED) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmhconcsf02medIsNotSetEnsureFeaturemapHasTheCorrectBitClear_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMHCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmhconcsf03criEnsureFeaturemapHasTheCorrectBitsSet_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMHCONC.S.F03(CRI) ensure featuremap has the correct bits set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmhconcsf03criIsNotSetEnsureFeaturemapHasTheCorrectBitClear_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMHCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmhconcsf04peaEnsureFeaturemapHasTheCorrectBitsSet_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMHCONC.S.F04(PEA) ensure featuremap has the correct bits set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmhconcsf04peaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_11()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMHCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmhconcsf05avgEnsureFeaturemapHasTheCorrectBitsSet_12()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMHCONC.S.F05(AVG) ensure featuremap has the correct bits set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmhconcsf05avgIsNotSetEnsureFeaturemapHasTheCorrectBitClear_13()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMHCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_14()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 9UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65530UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeUncertaintyInAttributeList_15()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute Uncertainty in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 7UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckTheOptionalAttributeUncertaintyIsExcludedFromAttributeListWhenPmhconcsa0007IsNotSet_16()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check the optional attribute Uncertainty is excluded from AttributeList when PMHCONC.S.A0007 is not set Error: "
+                  @"%@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 7UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestReadTheOptionalFeatureDependentAttributesMeasuredValueMinMeasuredValueMaxMeasuredValueAndMeasurementUnitInAttributeList_17()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue and "
+                  @"Measurement Unit in AttributeList Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 8UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestCheckThatMeasuredValueMinMeasuredValueMaxMeasuredValueMeasurementUnitAndUncertaintyAreExcludedFromAttributeListWhenPmhconcsf00MeaIsNotSet_18()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are excluded "
+                  @"from AttributeList when PMHCONC.S.F00 (MEA) is not set Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 1UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 7UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 8UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalFeatureDependentAttributesPeakMeasuredValuePeakMeasuredValueWindowInAttributeList_19()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in AttributeList "
+                  @"Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 3UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 4UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckThatPeakMeasuredValuePeakMeasuredValueWindowAreExcludedFromAttributeListWhenPmhconcsf04PeaIsNotSet_20()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when PMHCONC.S.F04 "
+                  @"(PEA) is not set Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 3UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 4UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalFeatureDependentAttributesAverageMeasuredValueAverageMeasuredValueWindowInAttributeList_21()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in "
+                  @"AttributeList Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 5UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 6UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestCheckThatAverageMeasuredValueAndAverageMeasuredValueWindowAreExcludedFromAttributeListWhenPmhconcsf05AvgIsNotSet_22()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
+                  @"PMHCONC.S.F05 (AVG) is not set Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 5UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 6UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalFeatureDependentAttributeLevelValueInAttributeList_23()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attribute LevelValue in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 10UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckThatLevelValueIsExcludedFromAttributeListWhenPmhconcsf01LevIsNotSet_24()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that LevelValue is excluded from AttributeList when PMHCONC.S.F01 (LEV) is not set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 10UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeEventList_25()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: EventList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("EventList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("eventList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_26()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("AcceptedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_27()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: GeneratedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_PMHCONC_2_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_PMHCONC_2_1()
+        : TestCommandBridge("Test_TC_PMHCONC_2_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_PMHCONC_2_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_PMHCONC_2_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_PMHCONC_2_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads from the DUT the MinMeasuredValue attribute.\n");
+            if (ShouldSkip("PMHCONC.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMinMeasuredValueAttribute_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads from the DUT the MaxMeasuredValue attribute.\n");
+            if (ShouldSkip("PMHCONC.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMaxMeasuredValueAttribute_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads from the DUT the MeasuredValue attribute.\n");
+            if (ShouldSkip("PMHCONC.S.A0000")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMeasuredValueAttribute_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads from the DUT the PeakMeasuredValue attribute.\n");
+            if (ShouldSkip("PMHCONC.S.A0003")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutThePeakMeasuredValueAttribute_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads from the DUT the PeakMeasuredValueWindow attribute.\n");
+            if (ShouldSkip("PMHCONC.S.A0004")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutThePeakMeasuredValueWindowAttribute_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH reads from the DUT the AverageMeasuredValue attribute.\n");
+            if (ShouldSkip("PMHCONC.S.A0005")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheAverageMeasuredValueAttribute_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH reads from the DUT the AverageMeasuredValueWindow attribute.\n");
+            if (ShouldSkip("PMHCONC.S.A0006")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheAverageMeasuredValueWindowAttribute_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : TH reads from the DUT the MeasurementUnit attribute.\n");
+            if (ShouldSkip("PMHCONC.S.A0008")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMeasurementUnitAttribute_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : TH reads from the DUT the MeasurementMedium attribute.\n");
+            if (ShouldSkip("PMHCONC.S.A0009")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMeasurementMediumAttribute_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH reads from the DUT the LevelValue attribute.\n");
+            if (ShouldSkip("PMHCONC.S.A000a")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheLevelValueAttribute_10();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 11;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+    NSNumber * _Nullable MinMeasuredValue;
+
+    CHIP_ERROR TestThReadsFromTheDutTheMinMeasuredValueAttribute_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMinMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MinMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("minMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("minMeasuredValue", [value floatValue], 0.0f));
+            }
+            {
+                MinMeasuredValue = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+    NSNumber * _Nullable MaxMeasuredValue;
+
+    CHIP_ERROR TestThReadsFromTheDutTheMaxMeasuredValueAttribute_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMaxMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MaxMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("maxMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("maxMeasuredValue", [value floatValue], MinMeasuredValue));
+            }
+            {
+                MaxMeasuredValue = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheMeasuredValueAttribute_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("measuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("measuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("measuredValue", [value floatValue], MaxMeasuredValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutThePeakMeasuredValueAttribute_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePeakMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the PeakMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("peakMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("peakMeasuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("peakMeasuredValue", [value floatValue], MaxMeasuredValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutThePeakMeasuredValueWindowAttribute_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePeakMeasuredValueWindowWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the PeakMeasuredValueWindow attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("peakMeasuredValueWindow", "elapsed_s", "elapsed_s"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheAverageMeasuredValueAttribute_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAverageMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the AverageMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("averageMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("averageMeasuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("averageMeasuredValue", [value floatValue], MaxMeasuredValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheAverageMeasuredValueWindowAttribute_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAverageMeasuredValueWindowWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the AverageMeasuredValueWindow attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("averageMeasuredValueWindow", "elapsed_s", "elapsed_s"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheMeasurementUnitAttribute_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMeasurementUnitWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MeasurementUnit attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("measurementUnit", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("measurementUnit", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("measurementUnit", [value unsignedCharValue], 7U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheMeasurementMediumAttribute_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMeasurementMediumWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MeasurementMedium attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("measurementMedium", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("measurementMedium", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("measurementMedium", [value unsignedCharValue], 2U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheLevelValueAttribute_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM1ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeLevelValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the LevelValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("levelValue", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("levelValue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("levelValue", [value unsignedCharValue], 4U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_PMICONC_1_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_PMICONC_1_1()
+        : TestCommandBridge("Test_TC_PMICONC_1_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_PMICONC_1_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_PMICONC_1_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_PMICONC_1_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read the global attribute: ClusterRevision\n");
+            if (ShouldSkip("PMICONC.S.Afffd")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeClusterRevision_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Given PMICONC.S.F00(MEA) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("PMICONC.S.Afffc && PMICONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmiconcsf00meaEnsureFeaturemapHasTheCorrectBitSet_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 3 : Given PMICONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("PMICONC.S.Afffc && !PMICONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmiconcsf00meaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Given PMICONC.S.F01(LEV) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("PMICONC.S.Afffc && PMICONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmiconcsf01levEnsureFeaturemapHasTheCorrectBitSet_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 5 : Given PMICONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("PMICONC.S.Afffc && !PMICONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmiconcsf01levIsNotSetEnsureFeaturemapHasTheCorrectBitClear_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Given PMICONC.S.F02(MED) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("PMICONC.S.Afffc && PMICONC.S.F02")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmiconcsf02medEnsureFeaturemapHasTheCorrectBitSet_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 7 : Given PMICONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("PMICONC.S.Afffc && !PMICONC.S.F02")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmiconcsf02medIsNotSetEnsureFeaturemapHasTheCorrectBitClear_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Given PMICONC.S.F03(CRI) ensure featuremap has the correct bits set\n");
+            if (ShouldSkip("PMICONC.S.Afffc && PMICONC.S.F03")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmiconcsf03criEnsureFeaturemapHasTheCorrectBitsSet_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 9 : Given PMICONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("PMICONC.S.Afffc && !PMICONC.S.F03")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmiconcsf03criIsNotSetEnsureFeaturemapHasTheCorrectBitClear_9();
+            break;
+        case 10:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 10 : Given PMICONC.S.F04(PEA) ensure featuremap has the correct bits set\n");
+            if (ShouldSkip("PMICONC.S.Afffc && PMICONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmiconcsf04peaEnsureFeaturemapHasTheCorrectBitsSet_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 11 : Given PMICONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("PMICONC.S.Afffc && !PMICONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmiconcsf04peaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_11();
+            break;
+        case 12:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 12 : Given PMICONC.S.F05(AVG) ensure featuremap has the correct bits set\n");
+            if (ShouldSkip("PMICONC.S.Afffc && PMICONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmiconcsf05avgEnsureFeaturemapHasTheCorrectBitsSet_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 13 : Given PMICONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("PMICONC.S.Afffc && !PMICONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmiconcsf05avgIsNotSetEnsureFeaturemapHasTheCorrectBitClear_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Read the global attribute: AttributeList\n");
+            if (ShouldSkip("PMICONC.S.Afffb")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeAttributeList_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Read the optional attribute Uncertainty in AttributeList\n");
+            if (ShouldSkip("PMICONC.S.Afffb && PMICONC.S.A0007 && PMICONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeUncertaintyInAttributeList_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 16 : Check the optional attribute Uncertainty is excluded from AttributeList when "
+                "PMICONC.S.A0007 is not set\n");
+            if (ShouldSkip("PMICONC.S.Afffb && !PMICONC.S.A0007")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckTheOptionalAttributeUncertaintyIsExcludedFromAttributeListWhenPmiconcsa0007IsNotSet_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 17 : Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, "
+                "MaxMeasuredValue and Measurement Unit in AttributeList\n");
+            if (ShouldSkip("PMICONC.S.Afffb && PMICONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributesMeasuredValueMinMeasuredValueMaxMeasuredValueAndMeasurementUnitInAttributeList_17();
+            break;
+        case 18:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 18 : Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and "
+                "Uncertainty are excluded from AttributeList when PMICONC.S.F00 (MEA) is not set\n");
+            if (ShouldSkip("PMICONC.S.Afffb && !PMICONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatMeasuredValueMinMeasuredValueMaxMeasuredValueMeasurementUnitAndUncertaintyAreExcludedFromAttributeListWhenPmiconcsf00MeaIsNotSet_18();
+            break;
+        case 19:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 19 : Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow "
+                "in AttributeList\n");
+            if (ShouldSkip("PMICONC.S.Afffb && PMICONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributesPeakMeasuredValuePeakMeasuredValueWindowInAttributeList_19();
+            break;
+        case 20:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 20 : Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when "
+                "PMICONC.S.F04 (PEA) is not set\n");
+            if (ShouldSkip("PMICONC.S.Afffb && !PMICONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatPeakMeasuredValuePeakMeasuredValueWindowAreExcludedFromAttributeListWhenPmiconcsf04PeaIsNotSet_20();
+            break;
+        case 21:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 21 : Read the optional, feature dependent attributes AverageMeasuredValue "
+                "AverageMeasuredValueWindow in AttributeList\n");
+            if (ShouldSkip("PMICONC.S.Afffb && PMICONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributesAverageMeasuredValueAverageMeasuredValueWindowInAttributeList_21();
+            break;
+        case 22:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 22 : Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from "
+                "AttributeList when PMICONC.S.F05 (AVG) is not set\n");
+            if (ShouldSkip("PMICONC.S.Afffb && !PMICONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatAverageMeasuredValueAndAverageMeasuredValueWindowAreExcludedFromAttributeListWhenPmiconcsf05AvgIsNotSet_22();
+            break;
+        case 23:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 23 : Read the optional, feature dependent attribute LevelValue in AttributeList\n");
+            if (ShouldSkip("PMICONC.S.Afffb && PMICONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributeLevelValueInAttributeList_23();
+            break;
+        case 24:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 24 : Check that LevelValue is excluded from AttributeList when PMICONC.S.F01 (LEV) is not set\n");
+            if (ShouldSkip("PMICONC.S.Afffb && !PMICONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatLevelValueIsExcludedFromAttributeListWhenPmiconcsf01LevIsNotSet_24();
+            break;
+        case 25:
+            ChipLogProgress(chipTool, " ***** Test Step 25 : Read the global attribute: EventList\n");
+            if (ShouldSkip("PMICONC.S.Afffa")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeEventList_25();
+            break;
+        case 26:
+            ChipLogProgress(chipTool, " ***** Test Step 26 : Read the global attribute: AcceptedCommandList\n");
+            if (ShouldSkip("PMICONC.S.Afff9")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeAcceptedCommandList_26();
+            break;
+        case 27:
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Read the global attribute: GeneratedCommandList\n");
+            if (ShouldSkip("PMICONC.S.Afff8")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeGeneratedCommandList_27();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 28;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: ClusterRevision Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmiconcsf00meaEnsureFeaturemapHasTheCorrectBitSet_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMICONC.S.F00(MEA) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmiconcsf00meaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMICONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmiconcsf01levEnsureFeaturemapHasTheCorrectBitSet_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMICONC.S.F01(LEV) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmiconcsf01levIsNotSetEnsureFeaturemapHasTheCorrectBitClear_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMICONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmiconcsf02medEnsureFeaturemapHasTheCorrectBitSet_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMICONC.S.F02(MED) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmiconcsf02medIsNotSetEnsureFeaturemapHasTheCorrectBitClear_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMICONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmiconcsf03criEnsureFeaturemapHasTheCorrectBitsSet_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMICONC.S.F03(CRI) ensure featuremap has the correct bits set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmiconcsf03criIsNotSetEnsureFeaturemapHasTheCorrectBitClear_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMICONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmiconcsf04peaEnsureFeaturemapHasTheCorrectBitsSet_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMICONC.S.F04(PEA) ensure featuremap has the correct bits set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmiconcsf04peaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_11()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMICONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmiconcsf05avgEnsureFeaturemapHasTheCorrectBitsSet_12()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMICONC.S.F05(AVG) ensure featuremap has the correct bits set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmiconcsf05avgIsNotSetEnsureFeaturemapHasTheCorrectBitClear_13()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMICONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_14()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 9UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65530UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeUncertaintyInAttributeList_15()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute Uncertainty in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 7UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckTheOptionalAttributeUncertaintyIsExcludedFromAttributeListWhenPmiconcsa0007IsNotSet_16()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check the optional attribute Uncertainty is excluded from AttributeList when PMICONC.S.A0007 is not set Error: "
+                  @"%@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 7UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestReadTheOptionalFeatureDependentAttributesMeasuredValueMinMeasuredValueMaxMeasuredValueAndMeasurementUnitInAttributeList_17()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue and "
+                  @"Measurement Unit in AttributeList Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 8UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestCheckThatMeasuredValueMinMeasuredValueMaxMeasuredValueMeasurementUnitAndUncertaintyAreExcludedFromAttributeListWhenPmiconcsf00MeaIsNotSet_18()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are excluded "
+                  @"from AttributeList when PMICONC.S.F00 (MEA) is not set Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 1UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 7UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 8UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalFeatureDependentAttributesPeakMeasuredValuePeakMeasuredValueWindowInAttributeList_19()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in AttributeList "
+                  @"Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 3UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 4UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckThatPeakMeasuredValuePeakMeasuredValueWindowAreExcludedFromAttributeListWhenPmiconcsf04PeaIsNotSet_20()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when PMICONC.S.F04 "
+                  @"(PEA) is not set Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 3UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 4UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalFeatureDependentAttributesAverageMeasuredValueAverageMeasuredValueWindowInAttributeList_21()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in "
+                  @"AttributeList Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 5UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 6UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestCheckThatAverageMeasuredValueAndAverageMeasuredValueWindowAreExcludedFromAttributeListWhenPmiconcsf05AvgIsNotSet_22()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
+                  @"PMICONC.S.F05 (AVG) is not set Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 5UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 6UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalFeatureDependentAttributeLevelValueInAttributeList_23()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attribute LevelValue in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 10UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckThatLevelValueIsExcludedFromAttributeListWhenPmiconcsf01LevIsNotSet_24()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that LevelValue is excluded from AttributeList when PMICONC.S.F01 (LEV) is not set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 10UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeEventList_25()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: EventList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("EventList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("eventList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_26()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("AcceptedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_27()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: GeneratedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_PMICONC_2_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_PMICONC_2_1()
+        : TestCommandBridge("Test_TC_PMICONC_2_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_PMICONC_2_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_PMICONC_2_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_PMICONC_2_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads from the DUT the MinMeasuredValue attribute.\n");
+            if (ShouldSkip("PMICONC.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMinMeasuredValueAttribute_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads from the DUT the MaxMeasuredValue attribute.\n");
+            if (ShouldSkip("PMICONC.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMaxMeasuredValueAttribute_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads from the DUT the MeasuredValue attribute.\n");
+            if (ShouldSkip("PMICONC.S.A0000")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMeasuredValueAttribute_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads from the DUT the PeakMeasuredValue attribute.\n");
+            if (ShouldSkip("PMICONC.S.A0003")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutThePeakMeasuredValueAttribute_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads from the DUT the PeakMeasuredValueWindow attribute.\n");
+            if (ShouldSkip("PMICONC.S.A0004")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutThePeakMeasuredValueWindowAttribute_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH reads from the DUT the AverageMeasuredValue attribute.\n");
+            if (ShouldSkip("PMICONC.S.A0005")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheAverageMeasuredValueAttribute_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH reads from the DUT the AverageMeasuredValueWindow attribute.\n");
+            if (ShouldSkip("PMICONC.S.A0006")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheAverageMeasuredValueWindowAttribute_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : TH reads from the DUT the MeasurementUnit attribute.\n");
+            if (ShouldSkip("PMICONC.S.A0008")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMeasurementUnitAttribute_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : TH reads from the DUT the MeasurementMedium attribute.\n");
+            if (ShouldSkip("PMICONC.S.A0009")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMeasurementMediumAttribute_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH reads from the DUT the LevelValue attribute.\n");
+            if (ShouldSkip("PMICONC.S.A000a")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheLevelValueAttribute_10();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 11;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+    NSNumber * _Nullable MinMeasuredValue;
+
+    CHIP_ERROR TestThReadsFromTheDutTheMinMeasuredValueAttribute_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMinMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MinMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("minMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("minMeasuredValue", [value floatValue], 0.0f));
+            }
+            {
+                MinMeasuredValue = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+    NSNumber * _Nullable MaxMeasuredValue;
+
+    CHIP_ERROR TestThReadsFromTheDutTheMaxMeasuredValueAttribute_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMaxMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MaxMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("maxMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("maxMeasuredValue", [value floatValue], MinMeasuredValue));
+            }
+            {
+                MaxMeasuredValue = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheMeasuredValueAttribute_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("measuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("measuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("measuredValue", [value floatValue], MaxMeasuredValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutThePeakMeasuredValueAttribute_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePeakMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the PeakMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("peakMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("peakMeasuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("peakMeasuredValue", [value floatValue], MaxMeasuredValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutThePeakMeasuredValueWindowAttribute_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePeakMeasuredValueWindowWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the PeakMeasuredValueWindow attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("peakMeasuredValueWindow", "elapsed_s", "elapsed_s"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheAverageMeasuredValueAttribute_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAverageMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the AverageMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("averageMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("averageMeasuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("averageMeasuredValue", [value floatValue], MaxMeasuredValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheAverageMeasuredValueWindowAttribute_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAverageMeasuredValueWindowWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the AverageMeasuredValueWindow attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("averageMeasuredValueWindow", "elapsed_s", "elapsed_s"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheMeasurementUnitAttribute_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMeasurementUnitWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MeasurementUnit attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("measurementUnit", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("measurementUnit", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("measurementUnit", [value unsignedCharValue], 7U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheMeasurementMediumAttribute_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMeasurementMediumWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MeasurementMedium attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("measurementMedium", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("measurementMedium", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("measurementMedium", [value unsignedCharValue], 2U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheLevelValueAttribute_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM25ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeLevelValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the LevelValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("levelValue", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("levelValue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("levelValue", [value unsignedCharValue], 4U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_PMKCONC_1_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_PMKCONC_1_1()
+        : TestCommandBridge("Test_TC_PMKCONC_1_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_PMKCONC_1_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_PMKCONC_1_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_PMKCONC_1_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read the global attribute: ClusterRevision\n");
+            if (ShouldSkip("PMKCONC.S.Afffd")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeClusterRevision_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Given PMKCONC.S.F00(MEA) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("PMKCONC.S.Afffc && PMKCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmkconcsf00meaEnsureFeaturemapHasTheCorrectBitSet_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 3 : Given PMKCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("PMKCONC.S.Afffc && !PMKCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmkconcsf00meaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Given PMKCONC.S.F01(LEV) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("PMKCONC.S.Afffc && PMKCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmkconcsf01levEnsureFeaturemapHasTheCorrectBitSet_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 5 : Given PMKCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("PMKCONC.S.Afffc && !PMKCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmkconcsf01levIsNotSetEnsureFeaturemapHasTheCorrectBitClear_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Given PMKCONC.S.F02(MED) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("PMKCONC.S.Afffc && PMKCONC.S.F02")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmkconcsf02medEnsureFeaturemapHasTheCorrectBitSet_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 7 : Given PMKCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("PMKCONC.S.Afffc && !PMKCONC.S.F02")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmkconcsf02medIsNotSetEnsureFeaturemapHasTheCorrectBitClear_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Given PMKCONC.S.F03(CRI) ensure featuremap has the correct bits set\n");
+            if (ShouldSkip("PMKCONC.S.Afffc && PMKCONC.S.F03")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmkconcsf03criEnsureFeaturemapHasTheCorrectBitsSet_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 9 : Given PMKCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("PMKCONC.S.Afffc && !PMKCONC.S.F03")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmkconcsf03criIsNotSetEnsureFeaturemapHasTheCorrectBitClear_9();
+            break;
+        case 10:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 10 : Given PMKCONC.S.F04(PEA) ensure featuremap has the correct bits set\n");
+            if (ShouldSkip("PMKCONC.S.Afffc && PMKCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmkconcsf04peaEnsureFeaturemapHasTheCorrectBitsSet_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 11 : Given PMKCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("PMKCONC.S.Afffc && !PMKCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmkconcsf04peaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_11();
+            break;
+        case 12:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 12 : Given PMKCONC.S.F05(AVG) ensure featuremap has the correct bits set\n");
+            if (ShouldSkip("PMKCONC.S.Afffc && PMKCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmkconcsf05avgEnsureFeaturemapHasTheCorrectBitsSet_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 13 : Given PMKCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("PMKCONC.S.Afffc && !PMKCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPmkconcsf05avgIsNotSetEnsureFeaturemapHasTheCorrectBitClear_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Read the global attribute: AttributeList\n");
+            if (ShouldSkip("PMKCONC.S.Afffb")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeAttributeList_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Read the optional attribute Uncertainty in AttributeList\n");
+            if (ShouldSkip("PMKCONC.S.Afffb && PMKCONC.S.A0007 && PMKCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeUncertaintyInAttributeList_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 16 : Check the optional attribute Uncertainty is excluded from AttributeList when "
+                "PMKCONC.S.A0007 is not set\n");
+            if (ShouldSkip("PMKCONC.S.Afffb && !PMKCONC.S.A0007")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckTheOptionalAttributeUncertaintyIsExcludedFromAttributeListWhenPmkconcsa0007IsNotSet_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 17 : Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, "
+                "MaxMeasuredValue and Measurement Unit in AttributeList\n");
+            if (ShouldSkip("PMKCONC.S.Afffb && PMKCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributesMeasuredValueMinMeasuredValueMaxMeasuredValueAndMeasurementUnitInAttributeList_17();
+            break;
+        case 18:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 18 : Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and "
+                "Uncertainty are excluded from AttributeList when PMKCONC.S.F00 (MEA) is not set\n");
+            if (ShouldSkip("PMKCONC.S.Afffb && !PMKCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatMeasuredValueMinMeasuredValueMaxMeasuredValueMeasurementUnitAndUncertaintyAreExcludedFromAttributeListWhenPmkconcsf00MeaIsNotSet_18();
+            break;
+        case 19:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 19 : Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow "
+                "in AttributeList\n");
+            if (ShouldSkip("PMKCONC.S.Afffb && PMKCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributesPeakMeasuredValuePeakMeasuredValueWindowInAttributeList_19();
+            break;
+        case 20:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 20 : Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when "
+                "PMKCONC.S.F04 (PEA) is not set\n");
+            if (ShouldSkip("PMKCONC.S.Afffb && !PMKCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatPeakMeasuredValuePeakMeasuredValueWindowAreExcludedFromAttributeListWhenPmkconcsf04PeaIsNotSet_20();
+            break;
+        case 21:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 21 : Read the optional, feature dependent attributes AverageMeasuredValue "
+                "AverageMeasuredValueWindow in AttributeList\n");
+            if (ShouldSkip("PMKCONC.S.Afffb && PMKCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributesAverageMeasuredValueAverageMeasuredValueWindowInAttributeList_21();
+            break;
+        case 22:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 22 : Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from "
+                "AttributeList when PMKCONC.S.F05 (AVG) is not set\n");
+            if (ShouldSkip("PMKCONC.S.Afffb && !PMKCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatAverageMeasuredValueAndAverageMeasuredValueWindowAreExcludedFromAttributeListWhenPmkconcsf05AvgIsNotSet_22();
+            break;
+        case 23:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 23 : Read the optional, feature dependent attribute LevelValue in AttributeList\n");
+            if (ShouldSkip("PMKCONC.S.Afffb && PMKCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributeLevelValueInAttributeList_23();
+            break;
+        case 24:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 24 : Check that LevelValue is excluded from AttributeList when PMKCONC.S.F01 (LEV) is not set\n");
+            if (ShouldSkip("PMKCONC.S.Afffb && !PMKCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatLevelValueIsExcludedFromAttributeListWhenPmkconcsf01LevIsNotSet_24();
+            break;
+        case 25:
+            ChipLogProgress(chipTool, " ***** Test Step 25 : Read the global attribute: EventList\n");
+            if (ShouldSkip("PMKCONC.S.Afffa")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeEventList_25();
+            break;
+        case 26:
+            ChipLogProgress(chipTool, " ***** Test Step 26 : Read the global attribute: AcceptedCommandList\n");
+            if (ShouldSkip("PMKCONC.S.Afff9")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeAcceptedCommandList_26();
+            break;
+        case 27:
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Read the global attribute: GeneratedCommandList\n");
+            if (ShouldSkip("PMKCONC.S.Afff8")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeGeneratedCommandList_27();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 28;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: ClusterRevision Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmkconcsf00meaEnsureFeaturemapHasTheCorrectBitSet_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMKCONC.S.F00(MEA) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmkconcsf00meaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMKCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmkconcsf01levEnsureFeaturemapHasTheCorrectBitSet_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMKCONC.S.F01(LEV) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmkconcsf01levIsNotSetEnsureFeaturemapHasTheCorrectBitClear_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMKCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmkconcsf02medEnsureFeaturemapHasTheCorrectBitSet_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMKCONC.S.F02(MED) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmkconcsf02medIsNotSetEnsureFeaturemapHasTheCorrectBitClear_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMKCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmkconcsf03criEnsureFeaturemapHasTheCorrectBitsSet_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMKCONC.S.F03(CRI) ensure featuremap has the correct bits set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmkconcsf03criIsNotSetEnsureFeaturemapHasTheCorrectBitClear_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMKCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmkconcsf04peaEnsureFeaturemapHasTheCorrectBitsSet_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMKCONC.S.F04(PEA) ensure featuremap has the correct bits set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmkconcsf04peaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_11()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMKCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmkconcsf05avgEnsureFeaturemapHasTheCorrectBitsSet_12()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMKCONC.S.F05(AVG) ensure featuremap has the correct bits set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPmkconcsf05avgIsNotSetEnsureFeaturemapHasTheCorrectBitClear_13()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PMKCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_14()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 9UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65530UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeUncertaintyInAttributeList_15()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute Uncertainty in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 7UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckTheOptionalAttributeUncertaintyIsExcludedFromAttributeListWhenPmkconcsa0007IsNotSet_16()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check the optional attribute Uncertainty is excluded from AttributeList when PMKCONC.S.A0007 is not set Error: "
+                  @"%@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 7UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestReadTheOptionalFeatureDependentAttributesMeasuredValueMinMeasuredValueMaxMeasuredValueAndMeasurementUnitInAttributeList_17()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue and "
+                  @"Measurement Unit in AttributeList Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 8UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestCheckThatMeasuredValueMinMeasuredValueMaxMeasuredValueMeasurementUnitAndUncertaintyAreExcludedFromAttributeListWhenPmkconcsf00MeaIsNotSet_18()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are excluded "
+                  @"from AttributeList when PMKCONC.S.F00 (MEA) is not set Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 1UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 7UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 8UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalFeatureDependentAttributesPeakMeasuredValuePeakMeasuredValueWindowInAttributeList_19()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in AttributeList "
+                  @"Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 3UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 4UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckThatPeakMeasuredValuePeakMeasuredValueWindowAreExcludedFromAttributeListWhenPmkconcsf04PeaIsNotSet_20()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when PMKCONC.S.F04 "
+                  @"(PEA) is not set Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 3UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 4UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalFeatureDependentAttributesAverageMeasuredValueAverageMeasuredValueWindowInAttributeList_21()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in "
+                  @"AttributeList Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 5UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 6UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestCheckThatAverageMeasuredValueAndAverageMeasuredValueWindowAreExcludedFromAttributeListWhenPmkconcsf05AvgIsNotSet_22()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
+                  @"PMKCONC.S.F05 (AVG) is not set Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 5UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 6UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalFeatureDependentAttributeLevelValueInAttributeList_23()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attribute LevelValue in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 10UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckThatLevelValueIsExcludedFromAttributeListWhenPmkconcsf01LevIsNotSet_24()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that LevelValue is excluded from AttributeList when PMKCONC.S.F01 (LEV) is not set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 10UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeEventList_25()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: EventList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("EventList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("eventList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_26()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("AcceptedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_27()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: GeneratedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_PMKCONC_2_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_PMKCONC_2_1()
+        : TestCommandBridge("Test_TC_PMKCONC_2_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_PMKCONC_2_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_PMKCONC_2_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_PMKCONC_2_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads from the DUT the MinMeasuredValue attribute.\n");
+            if (ShouldSkip("PMKCONC.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMinMeasuredValueAttribute_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads from the DUT the MaxMeasuredValue attribute.\n");
+            if (ShouldSkip("PMKCONC.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMaxMeasuredValueAttribute_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads from the DUT the MeasuredValue attribute.\n");
+            if (ShouldSkip("PMKCONC.S.A0000")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMeasuredValueAttribute_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads from the DUT the PeakMeasuredValue attribute.\n");
+            if (ShouldSkip("PMKCONC.S.A0003")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutThePeakMeasuredValueAttribute_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads from the DUT the PeakMeasuredValueWindow attribute.\n");
+            if (ShouldSkip("PMKCONC.S.A0004")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutThePeakMeasuredValueWindowAttribute_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH reads from the DUT the AverageMeasuredValue attribute.\n");
+            if (ShouldSkip("PMKCONC.S.A0005")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheAverageMeasuredValueAttribute_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH reads from the DUT the AverageMeasuredValueWindow attribute.\n");
+            if (ShouldSkip("PMKCONC.S.A0006")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheAverageMeasuredValueWindowAttribute_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : TH reads from the DUT the MeasurementUnit attribute.\n");
+            if (ShouldSkip("PMKCONC.S.A0008")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMeasurementUnitAttribute_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : TH reads from the DUT the MeasurementMedium attribute.\n");
+            if (ShouldSkip("PMKCONC.S.A0009")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMeasurementMediumAttribute_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH reads from the DUT the LevelValue attribute.\n");
+            if (ShouldSkip("PMKCONC.S.A000a")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheLevelValueAttribute_10();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 11;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+    NSNumber * _Nullable MinMeasuredValue;
+
+    CHIP_ERROR TestThReadsFromTheDutTheMinMeasuredValueAttribute_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMinMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MinMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("minMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("minMeasuredValue", [value floatValue], 0.0f));
+            }
+            {
+                MinMeasuredValue = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+    NSNumber * _Nullable MaxMeasuredValue;
+
+    CHIP_ERROR TestThReadsFromTheDutTheMaxMeasuredValueAttribute_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMaxMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MaxMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("maxMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("maxMeasuredValue", [value floatValue], MinMeasuredValue));
+            }
+            {
+                MaxMeasuredValue = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheMeasuredValueAttribute_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("measuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("measuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("measuredValue", [value floatValue], MaxMeasuredValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutThePeakMeasuredValueAttribute_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePeakMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the PeakMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("peakMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("peakMeasuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("peakMeasuredValue", [value floatValue], MaxMeasuredValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutThePeakMeasuredValueWindowAttribute_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePeakMeasuredValueWindowWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the PeakMeasuredValueWindow attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("peakMeasuredValueWindow", "elapsed_s", "elapsed_s"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheAverageMeasuredValueAttribute_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAverageMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the AverageMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("averageMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("averageMeasuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("averageMeasuredValue", [value floatValue], MaxMeasuredValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheAverageMeasuredValueWindowAttribute_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAverageMeasuredValueWindowWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the AverageMeasuredValueWindow attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("averageMeasuredValueWindow", "elapsed_s", "elapsed_s"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheMeasurementUnitAttribute_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMeasurementUnitWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MeasurementUnit attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("measurementUnit", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("measurementUnit", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("measurementUnit", [value unsignedCharValue], 7U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheMeasurementMediumAttribute_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMeasurementMediumWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MeasurementMedium attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("measurementMedium", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("measurementMedium", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("measurementMedium", [value unsignedCharValue], 2U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheLevelValueAttribute_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPM10ConcentrationMeasurement alloc] initWithDevice:device
+                                                                                        endpointID:@(1)
+                                                                                             queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeLevelValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the LevelValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("levelValue", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("levelValue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("levelValue", [value unsignedCharValue], 4U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_RNCONC_1_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_RNCONC_1_1()
+        : TestCommandBridge("Test_TC_RNCONC_1_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_RNCONC_1_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_RNCONC_1_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_RNCONC_1_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read the global attribute: ClusterRevision\n");
+            if (ShouldSkip("RNCONC.S.Afffd")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeClusterRevision_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Given RNCONC.S.F00(MEA) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("RNCONC.S.Afffc && RNCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenRnconcsf00meaEnsureFeaturemapHasTheCorrectBitSet_2();
+            break;
+        case 3:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 3 : Given RNCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("RNCONC.S.Afffc && !RNCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenRnconcsf00meaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Given RNCONC.S.F01(LEV) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("RNCONC.S.Afffc && RNCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenRnconcsf01levEnsureFeaturemapHasTheCorrectBitSet_4();
+            break;
+        case 5:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 5 : Given RNCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("RNCONC.S.Afffc && !RNCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenRnconcsf01levIsNotSetEnsureFeaturemapHasTheCorrectBitClear_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Given RNCONC.S.F02(MED) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("RNCONC.S.Afffc && RNCONC.S.F02")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenRnconcsf02medEnsureFeaturemapHasTheCorrectBitSet_6();
+            break;
+        case 7:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 7 : Given RNCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("RNCONC.S.Afffc && !RNCONC.S.F02")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenRnconcsf02medIsNotSetEnsureFeaturemapHasTheCorrectBitClear_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Given RNCONC.S.F03(CRI) ensure featuremap has the correct bits set\n");
+            if (ShouldSkip("RNCONC.S.Afffc && RNCONC.S.F03")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenRnconcsf03criEnsureFeaturemapHasTheCorrectBitsSet_8();
+            break;
+        case 9:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 9 : Given RNCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("RNCONC.S.Afffc && !RNCONC.S.F03")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenRnconcsf03criIsNotSetEnsureFeaturemapHasTheCorrectBitClear_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Given RNCONC.S.F04(PEA) ensure featuremap has the correct bits set\n");
+            if (ShouldSkip("RNCONC.S.Afffc && RNCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenRnconcsf04peaEnsureFeaturemapHasTheCorrectBitsSet_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 11 : Given RNCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("RNCONC.S.Afffc && !RNCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenRnconcsf04peaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Given RNCONC.S.F05(AVG) ensure featuremap has the correct bits set\n");
+            if (ShouldSkip("RNCONC.S.Afffc && RNCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenRnconcsf05avgEnsureFeaturemapHasTheCorrectBitsSet_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 13 : Given RNCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("RNCONC.S.Afffc && !RNCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenRnconcsf05avgIsNotSetEnsureFeaturemapHasTheCorrectBitClear_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Read the global attribute: AttributeList\n");
+            if (ShouldSkip("RNCONC.S.Afffb")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeAttributeList_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Read the optional attribute Uncertainty in AttributeList\n");
+            if (ShouldSkip("RNCONC.S.Afffb && RNCONC.S.A0007 && RNCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeUncertaintyInAttributeList_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 16 : Check the optional attribute Uncertainty is excluded from AttributeList when RNCONC.S.A0007 "
+                "is not set\n");
+            if (ShouldSkip("RNCONC.S.Afffb && !RNCONC.S.A0007")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckTheOptionalAttributeUncertaintyIsExcludedFromAttributeListWhenRnconcsa0007IsNotSet_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 17 : Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, "
+                "MaxMeasuredValue and Measurement Unit in AttributeList\n");
+            if (ShouldSkip("RNCONC.S.Afffb && RNCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributesMeasuredValueMinMeasuredValueMaxMeasuredValueAndMeasurementUnitInAttributeList_17();
+            break;
+        case 18:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 18 : Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and "
+                "Uncertainty are excluded from AttributeList when RNCONC.S.F00 (MEA) is not set\n");
+            if (ShouldSkip("RNCONC.S.Afffb && !RNCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatMeasuredValueMinMeasuredValueMaxMeasuredValueMeasurementUnitAndUncertaintyAreExcludedFromAttributeListWhenRnconcsf00MeaIsNotSet_18();
+            break;
+        case 19:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 19 : Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow "
+                "in AttributeList\n");
+            if (ShouldSkip("RNCONC.S.Afffb && RNCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributesPeakMeasuredValuePeakMeasuredValueWindowInAttributeList_19();
+            break;
+        case 20:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 20 : Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when "
+                "RNCONC.S.F04 (PEA) is not set\n");
+            if (ShouldSkip("RNCONC.S.Afffb && !RNCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatPeakMeasuredValuePeakMeasuredValueWindowAreExcludedFromAttributeListWhenRnconcsf04PeaIsNotSet_20();
+            break;
+        case 21:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 21 : Read the optional, feature dependent attributes AverageMeasuredValue "
+                "AverageMeasuredValueWindow in AttributeList\n");
+            if (ShouldSkip("RNCONC.S.Afffb && RNCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributesAverageMeasuredValueAverageMeasuredValueWindowInAttributeList_21();
+            break;
+        case 22:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 22 : Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from "
+                "AttributeList when RNCONC.S.F05 (AVG) is not set\n");
+            if (ShouldSkip("RNCONC.S.Afffb && !RNCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatAverageMeasuredValueAndAverageMeasuredValueWindowAreExcludedFromAttributeListWhenRnconcsf05AvgIsNotSet_22();
+            break;
+        case 23:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 23 : Read the optional, feature dependent attribute LevelValue in AttributeList\n");
+            if (ShouldSkip("RNCONC.S.Afffb && RNCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributeLevelValueInAttributeList_23();
+            break;
+        case 24:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 24 : Check that LevelValue is excluded from AttributeList when RNCONC.S.F01 (LEV) is not set\n");
+            if (ShouldSkip("RNCONC.S.Afffb && !RNCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatLevelValueIsExcludedFromAttributeListWhenRnconcsf01LevIsNotSet_24();
+            break;
+        case 25:
+            ChipLogProgress(chipTool, " ***** Test Step 25 : Read the global attribute: EventList\n");
+            if (ShouldSkip("RNCONC.S.Afffa")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeEventList_25();
+            break;
+        case 26:
+            ChipLogProgress(chipTool, " ***** Test Step 26 : Read the global attribute: AcceptedCommandList\n");
+            if (ShouldSkip("RNCONC.S.Afff9")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeAcceptedCommandList_26();
+            break;
+        case 27:
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Read the global attribute: GeneratedCommandList\n");
+            if (ShouldSkip("RNCONC.S.Afff8")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeGeneratedCommandList_27();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 28;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: ClusterRevision Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenRnconcsf00meaEnsureFeaturemapHasTheCorrectBitSet_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given RNCONC.S.F00(MEA) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenRnconcsf00meaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given RNCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenRnconcsf01levEnsureFeaturemapHasTheCorrectBitSet_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given RNCONC.S.F01(LEV) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenRnconcsf01levIsNotSetEnsureFeaturemapHasTheCorrectBitClear_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given RNCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenRnconcsf02medEnsureFeaturemapHasTheCorrectBitSet_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given RNCONC.S.F02(MED) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenRnconcsf02medIsNotSetEnsureFeaturemapHasTheCorrectBitClear_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given RNCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenRnconcsf03criEnsureFeaturemapHasTheCorrectBitsSet_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given RNCONC.S.F03(CRI) ensure featuremap has the correct bits set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenRnconcsf03criIsNotSetEnsureFeaturemapHasTheCorrectBitClear_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given RNCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenRnconcsf04peaEnsureFeaturemapHasTheCorrectBitsSet_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given RNCONC.S.F04(PEA) ensure featuremap has the correct bits set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenRnconcsf04peaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_11()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given RNCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenRnconcsf05avgEnsureFeaturemapHasTheCorrectBitsSet_12()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given RNCONC.S.F05(AVG) ensure featuremap has the correct bits set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenRnconcsf05avgIsNotSetEnsureFeaturemapHasTheCorrectBitClear_13()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given RNCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_14()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 9UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65530UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeUncertaintyInAttributeList_15()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute Uncertainty in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 7UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckTheOptionalAttributeUncertaintyIsExcludedFromAttributeListWhenRnconcsa0007IsNotSet_16()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(
+                @"Check the optional attribute Uncertainty is excluded from AttributeList when RNCONC.S.A0007 is not set Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 7UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestReadTheOptionalFeatureDependentAttributesMeasuredValueMinMeasuredValueMaxMeasuredValueAndMeasurementUnitInAttributeList_17()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue and "
+                  @"Measurement Unit in AttributeList Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 8UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestCheckThatMeasuredValueMinMeasuredValueMaxMeasuredValueMeasurementUnitAndUncertaintyAreExcludedFromAttributeListWhenRnconcsf00MeaIsNotSet_18()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are excluded "
+                  @"from AttributeList when RNCONC.S.F00 (MEA) is not set Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 1UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 7UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 8UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalFeatureDependentAttributesPeakMeasuredValuePeakMeasuredValueWindowInAttributeList_19()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in AttributeList "
+                  @"Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 3UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 4UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckThatPeakMeasuredValuePeakMeasuredValueWindowAreExcludedFromAttributeListWhenRnconcsf04PeaIsNotSet_20()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when RNCONC.S.F04 (PEA) "
+                  @"is not set Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 3UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 4UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalFeatureDependentAttributesAverageMeasuredValueAverageMeasuredValueWindowInAttributeList_21()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in "
+                  @"AttributeList Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 5UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 6UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestCheckThatAverageMeasuredValueAndAverageMeasuredValueWindowAreExcludedFromAttributeListWhenRnconcsf05AvgIsNotSet_22()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
+                  @"RNCONC.S.F05 (AVG) is not set Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 5UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 6UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalFeatureDependentAttributeLevelValueInAttributeList_23()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attribute LevelValue in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 10UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckThatLevelValueIsExcludedFromAttributeListWhenRnconcsf01LevIsNotSet_24()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that LevelValue is excluded from AttributeList when RNCONC.S.F01 (LEV) is not set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 10UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeEventList_25()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: EventList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("EventList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("eventList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_26()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("AcceptedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_27()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: GeneratedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_RNCONC_2_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_RNCONC_2_1()
+        : TestCommandBridge("Test_TC_RNCONC_2_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_RNCONC_2_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_RNCONC_2_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_RNCONC_2_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads from the DUT the MinMeasuredValue attribute.\n");
+            if (ShouldSkip("RNCONC.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMinMeasuredValueAttribute_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads from the DUT the MaxMeasuredValue attribute.\n");
+            if (ShouldSkip("RNCONC.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMaxMeasuredValueAttribute_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads from the DUT the MeasuredValue attribute.\n");
+            if (ShouldSkip("RNCONC.S.A0000")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMeasuredValueAttribute_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads from the DUT the PeakMeasuredValue attribute.\n");
+            if (ShouldSkip("RNCONC.S.A0003")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutThePeakMeasuredValueAttribute_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads from the DUT the PeakMeasuredValueWindow attribute.\n");
+            if (ShouldSkip("RNCONC.S.A0004")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutThePeakMeasuredValueWindowAttribute_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH reads from the DUT the AverageMeasuredValue attribute.\n");
+            if (ShouldSkip("RNCONC.S.A0005")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheAverageMeasuredValueAttribute_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH reads from the DUT the AverageMeasuredValueWindow attribute.\n");
+            if (ShouldSkip("RNCONC.S.A0006")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheAverageMeasuredValueWindowAttribute_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : TH reads from the DUT the MeasurementUnit attribute.\n");
+            if (ShouldSkip("RNCONC.S.A0008")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMeasurementUnitAttribute_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : TH reads from the DUT the MeasurementMedium attribute.\n");
+            if (ShouldSkip("RNCONC.S.A0009")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMeasurementMediumAttribute_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH reads from the DUT the LevelValue attribute.\n");
+            if (ShouldSkip("RNCONC.S.A000a")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheLevelValueAttribute_10();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 11;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+    NSNumber * _Nullable MinMeasuredValue;
+
+    CHIP_ERROR TestThReadsFromTheDutTheMinMeasuredValueAttribute_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMinMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MinMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("minMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("minMeasuredValue", [value floatValue], 0.0f));
+            }
+            {
+                MinMeasuredValue = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+    NSNumber * _Nullable MaxMeasuredValue;
+
+    CHIP_ERROR TestThReadsFromTheDutTheMaxMeasuredValueAttribute_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMaxMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MaxMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("maxMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("maxMeasuredValue", [value floatValue], MinMeasuredValue));
+            }
+            {
+                MaxMeasuredValue = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheMeasuredValueAttribute_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("measuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("measuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("measuredValue", [value floatValue], MaxMeasuredValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutThePeakMeasuredValueAttribute_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePeakMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the PeakMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("peakMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("peakMeasuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("peakMeasuredValue", [value floatValue], MaxMeasuredValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutThePeakMeasuredValueWindowAttribute_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePeakMeasuredValueWindowWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the PeakMeasuredValueWindow attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("peakMeasuredValueWindow", "elapsed_s", "elapsed_s"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheAverageMeasuredValueAttribute_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAverageMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the AverageMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("averageMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("averageMeasuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("averageMeasuredValue", [value floatValue], MaxMeasuredValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheAverageMeasuredValueWindowAttribute_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAverageMeasuredValueWindowWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the AverageMeasuredValueWindow attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("averageMeasuredValueWindow", "elapsed_s", "elapsed_s"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheMeasurementUnitAttribute_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMeasurementUnitWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MeasurementUnit attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("measurementUnit", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("measurementUnit", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("measurementUnit", [value unsignedCharValue], 7U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheMeasurementMediumAttribute_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMeasurementMediumWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MeasurementMedium attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("measurementMedium", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("measurementMedium", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("measurementMedium", [value unsignedCharValue], 2U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheLevelValueAttribute_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRadonConcentrationMeasurement alloc] initWithDevice:device
+                                                                                         endpointID:@(1)
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeLevelValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the LevelValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("levelValue", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("levelValue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("levelValue", [value unsignedCharValue], 4U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_TVOCCONC_1_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_TVOCCONC_1_1()
+        : TestCommandBridge("Test_TC_TVOCCONC_1_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_TVOCCONC_1_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_TVOCCONC_1_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_TVOCCONC_1_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read the global attribute: ClusterRevision\n");
+            if (ShouldSkip("TVOCCONC.S.Afffd")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeClusterRevision_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Given TVOCCONC.S.F00(MEA) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("TVOCCONC.S.Afffc && TVOCCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenTvocconcsf00meaEnsureFeaturemapHasTheCorrectBitSet_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 3 : Given TVOCCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("TVOCCONC.S.Afffc && !TVOCCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenTvocconcsf00meaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Given TVOCCONC.S.F01(LEV) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("TVOCCONC.S.Afffc && TVOCCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenTvocconcsf01levEnsureFeaturemapHasTheCorrectBitSet_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 5 : Given TVOCCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("TVOCCONC.S.Afffc && !TVOCCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenTvocconcsf01levIsNotSetEnsureFeaturemapHasTheCorrectBitClear_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Given TVOCCONC.S.F02(MED) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("TVOCCONC.S.Afffc && TVOCCONC.S.F02")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenTvocconcsf02medEnsureFeaturemapHasTheCorrectBitSet_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 7 : Given TVOCCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("TVOCCONC.S.Afffc && !TVOCCONC.S.F02")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenTvocconcsf02medIsNotSetEnsureFeaturemapHasTheCorrectBitClear_7();
+            break;
+        case 8:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 8 : Given TVOCCONC.S.F03(CRI) ensure featuremap has the correct bits set\n");
+            if (ShouldSkip("TVOCCONC.S.Afffc && TVOCCONC.S.F03")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenTvocconcsf03criEnsureFeaturemapHasTheCorrectBitsSet_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 9 : Given TVOCCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("TVOCCONC.S.Afffc && !TVOCCONC.S.F03")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenTvocconcsf03criIsNotSetEnsureFeaturemapHasTheCorrectBitClear_9();
+            break;
+        case 10:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 10 : Given TVOCCONC.S.F04(PEA) ensure featuremap has the correct bits set\n");
+            if (ShouldSkip("TVOCCONC.S.Afffc && TVOCCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenTvocconcsf04peaEnsureFeaturemapHasTheCorrectBitsSet_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 11 : Given TVOCCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("TVOCCONC.S.Afffc && !TVOCCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenTvocconcsf04peaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_11();
+            break;
+        case 12:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 12 : Given TVOCCONC.S.F05(AVG) ensure featuremap has the correct bits set\n");
+            if (ShouldSkip("TVOCCONC.S.Afffc && TVOCCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenTvocconcsf05avgEnsureFeaturemapHasTheCorrectBitsSet_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 13 : Given TVOCCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear\n");
+            if (ShouldSkip("TVOCCONC.S.Afffc && !TVOCCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenTvocconcsf05avgIsNotSetEnsureFeaturemapHasTheCorrectBitClear_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Read the global attribute: AttributeList\n");
+            if (ShouldSkip("TVOCCONC.S.Afffb")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeAttributeList_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Read the optional attribute Uncertainty in AttributeList\n");
+            if (ShouldSkip("TVOCCONC.S.Afffb && TVOCCONC.S.A0007 && TVOCCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeUncertaintyInAttributeList_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 16 : Check the optional attribute Uncertainty is excluded from AttributeList when "
+                "TVOCCONC.S.A0007 is not set\n");
+            if (ShouldSkip("TVOCCONC.S.Afffb && !TVOCCONC.S.A0007")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckTheOptionalAttributeUncertaintyIsExcludedFromAttributeListWhenTvocconcsa0007IsNotSet_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 17 : Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, "
+                "MaxMeasuredValue and Measurement Unit in AttributeList\n");
+            if (ShouldSkip("TVOCCONC.S.Afffb && TVOCCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributesMeasuredValueMinMeasuredValueMaxMeasuredValueAndMeasurementUnitInAttributeList_17();
+            break;
+        case 18:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 18 : Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and "
+                "Uncertainty are excluded from AttributeList when TVOCCONC.S.F00 (MEA) is not set\n");
+            if (ShouldSkip("TVOCCONC.S.Afffb && !TVOCCONC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatMeasuredValueMinMeasuredValueMaxMeasuredValueMeasurementUnitAndUncertaintyAreExcludedFromAttributeListWhenTvocconcsf00MeaIsNotSet_18();
+            break;
+        case 19:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 19 : Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow "
+                "in AttributeList\n");
+            if (ShouldSkip("TVOCCONC.S.Afffb && TVOCCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributesPeakMeasuredValuePeakMeasuredValueWindowInAttributeList_19();
+            break;
+        case 20:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 20 : Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when "
+                "TVOCCONC.S.F04 (PEA) is not set\n");
+            if (ShouldSkip("TVOCCONC.S.Afffb && !TVOCCONC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatPeakMeasuredValuePeakMeasuredValueWindowAreExcludedFromAttributeListWhenTvocconcsf04PeaIsNotSet_20();
+            break;
+        case 21:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 21 : Read the optional, feature dependent attributes AverageMeasuredValue "
+                "AverageMeasuredValueWindow in AttributeList\n");
+            if (ShouldSkip("TVOCCONC.S.Afffb && TVOCCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributesAverageMeasuredValueAverageMeasuredValueWindowInAttributeList_21();
+            break;
+        case 22:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 22 : Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from "
+                "AttributeList when TVOCCONC.S.F05 (AVG) is not set\n");
+            if (ShouldSkip("TVOCCONC.S.Afffb && !TVOCCONC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatAverageMeasuredValueAndAverageMeasuredValueWindowAreExcludedFromAttributeListWhenTvocconcsf05AvgIsNotSet_22();
+            break;
+        case 23:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 23 : Read the optional, feature dependent attribute LevelValue in AttributeList\n");
+            if (ShouldSkip("TVOCCONC.S.Afffb && TVOCCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalFeatureDependentAttributeLevelValueInAttributeList_23();
+            break;
+        case 24:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 24 : Check that LevelValue is excluded from AttributeList when TVOCCONC.S.F01 (LEV) is not "
+                "set\n");
+            if (ShouldSkip("TVOCCONC.S.Afffb && !TVOCCONC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckThatLevelValueIsExcludedFromAttributeListWhenTvocconcsf01LevIsNotSet_24();
+            break;
+        case 25:
+            ChipLogProgress(chipTool, " ***** Test Step 25 : Read the global attribute: EventList\n");
+            if (ShouldSkip("TVOCCONC.S.Afffa")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeEventList_25();
+            break;
+        case 26:
+            ChipLogProgress(chipTool, " ***** Test Step 26 : Read the global attribute: AcceptedCommandList\n");
+            if (ShouldSkip("TVOCCONC.S.Afff9")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeAcceptedCommandList_26();
+            break;
+        case 27:
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Read the global attribute: GeneratedCommandList\n");
+            if (ShouldSkip("TVOCCONC.S.Afff8")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeGeneratedCommandList_27();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 28;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: ClusterRevision Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenTvocconcsf00meaEnsureFeaturemapHasTheCorrectBitSet_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given TVOCCONC.S.F00(MEA) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenTvocconcsf00meaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given TVOCCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenTvocconcsf01levEnsureFeaturemapHasTheCorrectBitSet_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given TVOCCONC.S.F01(LEV) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenTvocconcsf01levIsNotSetEnsureFeaturemapHasTheCorrectBitClear_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given TVOCCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenTvocconcsf02medEnsureFeaturemapHasTheCorrectBitSet_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given TVOCCONC.S.F02(MED) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenTvocconcsf02medIsNotSetEnsureFeaturemapHasTheCorrectBitClear_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given TVOCCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenTvocconcsf03criEnsureFeaturemapHasTheCorrectBitsSet_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given TVOCCONC.S.F03(CRI) ensure featuremap has the correct bits set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenTvocconcsf03criIsNotSetEnsureFeaturemapHasTheCorrectBitClear_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given TVOCCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenTvocconcsf04peaEnsureFeaturemapHasTheCorrectBitsSet_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given TVOCCONC.S.F04(PEA) ensure featuremap has the correct bits set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenTvocconcsf04peaIsNotSetEnsureFeaturemapHasTheCorrectBitClear_11()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given TVOCCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenTvocconcsf05avgEnsureFeaturemapHasTheCorrectBitsSet_12()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given TVOCCONC.S.F05(AVG) ensure featuremap has the correct bits set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenTvocconcsf05avgIsNotSetEnsureFeaturemapHasTheCorrectBitClear_13()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given TVOCCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_14()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 9UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65530UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeUncertaintyInAttributeList_15()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute Uncertainty in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 7UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckTheOptionalAttributeUncertaintyIsExcludedFromAttributeListWhenTvocconcsa0007IsNotSet_16()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check the optional attribute Uncertainty is excluded from AttributeList when TVOCCONC.S.A0007 is not set "
+                  @"Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 7UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestReadTheOptionalFeatureDependentAttributesMeasuredValueMinMeasuredValueMaxMeasuredValueAndMeasurementUnitInAttributeList_17()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue and "
+                  @"Measurement Unit in AttributeList Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 8UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestCheckThatMeasuredValueMinMeasuredValueMaxMeasuredValueMeasurementUnitAndUncertaintyAreExcludedFromAttributeListWhenTvocconcsf00MeaIsNotSet_18()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are excluded "
+                  @"from AttributeList when TVOCCONC.S.F00 (MEA) is not set Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 1UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 7UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 8UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalFeatureDependentAttributesPeakMeasuredValuePeakMeasuredValueWindowInAttributeList_19()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in AttributeList "
+                  @"Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 3UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 4UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckThatPeakMeasuredValuePeakMeasuredValueWindowAreExcludedFromAttributeListWhenTvocconcsf04PeaIsNotSet_20()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when TVOCCONC.S.F04 "
+                  @"(PEA) is not set Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 3UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 4UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalFeatureDependentAttributesAverageMeasuredValueAverageMeasuredValueWindowInAttributeList_21()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in "
+                  @"AttributeList Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 5UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 6UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestCheckThatAverageMeasuredValueAndAverageMeasuredValueWindowAreExcludedFromAttributeListWhenTvocconcsf05AvgIsNotSet_22()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
+                  @"TVOCCONC.S.F05 (AVG) is not set Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 5UL));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 6UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalFeatureDependentAttributeLevelValueInAttributeList_23()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional, feature dependent attribute LevelValue in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 10UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckThatLevelValueIsExcludedFromAttributeListWhenTvocconcsf01LevIsNotSet_24()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check that LevelValue is excluded from AttributeList when TVOCCONC.S.F01 (LEV) is not set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("attributeList", value, 10UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeEventList_25()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: EventList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("EventList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("eventList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_26()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("AcceptedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_27()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: GeneratedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_TVOCCONC_2_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_TVOCCONC_2_1()
+        : TestCommandBridge("Test_TC_TVOCCONC_2_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_TVOCCONC_2_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_TVOCCONC_2_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_TVOCCONC_2_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads from the DUT the MinMeasuredValue attribute.\n");
+            if (ShouldSkip("TVOCCONC.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMinMeasuredValueAttribute_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads from the DUT the MaxMeasuredValue attribute.\n");
+            if (ShouldSkip("TVOCCONC.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMaxMeasuredValueAttribute_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads from the DUT the MeasuredValue attribute.\n");
+            if (ShouldSkip("TVOCCONC.S.A0000")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMeasuredValueAttribute_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads from the DUT the PeakMeasuredValue attribute.\n");
+            if (ShouldSkip("TVOCCONC.S.A0003")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutThePeakMeasuredValueAttribute_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads from the DUT the PeakMeasuredValueWindow attribute.\n");
+            if (ShouldSkip("TVOCCONC.S.A0004")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutThePeakMeasuredValueWindowAttribute_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH reads from the DUT the AverageMeasuredValue attribute.\n");
+            if (ShouldSkip("TVOCCONC.S.A0005")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheAverageMeasuredValueAttribute_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH reads from the DUT the AverageMeasuredValueWindow attribute.\n");
+            if (ShouldSkip("TVOCCONC.S.A0006")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheAverageMeasuredValueWindowAttribute_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : TH reads from the DUT the MeasurementUnit attribute.\n");
+            if (ShouldSkip("TVOCCONC.S.A0008")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMeasurementUnitAttribute_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : TH reads from the DUT the MeasurementMedium attribute.\n");
+            if (ShouldSkip("TVOCCONC.S.A0009")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheMeasurementMediumAttribute_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH reads from the DUT the LevelValue attribute.\n");
+            if (ShouldSkip("TVOCCONC.S.A000a")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFromTheDutTheLevelValueAttribute_10();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 11;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+    NSNumber * _Nullable MinMeasuredValue;
+
+    CHIP_ERROR TestThReadsFromTheDutTheMinMeasuredValueAttribute_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMinMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MinMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("minMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("minMeasuredValue", [value floatValue], 0.0f));
+            }
+            {
+                MinMeasuredValue = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+    NSNumber * _Nullable MaxMeasuredValue;
+
+    CHIP_ERROR TestThReadsFromTheDutTheMaxMeasuredValueAttribute_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMaxMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MaxMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("maxMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("maxMeasuredValue", [value floatValue], MinMeasuredValue));
+            }
+            {
+                MaxMeasuredValue = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheMeasuredValueAttribute_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("measuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("measuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("measuredValue", [value floatValue], MaxMeasuredValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutThePeakMeasuredValueAttribute_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePeakMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the PeakMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("peakMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("peakMeasuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("peakMeasuredValue", [value floatValue], MaxMeasuredValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutThePeakMeasuredValueWindowAttribute_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePeakMeasuredValueWindowWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the PeakMeasuredValueWindow attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("peakMeasuredValueWindow", "elapsed_s", "elapsed_s"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheAverageMeasuredValueAttribute_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAverageMeasuredValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the AverageMeasuredValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("averageMeasuredValue", "single", "single"));
+                VerifyOrReturn(CheckConstraintMinValue<float>("averageMeasuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("averageMeasuredValue", [value floatValue], MaxMeasuredValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheAverageMeasuredValueWindowAttribute_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAverageMeasuredValueWindowWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the AverageMeasuredValueWindow attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("averageMeasuredValueWindow", "elapsed_s", "elapsed_s"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheMeasurementUnitAttribute_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMeasurementUnitWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MeasurementUnit attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("measurementUnit", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("measurementUnit", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("measurementUnit", [value unsignedCharValue], 7U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheMeasurementMediumAttribute_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMeasurementMediumWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the MeasurementMedium attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("measurementMedium", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("measurementMedium", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("measurementMedium", [value unsignedCharValue], 2U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFromTheDutTheLevelValueAttribute_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster =
+            [[MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement alloc] initWithDevice:device
+                                                                                             endpointID:@(1)
+                                                                                                  queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeLevelValueWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads from the DUT the LevelValue attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("levelValue", "enum8", "enum8"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("levelValue", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("levelValue", [value unsignedCharValue], 4U));
 
             NextTest();
         }];
@@ -147995,6 +163100,26 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_CC_7_4>(),
         make_unique<TestColorControl_9_1>(),
         make_unique<TestColorControl_9_2>(),
+        make_unique<Test_TC_CDOCONC_1_1>(),
+        make_unique<Test_TC_CDOCONC_2_1>(),
+        make_unique<Test_TC_CMOCONC_1_1>(),
+        make_unique<Test_TC_CMOCONC_2_1>(),
+        make_unique<Test_TC_FLDCONC_1_1>(),
+        make_unique<Test_TC_FLDCONC_2_1>(),
+        make_unique<Test_TC_NDOCONC_1_1>(),
+        make_unique<Test_TC_NDOCONC_2_1>(),
+        make_unique<Test_TC_OZCONC_1_1>(),
+        make_unique<Test_TC_OZCONC_2_1>(),
+        make_unique<Test_TC_PMHCONC_1_1>(),
+        make_unique<Test_TC_PMHCONC_2_1>(),
+        make_unique<Test_TC_PMICONC_1_1>(),
+        make_unique<Test_TC_PMICONC_2_1>(),
+        make_unique<Test_TC_PMKCONC_1_1>(),
+        make_unique<Test_TC_PMKCONC_2_1>(),
+        make_unique<Test_TC_RNCONC_1_1>(),
+        make_unique<Test_TC_RNCONC_2_1>(),
+        make_unique<Test_TC_TVOCCONC_1_1>(),
+        make_unique<Test_TC_TVOCCONC_2_1>(),
         make_unique<Test_TC_OPCREDS_1_2>(),
         make_unique<Test_TC_BINFO_1_1>(),
         make_unique<Test_TC_CNET_1_3>(),
