@@ -119418,52 +119418,68 @@ public:
             err = TestWriteAttributeCharStringValueBackToDefaultValue_44();
             break;
         case 45:
-            ChipLogProgress(chipTool, " ***** Test Step 45 : Read attribute NULLABLE_INT8U Default Value\n");
-            err = TestReadAttributeNullableInt8uDefaultValue_45();
+            ChipLogProgress(chipTool, " ***** Test Step 45 : Write attribute NULLABLE_CHAR_STRING Value\n");
+            err = TestWriteAttributeNullableCharStringValue_45();
             break;
         case 46:
-            ChipLogProgress(chipTool, " ***** Test Step 46 : Write attribute NULLABLE_INT8U with a value\n");
-            err = TestWriteAttributeNullableInt8uWithAValue_46();
+            ChipLogProgress(chipTool, " ***** Test Step 46 : Read attribute NULLABLE_CHAR_STRING Value MinLength Constraints\n");
+            err = TestReadAttributeNullableCharStringValueMinLengthConstraints_46();
             break;
         case 47:
-            ChipLogProgress(chipTool, " ***** Test Step 47 : Read attribute NULLABLE_INT8U with a value\n");
-            err = TestReadAttributeNullableInt8uWithAValue_47();
+            ChipLogProgress(chipTool, " ***** Test Step 47 : Read attribute NULLABLE_CHAR_STRING Value MaxLength Constraints\n");
+            err = TestReadAttributeNullableCharStringValueMaxLengthConstraints_47();
             break;
         case 48:
-            ChipLogProgress(chipTool, " ***** Test Step 48 : Write attribute NULLABLE_INT8U without a value\n");
-            err = TestWriteAttributeNullableInt8uWithoutAValue_48();
+            ChipLogProgress(chipTool, " ***** Test Step 48 : Write attribute NULLABLE_CHAR_STRING Value Back to Default Value\n");
+            err = TestWriteAttributeNullableCharStringValueBackToDefaultValue_48();
             break;
         case 49:
-            ChipLogProgress(chipTool, " ***** Test Step 49 : Read attribute NULLABLE_INT8U with a value\n");
-            err = TestReadAttributeNullableInt8uWithAValue_49();
+            ChipLogProgress(chipTool, " ***** Test Step 49 : Read attribute NULLABLE_INT8U Default Value\n");
+            err = TestReadAttributeNullableInt8uDefaultValue_49();
             break;
         case 50:
-            ChipLogProgress(chipTool, " ***** Test Step 50 : Write attribute NULLABLE_INT8U back to Default Value\n");
-            err = TestWriteAttributeNullableInt8uBackToDefaultValue_50();
+            ChipLogProgress(chipTool, " ***** Test Step 50 : Write attribute NULLABLE_INT8U with a value\n");
+            err = TestWriteAttributeNullableInt8uWithAValue_50();
             break;
         case 51:
-            ChipLogProgress(chipTool, " ***** Test Step 51 : Read attribute NULLABLE_OCTET_STRING Default Value\n");
-            err = TestReadAttributeNullableOctetStringDefaultValue_51();
+            ChipLogProgress(chipTool, " ***** Test Step 51 : Read attribute NULLABLE_INT8U with a value\n");
+            err = TestReadAttributeNullableInt8uWithAValue_51();
             break;
         case 52:
-            ChipLogProgress(chipTool, " ***** Test Step 52 : Write attribute NULLABLE_OCTET_STRING\n");
-            err = TestWriteAttributeNullableOctetString_52();
+            ChipLogProgress(chipTool, " ***** Test Step 52 : Write attribute NULLABLE_INT8U without a value\n");
+            err = TestWriteAttributeNullableInt8uWithoutAValue_52();
             break;
         case 53:
-            ChipLogProgress(chipTool, " ***** Test Step 53 : Read attribute NULLABLE_OCTET_STRING\n");
-            err = TestReadAttributeNullableOctetString_53();
+            ChipLogProgress(chipTool, " ***** Test Step 53 : Read attribute NULLABLE_INT8U with a value\n");
+            err = TestReadAttributeNullableInt8uWithAValue_53();
             break;
         case 54:
-            ChipLogProgress(chipTool, " ***** Test Step 54 : Write attribute NULLABLE_OCTET_STRING\n");
-            err = TestWriteAttributeNullableOctetString_54();
+            ChipLogProgress(chipTool, " ***** Test Step 54 : Write attribute NULLABLE_INT8U back to Default Value\n");
+            err = TestWriteAttributeNullableInt8uBackToDefaultValue_54();
             break;
         case 55:
-            ChipLogProgress(chipTool, " ***** Test Step 55 : Read attribute NULLABLE_OCTET_STRING\n");
-            err = TestReadAttributeNullableOctetString_55();
+            ChipLogProgress(chipTool, " ***** Test Step 55 : Read attribute NULLABLE_OCTET_STRING Default Value\n");
+            err = TestReadAttributeNullableOctetStringDefaultValue_55();
             break;
         case 56:
-            ChipLogProgress(chipTool, " ***** Test Step 56 : Write attribute NULLABLE_OCTET_STRING back to Default Value\n");
-            err = TestWriteAttributeNullableOctetStringBackToDefaultValue_56();
+            ChipLogProgress(chipTool, " ***** Test Step 56 : Write attribute NULLABLE_OCTET_STRING\n");
+            err = TestWriteAttributeNullableOctetString_56();
+            break;
+        case 57:
+            ChipLogProgress(chipTool, " ***** Test Step 57 : Read attribute NULLABLE_OCTET_STRING\n");
+            err = TestReadAttributeNullableOctetString_57();
+            break;
+        case 58:
+            ChipLogProgress(chipTool, " ***** Test Step 58 : Write attribute NULLABLE_OCTET_STRING\n");
+            err = TestWriteAttributeNullableOctetString_58();
+            break;
+        case 59:
+            ChipLogProgress(chipTool, " ***** Test Step 59 : Read attribute NULLABLE_OCTET_STRING\n");
+            err = TestReadAttributeNullableOctetString_59();
+            break;
+        case 60:
+            ChipLogProgress(chipTool, " ***** Test Step 60 : Write attribute NULLABLE_OCTET_STRING back to Default Value\n");
+            err = TestWriteAttributeNullableOctetStringBackToDefaultValue_60();
             break;
         }
 
@@ -119647,6 +119663,18 @@ public:
         case 56:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 57:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 58:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 59:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 60:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -119660,7 +119688,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 57;
+    const uint16_t mTestCount = 61;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -120601,7 +120629,97 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt8uDefaultValue_45()
+    CHIP_ERROR TestWriteAttributeNullableCharStringValue_45()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id nullableCharStringArgument;
+        nullableCharStringArgument = nil;
+        [cluster writeAttributeNullableCharStringWithValue:nullableCharStringArgument
+                                                completion:^(NSError * _Nullable err) {
+                                                    NSLog(@"Write attribute NULLABLE_CHAR_STRING Value Error: %@", err);
+
+                                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                    NextTest();
+                                                }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadAttributeNullableCharStringValueMinLengthConstraints_46()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeNullableCharStringWithCompletion:^(NSString * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read attribute NULLABLE_CHAR_STRING Value MinLength Constraints Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintMinLength("nullableCharString", value, 5));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadAttributeNullableCharStringValueMaxLengthConstraints_47()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeNullableCharStringWithCompletion:^(NSString * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read attribute NULLABLE_CHAR_STRING Value MaxLength Constraints Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintMaxLength("nullableCharString", value, 20));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWriteAttributeNullableCharStringValueBackToDefaultValue_48()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id nullableCharStringArgument;
+        nullableCharStringArgument = @"";
+        [cluster
+            writeAttributeNullableCharStringWithValue:nullableCharStringArgument
+                                           completion:^(NSError * _Nullable err) {
+                                               NSLog(@"Write attribute NULLABLE_CHAR_STRING Value Back to Default Value Error: %@",
+                                                   err);
+
+                                               VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                               NextTest();
+                                           }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadAttributeNullableInt8uDefaultValue_49()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -120625,7 +120743,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt8uWithAValue_46()
+    CHIP_ERROR TestWriteAttributeNullableInt8uWithAValue_50()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -120646,7 +120764,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt8uWithAValue_47()
+    CHIP_ERROR TestReadAttributeNullableInt8uWithAValue_51()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -120667,7 +120785,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt8uWithoutAValue_48()
+    CHIP_ERROR TestWriteAttributeNullableInt8uWithoutAValue_52()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -120688,7 +120806,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableInt8uWithAValue_49()
+    CHIP_ERROR TestReadAttributeNullableInt8uWithAValue_53()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -120709,7 +120827,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableInt8uBackToDefaultValue_50()
+    CHIP_ERROR TestWriteAttributeNullableInt8uBackToDefaultValue_54()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -120730,7 +120848,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableOctetStringDefaultValue_51()
+    CHIP_ERROR TestReadAttributeNullableOctetStringDefaultValue_55()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -120755,7 +120873,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableOctetString_52()
+    CHIP_ERROR TestWriteAttributeNullableOctetString_56()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -120776,7 +120894,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableOctetString_53()
+    CHIP_ERROR TestReadAttributeNullableOctetString_57()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -120797,7 +120915,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableOctetString_54()
+    CHIP_ERROR TestWriteAttributeNullableOctetString_58()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -120818,7 +120936,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadAttributeNullableOctetString_55()
+    CHIP_ERROR TestReadAttributeNullableOctetString_59()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -120839,7 +120957,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeNullableOctetStringBackToDefaultValue_56()
+    CHIP_ERROR TestWriteAttributeNullableOctetStringBackToDefaultValue_60()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
