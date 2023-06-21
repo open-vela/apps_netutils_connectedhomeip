@@ -42618,6 +42618,7 @@ public:
 | * InterconnectCOAlarm                                               | 0x0009 |
 | * ContaminationState                                                | 0x000A |
 | * SensitivityLevel                                                  | 0x000B |
+| * ExpiryDate                                                        | 0x000C |
 | * GeneratedCommandList                                              | 0xFFF8 |
 | * AcceptedCommandList                                               | 0xFFF9 |
 | * EventList                                                         | 0xFFFA |
@@ -43555,6 +43556,76 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"SmokeCOAlarm.SensitivityLevel response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute ExpiryDate
+ */
+class ReadSmokeCoAlarmExpiryDate : public ReadAttribute {
+public:
+    ReadSmokeCoAlarmExpiryDate()
+        : ReadAttribute("expiry-date")
+    {
+    }
+
+    ~ReadSmokeCoAlarmExpiryDate() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReadAttribute (0x0000000C) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        [cluster readAttributeExpiryDateWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"SmokeCOAlarm.ExpiryDate response %@", [value description]);
+            if (error != nil) {
+                LogNSError("SmokeCOAlarm ExpiryDate read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeSmokeCoAlarmExpiryDate : public SubscribeAttribute {
+public:
+    SubscribeAttributeSmokeCoAlarmExpiryDate()
+        : SubscribeAttribute("expiry-date")
+    {
+    }
+
+    ~SubscribeAttributeSmokeCoAlarmExpiryDate() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000005C) ReportAttribute (0x0000000C) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device
+                                                                        endpointID:@(endpointId)
+                                                                             queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeExpiryDateWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"SmokeCOAlarm.ExpiryDate response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -122532,6 +122603,8 @@ void registerClusterSmokeCoAlarm(Commands & commands)
         make_unique<ReadSmokeCoAlarmSensitivityLevel>(), //
         make_unique<WriteSmokeCoAlarmSensitivityLevel>(), //
         make_unique<SubscribeAttributeSmokeCoAlarmSensitivityLevel>(), //
+        make_unique<ReadSmokeCoAlarmExpiryDate>(), //
+        make_unique<SubscribeAttributeSmokeCoAlarmExpiryDate>(), //
         make_unique<ReadSmokeCoAlarmGeneratedCommandList>(), //
         make_unique<SubscribeAttributeSmokeCoAlarmGeneratedCommandList>(), //
         make_unique<ReadSmokeCoAlarmAcceptedCommandList>(), //
