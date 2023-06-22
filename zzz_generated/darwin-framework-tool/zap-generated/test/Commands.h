@@ -27277,7 +27277,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 3U));
             }
 
             VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
@@ -28782,7 +28782,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 3U));
             }
 
             VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
@@ -30287,7 +30287,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 3U));
             }
 
             VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
@@ -31792,7 +31792,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 3U));
             }
 
             VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
@@ -33295,7 +33295,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 3U));
             }
 
             VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
@@ -34800,7 +34800,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 3U));
             }
 
             VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
@@ -36305,7 +36305,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 3U));
             }
 
             VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
@@ -37810,7 +37810,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 3U));
             }
 
             VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
@@ -39313,7 +39313,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 3U));
             }
 
             VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
@@ -40821,7 +40821,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 3U));
             }
 
             VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
