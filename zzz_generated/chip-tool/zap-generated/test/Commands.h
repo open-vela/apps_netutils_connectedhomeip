@@ -23081,7 +23081,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 3U));
                 VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
@@ -23834,7 +23834,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 3U));
                 VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
@@ -24589,7 +24589,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 3U));
                 VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
@@ -25340,7 +25340,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 3U));
                 VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
@@ -26096,7 +26096,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 3U));
                 VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
@@ -26842,7 +26842,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 3U));
                 VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
@@ -27588,7 +27588,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 3U));
                 VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
@@ -28335,7 +28335,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 3U));
                 VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
@@ -29081,7 +29081,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 3U));
                 VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
@@ -29827,7 +29827,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 3U));
                 VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
