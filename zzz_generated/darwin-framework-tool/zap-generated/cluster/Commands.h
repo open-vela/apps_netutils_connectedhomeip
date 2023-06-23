@@ -41521,6 +41521,7 @@ public:
 | Attributes:                                                         |        |
 | * Mask                                                              | 0x0000 |
 | * State                                                             | 0x0002 |
+| * Supported                                                         | 0x0003 |
 | * GeneratedCommandList                                              | 0xFFF8 |
 | * AcceptedCommandList                                               | 0xFFF9 |
 | * EventList                                                         | 0xFFFA |
@@ -41665,6 +41666,76 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"RefrigeratorAlarm.State response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute Supported
+ */
+class ReadRefrigeratorAlarmSupported : public ReadAttribute {
+public:
+    ReadRefrigeratorAlarmSupported()
+        : ReadAttribute("supported")
+    {
+    }
+
+    ~ReadRefrigeratorAlarmSupported() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000057) ReadAttribute (0x00000003) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterRefrigeratorAlarm alloc] initWithDevice:device
+                                                                             endpointID:@(endpointId)
+                                                                                  queue:callbackQueue];
+        [cluster readAttributeSupportedWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"RefrigeratorAlarm.Supported response %@", [value description]);
+            if (error != nil) {
+                LogNSError("RefrigeratorAlarm Supported read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeRefrigeratorAlarmSupported : public SubscribeAttribute {
+public:
+    SubscribeAttributeRefrigeratorAlarmSupported()
+        : SubscribeAttribute("supported")
+    {
+    }
+
+    ~SubscribeAttributeRefrigeratorAlarmSupported() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000057) ReportAttribute (0x00000003) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterRefrigeratorAlarm alloc] initWithDevice:device
+                                                                             endpointID:@(endpointId)
+                                                                                  queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeSupportedWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"RefrigeratorAlarm.Supported response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -122519,6 +122590,8 @@ void registerClusterRefrigeratorAlarm(Commands & commands)
         make_unique<SubscribeAttributeRefrigeratorAlarmMask>(), //
         make_unique<ReadRefrigeratorAlarmState>(), //
         make_unique<SubscribeAttributeRefrigeratorAlarmState>(), //
+        make_unique<ReadRefrigeratorAlarmSupported>(), //
+        make_unique<SubscribeAttributeRefrigeratorAlarmSupported>(), //
         make_unique<ReadRefrigeratorAlarmGeneratedCommandList>(), //
         make_unique<SubscribeAttributeRefrigeratorAlarmGeneratedCommandList>(), //
         make_unique<ReadRefrigeratorAlarmAcceptedCommandList>(), //
