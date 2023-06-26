@@ -79,7 +79,7 @@
 | ModeSelect                                                          | 0x0050 |
 | LaundryWasherMode                                                   | 0x0051 |
 | RefrigeratorAndTemperatureControlledCabinetMode                     | 0x0052 |
-| WasherControls                                                      | 0x0053 |
+| LaundryWasherControls                                               | 0x0053 |
 | RvcRunMode                                                          | 0x0054 |
 | RvcCleanMode                                                        | 0x0055 |
 | TemperatureControl                                                  | 0x0056 |
@@ -40588,6 +40588,806 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ModeSelect.ClusterRevision response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*----------------------------------------------------------------------------*\
+| Cluster LaundryWasherControls                                       | 0x0053 |
+|------------------------------------------------------------------------------|
+| Commands:                                                           |        |
+|------------------------------------------------------------------------------|
+| Attributes:                                                         |        |
+| * SpinSpeeds                                                        | 0x0000 |
+| * SpinSpeedCurrent                                                  | 0x0001 |
+| * NumberOfRinses                                                    | 0x0002 |
+| * SupportedRinses                                                   | 0x0003 |
+| * GeneratedCommandList                                              | 0xFFF8 |
+| * AcceptedCommandList                                               | 0xFFF9 |
+| * EventList                                                         | 0xFFFA |
+| * AttributeList                                                     | 0xFFFB |
+| * FeatureMap                                                        | 0xFFFC |
+| * ClusterRevision                                                   | 0xFFFD |
+|------------------------------------------------------------------------------|
+| Events:                                                             |        |
+\*----------------------------------------------------------------------------*/
+
+/*
+ * Attribute SpinSpeeds
+ */
+class ReadLaundryWasherControlsSpinSpeeds : public ReadAttribute {
+public:
+    ReadLaundryWasherControlsSpinSpeeds()
+        : ReadAttribute("spin-speeds")
+    {
+    }
+
+    ~ReadLaundryWasherControlsSpinSpeeds() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000053) ReadAttribute (0x00000000) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterLaundryWasherControls alloc] initWithDevice:device
+                                                                                 endpointID:@(endpointId)
+                                                                                      queue:callbackQueue];
+        [cluster readAttributeSpinSpeedsWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"LaundryWasherControls.SpinSpeeds response %@", [value description]);
+            if (error != nil) {
+                LogNSError("LaundryWasherControls SpinSpeeds read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeLaundryWasherControlsSpinSpeeds : public SubscribeAttribute {
+public:
+    SubscribeAttributeLaundryWasherControlsSpinSpeeds()
+        : SubscribeAttribute("spin-speeds")
+    {
+    }
+
+    ~SubscribeAttributeLaundryWasherControlsSpinSpeeds() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000053) ReportAttribute (0x00000000) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterLaundryWasherControls alloc] initWithDevice:device
+                                                                                 endpointID:@(endpointId)
+                                                                                      queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeSpinSpeedsWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"LaundryWasherControls.SpinSpeeds response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute SpinSpeedCurrent
+ */
+class ReadLaundryWasherControlsSpinSpeedCurrent : public ReadAttribute {
+public:
+    ReadLaundryWasherControlsSpinSpeedCurrent()
+        : ReadAttribute("spin-speed-current")
+    {
+    }
+
+    ~ReadLaundryWasherControlsSpinSpeedCurrent() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000053) ReadAttribute (0x00000001) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterLaundryWasherControls alloc] initWithDevice:device
+                                                                                 endpointID:@(endpointId)
+                                                                                      queue:callbackQueue];
+        [cluster readAttributeSpinSpeedCurrentWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"LaundryWasherControls.SpinSpeedCurrent response %@", [value description]);
+            if (error != nil) {
+                LogNSError("LaundryWasherControls SpinSpeedCurrent read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class WriteLaundryWasherControlsSpinSpeedCurrent : public WriteAttribute {
+public:
+    WriteLaundryWasherControlsSpinSpeedCurrent()
+        : WriteAttribute("spin-speed-current")
+    {
+        AddArgument("attr-name", "spin-speed-current");
+        AddArgument("attr-value", 0, UINT8_MAX, &mValue);
+        WriteAttribute::AddArguments();
+    }
+
+    ~WriteLaundryWasherControlsSpinSpeedCurrent() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000053) WriteAttribute (0x00000001) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterLaundryWasherControls alloc] initWithDevice:device
+                                                                                 endpointID:@(endpointId)
+                                                                                      queue:callbackQueue];
+        __auto_type * params = [[MTRWriteParams alloc] init];
+        params.timedWriteTimeout
+            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
+        NSNumber * _Nullable value = [NSNumber numberWithUnsignedChar:mValue];
+
+        [cluster writeAttributeSpinSpeedCurrentWithValue:value
+                                                  params:params
+                                              completion:^(NSError * _Nullable error) {
+                                                  if (error != nil) {
+                                                      LogNSError("LaundryWasherControls SpinSpeedCurrent write Error", error);
+                                                  }
+                                                  SetCommandExitStatus(error);
+                                              }];
+        return CHIP_NO_ERROR;
+    }
+
+private:
+    uint8_t mValue;
+};
+
+class SubscribeAttributeLaundryWasherControlsSpinSpeedCurrent : public SubscribeAttribute {
+public:
+    SubscribeAttributeLaundryWasherControlsSpinSpeedCurrent()
+        : SubscribeAttribute("spin-speed-current")
+    {
+    }
+
+    ~SubscribeAttributeLaundryWasherControlsSpinSpeedCurrent() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000053) ReportAttribute (0x00000001) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterLaundryWasherControls alloc] initWithDevice:device
+                                                                                 endpointID:@(endpointId)
+                                                                                      queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeSpinSpeedCurrentWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"LaundryWasherControls.SpinSpeedCurrent response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute NumberOfRinses
+ */
+class ReadLaundryWasherControlsNumberOfRinses : public ReadAttribute {
+public:
+    ReadLaundryWasherControlsNumberOfRinses()
+        : ReadAttribute("number-of-rinses")
+    {
+    }
+
+    ~ReadLaundryWasherControlsNumberOfRinses() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000053) ReadAttribute (0x00000002) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterLaundryWasherControls alloc] initWithDevice:device
+                                                                                 endpointID:@(endpointId)
+                                                                                      queue:callbackQueue];
+        [cluster readAttributeNumberOfRinsesWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"LaundryWasherControls.NumberOfRinses response %@", [value description]);
+            if (error != nil) {
+                LogNSError("LaundryWasherControls NumberOfRinses read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class WriteLaundryWasherControlsNumberOfRinses : public WriteAttribute {
+public:
+    WriteLaundryWasherControlsNumberOfRinses()
+        : WriteAttribute("number-of-rinses")
+    {
+        AddArgument("attr-name", "number-of-rinses");
+        AddArgument("attr-value", 0, UINT8_MAX, &mValue);
+        WriteAttribute::AddArguments();
+    }
+
+    ~WriteLaundryWasherControlsNumberOfRinses() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000053) WriteAttribute (0x00000002) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterLaundryWasherControls alloc] initWithDevice:device
+                                                                                 endpointID:@(endpointId)
+                                                                                      queue:callbackQueue];
+        __auto_type * params = [[MTRWriteParams alloc] init];
+        params.timedWriteTimeout
+            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
+        NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
+
+        [cluster writeAttributeNumberOfRinsesWithValue:value
+                                                params:params
+                                            completion:^(NSError * _Nullable error) {
+                                                if (error != nil) {
+                                                    LogNSError("LaundryWasherControls NumberOfRinses write Error", error);
+                                                }
+                                                SetCommandExitStatus(error);
+                                            }];
+        return CHIP_NO_ERROR;
+    }
+
+private:
+    uint8_t mValue;
+};
+
+class SubscribeAttributeLaundryWasherControlsNumberOfRinses : public SubscribeAttribute {
+public:
+    SubscribeAttributeLaundryWasherControlsNumberOfRinses()
+        : SubscribeAttribute("number-of-rinses")
+    {
+    }
+
+    ~SubscribeAttributeLaundryWasherControlsNumberOfRinses() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000053) ReportAttribute (0x00000002) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterLaundryWasherControls alloc] initWithDevice:device
+                                                                                 endpointID:@(endpointId)
+                                                                                      queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeNumberOfRinsesWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"LaundryWasherControls.NumberOfRinses response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute SupportedRinses
+ */
+class ReadLaundryWasherControlsSupportedRinses : public ReadAttribute {
+public:
+    ReadLaundryWasherControlsSupportedRinses()
+        : ReadAttribute("supported-rinses")
+    {
+    }
+
+    ~ReadLaundryWasherControlsSupportedRinses() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000053) ReadAttribute (0x00000003) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterLaundryWasherControls alloc] initWithDevice:device
+                                                                                 endpointID:@(endpointId)
+                                                                                      queue:callbackQueue];
+        [cluster readAttributeSupportedRinsesWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"LaundryWasherControls.SupportedRinses response %@", [value description]);
+            if (error != nil) {
+                LogNSError("LaundryWasherControls SupportedRinses read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeLaundryWasherControlsSupportedRinses : public SubscribeAttribute {
+public:
+    SubscribeAttributeLaundryWasherControlsSupportedRinses()
+        : SubscribeAttribute("supported-rinses")
+    {
+    }
+
+    ~SubscribeAttributeLaundryWasherControlsSupportedRinses() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000053) ReportAttribute (0x00000003) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterLaundryWasherControls alloc] initWithDevice:device
+                                                                                 endpointID:@(endpointId)
+                                                                                      queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeSupportedRinsesWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"LaundryWasherControls.SupportedRinses response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute GeneratedCommandList
+ */
+class ReadLaundryWasherControlsGeneratedCommandList : public ReadAttribute {
+public:
+    ReadLaundryWasherControlsGeneratedCommandList()
+        : ReadAttribute("generated-command-list")
+    {
+    }
+
+    ~ReadLaundryWasherControlsGeneratedCommandList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000053) ReadAttribute (0x0000FFF8) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterLaundryWasherControls alloc] initWithDevice:device
+                                                                                 endpointID:@(endpointId)
+                                                                                      queue:callbackQueue];
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"LaundryWasherControls.GeneratedCommandList response %@", [value description]);
+            if (error != nil) {
+                LogNSError("LaundryWasherControls GeneratedCommandList read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeLaundryWasherControlsGeneratedCommandList : public SubscribeAttribute {
+public:
+    SubscribeAttributeLaundryWasherControlsGeneratedCommandList()
+        : SubscribeAttribute("generated-command-list")
+    {
+    }
+
+    ~SubscribeAttributeLaundryWasherControlsGeneratedCommandList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000053) ReportAttribute (0x0000FFF8) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterLaundryWasherControls alloc] initWithDevice:device
+                                                                                 endpointID:@(endpointId)
+                                                                                      queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeGeneratedCommandListWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"LaundryWasherControls.GeneratedCommandList response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute AcceptedCommandList
+ */
+class ReadLaundryWasherControlsAcceptedCommandList : public ReadAttribute {
+public:
+    ReadLaundryWasherControlsAcceptedCommandList()
+        : ReadAttribute("accepted-command-list")
+    {
+    }
+
+    ~ReadLaundryWasherControlsAcceptedCommandList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000053) ReadAttribute (0x0000FFF9) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterLaundryWasherControls alloc] initWithDevice:device
+                                                                                 endpointID:@(endpointId)
+                                                                                      queue:callbackQueue];
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"LaundryWasherControls.AcceptedCommandList response %@", [value description]);
+            if (error != nil) {
+                LogNSError("LaundryWasherControls AcceptedCommandList read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeLaundryWasherControlsAcceptedCommandList : public SubscribeAttribute {
+public:
+    SubscribeAttributeLaundryWasherControlsAcceptedCommandList()
+        : SubscribeAttribute("accepted-command-list")
+    {
+    }
+
+    ~SubscribeAttributeLaundryWasherControlsAcceptedCommandList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000053) ReportAttribute (0x0000FFF9) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterLaundryWasherControls alloc] initWithDevice:device
+                                                                                 endpointID:@(endpointId)
+                                                                                      queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeAcceptedCommandListWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"LaundryWasherControls.AcceptedCommandList response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute EventList
+ */
+class ReadLaundryWasherControlsEventList : public ReadAttribute {
+public:
+    ReadLaundryWasherControlsEventList()
+        : ReadAttribute("event-list")
+    {
+    }
+
+    ~ReadLaundryWasherControlsEventList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000053) ReadAttribute (0x0000FFFA) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterLaundryWasherControls alloc] initWithDevice:device
+                                                                                 endpointID:@(endpointId)
+                                                                                      queue:callbackQueue];
+        [cluster readAttributeEventListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"LaundryWasherControls.EventList response %@", [value description]);
+            if (error != nil) {
+                LogNSError("LaundryWasherControls EventList read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeLaundryWasherControlsEventList : public SubscribeAttribute {
+public:
+    SubscribeAttributeLaundryWasherControlsEventList()
+        : SubscribeAttribute("event-list")
+    {
+    }
+
+    ~SubscribeAttributeLaundryWasherControlsEventList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000053) ReportAttribute (0x0000FFFA) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterLaundryWasherControls alloc] initWithDevice:device
+                                                                                 endpointID:@(endpointId)
+                                                                                      queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeEventListWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"LaundryWasherControls.EventList response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute AttributeList
+ */
+class ReadLaundryWasherControlsAttributeList : public ReadAttribute {
+public:
+    ReadLaundryWasherControlsAttributeList()
+        : ReadAttribute("attribute-list")
+    {
+    }
+
+    ~ReadLaundryWasherControlsAttributeList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000053) ReadAttribute (0x0000FFFB) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterLaundryWasherControls alloc] initWithDevice:device
+                                                                                 endpointID:@(endpointId)
+                                                                                      queue:callbackQueue];
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"LaundryWasherControls.AttributeList response %@", [value description]);
+            if (error != nil) {
+                LogNSError("LaundryWasherControls AttributeList read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeLaundryWasherControlsAttributeList : public SubscribeAttribute {
+public:
+    SubscribeAttributeLaundryWasherControlsAttributeList()
+        : SubscribeAttribute("attribute-list")
+    {
+    }
+
+    ~SubscribeAttributeLaundryWasherControlsAttributeList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000053) ReportAttribute (0x0000FFFB) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterLaundryWasherControls alloc] initWithDevice:device
+                                                                                 endpointID:@(endpointId)
+                                                                                      queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeAttributeListWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"LaundryWasherControls.AttributeList response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute FeatureMap
+ */
+class ReadLaundryWasherControlsFeatureMap : public ReadAttribute {
+public:
+    ReadLaundryWasherControlsFeatureMap()
+        : ReadAttribute("feature-map")
+    {
+    }
+
+    ~ReadLaundryWasherControlsFeatureMap() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000053) ReadAttribute (0x0000FFFC) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterLaundryWasherControls alloc] initWithDevice:device
+                                                                                 endpointID:@(endpointId)
+                                                                                      queue:callbackQueue];
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"LaundryWasherControls.FeatureMap response %@", [value description]);
+            if (error != nil) {
+                LogNSError("LaundryWasherControls FeatureMap read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeLaundryWasherControlsFeatureMap : public SubscribeAttribute {
+public:
+    SubscribeAttributeLaundryWasherControlsFeatureMap()
+        : SubscribeAttribute("feature-map")
+    {
+    }
+
+    ~SubscribeAttributeLaundryWasherControlsFeatureMap() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000053) ReportAttribute (0x0000FFFC) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterLaundryWasherControls alloc] initWithDevice:device
+                                                                                 endpointID:@(endpointId)
+                                                                                      queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeFeatureMapWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"LaundryWasherControls.FeatureMap response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute ClusterRevision
+ */
+class ReadLaundryWasherControlsClusterRevision : public ReadAttribute {
+public:
+    ReadLaundryWasherControlsClusterRevision()
+        : ReadAttribute("cluster-revision")
+    {
+    }
+
+    ~ReadLaundryWasherControlsClusterRevision() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000053) ReadAttribute (0x0000FFFD) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterLaundryWasherControls alloc] initWithDevice:device
+                                                                                 endpointID:@(endpointId)
+                                                                                      queue:callbackQueue];
+        [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"LaundryWasherControls.ClusterRevision response %@", [value description]);
+            if (error != nil) {
+                LogNSError("LaundryWasherControls ClusterRevision read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeLaundryWasherControlsClusterRevision : public SubscribeAttribute {
+public:
+    SubscribeAttributeLaundryWasherControlsClusterRevision()
+        : SubscribeAttribute("cluster-revision")
+    {
+    }
+
+    ~SubscribeAttributeLaundryWasherControlsClusterRevision() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x00000053) ReportAttribute (0x0000FFFD) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterLaundryWasherControls alloc] initWithDevice:device
+                                                                                 endpointID:@(endpointId)
+                                                                                      queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeClusterRevisionWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"LaundryWasherControls.ClusterRevision response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -123351,6 +124151,43 @@ void registerClusterModeSelect(Commands & commands)
 
     commands.Register(clusterName, clusterCommands);
 }
+void registerClusterLaundryWasherControls(Commands & commands)
+{
+    using namespace chip::app::Clusters::LaundryWasherControls;
+
+    const char * clusterName = "LaundryWasherControls";
+
+    commands_list clusterCommands = {
+        make_unique<ClusterCommand>(Id), //
+        make_unique<ReadAttribute>(Id), //
+        make_unique<ReadLaundryWasherControlsSpinSpeeds>(), //
+        make_unique<WriteAttribute>(Id), //
+        make_unique<SubscribeAttribute>(Id), //
+        make_unique<SubscribeAttributeLaundryWasherControlsSpinSpeeds>(), //
+        make_unique<ReadLaundryWasherControlsSpinSpeedCurrent>(), //
+        make_unique<WriteLaundryWasherControlsSpinSpeedCurrent>(), //
+        make_unique<SubscribeAttributeLaundryWasherControlsSpinSpeedCurrent>(), //
+        make_unique<ReadLaundryWasherControlsNumberOfRinses>(), //
+        make_unique<WriteLaundryWasherControlsNumberOfRinses>(), //
+        make_unique<SubscribeAttributeLaundryWasherControlsNumberOfRinses>(), //
+        make_unique<ReadLaundryWasherControlsSupportedRinses>(), //
+        make_unique<SubscribeAttributeLaundryWasherControlsSupportedRinses>(), //
+        make_unique<ReadLaundryWasherControlsGeneratedCommandList>(), //
+        make_unique<SubscribeAttributeLaundryWasherControlsGeneratedCommandList>(), //
+        make_unique<ReadLaundryWasherControlsAcceptedCommandList>(), //
+        make_unique<SubscribeAttributeLaundryWasherControlsAcceptedCommandList>(), //
+        make_unique<ReadLaundryWasherControlsEventList>(), //
+        make_unique<SubscribeAttributeLaundryWasherControlsEventList>(), //
+        make_unique<ReadLaundryWasherControlsAttributeList>(), //
+        make_unique<SubscribeAttributeLaundryWasherControlsAttributeList>(), //
+        make_unique<ReadLaundryWasherControlsFeatureMap>(), //
+        make_unique<SubscribeAttributeLaundryWasherControlsFeatureMap>(), //
+        make_unique<ReadLaundryWasherControlsClusterRevision>(), //
+        make_unique<SubscribeAttributeLaundryWasherControlsClusterRevision>(), //
+    };
+
+    commands.Register(clusterName, clusterCommands);
+}
 void registerClusterTemperatureControl(Commands & commands)
 {
     using namespace chip::app::Clusters::TemperatureControl;
@@ -126297,6 +127134,7 @@ void registerClusters(Commands & commands)
     registerClusterUserLabel(commands);
     registerClusterBooleanState(commands);
     registerClusterModeSelect(commands);
+    registerClusterLaundryWasherControls(commands);
     registerClusterTemperatureControl(commands);
     registerClusterRefrigeratorAlarm(commands);
     registerClusterAirQuality(commands);
