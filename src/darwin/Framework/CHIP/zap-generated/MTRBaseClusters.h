@@ -25536,29 +25536,29 @@ typedef NS_ENUM(uint8_t, MTRFanControlAirflowDirection) {
     MTRFanControlAirflowDirectionReverse MTR_NEWLY_AVAILABLE = 0x01,
 } MTR_NEWLY_AVAILABLE;
 
-typedef NS_ENUM(uint8_t, MTRFanControlDirection) {
-    MTRFanControlDirectionIncrease MTR_NEWLY_AVAILABLE = 0x00,
-    MTRFanControlDirectionDecrease MTR_NEWLY_AVAILABLE = 0x01,
+typedef NS_ENUM(uint8_t, MTRFanControlFanMode) {
+    MTRFanControlFanModeOff MTR_NEWLY_AVAILABLE = 0x00,
+    MTRFanControlFanModeLow MTR_NEWLY_AVAILABLE = 0x01,
+    MTRFanControlFanModeMedium MTR_NEWLY_AVAILABLE = 0x02,
+    MTRFanControlFanModeHigh MTR_NEWLY_AVAILABLE = 0x03,
+    MTRFanControlFanModeOn MTR_NEWLY_AVAILABLE = 0x04,
+    MTRFanControlFanModeAuto MTR_NEWLY_AVAILABLE = 0x05,
+    MTRFanControlFanModeSmart MTR_NEWLY_AVAILABLE = 0x06,
 } MTR_NEWLY_AVAILABLE;
 
-typedef NS_ENUM(uint8_t, MTRFanControlFanModeSequenceType) {
-    MTRFanControlFanModeSequenceTypeOffLowMedHigh API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x00,
-    MTRFanControlFanModeSequenceTypeOffLowHigh API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x01,
-    MTRFanControlFanModeSequenceTypeOffLowMedHighAuto API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x02,
-    MTRFanControlFanModeSequenceTypeOffLowHighAuto API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x03,
-    MTRFanControlFanModeSequenceTypeOffOnAuto API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x04,
-    MTRFanControlFanModeSequenceTypeOffOn API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x05,
-} API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
+typedef NS_ENUM(uint8_t, MTRFanControlFanModeSequence) {
+    MTRFanControlFanModeSequenceOffLowMedHigh MTR_NEWLY_AVAILABLE = 0x00,
+    MTRFanControlFanModeSequenceOffLowHigh MTR_NEWLY_AVAILABLE = 0x01,
+    MTRFanControlFanModeSequenceOffLowMedHighAuto MTR_NEWLY_AVAILABLE = 0x02,
+    MTRFanControlFanModeSequenceOffLowHighAuto MTR_NEWLY_AVAILABLE = 0x03,
+    MTRFanControlFanModeSequenceOffOnAuto MTR_NEWLY_AVAILABLE = 0x04,
+    MTRFanControlFanModeSequenceOffOn MTR_NEWLY_AVAILABLE = 0x05,
+} MTR_NEWLY_AVAILABLE;
 
-typedef NS_ENUM(uint8_t, MTRFanControlFanModeType) {
-    MTRFanControlFanModeTypeOff API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x00,
-    MTRFanControlFanModeTypeLow API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x01,
-    MTRFanControlFanModeTypeMedium API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x02,
-    MTRFanControlFanModeTypeHigh API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x03,
-    MTRFanControlFanModeTypeOn API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x04,
-    MTRFanControlFanModeTypeAuto API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x05,
-    MTRFanControlFanModeTypeSmart API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x06,
-} API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
+typedef NS_ENUM(uint8_t, MTRFanControlStepDirection) {
+    MTRFanControlStepDirectionIncrease MTR_NEWLY_AVAILABLE = 0x00,
+    MTRFanControlStepDirectionDecrease MTR_NEWLY_AVAILABLE = 0x01,
+} MTR_NEWLY_AVAILABLE;
 
 typedef NS_OPTIONS(uint32_t, MTRFanControlFeature) {
     MTRFanControlFeatureMultiSpeed API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x1,
@@ -25569,21 +25569,16 @@ typedef NS_OPTIONS(uint32_t, MTRFanControlFeature) {
     MTRFanControlFeatureAirflowDirection MTR_NEWLY_AVAILABLE = 0x20,
 } API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
-typedef NS_OPTIONS(uint8_t, MTRFanControlRockSupportMask) {
-    MTRFanControlRockSupportMaskRockLeftRight API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x1,
-    MTRFanControlRockSupportMaskRockUpDown API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x2,
-    MTRFanControlRockSupportMaskRockRound API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x4,
-} API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
+typedef NS_OPTIONS(uint8_t, MTRFanControlRockBitmap) {
+    MTRFanControlRockBitmapRockLeftRight MTR_NEWLY_AVAILABLE = 0x1,
+    MTRFanControlRockBitmapRockUpDown MTR_NEWLY_AVAILABLE = 0x2,
+    MTRFanControlRockBitmapRockRound MTR_NEWLY_AVAILABLE = 0x4,
+} MTR_NEWLY_AVAILABLE;
 
-typedef NS_OPTIONS(uint8_t, MTRFanControlWindSettingMask) {
-    MTRFanControlWindSettingMaskSleepWind API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x1,
-    MTRFanControlWindSettingMaskNaturalWind API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x2,
-} API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-
-typedef NS_OPTIONS(uint8_t, MTRFanControlWindSupportMask) {
-    MTRFanControlWindSupportMaskSleepWind API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x1,
-    MTRFanControlWindSupportMaskNaturalWind API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x2,
-} API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
+typedef NS_OPTIONS(uint8_t, MTRFanControlWindBitmap) {
+    MTRFanControlWindBitmapSleepWind MTR_NEWLY_AVAILABLE = 0x1,
+    MTRFanControlWindBitmapNaturalWind MTR_NEWLY_AVAILABLE = 0x2,
+} MTR_NEWLY_AVAILABLE;
 
 typedef NS_ENUM(uint8_t, MTRColorControlColorLoopAction) {
     MTRColorControlColorLoopActionDeactivate API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x00,

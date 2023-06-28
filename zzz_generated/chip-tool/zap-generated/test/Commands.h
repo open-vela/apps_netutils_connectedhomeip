@@ -36216,7 +36216,7 @@ private:
         case 1:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::FanControl::FanModeType value;
+                chip::app::Clusters::FanControl::FanModeEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
@@ -36226,7 +36226,7 @@ private:
         case 2:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::FanControl::FanModeSequenceType value;
+                chip::app::Clusters::FanControl::FanModeSequenceEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
@@ -36236,9 +36236,9 @@ private:
         case 3:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<uint8_t> value;
+                chip::app::DataModel::Nullable<chip::Percent> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
+                VerifyOrReturn(CheckConstraintType("value", "Percent", "Percent"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 100U));
             }
@@ -36246,9 +36246,9 @@ private:
         case 4:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::Percent value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
+                VerifyOrReturn(CheckConstraintType("value", "Percent", "Percent"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 100U));
             }
@@ -36465,7 +36465,7 @@ private:
         case 1:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::BitMask<chip::app::Clusters::FanControl::RockBitmap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap8", "bitmap8"));
             }
@@ -36473,7 +36473,7 @@ private:
         case 2:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::BitMask<chip::app::Clusters::FanControl::RockBitmap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap8", "bitmap8"));
             }
@@ -36560,7 +36560,7 @@ private:
         case 1:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::BitMask<chip::app::Clusters::FanControl::WindBitmap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap8", "bitmap8"));
             }
@@ -36568,7 +36568,7 @@ private:
         case 2:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::BitMask<chip::app::Clusters::FanControl::WindBitmap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap8", "bitmap8"));
             }
@@ -36745,7 +36745,7 @@ private:
         case 3:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::FanControl::FanModeType value;
+                chip::app::Clusters::FanControl::FanModeEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("fanMode", value, 3U));
             }
@@ -36760,7 +36760,7 @@ private:
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<uint8_t> value;
+                chip::app::DataModel::Nullable<chip::Percent> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("percentSetting", value));
                 VerifyOrReturn(CheckValue("percentSetting.Value()", value.Value(), 0U));
@@ -36769,7 +36769,7 @@ private:
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::Percent value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("percentCurrent", value, 0U));
             }
@@ -36784,7 +36784,7 @@ private:
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::Percent value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(
                     CheckValue("percentCurrent", value, mConfigPercentSetting.HasValue() ? mConfigPercentSetting.Value() : 30U));
@@ -36793,7 +36793,7 @@ private:
         case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<uint8_t> value;
+                chip::app::DataModel::Nullable<chip::Percent> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("percentSetting", value));
                 VerifyOrReturn(CheckValue("percentSetting.Value()", value.Value(),
@@ -36810,7 +36810,7 @@ private:
         case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::FanControl::FanModeType value;
+                chip::app::Clusters::FanControl::FanModeEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("fanMode", value, 0U));
             }
@@ -36841,8 +36841,8 @@ private:
             LogStep(1, "Step 2a: TH writes a supported FanMode attribute that is other than off to DUT");
             VerifyOrDo(!ShouldSkip("FAN.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::Clusters::FanControl::FanModeType value;
-            value = static_cast<chip::app::Clusters::FanControl::FanModeType>(3);
+            chip::app::Clusters::FanControl::FanModeEnum value;
+            value = static_cast<chip::app::Clusters::FanControl::FanModeEnum>(3);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), FanControl::Id, FanControl::Attributes::FanMode::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
@@ -36864,8 +36864,8 @@ private:
             LogStep(4, "Step 2.1a: TH writes the Off value of FanMode attribute to DUT");
             VerifyOrDo(!ShouldSkip("FAN.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::Clusters::FanControl::FanModeType value;
-            value = static_cast<chip::app::Clusters::FanControl::FanModeType>(0);
+            chip::app::Clusters::FanControl::FanModeEnum value;
+            value = static_cast<chip::app::Clusters::FanControl::FanModeEnum>(0);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), FanControl::Id, FanControl::Attributes::FanMode::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
@@ -36893,7 +36893,7 @@ private:
             LogStep(8, "Step 3a: TH writes PercentSetting attribute a non-zero value to DUT");
             VerifyOrDo(!ShouldSkip("FAN.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::DataModel::Nullable<uint8_t> value;
+            chip::app::DataModel::Nullable<chip::Percent> value;
             value.SetNonNull();
             value.Value() = mConfigPercentSetting.HasValue() ? mConfigPercentSetting.Value() : 30U;
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), FanControl::Id, FanControl::Attributes::PercentSetting::Id, value,
@@ -36923,7 +36923,7 @@ private:
             LogStep(12, "Step 3.1a: TH writes PercentSetting attribute a zero value to DUT");
             VerifyOrDo(!ShouldSkip("FAN.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::DataModel::Nullable<uint8_t> value;
+            chip::app::DataModel::Nullable<chip::Percent> value;
             value.SetNonNull();
             value.Value() = 0U;
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), FanControl::Id, FanControl::Attributes::PercentSetting::Id, value,
@@ -37125,7 +37125,7 @@ private:
         case 3:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::BitMask<chip::app::Clusters::FanControl::WindBitmap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("windSetting", value, mConfigWindSetting.HasValue() ? mConfigWindSetting.Value() : 1U));
             }
@@ -37156,8 +37156,9 @@ private:
             LogStep(1, "Step 2: TH writes WindSetting attribute a valid value to DUT");
             VerifyOrDo(!ShouldSkip("FAN.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            uint8_t value;
-            value = mConfigWindSetting.HasValue() ? mConfigWindSetting.Value() : 1U;
+            chip::BitMask<chip::app::Clusters::FanControl::WindBitmap> value;
+            value = mConfigWindSetting.HasValue() ? mConfigWindSetting.Value()
+                                                  : static_cast<chip::BitMask<chip::app::Clusters::FanControl::WindBitmap>>(1U);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), FanControl::Id, FanControl::Attributes::WindSetting::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
@@ -86586,7 +86587,7 @@ private:
         case 2:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::FanControl::FanModeType value;
+                chip::app::Clusters::FanControl::FanModeEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("fanMode", value, 3U));
             }
@@ -86597,7 +86598,7 @@ private:
         case 4:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::FanControl::FanModeSequenceType value;
+                chip::app::Clusters::FanControl::FanModeSequenceEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("fanModeSequence", value, 5U));
             }
@@ -86608,7 +86609,7 @@ private:
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<uint8_t> value;
+                chip::app::DataModel::Nullable<chip::Percent> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("percentSetting", value));
                 VerifyOrReturn(CheckValue("percentSetting.Value()", value.Value(), 84U));
@@ -86637,7 +86638,7 @@ private:
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<uint8_t> value;
+                chip::app::DataModel::Nullable<chip::Percent> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("percentSetting", value));
                 VerifyOrReturn(CheckValue("percentSetting.Value()", value.Value(), 84U));
@@ -86658,7 +86659,7 @@ private:
         case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<uint8_t> value;
+                chip::app::DataModel::Nullable<chip::Percent> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("percentSetting", value));
                 VerifyOrReturn(CheckValue("percentSetting.Value()", value.Value(), 73U));
@@ -86667,7 +86668,7 @@ private:
         case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::Percent value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("percentCurrent", value, 73U));
             }
@@ -86690,7 +86691,7 @@ private:
         case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<uint8_t> value;
+                chip::app::DataModel::Nullable<chip::Percent> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("percentSetting", value));
                 VerifyOrReturn(CheckValue("percentSetting.Value()", value.Value(), 0U));
@@ -86699,7 +86700,7 @@ private:
         case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::Percent value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("percentCurrent", value, 0U));
             }
@@ -86727,7 +86728,7 @@ private:
         case 23:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<uint8_t> value;
+                chip::app::DataModel::Nullable<chip::Percent> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNull("percentSetting", value));
             }
@@ -86765,8 +86766,8 @@ private:
         case 1: {
             LogStep(1, "Write fan mode");
             ListFreer listFreer;
-            chip::app::Clusters::FanControl::FanModeType value;
-            value = static_cast<chip::app::Clusters::FanControl::FanModeType>(3);
+            chip::app::Clusters::FanControl::FanModeEnum value;
+            value = static_cast<chip::app::Clusters::FanControl::FanModeEnum>(3);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), FanControl::Id, FanControl::Attributes::FanMode::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
@@ -86778,8 +86779,8 @@ private:
         case 3: {
             LogStep(3, "Write fan mode sequence");
             ListFreer listFreer;
-            chip::app::Clusters::FanControl::FanModeSequenceType value;
-            value = static_cast<chip::app::Clusters::FanControl::FanModeSequenceType>(5);
+            chip::app::Clusters::FanControl::FanModeSequenceEnum value;
+            value = static_cast<chip::app::Clusters::FanControl::FanModeSequenceEnum>(5);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), FanControl::Id, FanControl::Attributes::FanModeSequence::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
@@ -86791,7 +86792,7 @@ private:
         case 5: {
             LogStep(5, "Write percent setting");
             ListFreer listFreer;
-            chip::app::DataModel::Nullable<uint8_t> value;
+            chip::app::DataModel::Nullable<chip::Percent> value;
             value.SetNonNull();
             value.Value() = 84U;
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), FanControl::Id, FanControl::Attributes::PercentSetting::Id, value,
@@ -86815,7 +86816,7 @@ private:
         case 9: {
             LogStep(9, "Write percent setting");
             ListFreer listFreer;
-            chip::app::DataModel::Nullable<uint8_t> value;
+            chip::app::DataModel::Nullable<chip::Percent> value;
             value.SetNull();
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), FanControl::Id, FanControl::Attributes::PercentSetting::Id, value,
                                   chip::NullOptional, chip::NullOptional);
@@ -86865,8 +86866,8 @@ private:
         case 17: {
             LogStep(17, "Write fan mode");
             ListFreer listFreer;
-            chip::app::Clusters::FanControl::FanModeType value;
-            value = static_cast<chip::app::Clusters::FanControl::FanModeType>(0);
+            chip::app::Clusters::FanControl::FanModeEnum value;
+            value = static_cast<chip::app::Clusters::FanControl::FanModeEnum>(0);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), FanControl::Id, FanControl::Attributes::FanMode::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
@@ -86893,8 +86894,8 @@ private:
         case 22: {
             LogStep(22, "Write fan mode");
             ListFreer listFreer;
-            chip::app::Clusters::FanControl::FanModeType value;
-            value = static_cast<chip::app::Clusters::FanControl::FanModeType>(5);
+            chip::app::Clusters::FanControl::FanModeEnum value;
+            value = static_cast<chip::app::Clusters::FanControl::FanModeEnum>(5);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), FanControl::Id, FanControl::Attributes::FanMode::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }

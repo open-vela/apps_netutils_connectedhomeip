@@ -62900,7 +62900,7 @@ public:
     }
 
 private:
-    uint8_t mValue;
+    chip::Percent mValue;
 };
 
 class SubscribeAttributeFanControlPercentSetting : public SubscribeAttribute {
