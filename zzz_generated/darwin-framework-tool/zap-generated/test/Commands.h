@@ -48822,9 +48822,9 @@ private:
 
             if (value != nil) {
 
-                VerifyOrReturn(CheckConstraintType("percentSetting", "int8u", "int8u"));
-                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("percentSetting", [value unsignedCharValue], 0U));
-                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("percentSetting", [value unsignedCharValue], 100U));
+                VerifyOrReturn(CheckConstraintType("percentSetting", "Percent", "Percent"));
+                VerifyOrReturn(CheckConstraintMinValue<chip::Percent>("percentSetting", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<chip::Percent>("percentSetting", [value unsignedCharValue], 100U));
             }
 
             NextTest();
@@ -48845,9 +48845,9 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("percentCurrent", "int8u", "int8u"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("percentCurrent", [value unsignedCharValue], 0U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("percentCurrent", [value unsignedCharValue], 100U));
+            VerifyOrReturn(CheckConstraintType("percentCurrent", "Percent", "Percent"));
+            VerifyOrReturn(CheckConstraintMinValue<chip::Percent>("percentCurrent", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<chip::Percent>("percentCurrent", [value unsignedCharValue], 100U));
 
             NextTest();
         }];

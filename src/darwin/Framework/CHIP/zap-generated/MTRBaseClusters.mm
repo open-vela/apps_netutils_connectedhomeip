@@ -71143,7 +71143,7 @@ using chip::System::Clock::Timeout;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = FanControl::Attributes::FanMode::TypeInfo;
-    return MTRReadAttribute<MTRFanControlClusterFanModeTypeAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+    return MTRReadAttribute<MTRFanControlClusterFanModeEnumAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -71189,7 +71189,7 @@ using chip::System::Clock::Timeout;
                               reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = FanControl::Attributes::FanMode::TypeInfo;
-    MTRSubscribeAttribute<MTRFanControlClusterFanModeTypeAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(
+    MTRSubscribeAttribute<MTRFanControlClusterFanModeEnumAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(
         params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
 }
@@ -71199,9 +71199,9 @@ using chip::System::Clock::Timeout;
                                             queue:(dispatch_queue_t)queue
                                        completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRFanControlClusterFanModeTypeAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRFanControlClusterFanModeEnumAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(FanControlClusterFanModeTypeAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(FanControlClusterFanModeEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = FanControl::Attributes::FanMode::TypeInfo;
@@ -71223,7 +71223,7 @@ using chip::System::Clock::Timeout;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = FanControl::Attributes::FanModeSequence::TypeInfo;
-    return MTRReadAttribute<MTRFanControlClusterFanModeSequenceTypeAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+    return MTRReadAttribute<MTRFanControlClusterFanModeSequenceEnumAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -71269,7 +71269,7 @@ using chip::System::Clock::Timeout;
                                       reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = FanControl::Attributes::FanModeSequence::TypeInfo;
-    MTRSubscribeAttribute<MTRFanControlClusterFanModeSequenceTypeAttributeCallbackSubscriptionBridge, NSNumber,
+    MTRSubscribeAttribute<MTRFanControlClusterFanModeSequenceEnumAttributeCallbackSubscriptionBridge, NSNumber,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -71280,9 +71280,9 @@ using chip::System::Clock::Timeout;
                                                completion:
                                                    (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRFanControlClusterFanModeSequenceTypeAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRFanControlClusterFanModeSequenceEnumAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(FanControlClusterFanModeSequenceTypeAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(FanControlClusterFanModeSequenceEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = FanControl::Attributes::FanModeSequence::TypeInfo;
@@ -71603,7 +71603,7 @@ using chip::System::Clock::Timeout;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = FanControl::Attributes::RockSupport::TypeInfo;
-    return MTRReadAttribute<MTRInt8uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+    return MTRReadAttribute<MTRFanControlRockSupportAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -71612,7 +71612,7 @@ using chip::System::Clock::Timeout;
                                   reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = FanControl::Attributes::RockSupport::TypeInfo;
-    MTRSubscribeAttribute<MTRInt8uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
+    MTRSubscribeAttribute<MTRFanControlRockSupportAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
 }
@@ -71622,9 +71622,9 @@ using chip::System::Clock::Timeout;
                                                 queue:(dispatch_queue_t)queue
                                            completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRInt8uAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRFanControlRockSupportAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(
-        clusterStateCacheContainer.baseDevice, ^(Int8uAttributeCallback successCb, MTRErrorCallback failureCb) {
+        clusterStateCacheContainer.baseDevice, ^(FanControlRockSupportAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = FanControl::Attributes::RockSupport::TypeInfo;
@@ -71646,7 +71646,7 @@ using chip::System::Clock::Timeout;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = FanControl::Attributes::RockSetting::TypeInfo;
-    return MTRReadAttribute<MTRInt8uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+    return MTRReadAttribute<MTRFanControlRockSettingAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -71679,7 +71679,7 @@ using chip::System::Clock::Timeout;
             ListFreer listFreer;
             using TypeInfo = FanControl::Attributes::RockSetting::TypeInfo;
             TypeInfo::Type cppValue;
-            cppValue = value.unsignedCharValue;
+            cppValue = static_cast<std::remove_reference_t<decltype(cppValue)>>(value.unsignedCharValue);
 
             chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
@@ -71692,7 +71692,7 @@ using chip::System::Clock::Timeout;
                                   reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = FanControl::Attributes::RockSetting::TypeInfo;
-    MTRSubscribeAttribute<MTRInt8uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
+    MTRSubscribeAttribute<MTRFanControlRockSettingAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
 }
@@ -71702,9 +71702,9 @@ using chip::System::Clock::Timeout;
                                                 queue:(dispatch_queue_t)queue
                                            completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRInt8uAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRFanControlRockSettingAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(
-        clusterStateCacheContainer.baseDevice, ^(Int8uAttributeCallback successCb, MTRErrorCallback failureCb) {
+        clusterStateCacheContainer.baseDevice, ^(FanControlRockSettingAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = FanControl::Attributes::RockSetting::TypeInfo;
@@ -71726,7 +71726,7 @@ using chip::System::Clock::Timeout;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = FanControl::Attributes::WindSupport::TypeInfo;
-    return MTRReadAttribute<MTRInt8uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+    return MTRReadAttribute<MTRFanControlWindSupportAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -71735,7 +71735,7 @@ using chip::System::Clock::Timeout;
                                   reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = FanControl::Attributes::WindSupport::TypeInfo;
-    MTRSubscribeAttribute<MTRInt8uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
+    MTRSubscribeAttribute<MTRFanControlWindSupportAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
 }
@@ -71745,9 +71745,9 @@ using chip::System::Clock::Timeout;
                                                 queue:(dispatch_queue_t)queue
                                            completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRInt8uAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRFanControlWindSupportAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(
-        clusterStateCacheContainer.baseDevice, ^(Int8uAttributeCallback successCb, MTRErrorCallback failureCb) {
+        clusterStateCacheContainer.baseDevice, ^(FanControlWindSupportAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = FanControl::Attributes::WindSupport::TypeInfo;
@@ -71769,7 +71769,7 @@ using chip::System::Clock::Timeout;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = FanControl::Attributes::WindSetting::TypeInfo;
-    return MTRReadAttribute<MTRInt8uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+    return MTRReadAttribute<MTRFanControlWindSettingAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -71802,7 +71802,7 @@ using chip::System::Clock::Timeout;
             ListFreer listFreer;
             using TypeInfo = FanControl::Attributes::WindSetting::TypeInfo;
             TypeInfo::Type cppValue;
-            cppValue = value.unsignedCharValue;
+            cppValue = static_cast<std::remove_reference_t<decltype(cppValue)>>(value.unsignedCharValue);
 
             chip::Controller::ClusterBase cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
@@ -71815,7 +71815,7 @@ using chip::System::Clock::Timeout;
                                   reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = FanControl::Attributes::WindSetting::TypeInfo;
-    MTRSubscribeAttribute<MTRInt8uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
+    MTRSubscribeAttribute<MTRFanControlWindSettingAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
 }
@@ -71825,9 +71825,9 @@ using chip::System::Clock::Timeout;
                                                 queue:(dispatch_queue_t)queue
                                            completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRInt8uAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRFanControlWindSettingAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(
-        clusterStateCacheContainer.baseDevice, ^(Int8uAttributeCallback successCb, MTRErrorCallback failureCb) {
+        clusterStateCacheContainer.baseDevice, ^(FanControlWindSettingAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = FanControl::Attributes::WindSetting::TypeInfo;
