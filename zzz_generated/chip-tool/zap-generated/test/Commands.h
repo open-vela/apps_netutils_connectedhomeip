@@ -132014,10 +132014,8 @@ private:
                         auto iter_3 = iter_1.GetValue().attributeValueList.begin();
                         VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_1.GetValue().attributeValueList)>(
                             "extensionFieldSets.Value()[0].attributeValueList", iter_3, 0));
-                        VerifyOrReturn(CheckValuePresent("extensionFieldSets.Value()[0].attributeValueList[0].attributeID",
-                                                         iter_3.GetValue().attributeID));
-                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[0].attributeValueList[0].attributeID.Value()",
-                                                  iter_3.GetValue().attributeID.Value(), 0UL));
+                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[0].attributeValueList[0].attributeID",
+                                                  iter_3.GetValue().attributeID, 0UL));
                         VerifyOrReturn(CheckValue("extensionFieldSets.Value()[0].attributeValueList[0].attributeValue",
                                                   iter_3.GetValue().attributeValue, 1UL));
                         VerifyOrReturn(CheckNoMoreListItems<decltype(iter_1.GetValue().attributeValueList)>(
@@ -132030,18 +132028,14 @@ private:
                         auto iter_3 = iter_1.GetValue().attributeValueList.begin();
                         VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_1.GetValue().attributeValueList)>(
                             "extensionFieldSets.Value()[1].attributeValueList", iter_3, 0));
-                        VerifyOrReturn(CheckValuePresent("extensionFieldSets.Value()[1].attributeValueList[0].attributeID",
-                                                         iter_3.GetValue().attributeID));
-                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[0].attributeID.Value()",
-                                                  iter_3.GetValue().attributeID.Value(), 0UL));
+                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[0].attributeID",
+                                                  iter_3.GetValue().attributeID, 0UL));
                         VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[0].attributeValue",
                                                   iter_3.GetValue().attributeValue, 100UL));
                         VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_1.GetValue().attributeValueList)>(
                             "extensionFieldSets.Value()[1].attributeValueList", iter_3, 1));
-                        VerifyOrReturn(CheckValuePresent("extensionFieldSets.Value()[1].attributeValueList[1].attributeID",
-                                                         iter_3.GetValue().attributeID));
-                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[1].attributeID.Value()",
-                                                  iter_3.GetValue().attributeID.Value(), 1UL));
+                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[1].attributeID",
+                                                  iter_3.GetValue().attributeID, 1UL));
                         VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[1].attributeValue",
                                                   iter_3.GetValue().attributeValue, 0UL));
                         VerifyOrReturn(CheckNoMoreListItems<decltype(iter_1.GetValue().attributeValueList)>(
@@ -132661,9 +132655,8 @@ private:
                     auto * listHolder_2 = new ListHolder<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(1);
                     listFreer.add(listHolder_2);
 
-                    listHolder_2->mList[0].attributeID.Emplace();
-                    listHolder_2->mList[0].attributeID.Value() = 0UL;
-                    listHolder_2->mList[0].attributeValue      = 1UL;
+                    listHolder_2->mList[0].attributeID    = 0UL;
+                    listHolder_2->mList[0].attributeValue = 1UL;
 
                     listHolder_0->mList[0].attributeValueList =
                         chip::app::DataModel::List<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(
@@ -132676,13 +132669,11 @@ private:
                     auto * listHolder_2 = new ListHolder<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(2);
                     listFreer.add(listHolder_2);
 
-                    listHolder_2->mList[0].attributeID.Emplace();
-                    listHolder_2->mList[0].attributeID.Value() = 0UL;
-                    listHolder_2->mList[0].attributeValue      = 100UL;
+                    listHolder_2->mList[0].attributeID    = 0UL;
+                    listHolder_2->mList[0].attributeValue = 100UL;
 
-                    listHolder_2->mList[1].attributeID.Emplace();
-                    listHolder_2->mList[1].attributeID.Value() = 1UL;
-                    listHolder_2->mList[1].attributeValue      = 0UL;
+                    listHolder_2->mList[1].attributeID    = 1UL;
+                    listHolder_2->mList[1].attributeValue = 0UL;
 
                     listHolder_0->mList[1].attributeValueList =
                         chip::app::DataModel::List<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(
@@ -133109,10 +133100,8 @@ private:
                         auto iter_3 = iter_1.GetValue().attributeValueList.begin();
                         VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_1.GetValue().attributeValueList)>(
                             "extensionFieldSets.Value()[0].attributeValueList", iter_3, 0));
-                        VerifyOrReturn(CheckValuePresent("extensionFieldSets.Value()[0].attributeValueList[0].attributeID",
-                                                         iter_3.GetValue().attributeID));
-                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[0].attributeValueList[0].attributeID.Value()",
-                                                  iter_3.GetValue().attributeID.Value(), 0UL));
+                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[0].attributeValueList[0].attributeID",
+                                                  iter_3.GetValue().attributeID, 0UL));
                         VerifyOrReturn(CheckValue("extensionFieldSets.Value()[0].attributeValueList[0].attributeValue",
                                                   iter_3.GetValue().attributeValue, 1UL));
                         VerifyOrReturn(CheckNoMoreListItems<decltype(iter_1.GetValue().attributeValueList)>(
@@ -133125,18 +133114,14 @@ private:
                         auto iter_3 = iter_1.GetValue().attributeValueList.begin();
                         VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_1.GetValue().attributeValueList)>(
                             "extensionFieldSets.Value()[1].attributeValueList", iter_3, 0));
-                        VerifyOrReturn(CheckValuePresent("extensionFieldSets.Value()[1].attributeValueList[0].attributeID",
-                                                         iter_3.GetValue().attributeID));
-                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[0].attributeID.Value()",
-                                                  iter_3.GetValue().attributeID.Value(), 0UL));
+                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[0].attributeID",
+                                                  iter_3.GetValue().attributeID, 0UL));
                         VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[0].attributeValue",
                                                   iter_3.GetValue().attributeValue, 100UL));
                         VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_1.GetValue().attributeValueList)>(
                             "extensionFieldSets.Value()[1].attributeValueList", iter_3, 1));
-                        VerifyOrReturn(CheckValuePresent("extensionFieldSets.Value()[1].attributeValueList[1].attributeID",
-                                                         iter_3.GetValue().attributeID));
-                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[1].attributeID.Value()",
-                                                  iter_3.GetValue().attributeID.Value(), 1UL));
+                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[1].attributeID",
+                                                  iter_3.GetValue().attributeID, 1UL));
                         VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[1].attributeValue",
                                                   iter_3.GetValue().attributeValue, 0UL));
                         VerifyOrReturn(CheckNoMoreListItems<decltype(iter_1.GetValue().attributeValueList)>(
@@ -133167,10 +133152,8 @@ private:
                         auto iter_3 = iter_1.GetValue().attributeValueList.begin();
                         VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_1.GetValue().attributeValueList)>(
                             "extensionFieldSets.Value()[0].attributeValueList", iter_3, 0));
-                        VerifyOrReturn(CheckValuePresent("extensionFieldSets.Value()[0].attributeValueList[0].attributeID",
-                                                         iter_3.GetValue().attributeID));
-                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[0].attributeValueList[0].attributeID.Value()",
-                                                  iter_3.GetValue().attributeID.Value(), 0UL));
+                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[0].attributeValueList[0].attributeID",
+                                                  iter_3.GetValue().attributeID, 0UL));
                         VerifyOrReturn(CheckValue("extensionFieldSets.Value()[0].attributeValueList[0].attributeValue",
                                                   iter_3.GetValue().attributeValue, 1UL));
                         VerifyOrReturn(CheckNoMoreListItems<decltype(iter_1.GetValue().attributeValueList)>(
@@ -133183,18 +133166,14 @@ private:
                         auto iter_3 = iter_1.GetValue().attributeValueList.begin();
                         VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_1.GetValue().attributeValueList)>(
                             "extensionFieldSets.Value()[1].attributeValueList", iter_3, 0));
-                        VerifyOrReturn(CheckValuePresent("extensionFieldSets.Value()[1].attributeValueList[0].attributeID",
-                                                         iter_3.GetValue().attributeID));
-                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[0].attributeID.Value()",
-                                                  iter_3.GetValue().attributeID.Value(), 0UL));
+                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[0].attributeID",
+                                                  iter_3.GetValue().attributeID, 0UL));
                         VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[0].attributeValue",
                                                   iter_3.GetValue().attributeValue, 100UL));
                         VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_1.GetValue().attributeValueList)>(
                             "extensionFieldSets.Value()[1].attributeValueList", iter_3, 1));
-                        VerifyOrReturn(CheckValuePresent("extensionFieldSets.Value()[1].attributeValueList[1].attributeID",
-                                                         iter_3.GetValue().attributeID));
-                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[1].attributeID.Value()",
-                                                  iter_3.GetValue().attributeID.Value(), 1UL));
+                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[1].attributeID",
+                                                  iter_3.GetValue().attributeID, 1UL));
                         VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[1].attributeValue",
                                                   iter_3.GetValue().attributeValue, 0UL));
                         VerifyOrReturn(CheckNoMoreListItems<decltype(iter_1.GetValue().attributeValueList)>(
@@ -133425,9 +133404,8 @@ private:
                     auto * listHolder_2 = new ListHolder<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(1);
                     listFreer.add(listHolder_2);
 
-                    listHolder_2->mList[0].attributeID.Emplace();
-                    listHolder_2->mList[0].attributeID.Value() = 0UL;
-                    listHolder_2->mList[0].attributeValue      = 1UL;
+                    listHolder_2->mList[0].attributeID    = 0UL;
+                    listHolder_2->mList[0].attributeValue = 1UL;
 
                     listHolder_0->mList[0].attributeValueList =
                         chip::app::DataModel::List<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(
@@ -133440,13 +133418,11 @@ private:
                     auto * listHolder_2 = new ListHolder<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(2);
                     listFreer.add(listHolder_2);
 
-                    listHolder_2->mList[0].attributeID.Emplace();
-                    listHolder_2->mList[0].attributeID.Value() = 0UL;
-                    listHolder_2->mList[0].attributeValue      = 100UL;
+                    listHolder_2->mList[0].attributeID    = 0UL;
+                    listHolder_2->mList[0].attributeValue = 100UL;
 
-                    listHolder_2->mList[1].attributeID.Emplace();
-                    listHolder_2->mList[1].attributeID.Value() = 1UL;
-                    listHolder_2->mList[1].attributeValue      = 0UL;
+                    listHolder_2->mList[1].attributeID    = 1UL;
+                    listHolder_2->mList[1].attributeValue = 0UL;
 
                     listHolder_0->mList[1].attributeValueList =
                         chip::app::DataModel::List<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(
@@ -133484,9 +133460,8 @@ private:
                     auto * listHolder_2 = new ListHolder<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(1);
                     listFreer.add(listHolder_2);
 
-                    listHolder_2->mList[0].attributeID.Emplace();
-                    listHolder_2->mList[0].attributeID.Value() = 0UL;
-                    listHolder_2->mList[0].attributeValue      = 1UL;
+                    listHolder_2->mList[0].attributeID    = 0UL;
+                    listHolder_2->mList[0].attributeValue = 1UL;
 
                     listHolder_0->mList[0].attributeValueList =
                         chip::app::DataModel::List<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(
@@ -133499,13 +133474,11 @@ private:
                     auto * listHolder_2 = new ListHolder<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(2);
                     listFreer.add(listHolder_2);
 
-                    listHolder_2->mList[0].attributeID.Emplace();
-                    listHolder_2->mList[0].attributeID.Value() = 0UL;
-                    listHolder_2->mList[0].attributeValue      = 100UL;
+                    listHolder_2->mList[0].attributeID    = 0UL;
+                    listHolder_2->mList[0].attributeValue = 100UL;
 
-                    listHolder_2->mList[1].attributeID.Emplace();
-                    listHolder_2->mList[1].attributeID.Value() = 1UL;
-                    listHolder_2->mList[1].attributeValue      = 0UL;
+                    listHolder_2->mList[1].attributeID    = 1UL;
+                    listHolder_2->mList[1].attributeValue = 0UL;
 
                     listHolder_0->mList[1].attributeValueList =
                         chip::app::DataModel::List<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(
