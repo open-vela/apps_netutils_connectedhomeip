@@ -1817,10 +1817,7 @@ using chip::System::Clock::Timeout;
                                         return CHIP_ERROR_INVALID_ARGUMENT;
                                     }
                                     auto element_2 = (MTRScenesClusterAttributeValuePair *) element_0.attributeValueList[i_2];
-                                    if (element_2.attributeID != nil) {
-                                        auto & definedValue_4 = listHolder_2->mList[i_2].attributeID.Emplace();
-                                        definedValue_4 = element_2.attributeID.unsignedIntValue;
-                                    }
+                                    listHolder_2->mList[i_2].attributeID = element_2.attributeID.unsignedIntValue;
                                     listHolder_2->mList[i_2].attributeValue = element_2.attributeValue.unsignedIntValue;
                                 }
                                 listHolder_0->mList[i_0].attributeValueList
@@ -2126,10 +2123,7 @@ using chip::System::Clock::Timeout;
                                         return CHIP_ERROR_INVALID_ARGUMENT;
                                     }
                                     auto element_2 = (MTRScenesClusterAttributeValuePair *) element_0.attributeValueList[i_2];
-                                    if (element_2.attributeID != nil) {
-                                        auto & definedValue_4 = listHolder_2->mList[i_2].attributeID.Emplace();
-                                        definedValue_4 = element_2.attributeID.unsignedIntValue;
-                                    }
+                                    listHolder_2->mList[i_2].attributeID = element_2.attributeID.unsignedIntValue;
                                     listHolder_2->mList[i_2].attributeValue = element_2.attributeValue.unsignedIntValue;
                                 }
                                 listHolder_0->mList[i_0].attributeValueList
