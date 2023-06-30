@@ -24414,8 +24414,8 @@ typedef NS_ENUM(uint8_t, MTRSmokeCOAlarmContaminationState) {
 } MTR_NEWLY_AVAILABLE;
 
 typedef NS_ENUM(uint8_t, MTRSmokeCOAlarmEndOfService) {
-    MTRSmokeCOAlarmEndOfServiceExpired MTR_NEWLY_AVAILABLE = 0x00,
-    MTRSmokeCOAlarmEndOfServiceNormal MTR_NEWLY_AVAILABLE = 0x01,
+    MTRSmokeCOAlarmEndOfServiceNormal MTR_NEWLY_AVAILABLE = 0x00,
+    MTRSmokeCOAlarmEndOfServiceExpired MTR_NEWLY_AVAILABLE = 0x01,
 } MTR_NEWLY_AVAILABLE;
 
 typedef NS_ENUM(uint8_t, MTRSmokeCOAlarmExpressedState) {
