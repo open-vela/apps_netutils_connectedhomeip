@@ -28802,7 +28802,7 @@ private:
 
             VerifyOrReturn(CheckConstraintType("peakMeasuredValueWindow", "elapsed_s", "elapsed_s"));
             VerifyOrReturn(CheckConstraintMinValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 604800UL));
 
             NextTest();
         }];
@@ -28853,7 +28853,7 @@ private:
 
             VerifyOrReturn(CheckConstraintType("averageMeasuredValueWindow", "elapsed_s", "elapsed_s"));
             VerifyOrReturn(CheckConstraintMinValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 604800UL));
 
             NextTest();
         }];
@@ -30307,7 +30307,7 @@ private:
 
             VerifyOrReturn(CheckConstraintType("peakMeasuredValueWindow", "elapsed_s", "elapsed_s"));
             VerifyOrReturn(CheckConstraintMinValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 604800UL));
 
             NextTest();
         }];
@@ -30358,7 +30358,7 @@ private:
 
             VerifyOrReturn(CheckConstraintType("averageMeasuredValueWindow", "elapsed_s", "elapsed_s"));
             VerifyOrReturn(CheckConstraintMinValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 604800UL));
 
             NextTest();
         }];
@@ -31812,7 +31812,7 @@ private:
 
             VerifyOrReturn(CheckConstraintType("peakMeasuredValueWindow", "elapsed_s", "elapsed_s"));
             VerifyOrReturn(CheckConstraintMinValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 604800UL));
 
             NextTest();
         }];
@@ -31863,7 +31863,7 @@ private:
 
             VerifyOrReturn(CheckConstraintType("averageMeasuredValueWindow", "elapsed_s", "elapsed_s"));
             VerifyOrReturn(CheckConstraintMinValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 604800UL));
 
             NextTest();
         }];
@@ -33317,7 +33317,7 @@ private:
 
             VerifyOrReturn(CheckConstraintType("peakMeasuredValueWindow", "elapsed_s", "elapsed_s"));
             VerifyOrReturn(CheckConstraintMinValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 604800UL));
 
             NextTest();
         }];
@@ -33368,7 +33368,7 @@ private:
 
             VerifyOrReturn(CheckConstraintType("averageMeasuredValueWindow", "elapsed_s", "elapsed_s"));
             VerifyOrReturn(CheckConstraintMinValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 604800UL));
 
             NextTest();
         }];
@@ -34820,7 +34820,7 @@ private:
 
             VerifyOrReturn(CheckConstraintType("peakMeasuredValueWindow", "elapsed_s", "elapsed_s"));
             VerifyOrReturn(CheckConstraintMinValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 604800UL));
 
             NextTest();
         }];
@@ -34871,7 +34871,7 @@ private:
 
             VerifyOrReturn(CheckConstraintType("averageMeasuredValueWindow", "elapsed_s", "elapsed_s"));
             VerifyOrReturn(CheckConstraintMinValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 604800UL));
 
             NextTest();
         }];
@@ -36325,7 +36325,7 @@ private:
 
             VerifyOrReturn(CheckConstraintType("peakMeasuredValueWindow", "elapsed_s", "elapsed_s"));
             VerifyOrReturn(CheckConstraintMinValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 604800UL));
 
             NextTest();
         }];
@@ -36376,7 +36376,7 @@ private:
 
             VerifyOrReturn(CheckConstraintType("averageMeasuredValueWindow", "elapsed_s", "elapsed_s"));
             VerifyOrReturn(CheckConstraintMinValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 604800UL));
 
             NextTest();
         }];
@@ -37830,7 +37830,7 @@ private:
 
             VerifyOrReturn(CheckConstraintType("peakMeasuredValueWindow", "elapsed_s", "elapsed_s"));
             VerifyOrReturn(CheckConstraintMinValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 604800UL));
 
             NextTest();
         }];
@@ -37881,7 +37881,7 @@ private:
 
             VerifyOrReturn(CheckConstraintType("averageMeasuredValueWindow", "elapsed_s", "elapsed_s"));
             VerifyOrReturn(CheckConstraintMinValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 604800UL));
 
             NextTest();
         }];
@@ -39335,7 +39335,7 @@ private:
 
             VerifyOrReturn(CheckConstraintType("peakMeasuredValueWindow", "elapsed_s", "elapsed_s"));
             VerifyOrReturn(CheckConstraintMinValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 604800UL));
 
             NextTest();
         }];
@@ -39386,7 +39386,7 @@ private:
 
             VerifyOrReturn(CheckConstraintType("averageMeasuredValueWindow", "elapsed_s", "elapsed_s"));
             VerifyOrReturn(CheckConstraintMinValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 604800UL));
 
             NextTest();
         }];
@@ -40838,7 +40838,7 @@ private:
 
             VerifyOrReturn(CheckConstraintType("peakMeasuredValueWindow", "elapsed_s", "elapsed_s"));
             VerifyOrReturn(CheckConstraintMinValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 604800UL));
 
             NextTest();
         }];
@@ -40889,7 +40889,7 @@ private:
 
             VerifyOrReturn(CheckConstraintType("averageMeasuredValueWindow", "elapsed_s", "elapsed_s"));
             VerifyOrReturn(CheckConstraintMinValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 604800UL));
 
             NextTest();
         }];
@@ -42377,7 +42377,7 @@ private:
 
             VerifyOrReturn(CheckConstraintType("peakMeasuredValueWindow", "elapsed_s", "elapsed_s"));
             VerifyOrReturn(CheckConstraintMinValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("peakMeasuredValueWindow", [value unsignedIntValue], 604800UL));
 
             NextTest();
         }];
@@ -42430,7 +42430,7 @@ private:
 
             VerifyOrReturn(CheckConstraintType("averageMeasuredValueWindow", "elapsed_s", "elapsed_s"));
             VerifyOrReturn(CheckConstraintMinValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 259200UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("averageMeasuredValueWindow", [value unsignedIntValue], 604800UL));
 
             NextTest();
         }];

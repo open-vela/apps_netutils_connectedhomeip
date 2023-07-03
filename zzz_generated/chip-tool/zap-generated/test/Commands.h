@@ -23995,7 +23995,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 604800UL));
             }
             break;
         case 6:
@@ -24015,7 +24015,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 604800UL));
             }
             break;
         case 8:
@@ -24748,7 +24748,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 604800UL));
             }
             break;
         case 6:
@@ -24768,7 +24768,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 604800UL));
             }
             break;
         case 8:
@@ -25503,7 +25503,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 604800UL));
             }
             break;
         case 6:
@@ -25523,7 +25523,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 604800UL));
             }
             break;
         case 8:
@@ -26255,7 +26255,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 604800UL));
             }
             break;
         case 6:
@@ -26275,7 +26275,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 604800UL));
             }
             break;
         case 8:
@@ -27007,7 +27007,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 604800UL));
             }
             break;
         case 6:
@@ -27027,7 +27027,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 604800UL));
             }
             break;
         case 8:
@@ -27754,7 +27754,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 604800UL));
             }
             break;
         case 6:
@@ -27774,7 +27774,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 604800UL));
             }
             break;
         case 8:
@@ -28500,7 +28500,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 604800UL));
             }
             break;
         case 6:
@@ -28520,7 +28520,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 604800UL));
             }
             break;
         case 8:
@@ -29247,7 +29247,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 604800UL));
             }
             break;
         case 6:
@@ -29267,7 +29267,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 604800UL));
             }
             break;
         case 8:
@@ -29992,7 +29992,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 604800UL));
             }
             break;
         case 6:
@@ -30012,7 +30012,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 604800UL));
             }
             break;
         case 8:
@@ -30766,7 +30766,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 604800UL));
             }
             break;
         case 6:
@@ -30786,7 +30786,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "elapsed_s", "elapsed_s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 259200UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 604800UL));
             }
             break;
         case 8:
