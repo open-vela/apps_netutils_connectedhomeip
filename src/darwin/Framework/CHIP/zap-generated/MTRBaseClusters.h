@@ -25698,8 +25698,8 @@ typedef NS_ENUM(uint8_t, MTRCarbonMonoxideConcentrationMeasurementLevelValue) {
 } MTR_NEWLY_AVAILABLE;
 
 typedef NS_ENUM(uint8_t, MTRCarbonMonoxideConcentrationMeasurementMeasurementMedium) {
-    MTRCarbonMonoxideConcentrationMeasurementMeasurementMediumGas MTR_NEWLY_AVAILABLE = 0x00,
-    MTRCarbonMonoxideConcentrationMeasurementMeasurementMediumLiquid MTR_NEWLY_AVAILABLE = 0x01,
+    MTRCarbonMonoxideConcentrationMeasurementMeasurementMediumAir MTR_NEWLY_AVAILABLE = 0x00,
+    MTRCarbonMonoxideConcentrationMeasurementMeasurementMediumWater MTR_NEWLY_AVAILABLE = 0x01,
     MTRCarbonMonoxideConcentrationMeasurementMeasurementMediumSoil MTR_NEWLY_AVAILABLE = 0x02,
 } MTR_NEWLY_AVAILABLE;
 
@@ -25732,8 +25732,8 @@ typedef NS_ENUM(uint8_t, MTRCarbonDioxideConcentrationMeasurementLevelValue) {
 } MTR_NEWLY_AVAILABLE;
 
 typedef NS_ENUM(uint8_t, MTRCarbonDioxideConcentrationMeasurementMeasurementMedium) {
-    MTRCarbonDioxideConcentrationMeasurementMeasurementMediumGas MTR_NEWLY_AVAILABLE = 0x00,
-    MTRCarbonDioxideConcentrationMeasurementMeasurementMediumLiquid MTR_NEWLY_AVAILABLE = 0x01,
+    MTRCarbonDioxideConcentrationMeasurementMeasurementMediumAir MTR_NEWLY_AVAILABLE = 0x00,
+    MTRCarbonDioxideConcentrationMeasurementMeasurementMediumWater MTR_NEWLY_AVAILABLE = 0x01,
     MTRCarbonDioxideConcentrationMeasurementMeasurementMediumSoil MTR_NEWLY_AVAILABLE = 0x02,
 } MTR_NEWLY_AVAILABLE;
 
@@ -25766,8 +25766,8 @@ typedef NS_ENUM(uint8_t, MTRNitrogenDioxideConcentrationMeasurementLevelValue) {
 } MTR_NEWLY_AVAILABLE;
 
 typedef NS_ENUM(uint8_t, MTRNitrogenDioxideConcentrationMeasurementMeasurementMedium) {
-    MTRNitrogenDioxideConcentrationMeasurementMeasurementMediumGas MTR_NEWLY_AVAILABLE = 0x00,
-    MTRNitrogenDioxideConcentrationMeasurementMeasurementMediumLiquid MTR_NEWLY_AVAILABLE = 0x01,
+    MTRNitrogenDioxideConcentrationMeasurementMeasurementMediumAir MTR_NEWLY_AVAILABLE = 0x00,
+    MTRNitrogenDioxideConcentrationMeasurementMeasurementMediumWater MTR_NEWLY_AVAILABLE = 0x01,
     MTRNitrogenDioxideConcentrationMeasurementMeasurementMediumSoil MTR_NEWLY_AVAILABLE = 0x02,
 } MTR_NEWLY_AVAILABLE;
 
@@ -25800,8 +25800,8 @@ typedef NS_ENUM(uint8_t, MTROzoneConcentrationMeasurementLevelValue) {
 } MTR_NEWLY_AVAILABLE;
 
 typedef NS_ENUM(uint8_t, MTROzoneConcentrationMeasurementMeasurementMedium) {
-    MTROzoneConcentrationMeasurementMeasurementMediumGas MTR_NEWLY_AVAILABLE = 0x00,
-    MTROzoneConcentrationMeasurementMeasurementMediumLiquid MTR_NEWLY_AVAILABLE = 0x01,
+    MTROzoneConcentrationMeasurementMeasurementMediumAir MTR_NEWLY_AVAILABLE = 0x00,
+    MTROzoneConcentrationMeasurementMeasurementMediumWater MTR_NEWLY_AVAILABLE = 0x01,
     MTROzoneConcentrationMeasurementMeasurementMediumSoil MTR_NEWLY_AVAILABLE = 0x02,
 } MTR_NEWLY_AVAILABLE;
 
@@ -25834,8 +25834,8 @@ typedef NS_ENUM(uint8_t, MTRPM25ConcentrationMeasurementLevelValue) {
 } MTR_NEWLY_AVAILABLE;
 
 typedef NS_ENUM(uint8_t, MTRPM25ConcentrationMeasurementMeasurementMedium) {
-    MTRPM25ConcentrationMeasurementMeasurementMediumGas MTR_NEWLY_AVAILABLE = 0x00,
-    MTRPM25ConcentrationMeasurementMeasurementMediumLiquid MTR_NEWLY_AVAILABLE = 0x01,
+    MTRPM25ConcentrationMeasurementMeasurementMediumAir MTR_NEWLY_AVAILABLE = 0x00,
+    MTRPM25ConcentrationMeasurementMeasurementMediumWater MTR_NEWLY_AVAILABLE = 0x01,
     MTRPM25ConcentrationMeasurementMeasurementMediumSoil MTR_NEWLY_AVAILABLE = 0x02,
 } MTR_NEWLY_AVAILABLE;
 
@@ -25868,8 +25868,8 @@ typedef NS_ENUM(uint8_t, MTRFormaldehydeConcentrationMeasurementLevelValue) {
 } MTR_NEWLY_AVAILABLE;
 
 typedef NS_ENUM(uint8_t, MTRFormaldehydeConcentrationMeasurementMeasurementMedium) {
-    MTRFormaldehydeConcentrationMeasurementMeasurementMediumGas MTR_NEWLY_AVAILABLE = 0x00,
-    MTRFormaldehydeConcentrationMeasurementMeasurementMediumLiquid MTR_NEWLY_AVAILABLE = 0x01,
+    MTRFormaldehydeConcentrationMeasurementMeasurementMediumAir MTR_NEWLY_AVAILABLE = 0x00,
+    MTRFormaldehydeConcentrationMeasurementMeasurementMediumWater MTR_NEWLY_AVAILABLE = 0x01,
     MTRFormaldehydeConcentrationMeasurementMeasurementMediumSoil MTR_NEWLY_AVAILABLE = 0x02,
 } MTR_NEWLY_AVAILABLE;
 
@@ -25902,8 +25902,8 @@ typedef NS_ENUM(uint8_t, MTRPM1ConcentrationMeasurementLevelValue) {
 } MTR_NEWLY_AVAILABLE;
 
 typedef NS_ENUM(uint8_t, MTRPM1ConcentrationMeasurementMeasurementMedium) {
-    MTRPM1ConcentrationMeasurementMeasurementMediumGas MTR_NEWLY_AVAILABLE = 0x00,
-    MTRPM1ConcentrationMeasurementMeasurementMediumLiquid MTR_NEWLY_AVAILABLE = 0x01,
+    MTRPM1ConcentrationMeasurementMeasurementMediumAir MTR_NEWLY_AVAILABLE = 0x00,
+    MTRPM1ConcentrationMeasurementMeasurementMediumWater MTR_NEWLY_AVAILABLE = 0x01,
     MTRPM1ConcentrationMeasurementMeasurementMediumSoil MTR_NEWLY_AVAILABLE = 0x02,
 } MTR_NEWLY_AVAILABLE;
 
@@ -25936,8 +25936,8 @@ typedef NS_ENUM(uint8_t, MTRPM10ConcentrationMeasurementLevelValue) {
 } MTR_NEWLY_AVAILABLE;
 
 typedef NS_ENUM(uint8_t, MTRPM10ConcentrationMeasurementMeasurementMedium) {
-    MTRPM10ConcentrationMeasurementMeasurementMediumGas MTR_NEWLY_AVAILABLE = 0x00,
-    MTRPM10ConcentrationMeasurementMeasurementMediumLiquid MTR_NEWLY_AVAILABLE = 0x01,
+    MTRPM10ConcentrationMeasurementMeasurementMediumAir MTR_NEWLY_AVAILABLE = 0x00,
+    MTRPM10ConcentrationMeasurementMeasurementMediumWater MTR_NEWLY_AVAILABLE = 0x01,
     MTRPM10ConcentrationMeasurementMeasurementMediumSoil MTR_NEWLY_AVAILABLE = 0x02,
 } MTR_NEWLY_AVAILABLE;
 
@@ -25970,8 +25970,8 @@ typedef NS_ENUM(uint8_t, MTRTotalVolatileOrganicCompoundsConcentrationMeasuremen
 } MTR_NEWLY_AVAILABLE;
 
 typedef NS_ENUM(uint8_t, MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementMedium) {
-    MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementMediumGas MTR_NEWLY_AVAILABLE = 0x00,
-    MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementMediumLiquid MTR_NEWLY_AVAILABLE = 0x01,
+    MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementMediumAir MTR_NEWLY_AVAILABLE = 0x00,
+    MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementMediumWater MTR_NEWLY_AVAILABLE = 0x01,
     MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementMediumSoil MTR_NEWLY_AVAILABLE = 0x02,
 } MTR_NEWLY_AVAILABLE;
 
@@ -26004,8 +26004,8 @@ typedef NS_ENUM(uint8_t, MTRRadonConcentrationMeasurementLevelValue) {
 } MTR_NEWLY_AVAILABLE;
 
 typedef NS_ENUM(uint8_t, MTRRadonConcentrationMeasurementMeasurementMedium) {
-    MTRRadonConcentrationMeasurementMeasurementMediumGas MTR_NEWLY_AVAILABLE = 0x00,
-    MTRRadonConcentrationMeasurementMeasurementMediumLiquid MTR_NEWLY_AVAILABLE = 0x01,
+    MTRRadonConcentrationMeasurementMeasurementMediumAir MTR_NEWLY_AVAILABLE = 0x00,
+    MTRRadonConcentrationMeasurementMeasurementMediumWater MTR_NEWLY_AVAILABLE = 0x01,
     MTRRadonConcentrationMeasurementMeasurementMediumSoil MTR_NEWLY_AVAILABLE = 0x02,
 } MTR_NEWLY_AVAILABLE;
 
