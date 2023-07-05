@@ -283,6 +283,7 @@ public:
         printf("TestLevelControlWithOnOffDependency\n");
         printf("TestCommissioningWindow\n");
         printf("TestCommissionerNodeId\n");
+        printf("TestTimeSynchronization\n");
         printf("TestMultiAdmin\n");
         printf("Test_TC_DGSW_1_1\n");
         printf("TestSubscribe_OnOff\n");
@@ -83303,22 +83304,24 @@ private:
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("serverList", iter_0, 19));
                     VerifyOrReturn(CheckValue("serverList[19]", iter_0.GetValue(), 55UL));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("serverList", iter_0, 20));
-                    VerifyOrReturn(CheckValue("serverList[20]", iter_0.GetValue(), 60UL));
+                    VerifyOrReturn(CheckValue("serverList[20]", iter_0.GetValue(), 56UL));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("serverList", iter_0, 21));
-                    VerifyOrReturn(CheckValue("serverList[21]", iter_0.GetValue(), 62UL));
+                    VerifyOrReturn(CheckValue("serverList[21]", iter_0.GetValue(), 60UL));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("serverList", iter_0, 22));
-                    VerifyOrReturn(CheckValue("serverList[22]", iter_0.GetValue(), 63UL));
+                    VerifyOrReturn(CheckValue("serverList[22]", iter_0.GetValue(), 62UL));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("serverList", iter_0, 23));
-                    VerifyOrReturn(CheckValue("serverList[23]", iter_0.GetValue(), 64UL));
+                    VerifyOrReturn(CheckValue("serverList[23]", iter_0.GetValue(), 63UL));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("serverList", iter_0, 24));
-                    VerifyOrReturn(CheckValue("serverList[24]", iter_0.GetValue(), 65UL));
+                    VerifyOrReturn(CheckValue("serverList[24]", iter_0.GetValue(), 64UL));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("serverList", iter_0, 25));
-                    VerifyOrReturn(CheckValue("serverList[25]", iter_0.GetValue(), 70UL));
+                    VerifyOrReturn(CheckValue("serverList[25]", iter_0.GetValue(), 65UL));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("serverList", iter_0, 26));
-                    VerifyOrReturn(CheckValue("serverList[26]", iter_0.GetValue(), 1029UL));
+                    VerifyOrReturn(CheckValue("serverList[26]", iter_0.GetValue(), 70UL));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("serverList", iter_0, 27));
-                    VerifyOrReturn(CheckValue("serverList[27]", iter_0.GetValue(), 4294048774UL));
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("serverList", iter_0, 28));
+                    VerifyOrReturn(CheckValue("serverList[27]", iter_0.GetValue(), 1029UL));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("serverList", iter_0, 28));
+                    VerifyOrReturn(CheckValue("serverList[28]", iter_0.GetValue(), 4294048774UL));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("serverList", iter_0, 29));
                 }
             }
             break;
@@ -88863,6 +88866,596 @@ private:
             value.fabricIndex = gammaIndex;
             return SendCommand(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
                                OperationalCredentials::Commands::RemoveFabric::Id, value, chip::NullOptional
+
+            );
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class TestTimeSynchronizationSuite : public TestCommand
+{
+public:
+    TestTimeSynchronizationSuite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("TestTimeSynchronization", 21, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~TestTimeSynchronizationSuite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::TimeSynchronization::Structs::TimeZoneStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("timeZone", iter_0, 0));
+                    VerifyOrReturn(CheckValue("timeZone[0].offset", iter_0.GetValue().offset, 0L));
+                    VerifyOrReturn(CheckValue("timeZone[0].validAt", iter_0.GetValue().validAt, 0ULL));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("timeZone", iter_0, 1));
+                }
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::TimeSynchronization::Commands::SetTimeZoneResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("DSTOffsetRequired", value.DSTOffsetRequired, true));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::TimeSynchronization::Structs::TimeZoneStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("timeZone", iter_0, 0));
+                    VerifyOrReturn(CheckValue("timeZone[0].offset", iter_0.GetValue().offset, 100L));
+                    VerifyOrReturn(CheckValue("timeZone[0].validAt", iter_0.GetValue().validAt, 0ULL));
+                    VerifyOrReturn(CheckValuePresent("timeZone[0].name", iter_0.GetValue().name));
+                    VerifyOrReturn(
+                        CheckValueAsString("timeZone[0].name.Value()", iter_0.GetValue().name.Value(), chip::CharSpan("CET", 3)));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("timeZone", iter_0, 1));
+                }
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::TimeSynchronization::Commands::SetTimeZoneResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("DSTOffsetRequired", value.DSTOffsetRequired, true));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::TimeSynchronization::Structs::TimeZoneStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("timeZone", iter_0, 0));
+                    VerifyOrReturn(CheckValue("timeZone[0].offset", iter_0.GetValue().offset, 100L));
+                    VerifyOrReturn(CheckValue("timeZone[0].validAt", iter_0.GetValue().validAt, 0ULL));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("timeZone", iter_0, 1));
+                }
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_RESOURCE_EXHAUSTED));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::TimeSynchronization::Commands::SetTimeZoneResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("DSTOffsetRequired", value.DSTOffsetRequired, true));
+            }
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::TimeSynchronization::Structs::TimeZoneStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("timeZone", iter_0, 0));
+                    VerifyOrReturn(CheckValue("timeZone[0].offset", iter_0.GetValue().offset, 0L));
+                    VerifyOrReturn(CheckValue("timeZone[0].validAt", iter_0.GetValue().validAt, 0ULL));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("timeZone", iter_0, 1));
+                }
+            }
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::TimeSynchronization::Structs::DSTOffsetStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("DSTOffset", iter_0, 0));
+                }
+            }
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::TimeSynchronization::Structs::DSTOffsetStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("DSTOffset", iter_0, 0));
+                    VerifyOrReturn(CheckValue("DSTOffset[0].offset", iter_0.GetValue().offset, 1L));
+                    VerifyOrReturn(CheckValue("DSTOffset[0].validStarting", iter_0.GetValue().validStarting, 1ULL));
+                    VerifyOrReturn(CheckValueNonNull("DSTOffset[0].validUntil", iter_0.GetValue().validUntil));
+                    VerifyOrReturn(CheckValue("DSTOffset[0].validUntil.Value()", iter_0.GetValue().validUntil.Value(), 2ULL));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("DSTOffset", iter_0, 1));
+                    VerifyOrReturn(CheckValue("DSTOffset[1].offset", iter_0.GetValue().offset, 0L));
+                    VerifyOrReturn(CheckValue("DSTOffset[1].validStarting", iter_0.GetValue().validStarting, 3ULL));
+                    VerifyOrReturn(CheckValueNull("DSTOffset[1].validUntil", iter_0.GetValue().validUntil));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("DSTOffset", iter_0, 2));
+                }
+            }
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_RESOURCE_EXHAUSTED));
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Read Time Zone");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::TimeZone::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Set Time Zone list");
+            ListFreer listFreer;
+            chip::app::Clusters::TimeSynchronization::Commands::SetTimeZone::Type value;
+
+            {
+                auto * listHolder_0 = new ListHolder<chip::app::Clusters::TimeSynchronization::Structs::TimeZoneStruct::Type>(1);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].offset  = 100L;
+                listHolder_0->mList[0].validAt = 0ULL;
+                listHolder_0->mList[0].name.Emplace();
+                listHolder_0->mList[0].name.Value() = chip::Span<const char>("CETgarbage: not in length on purpose", 3);
+
+                value.timeZone =
+                    chip::app::DataModel::List<chip::app::Clusters::TimeSynchronization::Structs::TimeZoneStruct::Type>(
+                        listHolder_0->mList, 1);
+            }
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                               TimeSynchronization::Commands::SetTimeZone::Id, value, chip::NullOptional
+
+            );
+        }
+        case 3: {
+            LogStep(3, "Read Time Zone");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::TimeZone::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "Set Time Zone with missing optional name field");
+            ListFreer listFreer;
+            chip::app::Clusters::TimeSynchronization::Commands::SetTimeZone::Type value;
+
+            {
+                auto * listHolder_0 = new ListHolder<chip::app::Clusters::TimeSynchronization::Structs::TimeZoneStruct::Type>(1);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].offset  = 100L;
+                listHolder_0->mList[0].validAt = 0ULL;
+
+                value.timeZone =
+                    chip::app::DataModel::List<chip::app::Clusters::TimeSynchronization::Structs::TimeZoneStruct::Type>(
+                        listHolder_0->mList, 1);
+            }
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                               TimeSynchronization::Commands::SetTimeZone::Id, value, chip::NullOptional
+
+            );
+        }
+        case 5: {
+            LogStep(5, "Read Time Zone");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::TimeZone::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "Set Time Zone with very long name");
+            ListFreer listFreer;
+            chip::app::Clusters::TimeSynchronization::Commands::SetTimeZone::Type value;
+
+            {
+                auto * listHolder_0 = new ListHolder<chip::app::Clusters::TimeSynchronization::Structs::TimeZoneStruct::Type>(1);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].offset  = 100L;
+                listHolder_0->mList[0].validAt = 0ULL;
+                listHolder_0->mList[0].name.Emplace();
+                listHolder_0->mList[0].name.Value() = chip::Span<const char>(
+                    "MunichOnTheLongRiverOfIsarInNiceSummerWeatherWithAugustinerBeerssgarbage: not in length on purpose", 65);
+
+                value.timeZone =
+                    chip::app::DataModel::List<chip::app::Clusters::TimeSynchronization::Structs::TimeZoneStruct::Type>(
+                        listHolder_0->mList, 1);
+            }
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                               TimeSynchronization::Commands::SetTimeZone::Id, value, chip::NullOptional
+
+            );
+        }
+        case 7: {
+            LogStep(7, "Set Time Zone with first item validAt not zero");
+            ListFreer listFreer;
+            chip::app::Clusters::TimeSynchronization::Commands::SetTimeZone::Type value;
+
+            {
+                auto * listHolder_0 = new ListHolder<chip::app::Clusters::TimeSynchronization::Structs::TimeZoneStruct::Type>(1);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].offset  = 100L;
+                listHolder_0->mList[0].validAt = 1ULL;
+                listHolder_0->mList[0].name.Emplace();
+                listHolder_0->mList[0].name.Value() = chip::Span<const char>("CDTgarbage: not in length on purpose", 3);
+
+                value.timeZone =
+                    chip::app::DataModel::List<chip::app::Clusters::TimeSynchronization::Structs::TimeZoneStruct::Type>(
+                        listHolder_0->mList, 1);
+            }
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                               TimeSynchronization::Commands::SetTimeZone::Id, value, chip::NullOptional
+
+            );
+        }
+        case 8: {
+            LogStep(8, "Set Time Zone with second item validAt zero");
+            ListFreer listFreer;
+            chip::app::Clusters::TimeSynchronization::Commands::SetTimeZone::Type value;
+
+            {
+                auto * listHolder_0 = new ListHolder<chip::app::Clusters::TimeSynchronization::Structs::TimeZoneStruct::Type>(2);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].offset  = 100L;
+                listHolder_0->mList[0].validAt = 0ULL;
+                listHolder_0->mList[0].name.Emplace();
+                listHolder_0->mList[0].name.Value() = chip::Span<const char>("CSTgarbage: not in length on purpose", 3);
+
+                listHolder_0->mList[1].offset  = 200L;
+                listHolder_0->mList[1].validAt = 0ULL;
+                listHolder_0->mList[1].name.Emplace();
+                listHolder_0->mList[1].name.Value() = chip::Span<const char>("CDTgarbage: not in length on purpose", 3);
+
+                value.timeZone =
+                    chip::app::DataModel::List<chip::app::Clusters::TimeSynchronization::Structs::TimeZoneStruct::Type>(
+                        listHolder_0->mList, 2);
+            }
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                               TimeSynchronization::Commands::SetTimeZone::Id, value, chip::NullOptional
+
+            );
+        }
+        case 9: {
+            LogStep(9, "Set Time Zone with more than supported list count");
+            ListFreer listFreer;
+            chip::app::Clusters::TimeSynchronization::Commands::SetTimeZone::Type value;
+
+            {
+                auto * listHolder_0 = new ListHolder<chip::app::Clusters::TimeSynchronization::Structs::TimeZoneStruct::Type>(3);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].offset  = 100L;
+                listHolder_0->mList[0].validAt = 0ULL;
+                listHolder_0->mList[0].name.Emplace();
+                listHolder_0->mList[0].name.Value() = chip::Span<const char>("CSTgarbage: not in length on purpose", 3);
+
+                listHolder_0->mList[1].offset  = 200L;
+                listHolder_0->mList[1].validAt = 1ULL;
+                listHolder_0->mList[1].name.Emplace();
+                listHolder_0->mList[1].name.Value() = chip::Span<const char>("CDTgarbage: not in length on purpose", 3);
+
+                listHolder_0->mList[2].offset  = 200L;
+                listHolder_0->mList[2].validAt = 2ULL;
+                listHolder_0->mList[2].name.Emplace();
+                listHolder_0->mList[2].name.Value() = chip::Span<const char>("CETgarbage: not in length on purpose", 3);
+
+                value.timeZone =
+                    chip::app::DataModel::List<chip::app::Clusters::TimeSynchronization::Structs::TimeZoneStruct::Type>(
+                        listHolder_0->mList, 3);
+            }
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                               TimeSynchronization::Commands::SetTimeZone::Id, value, chip::NullOptional
+
+            );
+        }
+        case 10: {
+            LogStep(10, "Set Time Zone empty");
+            ListFreer listFreer;
+            chip::app::Clusters::TimeSynchronization::Commands::SetTimeZone::Type value;
+
+            value.timeZone = chip::app::DataModel::List<chip::app::Clusters::TimeSynchronization::Structs::TimeZoneStruct::Type>();
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                               TimeSynchronization::Commands::SetTimeZone::Id, value, chip::NullOptional
+
+            );
+        }
+        case 11: {
+            LogStep(11, "Read Time Zone");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::TimeZone::Id, true, chip::NullOptional);
+        }
+        case 12: {
+            LogStep(12, "Read DSTOffset");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::DSTOffset::Id, true, chip::NullOptional);
+        }
+        case 13: {
+            LogStep(13, "Set DSTOffset single item");
+            ListFreer listFreer;
+            chip::app::Clusters::TimeSynchronization::Commands::SetDSTOffset::Type value;
+
+            {
+                auto * listHolder_0 = new ListHolder<chip::app::Clusters::TimeSynchronization::Structs::DSTOffsetStruct::Type>(1);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].offset        = 1L;
+                listHolder_0->mList[0].validStarting = 1ULL;
+                listHolder_0->mList[0].validUntil.SetNonNull();
+                listHolder_0->mList[0].validUntil.Value() = 2ULL;
+
+                value.DSTOffset =
+                    chip::app::DataModel::List<chip::app::Clusters::TimeSynchronization::Structs::DSTOffsetStruct::Type>(
+                        listHolder_0->mList, 1);
+            }
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                               TimeSynchronization::Commands::SetDSTOffset::Id, value, chip::NullOptional
+
+            );
+        }
+        case 14: {
+            LogStep(14, "Set DSTOffset empty");
+            ListFreer listFreer;
+            chip::app::Clusters::TimeSynchronization::Commands::SetDSTOffset::Type value;
+
+            value.DSTOffset =
+                chip::app::DataModel::List<chip::app::Clusters::TimeSynchronization::Structs::DSTOffsetStruct::Type>();
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                               TimeSynchronization::Commands::SetDSTOffset::Id, value, chip::NullOptional
+
+            );
+        }
+        case 15: {
+            LogStep(15, "Set DSTOffset with more than 1 null value");
+            ListFreer listFreer;
+            chip::app::Clusters::TimeSynchronization::Commands::SetDSTOffset::Type value;
+
+            {
+                auto * listHolder_0 = new ListHolder<chip::app::Clusters::TimeSynchronization::Structs::DSTOffsetStruct::Type>(2);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].offset        = 1L;
+                listHolder_0->mList[0].validStarting = 1ULL;
+                listHolder_0->mList[0].validUntil.SetNull();
+
+                listHolder_0->mList[1].offset        = 0L;
+                listHolder_0->mList[1].validStarting = 2ULL;
+                listHolder_0->mList[1].validUntil.SetNull();
+
+                value.DSTOffset =
+                    chip::app::DataModel::List<chip::app::Clusters::TimeSynchronization::Structs::DSTOffsetStruct::Type>(
+                        listHolder_0->mList, 2);
+            }
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                               TimeSynchronization::Commands::SetDSTOffset::Id, value, chip::NullOptional
+
+            );
+        }
+        case 16: {
+            LogStep(16, "Set unsorted DSTOffset entries");
+            ListFreer listFreer;
+            chip::app::Clusters::TimeSynchronization::Commands::SetDSTOffset::Type value;
+
+            {
+                auto * listHolder_0 = new ListHolder<chip::app::Clusters::TimeSynchronization::Structs::DSTOffsetStruct::Type>(2);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].offset        = 1L;
+                listHolder_0->mList[0].validStarting = 2ULL;
+                listHolder_0->mList[0].validUntil.SetNonNull();
+                listHolder_0->mList[0].validUntil.Value() = 3ULL;
+
+                listHolder_0->mList[1].offset        = 0L;
+                listHolder_0->mList[1].validStarting = 1ULL;
+                listHolder_0->mList[1].validUntil.SetNull();
+
+                value.DSTOffset =
+                    chip::app::DataModel::List<chip::app::Clusters::TimeSynchronization::Structs::DSTOffsetStruct::Type>(
+                        listHolder_0->mList, 2);
+            }
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                               TimeSynchronization::Commands::SetDSTOffset::Id, value, chip::NullOptional
+
+            );
+        }
+        case 17: {
+            LogStep(17, "Set DSTOffset with multiple entries");
+            ListFreer listFreer;
+            chip::app::Clusters::TimeSynchronization::Commands::SetDSTOffset::Type value;
+
+            {
+                auto * listHolder_0 = new ListHolder<chip::app::Clusters::TimeSynchronization::Structs::DSTOffsetStruct::Type>(2);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].offset        = 1L;
+                listHolder_0->mList[0].validStarting = 1ULL;
+                listHolder_0->mList[0].validUntil.SetNonNull();
+                listHolder_0->mList[0].validUntil.Value() = 2ULL;
+
+                listHolder_0->mList[1].offset        = 0L;
+                listHolder_0->mList[1].validStarting = 3ULL;
+                listHolder_0->mList[1].validUntil.SetNull();
+
+                value.DSTOffset =
+                    chip::app::DataModel::List<chip::app::Clusters::TimeSynchronization::Structs::DSTOffsetStruct::Type>(
+                        listHolder_0->mList, 2);
+            }
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                               TimeSynchronization::Commands::SetDSTOffset::Id, value, chip::NullOptional
+
+            );
+        }
+        case 18: {
+            LogStep(18, "Read DSTOffset");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                                 TimeSynchronization::Attributes::DSTOffset::Id, true, chip::NullOptional);
+        }
+        case 19: {
+            LogStep(19, "Set DSTOffset with same validStarting and validUntil");
+            ListFreer listFreer;
+            chip::app::Clusters::TimeSynchronization::Commands::SetDSTOffset::Type value;
+
+            {
+                auto * listHolder_0 = new ListHolder<chip::app::Clusters::TimeSynchronization::Structs::DSTOffsetStruct::Type>(1);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].offset        = 0L;
+                listHolder_0->mList[0].validStarting = 1ULL;
+                listHolder_0->mList[0].validUntil.SetNonNull();
+                listHolder_0->mList[0].validUntil.Value() = 1ULL;
+
+                value.DSTOffset =
+                    chip::app::DataModel::List<chip::app::Clusters::TimeSynchronization::Structs::DSTOffsetStruct::Type>(
+                        listHolder_0->mList, 1);
+            }
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                               TimeSynchronization::Commands::SetDSTOffset::Id, value, chip::NullOptional
+
+            );
+        }
+        case 20: {
+            LogStep(20, "Set DSTOffset with more than supported list count");
+            ListFreer listFreer;
+            chip::app::Clusters::TimeSynchronization::Commands::SetDSTOffset::Type value;
+
+            {
+                auto * listHolder_0 = new ListHolder<chip::app::Clusters::TimeSynchronization::Structs::DSTOffsetStruct::Type>(3);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].offset        = 1L;
+                listHolder_0->mList[0].validStarting = 1ULL;
+                listHolder_0->mList[0].validUntil.SetNonNull();
+                listHolder_0->mList[0].validUntil.Value() = 2ULL;
+
+                listHolder_0->mList[1].offset        = 0L;
+                listHolder_0->mList[1].validStarting = 3ULL;
+                listHolder_0->mList[1].validUntil.SetNonNull();
+                listHolder_0->mList[1].validUntil.Value() = 5ULL;
+
+                listHolder_0->mList[2].offset        = 0L;
+                listHolder_0->mList[2].validStarting = 6ULL;
+                listHolder_0->mList[2].validUntil.SetNull();
+
+                value.DSTOffset =
+                    chip::app::DataModel::List<chip::app::Clusters::TimeSynchronization::Structs::DSTOffsetStruct::Type>(
+                        listHolder_0->mList, 3);
+            }
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), TimeSynchronization::Id,
+                               TimeSynchronization::Commands::SetDSTOffset::Id, value, chip::NullOptional
 
             );
         }
@@ -134863,6 +135456,7 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<TestLevelControlWithOnOffDependencySuite>(credsIssuerConfig),
         make_unique<TestCommissioningWindowSuite>(credsIssuerConfig),
         make_unique<TestCommissionerNodeIdSuite>(credsIssuerConfig),
+        make_unique<TestTimeSynchronizationSuite>(credsIssuerConfig),
         make_unique<TestMultiAdminSuite>(credsIssuerConfig),
         make_unique<Test_TC_DGSW_1_1Suite>(credsIssuerConfig),
         make_unique<TestSubscribe_OnOffSuite>(credsIssuerConfig),
