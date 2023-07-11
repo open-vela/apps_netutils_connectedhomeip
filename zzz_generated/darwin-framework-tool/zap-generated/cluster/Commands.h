@@ -97730,7 +97730,7 @@ void registerClusterIdentify(Commands & commands)
         make_unique<SubscribeAttributeIdentifyClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterGroups(Commands & commands)
 {
@@ -97763,7 +97763,7 @@ void registerClusterGroups(Commands & commands)
         make_unique<SubscribeAttributeGroupsClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterScenes(Commands & commands)
 {
@@ -97810,7 +97810,7 @@ void registerClusterScenes(Commands & commands)
         make_unique<SubscribeAttributeScenesClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterOnOff(Commands & commands)
 {
@@ -97854,7 +97854,7 @@ void registerClusterOnOff(Commands & commands)
         make_unique<SubscribeAttributeOnOffClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterOnOffSwitchConfiguration(Commands & commands)
 {
@@ -97884,7 +97884,7 @@ void registerClusterOnOffSwitchConfiguration(Commands & commands)
         make_unique<SubscribeAttributeOnOffSwitchConfigurationClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterLevelControl(Commands & commands)
 {
@@ -97953,7 +97953,7 @@ void registerClusterLevelControl(Commands & commands)
         make_unique<SubscribeAttributeLevelControlClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterBinaryInputBasic(Commands & commands)
 {
@@ -98002,7 +98002,7 @@ void registerClusterBinaryInputBasic(Commands & commands)
         make_unique<SubscribeAttributeBinaryInputBasicClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterDescriptor(Commands & commands)
 {
@@ -98035,7 +98035,7 @@ void registerClusterDescriptor(Commands & commands)
         make_unique<SubscribeAttributeDescriptorClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterBinding(Commands & commands)
 {
@@ -98063,7 +98063,7 @@ void registerClusterBinding(Commands & commands)
         make_unique<SubscribeAttributeBindingClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterAccessControl(Commands & commands)
 {
@@ -98102,7 +98102,7 @@ void registerClusterAccessControl(Commands & commands)
         make_unique<SubscribeEvent>(Id), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterActions(Commands & commands)
 {
@@ -98147,7 +98147,7 @@ void registerClusterActions(Commands & commands)
         make_unique<SubscribeEvent>(Id), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterBasicInformation(Commands & commands)
 {
@@ -98219,7 +98219,7 @@ void registerClusterBasicInformation(Commands & commands)
         make_unique<SubscribeEvent>(Id), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterOtaSoftwareUpdateProvider(Commands & commands)
 {
@@ -98247,7 +98247,7 @@ void registerClusterOtaSoftwareUpdateProvider(Commands & commands)
         make_unique<SubscribeAttributeOtaSoftwareUpdateProviderClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterOtaSoftwareUpdateRequestor(Commands & commands)
 {
@@ -98284,7 +98284,7 @@ void registerClusterOtaSoftwareUpdateRequestor(Commands & commands)
         make_unique<SubscribeEvent>(Id), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterLocalizationConfiguration(Commands & commands)
 {
@@ -98314,7 +98314,7 @@ void registerClusterLocalizationConfiguration(Commands & commands)
         make_unique<SubscribeAttributeLocalizationConfigurationClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterTimeFormatLocalization(Commands & commands)
 {
@@ -98347,7 +98347,7 @@ void registerClusterTimeFormatLocalization(Commands & commands)
         make_unique<SubscribeAttributeTimeFormatLocalizationClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterUnitLocalization(Commands & commands)
 {
@@ -98375,7 +98375,7 @@ void registerClusterUnitLocalization(Commands & commands)
         make_unique<SubscribeAttributeUnitLocalizationClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterPowerSourceConfiguration(Commands & commands)
 {
@@ -98402,7 +98402,7 @@ void registerClusterPowerSourceConfiguration(Commands & commands)
         make_unique<SubscribeAttributePowerSourceConfigurationClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterPowerSource(Commands & commands)
 {
@@ -98491,7 +98491,7 @@ void registerClusterPowerSource(Commands & commands)
         make_unique<SubscribeEvent>(Id), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterGeneralCommissioning(Commands & commands)
 {
@@ -98530,7 +98530,7 @@ void registerClusterGeneralCommissioning(Commands & commands)
         make_unique<SubscribeAttributeGeneralCommissioningClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterNetworkCommissioning(Commands & commands)
 {
@@ -98578,7 +98578,7 @@ void registerClusterNetworkCommissioning(Commands & commands)
         make_unique<SubscribeAttributeNetworkCommissioningClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterDiagnosticLogs(Commands & commands)
 {
@@ -98604,7 +98604,7 @@ void registerClusterDiagnosticLogs(Commands & commands)
         make_unique<SubscribeAttributeDiagnosticLogsClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterGeneralDiagnostics(Commands & commands)
 {
@@ -98650,7 +98650,7 @@ void registerClusterGeneralDiagnostics(Commands & commands)
         make_unique<SubscribeEvent>(Id), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterSoftwareDiagnostics(Commands & commands)
 {
@@ -98686,7 +98686,7 @@ void registerClusterSoftwareDiagnostics(Commands & commands)
         make_unique<SubscribeEvent>(Id), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterThreadNetworkDiagnostics(Commands & commands)
 {
@@ -98840,7 +98840,7 @@ void registerClusterThreadNetworkDiagnostics(Commands & commands)
         make_unique<SubscribeEvent>(Id), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterWiFiNetworkDiagnostics(Commands & commands)
 {
@@ -98894,7 +98894,7 @@ void registerClusterWiFiNetworkDiagnostics(Commands & commands)
         make_unique<SubscribeEvent>(Id), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterEthernetNetworkDiagnostics(Commands & commands)
 {
@@ -98938,7 +98938,7 @@ void registerClusterEthernetNetworkDiagnostics(Commands & commands)
         make_unique<SubscribeAttributeEthernetNetworkDiagnosticsClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterBridgedDeviceBasicInformation(Commands & commands)
 {
@@ -98998,7 +98998,7 @@ void registerClusterBridgedDeviceBasicInformation(Commands & commands)
         make_unique<SubscribeEvent>(Id), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterSwitch(Commands & commands)
 {
@@ -99031,7 +99031,7 @@ void registerClusterSwitch(Commands & commands)
         make_unique<SubscribeEvent>(Id), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterAdministratorCommissioning(Commands & commands)
 {
@@ -99065,7 +99065,7 @@ void registerClusterAdministratorCommissioning(Commands & commands)
         make_unique<SubscribeAttributeAdministratorCommissioningClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterOperationalCredentials(Commands & commands)
 {
@@ -99110,7 +99110,7 @@ void registerClusterOperationalCredentials(Commands & commands)
         make_unique<SubscribeAttributeOperationalCredentialsClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterGroupKeyManagement(Commands & commands)
 {
@@ -99148,7 +99148,7 @@ void registerClusterGroupKeyManagement(Commands & commands)
         make_unique<SubscribeAttributeGroupKeyManagementClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterFixedLabel(Commands & commands)
 {
@@ -99175,7 +99175,7 @@ void registerClusterFixedLabel(Commands & commands)
         make_unique<SubscribeAttributeFixedLabelClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterUserLabel(Commands & commands)
 {
@@ -99203,7 +99203,7 @@ void registerClusterUserLabel(Commands & commands)
         make_unique<SubscribeAttributeUserLabelClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterBooleanState(Commands & commands)
 {
@@ -99232,7 +99232,7 @@ void registerClusterBooleanState(Commands & commands)
         make_unique<SubscribeEvent>(Id), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterModeSelect(Commands & commands)
 {
@@ -99272,7 +99272,7 @@ void registerClusterModeSelect(Commands & commands)
         make_unique<SubscribeAttributeModeSelectClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterDoorLock(Commands & commands)
 {
@@ -99407,7 +99407,7 @@ void registerClusterDoorLock(Commands & commands)
         make_unique<SubscribeEvent>(Id), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterWindowCovering(Commands & commands)
 {
@@ -99484,7 +99484,7 @@ void registerClusterWindowCovering(Commands & commands)
         make_unique<SubscribeAttributeWindowCoveringClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterBarrierControl(Commands & commands)
 {
@@ -99537,7 +99537,7 @@ void registerClusterBarrierControl(Commands & commands)
         make_unique<SubscribeAttributeBarrierControlClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterPumpConfigurationAndControl(Commands & commands)
 {
@@ -99614,7 +99614,7 @@ void registerClusterPumpConfigurationAndControl(Commands & commands)
         make_unique<SubscribeEvent>(Id), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterThermostat(Commands & commands)
 {
@@ -99768,7 +99768,7 @@ void registerClusterThermostat(Commands & commands)
         make_unique<SubscribeAttributeThermostatClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterFanControl(Commands & commands)
 {
@@ -99821,7 +99821,7 @@ void registerClusterFanControl(Commands & commands)
         make_unique<SubscribeAttributeFanControlClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterThermostatUserInterfaceConfiguration(Commands & commands)
 {
@@ -99855,7 +99855,7 @@ void registerClusterThermostatUserInterfaceConfiguration(Commands & commands)
         make_unique<SubscribeAttributeThermostatUserInterfaceConfigurationClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterColorControl(Commands & commands)
 {
@@ -100016,7 +100016,7 @@ void registerClusterColorControl(Commands & commands)
         make_unique<SubscribeAttributeColorControlClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterBallastConfiguration(Commands & commands)
 {
@@ -100079,7 +100079,7 @@ void registerClusterBallastConfiguration(Commands & commands)
         make_unique<SubscribeAttributeBallastConfigurationClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterIlluminanceMeasurement(Commands & commands)
 {
@@ -100114,7 +100114,7 @@ void registerClusterIlluminanceMeasurement(Commands & commands)
         make_unique<SubscribeAttributeIlluminanceMeasurementClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterTemperatureMeasurement(Commands & commands)
 {
@@ -100147,7 +100147,7 @@ void registerClusterTemperatureMeasurement(Commands & commands)
         make_unique<SubscribeAttributeTemperatureMeasurementClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterPressureMeasurement(Commands & commands)
 {
@@ -100190,7 +100190,7 @@ void registerClusterPressureMeasurement(Commands & commands)
         make_unique<SubscribeAttributePressureMeasurementClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterFlowMeasurement(Commands & commands)
 {
@@ -100223,7 +100223,7 @@ void registerClusterFlowMeasurement(Commands & commands)
         make_unique<SubscribeAttributeFlowMeasurementClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterRelativeHumidityMeasurement(Commands & commands)
 {
@@ -100256,7 +100256,7 @@ void registerClusterRelativeHumidityMeasurement(Commands & commands)
         make_unique<SubscribeAttributeRelativeHumidityMeasurementClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterOccupancySensing(Commands & commands)
 {
@@ -100314,7 +100314,7 @@ void registerClusterOccupancySensing(Commands & commands)
         make_unique<SubscribeAttributeOccupancySensingClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterWakeOnLan(Commands & commands)
 {
@@ -100341,7 +100341,7 @@ void registerClusterWakeOnLan(Commands & commands)
         make_unique<SubscribeAttributeWakeOnLanClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterChannel(Commands & commands)
 {
@@ -100375,7 +100375,7 @@ void registerClusterChannel(Commands & commands)
         make_unique<SubscribeAttributeChannelClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterTargetNavigator(Commands & commands)
 {
@@ -100405,7 +100405,7 @@ void registerClusterTargetNavigator(Commands & commands)
         make_unique<SubscribeAttributeTargetNavigatorClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterMediaPlayback(Commands & commands)
 {
@@ -100455,7 +100455,7 @@ void registerClusterMediaPlayback(Commands & commands)
         make_unique<SubscribeAttributeMediaPlaybackClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterMediaInput(Commands & commands)
 {
@@ -100488,7 +100488,7 @@ void registerClusterMediaInput(Commands & commands)
         make_unique<SubscribeAttributeMediaInputClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterLowPower(Commands & commands)
 {
@@ -100514,7 +100514,7 @@ void registerClusterLowPower(Commands & commands)
         make_unique<SubscribeAttributeLowPowerClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterKeypadInput(Commands & commands)
 {
@@ -100540,7 +100540,7 @@ void registerClusterKeypadInput(Commands & commands)
         make_unique<SubscribeAttributeKeypadInputClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterContentLauncher(Commands & commands)
 {
@@ -100572,7 +100572,7 @@ void registerClusterContentLauncher(Commands & commands)
         make_unique<SubscribeAttributeContentLauncherClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterAudioOutput(Commands & commands)
 {
@@ -100603,7 +100603,7 @@ void registerClusterAudioOutput(Commands & commands)
         make_unique<SubscribeAttributeAudioOutputClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterApplicationLauncher(Commands & commands)
 {
@@ -100636,7 +100636,7 @@ void registerClusterApplicationLauncher(Commands & commands)
         make_unique<SubscribeAttributeApplicationLauncherClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterApplicationBasic(Commands & commands)
 {
@@ -100677,7 +100677,7 @@ void registerClusterApplicationBasic(Commands & commands)
         make_unique<SubscribeAttributeApplicationBasicClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterAccountLogin(Commands & commands)
 {
@@ -100705,7 +100705,7 @@ void registerClusterAccountLogin(Commands & commands)
         make_unique<SubscribeAttributeAccountLoginClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterElectricalMeasurement(Commands & commands)
 {
@@ -100996,7 +100996,7 @@ void registerClusterElectricalMeasurement(Commands & commands)
         make_unique<SubscribeAttributeElectricalMeasurementClusterRevision>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 void registerClusterUnitTesting(Commands & commands)
 {
@@ -101291,7 +101291,7 @@ void registerClusterUnitTesting(Commands & commands)
         make_unique<SubscribeEvent>(Id), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCluster(clusterName, clusterCommands);
 }
 
 void registerClusterAny(Commands & commands)
@@ -101308,7 +101308,8 @@ void registerClusterAny(Commands & commands)
         make_unique<SubscribeEvent>(), //
     };
 
-    commands.Register(clusterName, clusterCommands);
+    commands.RegisterCommandSet(
+        clusterName, clusterCommands, "Commands for sending IM messages based on cluster id, not cluster name.");
 }
 
 void registerClusters(Commands & commands)
