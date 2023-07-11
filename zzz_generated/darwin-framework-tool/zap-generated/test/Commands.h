@@ -142,6 +142,9 @@ public:
         printf("Test_TC_CONTENTLAUNCHER_10_1\n");
         printf("Test_TC_WAKEONLAN_4_1\n");
         printf("Test_TC_ALOGIN_12_1\n");
+        printf("Test_TC_CONTENTLAUNCHER_10_3\n");
+        printf("Test_TC_CONTENTLAUNCHER_10_5\n");
+        printf("Test_TC_CONTENTLAUNCHER_10_7\n");
         printf("Test_TC_MOD_1_1\n");
         printf("OTA_SuccessfulTransfer\n");
         printf("Test_TC_OCC_1_1\n");
@@ -20724,6 +20727,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("ConfigWait", 0, UINT16_MAX, &mConfigWait);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
@@ -20913,12 +20917,16 @@ public:
             err = TestTurnOffLightThatWeTurnedOn_19();
             break;
         case 20:
-            ChipLogProgress(chipTool, " ***** Test Step 20 : Check on/off attribute value is false after off command\n");
+            ChipLogProgress(chipTool, " ***** Test Step 20 : Wait to turn Off light\n");
+            err = TestWaitToTurnOffLight_20();
+            break;
+        case 21:
+            ChipLogProgress(chipTool, " ***** Test Step 21 : Check on/off attribute value is false after off command\n");
             if (ShouldSkip("OO.S.A0000")) {
                 NextTest();
                 return;
             }
-            err = TestCheckOnOffAttributeValueIsFalseAfterOffCommand_20();
+            err = TestCheckOnOffAttributeValueIsFalseAfterOffCommand_21();
             break;
         }
 
@@ -20994,6 +21002,9 @@ public:
         case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -21007,11 +21018,12 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 21;
+    const uint16_t mTestCount = 22;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mConfigWait;
     chip::Optional<uint16_t> mTimeout;
 
     CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
@@ -21383,7 +21395,15 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCheckOnOffAttributeValueIsFalseAfterOffCommand_20()
+    CHIP_ERROR TestWaitToTurnOffLight_20()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+        value.ms = mConfigWait.HasValue() ? mConfigWait.Value() : 5000UL;
+        return WaitForMs("alpha", value);
+    }
+
+    CHIP_ERROR TestCheckOnOffAttributeValueIsFalseAfterOffCommand_21()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -21417,6 +21437,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("ConfigWait", 0, UINT16_MAX, &mConfigWait);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
@@ -21577,6 +21598,26 @@ public:
             }
             err = TestThReadsEnhancedColorModeAttributeFromDut_16();
             break;
+        case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Turn Off light that we turned on\n");
+            if (ShouldSkip("OO.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestTurnOffLightThatWeTurnedOn_17();
+            break;
+        case 18:
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Wait to turn Off light\n");
+            err = TestWaitToTurnOffLight_18();
+            break;
+        case 19:
+            ChipLogProgress(chipTool, " ***** Test Step 19 : Check on/off attribute value is false after off command\n");
+            if (ShouldSkip("OO.S.A0000")) {
+                NextTest();
+                return;
+            }
+            err = TestCheckOnOffAttributeValueIsFalseAfterOffCommand_19();
+            break;
         }
 
         if (CHIP_NO_ERROR != err) {
@@ -21639,6 +21680,15 @@ public:
         case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -21652,11 +21702,12 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 17;
+    const uint16_t mTestCount = 20;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mConfigWait;
     chip::Optional<uint16_t> mTimeout;
 
     CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
@@ -21971,6 +22022,55 @@ private:
 
             VerifyOrReturn(CheckConstraintMinValue<uint8_t>("enhancedColorMode", [value unsignedCharValue], 0U));
             VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("enhancedColorMode", [value unsignedCharValue], 3U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTurnOffLightThatWeTurnedOn_17()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOnOff alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster offWithCompletion:^(NSError * _Nullable err) {
+            NSLog(@"Turn Off light that we turned on Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWaitToTurnOffLight_18()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+        value.ms = mConfigWait.HasValue() ? mConfigWait.Value() : 5000UL;
+        return WaitForMs("alpha", value);
+    }
+
+    CHIP_ERROR TestCheckOnOffAttributeValueIsFalseAfterOffCommand_19()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOnOff alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeOnOffWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check on/off attribute value is false after off command Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("OnOff", actualValue, 0));
+            }
 
             NextTest();
         }];
@@ -31773,6 +31873,7 @@ private:
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
         return WaitForCommissionee("alpha", value);
     }
+    NSNumber * _Nullable MinMeasuredVariable;
 
     CHIP_ERROR TestReadTheMandatoryAttributeMinMeasuredValue_1()
     {
@@ -31792,12 +31893,16 @@ private:
                 VerifyOrReturn(CheckConstraintMinValue<uint16_t>("minMeasuredValue", [value unsignedShortValue], 0U));
                 VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("minMeasuredValue", [value unsignedShortValue], 65533U));
             }
+            {
+                MinMeasuredVariable = value;
+            }
 
             NextTest();
         }];
 
         return CHIP_NO_ERROR;
     }
+    NSNumber * _Nullable MaxMeasuredVariable;
 
     CHIP_ERROR TestReadTheMandatoryAttributeMaxMeasuredValue_2()
     {
@@ -31814,8 +31919,12 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("maxMeasuredValue", "int16u", "int16u"));
-                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("maxMeasuredValue", [value unsignedShortValue], 0U));
+                VerifyOrReturn(
+                    CheckConstraintMinValue<uint16_t>("maxMeasuredValue", [value unsignedShortValue], MinMeasuredVariable));
                 VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("maxMeasuredValue", [value unsignedShortValue], 65534U));
+            }
+            {
+                MaxMeasuredVariable = value;
             }
 
             NextTest();
@@ -31839,8 +31948,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("measuredValue", "int16u", "int16u"));
-                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("measuredValue", [value unsignedShortValue], 0U));
-                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("measuredValue", [value unsignedShortValue], 65535U));
+                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("measuredValue", [value unsignedShortValue], MinMeasuredVariable));
+                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("measuredValue", [value unsignedShortValue], MaxMeasuredVariable));
             }
 
             NextTest();
@@ -54673,7 +54782,7 @@ public:
             break;
         case 14:
             ChipLogProgress(chipTool, " ***** Test Step 14 : Reads the PlaybackSpeed attribute from the DUT\n");
-            if (ShouldSkip("PICS_USER_PROMPT && MEDIAPLAYBACK.S.A0004 && MEDIAPLAYBACK.S.C06.Rsp")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.A0004 && MEDIAPLAYBACK.S.C06.Rsp")) {
                 NextTest();
                 return;
             }
@@ -54698,7 +54807,7 @@ public:
             break;
         case 17:
             ChipLogProgress(chipTool, " ***** Test Step 17 : Reads the PlaybackSpeed attribute from the DUT\n");
-            if (ShouldSkip("PICS_USER_PROMPT && MEDIAPLAYBACK.S.A0004 && MEDIAPLAYBACK.S.C06.Rsp")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.A0004 && MEDIAPLAYBACK.S.C06.Rsp")) {
                 NextTest();
                 return;
             }
@@ -55120,12 +55229,24 @@ private:
     CHIP_ERROR TestReadsThePlaybackSpeedAttributeFromTheDut_14()
     {
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message
-            = chip::Span<const char>("Please enter 'y' if PlaybackSpeed value is -1garbage: not in length on purpose", 45);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterMediaPlayback alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePlaybackSpeedWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the PlaybackSpeed attribute from the DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("PlaybackSpeed", actualValue, -1.0f));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 
     CHIP_ERROR TestSendsARewindCommandToTheDut_15()
@@ -55165,12 +55286,24 @@ private:
     CHIP_ERROR TestReadsThePlaybackSpeedAttributeFromTheDut_17()
     {
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message
-            = chip::Span<const char>("Please enter 'y' if PlaybackSpeed value is -2garbage: not in length on purpose", 45);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterMediaPlayback alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePlaybackSpeedWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the PlaybackSpeed attribute from the DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("PlaybackSpeed", actualValue, -2.0f));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 
     CHIP_ERROR TestSendsAPlayCommand_18()
@@ -56736,6 +56869,1813 @@ private:
         }];
 
         return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_CONTENTLAUNCHER_10_3 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_CONTENTLAUNCHER_10_3()
+        : TestCommandBridge("Test_TC_CONTENTLAUNCHER_10_3")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("data", &mData);
+        AddArgument("SearchValue", &mSearchValue);
+        AddArgument("ExternalIdName", &mExternalIdName);
+        AddArgument("ExternalIdValue", &mExternalIdValue);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_CONTENTLAUNCHER_10_3() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_CONTENTLAUNCHER_10_3\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_CONTENTLAUNCHER_10_3\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 1 : TH sends a LaunchContent command to the DUT with a search parameter and string, and AutoPlay "
+                "flag set to false\n");
+            if (ShouldSkip("CONTENTLAUNCHER.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsALaunchContentCommandToTheDutWithASearchParameterAndStringAndAutoPlayFlagSetToFalse_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 2 : Verify that DUT present via its user interface a list of matches based on the provided "
+                "search criteria.\n");
+            if (ShouldSkip("PICS_USER_PROMPT && CONTENTLAUNCHER.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestVerifyThatDutPresentViaItsUserInterfaceAListOfMatchesBasedOnTheProvidedSearchCriteria_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 3 : TH sends a LaunchContent command to the DUT with a search parameter and string, and AutoPlay "
+                "flag set to true\n");
+            if (ShouldSkip("CONTENTLAUNCHER.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsALaunchContentCommandToTheDutWithASearchParameterAndStringAndAutoPlayFlagSetToTrue_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 4 : Verify that DUT should also begin playing content that best matched the given search "
+                "criteria\n");
+            if (ShouldSkip("PICS_USER_PROMPT && CONTENTLAUNCHER.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestVerifyThatDutShouldAlsoBeginPlayingContentThatBestMatchedTheGivenSearchCriteria_4();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 5;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<chip::CharSpan> mData;
+    chip::Optional<chip::CharSpan> mSearchValue;
+    chip::Optional<chip::CharSpan> mExternalIdName;
+    chip::Optional<chip::CharSpan> mExternalIdValue;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestThSendsALaunchContentCommandToTheDutWithASearchParameterAndStringAndAutoPlayFlagSetToFalse_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterContentLauncher alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRContentLauncherClusterLaunchContentParams alloc] init];
+        params.search = [[MTRContentLauncherClusterContentSearchStruct alloc] init];
+        {
+            NSMutableArray * temp_1 = [[NSMutableArray alloc] init];
+            temp_1[0] = [[MTRContentLauncherClusterParameterStruct alloc] init];
+            ((MTRContentLauncherClusterParameterStruct *) temp_1[0]).type = [NSNumber numberWithUnsignedChar:0U];
+            ((MTRContentLauncherClusterParameterStruct *) temp_1[0]).value = mSearchValue.HasValue()
+                ? [[NSString alloc] initWithBytes:mSearchValue.Value().data()
+                                           length:mSearchValue.Value().size()
+                                         encoding:NSUTF8StringEncoding]
+                : @"exampleValue";
+            {
+                NSMutableArray * temp_4 = [[NSMutableArray alloc] init];
+                temp_4[0] = [[MTRContentLauncherClusterAdditionalInfoStruct alloc] init];
+                ((MTRContentLauncherClusterAdditionalInfoStruct *) temp_4[0]).name = mExternalIdName.HasValue()
+                    ? [[NSString alloc] initWithBytes:mExternalIdName.Value().data()
+                                               length:mExternalIdName.Value().size()
+                                             encoding:NSUTF8StringEncoding]
+                    : @"name";
+                ((MTRContentLauncherClusterAdditionalInfoStruct *) temp_4[0]).value = mExternalIdValue.HasValue()
+                    ? [[NSString alloc] initWithBytes:mExternalIdValue.Value().data()
+                                               length:mExternalIdValue.Value().size()
+                                             encoding:NSUTF8StringEncoding]
+                    : @"value";
+
+                ((MTRContentLauncherClusterParameterStruct *) temp_1[0]).externalIDList = temp_4;
+            }
+
+            ((MTRContentLauncherClusterContentSearchStruct *) params.search).parameterList = temp_1;
+        }
+
+        params.autoPlay = [NSNumber numberWithBool:false];
+        params.data = mData.HasValue()
+            ? [[NSString alloc] initWithBytes:mData.Value().data() length:mData.Value().size() encoding:NSUTF8StringEncoding]
+            : @"exampleData";
+        [cluster
+            launchContentWithParams:params
+                         completion:^(MTRContentLauncherClusterLauncherResponseParams * _Nullable values, NSError * _Nullable err) {
+                             NSLog(@"TH sends a LaunchContent command to the DUT with a search parameter and string, and AutoPlay "
+                                   @"flag set to false Error: %@",
+                                 err);
+
+                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                             {
+                                 id actualValue = values.status;
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
+                             }
+
+                             {
+                                 id actualValue = values.data;
+                                 VerifyOrReturn(CheckValueAsString("Data", actualValue,
+                                     mData.HasValue() ? [[NSString alloc] initWithBytes:mData.Value().data()
+                                                                                 length:mData.Value().size()
+                                                                               encoding:NSUTF8StringEncoding]
+                                                      : @"exampleData"));
+                             }
+
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatDutPresentViaItsUserInterfaceAListOfMatchesBasedOnTheProvidedSearchCriteria_2()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' if DUT present via its user interface a list of matches based on "
+                                               "the provided search criteria.garbage: not in length on purpose",
+            111);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestThSendsALaunchContentCommandToTheDutWithASearchParameterAndStringAndAutoPlayFlagSetToTrue_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterContentLauncher alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRContentLauncherClusterLaunchContentParams alloc] init];
+        params.search = [[MTRContentLauncherClusterContentSearchStruct alloc] init];
+        {
+            NSMutableArray * temp_1 = [[NSMutableArray alloc] init];
+            temp_1[0] = [[MTRContentLauncherClusterParameterStruct alloc] init];
+            ((MTRContentLauncherClusterParameterStruct *) temp_1[0]).type = [NSNumber numberWithUnsignedChar:0U];
+            ((MTRContentLauncherClusterParameterStruct *) temp_1[0]).value = mSearchValue.HasValue()
+                ? [[NSString alloc] initWithBytes:mSearchValue.Value().data()
+                                           length:mSearchValue.Value().size()
+                                         encoding:NSUTF8StringEncoding]
+                : @"exampleValue";
+            {
+                NSMutableArray * temp_4 = [[NSMutableArray alloc] init];
+                temp_4[0] = [[MTRContentLauncherClusterAdditionalInfoStruct alloc] init];
+                ((MTRContentLauncherClusterAdditionalInfoStruct *) temp_4[0]).name = mExternalIdName.HasValue()
+                    ? [[NSString alloc] initWithBytes:mExternalIdName.Value().data()
+                                               length:mExternalIdName.Value().size()
+                                             encoding:NSUTF8StringEncoding]
+                    : @"name";
+                ((MTRContentLauncherClusterAdditionalInfoStruct *) temp_4[0]).value = mExternalIdValue.HasValue()
+                    ? [[NSString alloc] initWithBytes:mExternalIdValue.Value().data()
+                                               length:mExternalIdValue.Value().size()
+                                             encoding:NSUTF8StringEncoding]
+                    : @"value";
+
+                ((MTRContentLauncherClusterParameterStruct *) temp_1[0]).externalIDList = temp_4;
+            }
+
+            ((MTRContentLauncherClusterContentSearchStruct *) params.search).parameterList = temp_1;
+        }
+
+        params.autoPlay = [NSNumber numberWithBool:true];
+        params.data = mData.HasValue()
+            ? [[NSString alloc] initWithBytes:mData.Value().data() length:mData.Value().size() encoding:NSUTF8StringEncoding]
+            : @"exampleData";
+        [cluster
+            launchContentWithParams:params
+                         completion:^(MTRContentLauncherClusterLauncherResponseParams * _Nullable values, NSError * _Nullable err) {
+                             NSLog(@"TH sends a LaunchContent command to the DUT with a search parameter and string, and AutoPlay "
+                                   @"flag set to true Error: %@",
+                                 err);
+
+                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                             {
+                                 id actualValue = values.status;
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
+                             }
+
+                             {
+                                 id actualValue = values.data;
+                                 VerifyOrReturn(CheckValueAsString("Data", actualValue,
+                                     mData.HasValue() ? [[NSString alloc] initWithBytes:mData.Value().data()
+                                                                                 length:mData.Value().size()
+                                                                               encoding:NSUTF8StringEncoding]
+                                                      : @"exampleData"));
+                             }
+
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatDutShouldAlsoBeginPlayingContentThatBestMatchedTheGivenSearchCriteria_4()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' if DUT begin playing content that best matched the given search "
+                                               "criteriagarbage: not in length on purpose",
+            89);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+};
+
+class Test_TC_CONTENTLAUNCHER_10_5 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_CONTENTLAUNCHER_10_5()
+        : TestCommandBridge("Test_TC_CONTENTLAUNCHER_10_5")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("GoodURL", &mGoodURL);
+        AddArgument("BadURL", &mBadURL);
+        AddArgument("UnauthorizedURL", &mUnauthorizedURL);
+        AddArgument("DisplayContent", &mDisplayContent);
+        AddArgument("providerNameString", &mProviderNameString);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_CONTENTLAUNCHER_10_5() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_CONTENTLAUNCHER_10_5\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_CONTENTLAUNCHER_10_5\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 1 : TH sends a LaunchURL command to the DUT with a known good content URL string\n");
+            if (ShouldSkip("CONTENTLAUNCHER.S.C01.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsALaunchURLCommandToTheDutWithAKnownGoodContentUrlString_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Verify that DUT launched the content at the given URL\n");
+            if (ShouldSkip("PICS_USER_PROMPT && CONTENTLAUNCHER.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestVerifyThatDutLaunchedTheContentAtTheGivenUrl_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 3 : TH sends a LaunchURL command to the DUT with a known good content URL string and a display "
+                "string\n");
+            if (ShouldSkip("CONTENTLAUNCHER.S.C01.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsALaunchURLCommandToTheDutWithAKnownGoodContentUrlStringAndADisplayString_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 4 : Verify that DUT launched the content at the given URL with the given display string in the "
+                "application-specific description area\n");
+            if (ShouldSkip("PICS_USER_PROMPT && CONTENTLAUNCHER.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestVerifyThatDutLaunchedTheContentAtTheGivenUrlWithTheGivenDisplayStringInTheApplicationSpecificDescriptionArea_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 5 : TH sends a LaunchURL command to the DUT with a known good content URL string and a brand "
+                "information object.\n");
+            if (ShouldSkip("CONTENTLAUNCHER.S.C01.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsALaunchURLCommandToTheDutWithAKnownGoodContentUrlStringAndABrandInformationObject_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 6 : Verify that DUT launched the content at the given URL with the player interface updated as "
+                "per the provided branding information\n");
+            if (ShouldSkip("PICS_USER_PROMPT && CONTENTLAUNCHER.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestVerifyThatDutLaunchedTheContentAtTheGivenUrlWithThePlayerInterfaceUpdatedAsPerTheProvidedBrandingInformation_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 7 : TH sends a LaunchURL command to the DUT with a known unreachable content URL string.\n");
+            if (ShouldSkip("CONTENTLAUNCHER.S.C01.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsALaunchURLCommandToTheDutWithAKnownUnreachableContentUrlString_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 8 : TH sends a LaunchURL command to the DUT with a known un-authorized content URL string.\n");
+            if (ShouldSkip("CONTENTLAUNCHER.S.C01.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsALaunchURLCommandToTheDutWithAKnownUnAuthorizedContentUrlString_8();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 9;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<chip::CharSpan> mGoodURL;
+    chip::Optional<chip::CharSpan> mBadURL;
+    chip::Optional<chip::CharSpan> mUnauthorizedURL;
+    chip::Optional<chip::CharSpan> mDisplayContent;
+    chip::Optional<chip::CharSpan> mProviderNameString;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestThSendsALaunchURLCommandToTheDutWithAKnownGoodContentUrlString_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterContentLauncher alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRContentLauncherClusterLaunchURLParams alloc] init];
+        params.contentURL = mGoodURL.HasValue()
+            ? [[NSString alloc] initWithBytes:mGoodURL.Value().data() length:mGoodURL.Value().size() encoding:NSUTF8StringEncoding]
+            : @"https://csa-iot.org/";
+        params.brandingInformation = [[MTRContentLauncherClusterBrandingInformationStruct alloc] init];
+        ((MTRContentLauncherClusterBrandingInformationStruct *) params.brandingInformation).providerName
+            = mProviderNameString.HasValue() ? [[NSString alloc] initWithBytes:mProviderNameString.Value().data()
+                                                                        length:mProviderNameString.Value().size()
+                                                                      encoding:NSUTF8StringEncoding]
+                                             : @"exampleName";
+
+        [cluster
+            launchURLWithParams:params
+                     completion:^(MTRContentLauncherClusterLauncherResponseParams * _Nullable values, NSError * _Nullable err) {
+                         NSLog(@"TH sends a LaunchURL command to the DUT with a known good content URL string Error: %@", err);
+
+                         VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                         {
+                             id actualValue = values.status;
+                             VerifyOrReturn(CheckValue("Status", actualValue, 0U));
+                         }
+
+                         NextTest();
+                     }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatDutLaunchedTheContentAtTheGivenUrl_2()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>(
+            "Please enter 'y' if DUT launched the content at the given URLgarbage: not in length on purpose", 61);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestThSendsALaunchURLCommandToTheDutWithAKnownGoodContentUrlStringAndADisplayString_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterContentLauncher alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRContentLauncherClusterLaunchURLParams alloc] init];
+        params.contentURL = mGoodURL.HasValue()
+            ? [[NSString alloc] initWithBytes:mGoodURL.Value().data() length:mGoodURL.Value().size() encoding:NSUTF8StringEncoding]
+            : @"https://csa-iot.org/";
+        params.displayString = mDisplayContent.HasValue() ? [[NSString alloc] initWithBytes:mDisplayContent.Value().data()
+                                                                                     length:mDisplayContent.Value().size()
+                                                                                   encoding:NSUTF8StringEncoding]
+                                                          : @"exampleData";
+        params.brandingInformation = [[MTRContentLauncherClusterBrandingInformationStruct alloc] init];
+        ((MTRContentLauncherClusterBrandingInformationStruct *) params.brandingInformation).providerName
+            = mProviderNameString.HasValue() ? [[NSString alloc] initWithBytes:mProviderNameString.Value().data()
+                                                                        length:mProviderNameString.Value().size()
+                                                                      encoding:NSUTF8StringEncoding]
+                                             : @"exampleName";
+
+        [cluster
+            launchURLWithParams:params
+                     completion:^(MTRContentLauncherClusterLauncherResponseParams * _Nullable values, NSError * _Nullable err) {
+                         NSLog(@"TH sends a LaunchURL command to the DUT with a known good content URL string and a display string "
+                               @"Error: %@",
+                             err);
+
+                         VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                         {
+                             id actualValue = values.status;
+                             VerifyOrReturn(CheckValue("Status", actualValue, 0U));
+                         }
+
+                         {
+                             id actualValue = values.data;
+                             VerifyOrReturn(CheckValueAsString("Data", actualValue,
+                                 mDisplayContent.HasValue() ? [[NSString alloc] initWithBytes:mDisplayContent.Value().data()
+                                                                                       length:mDisplayContent.Value().size()
+                                                                                     encoding:NSUTF8StringEncoding]
+                                                            : @"exampleData"));
+                         }
+
+                         NextTest();
+                     }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatDutLaunchedTheContentAtTheGivenUrlWithTheGivenDisplayStringInTheApplicationSpecificDescriptionArea_4()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message
+            = chip::Span<const char>("Please enter 'y' if DUT launched the content at the given URL with the given display string "
+                                     "in the application-specific description areagarbage: not in length on purpose",
+                136);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestThSendsALaunchURLCommandToTheDutWithAKnownGoodContentUrlStringAndABrandInformationObject_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterContentLauncher alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRContentLauncherClusterLaunchURLParams alloc] init];
+        params.contentURL = mGoodURL.HasValue()
+            ? [[NSString alloc] initWithBytes:mGoodURL.Value().data() length:mGoodURL.Value().size() encoding:NSUTF8StringEncoding]
+            : @"https://csa-iot.org/";
+        params.brandingInformation = [[MTRContentLauncherClusterBrandingInformationStruct alloc] init];
+        ((MTRContentLauncherClusterBrandingInformationStruct *) params.brandingInformation).providerName
+            = mProviderNameString.HasValue() ? [[NSString alloc] initWithBytes:mProviderNameString.Value().data()
+                                                                        length:mProviderNameString.Value().size()
+                                                                      encoding:NSUTF8StringEncoding]
+                                             : @"exampleName";
+
+        [cluster
+            launchURLWithParams:params
+                     completion:^(MTRContentLauncherClusterLauncherResponseParams * _Nullable values, NSError * _Nullable err) {
+                         NSLog(@"TH sends a LaunchURL command to the DUT with a known good content URL string and a brand "
+                               @"information object. Error: %@",
+                             err);
+
+                         VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                         {
+                             id actualValue = values.status;
+                             VerifyOrReturn(CheckValue("Status", actualValue, 0U));
+                         }
+
+                         NextTest();
+                     }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatDutLaunchedTheContentAtTheGivenUrlWithThePlayerInterfaceUpdatedAsPerTheProvidedBrandingInformation_6()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message
+            = chip::Span<const char>("Please enter 'y' if DUT launched the content at the given URL with the player interface "
+                                     "updated as per the provided branding informationgarbage: not in length on purpose",
+                136);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestThSendsALaunchURLCommandToTheDutWithAKnownUnreachableContentUrlString_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterContentLauncher alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRContentLauncherClusterLaunchURLParams alloc] init];
+        params.contentURL = mBadURL.HasValue()
+            ? [[NSString alloc] initWithBytes:mBadURL.Value().data() length:mBadURL.Value().size() encoding:NSUTF8StringEncoding]
+            : @"https://badurl";
+        params.brandingInformation = [[MTRContentLauncherClusterBrandingInformationStruct alloc] init];
+        ((MTRContentLauncherClusterBrandingInformationStruct *) params.brandingInformation).providerName
+            = mProviderNameString.HasValue() ? [[NSString alloc] initWithBytes:mProviderNameString.Value().data()
+                                                                        length:mProviderNameString.Value().size()
+                                                                      encoding:NSUTF8StringEncoding]
+                                             : @"exampleName";
+
+        [cluster
+            launchURLWithParams:params
+                     completion:^(MTRContentLauncherClusterLauncherResponseParams * _Nullable values, NSError * _Nullable err) {
+                         NSLog(@"TH sends a LaunchURL command to the DUT with a known unreachable content URL string. Error: %@",
+                             err);
+
+                         VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                         {
+                             id actualValue = values.status;
+                             VerifyOrReturn(CheckValue("Status", actualValue, 1U));
+                         }
+
+                         NextTest();
+                     }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsALaunchURLCommandToTheDutWithAKnownUnAuthorizedContentUrlString_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterContentLauncher alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRContentLauncherClusterLaunchURLParams alloc] init];
+        params.contentURL = mUnauthorizedURL.HasValue() ? [[NSString alloc] initWithBytes:mUnauthorizedURL.Value().data()
+                                                                                   length:mUnauthorizedURL.Value().size()
+                                                                                 encoding:NSUTF8StringEncoding]
+                                                        : @"https://csa-iot.org/badauth";
+        params.brandingInformation = [[MTRContentLauncherClusterBrandingInformationStruct alloc] init];
+        ((MTRContentLauncherClusterBrandingInformationStruct *) params.brandingInformation).providerName
+            = mProviderNameString.HasValue() ? [[NSString alloc] initWithBytes:mProviderNameString.Value().data()
+                                                                        length:mProviderNameString.Value().size()
+                                                                      encoding:NSUTF8StringEncoding]
+                                             : @"exampleName";
+
+        [cluster
+            launchURLWithParams:params
+                     completion:^(MTRContentLauncherClusterLauncherResponseParams * _Nullable values, NSError * _Nullable err) {
+                         NSLog(@"TH sends a LaunchURL command to the DUT with a known un-authorized content URL string. Error: %@",
+                             err);
+
+                         VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                         {
+                             id actualValue = values.status;
+                             VerifyOrReturn(CheckValue("Status", actualValue, 2U));
+                         }
+
+                         NextTest();
+                     }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_CONTENTLAUNCHER_10_7 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_CONTENTLAUNCHER_10_7()
+        : TestCommandBridge("Test_TC_CONTENTLAUNCHER_10_7")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("PopularityName", &mPopularityName);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_CONTENTLAUNCHER_10_7() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_CONTENTLAUNCHER_10_7\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_CONTENTLAUNCHER_10_7\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 1 : TH sends a LaunchContent command to the DUT with search parameter consisting of Type As "
+                "Actor and Value as An Actor’s name, for example, Gaby sHoffman\n");
+            if (ShouldSkip("CONTENTLAUNCHER.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsALaunchContentCommandToTheDutWithSearchParameterConsistingOfTypeAsActorAndValueAsAnActorsNameForExampleGabySHoffman_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Verify that DUT should play or display the search result.\n");
+            if (ShouldSkip("PICS_USER_PROMPT && CONTENTLAUNCHER.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestVerifyThatDutShouldPlayOrDisplayTheSearchResult_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 3 : TH sends a LaunchContent command to the DUT with search parameter consisting of Type As "
+                "Channel and Value as Channel Name name, for example, PBS\n");
+            if (ShouldSkip("CONTENTLAUNCHER.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsALaunchContentCommandToTheDutWithSearchParameterConsistingOfTypeAsChannelAndValueAsChannelNameNameForExamplePbs_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Verify that DUT should play or display the search result.\n");
+            if (ShouldSkip("PICS_USER_PROMPT && CONTENTLAUNCHER.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestVerifyThatDutShouldPlayOrDisplayTheSearchResult_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 5 : TH sends a LaunchContent command to the DUT with search parameter consisting of Type As "
+                "Character and Value as Character’s name,for example,Snow White\n");
+            if (ShouldSkip("CONTENTLAUNCHER.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsALaunchContentCommandToTheDutWithSearchParameterConsistingOfTypeAsCharacterAndValueAsCharactersNameforExampleSnowWhite_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Verify that DUT should play or display the search result.\n");
+            if (ShouldSkip("PICS_USER_PROMPT && CONTENTLAUNCHER.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestVerifyThatDutShouldPlayOrDisplayTheSearchResult_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 7 : TH sends a LaunchContent command to the DUT with search parameter consisting of Type As "
+                "Director and Value as Director’s name, for example, Spike Lee\n");
+            if (ShouldSkip("CONTENTLAUNCHER.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsALaunchContentCommandToTheDutWithSearchParameterConsistingOfTypeAsDirectorAndValueAsDirectorsNameForExampleSpikeLee_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Verify that DUT should play or display the search result.\n");
+            if (ShouldSkip("PICS_USER_PROMPT && CONTENTLAUNCHER.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestVerifyThatDutShouldPlayOrDisplayTheSearchResult_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 9 : TH sends a LaunchContent command to the DUT with search parameter consisting of Type As "
+                "Event and Value as An Event’s name , for example Football games\n");
+            if (ShouldSkip("CONTENTLAUNCHER.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsALaunchContentCommandToTheDutWithSearchParameterConsistingOfTypeAsEventAndValueAsAnEventsNameForExampleFootballGames_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Verify that DUT should play or display the search result.\n");
+            if (ShouldSkip("PICS_USER_PROMPT && CONTENTLAUNCHER.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestVerifyThatDutShouldPlayOrDisplayTheSearchResult_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 11 : TH sends a LaunchContent command to the DUT with search parameter consisting of Type As "
+                "Franchise and Value as Franchise’s name,for example Star Wars\n");
+            if (ShouldSkip("CONTENTLAUNCHER.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsALaunchContentCommandToTheDutWithSearchParameterConsistingOfTypeAsFranchiseAndValueAsFranchisesNameforExampleStarWars_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Verify that DUT should play or display the search result.\n");
+            if (ShouldSkip("PICS_USER_PROMPT && CONTENTLAUNCHER.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestVerifyThatDutShouldPlayOrDisplayTheSearchResult_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 13 : TH sends a LaunchContent command to the DUT with search parameter consisting of Type As "
+                "Genre and Value as Genre’s name, for example Horror\n");
+            if (ShouldSkip("CONTENTLAUNCHER.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsALaunchContentCommandToTheDutWithSearchParameterConsistingOfTypeAsGenreAndValueAsGenresNameForExampleHorror_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Verify that DUT should play or display the search result.\n");
+            if (ShouldSkip("PICS_USER_PROMPT && CONTENTLAUNCHER.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestVerifyThatDutShouldPlayOrDisplayTheSearchResult_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 15 : TH sends a LaunchContent command to the DUT with search parameter consisting of Type As "
+                "League and Value as League’s name, for example NCAA\n");
+            if (ShouldSkip("CONTENTLAUNCHER.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsALaunchContentCommandToTheDutWithSearchParameterConsistingOfTypeAsLeagueAndValueAsLeaguesNameForExampleNcaa_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Verify that DUT should play or display the search result.\n");
+            if (ShouldSkip("PICS_USER_PROMPT && CONTENTLAUNCHER.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestVerifyThatDutShouldPlayOrDisplayTheSearchResult_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 17 : TH sends a LaunchContent command to the DUT with search parameter consisting of Type As "
+                "Popularity and Value as Popularity’s name\n");
+            if (ShouldSkip("CONTENTLAUNCHER.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsALaunchContentCommandToTheDutWithSearchParameterConsistingOfTypeAsPopularityAndValueAsPopularitysName_17();
+            break;
+        case 18:
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Verify that DUT should play or display the search result.\n");
+            if (ShouldSkip("PICS_USER_PROMPT && CONTENTLAUNCHER.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestVerifyThatDutShouldPlayOrDisplayTheSearchResult_18();
+            break;
+        case 19:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 19 : TH sends a LaunchContent command to the DUT with search parameter consisting of Type As "
+                "Provider and Value as Provider’s name, for example Netflix\n");
+            if (ShouldSkip("CONTENTLAUNCHER.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsALaunchContentCommandToTheDutWithSearchParameterConsistingOfTypeAsProviderAndValueAsProvidersNameForExampleNetflix_19();
+            break;
+        case 20:
+            ChipLogProgress(chipTool, " ***** Test Step 20 : Verify that DUT should play or display the search result.\n");
+            if (ShouldSkip("PICS_USER_PROMPT && CONTENTLAUNCHER.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestVerifyThatDutShouldPlayOrDisplayTheSearchResult_20();
+            break;
+        case 21:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 21 : TH sends a LaunchContent command to the DUT with search parameter consisting of Type As "
+                "Sport and Value as Sport’s name, for example, football\n");
+            if (ShouldSkip("CONTENTLAUNCHER.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsALaunchContentCommandToTheDutWithSearchParameterConsistingOfTypeAsSportAndValueAsSportsNameForExampleFootball_21();
+            break;
+        case 22:
+            ChipLogProgress(chipTool, " ***** Test Step 22 : Verify that DUT should play or display the search result.\n");
+            if (ShouldSkip("PICS_USER_PROMPT && CONTENTLAUNCHER.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestVerifyThatDutShouldPlayOrDisplayTheSearchResult_22();
+            break;
+        case 23:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 23 : TH sends a LaunchContent command to the DUT with search parameter consisting of Type As "
+                "SportsTeam and Value as SportTeam’s name , for example Arsenel\n");
+            if (ShouldSkip("CONTENTLAUNCHER.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsALaunchContentCommandToTheDutWithSearchParameterConsistingOfTypeAsSportsTeamAndValueAsSportTeamsNameForExampleArsenel_23();
+            break;
+        case 24:
+            ChipLogProgress(chipTool, " ***** Test Step 24 : Verify that DUT should play or display the search result.\n");
+            if (ShouldSkip("PICS_USER_PROMPT && CONTENTLAUNCHER.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestVerifyThatDutShouldPlayOrDisplayTheSearchResult_24();
+            break;
+        case 25:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 25 : TH sends a LaunchContent command to the DUT with search parameter consisting of Type As "
+                "Type and Value as Type’s name, for example TVSeries\n");
+            if (ShouldSkip("CONTENTLAUNCHER.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsALaunchContentCommandToTheDutWithSearchParameterConsistingOfTypeAsTypeAndValueAsTypesNameForExampleTVSeries_25();
+            break;
+        case 26:
+            ChipLogProgress(chipTool, " ***** Test Step 26 : Verify that DUT should play or display the search result.\n");
+            if (ShouldSkip("PICS_USER_PROMPT && CONTENTLAUNCHER.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestVerifyThatDutShouldPlayOrDisplayTheSearchResult_26();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 27;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<chip::CharSpan> mPopularityName;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR
+    TestThSendsALaunchContentCommandToTheDutWithSearchParameterConsistingOfTypeAsActorAndValueAsAnActorsNameForExampleGabySHoffman_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterContentLauncher alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRContentLauncherClusterLaunchContentParams alloc] init];
+        params.search = [[MTRContentLauncherClusterContentSearchStruct alloc] init];
+        {
+            NSMutableArray * temp_1 = [[NSMutableArray alloc] init];
+            temp_1[0] = [[MTRContentLauncherClusterParameterStruct alloc] init];
+            ((MTRContentLauncherClusterParameterStruct *) temp_1[0]).type = [NSNumber numberWithUnsignedChar:0U];
+            ((MTRContentLauncherClusterParameterStruct *) temp_1[0]).value = @"Gaby sHoffman";
+
+            ((MTRContentLauncherClusterContentSearchStruct *) params.search).parameterList = temp_1;
+        }
+
+        params.autoPlay = [NSNumber numberWithBool:true];
+        [cluster
+            launchContentWithParams:params
+                         completion:^(MTRContentLauncherClusterLauncherResponseParams * _Nullable values, NSError * _Nullable err) {
+                             NSLog(@"TH sends a LaunchContent command to the DUT with search parameter consisting of Type As Actor "
+                                   @"and Value as An Actor’s name, for example, Gaby sHoffman Error: %@",
+                                 err);
+
+                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                             {
+                                 id actualValue = values.status;
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
+                             }
+
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatDutShouldPlayOrDisplayTheSearchResult_2()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>(
+            "Please enter 'y' if DUT play or display the search result.garbage: not in length on purpose", 58);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR
+    TestThSendsALaunchContentCommandToTheDutWithSearchParameterConsistingOfTypeAsChannelAndValueAsChannelNameNameForExamplePbs_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterContentLauncher alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRContentLauncherClusterLaunchContentParams alloc] init];
+        params.search = [[MTRContentLauncherClusterContentSearchStruct alloc] init];
+        {
+            NSMutableArray * temp_1 = [[NSMutableArray alloc] init];
+            temp_1[0] = [[MTRContentLauncherClusterParameterStruct alloc] init];
+            ((MTRContentLauncherClusterParameterStruct *) temp_1[0]).type = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRContentLauncherClusterParameterStruct *) temp_1[0]).value = @"PBS";
+
+            ((MTRContentLauncherClusterContentSearchStruct *) params.search).parameterList = temp_1;
+        }
+
+        params.autoPlay = [NSNumber numberWithBool:true];
+        [cluster
+            launchContentWithParams:params
+                         completion:^(MTRContentLauncherClusterLauncherResponseParams * _Nullable values, NSError * _Nullable err) {
+                             NSLog(@"TH sends a LaunchContent command to the DUT with search parameter consisting of Type As "
+                                   @"Channel and Value as Channel Name name, for example, PBS Error: %@",
+                                 err);
+
+                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                             {
+                                 id actualValue = values.status;
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
+                             }
+
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatDutShouldPlayOrDisplayTheSearchResult_4()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>(
+            "Please enter 'y' if DUT play or display the search result.garbage: not in length on purpose", 58);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR
+    TestThSendsALaunchContentCommandToTheDutWithSearchParameterConsistingOfTypeAsCharacterAndValueAsCharactersNameforExampleSnowWhite_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterContentLauncher alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRContentLauncherClusterLaunchContentParams alloc] init];
+        params.search = [[MTRContentLauncherClusterContentSearchStruct alloc] init];
+        {
+            NSMutableArray * temp_1 = [[NSMutableArray alloc] init];
+            temp_1[0] = [[MTRContentLauncherClusterParameterStruct alloc] init];
+            ((MTRContentLauncherClusterParameterStruct *) temp_1[0]).type = [NSNumber numberWithUnsignedChar:2U];
+            ((MTRContentLauncherClusterParameterStruct *) temp_1[0]).value = @"Snow White";
+
+            ((MTRContentLauncherClusterContentSearchStruct *) params.search).parameterList = temp_1;
+        }
+
+        params.autoPlay = [NSNumber numberWithBool:false];
+        [cluster
+            launchContentWithParams:params
+                         completion:^(MTRContentLauncherClusterLauncherResponseParams * _Nullable values, NSError * _Nullable err) {
+                             NSLog(@"TH sends a LaunchContent command to the DUT with search parameter consisting of Type As "
+                                   @"Character and Value as Character’s name,for example,Snow White Error: %@",
+                                 err);
+
+                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                             {
+                                 id actualValue = values.status;
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
+                             }
+
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatDutShouldPlayOrDisplayTheSearchResult_6()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>(
+            "Please enter 'y' if DUT play or display the search result.garbage: not in length on purpose", 58);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR
+    TestThSendsALaunchContentCommandToTheDutWithSearchParameterConsistingOfTypeAsDirectorAndValueAsDirectorsNameForExampleSpikeLee_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterContentLauncher alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRContentLauncherClusterLaunchContentParams alloc] init];
+        params.search = [[MTRContentLauncherClusterContentSearchStruct alloc] init];
+        {
+            NSMutableArray * temp_1 = [[NSMutableArray alloc] init];
+            temp_1[0] = [[MTRContentLauncherClusterParameterStruct alloc] init];
+            ((MTRContentLauncherClusterParameterStruct *) temp_1[0]).type = [NSNumber numberWithUnsignedChar:3U];
+            ((MTRContentLauncherClusterParameterStruct *) temp_1[0]).value = @"Spike Lee";
+
+            ((MTRContentLauncherClusterContentSearchStruct *) params.search).parameterList = temp_1;
+        }
+
+        params.autoPlay = [NSNumber numberWithBool:true];
+        [cluster
+            launchContentWithParams:params
+                         completion:^(MTRContentLauncherClusterLauncherResponseParams * _Nullable values, NSError * _Nullable err) {
+                             NSLog(@"TH sends a LaunchContent command to the DUT with search parameter consisting of Type As "
+                                   @"Director and Value as Director’s name, for example, Spike Lee Error: %@",
+                                 err);
+
+                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                             {
+                                 id actualValue = values.status;
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
+                             }
+
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatDutShouldPlayOrDisplayTheSearchResult_8()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>(
+            "Please enter 'y' if DUT play or display the search result.garbage: not in length on purpose", 58);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR
+    TestThSendsALaunchContentCommandToTheDutWithSearchParameterConsistingOfTypeAsEventAndValueAsAnEventsNameForExampleFootballGames_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterContentLauncher alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRContentLauncherClusterLaunchContentParams alloc] init];
+        params.search = [[MTRContentLauncherClusterContentSearchStruct alloc] init];
+        {
+            NSMutableArray * temp_1 = [[NSMutableArray alloc] init];
+            temp_1[0] = [[MTRContentLauncherClusterParameterStruct alloc] init];
+            ((MTRContentLauncherClusterParameterStruct *) temp_1[0]).type = [NSNumber numberWithUnsignedChar:4U];
+            ((MTRContentLauncherClusterParameterStruct *) temp_1[0]).value = @"Football games";
+
+            ((MTRContentLauncherClusterContentSearchStruct *) params.search).parameterList = temp_1;
+        }
+
+        params.autoPlay = [NSNumber numberWithBool:true];
+        [cluster
+            launchContentWithParams:params
+                         completion:^(MTRContentLauncherClusterLauncherResponseParams * _Nullable values, NSError * _Nullable err) {
+                             NSLog(@"TH sends a LaunchContent command to the DUT with search parameter consisting of Type As Event "
+                                   @"and Value as An Event’s name , for example Football games Error: %@",
+                                 err);
+
+                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                             {
+                                 id actualValue = values.status;
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
+                             }
+
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatDutShouldPlayOrDisplayTheSearchResult_10()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>(
+            "Please enter 'y' if DUT play or display the search result.garbage: not in length on purpose", 58);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR
+    TestThSendsALaunchContentCommandToTheDutWithSearchParameterConsistingOfTypeAsFranchiseAndValueAsFranchisesNameforExampleStarWars_11()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterContentLauncher alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRContentLauncherClusterLaunchContentParams alloc] init];
+        params.search = [[MTRContentLauncherClusterContentSearchStruct alloc] init];
+        {
+            NSMutableArray * temp_1 = [[NSMutableArray alloc] init];
+            temp_1[0] = [[MTRContentLauncherClusterParameterStruct alloc] init];
+            ((MTRContentLauncherClusterParameterStruct *) temp_1[0]).type = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRContentLauncherClusterParameterStruct *) temp_1[0]).value = @"Star Wars";
+
+            ((MTRContentLauncherClusterContentSearchStruct *) params.search).parameterList = temp_1;
+        }
+
+        params.autoPlay = [NSNumber numberWithBool:true];
+        [cluster
+            launchContentWithParams:params
+                         completion:^(MTRContentLauncherClusterLauncherResponseParams * _Nullable values, NSError * _Nullable err) {
+                             NSLog(@"TH sends a LaunchContent command to the DUT with search parameter consisting of Type As "
+                                   @"Franchise and Value as Franchise’s name,for example Star Wars Error: %@",
+                                 err);
+
+                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                             {
+                                 id actualValue = values.status;
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
+                             }
+
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatDutShouldPlayOrDisplayTheSearchResult_12()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>(
+            "Please enter 'y' if DUT play or display the search result.garbage: not in length on purpose", 58);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR
+    TestThSendsALaunchContentCommandToTheDutWithSearchParameterConsistingOfTypeAsGenreAndValueAsGenresNameForExampleHorror_13()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterContentLauncher alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRContentLauncherClusterLaunchContentParams alloc] init];
+        params.search = [[MTRContentLauncherClusterContentSearchStruct alloc] init];
+        {
+            NSMutableArray * temp_1 = [[NSMutableArray alloc] init];
+            temp_1[0] = [[MTRContentLauncherClusterParameterStruct alloc] init];
+            ((MTRContentLauncherClusterParameterStruct *) temp_1[0]).type = [NSNumber numberWithUnsignedChar:6U];
+            ((MTRContentLauncherClusterParameterStruct *) temp_1[0]).value = @"Horror";
+
+            ((MTRContentLauncherClusterContentSearchStruct *) params.search).parameterList = temp_1;
+        }
+
+        params.autoPlay = [NSNumber numberWithBool:true];
+        [cluster
+            launchContentWithParams:params
+                         completion:^(MTRContentLauncherClusterLauncherResponseParams * _Nullable values, NSError * _Nullable err) {
+                             NSLog(@"TH sends a LaunchContent command to the DUT with search parameter consisting of Type As Genre "
+                                   @"and Value as Genre’s name, for example Horror Error: %@",
+                                 err);
+
+                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                             {
+                                 id actualValue = values.status;
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
+                             }
+
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatDutShouldPlayOrDisplayTheSearchResult_14()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>(
+            "Please enter 'y' if DUT play or display the search result.garbage: not in length on purpose", 58);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR
+    TestThSendsALaunchContentCommandToTheDutWithSearchParameterConsistingOfTypeAsLeagueAndValueAsLeaguesNameForExampleNcaa_15()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterContentLauncher alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRContentLauncherClusterLaunchContentParams alloc] init];
+        params.search = [[MTRContentLauncherClusterContentSearchStruct alloc] init];
+        {
+            NSMutableArray * temp_1 = [[NSMutableArray alloc] init];
+            temp_1[0] = [[MTRContentLauncherClusterParameterStruct alloc] init];
+            ((MTRContentLauncherClusterParameterStruct *) temp_1[0]).type = [NSNumber numberWithUnsignedChar:7U];
+            ((MTRContentLauncherClusterParameterStruct *) temp_1[0]).value = @"NCAA";
+
+            ((MTRContentLauncherClusterContentSearchStruct *) params.search).parameterList = temp_1;
+        }
+
+        params.autoPlay = [NSNumber numberWithBool:true];
+        [cluster
+            launchContentWithParams:params
+                         completion:^(MTRContentLauncherClusterLauncherResponseParams * _Nullable values, NSError * _Nullable err) {
+                             NSLog(@"TH sends a LaunchContent command to the DUT with search parameter consisting of Type As "
+                                   @"League and Value as League’s name, for example NCAA Error: %@",
+                                 err);
+
+                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                             {
+                                 id actualValue = values.status;
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
+                             }
+
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatDutShouldPlayOrDisplayTheSearchResult_16()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>(
+            "Please enter 'y' if DUT play or display the search result.garbage: not in length on purpose", 58);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestThSendsALaunchContentCommandToTheDutWithSearchParameterConsistingOfTypeAsPopularityAndValueAsPopularitysName_17()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterContentLauncher alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRContentLauncherClusterLaunchContentParams alloc] init];
+        params.search = [[MTRContentLauncherClusterContentSearchStruct alloc] init];
+        {
+            NSMutableArray * temp_1 = [[NSMutableArray alloc] init];
+            temp_1[0] = [[MTRContentLauncherClusterParameterStruct alloc] init];
+            ((MTRContentLauncherClusterParameterStruct *) temp_1[0]).type = [NSNumber numberWithUnsignedChar:8U];
+            ((MTRContentLauncherClusterParameterStruct *) temp_1[0]).value = mPopularityName.HasValue()
+                ? [[NSString alloc] initWithBytes:mPopularityName.Value().data()
+                                           length:mPopularityName.Value().size()
+                                         encoding:NSUTF8StringEncoding]
+                : @"popular content";
+
+            ((MTRContentLauncherClusterContentSearchStruct *) params.search).parameterList = temp_1;
+        }
+
+        params.autoPlay = [NSNumber numberWithBool:true];
+        [cluster
+            launchContentWithParams:params
+                         completion:^(MTRContentLauncherClusterLauncherResponseParams * _Nullable values, NSError * _Nullable err) {
+                             NSLog(@"TH sends a LaunchContent command to the DUT with search parameter consisting of Type As "
+                                   @"Popularity and Value as Popularity’s name Error: %@",
+                                 err);
+
+                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                             {
+                                 id actualValue = values.status;
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
+                             }
+
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatDutShouldPlayOrDisplayTheSearchResult_18()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>(
+            "Please enter 'y' if DUT play or display the search result.garbage: not in length on purpose", 58);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR
+    TestThSendsALaunchContentCommandToTheDutWithSearchParameterConsistingOfTypeAsProviderAndValueAsProvidersNameForExampleNetflix_19()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterContentLauncher alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRContentLauncherClusterLaunchContentParams alloc] init];
+        params.search = [[MTRContentLauncherClusterContentSearchStruct alloc] init];
+        {
+            NSMutableArray * temp_1 = [[NSMutableArray alloc] init];
+            temp_1[0] = [[MTRContentLauncherClusterParameterStruct alloc] init];
+            ((MTRContentLauncherClusterParameterStruct *) temp_1[0]).type = [NSNumber numberWithUnsignedChar:9U];
+            ((MTRContentLauncherClusterParameterStruct *) temp_1[0]).value = @"Netflix";
+
+            ((MTRContentLauncherClusterContentSearchStruct *) params.search).parameterList = temp_1;
+        }
+
+        params.autoPlay = [NSNumber numberWithBool:true];
+        [cluster
+            launchContentWithParams:params
+                         completion:^(MTRContentLauncherClusterLauncherResponseParams * _Nullable values, NSError * _Nullable err) {
+                             NSLog(@"TH sends a LaunchContent command to the DUT with search parameter consisting of Type As "
+                                   @"Provider and Value as Provider’s name, for example Netflix Error: %@",
+                                 err);
+
+                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                             {
+                                 id actualValue = values.status;
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
+                             }
+
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatDutShouldPlayOrDisplayTheSearchResult_20()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>(
+            "Please enter 'y' if DUT play or display the search result.garbage: not in length on purpose", 58);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR
+    TestThSendsALaunchContentCommandToTheDutWithSearchParameterConsistingOfTypeAsSportAndValueAsSportsNameForExampleFootball_21()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterContentLauncher alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRContentLauncherClusterLaunchContentParams alloc] init];
+        params.search = [[MTRContentLauncherClusterContentSearchStruct alloc] init];
+        {
+            NSMutableArray * temp_1 = [[NSMutableArray alloc] init];
+            temp_1[0] = [[MTRContentLauncherClusterParameterStruct alloc] init];
+            ((MTRContentLauncherClusterParameterStruct *) temp_1[0]).type = [NSNumber numberWithUnsignedChar:10U];
+            ((MTRContentLauncherClusterParameterStruct *) temp_1[0]).value = @"football";
+
+            ((MTRContentLauncherClusterContentSearchStruct *) params.search).parameterList = temp_1;
+        }
+
+        params.autoPlay = [NSNumber numberWithBool:true];
+        [cluster
+            launchContentWithParams:params
+                         completion:^(MTRContentLauncherClusterLauncherResponseParams * _Nullable values, NSError * _Nullable err) {
+                             NSLog(@"TH sends a LaunchContent command to the DUT with search parameter consisting of Type As Sport "
+                                   @"and Value as Sport’s name, for example, football Error: %@",
+                                 err);
+
+                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                             {
+                                 id actualValue = values.status;
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
+                             }
+
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatDutShouldPlayOrDisplayTheSearchResult_22()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>(
+            "Please enter 'y' if DUT play or display the search result.garbage: not in length on purpose", 58);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR
+    TestThSendsALaunchContentCommandToTheDutWithSearchParameterConsistingOfTypeAsSportsTeamAndValueAsSportTeamsNameForExampleArsenel_23()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterContentLauncher alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRContentLauncherClusterLaunchContentParams alloc] init];
+        params.search = [[MTRContentLauncherClusterContentSearchStruct alloc] init];
+        {
+            NSMutableArray * temp_1 = [[NSMutableArray alloc] init];
+            temp_1[0] = [[MTRContentLauncherClusterParameterStruct alloc] init];
+            ((MTRContentLauncherClusterParameterStruct *) temp_1[0]).type = [NSNumber numberWithUnsignedChar:11U];
+            ((MTRContentLauncherClusterParameterStruct *) temp_1[0]).value = @"Arsenel";
+
+            ((MTRContentLauncherClusterContentSearchStruct *) params.search).parameterList = temp_1;
+        }
+
+        params.autoPlay = [NSNumber numberWithBool:true];
+        [cluster
+            launchContentWithParams:params
+                         completion:^(MTRContentLauncherClusterLauncherResponseParams * _Nullable values, NSError * _Nullable err) {
+                             NSLog(@"TH sends a LaunchContent command to the DUT with search parameter consisting of Type As "
+                                   @"SportsTeam and Value as SportTeam’s name , for example Arsenel Error: %@",
+                                 err);
+
+                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                             {
+                                 id actualValue = values.status;
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
+                             }
+
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatDutShouldPlayOrDisplayTheSearchResult_24()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>(
+            "Please enter 'y' if DUT play or display the search result.garbage: not in length on purpose", 58);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR
+    TestThSendsALaunchContentCommandToTheDutWithSearchParameterConsistingOfTypeAsTypeAndValueAsTypesNameForExampleTVSeries_25()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterContentLauncher alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRContentLauncherClusterLaunchContentParams alloc] init];
+        params.search = [[MTRContentLauncherClusterContentSearchStruct alloc] init];
+        {
+            NSMutableArray * temp_1 = [[NSMutableArray alloc] init];
+            temp_1[0] = [[MTRContentLauncherClusterParameterStruct alloc] init];
+            ((MTRContentLauncherClusterParameterStruct *) temp_1[0]).type = [NSNumber numberWithUnsignedChar:12U];
+            ((MTRContentLauncherClusterParameterStruct *) temp_1[0]).value = @"TVSeries";
+
+            ((MTRContentLauncherClusterContentSearchStruct *) params.search).parameterList = temp_1;
+        }
+
+        params.autoPlay = [NSNumber numberWithBool:true];
+        [cluster
+            launchContentWithParams:params
+                         completion:^(MTRContentLauncherClusterLauncherResponseParams * _Nullable values, NSError * _Nullable err) {
+                             NSLog(@"TH sends a LaunchContent command to the DUT with search parameter consisting of Type As Type "
+                                   @"and Value as Type’s name, for example TVSeries Error: %@",
+                                 err);
+
+                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                             {
+                                 id actualValue = values.status;
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
+                             }
+
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatDutShouldPlayOrDisplayTheSearchResult_26()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>(
+            "Please enter 'y' if DUT play or display the search result.garbage: not in length on purpose", 58);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -62950,8 +64890,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("minMeasuredValue", "int16s", "int16s"));
-                VerifyOrReturn(CheckConstraintMinValue<int16_t>("minMeasuredValue", [value shortValue], -32768));
-                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("minMeasuredValue", [value shortValue], 32767));
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("minMeasuredValue", [value shortValue], -32767));
+                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("minMeasuredValue", [value shortValue], 32766));
             }
             {
                 MinMeasuredValue = value;
@@ -62981,7 +64921,7 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("maxMeasuredValue", "int16s", "int16s"));
-                VerifyOrReturn(CheckConstraintMinValue<int16_t>("maxMeasuredValue", [value shortValue], -32768));
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("maxMeasuredValue", [value shortValue], MinMeasuredValue));
                 VerifyOrReturn(CheckConstraintMaxValue<int16_t>("maxMeasuredValue", [value shortValue], 32767));
             }
             {
@@ -63063,8 +65003,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("minScaledValue", "int16s", "int16s"));
-                VerifyOrReturn(CheckConstraintMinValue<int16_t>("minScaledValue", [value shortValue], -32768));
-                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("minScaledValue", [value shortValue], 32767));
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("minScaledValue", [value shortValue], -32767));
+                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("minScaledValue", [value shortValue], 32766));
             }
             {
                 MinScaledValue = value;
@@ -63094,7 +65034,7 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("maxScaledValue", "int16s", "int16s"));
-                VerifyOrReturn(CheckConstraintMinValue<int16_t>("maxScaledValue", [value shortValue], -32768));
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("maxScaledValue", [value shortValue], MinScaledValue));
                 VerifyOrReturn(CheckConstraintMaxValue<int16_t>("maxScaledValue", [value shortValue], 32767));
             }
             {
@@ -67928,6 +69868,7 @@ private:
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
         return WaitForCommissionee("alpha", value);
     }
+    NSNumber * _Nullable CurrentMinMeasured;
 
     CHIP_ERROR TestThReadsTheMinMeasuredValueAttributeFromTheDut_1()
     {
@@ -67949,12 +69890,16 @@ private:
                 VerifyOrReturn(CheckConstraintMinValue<uint16_t>("minMeasuredValue", [value unsignedShortValue], 0U));
                 VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("minMeasuredValue", [value unsignedShortValue], 9999U));
             }
+            {
+                CurrentMinMeasured = value;
+            }
 
             NextTest();
         }];
 
         return CHIP_NO_ERROR;
     }
+    NSNumber * _Nullable CurrentMaxMeasured;
 
     CHIP_ERROR TestThReadsTheMaxMeasuredValueAttributeFromTheDut_2()
     {
@@ -67973,8 +69918,12 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("maxMeasuredValue", "int16u", "int16u"));
-                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("maxMeasuredValue", [value unsignedShortValue], 1U));
+                VerifyOrReturn(
+                    CheckConstraintMinValue<uint16_t>("maxMeasuredValue", [value unsignedShortValue], CurrentMinMeasured));
                 VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("maxMeasuredValue", [value unsignedShortValue], 10000U));
+            }
+            {
+                CurrentMaxMeasured = value;
             }
 
             NextTest();
@@ -68000,8 +69949,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("measuredValue", "int16u", "int16u"));
-                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("measuredValue", [value unsignedShortValue], 0U));
-                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("measuredValue", [value unsignedShortValue], 10000U));
+                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("measuredValue", [value unsignedShortValue], CurrentMinMeasured));
+                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("measuredValue", [value unsignedShortValue], CurrentMaxMeasured));
             }
 
             NextTest();
@@ -70096,7 +72045,7 @@ private:
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
         return WaitForCommissionee("alpha", value);
     }
-    NSNumber * _Nullable MinMeasuredValue;
+    NSNumber * _Nullable CurrentMinMeasured;
 
     CHIP_ERROR TestReadTheMandatoryAttributeMinMeasuredValue_1()
     {
@@ -70116,10 +72065,10 @@ private:
 
                 VerifyOrReturn(CheckConstraintType("minMeasuredValue", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue<int16_t>("minMeasuredValue", [value shortValue], -27315));
-                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("minMeasuredValue", [value shortValue], 32767));
+                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("minMeasuredValue", [value shortValue], 32766));
             }
             {
-                MinMeasuredValue = value;
+                CurrentMinMeasured = value;
             }
 
             NextTest();
@@ -70127,7 +72076,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nullable MaxMeasuredValue;
+    NSNumber * _Nullable CurrentMaxMeasured;
 
     CHIP_ERROR TestReadTheMandatoryAttributeMaxMeasuredValue_2()
     {
@@ -70146,11 +72095,11 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("maxMeasuredValue", "int16s", "int16s"));
-                VerifyOrReturn(CheckConstraintMinValue<int16_t>("maxMeasuredValue", [value shortValue], -27314));
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("maxMeasuredValue", [value shortValue], CurrentMinMeasured));
                 VerifyOrReturn(CheckConstraintMaxValue<int16_t>("maxMeasuredValue", [value shortValue], 32767));
             }
             {
-                MaxMeasuredValue = value;
+                CurrentMaxMeasured = value;
             }
 
             NextTest();
@@ -70176,8 +72125,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("measuredValue", "int16s", "int16s"));
-                VerifyOrReturn(CheckConstraintMinValue<int16_t>("measuredValue", [value shortValue], MinMeasuredValue));
-                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("measuredValue", [value shortValue], MaxMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("measuredValue", [value shortValue], CurrentMinMeasured));
+                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("measuredValue", [value shortValue], CurrentMaxMeasured));
             }
 
             NextTest();
@@ -147939,6 +149888,9 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_CONTENTLAUNCHER_10_1>(),
         make_unique<Test_TC_WAKEONLAN_4_1>(),
         make_unique<Test_TC_ALOGIN_12_1>(),
+        make_unique<Test_TC_CONTENTLAUNCHER_10_3>(),
+        make_unique<Test_TC_CONTENTLAUNCHER_10_5>(),
+        make_unique<Test_TC_CONTENTLAUNCHER_10_7>(),
         make_unique<Test_TC_MOD_1_1>(),
         make_unique<OTA_SuccessfulTransfer>(),
         make_unique<Test_TC_OCC_1_1>(),
