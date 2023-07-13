@@ -290,6 +290,7 @@ public:
         printf("TestCommissioningWindow\n");
         printf("TestCommissionerNodeId\n");
         printf("TestTimeSynchronization\n");
+        printf("TestOperationalState\n");
         printf("TestMultiAdmin\n");
         printf("Test_TC_DGSW_1_1\n");
         printf("TestSubscribe_OnOff\n");
@@ -91343,6 +91344,289 @@ private:
     }
 };
 
+class TestOperationalStateSuite : public TestCommand
+{
+public:
+    TestOperationalStateSuite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("TestOperationalState", 15, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~TestOperationalStateSuite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<chip::app::DataModel::DecodableList<chip::CharSpan>> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNull("phaseList", value));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<uint8_t> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNull("currentPhase", value));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<uint32_t> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNull("countdownTime", value));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::OperationalState::Structs::OperationalStateStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("operationalStateList", iter_0, 0));
+                    VerifyOrReturn(
+                        CheckValue("operationalStateList[0].operationalStateID", iter_0.GetValue().operationalStateID, 0U));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("operationalStateList", iter_0, 1));
+                    VerifyOrReturn(
+                        CheckValue("operationalStateList[1].operationalStateID", iter_0.GetValue().operationalStateID, 1U));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("operationalStateList", iter_0, 2));
+                    VerifyOrReturn(
+                        CheckValue("operationalStateList[2].operationalStateID", iter_0.GetValue().operationalStateID, 2U));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("operationalStateList", iter_0, 3));
+                    VerifyOrReturn(
+                        CheckValue("operationalStateList[3].operationalStateID", iter_0.GetValue().operationalStateID, 3U));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("operationalStateList", iter_0, 4));
+                }
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::OperationalState::Structs::ErrorStateStruct::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("operationalError.errorStateID", value.errorStateID, 0U));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::OperationalState::Structs::OperationalStateStruct::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("operationalState.operationalStateID", value.operationalStateID, 0U));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::OperationalState::Commands::OperationalCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("commandResponseState.errorStateID", value.commandResponseState.errorStateID, 0U));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::OperationalState::Structs::OperationalStateStruct::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("operationalState.operationalStateID", value.operationalStateID, 1U));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::OperationalState::Commands::OperationalCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("commandResponseState.errorStateID", value.commandResponseState.errorStateID, 0U));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::OperationalState::Structs::OperationalStateStruct::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("operationalState.operationalStateID", value.operationalStateID, 2U));
+            }
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::OperationalState::Commands::OperationalCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("commandResponseState.errorStateID", value.commandResponseState.errorStateID, 0U));
+            }
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::OperationalState::Structs::OperationalStateStruct::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("operationalState.operationalStateID", value.operationalStateID, 1U));
+            }
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::OperationalState::Commands::OperationalCommandResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("commandResponseState.errorStateID", value.commandResponseState.errorStateID, 0U));
+            }
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::OperationalState::Structs::OperationalStateStruct::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("operationalState.operationalStateID", value.operationalStateID, 0U));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Read Phase List");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OperationalState::Id, OperationalState::Attributes::PhaseList::Id,
+                                 true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Read current Phase");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OperationalState::Id,
+                                 OperationalState::Attributes::CurrentPhase::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "Read Countdown Time");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OperationalState::Id,
+                                 OperationalState::Attributes::CountdownTime::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "Read Operational State List");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OperationalState::Id,
+                                 OperationalState::Attributes::OperationalStateList::Id, true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "Read current Operational Error");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OperationalState::Id,
+                                 OperationalState::Attributes::OperationalError::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "Read current Operational State");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OperationalState::Id,
+                                 OperationalState::Attributes::OperationalState::Id, true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "Start Command");
+            ListFreer listFreer;
+            chip::app::Clusters::OperationalState::Commands::Start::Type value;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), OperationalState::Id, OperationalState::Commands::Start::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 8: {
+            LogStep(8, "Read current Operational State");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OperationalState::Id,
+                                 OperationalState::Attributes::OperationalState::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "Pause Command");
+            ListFreer listFreer;
+            chip::app::Clusters::OperationalState::Commands::Pause::Type value;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), OperationalState::Id, OperationalState::Commands::Pause::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 10: {
+            LogStep(10, "Read current Operational State");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OperationalState::Id,
+                                 OperationalState::Attributes::OperationalState::Id, true, chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11, "Resume Command");
+            ListFreer listFreer;
+            chip::app::Clusters::OperationalState::Commands::Resume::Type value;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), OperationalState::Id, OperationalState::Commands::Resume::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 12: {
+            LogStep(12, "Read current Operational State");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OperationalState::Id,
+                                 OperationalState::Attributes::OperationalState::Id, true, chip::NullOptional);
+        }
+        case 13: {
+            LogStep(13, "Stop Command");
+            ListFreer listFreer;
+            chip::app::Clusters::OperationalState::Commands::Stop::Type value;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), OperationalState::Id, OperationalState::Commands::Stop::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 14: {
+            LogStep(14, "Read current Operational State");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OperationalState::Id,
+                                 OperationalState::Attributes::OperationalState::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
 class TestMultiAdminSuite : public TestCommand
 {
 public:
@@ -138862,6 +139146,7 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<TestCommissioningWindowSuite>(credsIssuerConfig),
         make_unique<TestCommissionerNodeIdSuite>(credsIssuerConfig),
         make_unique<TestTimeSynchronizationSuite>(credsIssuerConfig),
+        make_unique<TestOperationalStateSuite>(credsIssuerConfig),
         make_unique<TestMultiAdminSuite>(credsIssuerConfig),
         make_unique<Test_TC_DGSW_1_1Suite>(credsIssuerConfig),
         make_unique<TestSubscribe_OnOffSuite>(credsIssuerConfig),
