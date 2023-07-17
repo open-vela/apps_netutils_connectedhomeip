@@ -89985,9 +89985,9 @@ private:
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::OperationalState::Structs::OperationalStateStruct::DecodableType value;
+                chip::app::Clusters::OperationalState::OperationalStateEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("operationalState.operationalStateID", value.operationalStateID, 0U));
+                VerifyOrReturn(CheckValue("operationalState", value, 0U));
             }
             break;
         case 7:
@@ -90001,9 +90001,9 @@ private:
         case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::OperationalState::Structs::OperationalStateStruct::DecodableType value;
+                chip::app::Clusters::OperationalState::OperationalStateEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("operationalState.operationalStateID", value.operationalStateID, 1U));
+                VerifyOrReturn(CheckValue("operationalState", value, 1U));
             }
             break;
         case 9:
@@ -90017,9 +90017,9 @@ private:
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::OperationalState::Structs::OperationalStateStruct::DecodableType value;
+                chip::app::Clusters::OperationalState::OperationalStateEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("operationalState.operationalStateID", value.operationalStateID, 2U));
+                VerifyOrReturn(CheckValue("operationalState", value, 2U));
             }
             break;
         case 11:
@@ -90033,9 +90033,9 @@ private:
         case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::OperationalState::Structs::OperationalStateStruct::DecodableType value;
+                chip::app::Clusters::OperationalState::OperationalStateEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("operationalState.operationalStateID", value.operationalStateID, 1U));
+                VerifyOrReturn(CheckValue("operationalState", value, 1U));
             }
             break;
         case 13:
@@ -90049,9 +90049,9 @@ private:
         case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::OperationalState::Structs::OperationalStateStruct::DecodableType value;
+                chip::app::Clusters::OperationalState::OperationalStateEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("operationalState.operationalStateID", value.operationalStateID, 0U));
+                VerifyOrReturn(CheckValue("operationalState", value, 0U));
             }
             break;
         default:
