@@ -60185,7 +60185,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: FeatureMap\n");
-            if (ShouldSkip(" !OO.S.F00 ")) {
+            if (ShouldSkip("( !OO.S.F00 && !OO.S.F01 )")) {
                 NextTest();
                 return;
             }
@@ -60200,43 +60200,51 @@ public:
             err = TestGivenOosf00ltEnsureFeaturemapHasTheCorrectBitSet_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Read the global attribute: AttributeList\n");
-            err = TestReadTheGlobalAttributeAttributeList_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Given OO.S.F01(DF) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("OO.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenOosf01dfEnsureFeaturemapHasTheCorrectBitSet_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the feature dependent(OO.S.F00) attribute in AttributeList\n");
-            if (ShouldSkip("OO.S.F00")) {
-                NextTest();
-                return;
-            }
-            err = TestReadTheFeatureDependentOOSF00AttributeInAttributeList_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: AttributeList\n");
+            err = TestReadTheGlobalAttributeAttributeList_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Read the global attribute: AcceptedCommandList\n");
-            err = TestReadTheGlobalAttributeAcceptedCommandList_6();
-            break;
-        case 7:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 7 : Read the feature dependent(OO.S.F00) commands in AcceptedCommandList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Read the feature dependent(OO.S.F00) attribute in AttributeList\n");
             if (ShouldSkip("OO.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheFeatureDependentOOSF00CommandsInAcceptedCommandList_7();
+            err = TestReadTheFeatureDependentOOSF00AttributeInAttributeList_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Read the global attribute: AcceptedCommandList\n");
+            err = TestReadTheGlobalAttributeAcceptedCommandList_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Read the global attribute: GeneratedCommandList\n");
-            err = TestReadTheGlobalAttributeGeneratedCommandList_8();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 8 : Read the feature dependent(OO.S.F00) commands in AcceptedCommandList\n");
+            if (ShouldSkip("OO.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheFeatureDependentOOSF00CommandsInAcceptedCommandList_8();
             break;
         case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Read the global attribute: GeneratedCommandList\n");
+            err = TestReadTheGlobalAttributeGeneratedCommandList_9();
+            break;
+        case 10:
             ChipLogProgress(chipTool,
-                " ***** Test Step 9 : Read EventList attribute from the DUT.For this cluster the list is usually empty but it can "
+                " ***** Test Step 10 : Read EventList attribute from the DUT.For this cluster the list is usually empty but it can "
                 "contain manufacturer specific event IDs.\n");
             if (ShouldSkip("PICS_USER_PROMPT")) {
                 NextTest();
                 return;
             }
-            err = TestReadEventListAttributeFromTheDUTForThisClusterTheListIsUsuallyEmptyButItCanContainManufacturerSpecificEventIDs_9();
+            err = TestReadEventListAttributeFromTheDUTForThisClusterTheListIsUsuallyEmptyButItCanContainManufacturerSpecificEventIDs_10();
             break;
         }
 
@@ -60279,6 +60287,9 @@ public:
         case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -60292,7 +60303,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 10;
+    const uint16_t mTestCount = 11;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -60319,12 +60330,10 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 4U));
-            }
-
             VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("clusterRevision", [value unsignedShortValue], 4U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("clusterRevision", [value unsignedShortValue], 5U));
+
             NextTest();
         }];
 
@@ -60374,7 +60383,26 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_4()
+    CHIP_ERROR TestGivenOosf01dfEnsureFeaturemapHasTheCorrectBitSet_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOnOff alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given OO.S.F01(DF) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_5()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -60401,7 +60429,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheFeatureDependentOOSF00AttributeInAttributeList_5()
+    CHIP_ERROR TestReadTheFeatureDependentOOSF00AttributeInAttributeList_6()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -60425,7 +60453,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_6()
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_7()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -60448,7 +60476,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheFeatureDependentOOSF00CommandsInAcceptedCommandList_7()
+    CHIP_ERROR TestReadTheFeatureDependentOOSF00CommandsInAcceptedCommandList_8()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -60471,7 +60499,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_8()
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_9()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -60496,7 +60524,7 @@ private:
     }
 
     CHIP_ERROR
-    TestReadEventListAttributeFromTheDUTForThisClusterTheListIsUsuallyEmptyButItCanContainManufacturerSpecificEventIDs_9()
+    TestReadEventListAttributeFromTheDUTForThisClusterTheListIsUsuallyEmptyButItCanContainManufacturerSpecificEventIDs_10()
     {
 
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
