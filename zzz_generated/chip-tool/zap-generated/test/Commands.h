@@ -274,6 +274,7 @@ public:
         printf("TestIdentifyCluster\n");
         printf("TestOperationalCredentialsCluster\n");
         printf("TestModeSelectCluster\n");
+        printf("TestTemperatureControl\n");
         printf("TestSelfFabricRemoval\n");
         printf("TestSystemCommands\n");
         printf("TestBinding\n");
@@ -85857,6 +85858,166 @@ private:
     }
 };
 
+class TestTemperatureControlSuite : public TestCommand
+{
+public:
+    TestTemperatureControlSuite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("TestTemperatureControl", 7, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~TestTemperatureControlSuite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CharSpan> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("supportedTemperatureLevels", iter_0, 0));
+                    VerifyOrReturn(
+                        CheckValueAsString("supportedTemperatureLevels[0]", iter_0.GetValue(), chip::CharSpan("Hot", 3)));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("supportedTemperatureLevels", iter_0, 1));
+                    VerifyOrReturn(
+                        CheckValueAsString("supportedTemperatureLevels[1]", iter_0.GetValue(), chip::CharSpan("Warm", 4)));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("supportedTemperatureLevels", iter_0, 2));
+                    VerifyOrReturn(
+                        CheckValueAsString("supportedTemperatureLevels[2]", iter_0.GetValue(), chip::CharSpan("Freezing", 8)));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("supportedTemperatureLevels", iter_0, 3));
+                }
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("selectedTemperatureLevel", value, 0U));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("selectedTemperatureLevel", value, 1U));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("selectedTemperatureLevel", value, 1U));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Read supported temperature levels");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TemperatureControl::Id,
+                                 TemperatureControl::Attributes::SupportedTemperatureLevels::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Read selected temperature level");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TemperatureControl::Id,
+                                 TemperatureControl::Attributes::SelectedTemperatureLevel::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "Set temperature level to different level");
+            ListFreer listFreer;
+            chip::app::Clusters::TemperatureControl::Commands::SetTemperature::Type value;
+            value.targetTemperatureLevel.Emplace();
+            value.targetTemperatureLevel.Value() = 1U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), TemperatureControl::Id,
+                               TemperatureControl::Commands::SetTemperature::Id, value, chip::NullOptional
+
+            );
+        }
+        case 4: {
+            LogStep(4, "Read back selected temperature level");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TemperatureControl::Id,
+                                 TemperatureControl::Attributes::SelectedTemperatureLevel::Id, true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "Set temperature level to different level");
+            ListFreer listFreer;
+            chip::app::Clusters::TemperatureControl::Commands::SetTemperature::Type value;
+            value.targetTemperatureLevel.Emplace();
+            value.targetTemperatureLevel.Value() = 3U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), TemperatureControl::Id,
+                               TemperatureControl::Commands::SetTemperature::Id, value, chip::NullOptional
+
+            );
+        }
+        case 6: {
+            LogStep(6, "Read back selected temperature level");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TemperatureControl::Id,
+                                 TemperatureControl::Attributes::SelectedTemperatureLevel::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
 class TestSelfFabricRemovalSuite : public TestCommand
 {
 public:
@@ -137875,6 +138036,7 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<TestIdentifyClusterSuite>(credsIssuerConfig),
         make_unique<TestOperationalCredentialsClusterSuite>(credsIssuerConfig),
         make_unique<TestModeSelectClusterSuite>(credsIssuerConfig),
+        make_unique<TestTemperatureControlSuite>(credsIssuerConfig),
         make_unique<TestSelfFabricRemovalSuite>(credsIssuerConfig),
         make_unique<TestSystemCommandsSuite>(credsIssuerConfig),
         make_unique<TestBindingSuite>(credsIssuerConfig),
