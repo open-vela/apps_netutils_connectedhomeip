@@ -92,16 +92,6 @@
 | RvcOperationalState                                                 | 0x0061 |
 | HepaFilterMonitoring                                                | 0x0071 |
 | ActivatedCarbonFilterMonitoring                                     | 0x0072 |
-| CeramicFilterMonitoring                                             | 0x0073 |
-| ElectrostaticFilterMonitoring                                       | 0x0074 |
-| UvFilterMonitoring                                                  | 0x0075 |
-| IonizingFilterMonitoring                                            | 0x0076 |
-| ZeoliteFilterMonitoring                                             | 0x0077 |
-| OzoneFilterMonitoring                                               | 0x0078 |
-| WaterTankMonitoring                                                 | 0x0079 |
-| FuelTankMonitoring                                                  | 0x007A |
-| InkCartridgeMonitoring                                              | 0x007B |
-| TonerCartridgeMonitoring                                            | 0x007C |
 | DoorLock                                                            | 0x0101 |
 | WindowCovering                                                      | 0x0102 |
 | BarrierControl                                                      | 0x0103 |
