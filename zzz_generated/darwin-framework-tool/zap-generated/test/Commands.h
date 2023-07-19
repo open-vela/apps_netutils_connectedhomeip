@@ -112990,6 +112990,42 @@ public:
             ChipLogProgress(chipTool, " ***** Test Step 30 : Validate presence of SupportsConcurrentConnection\n");
             err = TestValidatePresenceOfSupportsConcurrentConnection_30();
             break;
+        case 31:
+            ChipLogProgress(chipTool, " ***** Test Step 31 : Read original regulatory location\n");
+            err = TestReadOriginalRegulatoryLocation_31();
+            break;
+        case 32:
+            ChipLogProgress(chipTool, " ***** Test Step 32 : Read original location\n");
+            err = TestReadOriginalLocation_32();
+            break;
+        case 33:
+            ChipLogProgress(chipTool, " ***** Test Step 33 : Try to SetRegulatoryConfig with 0-length country code\n");
+            err = TestTryToSetRegulatoryConfigWith0LengthCountryCode_33();
+            break;
+        case 34:
+            ChipLogProgress(chipTool, " ***** Test Step 34 : Read back location\n");
+            err = TestReadBackLocation_34();
+            break;
+        case 35:
+            ChipLogProgress(chipTool, " ***** Test Step 35 : Try to SetRegulatoryConfig with length-1 country code\n");
+            err = TestTryToSetRegulatoryConfigWithLength1CountryCode_35();
+            break;
+        case 36:
+            ChipLogProgress(chipTool, " ***** Test Step 36 : Read back location second time\n");
+            err = TestReadBackLocationSecondTime_36();
+            break;
+        case 37:
+            ChipLogProgress(chipTool, " ***** Test Step 37 : Try to SetRegulatoryConfig with length-2 country code\n");
+            err = TestTryToSetRegulatoryConfigWithLength2CountryCode_37();
+            break;
+        case 38:
+            ChipLogProgress(chipTool, " ***** Test Step 38 : Read back location third time\n");
+            err = TestReadBackLocationThirdTime_38();
+            break;
+        case 39:
+            ChipLogProgress(chipTool, " ***** Test Step 39 : Restore initial values\n");
+            err = TestRestoreInitialValues_39();
+            break;
         }
 
         if (CHIP_NO_ERROR != err) {
@@ -113094,6 +113130,33 @@ public:
         case 30:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 31:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 32:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 33:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 34:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 35:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 36:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 37:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 38:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 39:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -113107,7 +113170,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 31;
+    const uint16_t mTestCount = 40;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -113816,6 +113879,249 @@ private:
             VerifyOrReturn(CheckConstraintType("supportsConcurrentConnection", "boolean", "boolean"));
             NextTest();
         }];
+
+        return CHIP_NO_ERROR;
+    }
+    NSNumber * _Nonnull originalRegulatoryConfig;
+
+    CHIP_ERROR TestReadOriginalRegulatoryLocation_31()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterGeneralCommissioning alloc] initWithDevice:device
+                                                                                endpointID:@(0)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeRegulatoryConfigWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read original regulatory location Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                originalRegulatoryConfig = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+    NSString * _Nonnull originalLocation;
+
+    CHIP_ERROR TestReadOriginalLocation_32()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterBasicInformation alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeLocationWithCompletion:^(NSString * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read original location Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueAsString("Location", actualValue, @"XX"));
+            }
+            {
+                originalLocation = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTryToSetRegulatoryConfigWith0LengthCountryCode_33()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterGeneralCommissioning alloc] initWithDevice:device
+                                                                                endpointID:@(0)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGeneralCommissioningClusterSetRegulatoryConfigParams alloc] init];
+        params.newRegulatoryConfig = [NSNumber numberWithUnsignedChar:0U];
+        params.countryCode = @"";
+        params.breadcrumb = [NSNumber numberWithUnsignedLongLong:0ULL];
+        [cluster
+            setRegulatoryConfigWithParams:params
+                               completion:^(MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams * _Nullable values,
+                                   NSError * _Nullable err) {
+                                   NSLog(@"Try to SetRegulatoryConfig with 0-length country code Error: %@", err);
+
+                                   VerifyOrReturn(CheckValue("status",
+                                       err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                     : EMBER_ZCL_STATUS_FAILURE)
+                                           : 0,
+                                       EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                   NextTest();
+                               }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackLocation_34()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterBasicInformation alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeLocationWithCompletion:^(NSString * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read back location Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueAsString("Location", actualValue, originalLocation));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTryToSetRegulatoryConfigWithLength1CountryCode_35()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterGeneralCommissioning alloc] initWithDevice:device
+                                                                                endpointID:@(0)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGeneralCommissioningClusterSetRegulatoryConfigParams alloc] init];
+        params.newRegulatoryConfig = [NSNumber numberWithUnsignedChar:0U];
+        params.countryCode = @"U";
+        params.breadcrumb = [NSNumber numberWithUnsignedLongLong:0ULL];
+        [cluster
+            setRegulatoryConfigWithParams:params
+                               completion:^(MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams * _Nullable values,
+                                   NSError * _Nullable err) {
+                                   NSLog(@"Try to SetRegulatoryConfig with length-1 country code Error: %@", err);
+
+                                   VerifyOrReturn(CheckValue("status",
+                                       err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                     : EMBER_ZCL_STATUS_FAILURE)
+                                           : 0,
+                                       EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                   NextTest();
+                               }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackLocationSecondTime_36()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterBasicInformation alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeLocationWithCompletion:^(NSString * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read back location second time Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueAsString("Location", actualValue, originalLocation));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTryToSetRegulatoryConfigWithLength2CountryCode_37()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterGeneralCommissioning alloc] initWithDevice:device
+                                                                                endpointID:@(0)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGeneralCommissioningClusterSetRegulatoryConfigParams alloc] init];
+        params.newRegulatoryConfig = [NSNumber numberWithUnsignedChar:0U];
+        params.countryCode = @"US";
+        params.breadcrumb = [NSNumber numberWithUnsignedLongLong:0ULL];
+        [cluster setRegulatoryConfigWithParams:params
+                                    completion:^(MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams * _Nullable values,
+                                        NSError * _Nullable err) {
+                                        NSLog(@"Try to SetRegulatoryConfig with length-2 country code Error: %@", err);
+
+                                        VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                        {
+                                            id actualValue = values.errorCode;
+                                            VerifyOrReturn(CheckValue("ErrorCode", actualValue, 0U));
+                                        }
+
+                                        {
+                                            id actualValue = values.debugText;
+                                            VerifyOrReturn(CheckValueAsString("DebugText", actualValue, @""));
+                                        }
+
+                                        NextTest();
+                                    }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackLocationThirdTime_38()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterBasicInformation alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeLocationWithCompletion:^(NSString * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read back location third time Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueAsString("Location", actualValue, @"US"));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestRestoreInitialValues_39()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterGeneralCommissioning alloc] initWithDevice:device
+                                                                                endpointID:@(0)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGeneralCommissioningClusterSetRegulatoryConfigParams alloc] init];
+        params.newRegulatoryConfig = [originalRegulatoryConfig copy];
+        params.countryCode = [originalLocation copy];
+        params.breadcrumb = [NSNumber numberWithUnsignedLongLong:0ULL];
+        [cluster setRegulatoryConfigWithParams:params
+                                    completion:^(MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams * _Nullable values,
+                                        NSError * _Nullable err) {
+                                        NSLog(@"Restore initial values Error: %@", err);
+
+                                        VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                        NextTest();
+                                    }];
 
         return CHIP_NO_ERROR;
     }

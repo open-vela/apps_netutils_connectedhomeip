@@ -84601,7 +84601,7 @@ class TestGeneralCommissioningSuite : public TestCommand
 {
 public:
     TestGeneralCommissioningSuite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("TestGeneralCommissioning", 31, credsIssuerConfig)
+        TestCommand("TestGeneralCommissioning", 40, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -84611,7 +84611,14 @@ public:
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
-    ~TestGeneralCommissioningSuite() {}
+    ~TestGeneralCommissioningSuite()
+    {
+        if (originalLocationBuffer != nullptr)
+        {
+            chip::Platform::MemoryFree(originalLocationBuffer);
+            originalLocationBuffer = nullptr;
+        }
+    }
 
     chip::System::Clock::Timeout GetWaitDuration() const override
     {
@@ -84625,6 +84632,10 @@ private:
     chip::Optional<uint16_t> mDiscriminator;
     chip::Optional<chip::CharSpan> mPayload;
     chip::Optional<uint16_t> mTimeout;
+
+    chip::app::Clusters::GeneralCommissioning::RegulatoryLocationTypeEnum originalRegulatoryConfig;
+    char * originalLocationBuffer = nullptr;
+    chip::CharSpan originalLocation;
 
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
 
@@ -84839,6 +84850,75 @@ private:
                 bool value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
+            }
+            break;
+        case 31:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::GeneralCommissioning::RegulatoryLocationTypeEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                originalRegulatoryConfig = value;
+            }
+            break;
+        case 32:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::CharSpan value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueAsString("location", value, chip::CharSpan("XX", 2)));
+                if (originalLocationBuffer != nullptr)
+                {
+                    chip::Platform::MemoryFree(originalLocationBuffer);
+                }
+                originalLocationBuffer = static_cast<char *>(chip::Platform::MemoryAlloc(value.size()));
+                memcpy(originalLocationBuffer, value.data(), value.size());
+                originalLocation = chip::CharSpan(originalLocationBuffer, value.size());
+            }
+            break;
+        case 33:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 34:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::CharSpan value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueAsString("location", value, originalLocation));
+            }
+            break;
+        case 35:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 36:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::CharSpan value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueAsString("location", value, originalLocation));
+            }
+            break;
+        case 37:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::GeneralCommissioning::Commands::SetRegulatoryConfigResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("errorCode", value.errorCode, 0U));
+                VerifyOrReturn(CheckValueAsString("debugText", value.debugText, chip::CharSpan("", 0)));
+            }
+            break;
+        case 38:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::CharSpan value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueAsString("location", value, chip::CharSpan("US", 2)));
+            }
+            break;
+        case 39:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::GeneralCommissioning::Commands::SetRegulatoryConfigResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
             }
             break;
         default:
@@ -85080,6 +85160,79 @@ private:
             LogStep(30, "Validate presence of SupportsConcurrentConnection");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GeneralCommissioning::Id,
                                  GeneralCommissioning::Attributes::SupportsConcurrentConnection::Id, true, chip::NullOptional);
+        }
+        case 31: {
+            LogStep(31, "Read original regulatory location");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GeneralCommissioning::Id,
+                                 GeneralCommissioning::Attributes::RegulatoryConfig::Id, true, chip::NullOptional);
+        }
+        case 32: {
+            LogStep(32, "Read original location");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::Location::Id,
+                                 true, chip::NullOptional);
+        }
+        case 33: {
+            LogStep(33, "Try to SetRegulatoryConfig with 0-length country code");
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralCommissioning::Commands::SetRegulatoryConfig::Type value;
+            value.newRegulatoryConfig = static_cast<chip::app::Clusters::GeneralCommissioning::RegulatoryLocationTypeEnum>(0);
+            value.countryCode         = chip::Span<const char>("garbage: not in length on purpose", 0);
+            value.breadcrumb          = 0ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralCommissioning::Id,
+                               GeneralCommissioning::Commands::SetRegulatoryConfig::Id, value, chip::NullOptional
+
+            );
+        }
+        case 34: {
+            LogStep(34, "Read back location");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::Location::Id,
+                                 true, chip::NullOptional);
+        }
+        case 35: {
+            LogStep(35, "Try to SetRegulatoryConfig with length-1 country code");
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralCommissioning::Commands::SetRegulatoryConfig::Type value;
+            value.newRegulatoryConfig = static_cast<chip::app::Clusters::GeneralCommissioning::RegulatoryLocationTypeEnum>(0);
+            value.countryCode         = chip::Span<const char>("Ugarbage: not in length on purpose", 1);
+            value.breadcrumb          = 0ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralCommissioning::Id,
+                               GeneralCommissioning::Commands::SetRegulatoryConfig::Id, value, chip::NullOptional
+
+            );
+        }
+        case 36: {
+            LogStep(36, "Read back location second time");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::Location::Id,
+                                 true, chip::NullOptional);
+        }
+        case 37: {
+            LogStep(37, "Try to SetRegulatoryConfig with length-2 country code");
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralCommissioning::Commands::SetRegulatoryConfig::Type value;
+            value.newRegulatoryConfig = static_cast<chip::app::Clusters::GeneralCommissioning::RegulatoryLocationTypeEnum>(0);
+            value.countryCode         = chip::Span<const char>("USgarbage: not in length on purpose", 2);
+            value.breadcrumb          = 0ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralCommissioning::Id,
+                               GeneralCommissioning::Commands::SetRegulatoryConfig::Id, value, chip::NullOptional
+
+            );
+        }
+        case 38: {
+            LogStep(38, "Read back location third time");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::Location::Id,
+                                 true, chip::NullOptional);
+        }
+        case 39: {
+            LogStep(39, "Restore initial values");
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralCommissioning::Commands::SetRegulatoryConfig::Type value;
+            value.newRegulatoryConfig = originalRegulatoryConfig;
+            value.countryCode         = originalLocation;
+            value.breadcrumb          = 0ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralCommissioning::Id,
+                               GeneralCommissioning::Commands::SetRegulatoryConfig::Id, value, chip::NullOptional
+
+            );
         }
         }
         return CHIP_NO_ERROR;
