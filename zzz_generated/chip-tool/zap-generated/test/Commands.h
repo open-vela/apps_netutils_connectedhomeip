@@ -596,7 +596,6 @@ public:
         printf("Test_TC_BRBINFO_2_2\n");
         printf("Test_TC_BRBINFO_2_3\n");
         printf("Test_TC_ACE_1_2\n");
-        printf("Test_TC_ACE_1_6\n");
 
         return CHIP_NO_ERROR;
     }
@@ -137732,61 +137731,6 @@ private:
     }
 };
 
-class Test_TC_ACE_1_6Suite : public TestCommand
-{
-public:
-    Test_TC_ACE_1_6Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_ACE_1_6", 0, credsIssuerConfig)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_ACE_1_6Suite() {}
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
-
-    //
-    // Tests methods
-    //
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    CHIP_ERROR DoTestStep(uint16_t testIndex) override
-    {
-        using namespace chip::app::Clusters;
-        switch (testIndex)
-        {}
-        return CHIP_NO_ERROR;
-    }
-};
-
 #endif // CONFIG_ENABLE_YAML_TESTS
 
 void registerCommandsTests(Commands & commands, CredentialIssuerCommands * credsIssuerConfig)
@@ -138347,7 +138291,6 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_BRBINFO_2_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_BRBINFO_2_3Suite>(credsIssuerConfig),
         make_unique<Test_TC_ACE_1_2Suite>(credsIssuerConfig),
-        make_unique<Test_TC_ACE_1_6Suite>(credsIssuerConfig),
 #endif // CONFIG_ENABLE_YAML_TESTS
     };
 
