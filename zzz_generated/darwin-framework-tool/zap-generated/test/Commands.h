@@ -171348,7 +171348,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Step 3a: Read the global attribute: FeatureMap\n");
-            if (ShouldSkip("!ACFREMON.S.F00 && !ACFREMON.S.F01")) {
+            if (ShouldSkip("!ACFREMON.S.F00 && !ACFREMON.S.F01 && !ACFREMON.S.F02")) {
                 NextTest();
                 return;
             }
@@ -171373,47 +171373,57 @@ public:
             err = TestStep3cGivenACFREMONSF01WarningEnsureFeaturemapHasTheCorrectBitSet_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Step 4a: Read the global attribute: AttributeList\n");
-            err = TestStep4aReadTheGlobalAttributeAttributeList_5();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 5 : Step 3d: Given ACFREMON.S.F01(ReplacementProductList) ensure featuremap has the correct bit "
+                "set\n");
+            if (ShouldSkip("ACFREMON.S.F02")) {
+                NextTest();
+                return;
+            }
+            err = TestStep3dGivenACFREMONSF01ReplacementProductListEnsureFeaturemapHasTheCorrectBitSet_5();
             break;
         case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Step 4a: Read the global attribute: AttributeList\n");
+            err = TestStep4aReadTheGlobalAttributeAttributeList_6();
+            break;
+        case 7:
             ChipLogProgress(
-                chipTool, " ***** Test Step 6 : Step 4b: Read the feature dependent(ACFREMON.S.F00) attribute in AttributeList\n");
+                chipTool, " ***** Test Step 7 : Step 4b: Read the feature dependent(ACFREMON.S.F00) attribute in AttributeList\n");
             if (ShouldSkip("ACFREMON.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestStep4bReadTheFeatureDependentACFREMONSF00AttributeInAttributeList_6();
+            err = TestStep4bReadTheFeatureDependentACFREMONSF00AttributeInAttributeList_7();
             break;
-        case 7:
+        case 8:
             ChipLogProgress(chipTool,
-                " ***** Test Step 7 : Step 4c: Read the optional attribute InPlaceIndicator (ACFREMON.S.A0002) in AttributeList\n");
+                " ***** Test Step 8 : Step 4c: Read the optional attribute InPlaceIndicator (ACFREMON.S.A0002) in AttributeList\n");
             if (ShouldSkip("ACFREMON.S.A0002")) {
                 NextTest();
                 return;
             }
-            err = TestStep4cReadTheOptionalAttributeInPlaceIndicatorAcfremonsa0002InAttributeList_7();
+            err = TestStep4cReadTheOptionalAttributeInPlaceIndicatorAcfremonsa0002InAttributeList_8();
             break;
-        case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Step 5: TH reads EventList attribute from DUT\n");
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Step 5: TH reads EventList attribute from DUT\n");
             NextTest();
             return;
-        case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Step 6a: Read the global attribute: AcceptedCommandList\n");
-            err = TestStep6aReadTheGlobalAttributeAcceptedCommandList_9();
-            break;
         case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Step 6a: Read the global attribute: AcceptedCommandList\n");
+            err = TestStep6aReadTheGlobalAttributeAcceptedCommandList_10();
+            break;
+        case 11:
             ChipLogProgress(
-                chipTool, " ***** Test Step 10 : Step 6b: Read the optional command (ResetCondition) in AcceptedCommandList\n");
+                chipTool, " ***** Test Step 11 : Step 6b: Read the optional command (ResetCondition) in AcceptedCommandList\n");
             if (ShouldSkip("ACFREMON.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestStep6bReadTheOptionalCommandResetConditionInAcceptedCommandList_10();
+            err = TestStep6bReadTheOptionalCommandResetConditionInAcceptedCommandList_11();
             break;
-        case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Step 7: Read the global attribute: GeneratedCommandList\n");
-            err = TestStep7ReadTheGlobalAttributeGeneratedCommandList_11();
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Step 7: Read the global attribute: GeneratedCommandList\n");
+            err = TestStep7ReadTheGlobalAttributeGeneratedCommandList_12();
             break;
         }
 
@@ -171462,6 +171472,9 @@ public:
         case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -171475,7 +171488,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 12;
+    const uint16_t mTestCount = 13;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -171584,7 +171597,29 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4aReadTheGlobalAttributeAttributeList_5()
+    CHIP_ERROR TestStep3dGivenACFREMONSF01ReplacementProductListEnsureFeaturemapHasTheCorrectBitSet_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterActivatedCarbonFilterMonitoring alloc] initWithDevice:device
+                                                                                           endpointID:@(1)
+                                                                                                queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(
+                @"Step 3d: Given ACFREMON.S.F01(ReplacementProductList) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestStep4aReadTheGlobalAttributeAttributeList_6()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -171613,7 +171648,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4bReadTheFeatureDependentACFREMONSF00AttributeInAttributeList_6()
+    CHIP_ERROR TestStep4bReadTheFeatureDependentACFREMONSF00AttributeInAttributeList_7()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -171630,6 +171665,7 @@ private:
             VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
 
             NextTest();
         }];
@@ -171637,7 +171673,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4cReadTheOptionalAttributeInPlaceIndicatorAcfremonsa0002InAttributeList_7()
+    CHIP_ERROR TestStep4cReadTheOptionalAttributeInPlaceIndicatorAcfremonsa0002InAttributeList_8()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -171660,7 +171696,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep6aReadTheGlobalAttributeAcceptedCommandList_9()
+    CHIP_ERROR TestStep6aReadTheGlobalAttributeAcceptedCommandList_10()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -171681,7 +171717,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep6bReadTheOptionalCommandResetConditionInAcceptedCommandList_10()
+    CHIP_ERROR TestStep6bReadTheOptionalCommandResetConditionInAcceptedCommandList_11()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -171704,7 +171740,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep7ReadTheGlobalAttributeGeneratedCommandList_11()
+    CHIP_ERROR TestStep7ReadTheGlobalAttributeGeneratedCommandList_12()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -171805,6 +171841,22 @@ public:
             }
             err = TestStep5ThReadsFromTheDutTheInPlaceIndicatorAttribute_4();
             break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Step 6: TH reads from the DUT the LastChangedTime attribute\n");
+            if (ShouldSkip("ACFREMON.S.A0004")) {
+                NextTest();
+                return;
+            }
+            err = TestStep6ThReadsFromTheDutTheLastChangedTimeAttribute_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Step 7: TH reads from the DUT the ReplacementProductList attribute\n");
+            if (ShouldSkip("ACFREMON.S.A0005")) {
+                NextTest();
+                return;
+            }
+            err = TestStep7ThReadsFromTheDutTheReplacementProductListAttribute_6();
+            break;
         }
 
         if (CHIP_NO_ERROR != err) {
@@ -171831,6 +171883,12 @@ public:
         case 4:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -171844,7 +171902,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 5;
+    const uint16_t mTestCount = 7;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -171951,6 +172009,52 @@ private:
 
         return CHIP_NO_ERROR;
     }
+
+    CHIP_ERROR TestStep6ThReadsFromTheDutTheLastChangedTimeAttribute_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterActivatedCarbonFilterMonitoring alloc] initWithDevice:device
+                                                                                           endpointID:@(1)
+                                                                                                queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeLastChangedTimeWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 6: TH reads from the DUT the LastChangedTime attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("lastChangedTime", "epoch_s", "epoch_s"));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestStep7ThReadsFromTheDutTheReplacementProductListAttribute_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterActivatedCarbonFilterMonitoring alloc] initWithDevice:device
+                                                                                           endpointID:@(1)
+                                                                                                queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeReplacementProductListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 7: TH reads from the DUT the ReplacementProductList attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("replacementProductList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
 };
 
 class Test_TC_HEPAFREMON_1_1 : public TestCommandBridge {
@@ -172001,7 +172105,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Step 3a: Read the global attribute: FeatureMap\n");
-            if (ShouldSkip("!HEPAFREMON.S.F00 && !HEPAFREMON.S.F01")) {
+            if (ShouldSkip("!HEPAFREMON.S.F00 && !HEPAFREMON.S.F01 && !HEPAFREMON.S.F02")) {
                 NextTest();
                 return;
             }
@@ -172026,48 +172130,58 @@ public:
             err = TestStep3cGivenHEPAFREMONSF01WarningEnsureFeaturemapHasTheCorrectBitSet_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Step 4: Read the global attribute: AttributeList\n");
-            err = TestStep4ReadTheGlobalAttributeAttributeList_5();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 5 : Step 3d: Given HEPAFREMON.S.F02(ReplacementProductList) ensure featuremap has the correct "
+                "bit set\n");
+            if (ShouldSkip("HEPAFREMON.S.F02")) {
+                NextTest();
+                return;
+            }
+            err = TestStep3dGivenHEPAFREMONSF02ReplacementProductListEnsureFeaturemapHasTheCorrectBitSet_5();
             break;
         case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Step 4: Read the global attribute: AttributeList\n");
+            err = TestStep4ReadTheGlobalAttributeAttributeList_6();
+            break;
+        case 7:
             ChipLogProgress(chipTool,
-                " ***** Test Step 6 : Step 4a: Read the feature dependent(HEPAFREMON.S.F00) attribute in AttributeList\n");
+                " ***** Test Step 7 : Step 4a: Read the feature dependent(HEPAFREMON.S.F00) attribute in AttributeList\n");
             if (ShouldSkip("HEPAFREMON.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestStep4aReadTheFeatureDependentHEPAFREMONSF00AttributeInAttributeList_6();
+            err = TestStep4aReadTheFeatureDependentHEPAFREMONSF00AttributeInAttributeList_7();
             break;
-        case 7:
+        case 8:
             ChipLogProgress(chipTool,
-                " ***** Test Step 7 : Step 4b: Read the optional attribute InPlaceIndicator (HEPAFREMON.S.A0002) in "
+                " ***** Test Step 8 : Step 4b: Read the optional attribute InPlaceIndicator (HEPAFREMON.S.A0002) in "
                 "AttributeList\n");
             if (ShouldSkip("HEPAFREMON.S.A0002")) {
                 NextTest();
                 return;
             }
-            err = TestStep4bReadTheOptionalAttributeInPlaceIndicatorHepafremonsa0002InAttributeList_7();
+            err = TestStep4bReadTheOptionalAttributeInPlaceIndicatorHepafremonsa0002InAttributeList_8();
             break;
-        case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Step 5: TH reads EventList attribute from DUT\n");
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Step 5: TH reads EventList attribute from DUT\n");
             NextTest();
             return;
-        case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Step 6a: Read the global attribute: AcceptedCommandList\n");
-            err = TestStep6aReadTheGlobalAttributeAcceptedCommandList_9();
-            break;
         case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Step 6a: Read the global attribute: AcceptedCommandList\n");
+            err = TestStep6aReadTheGlobalAttributeAcceptedCommandList_10();
+            break;
+        case 11:
             ChipLogProgress(
-                chipTool, " ***** Test Step 10 : Step 6b: Read the optional command (ResetCondition) in AcceptedCommandList\n");
+                chipTool, " ***** Test Step 11 : Step 6b: Read the optional command (ResetCondition) in AcceptedCommandList\n");
             if (ShouldSkip("HEPAFREMON.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestStep6bReadTheOptionalCommandResetConditionInAcceptedCommandList_10();
+            err = TestStep6bReadTheOptionalCommandResetConditionInAcceptedCommandList_11();
             break;
-        case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Step 7: Read the global attribute: GeneratedCommandList\n");
-            err = TestStep7ReadTheGlobalAttributeGeneratedCommandList_11();
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Step 7: Read the global attribute: GeneratedCommandList\n");
+            err = TestStep7ReadTheGlobalAttributeGeneratedCommandList_12();
             break;
         }
 
@@ -172116,6 +172230,9 @@ public:
         case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -172129,7 +172246,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 12;
+    const uint16_t mTestCount = 13;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -172238,7 +172355,29 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4ReadTheGlobalAttributeAttributeList_5()
+    CHIP_ERROR TestStep3dGivenHEPAFREMONSF02ReplacementProductListEnsureFeaturemapHasTheCorrectBitSet_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterHEPAFilterMonitoring alloc] initWithDevice:device
+                                                                                endpointID:@(1)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 3d: Given HEPAFREMON.S.F02(ReplacementProductList) ensure featuremap has the correct bit set Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestStep4ReadTheGlobalAttributeAttributeList_6()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -172267,7 +172406,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4aReadTheFeatureDependentHEPAFREMONSF00AttributeInAttributeList_6()
+    CHIP_ERROR TestStep4aReadTheFeatureDependentHEPAFREMONSF00AttributeInAttributeList_7()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -172284,6 +172423,7 @@ private:
             VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
 
             NextTest();
         }];
@@ -172291,7 +172431,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4bReadTheOptionalAttributeInPlaceIndicatorHepafremonsa0002InAttributeList_7()
+    CHIP_ERROR TestStep4bReadTheOptionalAttributeInPlaceIndicatorHepafremonsa0002InAttributeList_8()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -172314,7 +172454,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep6aReadTheGlobalAttributeAcceptedCommandList_9()
+    CHIP_ERROR TestStep6aReadTheGlobalAttributeAcceptedCommandList_10()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -172335,7 +172475,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep6bReadTheOptionalCommandResetConditionInAcceptedCommandList_10()
+    CHIP_ERROR TestStep6bReadTheOptionalCommandResetConditionInAcceptedCommandList_11()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -172358,7 +172498,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep7ReadTheGlobalAttributeGeneratedCommandList_11()
+    CHIP_ERROR TestStep7ReadTheGlobalAttributeGeneratedCommandList_12()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -172459,6 +172599,22 @@ public:
             }
             err = TestStep5ThReadsFromTheDutTheInPlaceIndicatorAttribute_4();
             break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Step 6: TH reads from the DUT the LastChangedTime attribute\n");
+            if (ShouldSkip("HEPAFREMON.S.A0004")) {
+                NextTest();
+                return;
+            }
+            err = TestStep6ThReadsFromTheDutTheLastChangedTimeAttribute_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Step 7: TH reads from the DUT the ReplacementProductList attribute\n");
+            if (ShouldSkip("HEPAFREMON.S.A0005")) {
+                NextTest();
+                return;
+            }
+            err = TestStep7ThReadsFromTheDutTheReplacementProductListAttribute_6();
+            break;
         }
 
         if (CHIP_NO_ERROR != err) {
@@ -172485,6 +172641,12 @@ public:
         case 4:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -172498,7 +172660,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 5;
+    const uint16_t mTestCount = 7;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -172600,6 +172762,52 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("inPlaceIndicator", "boolean", "boolean"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestStep6ThReadsFromTheDutTheLastChangedTimeAttribute_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterHEPAFilterMonitoring alloc] initWithDevice:device
+                                                                                endpointID:@(1)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeLastChangedTimeWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 6: TH reads from the DUT the LastChangedTime attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("lastChangedTime", "epoch_s", "epoch_s"));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestStep7ThReadsFromTheDutTheReplacementProductListAttribute_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterHEPAFilterMonitoring alloc] initWithDevice:device
+                                                                                endpointID:@(1)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeReplacementProductListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 7: TH reads from the DUT the ReplacementProductList attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("replacementProductList", "list", "list"));
             NextTest();
         }];
 

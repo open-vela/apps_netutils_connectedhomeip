@@ -26642,6 +26642,7 @@ typedef NS_ENUM(uint8_t, MTRHEPAFilterMonitoringProductIdentifierType) {
 typedef NS_OPTIONS(uint32_t, MTRHEPAFilterMonitoringFeature) {
     MTRHEPAFilterMonitoringFeatureCondition MTR_PROVISIONALLY_AVAILABLE = 0x1,
     MTRHEPAFilterMonitoringFeatureWarning MTR_PROVISIONALLY_AVAILABLE = 0x2,
+    MTRHEPAFilterMonitoringFeatureReplacementProductList MTR_PROVISIONALLY_AVAILABLE = 0x3,
 } MTR_PROVISIONALLY_AVAILABLE;
 
 typedef NS_ENUM(uint8_t, MTRActivatedCarbonFilterMonitoringChangeIndication) {
@@ -26666,6 +26667,7 @@ typedef NS_ENUM(uint8_t, MTRActivatedCarbonFilterMonitoringProductIdentifierType
 typedef NS_OPTIONS(uint32_t, MTRActivatedCarbonFilterMonitoringFeature) {
     MTRActivatedCarbonFilterMonitoringFeatureCondition MTR_PROVISIONALLY_AVAILABLE = 0x1,
     MTRActivatedCarbonFilterMonitoringFeatureWarning MTR_PROVISIONALLY_AVAILABLE = 0x2,
+    MTRActivatedCarbonFilterMonitoringFeatureReplacementProductList MTR_PROVISIONALLY_AVAILABLE = 0x3,
 } MTR_PROVISIONALLY_AVAILABLE;
 
 typedef NS_ENUM(uint8_t, MTRDoorLockAlarmCode) {
