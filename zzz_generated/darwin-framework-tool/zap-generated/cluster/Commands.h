@@ -16450,6 +16450,7 @@ public:
 | * BatFunctionalWhileCharging                                        | 0x001C |
 | * BatChargingCurrent                                                | 0x001D |
 | * ActiveBatChargeFaults                                             | 0x001E |
+| * EndpointList                                                      | 0x001F |
 | * GeneratedCommandList                                              | 0xFFF8 |
 | * AcceptedCommandList                                               | 0xFFF9 |
 | * EventList                                                         | 0xFFFA |
@@ -18626,6 +18627,76 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.ActiveBatChargeFaults response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute EndpointList
+ */
+class ReadPowerSourceEndpointList : public ReadAttribute {
+public:
+    ReadPowerSourceEndpointList()
+        : ReadAttribute("endpoint-list")
+    {
+    }
+
+    ~ReadPowerSourceEndpointList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000002F) ReadAttribute (0x0000001F) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterPowerSource alloc] initWithDevice:device
+                                                                       endpointID:@(endpointId)
+                                                                            queue:callbackQueue];
+        [cluster readAttributeEndpointListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"PowerSource.EndpointList response %@", [value description]);
+            if (error != nil) {
+                LogNSError("PowerSource EndpointList read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributePowerSourceEndpointList : public SubscribeAttribute {
+public:
+    SubscribeAttributePowerSourceEndpointList()
+        : SubscribeAttribute("endpoint-list")
+    {
+    }
+
+    ~SubscribeAttributePowerSourceEndpointList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000002F) ReportAttribute (0x0000001F) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterPowerSource alloc] initWithDevice:device
+                                                                       endpointID:@(endpointId)
+                                                                            queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeEndpointListWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"PowerSource.EndpointList response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -98467,6 +98538,8 @@ void registerClusterPowerSource(Commands & commands)
         make_unique<SubscribeAttributePowerSourceBatChargingCurrent>(), //
         make_unique<ReadPowerSourceActiveBatChargeFaults>(), //
         make_unique<SubscribeAttributePowerSourceActiveBatChargeFaults>(), //
+        make_unique<ReadPowerSourceEndpointList>(), //
+        make_unique<SubscribeAttributePowerSourceEndpointList>(), //
         make_unique<ReadPowerSourceGeneratedCommandList>(), //
         make_unique<SubscribeAttributePowerSourceGeneratedCommandList>(), //
         make_unique<ReadPowerSourceAcceptedCommandList>(), //

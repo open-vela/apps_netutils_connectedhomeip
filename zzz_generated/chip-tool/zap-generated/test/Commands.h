@@ -54826,7 +54826,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 2U));
                 VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
@@ -54886,6 +54886,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 31UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65530UL));
@@ -55142,7 +55143,7 @@ private:
 class Test_TC_PS_2_1Suite : public TestCommand
 {
 public:
-    Test_TC_PS_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_PS_2_1", 32, credsIssuerConfig)
+    Test_TC_PS_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_PS_2_1", 33, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -55205,6 +55206,7 @@ private:
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
+                VerifyOrReturn(CheckConstraintMaxLength("value", value, 60));
             }
             break;
         case 4:
@@ -55470,6 +55472,15 @@ private:
                 chip::app::DataModel::DecodableList<chip::app::Clusters::PowerSource::BatChargeFaultEnum> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintMaxLength("value", value, 16));
+            }
+            break;
+        case 32:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EndpointId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         default:
@@ -55679,6 +55690,12 @@ private:
             VerifyOrDo(!ShouldSkip("PS.S.A001e"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PowerSource::Id,
                                  PowerSource::Attributes::ActiveBatChargeFaults::Id, true, chip::NullOptional);
+        }
+        case 32: {
+            LogStep(32, "Test Harness Client reads EndpointList from Server DUT");
+            VerifyOrDo(!ShouldSkip("PS.S.A001f"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PowerSource::Id, PowerSource::Attributes::EndpointList::Id, true,
+                                 chip::NullOptional);
         }
         }
         return CHIP_NO_ERROR;
@@ -84717,44 +84734,42 @@ private:
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("serverList", iter_0, 9));
                     VerifyOrReturn(CheckValue("serverList[9]", iter_0.GetValue(), 45UL));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("serverList", iter_0, 10));
-                    VerifyOrReturn(CheckValue("serverList[10]", iter_0.GetValue(), 46UL));
+                    VerifyOrReturn(CheckValue("serverList[10]", iter_0.GetValue(), 47UL));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("serverList", iter_0, 11));
-                    VerifyOrReturn(CheckValue("serverList[11]", iter_0.GetValue(), 47UL));
+                    VerifyOrReturn(CheckValue("serverList[11]", iter_0.GetValue(), 48UL));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("serverList", iter_0, 12));
-                    VerifyOrReturn(CheckValue("serverList[12]", iter_0.GetValue(), 48UL));
+                    VerifyOrReturn(CheckValue("serverList[12]", iter_0.GetValue(), 49UL));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("serverList", iter_0, 13));
-                    VerifyOrReturn(CheckValue("serverList[13]", iter_0.GetValue(), 49UL));
+                    VerifyOrReturn(CheckValue("serverList[13]", iter_0.GetValue(), 50UL));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("serverList", iter_0, 14));
-                    VerifyOrReturn(CheckValue("serverList[14]", iter_0.GetValue(), 50UL));
+                    VerifyOrReturn(CheckValue("serverList[14]", iter_0.GetValue(), 51UL));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("serverList", iter_0, 15));
-                    VerifyOrReturn(CheckValue("serverList[15]", iter_0.GetValue(), 51UL));
+                    VerifyOrReturn(CheckValue("serverList[15]", iter_0.GetValue(), 52UL));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("serverList", iter_0, 16));
-                    VerifyOrReturn(CheckValue("serverList[16]", iter_0.GetValue(), 52UL));
+                    VerifyOrReturn(CheckValue("serverList[16]", iter_0.GetValue(), 53UL));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("serverList", iter_0, 17));
-                    VerifyOrReturn(CheckValue("serverList[17]", iter_0.GetValue(), 53UL));
+                    VerifyOrReturn(CheckValue("serverList[17]", iter_0.GetValue(), 54UL));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("serverList", iter_0, 18));
-                    VerifyOrReturn(CheckValue("serverList[18]", iter_0.GetValue(), 54UL));
+                    VerifyOrReturn(CheckValue("serverList[18]", iter_0.GetValue(), 55UL));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("serverList", iter_0, 19));
-                    VerifyOrReturn(CheckValue("serverList[19]", iter_0.GetValue(), 55UL));
+                    VerifyOrReturn(CheckValue("serverList[19]", iter_0.GetValue(), 56UL));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("serverList", iter_0, 20));
-                    VerifyOrReturn(CheckValue("serverList[20]", iter_0.GetValue(), 56UL));
+                    VerifyOrReturn(CheckValue("serverList[20]", iter_0.GetValue(), 60UL));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("serverList", iter_0, 21));
-                    VerifyOrReturn(CheckValue("serverList[21]", iter_0.GetValue(), 60UL));
+                    VerifyOrReturn(CheckValue("serverList[21]", iter_0.GetValue(), 62UL));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("serverList", iter_0, 22));
-                    VerifyOrReturn(CheckValue("serverList[22]", iter_0.GetValue(), 62UL));
+                    VerifyOrReturn(CheckValue("serverList[22]", iter_0.GetValue(), 63UL));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("serverList", iter_0, 23));
-                    VerifyOrReturn(CheckValue("serverList[23]", iter_0.GetValue(), 63UL));
+                    VerifyOrReturn(CheckValue("serverList[23]", iter_0.GetValue(), 64UL));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("serverList", iter_0, 24));
-                    VerifyOrReturn(CheckValue("serverList[24]", iter_0.GetValue(), 64UL));
+                    VerifyOrReturn(CheckValue("serverList[24]", iter_0.GetValue(), 65UL));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("serverList", iter_0, 25));
-                    VerifyOrReturn(CheckValue("serverList[25]", iter_0.GetValue(), 65UL));
+                    VerifyOrReturn(CheckValue("serverList[25]", iter_0.GetValue(), 70UL));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("serverList", iter_0, 26));
-                    VerifyOrReturn(CheckValue("serverList[26]", iter_0.GetValue(), 70UL));
+                    VerifyOrReturn(CheckValue("serverList[26]", iter_0.GetValue(), 1029UL));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("serverList", iter_0, 27));
-                    VerifyOrReturn(CheckValue("serverList[27]", iter_0.GetValue(), 1029UL));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("serverList", iter_0, 28));
-                    VerifyOrReturn(CheckValue("serverList[28]", iter_0.GetValue(), 4294048774UL));
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("serverList", iter_0, 29));
+                    VerifyOrReturn(CheckValue("serverList[27]", iter_0.GetValue(), 4294048774UL));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("serverList", iter_0, 28));
                 }
             }
             break;
