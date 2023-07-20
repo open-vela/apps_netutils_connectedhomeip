@@ -32089,8 +32089,8 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::IcdManagement::Commands::UnregisterClient::Type value;
             value.checkInNodeID = 101ULL;
-            value.key.Emplace();
-            value.key.Value() = chip::ByteSpan(
+            value.verificationKey.Emplace();
+            value.verificationKey.Value() = chip::ByteSpan(
                 chip::Uint8::from_const_char("\001!!1AQaq\201\221\241\261\301\321\341\361garbage: not in length on purpose"), 16);
             return SendCommand(kIdentityAlpha, GetEndpoint(0), IcdManagement::Id, IcdManagement::Commands::UnregisterClient::Id,
                                value, chip::NullOptional
