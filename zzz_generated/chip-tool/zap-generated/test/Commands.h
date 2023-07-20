@@ -107998,7 +107998,7 @@ class Test_TC_ACFREMON_1_1Suite : public TestCommand
 {
 public:
     Test_TC_ACFREMON_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_ACFREMON_1_1", 12, credsIssuerConfig)
+        TestCommand("Test_TC_ACFREMON_1_1", 13, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -108074,6 +108074,15 @@ private:
         case 5:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 3UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
@@ -108086,7 +108095,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
             }
             break;
-        case 6:
+        case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -108094,9 +108103,10 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
             }
             break;
-        case 7:
+        case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -108105,7 +108115,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
             }
             break;
-        case 8:
+        case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::EventId> value;
@@ -108117,7 +108127,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 9:
+        case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -108125,7 +108135,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 10:
+        case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -108134,7 +108144,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
             }
             break;
-        case 11:
+        case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -108175,7 +108185,8 @@ private:
         }
         case 2: {
             LogStep(2, "Step 3a: Read the global attribute: FeatureMap");
-            VerifyOrDo(!ShouldSkip("!ACFREMON.S.F00 && !ACFREMON.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("!ACFREMON.S.F00 && !ACFREMON.S.F01 && !ACFREMON.S.F02"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
                                  ActivatedCarbonFilterMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
@@ -108192,40 +108203,46 @@ private:
                                  ActivatedCarbonFilterMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 5: {
-            LogStep(5, "Step 4a: Read the global attribute: AttributeList");
+            LogStep(5, "Step 3d: Given ACFREMON.S.F01(ReplacementProductList) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("ACFREMON.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
-                                 ActivatedCarbonFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+                                 ActivatedCarbonFilterMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 6: {
-            LogStep(6, "Step 4b: Read the feature dependent(ACFREMON.S.F00) attribute in AttributeList");
-            VerifyOrDo(!ShouldSkip("ACFREMON.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(6, "Step 4a: Read the global attribute: AttributeList");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
                                  ActivatedCarbonFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 7: {
-            LogStep(7, "Step 4c: Read the optional attribute InPlaceIndicator (ACFREMON.S.A0002) in AttributeList");
-            VerifyOrDo(!ShouldSkip("ACFREMON.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(7, "Step 4b: Read the feature dependent(ACFREMON.S.F00) attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("ACFREMON.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
                                  ActivatedCarbonFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 8: {
-            LogStep(8, "Step 5: TH reads EventList attribute from DUT");
+            LogStep(8, "Step 4c: Read the optional attribute InPlaceIndicator (ACFREMON.S.A0002) in AttributeList");
+            VerifyOrDo(!ShouldSkip("ACFREMON.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
+                                 ActivatedCarbonFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "Step 5: TH reads EventList attribute from DUT");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
                                  ActivatedCarbonFilterMonitoring::Attributes::EventList::Id, true, chip::NullOptional);
         }
-        case 9: {
-            LogStep(9, "Step 6a: Read the global attribute: AcceptedCommandList");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
-                                 ActivatedCarbonFilterMonitoring::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
-        }
         case 10: {
-            LogStep(10, "Step 6b: Read the optional command (ResetCondition) in AcceptedCommandList");
-            VerifyOrDo(!ShouldSkip("ACFREMON.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(10, "Step 6a: Read the global attribute: AcceptedCommandList");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
                                  ActivatedCarbonFilterMonitoring::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
         }
         case 11: {
-            LogStep(11, "Step 7: Read the global attribute: GeneratedCommandList");
+            LogStep(11, "Step 6b: Read the optional command (ResetCondition) in AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("ACFREMON.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
+                                 ActivatedCarbonFilterMonitoring::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 12: {
+            LogStep(12, "Step 7: Read the global attribute: GeneratedCommandList");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
                                  ActivatedCarbonFilterMonitoring::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
         }
@@ -108238,7 +108255,7 @@ class Test_TC_ACFREMON_2_1Suite : public TestCommand
 {
 public:
     Test_TC_ACFREMON_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_ACFREMON_2_1", 5, credsIssuerConfig)
+        TestCommand("Test_TC_ACFREMON_2_1", 7, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -108313,6 +108330,24 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
             }
             break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<uint32_t> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "epoch_s", "epoch_s"));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::ActivatedCarbonFilterMonitoring::Structs::ReplacementProductStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
         default:
             LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
         }
@@ -108359,6 +108394,18 @@ private:
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
                                  ActivatedCarbonFilterMonitoring::Attributes::InPlaceIndicator::Id, true, chip::NullOptional);
         }
+        case 5: {
+            LogStep(5, "Step 6: TH reads from the DUT the LastChangedTime attribute");
+            VerifyOrDo(!ShouldSkip("ACFREMON.S.A0004"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
+                                 ActivatedCarbonFilterMonitoring::Attributes::LastChangedTime::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "Step 7: TH reads from the DUT the ReplacementProductList attribute");
+            VerifyOrDo(!ShouldSkip("ACFREMON.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
+                                 ActivatedCarbonFilterMonitoring::Attributes::ReplacementProductList::Id, true, chip::NullOptional);
+        }
         }
         return CHIP_NO_ERROR;
     }
@@ -108368,7 +108415,7 @@ class Test_TC_HEPAFREMON_1_1Suite : public TestCommand
 {
 public:
     Test_TC_HEPAFREMON_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_HEPAFREMON_1_1", 12, credsIssuerConfig)
+        TestCommand("Test_TC_HEPAFREMON_1_1", 13, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -108444,6 +108491,15 @@ private:
         case 5:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 3UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
@@ -108456,7 +108512,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
             }
             break;
-        case 6:
+        case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -108464,9 +108520,10 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
             }
             break;
-        case 7:
+        case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -108475,7 +108532,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
             }
             break;
-        case 8:
+        case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::EventId> value;
@@ -108487,7 +108544,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 9:
+        case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -108495,7 +108552,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 10:
+        case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -108504,7 +108561,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
             }
             break;
-        case 11:
+        case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -108545,7 +108602,8 @@ private:
         }
         case 2: {
             LogStep(2, "Step 3a: Read the global attribute: FeatureMap");
-            VerifyOrDo(!ShouldSkip("!HEPAFREMON.S.F00 && !HEPAFREMON.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("!HEPAFREMON.S.F00 && !HEPAFREMON.S.F01 && !HEPAFREMON.S.F02"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
                                  HepaFilterMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
@@ -108562,40 +108620,46 @@ private:
                                  HepaFilterMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 5: {
-            LogStep(5, "Step 4: Read the global attribute: AttributeList");
+            LogStep(5, "Step 3d: Given HEPAFREMON.S.F02(ReplacementProductList) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("HEPAFREMON.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
-                                 HepaFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+                                 HepaFilterMonitoring::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 6: {
-            LogStep(6, "Step 4a: Read the feature dependent(HEPAFREMON.S.F00) attribute in AttributeList");
-            VerifyOrDo(!ShouldSkip("HEPAFREMON.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(6, "Step 4: Read the global attribute: AttributeList");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
                                  HepaFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 7: {
-            LogStep(7, "Step 4b: Read the optional attribute InPlaceIndicator (HEPAFREMON.S.A0002) in AttributeList");
-            VerifyOrDo(!ShouldSkip("HEPAFREMON.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(7, "Step 4a: Read the feature dependent(HEPAFREMON.S.F00) attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("HEPAFREMON.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
                                  HepaFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 8: {
-            LogStep(8, "Step 5: TH reads EventList attribute from DUT");
+            LogStep(8, "Step 4b: Read the optional attribute InPlaceIndicator (HEPAFREMON.S.A0002) in AttributeList");
+            VerifyOrDo(!ShouldSkip("HEPAFREMON.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
+                                 HepaFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "Step 5: TH reads EventList attribute from DUT");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
                                  HepaFilterMonitoring::Attributes::EventList::Id, true, chip::NullOptional);
         }
-        case 9: {
-            LogStep(9, "Step 6a: Read the global attribute: AcceptedCommandList");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
-                                 HepaFilterMonitoring::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
-        }
         case 10: {
-            LogStep(10, "Step 6b: Read the optional command (ResetCondition) in AcceptedCommandList");
-            VerifyOrDo(!ShouldSkip("HEPAFREMON.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(10, "Step 6a: Read the global attribute: AcceptedCommandList");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
                                  HepaFilterMonitoring::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
         }
         case 11: {
-            LogStep(11, "Step 7: Read the global attribute: GeneratedCommandList");
+            LogStep(11, "Step 6b: Read the optional command (ResetCondition) in AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("HEPAFREMON.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
+                                 HepaFilterMonitoring::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 12: {
+            LogStep(12, "Step 7: Read the global attribute: GeneratedCommandList");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
                                  HepaFilterMonitoring::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
         }
@@ -108608,7 +108672,7 @@ class Test_TC_HEPAFREMON_2_1Suite : public TestCommand
 {
 public:
     Test_TC_HEPAFREMON_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_HEPAFREMON_2_1", 5, credsIssuerConfig)
+        TestCommand("Test_TC_HEPAFREMON_2_1", 7, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -108683,6 +108747,24 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
             }
             break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<uint32_t> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "epoch_s", "epoch_s"));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::HepaFilterMonitoring::Structs::ReplacementProductStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
         default:
             LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
         }
@@ -108728,6 +108810,18 @@ private:
             VerifyOrDo(!ShouldSkip("HEPAFREMON.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
                                  HepaFilterMonitoring::Attributes::InPlaceIndicator::Id, true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "Step 6: TH reads from the DUT the LastChangedTime attribute");
+            VerifyOrDo(!ShouldSkip("HEPAFREMON.S.A0004"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
+                                 HepaFilterMonitoring::Attributes::LastChangedTime::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "Step 7: TH reads from the DUT the ReplacementProductList attribute");
+            VerifyOrDo(!ShouldSkip("HEPAFREMON.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
+                                 HepaFilterMonitoring::Attributes::ReplacementProductList::Id, true, chip::NullOptional);
         }
         }
         return CHIP_NO_ERROR;
