@@ -163,8 +163,6 @@ public:
         printf("Test_TC_PCC_2_2\n");
         printf("Test_TC_PCC_2_3\n");
         printf("Test_TC_PCC_2_4\n");
-        printf("Test_TC_PSCFG_1_1\n");
-        printf("Test_TC_PSCFG_2_1\n");
         printf("Test_TC_RH_1_1\n");
         printf("Test_TC_RH_2_1\n");
         printf("Test_TC_SWTCH_1_1\n");
@@ -62823,7 +62821,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 2U));
             }
 
             VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
@@ -62949,6 +62947,7 @@ private:
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 31UL));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 65530UL));
@@ -63421,6 +63420,14 @@ public:
             }
             err = TestStep32TestHarnessClientReadsActiveBatChargeFaultsFromServerDut_31();
             break;
+        case 32:
+            ChipLogProgress(chipTool, " ***** Test Step 32 : Test Harness Client reads EndpointList from Server DUT\n");
+            if (ShouldSkip("PS.S.A001f")) {
+                NextTest();
+                return;
+            }
+            err = TestTestHarnessClientReadsEndpointListFromServerDut_32();
+            break;
         }
 
         if (CHIP_NO_ERROR != err) {
@@ -63528,6 +63535,9 @@ public:
         case 31:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 32:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -63541,7 +63551,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 32;
+    const uint16_t mTestCount = 33;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -63613,6 +63623,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("description", "char_string", "char_string"));
+            VerifyOrReturn(CheckConstraintMaxLength("description", value, 60));
             NextTest();
         }];
 
@@ -64230,6 +64241,26 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("activeBatChargeFaults", "list", "list"));
+            VerifyOrReturn(CheckConstraintMaxLength("activeBatChargeFaults", value, 16));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTestHarnessClientReadsEndpointListFromServerDut_32()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPowerSource alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeEndpointListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Test Harness Client reads EndpointList from Server DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("endpointList", "list", "list"));
             NextTest();
         }];
 
@@ -69165,400 +69196,6 @@ private:
                 VerifyOrReturn(CheckValue("LifetimeEnergyConsumed", actualValue, 3UL));
             }
 
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-};
-
-class Test_TC_PSCFG_1_1 : public TestCommandBridge {
-public:
-    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_PSCFG_1_1()
-        : TestCommandBridge("Test_TC_PSCFG_1_1")
-        , mTestIndex(0)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
-
-    ~Test_TC_PSCFG_1_1() {}
-
-    /////////// TestCommand Interface /////////
-    void NextTest() override
-    {
-        CHIP_ERROR err = CHIP_NO_ERROR;
-
-        if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_PSCFG_1_1\n");
-        }
-
-        if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_PSCFG_1_1\n");
-            SetCommandExitStatus(CHIP_NO_ERROR);
-            return;
-        }
-
-        Wait();
-
-        // Ensure we increment mTestIndex before we start running the relevant
-        // command.  That way if we lose the timeslice after we send the message
-        // but before our function call returns, we won't end up with an
-        // incorrect mTestIndex value observed when we get the response.
-        switch (mTestIndex++) {
-        case 0:
-            ChipLogProgress(chipTool, " ***** Test Step 0 : Step 1: Commission DUT to TH\n");
-            err = TestStep1CommissionDutToTh_0();
-            break;
-        case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : Step 2: TH reads the ClusterRevision attribute from the DUT\n");
-            err = TestStep2ThReadsTheClusterRevisionAttributeFromTheDut_1();
-            break;
-        case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Step 3: TH reads the FeatureMap attribute from the DUT\n");
-            err = TestStep3ThReadsTheFeatureMapAttributeFromTheDut_2();
-            break;
-        case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Step 4: TH reads the AttributeList attribute from the DUT\n");
-            err = TestStep4ThReadsTheAttributeListAttributeFromTheDut_3();
-            break;
-        case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Step 5: TH reads the AcceptedCommandList attribute from the DUT\n");
-            err = TestStep5ThReadsTheAcceptedCommandListAttributeFromTheDut_4();
-            break;
-        case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Step 6: TH reads the GeneratedCommandList attribute from the DUT\n");
-            err = TestStep6ThReadsTheGeneratedCommandListAttributeFromTheDut_5();
-            break;
-        case 6:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 6 : Step 7: Read EventList attribute from the DUT.For this cluster the list is usually empty but "
-                "it can contain manufacturer specific event IDs.\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7ReadEventListAttributeFromTheDUTForThisClusterTheListIsUsuallyEmptyButItCanContainManufacturerSpecificEventIDs_6();
-            break;
-        }
-
-        if (CHIP_NO_ERROR != err) {
-            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
-            SetCommandExitStatus(err);
-        }
-    }
-
-    void OnStatusUpdate(const chip::app::StatusIB & status) override
-    {
-        switch (mTestIndex - 1) {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 3:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 4:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        }
-
-        // Go on to the next test.
-        ContinueOnChipMainThread(CHIP_NO_ERROR);
-    }
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 7;
-
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    CHIP_ERROR TestStep1CommissionDutToTh_0()
-    {
-
-        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        return WaitForCommissionee("alpha", value);
-    }
-
-    CHIP_ERROR TestStep2ThReadsTheClusterRevisionAttributeFromTheDut_1()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterPowerSourceConfiguration alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 2: TH reads the ClusterRevision attribute from the DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
-            }
-
-            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestStep3ThReadsTheFeatureMapAttributeFromTheDut_2()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterPowerSourceConfiguration alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 3: TH reads the FeatureMap attribute from the DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 0UL));
-            }
-
-            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestStep4ThReadsTheAttributeListAttributeFromTheDut_3()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterPowerSourceConfiguration alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 4: TH reads the AttributeList attribute from the DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
-            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
-            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
-            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
-            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65530UL));
-            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
-            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
-            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestStep5ThReadsTheAcceptedCommandListAttributeFromTheDut_4()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterPowerSourceConfiguration alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 5: TH reads the AcceptedCommandList attribute from the DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("AcceptedCommandList", [actualValue count], static_cast<uint32_t>(0)));
-            }
-
-            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestStep6ThReadsTheGeneratedCommandListAttributeFromTheDut_5()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterPowerSourceConfiguration alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6: TH reads the GeneratedCommandList attribute from the DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
-            }
-
-            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestStep7ReadEventListAttributeFromTheDUTForThisClusterTheListIsUsuallyEmptyButItCanContainManufacturerSpecificEventIDs_6()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-};
-
-class Test_TC_PSCFG_2_1 : public TestCommandBridge {
-public:
-    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_PSCFG_2_1()
-        : TestCommandBridge("Test_TC_PSCFG_2_1")
-        , mTestIndex(0)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
-
-    ~Test_TC_PSCFG_2_1() {}
-
-    /////////// TestCommand Interface /////////
-    void NextTest() override
-    {
-        CHIP_ERROR err = CHIP_NO_ERROR;
-
-        if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_PSCFG_2_1\n");
-        }
-
-        if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_PSCFG_2_1\n");
-            SetCommandExitStatus(CHIP_NO_ERROR);
-            return;
-        }
-
-        Wait();
-
-        // Ensure we increment mTestIndex before we start running the relevant
-        // command.  That way if we lose the timeslice after we send the message
-        // but before our function call returns, we won't end up with an
-        // incorrect mTestIndex value observed when we get the response.
-        switch (mTestIndex++) {
-        case 0:
-            ChipLogProgress(chipTool, " ***** Test Step 0 : Step 1: Commission DUT to TH\n");
-            err = TestStep1CommissionDutToTh_0();
-            break;
-        case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : Step 2: TH reads the Sources attribute from the DUT\n");
-            if (ShouldSkip("PSCFG.S.A0000")) {
-                NextTest();
-                return;
-            }
-            err = TestStep2ThReadsTheSourcesAttributeFromTheDut_1();
-            break;
-        }
-
-        if (CHIP_NO_ERROR != err) {
-            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
-            SetCommandExitStatus(err);
-        }
-    }
-
-    void OnStatusUpdate(const chip::app::StatusIB & status) override
-    {
-        switch (mTestIndex - 1) {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        }
-
-        // Go on to the next test.
-        ContinueOnChipMainThread(CHIP_NO_ERROR);
-    }
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 2;
-
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    CHIP_ERROR TestStep1CommissionDutToTh_0()
-    {
-
-        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        return WaitForCommissionee("alpha", value);
-    }
-
-    CHIP_ERROR TestStep2ThReadsTheSourcesAttributeFromTheDut_1()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterPowerSourceConfiguration alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeSourcesWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 2: TH reads the Sources attribute from the DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("sources", "list", "list"));
             NextTest();
         }];
 
@@ -112110,7 +111747,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("ServerList", [actualValue count], static_cast<uint32_t>(29)));
+                VerifyOrReturn(CheckValue("ServerList", [actualValue count], static_cast<uint32_t>(28)));
                 VerifyOrReturn(CheckValue("", actualValue[0], 3UL));
                 VerifyOrReturn(CheckValue("", actualValue[1], 4UL));
                 VerifyOrReturn(CheckValue("", actualValue[2], 29UL));
@@ -112121,25 +111758,24 @@ private:
                 VerifyOrReturn(CheckValue("", actualValue[7], 43UL));
                 VerifyOrReturn(CheckValue("", actualValue[8], 44UL));
                 VerifyOrReturn(CheckValue("", actualValue[9], 45UL));
-                VerifyOrReturn(CheckValue("", actualValue[10], 46UL));
-                VerifyOrReturn(CheckValue("", actualValue[11], 47UL));
-                VerifyOrReturn(CheckValue("", actualValue[12], 48UL));
-                VerifyOrReturn(CheckValue("", actualValue[13], 49UL));
-                VerifyOrReturn(CheckValue("", actualValue[14], 50UL));
-                VerifyOrReturn(CheckValue("", actualValue[15], 51UL));
-                VerifyOrReturn(CheckValue("", actualValue[16], 52UL));
-                VerifyOrReturn(CheckValue("", actualValue[17], 53UL));
-                VerifyOrReturn(CheckValue("", actualValue[18], 54UL));
-                VerifyOrReturn(CheckValue("", actualValue[19], 55UL));
-                VerifyOrReturn(CheckValue("", actualValue[20], 56UL));
-                VerifyOrReturn(CheckValue("", actualValue[21], 60UL));
-                VerifyOrReturn(CheckValue("", actualValue[22], 62UL));
-                VerifyOrReturn(CheckValue("", actualValue[23], 63UL));
-                VerifyOrReturn(CheckValue("", actualValue[24], 64UL));
-                VerifyOrReturn(CheckValue("", actualValue[25], 65UL));
-                VerifyOrReturn(CheckValue("", actualValue[26], 70UL));
-                VerifyOrReturn(CheckValue("", actualValue[27], 1029UL));
-                VerifyOrReturn(CheckValue("", actualValue[28], 4294048774UL));
+                VerifyOrReturn(CheckValue("", actualValue[10], 47UL));
+                VerifyOrReturn(CheckValue("", actualValue[11], 48UL));
+                VerifyOrReturn(CheckValue("", actualValue[12], 49UL));
+                VerifyOrReturn(CheckValue("", actualValue[13], 50UL));
+                VerifyOrReturn(CheckValue("", actualValue[14], 51UL));
+                VerifyOrReturn(CheckValue("", actualValue[15], 52UL));
+                VerifyOrReturn(CheckValue("", actualValue[16], 53UL));
+                VerifyOrReturn(CheckValue("", actualValue[17], 54UL));
+                VerifyOrReturn(CheckValue("", actualValue[18], 55UL));
+                VerifyOrReturn(CheckValue("", actualValue[19], 56UL));
+                VerifyOrReturn(CheckValue("", actualValue[20], 60UL));
+                VerifyOrReturn(CheckValue("", actualValue[21], 62UL));
+                VerifyOrReturn(CheckValue("", actualValue[22], 63UL));
+                VerifyOrReturn(CheckValue("", actualValue[23], 64UL));
+                VerifyOrReturn(CheckValue("", actualValue[24], 65UL));
+                VerifyOrReturn(CheckValue("", actualValue[25], 70UL));
+                VerifyOrReturn(CheckValue("", actualValue[26], 1029UL));
+                VerifyOrReturn(CheckValue("", actualValue[27], 4294048774UL));
             }
 
             NextTest();
@@ -149507,8 +149143,6 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_PCC_2_2>(),
         make_unique<Test_TC_PCC_2_3>(),
         make_unique<Test_TC_PCC_2_4>(),
-        make_unique<Test_TC_PSCFG_1_1>(),
-        make_unique<Test_TC_PSCFG_2_1>(),
         make_unique<Test_TC_RH_1_1>(),
         make_unique<Test_TC_RH_2_1>(),
         make_unique<Test_TC_SWTCH_1_1>(),
