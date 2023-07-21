@@ -109698,7 +109698,7 @@ private:
         }
         case 5: {
             LogStep(5, "Step 1: TH writes the RequirePINforRemoteOperation attribute value as False on the DUT");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F0c && DRLK.S.F07 && DRLK.S.F00 && DRLK.S.A0033.Write"),
+            VerifyOrDo(!ShouldSkip("DRLK.S.F07 && DRLK.S.F00 && DRLK.S.A0033.Write"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             bool value;
@@ -109709,7 +109709,7 @@ private:
         }
         case 6: {
             LogStep(6, "Step 1: TH writes the RequirePINforRemoteOperation attribute value as False on the DUT");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F0c && DRLK.S.F07 && DRLK.S.F00 && !DRLK.S.A0033.Write"),
+            VerifyOrDo(!ShouldSkip("DRLK.S.F07 && DRLK.S.F00 && !DRLK.S.A0033.Write"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             bool value;
@@ -109720,14 +109720,13 @@ private:
         }
         case 7: {
             LogStep(7, "Step 2: TH reads the RequirePINforRemoteOperation attribute from the DUT");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F0c && DRLK.S.F07 && DRLK.S.F00 && DRLK.S.A0033"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("DRLK.S.F07 && DRLK.S.F00 && DRLK.S.A0033"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id,
                                  DoorLock::Attributes::RequirePINforRemoteOperation::Id, true, chip::NullOptional);
         }
         case 8: {
             LogStep(8, "Step 3: TH sends Ubolt Door Command to the DUT without PINCode");
-            VerifyOrDo(!ShouldSkip("DRLK.S.C27.Rsp && DRLK.S.F0c"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("DRLK.S.C27.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::UnboltDoor::Type value;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::UnboltDoor::Id, value,
@@ -109737,7 +109736,7 @@ private:
         }
         case 9: {
             LogStep(9, "Step 4: TH sends Ubolt Door Command to the DUT with PINCode");
-            VerifyOrDo(!ShouldSkip("DRLK.S.C27.Rsp && DRLK.S.F0c"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("DRLK.S.C27.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::UnboltDoor::Type value;
             value.PINCode.Emplace();
@@ -109749,7 +109748,7 @@ private:
         }
         case 10: {
             LogStep(10, "Step 5: TH writes the RequirePINforRemoteOperation attribute value as true on the DUT");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F0c && DRLK.S.F07 && DRLK.S.F00 && DRLK.S.A0033.Write"),
+            VerifyOrDo(!ShouldSkip("DRLK.S.F07 && DRLK.S.F00 && DRLK.S.A0033.Write"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             bool value;
@@ -109760,7 +109759,7 @@ private:
         }
         case 11: {
             LogStep(11, "Step 5: TH writes the RequirePINforRemoteOperation attribute value as true on the DUT");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F0c && DRLK.S.F07 && DRLK.S.F00 && !DRLK.S.A0033.Write"),
+            VerifyOrDo(!ShouldSkip("DRLK.S.F07 && DRLK.S.F00 && !DRLK.S.A0033.Write"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             bool value;
@@ -109771,14 +109770,13 @@ private:
         }
         case 12: {
             LogStep(12, "Step 6: TH reads the RequirePINforRemoteOperation attribute from the DUT");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F0c && DRLK.S.F07 && DRLK.S.F00 && DRLK.S.A0033"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("DRLK.S.F07 && DRLK.S.F00 && DRLK.S.A0033"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id,
                                  DoorLock::Attributes::RequirePINforRemoteOperation::Id, true, chip::NullOptional);
         }
         case 13: {
             LogStep(13, "Step 7: TH sends Ubolt Door Command to the DUT with valid PINCode");
-            VerifyOrDo(!ShouldSkip("DRLK.S.C27.Rsp && DRLK.S.F0c"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("DRLK.S.C27.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::UnboltDoor::Type value;
             value.PINCode.Emplace();
@@ -109790,7 +109788,7 @@ private:
         }
         case 14: {
             LogStep(14, "Step 8: TH sends Unbolt Door Command to the DUT with Invalid PINCode");
-            VerifyOrDo(!ShouldSkip("DRLK.S.C27.Rsp && DRLK.S.F0c"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("DRLK.S.C27.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::UnboltDoor::Type value;
             value.PINCode.Emplace();
@@ -109802,7 +109800,7 @@ private:
         }
         case 15: {
             LogStep(15, "Step 9: TH sends Unbolt Door Command to the DUT without PINCode");
-            VerifyOrDo(!ShouldSkip("DRLK.S.C27.Rsp && DRLK.S.F0c"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("DRLK.S.C27.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::UnboltDoor::Type value;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::UnboltDoor::Id, value,
@@ -109812,7 +109810,7 @@ private:
         }
         case 16: {
             LogStep(16, "Step 10: TH writes WrongCodeEntryLimit attribute value as 3 on the DUT");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F0c && ( DRLK.S.F00 || DRLK.S.F01 ) && DRLK.S.A0030.Write"),
+            VerifyOrDo(!ShouldSkip("( DRLK.S.F00 || DRLK.S.F01 ) && DRLK.S.A0030.Write"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             uint8_t value;
@@ -109822,7 +109820,7 @@ private:
         }
         case 17: {
             LogStep(17, "Step 10: TH writes WrongCodeEntryLimit attribute value as 3 on the DUT");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F0c && ( DRLK.S.F00 || DRLK.S.F01 ) && !DRLK.S.A0030.Write"),
+            VerifyOrDo(!ShouldSkip("( DRLK.S.F00 || DRLK.S.F01 ) && !DRLK.S.A0030.Write"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             uint8_t value;
@@ -109834,7 +109832,7 @@ private:
             LogStep(18,
                     "Step 11: TH writes UserCodeTemporaryDisableTime attribute value as 15 Seconds on the DUT and Verify that the "
                     "DUT sends Success response");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F0c && ( DRLK.S.F00 || DRLK.S.F01 ) && DRLK.S.A0031.Write"),
+            VerifyOrDo(!ShouldSkip("( DRLK.S.F00 || DRLK.S.F01 ) && DRLK.S.A0031.Write"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             uint8_t value;
@@ -109847,7 +109845,7 @@ private:
             LogStep(19,
                     "Step 11: TH writes UserCodeTemporaryDisableTime attribute value as 15 Seconds on the DUT and Verify that the "
                     "DUT sends Success response");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F0c && ( DRLK.S.F00 || DRLK.S.F01 ) && !DRLK.S.A0031.Write"),
+            VerifyOrDo(!ShouldSkip("( DRLK.S.F00 || DRLK.S.F01 ) && !DRLK.S.A0031.Write"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             uint8_t value;
@@ -109906,8 +109904,7 @@ private:
         }
         case 24: {
             LogStep(24, "Step 13: TH reads UserCodedTemporaryDisableTime attribute from DUT");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F0c && ( DRLK.S.F00 || DRLK.S.F01 ) && DRLK.S.A0031"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("( DRLK.S.F00 || DRLK.S.F01 ) && DRLK.S.A0031"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id,
                                  DoorLock::Attributes::UserCodeTemporaryDisableTime::Id, true, chip::NullOptional);
         }
@@ -109927,8 +109924,7 @@ private:
         }
         case 26: {
             LogStep(26, "Wait for UserCodeTemporaryDisableTime expires");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F0c && ( DRLK.S.F00 || DRLK.S.F01 ) && DRLK.S.A0031"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("( DRLK.S.F00 || DRLK.S.F01 ) && DRLK.S.A0031"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 15000UL;
