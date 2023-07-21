@@ -208,6 +208,13 @@ public:
         printf("Test_TC_PSCFG_2_1\n");
         printf("Test_TC_RH_1_1\n");
         printf("Test_TC_RH_2_1\n");
+        printf("Test_TC_SMCO_1_1\n");
+        printf("Test_TC_SMCO_2_1\n");
+        printf("Test_TC_SMCO_2_2\n");
+        printf("Test_TC_SMCO_2_3\n");
+        printf("Test_TC_SMCO_2_4\n");
+        printf("Test_TC_SMCO_2_5\n");
+        printf("Test_TC_SMCO_2_6\n");
         printf("Test_TC_SWTCH_1_1\n");
         printf("Test_TC_SWTCH_2_1\n");
         printf("Test_TC_TMP_1_1\n");
@@ -58883,6 +58890,4630 @@ private:
             VerifyOrDo(!ShouldSkip("RH.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RelativeHumidityMeasurement::Id,
                                  RelativeHumidityMeasurement::Attributes::Tolerance::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_SMCO_1_1Suite : public TestCommand
+{
+public:
+    Test_TC_SMCO_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_SMCO_1_1", 25, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_SMCO_1_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("featureMap", value, 0UL));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("featureMap", value, 1UL));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("featureMap", value, 2UL));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("featureMap", value, 3UL));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 5UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 6UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 7UL));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 8UL));
+            }
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 9UL));
+            }
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 10UL));
+            }
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 11UL));
+            }
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 12UL));
+            }
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 5UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 10UL));
+            }
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+            }
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+            }
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 6UL));
+            }
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 7UL));
+            }
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 8UL));
+            }
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 9UL));
+            }
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acceptedCommandList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+            }
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Commission DUT to TH");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH reads the ClusterRevision attribute from the DUT");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ClusterRevision::Id,
+                                 true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TH reads from the DUT the FeatureMap attribute");
+            VerifyOrDo(!ShouldSkip("!SMOKECO.S.F00 && !SMOKECO.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::FeatureMap::Id, true,
+                                 chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "TH reads from the DUT the FeatureMap attribute(Smoke Alarm)");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.F00 && !SMOKECO.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::FeatureMap::Id, true,
+                                 chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "TH reads from the DUT the FeatureMap attribute(CO Alarm)");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.F01 && !SMOKECO.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::FeatureMap::Id, true,
+                                 chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "TH reads from the DUT the FeatureMap attribute(Smoke Alarm & CO Alarm)");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.F00 && SMOKECO.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::FeatureMap::Id, true,
+                                 chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "TH reads from the DUT the AttributeList attribute");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::AttributeList::Id,
+                                 true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "TH reads from the DUT the AttributeList attribute(SmokeState)");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::AttributeList::Id,
+                                 true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "TH reads from the DUT the AttributeList attribute(COState)");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::AttributeList::Id,
+                                 true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "TH reads from the DUT the AttributeList attribute(DeviceMuted)");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0004"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::AttributeList::Id,
+                                 true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "TH reads from the DUT the AttributeList attribute(InterconnectSmokeAlarm)");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::AttributeList::Id,
+                                 true, chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11, "TH reads from the DUT the AttributeList attribute(InterconnectCOAlarm)");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0009"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::AttributeList::Id,
+                                 true, chip::NullOptional);
+        }
+        case 12: {
+            LogStep(12, "TH reads from the DUT the AttributeList attribute(ContaminationState)");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A000a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::AttributeList::Id,
+                                 true, chip::NullOptional);
+        }
+        case 13: {
+            LogStep(13, "TH reads from the DUT the AttributeList attribute(SmokeSensitivityLevel)");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A000b"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::AttributeList::Id,
+                                 true, chip::NullOptional);
+        }
+        case 14: {
+            LogStep(14, "TH reads from the DUT the AttributeList attribute(ExpiryDate)");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A000c"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::AttributeList::Id,
+                                 true, chip::NullOptional);
+        }
+        case 15: {
+            LogStep(15, "TH reads from the DUT the EventList attribute");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::EventList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 16: {
+            LogStep(16, "TH reads from the DUT the EventList attribute(SmokeAlarm)");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.E00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::EventList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 17: {
+            LogStep(17, "TH reads from the DUT the EventList attribute(COAlarm)");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.E01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::EventList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 18: {
+            LogStep(18, "TH reads from the DUT the EventList attribute(AlarmMuted)");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.E06"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::EventList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 19: {
+            LogStep(19, "TH reads from the DUT the EventList attribute(MuteEnded)");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.E07"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::EventList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 20: {
+            LogStep(20, "TH reads from the DUT the EventList attribute(InterconnectSmokeAlarm)");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.E08"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::EventList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 21: {
+            LogStep(21, "TH reads from the DUT the EventList attribute(InterconnectCOAlarm)");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.E09"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::EventList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 22: {
+            LogStep(22, "TH reads from the DUT the AcceptedCommandList attribute");
+            VerifyOrDo(!ShouldSkip("!SMOKECO.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id,
+                                 SmokeCoAlarm::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 23: {
+            LogStep(23, "TH reads from the DUT the AcceptedCommandList attribute");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id,
+                                 SmokeCoAlarm::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 24: {
+            LogStep(24, "TH reads from the DUT the GeneratedCommandList attribute");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id,
+                                 SmokeCoAlarm::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_SMCO_2_1Suite : public TestCommand
+{
+public:
+    Test_TC_SMCO_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_SMCO_2_1", 14, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_SMCO_2_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 8U));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::MuteStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 1U));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                bool value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                bool value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::EndOfServiceEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 1U));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
+            }
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ContaminationStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 3U));
+            }
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::SensitivityEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
+            }
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "epoch_s", "epoch_s"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Commission DUT to TH");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH reads from the DUT the ExpressedState attribute");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpressedState::Id,
+                                 true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TH reads from the DUT the SmokeState attribute");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::SmokeState::Id, true,
+                                 chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "TH reads from the DUT the COState attribute");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::COState::Id, true,
+                                 chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "TH reads from the DUT the BatteryAlert attribute");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::BatteryAlert::Id, true,
+                                 chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "TH reads from the DUT the DeviceMuted attribute");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0004"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::DeviceMuted::Id, true,
+                                 chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "TH reads from the DUT the TestInProgress attribute");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::TestInProgress::Id,
+                                 true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "TH reads from the DUT the HardwareFaultAlert attribute");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0006"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::HardwareFaultAlert::Id,
+                                 true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "TH reads from the DUT the EndOfServiceAlert attribute");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::EndOfServiceAlert::Id,
+                                 true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "TH reads from the DUT the InterconnectSmokeAlarm attribute");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id,
+                                 SmokeCoAlarm::Attributes::InterconnectSmokeAlarm::Id, true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "TH reads from the DUT the InterconnectCOAlarm attribute");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0009"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id,
+                                 SmokeCoAlarm::Attributes::InterconnectCOAlarm::Id, true, chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11, "TH reads from the DUT the ContaminationState attribute");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A000a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ContaminationState::Id,
+                                 true, chip::NullOptional);
+        }
+        case 12: {
+            LogStep(12, "TH reads from the DUT the SmokeSensitivityLevel attribute");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A000b"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id,
+                                 SmokeCoAlarm::Attributes::SmokeSensitivityLevel::Id, true, chip::NullOptional);
+        }
+        case 13: {
+            LogStep(13, "TH reads from the DUT the ExpiryDate attribute");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A000c"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpiryDate::Id, true,
+                                 chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_SMCO_2_2Suite : public TestCommand
+{
+public:
+    Test_TC_SMCO_2_2Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_SMCO_2_2", 20, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+        AddArgument("TEST_EVENT_TRIGGER_KEY", &mTestEventTriggerKey);
+        AddArgument("TEST_EVENT_TRIGGER_WARNING_SMOKE_ALARM", 0, UINT64_MAX, &mTestEventTriggerWarningSmokeAlarm);
+        AddArgument("TEST_EVENT_TRIGGER_CRITICAL_SMOKE_ALARM", 0, UINT64_MAX, &mTestEventTriggerCriticalSmokeAlarm);
+        AddArgument("TEST_EVENT_TRIGGER_SMOKE_ALARM_CLEAR", 0, UINT64_MAX, &mTestEventTriggerSmokeAlarmClear);
+        AddArgument("EVENT_NUMBER", 0, UINT64_MAX, &mEventNumber);
+    }
+
+    ~Test_TC_SMCO_2_2Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override { return chip::System::Clock::Seconds16(mTimeout.ValueOr(990)); }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+    chip::Optional<chip::ByteSpan> mTestEventTriggerKey;
+    chip::Optional<uint64_t> mTestEventTriggerWarningSmokeAlarm;
+    chip::Optional<uint64_t> mTestEventTriggerCriticalSmokeAlarm;
+    chip::Optional<uint64_t> mTestEventTriggerSmokeAlarmClear;
+    chip::Optional<uint64_t> mEventNumber;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("smokeState", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("expressedState", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                bool value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("testEventTriggersEnabled", value, 1));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("smokeState", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("expressedState", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 7:
+            switch (mTestSubStepIndex)
+            {
+            case 0:
+                VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+                {
+                    chip::app::Clusters::SmokeCoAlarm::Events::SmokeAlarm::DecodableType value;
+                    VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                    VerifyOrReturn(CheckValue("smokeAlarm.alarmSeverityLevel", value.alarmSeverityLevel, 1U));
+                }
+                mTestSubStepIndex++;
+                break;
+            default:
+                LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+                break;
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                bool value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("testInProgress", value, 0));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_BUSY));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                bool value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("testInProgress", value, 0));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
+            }
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("smokeState", value, 2U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("expressedState", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 15:
+            switch (mTestSubStepIndex)
+            {
+            case 0:
+                VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+                {
+                    chip::app::Clusters::SmokeCoAlarm::Events::SmokeAlarm::DecodableType value;
+                    VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                    VerifyOrReturn(CheckValue("smokeAlarm.alarmSeverityLevel", value.alarmSeverityLevel, 2U));
+                }
+                mTestSubStepIndex++;
+                break;
+            default:
+                LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+                break;
+            }
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("smokeState", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("expressedState", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 19:
+            switch (mTestSubStepIndex)
+            {
+            case 0:
+                VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+                {
+                    chip::app::Clusters::SmokeCoAlarm::Events::AllClear::DecodableType value;
+                    VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                }
+                mTestSubStepIndex++;
+                break;
+            default:
+                LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+                break;
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Commission DUT to TH");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH subscribes to SmokeState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return SubscribeAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::SmokeState::Id, 3,
+                                      30, true, chip::NullOptional, chip::NullOptional, /* autoResubscribe = */ chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TH reads ExpressedState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpressedState::Id,
+                                 true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "TH reads TestEventTriggersEnabled attribute from General Diagnostics Cluster");
+            VerifyOrDo(!ShouldSkip("DGGEN.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                                 GeneralDiagnostics::Attributes::TestEventTriggersEnabled::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
+                    "Warning Smoke Alarm Test Event");
+            VerifyOrDo(!ShouldSkip("DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey = mTestEventTriggerKey.HasValue()
+                ? mTestEventTriggerKey.Value()
+                : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                 16);
+            value.eventTrigger =
+                mTestEventTriggerWarningSmokeAlarm.HasValue() ? mTestEventTriggerWarningSmokeAlarm.Value() : 0xffffffff00000090ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 5: {
+            LogStep(5, "TH waits for a report of SmokeState attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 6: {
+            LogStep(6, "TH reads ExpressedState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpressedState::Id,
+                                 true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "TH reads SmokeAlarm event from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.E00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            mTestSubStepCount = 1;
+            return ReadEvent(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Events::SmokeAlarm::Id, false,
+                             chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "Start manually DUT self-test");
+            VerifyOrDo(!ShouldSkip("PICS_USER_PROMPT && SMOKECO.M.ManuallyControlledTest"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 9: {
+            LogStep(9, "TH reads TestInProgress attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::TestInProgress::Id,
+                                 true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "TH sends SelfTestRequest command to DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::SmokeCoAlarm::Commands::SelfTestRequest::Type value;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Commands::SelfTestRequest::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 11: {
+            LogStep(11, "TH reads TestInProgress attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::TestInProgress::Id,
+                                 true, chip::NullOptional);
+        }
+        case 12: {
+            LogStep(12,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
+                    "Critical Smoke Alarm Test Event");
+            VerifyOrDo(!ShouldSkip("DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey    = mTestEventTriggerKey.HasValue()
+                   ? mTestEventTriggerKey.Value()
+                   : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                    16);
+            value.eventTrigger = mTestEventTriggerCriticalSmokeAlarm.HasValue() ? mTestEventTriggerCriticalSmokeAlarm.Value()
+                                                                                : 0xffffffff0000009cULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 13: {
+            LogStep(13, "TH waits for a report of SmokeState attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 14: {
+            LogStep(14, "TH reads ExpressedState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpressedState::Id,
+                                 true, chip::NullOptional);
+        }
+        case 15: {
+            LogStep(15, "TH reads SmokeAlarm event from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.E00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            mTestSubStepCount = 1;
+            return ReadEvent(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Events::SmokeAlarm::Id, false,
+                             chip::NullOptional);
+        }
+        case 16: {
+            LogStep(16,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for Smoke "
+                    "Alarm Test Event Clear");
+            VerifyOrDo(!ShouldSkip("DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey = mTestEventTriggerKey.HasValue()
+                ? mTestEventTriggerKey.Value()
+                : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                 16);
+            value.eventTrigger =
+                mTestEventTriggerSmokeAlarmClear.HasValue() ? mTestEventTriggerSmokeAlarmClear.Value() : 0xffffffff000000a0ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 17: {
+            LogStep(17, "TH waits for a report of SmokeState attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 18: {
+            LogStep(18, "TH reads ExpressedState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpressedState::Id,
+                                 true, chip::NullOptional);
+        }
+        case 19: {
+            LogStep(19, "TH reads AllClear event from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.E0a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            mTestSubStepCount = 1;
+            return ReadEvent(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Events::AllClear::Id, false,
+                             chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_SMCO_2_3Suite : public TestCommand
+{
+public:
+    Test_TC_SMCO_2_3Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_SMCO_2_3", 20, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+        AddArgument("TEST_EVENT_TRIGGER_KEY", &mTestEventTriggerKey);
+        AddArgument("TEST_EVENT_TRIGGER_WARNING_CO_ALARM", 0, UINT64_MAX, &mTestEventTriggerWarningCoAlarm);
+        AddArgument("TEST_EVENT_TRIGGER_CRITICAL_CO_ALARM", 0, UINT64_MAX, &mTestEventTriggerCriticalCoAlarm);
+        AddArgument("TEST_EVENT_TRIGGER_CO_ALARM_CLEAR", 0, UINT64_MAX, &mTestEventTriggerCoAlarmClear);
+        AddArgument("EVENT_NUMBER", 0, UINT64_MAX, &mEventNumber);
+    }
+
+    ~Test_TC_SMCO_2_3Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override { return chip::System::Clock::Seconds16(mTimeout.ValueOr(990)); }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+    chip::Optional<chip::ByteSpan> mTestEventTriggerKey;
+    chip::Optional<uint64_t> mTestEventTriggerWarningCoAlarm;
+    chip::Optional<uint64_t> mTestEventTriggerCriticalCoAlarm;
+    chip::Optional<uint64_t> mTestEventTriggerCoAlarmClear;
+    chip::Optional<uint64_t> mEventNumber;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("expressedState", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                bool value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("testEventTriggersEnabled", value, 1));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("COState", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("expressedState", value, 2U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 7:
+            switch (mTestSubStepIndex)
+            {
+            case 0:
+                VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+                {
+                    chip::app::Clusters::SmokeCoAlarm::Events::COAlarm::DecodableType value;
+                    VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                    VerifyOrReturn(CheckValue("COAlarm.alarmSeverityLevel", value.alarmSeverityLevel, 1U));
+                }
+                mTestSubStepIndex++;
+                break;
+            default:
+                LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+                break;
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                bool value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("testInProgress", value, 0));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_BUSY));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                bool value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("testInProgress", value, 0));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
+            }
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("COState", value, 2U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("expressedState", value, 2U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 15:
+            switch (mTestSubStepIndex)
+            {
+            case 0:
+                VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+                {
+                    chip::app::Clusters::SmokeCoAlarm::Events::COAlarm::DecodableType value;
+                    VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                    VerifyOrReturn(CheckValue("COAlarm.alarmSeverityLevel", value.alarmSeverityLevel, 2U));
+                }
+                mTestSubStepIndex++;
+                break;
+            default:
+                LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+                break;
+            }
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("COState", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("expressedState", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 19:
+            switch (mTestSubStepIndex)
+            {
+            case 0:
+                VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+                {
+                    chip::app::Clusters::SmokeCoAlarm::Events::AllClear::DecodableType value;
+                    VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                }
+                mTestSubStepIndex++;
+                break;
+            default:
+                LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+                break;
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Commission DUT to TH");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH subscribes to COState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return SubscribeAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::COState::Id, 3,
+                                      30, true, chip::NullOptional, chip::NullOptional, /* autoResubscribe = */ chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TH reads ExpressedState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpressedState::Id,
+                                 true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "TH reads TestEventTriggersEnabled attribute from General Diagnostics Cluster");
+            VerifyOrDo(!ShouldSkip("DGGEN.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                                 GeneralDiagnostics::Attributes::TestEventTriggersEnabled::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
+                    "Warning CO Alarm Test Event");
+            VerifyOrDo(!ShouldSkip("DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey = mTestEventTriggerKey.HasValue()
+                ? mTestEventTriggerKey.Value()
+                : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                 16);
+            value.eventTrigger =
+                mTestEventTriggerWarningCoAlarm.HasValue() ? mTestEventTriggerWarningCoAlarm.Value() : 0xffffffff00000091ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 5: {
+            LogStep(5, "TH waits for a report of COState attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 6: {
+            LogStep(6, "TH reads ExpressedState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpressedState::Id,
+                                 true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "TH reads COAlarm event from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.E01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            mTestSubStepCount = 1;
+            return ReadEvent(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Events::COAlarm::Id, false,
+                             chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "Start manually DUT self-test");
+            VerifyOrDo(!ShouldSkip("PICS_USER_PROMPT && SMOKECO.M.ManuallyControlledTest"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 9: {
+            LogStep(9, "TH reads TestInProgress attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::TestInProgress::Id,
+                                 true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "TH sends SelfTestRequest command to DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::SmokeCoAlarm::Commands::SelfTestRequest::Type value;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Commands::SelfTestRequest::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 11: {
+            LogStep(11, "TH reads TestInProgress attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::TestInProgress::Id,
+                                 true, chip::NullOptional);
+        }
+        case 12: {
+            LogStep(12,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
+                    "Critical CO Alarm Test Event");
+            VerifyOrDo(!ShouldSkip("DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey = mTestEventTriggerKey.HasValue()
+                ? mTestEventTriggerKey.Value()
+                : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                 16);
+            value.eventTrigger =
+                mTestEventTriggerCriticalCoAlarm.HasValue() ? mTestEventTriggerCriticalCoAlarm.Value() : 0xffffffff0000009dULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 13: {
+            LogStep(13, "TH waits for a report of COState attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 14: {
+            LogStep(14, "TH reads ExpressedState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpressedState::Id,
+                                 true, chip::NullOptional);
+        }
+        case 15: {
+            LogStep(15, "TH reads COAlarm event from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.E01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            mTestSubStepCount = 1;
+            return ReadEvent(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Events::COAlarm::Id, false,
+                             chip::NullOptional);
+        }
+        case 16: {
+            LogStep(16,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for CO "
+                    "Alarm Test Event Clear");
+            VerifyOrDo(!ShouldSkip("DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey = mTestEventTriggerKey.HasValue()
+                ? mTestEventTriggerKey.Value()
+                : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                 16);
+            value.eventTrigger =
+                mTestEventTriggerCoAlarmClear.HasValue() ? mTestEventTriggerCoAlarmClear.Value() : 0xffffffff000000a1ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 17: {
+            LogStep(17, "TH waits for a report of COState attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 18: {
+            LogStep(18, "TH reads ExpressedState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpressedState::Id,
+                                 true, chip::NullOptional);
+        }
+        case 19: {
+            LogStep(19, "TH reads AllClear event from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.E0a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            mTestSubStepCount = 1;
+            return ReadEvent(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Events::AllClear::Id, false,
+                             chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_SMCO_2_4Suite : public TestCommand
+{
+public:
+    Test_TC_SMCO_2_4Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_SMCO_2_4", 50, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+        AddArgument("TEST_EVENT_TRIGGER_KEY", &mTestEventTriggerKey);
+        AddArgument("TEST_EVENT_TRIGGER_WARNING_BATTERY_ALERT", 0, UINT64_MAX, &mTestEventTriggerWarningBatteryAlert);
+        AddArgument("TEST_EVENT_TRIGGER_CRITICAL_BATTERY_ALERT", 0, UINT64_MAX, &mTestEventTriggerCriticalBatteryAlert);
+        AddArgument("TEST_EVENT_TRIGGER_BATTERY_ALERT_CLEAR", 0, UINT64_MAX, &mTestEventTriggerBatteryAlertClear);
+        AddArgument("TEST_EVENT_TRIGGER_HARDWARE_FAULT_ALERT", 0, UINT64_MAX, &mTestEventTriggerHardwareFaultAlert);
+        AddArgument("TEST_EVENT_TRIGGER_HARDWARE_FAULT_ALERT_CLEAR", 0, UINT64_MAX, &mTestEventTriggerHardwareFaultAlertClear);
+        AddArgument("TEST_EVENT_TRIGGER_END_OF_SERVICE_ALERT", 0, UINT64_MAX, &mTestEventTriggerEndOfServiceAlert);
+        AddArgument("TEST_EVENT_TRIGGER_END_OF_SERVICE_ALERT_CLEAR", 0, UINT64_MAX, &mTestEventTriggerEndOfServiceAlertClear);
+        AddArgument("EVENT_NUMBER", 0, UINT64_MAX, &mEventNumber);
+    }
+
+    ~Test_TC_SMCO_2_4Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override { return chip::System::Clock::Seconds16(mTimeout.ValueOr(2910)); }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+    chip::Optional<chip::ByteSpan> mTestEventTriggerKey;
+    chip::Optional<uint64_t> mTestEventTriggerWarningBatteryAlert;
+    chip::Optional<uint64_t> mTestEventTriggerCriticalBatteryAlert;
+    chip::Optional<uint64_t> mTestEventTriggerBatteryAlertClear;
+    chip::Optional<uint64_t> mTestEventTriggerHardwareFaultAlert;
+    chip::Optional<uint64_t> mTestEventTriggerHardwareFaultAlertClear;
+    chip::Optional<uint64_t> mTestEventTriggerEndOfServiceAlert;
+    chip::Optional<uint64_t> mTestEventTriggerEndOfServiceAlertClear;
+    chip::Optional<uint64_t> mEventNumber;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("batteryAlert", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("expressedState", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                bool value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("testEventTriggersEnabled", value, 1));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("batteryAlert", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("expressedState", value, 3U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 7:
+            switch (mTestSubStepIndex)
+            {
+            case 0:
+                VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+                {
+                    chip::app::Clusters::SmokeCoAlarm::Events::LowBattery::DecodableType value;
+                    VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                    VerifyOrReturn(CheckValue("lowBattery.alarmSeverityLevel", value.alarmSeverityLevel, 1U));
+                }
+                mTestSubStepIndex++;
+                break;
+            default:
+                LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+                break;
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("batteryAlert", value, 2U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("expressedState", value, 3U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 11:
+            switch (mTestSubStepIndex)
+            {
+            case 0:
+                VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+                {
+                    chip::app::Clusters::SmokeCoAlarm::Events::LowBattery::DecodableType value;
+                    VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                    VerifyOrReturn(CheckValue("lowBattery.alarmSeverityLevel", value.alarmSeverityLevel, 2U));
+                }
+                mTestSubStepIndex++;
+                break;
+            default:
+                LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+                break;
+            }
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("batteryAlert", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("expressedState", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 15:
+            switch (mTestSubStepIndex)
+            {
+            case 0:
+                VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+                {
+                    chip::app::Clusters::SmokeCoAlarm::Events::AllClear::DecodableType value;
+                    VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                }
+                mTestSubStepIndex++;
+                break;
+            default:
+                LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+                break;
+            }
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                bool value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("hardwareFaultAlert", value, 0));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
+            }
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                bool value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("hardwareFaultAlert", value, 1));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
+            }
+            shouldContinue = true;
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("expressedState", value, 5U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 20:
+            switch (mTestSubStepIndex)
+            {
+            case 0:
+                VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+                {
+                    chip::app::Clusters::SmokeCoAlarm::Events::HardwareFault::DecodableType value;
+                    VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                }
+                mTestSubStepIndex++;
+                break;
+            default:
+                LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+                break;
+            }
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                bool value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("hardwareFaultAlert", value, 0));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
+            }
+            shouldContinue = true;
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("expressedState", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 24:
+            switch (mTestSubStepIndex)
+            {
+            case 0:
+                VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+                {
+                    chip::app::Clusters::SmokeCoAlarm::Events::AllClear::DecodableType value;
+                    VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                }
+                mTestSubStepIndex++;
+                break;
+            default:
+                LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+                break;
+            }
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::EndOfServiceEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("endOfServiceAlert", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::EndOfServiceEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("endOfServiceAlert", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 28:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("expressedState", value, 6U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 29:
+            switch (mTestSubStepIndex)
+            {
+            case 0:
+                VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+                {
+                    chip::app::Clusters::SmokeCoAlarm::Events::EndOfService::DecodableType value;
+                    VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                }
+                mTestSubStepIndex++;
+                break;
+            default:
+                LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+                break;
+            }
+            break;
+        case 30:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 31:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::EndOfServiceEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("endOfServiceAlert", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 32:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("expressedState", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 33:
+            switch (mTestSubStepIndex)
+            {
+            case 0:
+                VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+                {
+                    chip::app::Clusters::SmokeCoAlarm::Events::AllClear::DecodableType value;
+                    VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                }
+                mTestSubStepIndex++;
+                break;
+            default:
+                LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+                break;
+            }
+            break;
+        case 34:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                bool value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("testInProgress", value, 0));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
+            }
+            break;
+        case 35:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("expressedState", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 36:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 37:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                bool value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("testInProgress", value, 1));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
+            }
+            shouldContinue = true;
+            break;
+        case 38:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("expressedState", value, 4U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 39:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                bool value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("testInProgress", value, 0));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
+            }
+            shouldContinue = true;
+            break;
+        case 40:
+            switch (mTestSubStepIndex)
+            {
+            case 0:
+                VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+                {
+                    chip::app::Clusters::SmokeCoAlarm::Events::SelfTestComplete::DecodableType value;
+                    VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                }
+                mTestSubStepIndex++;
+                break;
+            default:
+                LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+                break;
+            }
+            break;
+        case 41:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("expressedState", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 42:
+            switch (mTestSubStepIndex)
+            {
+            case 0:
+                VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+                {
+                    chip::app::Clusters::SmokeCoAlarm::Events::AllClear::DecodableType value;
+                    VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                }
+                mTestSubStepIndex++;
+                break;
+            default:
+                LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+                break;
+            }
+            break;
+        case 43:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 44:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                bool value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("testInProgress", value, 1));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
+            }
+            shouldContinue = true;
+            break;
+        case 45:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("expressedState", value, 4U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 46:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                bool value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("testInProgress", value, 0));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
+            }
+            shouldContinue = true;
+            break;
+        case 47:
+            switch (mTestSubStepIndex)
+            {
+            case 0:
+                VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+                {
+                    chip::app::Clusters::SmokeCoAlarm::Events::SelfTestComplete::DecodableType value;
+                    VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                }
+                mTestSubStepIndex++;
+                break;
+            default:
+                LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+                break;
+            }
+            break;
+        case 48:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("expressedState", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 49:
+            switch (mTestSubStepIndex)
+            {
+            case 0:
+                VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+                {
+                    chip::app::Clusters::SmokeCoAlarm::Events::AllClear::DecodableType value;
+                    VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                }
+                mTestSubStepIndex++;
+                break;
+            default:
+                LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+                break;
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Commission DUT to TH");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH subscribes to BatteryAlert attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return SubscribeAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::BatteryAlert::Id,
+                                      3, 30, true, chip::NullOptional, chip::NullOptional,
+                                      /* autoResubscribe = */ chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TH reads ExpressedState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpressedState::Id,
+                                 true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "TH reads TestEventTriggersEnabled attribute from General Diagnostics Cluster");
+            VerifyOrDo(!ShouldSkip("DGGEN.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                                 GeneralDiagnostics::Attributes::TestEventTriggersEnabled::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
+                    "Warning Battery Alert Test Event");
+            VerifyOrDo(!ShouldSkip("DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey    = mTestEventTriggerKey.HasValue()
+                   ? mTestEventTriggerKey.Value()
+                   : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                    16);
+            value.eventTrigger = mTestEventTriggerWarningBatteryAlert.HasValue() ? mTestEventTriggerWarningBatteryAlert.Value()
+                                                                                 : 0xffffffff00000095ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 5: {
+            LogStep(5, "TH waits for a report of BatteryAlert attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 6: {
+            LogStep(6, "TH reads ExpressedState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpressedState::Id,
+                                 true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "TH reads LowBattery event from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.E02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            mTestSubStepCount = 1;
+            return ReadEvent(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Events::LowBattery::Id, false,
+                             chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
+                    "Critical Battery Alert Test Event");
+            VerifyOrDo(!ShouldSkip("DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey    = mTestEventTriggerKey.HasValue()
+                   ? mTestEventTriggerKey.Value()
+                   : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                    16);
+            value.eventTrigger = mTestEventTriggerCriticalBatteryAlert.HasValue() ? mTestEventTriggerCriticalBatteryAlert.Value()
+                                                                                  : 0xffffffff0000009eULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 9: {
+            LogStep(9, "TH waits for a report of BatteryAlert attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 10: {
+            LogStep(10, "TH reads ExpressedState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpressedState::Id,
+                                 true, chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11, "TH reads LowBattery event from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.E02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            mTestSubStepCount = 1;
+            return ReadEvent(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Events::LowBattery::Id, false,
+                             chip::NullOptional);
+        }
+        case 12: {
+            LogStep(12,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
+                    "Battery Alert Test Event Clear");
+            VerifyOrDo(!ShouldSkip("DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey = mTestEventTriggerKey.HasValue()
+                ? mTestEventTriggerKey.Value()
+                : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                 16);
+            value.eventTrigger =
+                mTestEventTriggerBatteryAlertClear.HasValue() ? mTestEventTriggerBatteryAlertClear.Value() : 0xffffffff000000a5ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 13: {
+            LogStep(13, "TH waits for a report of BatteryAlert attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 14: {
+            LogStep(14, "TH reads ExpressedState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpressedState::Id,
+                                 true, chip::NullOptional);
+        }
+        case 15: {
+            LogStep(15, "TH reads AllClear event from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.E0a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            mTestSubStepCount = 1;
+            return ReadEvent(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Events::AllClear::Id, false,
+                             chip::NullOptional);
+        }
+        case 16: {
+            LogStep(16, "TH subscribes to HardwareFaultAlert attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0006"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return SubscribeAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id,
+                                      SmokeCoAlarm::Attributes::HardwareFaultAlert::Id, 3, 30, true, chip::NullOptional,
+                                      chip::NullOptional, /* autoResubscribe = */ chip::NullOptional);
+        }
+        case 17: {
+            LogStep(17,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
+                    "Hardware Fault Alert Test Event");
+            VerifyOrDo(!ShouldSkip("DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey    = mTestEventTriggerKey.HasValue()
+                   ? mTestEventTriggerKey.Value()
+                   : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                    16);
+            value.eventTrigger = mTestEventTriggerHardwareFaultAlert.HasValue() ? mTestEventTriggerHardwareFaultAlert.Value()
+                                                                                : 0xffffffff00000093ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 18: {
+            LogStep(18, "TH waits for a report of HardwareFaultAlert attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0006"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 19: {
+            LogStep(19, "TH reads ExpressedState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpressedState::Id,
+                                 true, chip::NullOptional);
+        }
+        case 20: {
+            LogStep(20, "TH reads HardwareFault event from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.E03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            mTestSubStepCount = 1;
+            return ReadEvent(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Events::HardwareFault::Id, false,
+                             chip::NullOptional);
+        }
+        case 21: {
+            LogStep(21,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
+                    "Hardware Fault Alert Test Event Clear");
+            VerifyOrDo(!ShouldSkip("DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey    = mTestEventTriggerKey.HasValue()
+                   ? mTestEventTriggerKey.Value()
+                   : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                    16);
+            value.eventTrigger = mTestEventTriggerHardwareFaultAlertClear.HasValue()
+                ? mTestEventTriggerHardwareFaultAlertClear.Value()
+                : 0xffffffff000000a3ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 22: {
+            LogStep(22, "TH waits for a report of HardwareFaultAlert attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0006"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 23: {
+            LogStep(23, "TH reads ExpressedState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpressedState::Id,
+                                 true, chip::NullOptional);
+        }
+        case 24: {
+            LogStep(24, "TH reads AllClear event from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.E0a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            mTestSubStepCount = 1;
+            return ReadEvent(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Events::AllClear::Id, false,
+                             chip::NullOptional);
+        }
+        case 25: {
+            LogStep(25, "TH subscribes to EndOfServiceAlert attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return SubscribeAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id,
+                                      SmokeCoAlarm::Attributes::EndOfServiceAlert::Id, 3, 30, true, chip::NullOptional,
+                                      chip::NullOptional, /* autoResubscribe = */ chip::NullOptional);
+        }
+        case 26: {
+            LogStep(26,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for End "
+                    "of Service Alert Test Event");
+            VerifyOrDo(!ShouldSkip("DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey = mTestEventTriggerKey.HasValue()
+                ? mTestEventTriggerKey.Value()
+                : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                 16);
+            value.eventTrigger =
+                mTestEventTriggerEndOfServiceAlert.HasValue() ? mTestEventTriggerEndOfServiceAlert.Value() : 0xffffffff0000009aULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 27: {
+            LogStep(27, "TH waits for a report of EndOfServiceAlert attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 28: {
+            LogStep(28, "TH reads ExpressedState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpressedState::Id,
+                                 true, chip::NullOptional);
+        }
+        case 29: {
+            LogStep(29, "TH reads EndOfService event from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.E04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            mTestSubStepCount = 1;
+            return ReadEvent(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Events::EndOfService::Id, false,
+                             chip::NullOptional);
+        }
+        case 30: {
+            LogStep(30,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for End "
+                    "of Service Alert Test Event Clear");
+            VerifyOrDo(!ShouldSkip("DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey    = mTestEventTriggerKey.HasValue()
+                   ? mTestEventTriggerKey.Value()
+                   : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                    16);
+            value.eventTrigger = mTestEventTriggerEndOfServiceAlertClear.HasValue()
+                ? mTestEventTriggerEndOfServiceAlertClear.Value()
+                : 0xffffffff000000aaULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 31: {
+            LogStep(31, "TH waits for a report of EndOfServiceAlert attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 32: {
+            LogStep(32, "TH reads ExpressedState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpressedState::Id,
+                                 true, chip::NullOptional);
+        }
+        case 33: {
+            LogStep(33, "TH reads AllClear event from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.E0a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            mTestSubStepCount = 1;
+            return ReadEvent(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Events::AllClear::Id, false,
+                             chip::NullOptional);
+        }
+        case 34: {
+            LogStep(34, "TH subscribes to TestInProgress attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return SubscribeAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id,
+                                      SmokeCoAlarm::Attributes::TestInProgress::Id, 3, 30, true, chip::NullOptional,
+                                      chip::NullOptional, /* autoResubscribe = */ chip::NullOptional);
+        }
+        case 35: {
+            LogStep(35, "TH reads ExpressedState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpressedState::Id,
+                                 true, chip::NullOptional);
+        }
+        case 36: {
+            LogStep(36, "Start manually DUT self-test");
+            VerifyOrDo(!ShouldSkip("PICS_USER_PROMPT && SMOKECO.M.ManuallyControlledTest"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 37: {
+            LogStep(37, "TH waits for a report of TestInProgress attribute from DUT with a timeout of 180 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 38: {
+            LogStep(38, "TH reads ExpressedState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpressedState::Id,
+                                 true, chip::NullOptional);
+        }
+        case 39: {
+            LogStep(39, "TH waits for a report of TestInProgress attribute from DUT with a timeout of 180 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 40: {
+            LogStep(40, "TH reads SelfTestComplete event from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.E05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            mTestSubStepCount = 1;
+            return ReadEvent(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Events::SelfTestComplete::Id, false,
+                             chip::NullOptional);
+        }
+        case 41: {
+            LogStep(41, "TH reads ExpressedState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpressedState::Id,
+                                 true, chip::NullOptional);
+        }
+        case 42: {
+            LogStep(42, "TH reads AllClear event from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.E0a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            mTestSubStepCount = 1;
+            return ReadEvent(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Events::AllClear::Id, false,
+                             chip::NullOptional);
+        }
+        case 43: {
+            LogStep(43, "TH sends SelfTestRequest command to DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::SmokeCoAlarm::Commands::SelfTestRequest::Type value;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Commands::SelfTestRequest::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 44: {
+            LogStep(44, "TH waits for a report of TestInProgress attribute from DUT with a timeout of 180 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 45: {
+            LogStep(45, "TH reads ExpressedState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpressedState::Id,
+                                 true, chip::NullOptional);
+        }
+        case 46: {
+            LogStep(46, "TH waits for a report of TestInProgress attribute from DUT with a timeout of 180 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 47: {
+            LogStep(47, "TH reads SelfTestComplete event from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.E05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            mTestSubStepCount = 1;
+            return ReadEvent(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Events::SelfTestComplete::Id, false,
+                             chip::NullOptional);
+        }
+        case 48: {
+            LogStep(48, "TH reads ExpressedState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpressedState::Id,
+                                 true, chip::NullOptional);
+        }
+        case 49: {
+            LogStep(49, "TH reads AllClear event from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.E0a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            mTestSubStepCount = 1;
+            return ReadEvent(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Events::AllClear::Id, false,
+                             chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_SMCO_2_5Suite : public TestCommand
+{
+public:
+    Test_TC_SMCO_2_5Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_SMCO_2_5", 75, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+        AddArgument("TEST_EVENT_TRIGGER_KEY", &mTestEventTriggerKey);
+        AddArgument("TEST_EVENT_TRIGGER_WARNING_SMOKE_ALARM", 0, UINT64_MAX, &mTestEventTriggerWarningSmokeAlarm);
+        AddArgument("TEST_EVENT_TRIGGER_CRITICAL_SMOKE_ALARM", 0, UINT64_MAX, &mTestEventTriggerCriticalSmokeAlarm);
+        AddArgument("TEST_EVENT_TRIGGER_SMOKE_ALARM_CLEAR", 0, UINT64_MAX, &mTestEventTriggerSmokeAlarmClear);
+        AddArgument("TEST_EVENT_TRIGGER_WARNING_CO_ALARM", 0, UINT64_MAX, &mTestEventTriggerWarningCoAlarm);
+        AddArgument("TEST_EVENT_TRIGGER_CRITICAL_CO_ALARM", 0, UINT64_MAX, &mTestEventTriggerCriticalCoAlarm);
+        AddArgument("TEST_EVENT_TRIGGER_CO_ALARM_CLEAR", 0, UINT64_MAX, &mTestEventTriggerCoAlarmClear);
+        AddArgument("TEST_EVENT_TRIGGER_DEVICE_MUTED", 0, UINT64_MAX, &mTestEventTriggerDeviceMuted);
+        AddArgument("TEST_EVENT_TRIGGER_DEVICE_MUTED_CLEAR", 0, UINT64_MAX, &mTestEventTriggerDeviceMutedClear);
+        AddArgument("TEST_EVENT_TRIGGER_INTERCONNECT_SMOKE_ALARM", 0, UINT64_MAX, &mTestEventTriggerInterconnectSmokeAlarm);
+        AddArgument("TEST_EVENT_TRIGGER_INTERCONNECT_SMOKE_ALARM_CLEAR", 0, UINT64_MAX,
+                    &mTestEventTriggerInterconnectSmokeAlarmClear);
+        AddArgument("TEST_EVENT_TRIGGER_INTERCONNECT_CO_ALARM", 0, UINT64_MAX, &mTestEventTriggerInterconnectCoAlarm);
+        AddArgument("TEST_EVENT_TRIGGER_INTERCONNECT_CO_ALARM_CLEAR", 0, UINT64_MAX, &mTestEventTriggerInterconnectCoAlarmClear);
+        AddArgument("TEST_EVENT_TRIGGER_CONTAMINATION_STATE_HIGH", 0, UINT64_MAX, &mTestEventTriggerContaminationStateHigh);
+        AddArgument("TEST_EVENT_TRIGGER_CONTAMINATION_STATE_LOW", 0, UINT64_MAX, &mTestEventTriggerContaminationStateLow);
+        AddArgument("TTEST_EVENT_TRIGGER_CONTAMINATION_STATE_CLEAR", 0, UINT64_MAX, &mTtestEventTriggerContaminationStateClear);
+        AddArgument("TEST_EVENT_TRIGGER_SENSITIVITY_LEVEL_HIGH", 0, UINT64_MAX, &mTestEventTriggerSensitivityLevelHigh);
+        AddArgument("TEST_EVENT_TRIGGER_SENSITIVITY_LEVEL_LOW", 0, UINT64_MAX, &mTestEventTriggerSensitivityLevelLow);
+        AddArgument("TTEST_EVENT_TRIGGER_SENSITIVITY_LEVEL_CLEAR", 0, UINT64_MAX, &mTtestEventTriggerSensitivityLevelClear);
+        AddArgument("EVENT_NUMBER", 0, UINT64_MAX, &mEventNumber);
+    }
+
+    ~Test_TC_SMCO_2_5Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override { return chip::System::Clock::Seconds16(mTimeout.ValueOr(6090)); }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+    chip::Optional<chip::ByteSpan> mTestEventTriggerKey;
+    chip::Optional<uint64_t> mTestEventTriggerWarningSmokeAlarm;
+    chip::Optional<uint64_t> mTestEventTriggerCriticalSmokeAlarm;
+    chip::Optional<uint64_t> mTestEventTriggerSmokeAlarmClear;
+    chip::Optional<uint64_t> mTestEventTriggerWarningCoAlarm;
+    chip::Optional<uint64_t> mTestEventTriggerCriticalCoAlarm;
+    chip::Optional<uint64_t> mTestEventTriggerCoAlarmClear;
+    chip::Optional<uint64_t> mTestEventTriggerDeviceMuted;
+    chip::Optional<uint64_t> mTestEventTriggerDeviceMutedClear;
+    chip::Optional<uint64_t> mTestEventTriggerInterconnectSmokeAlarm;
+    chip::Optional<uint64_t> mTestEventTriggerInterconnectSmokeAlarmClear;
+    chip::Optional<uint64_t> mTestEventTriggerInterconnectCoAlarm;
+    chip::Optional<uint64_t> mTestEventTriggerInterconnectCoAlarmClear;
+    chip::Optional<uint64_t> mTestEventTriggerContaminationStateHigh;
+    chip::Optional<uint64_t> mTestEventTriggerContaminationStateLow;
+    chip::Optional<uint64_t> mTtestEventTriggerContaminationStateClear;
+    chip::Optional<uint64_t> mTestEventTriggerSensitivityLevelHigh;
+    chip::Optional<uint64_t> mTestEventTriggerSensitivityLevelLow;
+    chip::Optional<uint64_t> mTtestEventTriggerSensitivityLevelClear;
+    chip::Optional<uint64_t> mEventNumber;
+
+    chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum interconnectSmokeAlarmSeverityLevel;
+    chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum interconnectCOAlarmSeverityLevel;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("interconnectSmokeAlarm", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("expressedState", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                bool value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("testEventTriggersEnabled", value, 1));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
+                interconnectSmokeAlarmSeverityLevel = value;
+            }
+            shouldContinue = true;
+            break;
+        case 6:
+            switch (mTestSubStepIndex)
+            {
+            case 0:
+                VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+                {
+                    chip::app::Clusters::SmokeCoAlarm::Events::InterconnectSmokeAlarm::DecodableType value;
+                    VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                    VerifyOrReturn(CheckValue("interconnectSmokeAlarm.alarmSeverityLevel", value.alarmSeverityLevel,
+                                              interconnectSmokeAlarmSeverityLevel));
+                }
+                mTestSubStepIndex++;
+                break;
+            default:
+                LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+                break;
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("expressedState", value, 7U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("interconnectSmokeAlarm", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("expressedState", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 11:
+            switch (mTestSubStepIndex)
+            {
+            case 0:
+                VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+                {
+                    chip::app::Clusters::SmokeCoAlarm::Events::AllClear::DecodableType value;
+                    VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                }
+                mTestSubStepIndex++;
+                break;
+            default:
+                LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+                break;
+            }
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("interconnectCOAlarm", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("expressedState", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
+                interconnectCOAlarmSeverityLevel = value;
+            }
+            shouldContinue = true;
+            break;
+        case 16:
+            switch (mTestSubStepIndex)
+            {
+            case 0:
+                VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+                {
+                    chip::app::Clusters::SmokeCoAlarm::Events::InterconnectCOAlarm::DecodableType value;
+                    VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                    VerifyOrReturn(CheckValue("interconnectCOAlarm.alarmSeverityLevel", value.alarmSeverityLevel,
+                                              interconnectCOAlarmSeverityLevel));
+                }
+                mTestSubStepIndex++;
+                break;
+            default:
+                LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+                break;
+            }
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("expressedState", value, 8U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("interconnectCOAlarm", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("expressedState", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 21:
+            switch (mTestSubStepIndex)
+            {
+            case 0:
+                VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+                {
+                    chip::app::Clusters::SmokeCoAlarm::Events::AllClear::DecodableType value;
+                    VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                }
+                mTestSubStepIndex++;
+                break;
+            default:
+                LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+                break;
+            }
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ContaminationStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("contaminationState", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ContaminationStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 2U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 3U));
+            }
+            shouldContinue = true;
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ContaminationStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("contaminationState", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 28:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ContaminationStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("contaminationState", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 29:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 30:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ContaminationStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("contaminationState", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 31:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::SensitivityEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("smokeSensitivityLevel", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 32:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 33:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::SensitivityEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("smokeSensitivityLevel", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 34:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 35:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::SensitivityEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("smokeSensitivityLevel", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 36:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 37:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::SensitivityEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("smokeSensitivityLevel", value, 2U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 38:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 39:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::SensitivityEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("smokeSensitivityLevel", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 40:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::MuteStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("deviceMuted", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 41:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 42:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("smokeState", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 43:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 44:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("smokeState", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 45:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 46:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::MuteStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("deviceMuted", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 47:
+            switch (mTestSubStepIndex)
+            {
+            case 0:
+                VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+                {
+                    chip::app::Clusters::SmokeCoAlarm::Events::AlarmMuted::DecodableType value;
+                    VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                }
+                mTestSubStepIndex++;
+                break;
+            default:
+                LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+                break;
+            }
+            break;
+        case 48:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 49:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::MuteStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("deviceMuted", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 50:
+            switch (mTestSubStepIndex)
+            {
+            case 0:
+                VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+                {
+                    chip::app::Clusters::SmokeCoAlarm::Events::MuteEnded::DecodableType value;
+                    VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                }
+                mTestSubStepIndex++;
+                break;
+            default:
+                LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+                break;
+            }
+            break;
+        case 51:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 52:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("smokeState", value, 2U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 53:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 54:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 55:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::MuteStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("deviceMuted", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 56:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 57:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("smokeState", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 58:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 59:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("COState", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 60:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 61:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("COState", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 62:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 63:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::MuteStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("deviceMuted", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 64:
+            switch (mTestSubStepIndex)
+            {
+            case 0:
+                VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+                {
+                    chip::app::Clusters::SmokeCoAlarm::Events::AlarmMuted::DecodableType value;
+                    VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                }
+                mTestSubStepIndex++;
+                break;
+            default:
+                LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+                break;
+            }
+            break;
+        case 65:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 66:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::MuteStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("deviceMuted", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 67:
+            switch (mTestSubStepIndex)
+            {
+            case 0:
+                VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+                {
+                    chip::app::Clusters::SmokeCoAlarm::Events::MuteEnded::DecodableType value;
+                    VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                }
+                mTestSubStepIndex++;
+                break;
+            default:
+                LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+                break;
+            }
+            break;
+        case 68:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 69:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("COState", value, 2U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 70:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 71:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 72:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::MuteStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("deviceMuted", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 73:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 74:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("COState", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Commission DUT to TH");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH subscribes to InterconnectSmokeAlarm attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return SubscribeAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id,
+                                      SmokeCoAlarm::Attributes::InterconnectSmokeAlarm::Id, 3, 30, true, chip::NullOptional,
+                                      chip::NullOptional, /* autoResubscribe = */ chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TH reads ExpressedState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0008 && SMOKECO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpressedState::Id,
+                                 true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "TH reads TestEventTriggersEnabled attribute from General Diagnostics Cluster");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0008 && DGGEN.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                                 GeneralDiagnostics::Attributes::TestEventTriggersEnabled::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
+                    "Interconnect Smoke Alarm Test Event");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0008 && DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey    = mTestEventTriggerKey.HasValue()
+                   ? mTestEventTriggerKey.Value()
+                   : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                    16);
+            value.eventTrigger = mTestEventTriggerInterconnectSmokeAlarm.HasValue()
+                ? mTestEventTriggerInterconnectSmokeAlarm.Value()
+                : 0xffffffff00000092ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 5: {
+            LogStep(5, "TH waits for a report of InterconnectSmokeAlarm attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 6: {
+            LogStep(6, "TH reads InterconnectSmokeAlarm event from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0008 && SMOKECO.S.E08"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            mTestSubStepCount = 1;
+            return ReadEvent(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Events::InterconnectSmokeAlarm::Id,
+                             false, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "TH reads ExpressedState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0008 && SMOKECO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpressedState::Id,
+                                 true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
+                    "Interconnect Smoke Alarm Test Event Clear");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0008 && DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey    = mTestEventTriggerKey.HasValue()
+                   ? mTestEventTriggerKey.Value()
+                   : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                    16);
+            value.eventTrigger = mTestEventTriggerInterconnectSmokeAlarmClear.HasValue()
+                ? mTestEventTriggerInterconnectSmokeAlarmClear.Value()
+                : 0xffffffff000000a2ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 9: {
+            LogStep(9, "TH waits for a report of InterconnectSmokeAlarm attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 10: {
+            LogStep(10, "TH reads ExpressedState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0008 && SMOKECO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpressedState::Id,
+                                 true, chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11, "TH reads AllClear event from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0008 && SMOKECO.S.E0a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            mTestSubStepCount = 1;
+            return ReadEvent(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Events::AllClear::Id, false,
+                             chip::NullOptional);
+        }
+        case 12: {
+            LogStep(12, "TH subscribes to InterconnectCOAlarm attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0009"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return SubscribeAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id,
+                                      SmokeCoAlarm::Attributes::InterconnectCOAlarm::Id, 3, 30, true, chip::NullOptional,
+                                      chip::NullOptional, /* autoResubscribe = */ chip::NullOptional);
+        }
+        case 13: {
+            LogStep(13, "TH reads ExpressedState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0009 && SMOKECO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpressedState::Id,
+                                 true, chip::NullOptional);
+        }
+        case 14: {
+            LogStep(14,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
+                    "Interconnect CO Alarm Test Event");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0009 && DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey    = mTestEventTriggerKey.HasValue()
+                   ? mTestEventTriggerKey.Value()
+                   : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                    16);
+            value.eventTrigger = mTestEventTriggerInterconnectCoAlarm.HasValue() ? mTestEventTriggerInterconnectCoAlarm.Value()
+                                                                                 : 0xffffffff00000094ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 15: {
+            LogStep(15, "TH waits for a report of InterconnectCOAlarm attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0009"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 16: {
+            LogStep(16, "TH reads InterconnectCOAlarm event from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0009 && SMOKECO.S.E09"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            mTestSubStepCount = 1;
+            return ReadEvent(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Events::InterconnectCOAlarm::Id, false,
+                             chip::NullOptional);
+        }
+        case 17: {
+            LogStep(17, "TH reads ExpressedState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0009 && SMOKECO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpressedState::Id,
+                                 true, chip::NullOptional);
+        }
+        case 18: {
+            LogStep(18,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
+                    "Interconnect CO Alarm Test Event Clear");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0009 && DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey    = mTestEventTriggerKey.HasValue()
+                   ? mTestEventTriggerKey.Value()
+                   : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                    16);
+            value.eventTrigger = mTestEventTriggerInterconnectCoAlarmClear.HasValue()
+                ? mTestEventTriggerInterconnectCoAlarmClear.Value()
+                : 0xffffffff000000a4ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 19: {
+            LogStep(19, "TH waits for a report of InterconnectCOAlarm attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0009"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 20: {
+            LogStep(20, "TH reads ExpressedState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0009 && SMOKECO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpressedState::Id,
+                                 true, chip::NullOptional);
+        }
+        case 21: {
+            LogStep(21, "TH reads AllClear event from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.E0a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            mTestSubStepCount = 1;
+            return ReadEvent(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Events::AllClear::Id, false,
+                             chip::NullOptional);
+        }
+        case 22: {
+            LogStep(22, "TH subscribes to ContaminationState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A000a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return SubscribeAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id,
+                                      SmokeCoAlarm::Attributes::ContaminationState::Id, 3, 30, true, chip::NullOptional,
+                                      chip::NullOptional, /* autoResubscribe = */ chip::NullOptional);
+        }
+        case 23: {
+            LogStep(23,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
+                    "Contamination State (High) Test Event");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A000a && DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey    = mTestEventTriggerKey.HasValue()
+                   ? mTestEventTriggerKey.Value()
+                   : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                    16);
+            value.eventTrigger = mTestEventTriggerContaminationStateHigh.HasValue()
+                ? mTestEventTriggerContaminationStateHigh.Value()
+                : 0xffffffff00000096ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 24: {
+            LogStep(24, "TH waits for a report of ContaminationState attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A000a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 25: {
+            LogStep(25,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
+                    "Contamination State Test Event Clear");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A000a && DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey    = mTestEventTriggerKey.HasValue()
+                   ? mTestEventTriggerKey.Value()
+                   : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                    16);
+            value.eventTrigger = mTtestEventTriggerContaminationStateClear.HasValue()
+                ? mTtestEventTriggerContaminationStateClear.Value()
+                : 0xffffffff000000a6ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 26: {
+            LogStep(26, "TH waits for a report of ContaminationState attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A000a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 27: {
+            LogStep(27,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
+                    "Contamination State (Low) Test Event");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A000a && DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey    = mTestEventTriggerKey.HasValue()
+                   ? mTestEventTriggerKey.Value()
+                   : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                    16);
+            value.eventTrigger = mTestEventTriggerContaminationStateLow.HasValue() ? mTestEventTriggerContaminationStateLow.Value()
+                                                                                   : 0xffffffff00000097ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 28: {
+            LogStep(28, "TH waits for a report of ContaminationState attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A000a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 29: {
+            LogStep(29,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
+                    "Contamination State Test Event Clear");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A000a && DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey    = mTestEventTriggerKey.HasValue()
+                   ? mTestEventTriggerKey.Value()
+                   : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                    16);
+            value.eventTrigger = mTtestEventTriggerContaminationStateClear.HasValue()
+                ? mTtestEventTriggerContaminationStateClear.Value()
+                : 0xffffffff000000a6ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 30: {
+            LogStep(30, "TH waits for a report of ContaminationState attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A000a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 31: {
+            LogStep(31, "TH subscribes to SmokeSensitivityLevel attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A000b"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return SubscribeAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id,
+                                      SmokeCoAlarm::Attributes::SmokeSensitivityLevel::Id, 3, 30, true, chip::NullOptional,
+                                      chip::NullOptional, /* autoResubscribe = */ chip::NullOptional);
+        }
+        case 32: {
+            LogStep(32,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for Smoke "
+                    "Sensitivity Level (High) Test Event");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A000b && DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey    = mTestEventTriggerKey.HasValue()
+                   ? mTestEventTriggerKey.Value()
+                   : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                    16);
+            value.eventTrigger = mTestEventTriggerSensitivityLevelHigh.HasValue() ? mTestEventTriggerSensitivityLevelHigh.Value()
+                                                                                  : 0xffffffff00000098ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 33: {
+            LogStep(33, "TH waits for a report of SmokeSensitivityLevel attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A000b"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 34: {
+            LogStep(34,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for Smoke "
+                    "Sensitivity Level Test Event Clear");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A000b && DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey    = mTestEventTriggerKey.HasValue()
+                   ? mTestEventTriggerKey.Value()
+                   : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                    16);
+            value.eventTrigger = mTtestEventTriggerSensitivityLevelClear.HasValue()
+                ? mTtestEventTriggerSensitivityLevelClear.Value()
+                : 0xffffffff000000a8ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 35: {
+            LogStep(35, "TH waits for a report of SmokeSensitivityLevel attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A000b"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 36: {
+            LogStep(36,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for Smoke "
+                    "Sensitivity Level (Low) Test Event");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A000b && DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey    = mTestEventTriggerKey.HasValue()
+                   ? mTestEventTriggerKey.Value()
+                   : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                    16);
+            value.eventTrigger = mTestEventTriggerSensitivityLevelLow.HasValue() ? mTestEventTriggerSensitivityLevelLow.Value()
+                                                                                 : 0xffffffff00000099ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 37: {
+            LogStep(37, "TH waits for a report of SmokeSensitivityLevel attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A000b"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 38: {
+            LogStep(38,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for Smoke "
+                    "Sensitivity Level Test Event Clear");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A000b && DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey    = mTestEventTriggerKey.HasValue()
+                   ? mTestEventTriggerKey.Value()
+                   : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                    16);
+            value.eventTrigger = mTtestEventTriggerSensitivityLevelClear.HasValue()
+                ? mTtestEventTriggerSensitivityLevelClear.Value()
+                : 0xffffffff000000a8ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 39: {
+            LogStep(39, "TH waits for a report of SmokeSensitivityLevel attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A000b"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 40: {
+            LogStep(40, "TH subscribes to DeviceMuted attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0004"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return SubscribeAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::DeviceMuted::Id,
+                                      3, 30, true, chip::NullOptional, chip::NullOptional,
+                                      /* autoResubscribe = */ chip::NullOptional);
+        }
+        case 41: {
+            LogStep(41, "TH reads FeatureMap attribute(Smoke Alarm) from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0004 && SMOKECO.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::FeatureMap::Id, true,
+                                 chip::NullOptional);
+        }
+        case 42: {
+            LogStep(42, "TH subscribes to SmokeState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0004 && SMOKECO.S.F00 && SMOKECO.S.A0001"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return SubscribeAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::SmokeState::Id, 3,
+                                      30, true, chip::NullOptional, chip::Optional<bool>(true),
+                                      /* autoResubscribe = */ chip::NullOptional);
+        }
+        case 43: {
+            LogStep(43,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
+                    "Warning Smoke Alarm Test Event");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0004 && SMOKECO.S.F00 && DGGEN.S.C00.Rsp"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey = mTestEventTriggerKey.HasValue()
+                ? mTestEventTriggerKey.Value()
+                : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                 16);
+            value.eventTrigger =
+                mTestEventTriggerWarningSmokeAlarm.HasValue() ? mTestEventTriggerWarningSmokeAlarm.Value() : 0xffffffff00000090ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 44: {
+            LogStep(44, "TH waits for a report of SmokeState attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0004 && SMOKECO.S.F00 && SMOKECO.S.A0001"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 45: {
+            LogStep(45,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
+                    "Manual Device Mute Test Event");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0004 && SMOKECO.S.F00 && DGGEN.S.C00.Rsp"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey = mTestEventTriggerKey.HasValue()
+                ? mTestEventTriggerKey.Value()
+                : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                 16);
+            value.eventTrigger =
+                mTestEventTriggerDeviceMuted.HasValue() ? mTestEventTriggerDeviceMuted.Value() : 0xffffffff0000009bULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 46: {
+            LogStep(46, "TH waits for a report of DeviceMuted attribute from DUT with a timeout of 120 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0004 && SMOKECO.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 47: {
+            LogStep(47, "TH reads AlarmMuted event from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0004 && SMOKECO.S.F00 && SMOKECO.S.E06"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            mTestSubStepCount = 1;
+            return ReadEvent(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Events::AlarmMuted::Id, false,
+                             chip::NullOptional);
+        }
+        case 48: {
+            LogStep(48,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
+                    "Manual Device Mute Test Event Clear");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0004 && SMOKECO.S.F00 && DGGEN.S.C00.Rsp"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey = mTestEventTriggerKey.HasValue()
+                ? mTestEventTriggerKey.Value()
+                : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                 16);
+            value.eventTrigger =
+                mTestEventTriggerDeviceMutedClear.HasValue() ? mTestEventTriggerDeviceMutedClear.Value() : 0xffffffff000000abULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 49: {
+            LogStep(49, "TH waits for a report of DeviceMuted attribute from DUT with a timeout of 120 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0004 && SMOKECO.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 50: {
+            LogStep(50, "TH reads MuteEnded event from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0004 && SMOKECO.S.F00 && SMOKECO.S.E07"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            mTestSubStepCount = 1;
+            return ReadEvent(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Events::MuteEnded::Id, false,
+                             chip::NullOptional);
+        }
+        case 51: {
+            LogStep(51,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
+                    "Critical Smoke Alarm Test Event");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0004 && SMOKECO.S.F00 && DGGEN.S.C00.Rsp"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey    = mTestEventTriggerKey.HasValue()
+                   ? mTestEventTriggerKey.Value()
+                   : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                    16);
+            value.eventTrigger = mTestEventTriggerCriticalSmokeAlarm.HasValue() ? mTestEventTriggerCriticalSmokeAlarm.Value()
+                                                                                : 0xffffffff0000009cULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 52: {
+            LogStep(52, "TH waits for a report of SmokeState attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0004 && SMOKECO.S.F00 && SMOKECO.S.A0001"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 53: {
+            LogStep(53,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
+                    "Manual Device Mute Test Event");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0004 && SMOKECO.S.F00 && DGGEN.S.C00.Rsp"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey = mTestEventTriggerKey.HasValue()
+                ? mTestEventTriggerKey.Value()
+                : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                 16);
+            value.eventTrigger =
+                mTestEventTriggerDeviceMuted.HasValue() ? mTestEventTriggerDeviceMuted.Value() : 0xffffffff0000009bULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 54: {
+            LogStep(54, "TH waits 60 Seconds");
+            VerifyOrDo(!ShouldSkip("!PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = 60000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 55: {
+            LogStep(55, "TH reads DeviceMuted attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0004"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::DeviceMuted::Id, true,
+                                 chip::NullOptional);
+        }
+        case 56: {
+            LogStep(56,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for Smoke "
+                    "Alarm Test Event Clear");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0004 && SMOKECO.S.F00 && DGGEN.S.C00.Rsp"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey = mTestEventTriggerKey.HasValue()
+                ? mTestEventTriggerKey.Value()
+                : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                 16);
+            value.eventTrigger =
+                mTestEventTriggerSmokeAlarmClear.HasValue() ? mTestEventTriggerSmokeAlarmClear.Value() : 0xffffffff000000a0ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 57: {
+            LogStep(57, "TH waits for a report of SmokeState attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0004 && SMOKECO.S.A0001 && SMOKECO.S.F00"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 58: {
+            LogStep(58, "TH reads FeatureMap attribute(CO Alarm) from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0004 && SMOKECO.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::FeatureMap::Id, true,
+                                 chip::NullOptional);
+        }
+        case 59: {
+            LogStep(59, "TH subscribes to COState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0004 && SMOKECO.S.F01 && SMOKECO.S.A0002"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return SubscribeAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::COState::Id, 3,
+                                      30, true, chip::NullOptional, chip::Optional<bool>(true),
+                                      /* autoResubscribe = */ chip::NullOptional);
+        }
+        case 60: {
+            LogStep(60,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
+                    "Warning CO Alarm Test Event");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0004 && SMOKECO.S.F01 && DGGEN.S.C00.Rsp"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey = mTestEventTriggerKey.HasValue()
+                ? mTestEventTriggerKey.Value()
+                : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                 16);
+            value.eventTrigger =
+                mTestEventTriggerWarningCoAlarm.HasValue() ? mTestEventTriggerWarningCoAlarm.Value() : 0xffffffff00000091ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 61: {
+            LogStep(61, "TH waits for a report of COState attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0004 && SMOKECO.S.F01 && SMOKECO.S.A0002"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 62: {
+            LogStep(62,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
+                    "Manual Device Mute Test Event");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0004 && SMOKECO.S.F01 && DGGEN.S.C00.Rsp"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey = mTestEventTriggerKey.HasValue()
+                ? mTestEventTriggerKey.Value()
+                : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                 16);
+            value.eventTrigger =
+                mTestEventTriggerDeviceMuted.HasValue() ? mTestEventTriggerDeviceMuted.Value() : 0xffffffff0000009bULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 63: {
+            LogStep(63, "TH waits for a report of DeviceMuted attribute from DUT with a timeout of 120 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0004 && SMOKECO.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 64: {
+            LogStep(64, "TH reads AlarmMuted event from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0004 && SMOKECO.S.F01 && SMOKECO.S.E06"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            mTestSubStepCount = 1;
+            return ReadEvent(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Events::AlarmMuted::Id, false,
+                             chip::NullOptional);
+        }
+        case 65: {
+            LogStep(65,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
+                    "Manual Device Mute Test Event Clear");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0004 && SMOKECO.S.F01 && DGGEN.S.C00.Rsp"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey = mTestEventTriggerKey.HasValue()
+                ? mTestEventTriggerKey.Value()
+                : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                 16);
+            value.eventTrigger =
+                mTestEventTriggerDeviceMutedClear.HasValue() ? mTestEventTriggerDeviceMutedClear.Value() : 0xffffffff000000abULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 66: {
+            LogStep(66, "TH waits for a report of DeviceMuted attribute from DUT with a timeout of 120 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0004 && SMOKECO.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 67: {
+            LogStep(67, "TH reads MuteEnded event from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0004 && SMOKECO.S.F01 && SMOKECO.S.E07"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            mTestSubStepCount = 1;
+            return ReadEvent(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Events::MuteEnded::Id, false,
+                             chip::NullOptional);
+        }
+        case 68: {
+            LogStep(68,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
+                    "Critical CO Alarm Test Event");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0004 && SMOKECO.S.F01 && DGGEN.S.C00.Rsp"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey = mTestEventTriggerKey.HasValue()
+                ? mTestEventTriggerKey.Value()
+                : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                 16);
+            value.eventTrigger =
+                mTestEventTriggerCriticalCoAlarm.HasValue() ? mTestEventTriggerCriticalCoAlarm.Value() : 0xffffffff0000009dULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 69: {
+            LogStep(69, "TH waits for a report of COState attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0004 && SMOKECO.S.F01 && SMOKECO.S.A0002"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 70: {
+            LogStep(70,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
+                    "Manual Device Mute Test Event");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0004 && SMOKECO.S.F01 && DGGEN.S.C00.Rsp"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey = mTestEventTriggerKey.HasValue()
+                ? mTestEventTriggerKey.Value()
+                : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                 16);
+            value.eventTrigger =
+                mTestEventTriggerDeviceMuted.HasValue() ? mTestEventTriggerDeviceMuted.Value() : 0xffffffff0000009bULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 71: {
+            LogStep(71, "TH waits 60 Seconds");
+            VerifyOrDo(!ShouldSkip("!PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = 60000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 72: {
+            LogStep(72, "TH reads DeviceMuted attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0004"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::DeviceMuted::Id, true,
+                                 chip::NullOptional);
+        }
+        case 73: {
+            LogStep(73,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for CO "
+                    "Alarm Test Event Clear");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0004 && SMOKECO.S.F01 && DGGEN.S.C00.Rsp"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey = mTestEventTriggerKey.HasValue()
+                ? mTestEventTriggerKey.Value()
+                : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                 16);
+            value.eventTrigger =
+                mTestEventTriggerCoAlarmClear.HasValue() ? mTestEventTriggerCoAlarmClear.Value() : 0xffffffff000000a1ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 74: {
+            LogStep(74, "TH waits for a report of COState attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0004 && SMOKECO.S.F01 && SMOKECO.S.A0002"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_SMCO_2_6Suite : public TestCommand
+{
+public:
+    Test_TC_SMCO_2_6Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_SMCO_2_6", 34, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+        AddArgument("TEST_EVENT_TRIGGER_KEY", &mTestEventTriggerKey);
+        AddArgument("TEST_EVENT_TRIGGER_WARNING_SMOKE_ALARM", 0, UINT64_MAX, &mTestEventTriggerWarningSmokeAlarm);
+        AddArgument("TEST_EVENT_TRIGGER_SMOKE_ALARM_CLEAR", 0, UINT64_MAX, &mTestEventTriggerSmokeAlarmClear);
+        AddArgument("TEST_EVENT_TRIGGER_WARNING_CO_ALARM", 0, UINT64_MAX, &mTestEventTriggerWarningCoAlarm);
+        AddArgument("TEST_EVENT_TRIGGER_CO_ALARM_CLEAR", 0, UINT64_MAX, &mTestEventTriggerCoAlarmClear);
+        AddArgument("TEST_EVENT_TRIGGER_WARNING_BATTERY_ALERT", 0, UINT64_MAX, &mTestEventTriggerWarningBatteryAlert);
+        AddArgument("TEST_EVENT_TRIGGER_BATTERY_ALERT_CLEAR", 0, UINT64_MAX, &mTestEventTriggerBatteryAlertClear);
+        AddArgument("TEST_EVENT_TRIGGER_INTERCONNECT_SMOKE_ALARM", 0, UINT64_MAX, &mTestEventTriggerInterconnectSmokeAlarm);
+        AddArgument("TEST_EVENT_TRIGGER_INTERCONNECT_SMOKE_ALARM_CLEAR", 0, UINT64_MAX,
+                    &mTestEventTriggerInterconnectSmokeAlarmClear);
+        AddArgument("TEST_EVENT_TRIGGER_INTERCONNECT_CO_ALARM", 0, UINT64_MAX, &mTestEventTriggerInterconnectCoAlarm);
+        AddArgument("TEST_EVENT_TRIGGER_INTERCONNECT_CO_ALARM_CLEAR", 0, UINT64_MAX, &mTestEventTriggerInterconnectCoAlarmClear);
+        AddArgument("HIEST_PRI_ALARM", 0, UINT8_MAX, &mHiestPriAlarm);
+    }
+
+    ~Test_TC_SMCO_2_6Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override { return chip::System::Clock::Seconds16(mTimeout.ValueOr(3090)); }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+    chip::Optional<chip::ByteSpan> mTestEventTriggerKey;
+    chip::Optional<uint64_t> mTestEventTriggerWarningSmokeAlarm;
+    chip::Optional<uint64_t> mTestEventTriggerSmokeAlarmClear;
+    chip::Optional<uint64_t> mTestEventTriggerWarningCoAlarm;
+    chip::Optional<uint64_t> mTestEventTriggerCoAlarmClear;
+    chip::Optional<uint64_t> mTestEventTriggerWarningBatteryAlert;
+    chip::Optional<uint64_t> mTestEventTriggerBatteryAlertClear;
+    chip::Optional<uint64_t> mTestEventTriggerInterconnectSmokeAlarm;
+    chip::Optional<uint64_t> mTestEventTriggerInterconnectSmokeAlarmClear;
+    chip::Optional<uint64_t> mTestEventTriggerInterconnectCoAlarm;
+    chip::Optional<uint64_t> mTestEventTriggerInterconnectCoAlarmClear;
+    chip::Optional<uint8_t> mHiestPriAlarm;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("expressedState", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("batteryAlert", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("interconnectSmokeAlarm", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("interconnectCOAlarm", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("COState", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("smokeState", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                bool value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("testEventTriggersEnabled", value, 1));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("batteryAlert", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
+            }
+            shouldContinue = true;
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
+            }
+            shouldContinue = true;
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("COState", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("smokeState", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("expressedState", value, mHiestPriAlarm.HasValue() ? mHiestPriAlarm.Value() : 1U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("smokeState", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("expressedState", value, mHiestPriAlarm.HasValue() ? mHiestPriAlarm.Value() : 1U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("COState", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("expressedState", value, mHiestPriAlarm.HasValue() ? mHiestPriAlarm.Value() : 1U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("interconnectCOAlarm", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("expressedState", value, mHiestPriAlarm.HasValue() ? mHiestPriAlarm.Value() : 1U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 28:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 29:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("interconnectSmokeAlarm", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 30:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("expressedState", value, mHiestPriAlarm.HasValue() ? mHiestPriAlarm.Value() : 1U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 31:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 32:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::AlarmStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("batteryAlert", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            shouldContinue = true;
+            break;
+        case 33:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("expressedState", value, 0U));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Commission DUT to TH");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH reads ExpressedState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpressedState::Id,
+                                 true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TH subscribes to BatteryAlert attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return SubscribeAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::BatteryAlert::Id,
+                                      3, 30, true, chip::NullOptional, chip::NullOptional,
+                                      /* autoResubscribe = */ chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "TH subscribes to InterconnectSmokeAlarm attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return SubscribeAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id,
+                                      SmokeCoAlarm::Attributes::InterconnectSmokeAlarm::Id, 3, 30, true, chip::NullOptional,
+                                      chip::Optional<bool>(true), /* autoResubscribe = */ chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "TH subscribes to InterconnectCOAlarm attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0009"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return SubscribeAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id,
+                                      SmokeCoAlarm::Attributes::InterconnectCOAlarm::Id, 3, 30, true, chip::NullOptional,
+                                      chip::Optional<bool>(true), /* autoResubscribe = */ chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "TH subscribes to COState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return SubscribeAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::COState::Id, 3,
+                                      30, true, chip::NullOptional, chip::Optional<bool>(true),
+                                      /* autoResubscribe = */ chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "TH subscribes to SmokeState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return SubscribeAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::SmokeState::Id, 3,
+                                      30, true, chip::NullOptional, chip::Optional<bool>(true),
+                                      /* autoResubscribe = */ chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "TH reads TestEventTriggersEnabled attribute from General Diagnostics Cluster");
+            VerifyOrDo(!ShouldSkip("DGGEN.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                                 GeneralDiagnostics::Attributes::TestEventTriggersEnabled::Id, true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
+                    "Warning Battery Alert Test Event");
+            VerifyOrDo(!ShouldSkip("DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey    = mTestEventTriggerKey.HasValue()
+                   ? mTestEventTriggerKey.Value()
+                   : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                    16);
+            value.eventTrigger = mTestEventTriggerWarningBatteryAlert.HasValue() ? mTestEventTriggerWarningBatteryAlert.Value()
+                                                                                 : 0xffffffff00000095ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 9: {
+            LogStep(9, "TH waits for a report of BatteryAlert attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 10: {
+            LogStep(10,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
+                    "Interconnect Smoke Alarm Test Event");
+            VerifyOrDo(!ShouldSkip("DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey    = mTestEventTriggerKey.HasValue()
+                   ? mTestEventTriggerKey.Value()
+                   : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                    16);
+            value.eventTrigger = mTestEventTriggerInterconnectSmokeAlarm.HasValue()
+                ? mTestEventTriggerInterconnectSmokeAlarm.Value()
+                : 0xffffffff00000092ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 11: {
+            LogStep(11, "TH waits for a report of InterconnectSmokeAlarm attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 12: {
+            LogStep(12,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
+                    "Interconnect CO Alarm Test Event");
+            VerifyOrDo(!ShouldSkip("DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey    = mTestEventTriggerKey.HasValue()
+                   ? mTestEventTriggerKey.Value()
+                   : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                    16);
+            value.eventTrigger = mTestEventTriggerInterconnectCoAlarm.HasValue() ? mTestEventTriggerInterconnectCoAlarm.Value()
+                                                                                 : 0xffffffff00000094ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 13: {
+            LogStep(13, "TH waits for a report of InterconnectCOAlarm attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0009"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 14: {
+            LogStep(14,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
+                    "Warning CO Alarm Test Event");
+            VerifyOrDo(!ShouldSkip("DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey = mTestEventTriggerKey.HasValue()
+                ? mTestEventTriggerKey.Value()
+                : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                 16);
+            value.eventTrigger =
+                mTestEventTriggerWarningCoAlarm.HasValue() ? mTestEventTriggerWarningCoAlarm.Value() : 0xffffffff00000091ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 15: {
+            LogStep(15, "TH waits for a report of COState attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 16: {
+            LogStep(16,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
+                    "Warning Smoke Alarm Test Event");
+            VerifyOrDo(!ShouldSkip("DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey = mTestEventTriggerKey.HasValue()
+                ? mTestEventTriggerKey.Value()
+                : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                 16);
+            value.eventTrigger =
+                mTestEventTriggerWarningSmokeAlarm.HasValue() ? mTestEventTriggerWarningSmokeAlarm.Value() : 0xffffffff00000090ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 17: {
+            LogStep(17, "TH waits for a report of SmokeState attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 18: {
+            LogStep(18, "TH reads ExpressedState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpressedState::Id,
+                                 true, chip::NullOptional);
+        }
+        case 19: {
+            LogStep(19,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for Smoke "
+                    "Alarm Test Event Clear");
+            VerifyOrDo(!ShouldSkip("DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey = mTestEventTriggerKey.HasValue()
+                ? mTestEventTriggerKey.Value()
+                : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                 16);
+            value.eventTrigger =
+                mTestEventTriggerSmokeAlarmClear.HasValue() ? mTestEventTriggerSmokeAlarmClear.Value() : 0xffffffff000000a0ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 20: {
+            LogStep(20, "TH waits for a report of SmokeState attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 21: {
+            LogStep(21, "TH reads ExpressedState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpressedState::Id,
+                                 true, chip::NullOptional);
+        }
+        case 22: {
+            LogStep(22,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for CO "
+                    "Alarm Test Event clear");
+            VerifyOrDo(!ShouldSkip("DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey = mTestEventTriggerKey.HasValue()
+                ? mTestEventTriggerKey.Value()
+                : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                 16);
+            value.eventTrigger =
+                mTestEventTriggerCoAlarmClear.HasValue() ? mTestEventTriggerCoAlarmClear.Value() : 0xffffffff000000a1ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 23: {
+            LogStep(23, "TH waits for a report of COState attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 24: {
+            LogStep(24, "TH reads ExpressedState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpressedState::Id,
+                                 true, chip::NullOptional);
+        }
+        case 25: {
+            LogStep(25,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
+                    "Interconnect CO Alarm Test Event Clear");
+            VerifyOrDo(!ShouldSkip("DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey    = mTestEventTriggerKey.HasValue()
+                   ? mTestEventTriggerKey.Value()
+                   : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                    16);
+            value.eventTrigger = mTestEventTriggerInterconnectCoAlarmClear.HasValue()
+                ? mTestEventTriggerInterconnectCoAlarmClear.Value()
+                : 0xffffffff000000a4ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 26: {
+            LogStep(26, "TH waits for a report of InterconnectCOAlarm attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0009"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 27: {
+            LogStep(27, "TH reads ExpressedState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpressedState::Id,
+                                 true, chip::NullOptional);
+        }
+        case 28: {
+            LogStep(28,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
+                    "Interconnect Smoke Alarm Test Event Clear");
+            VerifyOrDo(!ShouldSkip("DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey    = mTestEventTriggerKey.HasValue()
+                   ? mTestEventTriggerKey.Value()
+                   : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                    16);
+            value.eventTrigger = mTestEventTriggerInterconnectSmokeAlarmClear.HasValue()
+                ? mTestEventTriggerInterconnectSmokeAlarmClear.Value()
+                : 0xffffffff000000a2ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 29: {
+            LogStep(29, "TH waits for a report of InterconnectSmokeAlarm attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 30: {
+            LogStep(30, "TH reads ExpressedState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpressedState::Id,
+                                 true, chip::NullOptional);
+        }
+        case 31: {
+            LogStep(31,
+                    "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
+                    "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
+                    "Battery Alert Test Event Clear");
+            VerifyOrDo(!ShouldSkip("DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey = mTestEventTriggerKey.HasValue()
+                ? mTestEventTriggerKey.Value()
+                : chip::ByteSpan(chip::Uint8::from_const_char("\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff"),
+                                 16);
+            value.eventTrigger =
+                mTestEventTriggerBatteryAlertClear.HasValue() ? mTestEventTriggerBatteryAlertClear.Value() : 0xffffffff000000a5ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 32: {
+            LogStep(32, "TH waits for a report of BatteryAlert attribute from DUT with a timeout of 300 seconds");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitForReport();
+        }
+        case 33: {
+            LogStep(33, "TH reads ExpressedState attribute from DUT");
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), SmokeCoAlarm::Id, SmokeCoAlarm::Attributes::ExpressedState::Id,
+                                 true, chip::NullOptional);
         }
         }
         return CHIP_NO_ERROR;
@@ -135304,6 +139935,13 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_PSCFG_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_RH_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_RH_2_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_SMCO_1_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_SMCO_2_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_SMCO_2_2Suite>(credsIssuerConfig),
+        make_unique<Test_TC_SMCO_2_3Suite>(credsIssuerConfig),
+        make_unique<Test_TC_SMCO_2_4Suite>(credsIssuerConfig),
+        make_unique<Test_TC_SMCO_2_5Suite>(credsIssuerConfig),
+        make_unique<Test_TC_SMCO_2_6Suite>(credsIssuerConfig),
         make_unique<Test_TC_SWTCH_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_SWTCH_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_TMP_1_1Suite>(credsIssuerConfig),
