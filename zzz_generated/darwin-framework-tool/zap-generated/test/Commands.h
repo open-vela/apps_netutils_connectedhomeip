@@ -265,6 +265,7 @@ public:
         printf("TestCommissionerNodeId\n");
         printf("TestTimeSynchronization\n");
         printf("TestOperationalState\n");
+        printf("TestRVCOperationalState\n");
         printf("TestMultiAdmin\n");
         printf("Test_TC_DGSW_1_1\n");
         printf("TestSubscribe_OnOff\n");
@@ -142462,6 +142463,553 @@ private:
     }
 };
 
+class TestRVCOperationalState : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    TestRVCOperationalState()
+        : TestCommandBridge("TestRVCOperationalState")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~TestRVCOperationalState() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: TestRVCOperationalState\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: TestRVCOperationalState\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read Phase List\n");
+            err = TestReadPhaseList_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read current Phase\n");
+            err = TestReadCurrentPhase_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Read Countdown Time\n");
+            err = TestReadCountdownTime_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Read Operational State List\n");
+            err = TestReadOperationalStateList_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Read current Operational Error\n");
+            err = TestReadCurrentOperationalError_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Read current Operational State\n");
+            err = TestReadCurrentOperationalState_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Start Command\n");
+            err = TestStartCommand_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Read current Operational State\n");
+            err = TestReadCurrentOperationalState_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Pause Command\n");
+            err = TestPauseCommand_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Read current Operational State\n");
+            err = TestReadCurrentOperationalState_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Resume Command\n");
+            err = TestResumeCommand_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Read current Operational State\n");
+            err = TestReadCurrentOperationalState_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Stop Command\n");
+            err = TestStopCommand_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Read current Operational State\n");
+            err = TestReadCurrentOperationalState_14();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_COMMAND));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_COMMAND));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 15;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestReadPhaseList_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRVCOperationalState alloc] initWithDevice:device
+                                                                               endpointID:@(1)
+                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributePhaseListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read Phase List Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNull("PhaseList", actualValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadCurrentPhase_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRVCOperationalState alloc] initWithDevice:device
+                                                                               endpointID:@(1)
+                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentPhaseWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read current Phase Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNull("CurrentPhase", actualValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadCountdownTime_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRVCOperationalState alloc] initWithDevice:device
+                                                                               endpointID:@(1)
+                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCountdownTimeWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read Countdown Time Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNull("CountdownTime", actualValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadOperationalStateList_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRVCOperationalState alloc] initWithDevice:device
+                                                                               endpointID:@(1)
+                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeOperationalStateListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read Operational State List Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("OperationalStateList", [actualValue count], static_cast<uint32_t>(7)));
+                VerifyOrReturn(CheckValue("OperationalStateID",
+                    ((MTRRVCOperationalStateClusterOperationalStateStruct *) actualValue[0]).operationalStateID, 0U));
+                VerifyOrReturn(CheckValue("OperationalStateID",
+                    ((MTRRVCOperationalStateClusterOperationalStateStruct *) actualValue[1]).operationalStateID, 1U));
+                VerifyOrReturn(CheckValue("OperationalStateID",
+                    ((MTRRVCOperationalStateClusterOperationalStateStruct *) actualValue[2]).operationalStateID, 2U));
+                VerifyOrReturn(CheckValue("OperationalStateID",
+                    ((MTRRVCOperationalStateClusterOperationalStateStruct *) actualValue[3]).operationalStateID, 3U));
+                VerifyOrReturn(CheckValue("OperationalStateID",
+                    ((MTRRVCOperationalStateClusterOperationalStateStruct *) actualValue[4]).operationalStateID, 64U));
+                VerifyOrReturn(CheckValue("OperationalStateID",
+                    ((MTRRVCOperationalStateClusterOperationalStateStruct *) actualValue[5]).operationalStateID, 65U));
+                VerifyOrReturn(CheckValue("OperationalStateID",
+                    ((MTRRVCOperationalStateClusterOperationalStateStruct *) actualValue[6]).operationalStateID, 66U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadCurrentOperationalError_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRVCOperationalState alloc] initWithDevice:device
+                                                                               endpointID:@(1)
+                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeOperationalErrorWithCompletion:^(
+            MTRRVCOperationalStateClusterErrorStateStruct * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read current Operational Error Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(
+                    CheckValue("ErrorStateID", ((MTRRVCOperationalStateClusterErrorStateStruct *) actualValue).errorStateID, 0U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadCurrentOperationalState_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRVCOperationalState alloc] initWithDevice:device
+                                                                               endpointID:@(1)
+                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeOperationalStateWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read current Operational State Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("OperationalState", actualValue, 0U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestStartCommand_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRVCOperationalState alloc] initWithDevice:device
+                                                                               endpointID:@(1)
+                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster startWithCompletion:^(
+            MTRRVCOperationalStateClusterOperationalCommandResponseParams * _Nullable values, NSError * _Nullable err) {
+            NSLog(@"Start Command Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status",
+                err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                EMBER_ZCL_STATUS_UNSUPPORTED_COMMAND));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadCurrentOperationalState_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRVCOperationalState alloc] initWithDevice:device
+                                                                               endpointID:@(1)
+                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeOperationalStateWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read current Operational State Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("OperationalState", actualValue, 0U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestPauseCommand_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRVCOperationalState alloc] initWithDevice:device
+                                                                               endpointID:@(1)
+                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster pauseWithCompletion:^(
+            MTRRVCOperationalStateClusterOperationalCommandResponseParams * _Nullable values, NSError * _Nullable err) {
+            NSLog(@"Pause Command Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = values.commandResponseState;
+                VerifyOrReturn(
+                    CheckValue("ErrorStateID", ((MTRRVCOperationalStateClusterErrorStateStruct *) actualValue).errorStateID, 0U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadCurrentOperationalState_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRVCOperationalState alloc] initWithDevice:device
+                                                                               endpointID:@(1)
+                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeOperationalStateWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read current Operational State Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("OperationalState", actualValue, 2U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestResumeCommand_11()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRVCOperationalState alloc] initWithDevice:device
+                                                                               endpointID:@(1)
+                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster resumeWithCompletion:^(
+            MTRRVCOperationalStateClusterOperationalCommandResponseParams * _Nullable values, NSError * _Nullable err) {
+            NSLog(@"Resume Command Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = values.commandResponseState;
+                VerifyOrReturn(
+                    CheckValue("ErrorStateID", ((MTRRVCOperationalStateClusterErrorStateStruct *) actualValue).errorStateID, 0U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadCurrentOperationalState_12()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRVCOperationalState alloc] initWithDevice:device
+                                                                               endpointID:@(1)
+                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeOperationalStateWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read current Operational State Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("OperationalState", actualValue, 1U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestStopCommand_13()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRVCOperationalState alloc] initWithDevice:device
+                                                                               endpointID:@(1)
+                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster stopWithCompletion:^(
+            MTRRVCOperationalStateClusterOperationalCommandResponseParams * _Nullable values, NSError * _Nullable err) {
+            NSLog(@"Stop Command Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status",
+                err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                EMBER_ZCL_STATUS_UNSUPPORTED_COMMAND));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadCurrentOperationalState_14()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterRVCOperationalState alloc] initWithDevice:device
+                                                                               endpointID:@(1)
+                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeOperationalStateWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read current Operational State Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("OperationalState", actualValue, 1U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
 class TestMultiAdmin : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
@@ -173173,6 +173721,7 @@ void registerCommandsTests(Commands & commands)
         make_unique<TestCommissionerNodeId>(),
         make_unique<TestTimeSynchronization>(),
         make_unique<TestOperationalState>(),
+        make_unique<TestRVCOperationalState>(),
         make_unique<TestMultiAdmin>(),
         make_unique<Test_TC_DGSW_1_1>(),
         make_unique<TestSubscribe_OnOff>(),
