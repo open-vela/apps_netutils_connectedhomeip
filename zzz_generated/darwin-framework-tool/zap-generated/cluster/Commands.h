@@ -8853,6 +8853,7 @@ public:
 | * ServerList                                                        | 0x0001 |
 | * ClientList                                                        | 0x0002 |
 | * PartsList                                                         | 0x0003 |
+| * TagList                                                           | 0x0004 |
 | * GeneratedCommandList                                              | 0xFFF8 |
 | * AcceptedCommandList                                               | 0xFFF9 |
 | * EventList                                                         | 0xFFFA |
@@ -9136,6 +9137,76 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Descriptor.PartsList response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute TagList
+ */
+class ReadDescriptorTagList : public ReadAttribute {
+public:
+    ReadDescriptorTagList()
+        : ReadAttribute("tag-list")
+    {
+    }
+
+    ~ReadDescriptorTagList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000001D) ReadAttribute (0x00000004) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterDescriptor alloc] initWithDevice:device
+                                                                      endpointID:@(endpointId)
+                                                                           queue:callbackQueue];
+        [cluster readAttributeTagListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"Descriptor.TagList response %@", [value description]);
+            if (error != nil) {
+                LogNSError("Descriptor TagList read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeDescriptorTagList : public SubscribeAttribute {
+public:
+    SubscribeAttributeDescriptorTagList()
+        : SubscribeAttribute("tag-list")
+    {
+    }
+
+    ~SubscribeAttributeDescriptorTagList() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0x0000001D) ReportAttribute (0x00000004) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterDescriptor alloc] initWithDevice:device
+                                                                      endpointID:@(endpointId)
+                                                                           queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeTagListWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"Descriptor.TagList response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -133255,6 +133326,8 @@ void registerClusterDescriptor(Commands & commands)
               make_unique<SubscribeAttributeDescriptorClientList>(), //
               make_unique<ReadDescriptorPartsList>(), //
               make_unique<SubscribeAttributeDescriptorPartsList>(), //
+              make_unique<ReadDescriptorTagList>(), //
+              make_unique<SubscribeAttributeDescriptorTagList>(), //
               make_unique<ReadDescriptorGeneratedCommandList>(), //
               make_unique<SubscribeAttributeDescriptorGeneratedCommandList>(), //
               make_unique<ReadDescriptorAcceptedCommandList>(), //
