@@ -119,7 +119,7 @@ public:
         printf("Test_TC_FAN_2_5\n");
         printf("Test_TC_FAN_3_1\n");
         printf("Test_TC_FAN_3_2\n");
-        printf("Test_TC_FAN_3_4\n");
+        printf("Test_TC_FAN_3_6\n");
         printf("Test_TC_CGEN_1_1\n");
         printf("Test_TC_CGEN_2_1\n");
         printf("Test_TC_DGGEN_1_1\n");
@@ -37678,12 +37678,11 @@ private:
 class Test_TC_FAN_3_2Suite : public TestCommand
 {
 public:
-    Test_TC_FAN_3_2Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_FAN_3_2", 5, credsIssuerConfig)
+    Test_TC_FAN_3_2Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_FAN_3_2", 6, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("ConfigSpeedSetting", 0, UINT8_MAX, &mConfigSpeedSetting);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
@@ -37698,8 +37697,9 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint8_t> mConfigSpeedSetting;
     chip::Optional<uint16_t> mTimeout;
+
+    uint8_t rSpeedMax;
 
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
 
@@ -37719,28 +37719,34 @@ private:
             break;
         case 1:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                rSpeedMax = value;
+            }
             break;
         case 2:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
             break;
         case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 4:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("speedSetting", value));
-                VerifyOrReturn(CheckValue("speedSetting.Value()", value.Value(),
-                                          mConfigSpeedSetting.HasValue() ? mConfigSpeedSetting.Value() : 50U));
+                VerifyOrReturn(CheckValue("speedSetting.Value()", value.Value(), rSpeedMax));
             }
             break;
-        case 4:
+        case 5:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(
-                    CheckValue("speedCurrent", value, mConfigSpeedSetting.HasValue() ? mConfigSpeedSetting.Value() : 50U));
+                VerifyOrReturn(CheckValue("speedCurrent", value, rSpeedMax));
             }
             break;
         default:
@@ -37766,31 +37772,37 @@ private:
             return WaitForCommissionee(kIdentityAlpha, value);
         }
         case 1: {
-            LogStep(1, "Step 2: TH writes SpeedSetting attribute a valid value to DUT");
+            LogStep(1, "Step 2: TH reads from the DUT the SpeedMax attribute");
+            VerifyOrDo(!ShouldSkip("FAN.S.A0004"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FanControl::Id, FanControl::Attributes::SpeedMax::Id, true,
+                                 chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Step 3: TH writes TH writes to the DUT the a value less than or equal to the value read in step 2");
             VerifyOrDo(!ShouldSkip("FAN.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::DataModel::Nullable<uint8_t> value;
             value.SetNonNull();
-            value.Value() = mConfigSpeedSetting.HasValue() ? mConfigSpeedSetting.Value() : 50U;
+            value.Value() = rSpeedMax;
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), FanControl::Id, FanControl::Attributes::SpeedSetting::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 2: {
-            LogStep(2, "Wait 1000ms");
+        case 3: {
+            LogStep(3, "Wait 1000ms");
             VerifyOrDo(!ShouldSkip("FAN.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 1000UL;
             return WaitForMs(kIdentityAlpha, value);
         }
-        case 3: {
-            LogStep(3, "Step 3: TH reads from the DUT the the SpeedSetting attribute");
+        case 4: {
+            LogStep(4, "Step 4: TH reads from the DUT the the SpeedSetting attribute");
             VerifyOrDo(!ShouldSkip("FAN.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FanControl::Id, FanControl::Attributes::SpeedSetting::Id, true,
                                  chip::NullOptional);
         }
-        case 4: {
-            LogStep(4, "Step 4: TH reads from the DUT the the SpeedCurrent attribute");
+        case 5: {
+            LogStep(5, "Step 5: TH reads from the DUT the the SpeedCurrent attribute");
             VerifyOrDo(!ShouldSkip("FAN.S.A0006"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FanControl::Id, FanControl::Attributes::SpeedCurrent::Id, true,
                                  chip::NullOptional);
@@ -37800,19 +37812,18 @@ private:
     }
 };
 
-class Test_TC_FAN_3_4Suite : public TestCommand
+class Test_TC_FAN_3_6Suite : public TestCommand
 {
 public:
-    Test_TC_FAN_3_4Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_FAN_3_4", 4, credsIssuerConfig)
+    Test_TC_FAN_3_6Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_FAN_3_6", 7, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("ConfigWindSetting", 0, UINT8_MAX, &mConfigWindSetting);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
-    ~Test_TC_FAN_3_4Suite() {}
+    ~Test_TC_FAN_3_6Suite() {}
 
     chip::System::Clock::Timeout GetWaitDuration() const override
     {
@@ -37823,7 +37834,6 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint8_t> mConfigWindSetting;
     chip::Optional<uint16_t> mTimeout;
 
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
@@ -37852,9 +37862,24 @@ private:
         case 3:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::BitMask<chip::app::Clusters::FanControl::WindBitmap> value;
+                chip::app::Clusters::FanControl::AirflowDirectionEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("windSetting", value, mConfigWindSetting.HasValue() ? mConfigWindSetting.Value() : 1U));
+                VerifyOrReturn(CheckValue("airflowDirection", value, 0U));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::FanControl::AirflowDirectionEnum value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("airflowDirection", value, 1U));
             }
             break;
         default:
@@ -37880,27 +37905,49 @@ private:
             return WaitForCommissionee(kIdentityAlpha, value);
         }
         case 1: {
-            LogStep(1, "Step 2: TH writes WindSetting attribute a valid value to DUT");
-            VerifyOrDo(!ShouldSkip("FAN.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(1, "Step 2: TH writes a value of Forward to the DUT");
+            VerifyOrDo(!ShouldSkip("FAN.S.A000B"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::BitMask<chip::app::Clusters::FanControl::WindBitmap> value;
-            value = mConfigWindSetting.HasValue() ? mConfigWindSetting.Value()
-                                                  : static_cast<chip::BitMask<chip::app::Clusters::FanControl::WindBitmap>>(1U);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), FanControl::Id, FanControl::Attributes::WindSetting::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            chip::app::Clusters::FanControl::AirflowDirectionEnum value;
+            value = static_cast<chip::app::Clusters::FanControl::AirflowDirectionEnum>(0);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), FanControl::Id, FanControl::Attributes::AirflowDirection::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
         }
         case 2: {
             LogStep(2, "Wait 1000ms");
-            VerifyOrDo(!ShouldSkip("FAN.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("FAN.S.A000B"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 1000UL;
             return WaitForMs(kIdentityAlpha, value);
         }
         case 3: {
-            LogStep(3, "Step 3: TH reads from the DUT the the WindSetting attribute");
-            VerifyOrDo(!ShouldSkip("FAN.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FanControl::Id, FanControl::Attributes::WindSetting::Id, true,
+            LogStep(3, "Step 3: TH reads from the DUT the AirflowDirection attribute and check it is forwards");
+            VerifyOrDo(!ShouldSkip("FAN.S.A000B"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FanControl::Id, FanControl::Attributes::AirflowDirection::Id, true,
+                                 chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "Step 4: TH writes a value of Reverse to the DUT");
+            VerifyOrDo(!ShouldSkip("FAN.S.A000B"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::FanControl::AirflowDirectionEnum value;
+            value = static_cast<chip::app::Clusters::FanControl::AirflowDirectionEnum>(1);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), FanControl::Id, FanControl::Attributes::AirflowDirection::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "Wait 1000ms");
+            VerifyOrDo(!ShouldSkip("FAN.S.A000B"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = 1000UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 6: {
+            LogStep(6, "Step 5: TH reads from the DUT the AirflowDirection attribute and check it is reverse");
+            VerifyOrDo(!ShouldSkip("FAN.S.A000B"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FanControl::Id, FanControl::Attributes::AirflowDirection::Id, true,
                                  chip::NullOptional);
         }
         }
@@ -134885,7 +134932,7 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_FAN_2_5Suite>(credsIssuerConfig),
         make_unique<Test_TC_FAN_3_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_FAN_3_2Suite>(credsIssuerConfig),
-        make_unique<Test_TC_FAN_3_4Suite>(credsIssuerConfig),
+        make_unique<Test_TC_FAN_3_6Suite>(credsIssuerConfig),
         make_unique<Test_TC_CGEN_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_CGEN_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_DGGEN_1_1Suite>(credsIssuerConfig),

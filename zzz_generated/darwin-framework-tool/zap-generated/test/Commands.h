@@ -106,7 +106,7 @@ public:
         printf("Test_TC_FAN_2_5\n");
         printf("Test_TC_FAN_3_1\n");
         printf("Test_TC_FAN_3_2\n");
-        printf("Test_TC_FAN_3_4\n");
+        printf("Test_TC_FAN_3_6\n");
         printf("Test_TC_CGEN_1_1\n");
         printf("Test_TC_CGEN_2_1\n");
         printf("Test_TC_DGGEN_1_1\n");
@@ -50592,7 +50592,6 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("ConfigSpeedSetting", 0, UINT8_MAX, &mConfigSpeedSetting);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
@@ -50626,36 +50625,46 @@ public:
             err = TestStep1WaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
         case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : Step 2: TH writes SpeedSetting attribute a valid value to DUT\n");
-            if (ShouldSkip("FAN.S.A0005")) {
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Step 2: TH reads from the DUT the SpeedMax attribute\n");
+            if (ShouldSkip("FAN.S.A0004")) {
                 NextTest();
                 return;
             }
-            err = TestStep2ThWritesSpeedSettingAttributeAValidValueToDut_1();
+            err = TestStep2ThReadsFromTheDutTheSpeedMaxAttribute_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Wait 1000ms\n");
+            ChipLogProgress(chipTool,
+                " ***** Test Step 2 : Step 3: TH writes TH writes to the DUT the a value less than or equal to the value read in "
+                "step 2\n");
             if (ShouldSkip("FAN.S.A0005")) {
                 NextTest();
                 return;
             }
-            err = TestWait1000ms_2();
+            err = TestStep3ThWritesThWritesToTheDutTheAValueLessThanOrEqualToTheValueReadInStep2_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Step 3: TH reads from the DUT the the SpeedSetting attribute\n");
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Wait 1000ms\n");
             if (ShouldSkip("FAN.S.A0005")) {
                 NextTest();
                 return;
             }
-            err = TestStep3ThReadsFromTheDutTheTheSpeedSettingAttribute_3();
+            err = TestWait1000ms_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Step 4: TH reads from the DUT the the SpeedCurrent attribute\n");
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Step 4: TH reads from the DUT the the SpeedSetting attribute\n");
+            if (ShouldSkip("FAN.S.A0005")) {
+                NextTest();
+                return;
+            }
+            err = TestStep4ThReadsFromTheDutTheTheSpeedSettingAttribute_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Step 5: TH reads from the DUT the the SpeedCurrent attribute\n");
             if (ShouldSkip("FAN.S.A0006")) {
                 NextTest();
                 return;
             }
-            err = TestStep4ThReadsFromTheDutTheTheSpeedCurrentAttribute_4();
+            err = TestStep5ThReadsFromTheDutTheTheSpeedCurrentAttribute_5();
             break;
         }
 
@@ -50683,6 +50692,9 @@ public:
         case 4:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -50696,12 +50708,11 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 5;
+    const uint16_t mTestCount = 6;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint8_t> mConfigSpeedSetting;
     chip::Optional<uint16_t> mTimeout;
 
     CHIP_ERROR TestStep1WaitForTheCommissionedDeviceToBeRetrieved_0()
@@ -50711,55 +50722,22 @@ private:
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
         return WaitForCommissionee("alpha", value);
     }
+    NSNumber * _Nonnull rSpeedMax;
 
-    CHIP_ERROR TestStep2ThWritesSpeedSettingAttributeAValidValueToDut_1()
+    CHIP_ERROR TestStep2ThReadsFromTheDutTheSpeedMaxAttribute_1()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
         __auto_type * cluster = [[MTRBaseClusterFanControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        id speedSettingArgument;
-        speedSettingArgument = mConfigSpeedSetting.HasValue() ? [NSNumber numberWithUnsignedChar:mConfigSpeedSetting.Value()]
-                                                              : [NSNumber numberWithUnsignedChar:50U];
-        [cluster
-            writeAttributeSpeedSettingWithValue:speedSettingArgument
-                                     completion:^(NSError * _Nullable err) {
-                                         NSLog(@"Step 2: TH writes SpeedSetting attribute a valid value to DUT Error: %@", err);
-
-                                         VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                         NextTest();
-                                     }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestWait1000ms_2()
-    {
-
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 1000UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestStep3ThReadsFromTheDutTheTheSpeedSettingAttribute_3()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterFanControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeSpeedSettingWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 3: TH reads from the DUT the the SpeedSetting attribute Error: %@", err);
+        [cluster readAttributeSpeedMaxWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 2: TH reads from the DUT the SpeedMax attribute Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             {
-                id actualValue = value;
-                VerifyOrReturn(CheckValueNonNull("SpeedSetting", actualValue));
-                VerifyOrReturn(
-                    CheckValue("SpeedSetting", actualValue, mConfigSpeedSetting.HasValue() ? mConfigSpeedSetting.Value() : 50U));
+                rSpeedMax = value;
             }
 
             NextTest();
@@ -50768,7 +50746,66 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4ThReadsFromTheDutTheTheSpeedCurrentAttribute_4()
+    CHIP_ERROR TestStep3ThWritesThWritesToTheDutTheAValueLessThanOrEqualToTheValueReadInStep2_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFanControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id speedSettingArgument;
+        speedSettingArgument = [rSpeedMax copy];
+        [cluster writeAttributeSpeedSettingWithValue:speedSettingArgument
+                                          completion:^(NSError * _Nullable err) {
+                                              NSLog(@"Step 3: TH writes TH writes to the DUT the a value less than or equal to the "
+                                                    @"value read in step 2 Error: %@",
+                                                  err);
+
+                                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                              NextTest();
+                                          }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWait1000ms_3()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+        value.ms = 1000UL;
+        return WaitForMs("alpha", value);
+    }
+
+    CHIP_ERROR TestStep4ThReadsFromTheDutTheTheSpeedSettingAttribute_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFanControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeSpeedSettingWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 4: TH reads from the DUT the the SpeedSetting attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                if (rSpeedMax == nil) {
+                    VerifyOrReturn(CheckValueNull("SpeedSetting", actualValue));
+                } else {
+                    VerifyOrReturn(CheckValueNonNull("SpeedSetting", actualValue));
+                    VerifyOrReturn(CheckValue("SpeedSetting", actualValue, rSpeedMax));
+                }
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestStep5ThReadsFromTheDutTheTheSpeedCurrentAttribute_5()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -50776,14 +50813,13 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeSpeedCurrentWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 4: TH reads from the DUT the the SpeedCurrent attribute Error: %@", err);
+            NSLog(@"Step 5: TH reads from the DUT the the SpeedCurrent attribute Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             {
                 id actualValue = value;
-                VerifyOrReturn(
-                    CheckValue("SpeedCurrent", actualValue, mConfigSpeedSetting.HasValue() ? mConfigSpeedSetting.Value() : 50U));
+                VerifyOrReturn(CheckValue("SpeedCurrent", actualValue, rSpeedMax));
             }
 
             NextTest();
@@ -50793,22 +50829,21 @@ private:
     }
 };
 
-class Test_TC_FAN_3_4 : public TestCommandBridge {
+class Test_TC_FAN_3_6 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_FAN_3_4()
-        : TestCommandBridge("Test_TC_FAN_3_4")
+    Test_TC_FAN_3_6()
+        : TestCommandBridge("Test_TC_FAN_3_6")
         , mTestIndex(0)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("ConfigWindSetting", 0, UINT8_MAX, &mConfigWindSetting);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
 
-    ~Test_TC_FAN_3_4() {}
+    ~Test_TC_FAN_3_6() {}
 
     /////////// TestCommand Interface /////////
     void NextTest() override
@@ -50816,11 +50851,11 @@ public:
         CHIP_ERROR err = CHIP_NO_ERROR;
 
         if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_FAN_3_4\n");
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_FAN_3_6\n");
         }
 
         if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_FAN_3_4\n");
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_FAN_3_6\n");
             SetCommandExitStatus(CHIP_NO_ERROR);
             return;
         }
@@ -50837,28 +50872,54 @@ public:
             err = TestStep1WaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
         case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : Step 2: TH writes WindSetting attribute a valid value to DUT\n");
-            if (ShouldSkip("FAN.S.A0008")) {
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Step 2: TH writes a value of Forward to the DUT\n");
+            if (ShouldSkip("FAN.S.A000B")) {
                 NextTest();
                 return;
             }
-            err = TestStep2ThWritesWindSettingAttributeAValidValueToDut_1();
+            err = TestStep2ThWritesAValueOfForwardToTheDut_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Wait 1000ms\n");
-            if (ShouldSkip("FAN.S.A0008")) {
+            if (ShouldSkip("FAN.S.A000B")) {
                 NextTest();
                 return;
             }
             err = TestWait1000ms_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Step 3: TH reads from the DUT the the WindSetting attribute\n");
-            if (ShouldSkip("FAN.S.A0008")) {
+            ChipLogProgress(chipTool,
+                " ***** Test Step 3 : Step 3: TH reads from the DUT the AirflowDirection attribute and check it is forwards\n");
+            if (ShouldSkip("FAN.S.A000B")) {
                 NextTest();
                 return;
             }
-            err = TestStep3ThReadsFromTheDutTheTheWindSettingAttribute_3();
+            err = TestStep3ThReadsFromTheDutTheAirflowDirectionAttributeAndCheckItIsForwards_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Step 4: TH writes a value of Reverse to the DUT\n");
+            if (ShouldSkip("FAN.S.A000B")) {
+                NextTest();
+                return;
+            }
+            err = TestStep4ThWritesAValueOfReverseToTheDut_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Wait 1000ms\n");
+            if (ShouldSkip("FAN.S.A000B")) {
+                NextTest();
+                return;
+            }
+            err = TestWait1000ms_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 6 : Step 5: TH reads from the DUT the AirflowDirection attribute and check it is reverse\n");
+            if (ShouldSkip("FAN.S.A000B")) {
+                NextTest();
+                return;
+            }
+            err = TestStep5ThReadsFromTheDutTheAirflowDirectionAttributeAndCheckItIsReverse_6();
             break;
         }
 
@@ -50883,6 +50944,15 @@ public:
         case 3:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -50896,12 +50966,11 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 4;
+    const uint16_t mTestCount = 7;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint8_t> mConfigWindSetting;
     chip::Optional<uint16_t> mTimeout;
 
     CHIP_ERROR TestStep1WaitForTheCommissionedDeviceToBeRetrieved_0()
@@ -50912,24 +50981,23 @@ private:
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestStep2ThWritesWindSettingAttributeAValidValueToDut_1()
+    CHIP_ERROR TestStep2ThWritesAValueOfForwardToTheDut_1()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
         __auto_type * cluster = [[MTRBaseClusterFanControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        id windSettingArgument;
-        windSettingArgument = mConfigWindSetting.HasValue() ? [NSNumber numberWithUnsignedChar:mConfigWindSetting.Value()]
-                                                            : [NSNumber numberWithUnsignedChar:1U];
-        [cluster writeAttributeWindSettingWithValue:windSettingArgument
-                                         completion:^(NSError * _Nullable err) {
-                                             NSLog(@"Step 2: TH writes WindSetting attribute a valid value to DUT Error: %@", err);
+        id airflowDirectionArgument;
+        airflowDirectionArgument = [NSNumber numberWithUnsignedChar:0U];
+        [cluster writeAttributeAirflowDirectionWithValue:airflowDirectionArgument
+                                              completion:^(NSError * _Nullable err) {
+                                                  NSLog(@"Step 2: TH writes a value of Forward to the DUT Error: %@", err);
 
-                                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+                                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                                             NextTest();
-                                         }];
+                                                  NextTest();
+                                              }];
 
         return CHIP_NO_ERROR;
     }
@@ -50942,22 +51010,73 @@ private:
         return WaitForMs("alpha", value);
     }
 
-    CHIP_ERROR TestStep3ThReadsFromTheDutTheTheWindSettingAttribute_3()
+    CHIP_ERROR TestStep3ThReadsFromTheDutTheAirflowDirectionAttributeAndCheckItIsForwards_3()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
         __auto_type * cluster = [[MTRBaseClusterFanControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeWindSettingWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 3: TH reads from the DUT the the WindSetting attribute Error: %@", err);
+        [cluster readAttributeAirflowDirectionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 3: TH reads from the DUT the AirflowDirection attribute and check it is forwards Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             {
                 id actualValue = value;
-                VerifyOrReturn(
-                    CheckValue("WindSetting", actualValue, mConfigWindSetting.HasValue() ? mConfigWindSetting.Value() : 1U));
+                VerifyOrReturn(CheckValue("AirflowDirection", actualValue, 0U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestStep4ThWritesAValueOfReverseToTheDut_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFanControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id airflowDirectionArgument;
+        airflowDirectionArgument = [NSNumber numberWithUnsignedChar:1U];
+        [cluster writeAttributeAirflowDirectionWithValue:airflowDirectionArgument
+                                              completion:^(NSError * _Nullable err) {
+                                                  NSLog(@"Step 4: TH writes a value of Reverse to the DUT Error: %@", err);
+
+                                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                  NextTest();
+                                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWait1000ms_5()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+        value.ms = 1000UL;
+        return WaitForMs("alpha", value);
+    }
+
+    CHIP_ERROR TestStep5ThReadsFromTheDutTheAirflowDirectionAttributeAndCheckItIsReverse_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFanControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAirflowDirectionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 5: TH reads from the DUT the AirflowDirection attribute and check it is reverse Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("AirflowDirection", actualValue, 1U));
             }
 
             NextTest();
@@ -172895,7 +173014,7 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_FAN_2_5>(),
         make_unique<Test_TC_FAN_3_1>(),
         make_unique<Test_TC_FAN_3_2>(),
-        make_unique<Test_TC_FAN_3_4>(),
+        make_unique<Test_TC_FAN_3_6>(),
         make_unique<Test_TC_CGEN_1_1>(),
         make_unique<Test_TC_CGEN_2_1>(),
         make_unique<Test_TC_DGGEN_1_1>(),
