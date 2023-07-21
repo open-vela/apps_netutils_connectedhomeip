@@ -10054,6 +10054,49 @@ using chip::System::Clock::Timeout;
         });
 }
 
+- (void)readAttributeTagListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
+{
+    MTRReadParams * params = [[MTRReadParams alloc] init];
+    using TypeInfo = Descriptor::Attributes::TagList::TypeInfo;
+    return MTRReadAttribute<MTRDescriptorTagListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
+        params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+}
+
+- (void)subscribeAttributeTagListWithParams:(MTRSubscribeParams * _Nonnull)params
+                    subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                              reportHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
+{
+    using TypeInfo = Descriptor::Attributes::TagList::TypeInfo;
+    MTRSubscribeAttribute<MTRDescriptorTagListListAttributeCallbackSubscriptionBridge, NSArray, TypeInfo::DecodableType>(params,
+        subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
+        TypeInfo::GetAttributeId());
+}
+
++ (void)readAttributeTagListWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                         endpoint:(NSNumber *)endpoint
+                                            queue:(dispatch_queue_t)queue
+                                       completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
+{
+    auto * bridge = new MTRDescriptorTagListListAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(
+        clusterStateCacheContainer.baseDevice, ^(DescriptorTagListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+            if (clusterStateCacheContainer.cppClusterStateCache) {
+                chip::app::ConcreteAttributePath path;
+                using TypeInfo = Descriptor::Attributes::TagList::TypeInfo;
+                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+                path.mClusterId = TypeInfo::GetClusterId();
+                path.mAttributeId = TypeInfo::GetAttributeId();
+                TypeInfo::DecodableType value;
+                CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+                if (err == CHIP_NO_ERROR) {
+                    successCb(bridge, value);
+                }
+                return err;
+            }
+            return CHIP_ERROR_NOT_FOUND;
+        });
+}
+
 - (void)readAttributeGeneratedCommandListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
