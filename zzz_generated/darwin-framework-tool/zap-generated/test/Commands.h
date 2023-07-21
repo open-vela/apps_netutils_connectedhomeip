@@ -13573,8 +13573,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 8U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 12U));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 4U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 16U));
 
             NextTest();
         }];
@@ -71768,12 +71768,13 @@ public:
             err = TestPreconditionMediaContentInAPausedStateAtTheBeginningOfTheContent_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Step 1: Sends a Seek command\n");
+            ChipLogProgress(
+                chipTool, " ***** Test Step 2 : Step 1: TH sends a Seek command to the DUT with a Position value of 10000\n");
             if (ShouldSkip("MEDIAPLAYBACK.S.C0b.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestStep1SendsASeekCommand_2();
+            err = TestStep1ThSendsASeekCommandToTheDutWithAPositionValueOf10000_2();
             break;
         case 3:
             ChipLogProgress(
@@ -71785,12 +71786,12 @@ public:
             err = TestVerifyThatTheMediaHasMovedTo10SecondsFromTheStartingPoint_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Step 2: Reads the SampledPosition attribute\n");
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Step 2: TH reads the SampledPosition attribute from the DUT\n");
             if (ShouldSkip("MEDIAPLAYBACK.S.A0003 && MEDIAPLAYBACK.S.C0b.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestStep2ReadsTheSampledPositionAttribute_4();
+            err = TestStep2ThReadsTheSampledPositionAttributeFromTheDut_4();
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Step 3: TH reads the StartTime attribute from the DUT\n");
@@ -71825,13 +71826,14 @@ public:
             err = TestStep6ThReadsTheDurationAttributeFromTheDut_8();
             break;
         case 9:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 9 : Step 7: Sends a Seek command Position value beyond the furthest valid position\n");
+            ChipLogProgress(chipTool,
+                " ***** Test Step 9 : Step 7: TH sends a Seek command to the DUT with a Position value beyond the furthest valid "
+                "position (ex: beyond the duration of the media)\n");
             if (ShouldSkip("MEDIAPLAYBACK.S.C0b.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestStep7SendsASeekCommandPositionValueBeyondTheFurthestValidPosition_9();
+            err = TestStep7ThSendsASeekCommandToTheDutWithAPositionValueBeyondTheFurthestValidPositionExBeyondTheDurationOfTheMedia_9();
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : verify that the media has not moved.\n");
@@ -71937,7 +71939,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep1SendsASeekCommand_2()
+    CHIP_ERROR TestStep1ThSendsASeekCommandToTheDutWithAPositionValueOf10000_2()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -71948,7 +71950,7 @@ private:
         params.position = [NSNumber numberWithUnsignedLongLong:10000ULL];
         [cluster seekWithParams:params
                      completion:^(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable err) {
-                         NSLog(@"Step 1: Sends a Seek command Error: %@", err);
+                         NSLog(@"Step 1: TH sends a Seek command to the DUT with a Position value of 10000 Error: %@", err);
 
                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -71974,7 +71976,7 @@ private:
         return UserPrompt("alpha", value);
     }
 
-    CHIP_ERROR TestStep2ReadsTheSampledPositionAttribute_4()
+    CHIP_ERROR TestStep2ThReadsTheSampledPositionAttributeFromTheDut_4()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -71983,7 +71985,7 @@ private:
 
         [cluster readAttributeSampledPositionWithCompletion:^(
             MTRMediaPlaybackClusterPlaybackPositionStruct * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 2: Reads the SampledPosition attribute Error: %@", err);
+            NSLog(@"Step 2: TH reads the SampledPosition attribute from the DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -72042,7 +72044,7 @@ private:
         return UserPrompt("alpha", value);
     }
 
-    CHIP_ERROR TestStep7SendsASeekCommandPositionValueBeyondTheFurthestValidPosition_9()
+    CHIP_ERROR TestStep7ThSendsASeekCommandToTheDutWithAPositionValueBeyondTheFurthestValidPositionExBeyondTheDurationOfTheMedia_9()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -72054,7 +72056,9 @@ private:
                                                    : [NSNumber numberWithUnsignedLongLong:100000000ULL];
         [cluster seekWithParams:params
                      completion:^(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable err) {
-                         NSLog(@"Step 7: Sends a Seek command Position value beyond the furthest valid position Error: %@", err);
+                         NSLog(@"Step 7: TH sends a Seek command to the DUT with a Position value beyond the furthest valid "
+                               @"position (ex: beyond the duration of the media) Error: %@",
+                             err);
 
                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -76181,6 +76185,10 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Step 2: TH reads the ClusterRevision attribute from the DUT\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
             err = TestStep2ThReadsTheClusterRevisionAttributeFromTheDut_1();
             break;
         case 2:
@@ -76305,25 +76313,11 @@ private:
     CHIP_ERROR TestStep2ThReadsTheClusterRevisionAttributeFromTheDut_1()
     {
 
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterModeSelect alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 2: TH reads the ClusterRevision attribute from the DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
-            }
-
-            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestStep3aThReadsTheFeatureMapAttributeFromTheDut_2()
@@ -81249,12 +81243,12 @@ public:
             err = TestStep32TestHarnessClientReadsActiveBatChargeFaultsFromServerDut_31();
             break;
         case 32:
-            ChipLogProgress(chipTool, " ***** Test Step 32 : Test Harness Client reads EndpointList from Server DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 32 : Step 33: Test Harness Client reads EndpointList from Server DUT\n");
             if (ShouldSkip("PS.S.A001f")) {
                 NextTest();
                 return;
             }
-            err = TestTestHarnessClientReadsEndpointListFromServerDut_32();
+            err = TestStep33TestHarnessClientReadsEndpointListFromServerDut_32();
             break;
         }
 
@@ -82076,7 +82070,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestTestHarnessClientReadsEndpointListFromServerDut_32()
+    CHIP_ERROR TestStep33TestHarnessClientReadsEndpointListFromServerDut_32()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -82084,7 +82078,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeEndpointListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Test Harness Client reads EndpointList from Server DUT Error: %@", err);
+            NSLog(@"Step 33: Test Harness Client reads EndpointList from Server DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -85973,116 +85967,125 @@ public:
             err = TestStep1WaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
         case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : Step 2a: Write 0 to the OperationMode attribute to DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Step 2a: TH write 0 (Normal) to the OperationMode attribute to DUT.\n");
             if (ShouldSkip("PCC.S.A0020")) {
                 NextTest();
                 return;
             }
-            err = TestStep2aWrite0ToTheOperationModeAttributeToDut_1();
+            err = TestStep2aThWrite0NormalToTheOperationModeAttributeToDut_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Step 2b: Reads the attribute: EffectiveOperationMode\n");
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Step 2b: TH reads from the DUT the EffectiveOperationMode attribute\n");
             if (ShouldSkip("PCC.S.A0011")) {
                 NextTest();
                 return;
             }
-            err = TestStep2bReadsTheAttributeEffectiveOperationMode_2();
+            err = TestStep2bThReadsFromTheDutTheEffectiveOperationModeAttribute_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Step 3a: Write 0 to the ControlMode attribute to DUT\n");
+            ChipLogProgress(chipTool,
+                " ***** Test Step 3 : Step 3a: TH write 0 (ConstantSpeed) to the ControlMode attribute to DUT one at a time.\n");
             if (ShouldSkip("PCC.S.F03 && PCC.S.A0021")) {
                 NextTest();
                 return;
             }
-            err = TestStep3aWrite0ToTheControlModeAttributeToDut_3();
+            err = TestStep3aThWrite0ConstantSpeedToTheControlModeAttributeToDutOneAtATime_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Step 3b: Reads the attribute: EffectiveControlMode\n");
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Step 3b: TH reads from the DUT the EffectiveControlMode attribute.\n");
             if (ShouldSkip("PCC.S.F03 && PCC.S.A0012")) {
                 NextTest();
                 return;
             }
-            err = TestStep3bReadsTheAttributeEffectiveControlMode_4();
+            err = TestStep3bThReadsFromTheDutTheEffectiveControlModeAttribute_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Step 4a: Write 1 to the ControlMode attribute to DUT\n");
+            ChipLogProgress(chipTool,
+                " ***** Test Step 5 : Step 4a: TH write 1 (ConstantPressure) to the ControlMode attribute to DUT one at a time.\n");
             if (ShouldSkip("PCC.S.F00 && PCC.S.A0021")) {
                 NextTest();
                 return;
             }
-            err = TestStep4aWrite1ToTheControlModeAttributeToDut_5();
+            err = TestStep4aThWrite1ConstantPressureToTheControlModeAttributeToDutOneAtATime_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Step 4b: Reads the attribute: EffectiveControlMode\n");
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Step 4b: TH reads from the DUT the EffectiveControlMode attribute.\n");
             if (ShouldSkip("PCC.S.F00 && PCC.S.A0012")) {
                 NextTest();
                 return;
             }
-            err = TestStep4bReadsTheAttributeEffectiveControlMode_6();
+            err = TestStep4bThReadsFromTheDutTheEffectiveControlModeAttribute_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Step 5a: Write 2 to the ControlMode attribute to DUT\n");
+            ChipLogProgress(chipTool,
+                " ***** Test Step 7 : Step 5a: TH write 2 (ProportionalPressure) to the ControlMode attribute to DUT one at a "
+                "time.\n");
             if (ShouldSkip("PCC.S.F01 && PCC.S.A0021")) {
                 NextTest();
                 return;
             }
-            err = TestStep5aWrite2ToTheControlModeAttributeToDut_7();
+            err = TestStep5aThWrite2ProportionalPressureToTheControlModeAttributeToDutOneAtATime_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Step 5b: Reads the attribute: EffectiveControlMode\n");
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Step 5b: TH reads from the DUT the EffectiveControlMode attribute.\n");
             if (ShouldSkip("PCC.S.F01 && PCC.S.A0012")) {
                 NextTest();
                 return;
             }
-            err = TestStep5bReadsTheAttributeEffectiveControlMode_8();
+            err = TestStep5bThReadsFromTheDutTheEffectiveControlModeAttribute_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Step 6a: Write 3 to the ControlMode attribute to DUT\n");
+            ChipLogProgress(chipTool,
+                " ***** Test Step 9 : Step 6a: TH write 3 (ConstantFlow) to the ControlMode attribute to DUT one at a time.\n");
             if (ShouldSkip("PCC.S.F02 && PCC.S.A0021")) {
                 NextTest();
                 return;
             }
-            err = TestStep6aWrite3ToTheControlModeAttributeToDut_9();
+            err = TestStep6aThWrite3ConstantFlowToTheControlModeAttributeToDutOneAtATime_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Step 6b: Reads the attribute: EffectiveControlMode\n");
+            ChipLogProgress(
+                chipTool, " ***** Test Step 10 : Step 6b: TH reads from the DUT the _EffectiveControlMode attribute.\n");
             if (ShouldSkip("PCC.S.F02 && PCC.S.A0012")) {
                 NextTest();
                 return;
             }
-            err = TestStep6bReadsTheAttributeEffectiveControlMode_10();
+            err = TestStep6bThReadsFromTheDutTheEffectiveControlModeAttribute_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Step 7a: Write 5 to the ControlMode attribute to DUT\n");
+            ChipLogProgress(chipTool,
+                " ***** Test Step 11 : Step 7a: TH write 5 (ConstantTemperature) to the ControlMode attribute to DUT one at a "
+                "time.\n");
             if (ShouldSkip("PCC.S.F04 && PCC.S.A0021")) {
                 NextTest();
                 return;
             }
-            err = TestStep7aWrite5ToTheControlModeAttributeToDut_11();
+            err = TestStep7aThWrite5ConstantTemperatureToTheControlModeAttributeToDutOneAtATime_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : Step 7b: Reads the attribute: EffectiveControlMode\n");
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Step 7b: TH reads from the DUT the EffectiveControlMode attribute.\n");
             if (ShouldSkip("PCC.S.F04 && PCC.S.A0012")) {
                 NextTest();
                 return;
             }
-            err = TestStep7bReadsTheAttributeEffectiveControlMode_12();
+            err = TestStep7bThReadsFromTheDutTheEffectiveControlModeAttribute_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Step 8a: Write 7 to the ControlMode attribute to DUT\n");
+            ChipLogProgress(chipTool,
+                " ***** Test Step 13 : Step 8a: TH write 7 (Automatic) to the ControlMode attribute to DUT one at a time.\n");
             if (ShouldSkip("PCC.S.F05 && PCC.S.A0021")) {
                 NextTest();
                 return;
             }
-            err = TestStep8aWrite7ToTheControlModeAttributeToDut_13();
+            err = TestStep8aThWrite7AutomaticToTheControlModeAttributeToDutOneAtATime_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : Step 8b: Reads the attribute: EffectiveControlMode\n");
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Step 8b: TH reads from the DUT the EffectiveControlMode attribute.\n");
             if (ShouldSkip("PCC.S.F05 && PCC.S.A0012")) {
                 NextTest();
                 return;
             }
-            err = TestStep8bReadsTheAttributeEffectiveControlMode_14();
+            err = TestStep8bThReadsFromTheDutTheEffectiveControlModeAttribute_14();
             break;
         }
 
@@ -86168,7 +86171,7 @@ private:
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestStep2aWrite0ToTheOperationModeAttributeToDut_1()
+    CHIP_ERROR TestStep2aThWrite0NormalToTheOperationModeAttributeToDut_1()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -86179,19 +86182,21 @@ private:
 
         id operationModeArgument;
         operationModeArgument = [NSNumber numberWithUnsignedChar:0U];
-        [cluster writeAttributeOperationModeWithValue:operationModeArgument
-                                           completion:^(NSError * _Nullable err) {
-                                               NSLog(@"Step 2a: Write 0 to the OperationMode attribute to DUT Error: %@", err);
+        [cluster
+            writeAttributeOperationModeWithValue:operationModeArgument
+                                      completion:^(NSError * _Nullable err) {
+                                          NSLog(@"Step 2a: TH write 0 (Normal) to the OperationMode attribute to DUT. Error: %@",
+                                              err);
 
-                                               VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+                                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                                               NextTest();
-                                           }];
+                                          NextTest();
+                                      }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep2bReadsTheAttributeEffectiveOperationMode_2()
+    CHIP_ERROR TestStep2bThReadsFromTheDutTheEffectiveOperationModeAttribute_2()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -86201,7 +86206,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeEffectiveOperationModeWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 2b: Reads the attribute: EffectiveOperationMode Error: %@", err);
+            NSLog(@"Step 2b: TH reads from the DUT the EffectiveOperationMode attribute Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -86216,7 +86221,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep3aWrite0ToTheControlModeAttributeToDut_3()
+    CHIP_ERROR TestStep3aThWrite0ConstantSpeedToTheControlModeAttributeToDutOneAtATime_3()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -86229,7 +86234,9 @@ private:
         controlModeArgument = [NSNumber numberWithUnsignedChar:0U];
         [cluster writeAttributeControlModeWithValue:controlModeArgument
                                          completion:^(NSError * _Nullable err) {
-                                             NSLog(@"Step 3a: Write 0 to the ControlMode attribute to DUT Error: %@", err);
+                                             NSLog(@"Step 3a: TH write 0 (ConstantSpeed) to the ControlMode attribute to DUT one "
+                                                   @"at a time. Error: %@",
+                                                 err);
 
                                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -86239,7 +86246,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep3bReadsTheAttributeEffectiveControlMode_4()
+    CHIP_ERROR TestStep3bThReadsFromTheDutTheEffectiveControlModeAttribute_4()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -86249,7 +86256,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeEffectiveControlModeWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 3b: Reads the attribute: EffectiveControlMode Error: %@", err);
+            NSLog(@"Step 3b: TH reads from the DUT the EffectiveControlMode attribute. Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -86264,7 +86271,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4aWrite1ToTheControlModeAttributeToDut_5()
+    CHIP_ERROR TestStep4aThWrite1ConstantPressureToTheControlModeAttributeToDutOneAtATime_5()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -86277,7 +86284,9 @@ private:
         controlModeArgument = [NSNumber numberWithUnsignedChar:1U];
         [cluster writeAttributeControlModeWithValue:controlModeArgument
                                          completion:^(NSError * _Nullable err) {
-                                             NSLog(@"Step 4a: Write 1 to the ControlMode attribute to DUT Error: %@", err);
+                                             NSLog(@"Step 4a: TH write 1 (ConstantPressure) to the ControlMode attribute to DUT "
+                                                   @"one at a time. Error: %@",
+                                                 err);
 
                                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -86287,7 +86296,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4bReadsTheAttributeEffectiveControlMode_6()
+    CHIP_ERROR TestStep4bThReadsFromTheDutTheEffectiveControlModeAttribute_6()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -86297,7 +86306,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeEffectiveControlModeWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 4b: Reads the attribute: EffectiveControlMode Error: %@", err);
+            NSLog(@"Step 4b: TH reads from the DUT the EffectiveControlMode attribute. Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -86312,7 +86321,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep5aWrite2ToTheControlModeAttributeToDut_7()
+    CHIP_ERROR TestStep5aThWrite2ProportionalPressureToTheControlModeAttributeToDutOneAtATime_7()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -86325,7 +86334,9 @@ private:
         controlModeArgument = [NSNumber numberWithUnsignedChar:2U];
         [cluster writeAttributeControlModeWithValue:controlModeArgument
                                          completion:^(NSError * _Nullable err) {
-                                             NSLog(@"Step 5a: Write 2 to the ControlMode attribute to DUT Error: %@", err);
+                                             NSLog(@"Step 5a: TH write 2 (ProportionalPressure) to the ControlMode attribute to "
+                                                   @"DUT one at a time. Error: %@",
+                                                 err);
 
                                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -86335,7 +86346,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep5bReadsTheAttributeEffectiveControlMode_8()
+    CHIP_ERROR TestStep5bThReadsFromTheDutTheEffectiveControlModeAttribute_8()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -86345,7 +86356,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeEffectiveControlModeWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 5b: Reads the attribute: EffectiveControlMode Error: %@", err);
+            NSLog(@"Step 5b: TH reads from the DUT the EffectiveControlMode attribute. Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -86360,7 +86371,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep6aWrite3ToTheControlModeAttributeToDut_9()
+    CHIP_ERROR TestStep6aThWrite3ConstantFlowToTheControlModeAttributeToDutOneAtATime_9()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -86373,7 +86384,9 @@ private:
         controlModeArgument = [NSNumber numberWithUnsignedChar:3U];
         [cluster writeAttributeControlModeWithValue:controlModeArgument
                                          completion:^(NSError * _Nullable err) {
-                                             NSLog(@"Step 6a: Write 3 to the ControlMode attribute to DUT Error: %@", err);
+                                             NSLog(@"Step 6a: TH write 3 (ConstantFlow) to the ControlMode attribute to DUT one at "
+                                                   @"a time. Error: %@",
+                                                 err);
 
                                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -86383,7 +86396,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep6bReadsTheAttributeEffectiveControlMode_10()
+    CHIP_ERROR TestStep6bThReadsFromTheDutTheEffectiveControlModeAttribute_10()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -86393,7 +86406,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeEffectiveControlModeWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6b: Reads the attribute: EffectiveControlMode Error: %@", err);
+            NSLog(@"Step 6b: TH reads from the DUT the _EffectiveControlMode attribute. Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -86408,7 +86421,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep7aWrite5ToTheControlModeAttributeToDut_11()
+    CHIP_ERROR TestStep7aThWrite5ConstantTemperatureToTheControlModeAttributeToDutOneAtATime_11()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -86421,7 +86434,9 @@ private:
         controlModeArgument = [NSNumber numberWithUnsignedChar:5U];
         [cluster writeAttributeControlModeWithValue:controlModeArgument
                                          completion:^(NSError * _Nullable err) {
-                                             NSLog(@"Step 7a: Write 5 to the ControlMode attribute to DUT Error: %@", err);
+                                             NSLog(@"Step 7a: TH write 5 (ConstantTemperature) to the ControlMode attribute to DUT "
+                                                   @"one at a time. Error: %@",
+                                                 err);
 
                                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -86431,7 +86446,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep7bReadsTheAttributeEffectiveControlMode_12()
+    CHIP_ERROR TestStep7bThReadsFromTheDutTheEffectiveControlModeAttribute_12()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -86441,7 +86456,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeEffectiveControlModeWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 7b: Reads the attribute: EffectiveControlMode Error: %@", err);
+            NSLog(@"Step 7b: TH reads from the DUT the EffectiveControlMode attribute. Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -86456,7 +86471,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep8aWrite7ToTheControlModeAttributeToDut_13()
+    CHIP_ERROR TestStep8aThWrite7AutomaticToTheControlModeAttributeToDutOneAtATime_13()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -86469,7 +86484,9 @@ private:
         controlModeArgument = [NSNumber numberWithUnsignedChar:7U];
         [cluster writeAttributeControlModeWithValue:controlModeArgument
                                          completion:^(NSError * _Nullable err) {
-                                             NSLog(@"Step 8a: Write 7 to the ControlMode attribute to DUT Error: %@", err);
+                                             NSLog(@"Step 8a: TH write 7 (Automatic) to the ControlMode attribute to DUT one at a "
+                                                   @"time. Error: %@",
+                                                 err);
 
                                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -86479,7 +86496,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep8bReadsTheAttributeEffectiveControlMode_14()
+    CHIP_ERROR TestStep8bThReadsFromTheDutTheEffectiveControlModeAttribute_14()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -86489,7 +86506,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeEffectiveControlModeWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 8b: Reads the attribute: EffectiveControlMode Error: %@", err);
+            NSLog(@"Step 8b: TH reads from the DUT the EffectiveControlMode attribute. Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
