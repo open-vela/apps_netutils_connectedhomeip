@@ -166673,7 +166673,7 @@ public:
         case 5:
             ChipLogProgress(chipTool,
                 " ***** Test Step 5 : Step 1: TH writes the RequirePINforRemoteOperation attribute value as False on the DUT\n");
-            if (ShouldSkip("DRLK.S.F0c && DRLK.S.F07 && DRLK.S.F00 && DRLK.S.A0033.Write")) {
+            if (ShouldSkip("DRLK.S.F07 && DRLK.S.F00 && DRLK.S.A0033.Write")) {
                 NextTest();
                 return;
             }
@@ -166682,7 +166682,7 @@ public:
         case 6:
             ChipLogProgress(chipTool,
                 " ***** Test Step 6 : Step 1: TH writes the RequirePINforRemoteOperation attribute value as False on the DUT\n");
-            if (ShouldSkip("DRLK.S.F0c && DRLK.S.F07 && DRLK.S.F00 && !DRLK.S.A0033.Write")) {
+            if (ShouldSkip("DRLK.S.F07 && DRLK.S.F00 && !DRLK.S.A0033.Write")) {
                 NextTest();
                 return;
             }
@@ -166691,7 +166691,7 @@ public:
         case 7:
             ChipLogProgress(
                 chipTool, " ***** Test Step 7 : Step 2: TH reads the RequirePINforRemoteOperation attribute from the DUT\n");
-            if (ShouldSkip("DRLK.S.F0c && DRLK.S.F07 && DRLK.S.F00 && DRLK.S.A0033")) {
+            if (ShouldSkip("DRLK.S.F07 && DRLK.S.F00 && DRLK.S.A0033")) {
                 NextTest();
                 return;
             }
@@ -166699,7 +166699,7 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Step 3: TH sends Ubolt Door Command to the DUT without PINCode\n");
-            if (ShouldSkip("DRLK.S.C27.Rsp && DRLK.S.F0c")) {
+            if (ShouldSkip("DRLK.S.C27.Rsp")) {
                 NextTest();
                 return;
             }
@@ -166707,7 +166707,7 @@ public:
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Step 4: TH sends Ubolt Door Command to the DUT with PINCode\n");
-            if (ShouldSkip("DRLK.S.C27.Rsp && DRLK.S.F0c")) {
+            if (ShouldSkip("DRLK.S.C27.Rsp")) {
                 NextTest();
                 return;
             }
@@ -166716,7 +166716,7 @@ public:
         case 10:
             ChipLogProgress(chipTool,
                 " ***** Test Step 10 : Step 5: TH writes the RequirePINforRemoteOperation attribute value as true on the DUT\n");
-            if (ShouldSkip("DRLK.S.F0c && DRLK.S.F07 && DRLK.S.F00 && DRLK.S.A0033.Write")) {
+            if (ShouldSkip("DRLK.S.F07 && DRLK.S.F00 && DRLK.S.A0033.Write")) {
                 NextTest();
                 return;
             }
@@ -166725,7 +166725,7 @@ public:
         case 11:
             ChipLogProgress(chipTool,
                 " ***** Test Step 11 : Step 5: TH writes the RequirePINforRemoteOperation attribute value as true on the DUT\n");
-            if (ShouldSkip("DRLK.S.F0c && DRLK.S.F07 && DRLK.S.F00 && !DRLK.S.A0033.Write")) {
+            if (ShouldSkip("DRLK.S.F07 && DRLK.S.F00 && !DRLK.S.A0033.Write")) {
                 NextTest();
                 return;
             }
@@ -166734,7 +166734,7 @@ public:
         case 12:
             ChipLogProgress(
                 chipTool, " ***** Test Step 12 : Step 6: TH reads the RequirePINforRemoteOperation attribute from the DUT\n");
-            if (ShouldSkip("DRLK.S.F0c && DRLK.S.F07 && DRLK.S.F00 && DRLK.S.A0033")) {
+            if (ShouldSkip("DRLK.S.F07 && DRLK.S.F00 && DRLK.S.A0033")) {
                 NextTest();
                 return;
             }
@@ -166742,7 +166742,7 @@ public:
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : Step 7: TH sends Ubolt Door Command to the DUT with valid PINCode\n");
-            if (ShouldSkip("DRLK.S.C27.Rsp && DRLK.S.F0c")) {
+            if (ShouldSkip("DRLK.S.C27.Rsp")) {
                 NextTest();
                 return;
             }
@@ -166751,7 +166751,7 @@ public:
         case 14:
             ChipLogProgress(
                 chipTool, " ***** Test Step 14 : Step 8: TH sends Unbolt Door Command to the DUT with Invalid PINCode\n");
-            if (ShouldSkip("DRLK.S.C27.Rsp && DRLK.S.F0c")) {
+            if (ShouldSkip("DRLK.S.C27.Rsp")) {
                 NextTest();
                 return;
             }
@@ -166759,7 +166759,7 @@ public:
             break;
         case 15:
             ChipLogProgress(chipTool, " ***** Test Step 15 : Step 9: TH sends Unbolt Door Command to the DUT without PINCode\n");
-            if (ShouldSkip("DRLK.S.C27.Rsp && DRLK.S.F0c")) {
+            if (ShouldSkip("DRLK.S.C27.Rsp")) {
                 NextTest();
                 return;
             }
@@ -166768,7 +166768,7 @@ public:
         case 16:
             ChipLogProgress(
                 chipTool, " ***** Test Step 16 : Step 10: TH writes WrongCodeEntryLimit attribute value as 3 on the DUT\n");
-            if (ShouldSkip("DRLK.S.F0c && ( DRLK.S.F00 || DRLK.S.F01 ) && DRLK.S.A0030.Write")) {
+            if (ShouldSkip("( DRLK.S.F00 || DRLK.S.F01 ) && DRLK.S.A0030.Write")) {
                 NextTest();
                 return;
             }
@@ -166777,7 +166777,7 @@ public:
         case 17:
             ChipLogProgress(
                 chipTool, " ***** Test Step 17 : Step 10: TH writes WrongCodeEntryLimit attribute value as 3 on the DUT\n");
-            if (ShouldSkip("DRLK.S.F0c && ( DRLK.S.F00 || DRLK.S.F01 ) && !DRLK.S.A0030.Write")) {
+            if (ShouldSkip("( DRLK.S.F00 || DRLK.S.F01 ) && !DRLK.S.A0030.Write")) {
                 NextTest();
                 return;
             }
@@ -166787,7 +166787,7 @@ public:
             ChipLogProgress(chipTool,
                 " ***** Test Step 18 : Step 11: TH writes UserCodeTemporaryDisableTime attribute value as 15 Seconds on the DUT "
                 "and Verify that the DUT sends Success response\n");
-            if (ShouldSkip("DRLK.S.F0c && ( DRLK.S.F00 || DRLK.S.F01 ) && DRLK.S.A0031.Write")) {
+            if (ShouldSkip("( DRLK.S.F00 || DRLK.S.F01 ) && DRLK.S.A0031.Write")) {
                 NextTest();
                 return;
             }
@@ -166797,7 +166797,7 @@ public:
             ChipLogProgress(chipTool,
                 " ***** Test Step 19 : Step 11: TH writes UserCodeTemporaryDisableTime attribute value as 15 Seconds on the DUT "
                 "and Verify that the DUT sends Success response\n");
-            if (ShouldSkip("DRLK.S.F0c && ( DRLK.S.F00 || DRLK.S.F01 ) && !DRLK.S.A0031.Write")) {
+            if (ShouldSkip("( DRLK.S.F00 || DRLK.S.F01 ) && !DRLK.S.A0031.Write")) {
                 NextTest();
                 return;
             }
@@ -166841,7 +166841,7 @@ public:
             break;
         case 24:
             ChipLogProgress(chipTool, " ***** Test Step 24 : Step 13: TH reads UserCodedTemporaryDisableTime attribute from DUT\n");
-            if (ShouldSkip("DRLK.S.F0c && ( DRLK.S.F00 || DRLK.S.F01 ) && DRLK.S.A0031")) {
+            if (ShouldSkip("( DRLK.S.F00 || DRLK.S.F01 ) && DRLK.S.A0031")) {
                 NextTest();
                 return;
             }
@@ -166859,7 +166859,7 @@ public:
             break;
         case 26:
             ChipLogProgress(chipTool, " ***** Test Step 26 : Wait for UserCodeTemporaryDisableTime expires\n");
-            if (ShouldSkip("DRLK.S.F0c && ( DRLK.S.F00 || DRLK.S.F01 ) && DRLK.S.A0031")) {
+            if (ShouldSkip("( DRLK.S.F00 || DRLK.S.F01 ) && DRLK.S.A0031")) {
                 NextTest();
                 return;
             }
