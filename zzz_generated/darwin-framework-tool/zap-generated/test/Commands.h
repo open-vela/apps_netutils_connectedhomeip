@@ -142893,7 +142893,7 @@ private:
             {
                 id actualValue = values.commandResponseState;
                 VerifyOrReturn(
-                    CheckValue("ErrorStateID", ((MTRRVCOperationalStateClusterErrorStateStruct *) actualValue).errorStateID, 0U));
+                    CheckValue("ErrorStateID", ((MTRRVCOperationalStateClusterErrorStateStruct *) actualValue).errorStateID, 3U));
             }
 
             NextTest();
@@ -142918,7 +142918,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("OperationalState", actualValue, 2U));
+                VerifyOrReturn(CheckValue("OperationalState", actualValue, 0U));
             }
 
             NextTest();
@@ -142945,7 +142945,7 @@ private:
             {
                 id actualValue = values.commandResponseState;
                 VerifyOrReturn(
-                    CheckValue("ErrorStateID", ((MTRRVCOperationalStateClusterErrorStateStruct *) actualValue).errorStateID, 0U));
+                    CheckValue("ErrorStateID", ((MTRRVCOperationalStateClusterErrorStateStruct *) actualValue).errorStateID, 3U));
             }
 
             NextTest();
@@ -142970,7 +142970,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("OperationalState", actualValue, 1U));
+                VerifyOrReturn(CheckValue("OperationalState", actualValue, 0U));
             }
 
             NextTest();
@@ -143017,7 +143017,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("OperationalState", actualValue, 1U));
+                VerifyOrReturn(CheckValue("OperationalState", actualValue, 0U));
             }
 
             NextTest();

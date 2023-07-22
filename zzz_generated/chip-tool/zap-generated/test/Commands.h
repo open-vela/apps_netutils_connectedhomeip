@@ -96662,7 +96662,7 @@ private:
             {
                 chip::app::Clusters::RvcOperationalState::Commands::OperationalCommandResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("commandResponseState.errorStateID", value.commandResponseState.errorStateID, 0U));
+                VerifyOrReturn(CheckValue("commandResponseState.errorStateID", value.commandResponseState.errorStateID, 3U));
             }
             break;
         case 10:
@@ -96670,7 +96670,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("operationalState", value, 2U));
+                VerifyOrReturn(CheckValue("operationalState", value, 0U));
             }
             break;
         case 11:
@@ -96678,7 +96678,7 @@ private:
             {
                 chip::app::Clusters::RvcOperationalState::Commands::OperationalCommandResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("commandResponseState.errorStateID", value.commandResponseState.errorStateID, 0U));
+                VerifyOrReturn(CheckValue("commandResponseState.errorStateID", value.commandResponseState.errorStateID, 3U));
             }
             break;
         case 12:
@@ -96686,7 +96686,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("operationalState", value, 1U));
+                VerifyOrReturn(CheckValue("operationalState", value, 0U));
             }
             break;
         case 13:
@@ -96697,7 +96697,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("operationalState", value, 1U));
+                VerifyOrReturn(CheckValue("operationalState", value, 0U));
             }
             break;
         default:
