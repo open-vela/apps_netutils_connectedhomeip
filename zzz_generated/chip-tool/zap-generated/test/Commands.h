@@ -138030,7 +138030,7 @@ class Test_TC_RVCCLEANM_1_1Suite : public TestCommand
 {
 public:
     Test_TC_RVCCLEANM_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_RVCCLEANM_1_1", 0, credsIssuerConfig)
+        TestCommand("Test_TC_RVCCLEANM_1_1", 11, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -138063,6 +138063,120 @@ private:
 
         switch (mTestIndex - 1)
         {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("featureMap", value, 0UL));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65530UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65532UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 3UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("eventList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("acceptedCommandList", iter_0, 0));
+                    VerifyOrReturn(CheckValue("acceptedCommandList[0]", iter_0.GetValue(), 0UL));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acceptedCommandList", iter_0, 1));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("generatedCommandList", iter_0, 0));
+                    VerifyOrReturn(CheckValue("generatedCommandList[0]", iter_0.GetValue(), 1UL));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 1));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
         default:
             LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
         }
@@ -138077,7 +138191,77 @@ private:
     {
         using namespace chip::app::Clusters;
         switch (testIndex)
-        {}
+        {
+        case 0: {
+            LogStep(0, "Step 1: Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Step 2: TH reads the ClusterRevision attribute from the DUT");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RvcCleanMode::Id, RvcCleanMode::Attributes::ClusterRevision::Id,
+                                 true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TH reads the FeatureMap attribute from the DUT");
+            VerifyOrDo(!ShouldSkip(" !RVCCLEANM.S.F00 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RvcCleanMode::Id, RvcCleanMode::Attributes::FeatureMap::Id, true,
+                                 chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "Given RVCCLEANM.S.F00(DEPONOFF) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("RVCCLEANM.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RvcCleanMode::Id, RvcCleanMode::Attributes::FeatureMap::Id, true,
+                                 chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "Step 4a: TH reads the AttributeList attribute from the DUT");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RvcCleanMode::Id, RvcCleanMode::Attributes::AttributeList::Id,
+                                 true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "TH reads the optional attribute(StartUpMode) in AttributeList from the DUT");
+            VerifyOrDo(!ShouldSkip("RVCCLEANM.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RvcCleanMode::Id, RvcCleanMode::Attributes::AttributeList::Id,
+                                 true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6,
+                    "Read the Feature dependent(RVCCLEANM.S.F00 - DEPONOFF) and optional attribute(OnMode) is in AttributeList "
+                    "from the DUT");
+            VerifyOrDo(!ShouldSkip("RVCCLEANM.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RvcCleanMode::Id, RvcCleanMode::Attributes::AttributeList::Id,
+                                 true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7,
+                    "Read the Feature dependent(RVCCLEANM.S.F00 - DEPONOFF) and optional attribute(OnMode) is not in AttributeList "
+                    "from the DUT");
+            VerifyOrDo(!ShouldSkip(" !RVCCLEANM.S.F00 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RvcCleanMode::Id, RvcCleanMode::Attributes::AttributeList::Id,
+                                 true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "Read the global attribute: EventList from the DUT");
+            VerifyOrDo(!ShouldSkip("RVCCLEANM.S.Afffa"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RvcCleanMode::Id, RvcCleanMode::Attributes::EventList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "Read the global attribute AcceptedCommandList. Check if it contains id 0x0 (ChangeToMode)");
+            VerifyOrDo(!ShouldSkip("RVCCLEANM.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RvcCleanMode::Id,
+                                 RvcCleanMode::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "Read the global attribute: GeneratedCommandList. Check if it contains id 0x1 (ChangeToModeResponse)");
+            VerifyOrDo(!ShouldSkip("RVCCLEANM.S.C01.Tx"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RvcCleanMode::Id,
+                                 RvcCleanMode::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
+        }
+        }
         return CHIP_NO_ERROR;
     }
 };
@@ -138534,7 +138718,7 @@ class Test_TC_RVCRUNM_1_1Suite : public TestCommand
 {
 public:
     Test_TC_RVCRUNM_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_RVCRUNM_1_1", 0, credsIssuerConfig)
+        TestCommand("Test_TC_RVCRUNM_1_1", 11, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -138567,6 +138751,120 @@ private:
 
         switch (mTestIndex - 1)
         {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("featureMap", value, 0UL));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65530UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65532UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintExcludes("value", value, 3UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("eventList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("acceptedCommandList", iter_0, 0));
+                    VerifyOrReturn(CheckValue("acceptedCommandList[0]", iter_0.GetValue(), 0UL));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acceptedCommandList", iter_0, 1));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("generatedCommandList", iter_0, 0));
+                    VerifyOrReturn(CheckValue("generatedCommandList[0]", iter_0.GetValue(), 1UL));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 1));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
         default:
             LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
         }
@@ -138581,7 +138879,77 @@ private:
     {
         using namespace chip::app::Clusters;
         switch (testIndex)
-        {}
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH reads the ClusterRevision attribute from the DUT");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RvcRunMode::Id, RvcRunMode::Attributes::ClusterRevision::Id, true,
+                                 chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TH reads the FeatureMap attribute from the DUT");
+            VerifyOrDo(!ShouldSkip(" !RVCRUNM.S.F00 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RvcRunMode::Id, RvcRunMode::Attributes::FeatureMap::Id, true,
+                                 chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "Given RVCRUNM.S.F00(DEPONOFF) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("RVCRUNM.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RvcRunMode::Id, RvcRunMode::Attributes::FeatureMap::Id, true,
+                                 chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "TH reads the AttributeList attribute from the DUT");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RvcRunMode::Id, RvcRunMode::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "TH reads the optional attribute(StartUpMode) in AttributeList from the DUT");
+            VerifyOrDo(!ShouldSkip("RVCRUNM.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RvcRunMode::Id, RvcRunMode::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6,
+                    "Read the Feature dependent(RVCRUNM.S.F00 - DEPONOFF) and optional attribute(OnMode) is in AttributeList from "
+                    "the DUT");
+            VerifyOrDo(!ShouldSkip("RVCRUNM.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RvcRunMode::Id, RvcRunMode::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7,
+                    "Read the Feature dependent(RVCRUNM.S.F00 - DEPONOFF) and optional attribute(OnMode) is not in AttributeList "
+                    "from the DUT");
+            VerifyOrDo(!ShouldSkip(" !RVCRUNM.S.F00 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RvcRunMode::Id, RvcRunMode::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "Read the global attribute: EventList from the DUT");
+            VerifyOrDo(!ShouldSkip("RVCRUNM.S.Afffa"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RvcRunMode::Id, RvcRunMode::Attributes::EventList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "Read the global attribute AcceptedCommandList. Check if it contains id 0x0 (ChangeToMode)");
+            VerifyOrDo(!ShouldSkip("RVCRUNM.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RvcRunMode::Id, RvcRunMode::Attributes::AcceptedCommandList::Id,
+                                 true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "Read the global attribute: GeneratedCommandList. Check if it contains id 0x1 (ChangeToModeResponse)");
+            VerifyOrDo(!ShouldSkip("RVCRUNM.S.C01.Tx"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RvcRunMode::Id, RvcRunMode::Attributes::GeneratedCommandList::Id,
+                                 true, chip::NullOptional);
+        }
+        }
         return CHIP_NO_ERROR;
     }
 };
