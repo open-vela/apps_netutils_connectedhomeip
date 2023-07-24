@@ -299,6 +299,7 @@ public:
         printf("TestTimeSynchronization\n");
         printf("TestOperationalState\n");
         printf("TestRVCOperationalState\n");
+        printf("TestDishwasherAlarm\n");
         printf("TestMultiAdmin\n");
         printf("Test_TC_DGSW_1_1\n");
         printf("TestSubscribe_OnOff\n");
@@ -96813,6 +96814,348 @@ private:
     }
 };
 
+class TestDishwasherAlarmSuite : public TestCommand
+{
+public:
+    TestDishwasherAlarmSuite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("TestDishwasherAlarm", 22, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~TestDishwasherAlarmSuite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::BitMask<chip::app::Clusters::DishwasherAlarm::AlarmMap> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("supported", value, 47UL));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::BitMask<chip::app::Clusters::DishwasherAlarm::AlarmMap> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("mask", value, 47UL));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::BitMask<chip::app::Clusters::DishwasherAlarm::AlarmMap> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("latch", value, 3UL));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::BitMask<chip::app::Clusters::DishwasherAlarm::AlarmMap> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("state", value, 7UL));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::BitMask<chip::app::Clusters::DishwasherAlarm::AlarmMap> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("mask", value, 41UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::BitMask<chip::app::Clusters::DishwasherAlarm::AlarmMap> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("latch", value, 3UL));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::BitMask<chip::app::Clusters::DishwasherAlarm::AlarmMap> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("state", value, 1UL));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::BitMask<chip::app::Clusters::DishwasherAlarm::AlarmMap> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("mask", value, 41UL));
+            }
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::BitMask<chip::app::Clusters::DishwasherAlarm::AlarmMap> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("latch", value, 3UL));
+            }
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::BitMask<chip::app::Clusters::DishwasherAlarm::AlarmMap> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("state", value, 1UL));
+            }
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::BitMask<chip::app::Clusters::DishwasherAlarm::AlarmMap> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("mask", value, 41UL));
+            }
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::BitMask<chip::app::Clusters::DishwasherAlarm::AlarmMap> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("latch", value, 3UL));
+            }
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::BitMask<chip::app::Clusters::DishwasherAlarm::AlarmMap> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("state", value, 1UL));
+            }
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::BitMask<chip::app::Clusters::DishwasherAlarm::AlarmMap> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("mask", value, 41UL));
+            }
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::BitMask<chip::app::Clusters::DishwasherAlarm::AlarmMap> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("latch", value, 3UL));
+            }
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::BitMask<chip::app::Clusters::DishwasherAlarm::AlarmMap> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("state", value, 0UL));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Read Supported Attribute");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DishwasherAlarm::Id, DishwasherAlarm::Attributes::Supported::Id,
+                                 true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Read Mask Attribute");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DishwasherAlarm::Id, DishwasherAlarm::Attributes::Mask::Id, true,
+                                 chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "Read Latch Attribute");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DishwasherAlarm::Id, DishwasherAlarm::Attributes::Latch::Id, true,
+                                 chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "Read State Attribute");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DishwasherAlarm::Id, DishwasherAlarm::Attributes::State::Id, true,
+                                 chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "Read feature map Attribute");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DishwasherAlarm::Id, DishwasherAlarm::Attributes::FeatureMap::Id,
+                                 true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "Modify enabled alarms Command");
+            ListFreer listFreer;
+            chip::app::Clusters::DishwasherAlarm::Commands::ModifyEnabledAlarms::Type value;
+            value.mask = static_cast<chip::BitMask<chip::app::Clusters::DishwasherAlarm::AlarmMap>>(41UL);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), DishwasherAlarm::Id,
+                               DishwasherAlarm::Commands::ModifyEnabledAlarms::Id, value, chip::NullOptional
+
+            );
+        }
+        case 7: {
+            LogStep(7, "Read Mask Attribute");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DishwasherAlarm::Id, DishwasherAlarm::Attributes::Mask::Id, true,
+                                 chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "Read Latch Attribute");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DishwasherAlarm::Id, DishwasherAlarm::Attributes::Latch::Id, true,
+                                 chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "Read State Attribute");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DishwasherAlarm::Id, DishwasherAlarm::Attributes::State::Id, true,
+                                 chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "Modify enabled alarms Command");
+            ListFreer listFreer;
+            chip::app::Clusters::DishwasherAlarm::Commands::ModifyEnabledAlarms::Type value;
+            value.mask = static_cast<chip::BitMask<chip::app::Clusters::DishwasherAlarm::AlarmMap>>(105UL);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), DishwasherAlarm::Id,
+                               DishwasherAlarm::Commands::ModifyEnabledAlarms::Id, value, chip::NullOptional
+
+            );
+        }
+        case 11: {
+            LogStep(11, "Read Mask Attribute");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DishwasherAlarm::Id, DishwasherAlarm::Attributes::Mask::Id, true,
+                                 chip::NullOptional);
+        }
+        case 12: {
+            LogStep(12, "Read Latch Attribute");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DishwasherAlarm::Id, DishwasherAlarm::Attributes::Latch::Id, true,
+                                 chip::NullOptional);
+        }
+        case 13: {
+            LogStep(13, "Read State Attribute");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DishwasherAlarm::Id, DishwasherAlarm::Attributes::State::Id, true,
+                                 chip::NullOptional);
+        }
+        case 14: {
+            LogStep(14, "Modify enabled alarms Command");
+            ListFreer listFreer;
+            chip::app::Clusters::DishwasherAlarm::Commands::ModifyEnabledAlarms::Type value;
+            value.mask = static_cast<chip::BitMask<chip::app::Clusters::DishwasherAlarm::AlarmMap>>(59UL);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), DishwasherAlarm::Id,
+                               DishwasherAlarm::Commands::ModifyEnabledAlarms::Id, value, chip::NullOptional
+
+            );
+        }
+        case 15: {
+            LogStep(15, "Read Mask Attribute");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DishwasherAlarm::Id, DishwasherAlarm::Attributes::Mask::Id, true,
+                                 chip::NullOptional);
+        }
+        case 16: {
+            LogStep(16, "Read Latch Attribute");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DishwasherAlarm::Id, DishwasherAlarm::Attributes::Latch::Id, true,
+                                 chip::NullOptional);
+        }
+        case 17: {
+            LogStep(17, "Read State Attribute");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DishwasherAlarm::Id, DishwasherAlarm::Attributes::State::Id, true,
+                                 chip::NullOptional);
+        }
+        case 18: {
+            LogStep(18, "Reset Command");
+            ListFreer listFreer;
+            chip::app::Clusters::DishwasherAlarm::Commands::Reset::Type value;
+            value.alarms = static_cast<chip::BitMask<chip::app::Clusters::DishwasherAlarm::AlarmMap>>(1UL);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), DishwasherAlarm::Id, DishwasherAlarm::Commands::Reset::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 19: {
+            LogStep(19, "Read Mask Attribute");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DishwasherAlarm::Id, DishwasherAlarm::Attributes::Mask::Id, true,
+                                 chip::NullOptional);
+        }
+        case 20: {
+            LogStep(20, "Read Latch Attribute");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DishwasherAlarm::Id, DishwasherAlarm::Attributes::Latch::Id, true,
+                                 chip::NullOptional);
+        }
+        case 21: {
+            LogStep(21, "Read State Attribute");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DishwasherAlarm::Id, DishwasherAlarm::Attributes::State::Id, true,
+                                 chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
 class TestMultiAdminSuite : public TestCommand
 {
 public:
@@ -144580,6 +144923,7 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<TestTimeSynchronizationSuite>(credsIssuerConfig),
         make_unique<TestOperationalStateSuite>(credsIssuerConfig),
         make_unique<TestRVCOperationalStateSuite>(credsIssuerConfig),
+        make_unique<TestDishwasherAlarmSuite>(credsIssuerConfig),
         make_unique<TestMultiAdminSuite>(credsIssuerConfig),
         make_unique<Test_TC_DGSW_1_1Suite>(credsIssuerConfig),
         make_unique<TestSubscribe_OnOffSuite>(credsIssuerConfig),
