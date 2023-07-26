@@ -63224,6 +63224,10 @@ public:
         AddArgument("TEST_EVENT_TRIGGER_INTERCONNECT_CO_ALARM", 0, UINT64_MAX, &mTestEventTriggerInterconnectCoAlarm);
         AddArgument("TEST_EVENT_TRIGGER_INTERCONNECT_CO_ALARM_CLEAR", 0, UINT64_MAX, &mTestEventTriggerInterconnectCoAlarmClear);
         AddArgument("HIEST_PRI_ALARM", 0, UINT8_MAX, &mHiestPriAlarm);
+        AddArgument("HIEST_PRI_ALARM_2", 0, UINT8_MAX, &mHiestPriAlarm2);
+        AddArgument("HIEST_PRI_ALARM_3", 0, UINT8_MAX, &mHiestPriAlarm3);
+        AddArgument("HIEST_PRI_ALARM_4", 0, UINT8_MAX, &mHiestPriAlarm4);
+        AddArgument("HIEST_PRI_ALARM_5", 0, UINT8_MAX, &mHiestPriAlarm5);
     }
 
     ~Test_TC_SMCO_2_6Suite() {}
@@ -63247,6 +63251,10 @@ private:
     chip::Optional<uint64_t> mTestEventTriggerInterconnectCoAlarm;
     chip::Optional<uint64_t> mTestEventTriggerInterconnectCoAlarmClear;
     chip::Optional<uint8_t> mHiestPriAlarm;
+    chip::Optional<uint8_t> mHiestPriAlarm2;
+    chip::Optional<uint8_t> mHiestPriAlarm3;
+    chip::Optional<uint8_t> mHiestPriAlarm4;
+    chip::Optional<uint8_t> mHiestPriAlarm5;
 
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
 
@@ -63420,7 +63428,7 @@ private:
             {
                 chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("expressedState", value, mHiestPriAlarm.HasValue() ? mHiestPriAlarm.Value() : 1U));
+                VerifyOrReturn(CheckValue("expressedState", value, mHiestPriAlarm2.HasValue() ? mHiestPriAlarm2.Value() : 2U));
                 VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
             }
             break;
@@ -63442,7 +63450,7 @@ private:
             {
                 chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("expressedState", value, mHiestPriAlarm.HasValue() ? mHiestPriAlarm.Value() : 1U));
+                VerifyOrReturn(CheckValue("expressedState", value, mHiestPriAlarm3.HasValue() ? mHiestPriAlarm3.Value() : 7U));
                 VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
             }
             break;
@@ -63464,7 +63472,7 @@ private:
             {
                 chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("expressedState", value, mHiestPriAlarm.HasValue() ? mHiestPriAlarm.Value() : 1U));
+                VerifyOrReturn(CheckValue("expressedState", value, mHiestPriAlarm4.HasValue() ? mHiestPriAlarm4.Value() : 7U));
                 VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
             }
             break;
@@ -63486,7 +63494,7 @@ private:
             {
                 chip::app::Clusters::SmokeCoAlarm::ExpressedStateEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("expressedState", value, mHiestPriAlarm.HasValue() ? mHiestPriAlarm.Value() : 1U));
+                VerifyOrReturn(CheckValue("expressedState", value, mHiestPriAlarm5.HasValue() ? mHiestPriAlarm5.Value() : 3U));
                 VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
             }
             break;
