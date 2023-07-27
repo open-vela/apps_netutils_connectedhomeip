@@ -209,13 +209,13 @@ public:
         printf("Test_TC_PSCFG_2_1\n");
         printf("Test_TC_RH_1_1\n");
         printf("Test_TC_RH_2_1\n");
-        printf("Test_TC_SMCO_1_1\n");
-        printf("Test_TC_SMCO_2_1\n");
-        printf("Test_TC_SMCO_2_2\n");
-        printf("Test_TC_SMCO_2_3\n");
-        printf("Test_TC_SMCO_2_4\n");
-        printf("Test_TC_SMCO_2_5\n");
-        printf("Test_TC_SMCO_2_6\n");
+        printf("Test_TC_SMOKECO_1_1\n");
+        printf("Test_TC_SMOKECO_2_1\n");
+        printf("Test_TC_SMOKECO_2_2\n");
+        printf("Test_TC_SMOKECO_2_3\n");
+        printf("Test_TC_SMOKECO_2_4\n");
+        printf("Test_TC_SMOKECO_2_5\n");
+        printf("Test_TC_SMOKECO_2_6\n");
         printf("Test_TC_SWTCH_1_1\n");
         printf("Test_TC_SWTCH_2_1\n");
         printf("Test_TC_TMP_1_1\n");
@@ -59243,10 +59243,11 @@ private:
     }
 };
 
-class Test_TC_SMCO_1_1Suite : public TestCommand
+class Test_TC_SMOKECO_1_1Suite : public TestCommand
 {
 public:
-    Test_TC_SMCO_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_SMCO_1_1", 25, credsIssuerConfig)
+    Test_TC_SMOKECO_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_SMOKECO_1_1", 25, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -59254,7 +59255,7 @@ public:
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
-    ~Test_TC_SMCO_1_1Suite() {}
+    ~Test_TC_SMOKECO_1_1Suite() {}
 
     chip::System::Clock::Timeout GetWaitDuration() const override
     {
@@ -59680,10 +59681,11 @@ private:
     }
 };
 
-class Test_TC_SMCO_2_1Suite : public TestCommand
+class Test_TC_SMOKECO_2_1Suite : public TestCommand
 {
 public:
-    Test_TC_SMCO_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_SMCO_2_1", 14, credsIssuerConfig)
+    Test_TC_SMOKECO_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_SMOKECO_2_1", 14, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -59691,7 +59693,7 @@ public:
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
-    ~Test_TC_SMCO_2_1Suite() {}
+    ~Test_TC_SMOKECO_2_1Suite() {}
 
     chip::System::Clock::Timeout GetWaitDuration() const override
     {
@@ -59949,10 +59951,11 @@ private:
     }
 };
 
-class Test_TC_SMCO_2_2Suite : public TestCommand
+class Test_TC_SMOKECO_2_2Suite : public TestCommand
 {
 public:
-    Test_TC_SMCO_2_2Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_SMCO_2_2", 20, credsIssuerConfig)
+    Test_TC_SMOKECO_2_2Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_SMOKECO_2_2", 20, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -59965,7 +59968,7 @@ public:
         AddArgument("EVENT_NUMBER", 0, UINT64_MAX, &mEventNumber);
     }
 
-    ~Test_TC_SMCO_2_2Suite() {}
+    ~Test_TC_SMOKECO_2_2Suite() {}
 
     chip::System::Clock::Timeout GetWaitDuration() const override { return chip::System::Clock::Seconds16(mTimeout.ValueOr(990)); }
 
@@ -60352,10 +60355,11 @@ private:
     }
 };
 
-class Test_TC_SMCO_2_3Suite : public TestCommand
+class Test_TC_SMOKECO_2_3Suite : public TestCommand
 {
 public:
-    Test_TC_SMCO_2_3Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_SMCO_2_3", 20, credsIssuerConfig)
+    Test_TC_SMOKECO_2_3Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_SMOKECO_2_3", 20, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -60368,7 +60372,7 @@ public:
         AddArgument("EVENT_NUMBER", 0, UINT64_MAX, &mEventNumber);
     }
 
-    ~Test_TC_SMCO_2_3Suite() {}
+    ~Test_TC_SMOKECO_2_3Suite() {}
 
     chip::System::Clock::Timeout GetWaitDuration() const override { return chip::System::Clock::Seconds16(mTimeout.ValueOr(990)); }
 
@@ -60754,10 +60758,11 @@ private:
     }
 };
 
-class Test_TC_SMCO_2_4Suite : public TestCommand
+class Test_TC_SMOKECO_2_4Suite : public TestCommand
 {
 public:
-    Test_TC_SMCO_2_4Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_SMCO_2_4", 50, credsIssuerConfig)
+    Test_TC_SMOKECO_2_4Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_SMOKECO_2_4", 50, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -60774,7 +60779,7 @@ public:
         AddArgument("EVENT_NUMBER", 0, UINT64_MAX, &mEventNumber);
     }
 
-    ~Test_TC_SMCO_2_4Suite() {}
+    ~Test_TC_SMOKECO_2_4Suite() {}
 
     chip::System::Clock::Timeout GetWaitDuration() const override { return chip::System::Clock::Seconds16(mTimeout.ValueOr(2910)); }
 
@@ -61713,10 +61718,11 @@ private:
     }
 };
 
-class Test_TC_SMCO_2_5Suite : public TestCommand
+class Test_TC_SMOKECO_2_5Suite : public TestCommand
 {
 public:
-    Test_TC_SMCO_2_5Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_SMCO_2_5", 75, credsIssuerConfig)
+    Test_TC_SMOKECO_2_5Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_SMOKECO_2_5", 75, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -61745,7 +61751,7 @@ public:
         AddArgument("EVENT_NUMBER", 0, UINT64_MAX, &mEventNumber);
     }
 
-    ~Test_TC_SMCO_2_5Suite() {}
+    ~Test_TC_SMOKECO_2_5Suite() {}
 
     chip::System::Clock::Timeout GetWaitDuration() const override { return chip::System::Clock::Seconds16(mTimeout.ValueOr(6090)); }
 
@@ -63204,10 +63210,11 @@ private:
     }
 };
 
-class Test_TC_SMCO_2_6Suite : public TestCommand
+class Test_TC_SMOKECO_2_6Suite : public TestCommand
 {
 public:
-    Test_TC_SMCO_2_6Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_SMCO_2_6", 34, credsIssuerConfig)
+    Test_TC_SMOKECO_2_6Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_SMOKECO_2_6", 34, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -63232,7 +63239,7 @@ public:
         AddArgument("HIEST_PRI_ALARM_5", 0, UINT8_MAX, &mHiestPriAlarm5);
     }
 
-    ~Test_TC_SMCO_2_6Suite() {}
+    ~Test_TC_SMOKECO_2_6Suite() {}
 
     chip::System::Clock::Timeout GetWaitDuration() const override { return chip::System::Clock::Seconds16(mTimeout.ValueOr(3090)); }
 
@@ -63620,7 +63627,7 @@ private:
                     "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
                     "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
                     "Interconnect Smoke Alarm Test Event");
-            VerifyOrDo(!ShouldSkip("DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0008 && DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
             value.enableKey    = mTestEventTriggerKey.HasValue()
@@ -63645,7 +63652,7 @@ private:
                     "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
                     "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
                     "Interconnect CO Alarm Test Event");
-            VerifyOrDo(!ShouldSkip("DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0009 && DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
             value.enableKey    = mTestEventTriggerKey.HasValue()
@@ -63783,7 +63790,7 @@ private:
                     "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
                     "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
                     "Interconnect CO Alarm Test Event Clear");
-            VerifyOrDo(!ShouldSkip("DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0009 && DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
             value.enableKey    = mTestEventTriggerKey.HasValue()
@@ -63814,7 +63821,7 @@ private:
                     "TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with EnableKey field set to "
                     "PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for "
                     "Interconnect Smoke Alarm Test Event Clear");
-            VerifyOrDo(!ShouldSkip("DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("SMOKECO.S.A0008 && DGGEN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
             value.enableKey    = mTestEventTriggerKey.HasValue()
@@ -145073,13 +145080,13 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_PSCFG_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_RH_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_RH_2_1Suite>(credsIssuerConfig),
-        make_unique<Test_TC_SMCO_1_1Suite>(credsIssuerConfig),
-        make_unique<Test_TC_SMCO_2_1Suite>(credsIssuerConfig),
-        make_unique<Test_TC_SMCO_2_2Suite>(credsIssuerConfig),
-        make_unique<Test_TC_SMCO_2_3Suite>(credsIssuerConfig),
-        make_unique<Test_TC_SMCO_2_4Suite>(credsIssuerConfig),
-        make_unique<Test_TC_SMCO_2_5Suite>(credsIssuerConfig),
-        make_unique<Test_TC_SMCO_2_6Suite>(credsIssuerConfig),
+        make_unique<Test_TC_SMOKECO_1_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_SMOKECO_2_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_SMOKECO_2_2Suite>(credsIssuerConfig),
+        make_unique<Test_TC_SMOKECO_2_3Suite>(credsIssuerConfig),
+        make_unique<Test_TC_SMOKECO_2_4Suite>(credsIssuerConfig),
+        make_unique<Test_TC_SMOKECO_2_5Suite>(credsIssuerConfig),
+        make_unique<Test_TC_SMOKECO_2_6Suite>(credsIssuerConfig),
         make_unique<Test_TC_SWTCH_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_SWTCH_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_TMP_1_1Suite>(credsIssuerConfig),
