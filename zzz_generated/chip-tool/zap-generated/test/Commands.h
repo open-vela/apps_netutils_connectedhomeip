@@ -322,6 +322,8 @@ public:
         printf("TestGroupKeyManagementCluster\n");
         printf("Test_TC_G_1_1\n");
         printf("Test_TC_G_2_1\n");
+        printf("TestActivatedCarbonFilterMonitoring\n");
+        printf("TestHepaFilterMonitoring\n");
         printf("Test_TC_ACFREMON_1_1\n");
         printf("Test_TC_ACFREMON_2_1\n");
         printf("Test_TC_HEPAFREMON_1_1\n");
@@ -113646,6 +113648,236 @@ private:
     }
 };
 
+class TestActivatedCarbonFilterMonitoringSuite : public TestCommand
+{
+public:
+    TestActivatedCarbonFilterMonitoringSuite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("TestActivatedCarbonFilterMonitoring", 2, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~TestActivatedCarbonFilterMonitoringSuite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::ActivatedCarbonFilterMonitoring::Structs::ReplacementProductStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("replacementProductList", iter_0, 0));
+                    VerifyOrReturn(
+                        CheckValue("replacementProductList[0].productIdentifierType", iter_0.GetValue().productIdentifierType, 0U));
+                    VerifyOrReturn(CheckValueAsString("replacementProductList[0].productIdentifierValue",
+                                                      iter_0.GetValue().productIdentifierValue,
+                                                      chip::CharSpan("111112222233", 12)));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("replacementProductList", iter_0, 1));
+                    VerifyOrReturn(
+                        CheckValue("replacementProductList[1].productIdentifierType", iter_0.GetValue().productIdentifierType, 1U));
+                    VerifyOrReturn(CheckValueAsString("replacementProductList[1].productIdentifierValue",
+                                                      iter_0.GetValue().productIdentifierValue, chip::CharSpan("gtin8xxx", 8)));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("replacementProductList", iter_0, 2));
+                    VerifyOrReturn(
+                        CheckValue("replacementProductList[2].productIdentifierType", iter_0.GetValue().productIdentifierType, 2U));
+                    VerifyOrReturn(CheckValueAsString("replacementProductList[2].productIdentifierValue",
+                                                      iter_0.GetValue().productIdentifierValue,
+                                                      chip::CharSpan("4444455555666", 13)));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("replacementProductList", iter_0, 3));
+                    VerifyOrReturn(
+                        CheckValue("replacementProductList[3].productIdentifierType", iter_0.GetValue().productIdentifierType, 3U));
+                    VerifyOrReturn(CheckValueAsString("replacementProductList[3].productIdentifierValue",
+                                                      iter_0.GetValue().productIdentifierValue,
+                                                      chip::CharSpan("gtin14xxxxxxxx", 14)));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("replacementProductList", iter_0, 4));
+                    VerifyOrReturn(
+                        CheckValue("replacementProductList[4].productIdentifierType", iter_0.GetValue().productIdentifierType, 4U));
+                    VerifyOrReturn(CheckValueAsString("replacementProductList[4].productIdentifierValue",
+                                                      iter_0.GetValue().productIdentifierValue,
+                                                      chip::CharSpan("oem20xxxxxxxxxxxxxxx", 20)));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("replacementProductList", iter_0, 5));
+                }
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Read Replacement Product List");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
+                                 ActivatedCarbonFilterMonitoring::Attributes::ReplacementProductList::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class TestHepaFilterMonitoringSuite : public TestCommand
+{
+public:
+    TestHepaFilterMonitoringSuite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("TestHepaFilterMonitoring", 2, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~TestHepaFilterMonitoringSuite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::HepaFilterMonitoring::Structs::ReplacementProductStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("replacementProductList", iter_0, 0));
+                    VerifyOrReturn(
+                        CheckValue("replacementProductList[0].productIdentifierType", iter_0.GetValue().productIdentifierType, 0U));
+                    VerifyOrReturn(CheckValueAsString("replacementProductList[0].productIdentifierValue",
+                                                      iter_0.GetValue().productIdentifierValue,
+                                                      chip::CharSpan("111112222233", 12)));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("replacementProductList", iter_0, 1));
+                    VerifyOrReturn(
+                        CheckValue("replacementProductList[1].productIdentifierType", iter_0.GetValue().productIdentifierType, 1U));
+                    VerifyOrReturn(CheckValueAsString("replacementProductList[1].productIdentifierValue",
+                                                      iter_0.GetValue().productIdentifierValue, chip::CharSpan("gtin8xxx", 8)));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("replacementProductList", iter_0, 2));
+                    VerifyOrReturn(
+                        CheckValue("replacementProductList[2].productIdentifierType", iter_0.GetValue().productIdentifierType, 2U));
+                    VerifyOrReturn(CheckValueAsString("replacementProductList[2].productIdentifierValue",
+                                                      iter_0.GetValue().productIdentifierValue,
+                                                      chip::CharSpan("4444455555666", 13)));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("replacementProductList", iter_0, 3));
+                    VerifyOrReturn(
+                        CheckValue("replacementProductList[3].productIdentifierType", iter_0.GetValue().productIdentifierType, 3U));
+                    VerifyOrReturn(CheckValueAsString("replacementProductList[3].productIdentifierValue",
+                                                      iter_0.GetValue().productIdentifierValue,
+                                                      chip::CharSpan("gtin14xxxxxxxx", 14)));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("replacementProductList", iter_0, 4));
+                    VerifyOrReturn(
+                        CheckValue("replacementProductList[4].productIdentifierType", iter_0.GetValue().productIdentifierType, 4U));
+                    VerifyOrReturn(CheckValueAsString("replacementProductList[4].productIdentifierValue",
+                                                      iter_0.GetValue().productIdentifierValue,
+                                                      chip::CharSpan("oem20xxxxxxxxxxxxxxx", 20)));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("replacementProductList", iter_0, 5));
+                }
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Read Replacement Product List");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
+                                 HepaFilterMonitoring::Attributes::ReplacementProductList::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
 class Test_TC_ACFREMON_1_1Suite : public TestCommand
 {
 public:
@@ -144954,6 +145186,8 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<TestGroupKeyManagementClusterSuite>(credsIssuerConfig),
         make_unique<Test_TC_G_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_G_2_1Suite>(credsIssuerConfig),
+        make_unique<TestActivatedCarbonFilterMonitoringSuite>(credsIssuerConfig),
+        make_unique<TestHepaFilterMonitoringSuite>(credsIssuerConfig),
         make_unique<Test_TC_ACFREMON_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_ACFREMON_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_HEPAFREMON_1_1Suite>(credsIssuerConfig),
