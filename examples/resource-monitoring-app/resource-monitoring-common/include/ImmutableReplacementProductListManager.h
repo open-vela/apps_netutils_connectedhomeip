@@ -28,24 +28,14 @@ namespace Clusters {
 namespace ResourceMonitoring {
 
 /**
- * This implementation statically defines the options.
+ * This implementation returns an immutable list of replacement products.
+ * It holds ReplacementProductListManager::kReplacementProductListMaxSize products in the list.
  */
 
-class StaticReplacementProductListManager : public ReplacementProductListManager
+class ImmutableReplacementProductListManager : public ReplacementProductListManager
 {
 public:
     CHIP_ERROR Next(ReplacementProductStruct & item) override;
-
-    ~StaticReplacementProductListManager() {}
-    StaticReplacementProductListManager(ReplacementProductStruct * aReplacementProductsList, uint8_t aReplacementProductListSize)
-    {
-        mReplacementProductsList    = aReplacementProductsList;
-        mReplacementProductListSize = aReplacementProductListSize;
-    }
-
-private:
-    ReplacementProductStruct * mReplacementProductsList;
-    uint8_t mReplacementProductListSize;
 };
 
 } // namespace ResourceMonitoring

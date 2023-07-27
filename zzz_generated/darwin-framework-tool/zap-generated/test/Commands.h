@@ -286,6 +286,8 @@ public:
         printf("TestGroupsCluster\n");
         printf("TestGroupKeyManagementCluster\n");
         printf("Test_TC_G_1_1\n");
+        printf("TestActivatedCarbonFilterMonitoring\n");
+        printf("TestHepaFilterMonitoring\n");
         printf("Test_TC_ACFREMON_1_1\n");
         printf("Test_TC_ACFREMON_2_1\n");
         printf("Test_TC_HEPAFREMON_1_1\n");
@@ -172696,6 +172698,295 @@ private:
     }
 };
 
+class TestActivatedCarbonFilterMonitoring : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    TestActivatedCarbonFilterMonitoring()
+        : TestCommandBridge("TestActivatedCarbonFilterMonitoring")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~TestActivatedCarbonFilterMonitoring() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: TestActivatedCarbonFilterMonitoring\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: TestActivatedCarbonFilterMonitoring\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read Replacement Product List\n");
+            err = TestReadReplacementProductList_1();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 2;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestReadReplacementProductList_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterActivatedCarbonFilterMonitoring alloc] initWithDevice:device
+                                                                                           endpointID:@(1)
+                                                                                                queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeReplacementProductListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read Replacement Product List Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ReplacementProductList", [actualValue count], static_cast<uint32_t>(5)));
+                VerifyOrReturn(CheckValue("ProductIdentifierType",
+                    ((MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct *) actualValue[0]).productIdentifierType,
+                    0U));
+                VerifyOrReturn(CheckValueAsString("ProductIdentifierValue",
+                    ((MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct *) actualValue[0]).productIdentifierValue,
+                    @"111112222233"));
+                VerifyOrReturn(CheckValue("ProductIdentifierType",
+                    ((MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct *) actualValue[1]).productIdentifierType,
+                    1U));
+                VerifyOrReturn(CheckValueAsString("ProductIdentifierValue",
+                    ((MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct *) actualValue[1]).productIdentifierValue,
+                    @"gtin8xxx"));
+                VerifyOrReturn(CheckValue("ProductIdentifierType",
+                    ((MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct *) actualValue[2]).productIdentifierType,
+                    2U));
+                VerifyOrReturn(CheckValueAsString("ProductIdentifierValue",
+                    ((MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct *) actualValue[2]).productIdentifierValue,
+                    @"4444455555666"));
+                VerifyOrReturn(CheckValue("ProductIdentifierType",
+                    ((MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct *) actualValue[3]).productIdentifierType,
+                    3U));
+                VerifyOrReturn(CheckValueAsString("ProductIdentifierValue",
+                    ((MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct *) actualValue[3]).productIdentifierValue,
+                    @"gtin14xxxxxxxx"));
+                VerifyOrReturn(CheckValue("ProductIdentifierType",
+                    ((MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct *) actualValue[4]).productIdentifierType,
+                    4U));
+                VerifyOrReturn(CheckValueAsString("ProductIdentifierValue",
+                    ((MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct *) actualValue[4]).productIdentifierValue,
+                    @"oem20xxxxxxxxxxxxxxx"));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class TestHepaFilterMonitoring : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    TestHepaFilterMonitoring()
+        : TestCommandBridge("TestHepaFilterMonitoring")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~TestHepaFilterMonitoring() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: TestHepaFilterMonitoring\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: TestHepaFilterMonitoring\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read Replacement Product List\n");
+            err = TestReadReplacementProductList_1();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 2;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestReadReplacementProductList_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterHEPAFilterMonitoring alloc] initWithDevice:device
+                                                                                endpointID:@(1)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeReplacementProductListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read Replacement Product List Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ReplacementProductList", [actualValue count], static_cast<uint32_t>(5)));
+                VerifyOrReturn(CheckValue("ProductIdentifierType",
+                    ((MTRHEPAFilterMonitoringClusterReplacementProductStruct *) actualValue[0]).productIdentifierType, 0U));
+                VerifyOrReturn(CheckValueAsString("ProductIdentifierValue",
+                    ((MTRHEPAFilterMonitoringClusterReplacementProductStruct *) actualValue[0]).productIdentifierValue,
+                    @"111112222233"));
+                VerifyOrReturn(CheckValue("ProductIdentifierType",
+                    ((MTRHEPAFilterMonitoringClusterReplacementProductStruct *) actualValue[1]).productIdentifierType, 1U));
+                VerifyOrReturn(CheckValueAsString("ProductIdentifierValue",
+                    ((MTRHEPAFilterMonitoringClusterReplacementProductStruct *) actualValue[1]).productIdentifierValue,
+                    @"gtin8xxx"));
+                VerifyOrReturn(CheckValue("ProductIdentifierType",
+                    ((MTRHEPAFilterMonitoringClusterReplacementProductStruct *) actualValue[2]).productIdentifierType, 2U));
+                VerifyOrReturn(CheckValueAsString("ProductIdentifierValue",
+                    ((MTRHEPAFilterMonitoringClusterReplacementProductStruct *) actualValue[2]).productIdentifierValue,
+                    @"4444455555666"));
+                VerifyOrReturn(CheckValue("ProductIdentifierType",
+                    ((MTRHEPAFilterMonitoringClusterReplacementProductStruct *) actualValue[3]).productIdentifierType, 3U));
+                VerifyOrReturn(CheckValueAsString("ProductIdentifierValue",
+                    ((MTRHEPAFilterMonitoringClusterReplacementProductStruct *) actualValue[3]).productIdentifierValue,
+                    @"gtin14xxxxxxxx"));
+                VerifyOrReturn(CheckValue("ProductIdentifierType",
+                    ((MTRHEPAFilterMonitoringClusterReplacementProductStruct *) actualValue[4]).productIdentifierType, 4U));
+                VerifyOrReturn(CheckValueAsString("ProductIdentifierValue",
+                    ((MTRHEPAFilterMonitoringClusterReplacementProductStruct *) actualValue[4]).productIdentifierValue,
+                    @"oem20xxxxxxxxxxxxxxx"));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
 class Test_TC_ACFREMON_1_1 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
@@ -174471,6 +174762,8 @@ void registerCommandsTests(Commands & commands)
         make_unique<TestGroupsCluster>(),
         make_unique<TestGroupKeyManagementCluster>(),
         make_unique<Test_TC_G_1_1>(),
+        make_unique<TestActivatedCarbonFilterMonitoring>(),
+        make_unique<TestHepaFilterMonitoring>(),
         make_unique<Test_TC_ACFREMON_1_1>(),
         make_unique<Test_TC_ACFREMON_2_1>(),
         make_unique<Test_TC_HEPAFREMON_1_1>(),
