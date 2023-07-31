@@ -175716,204 +175716,272 @@ public:
             err = TestReadMaxGroupKeysPerFabric_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : KeySet Write 1\n");
-            err = TestKeySetWrite1_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : KeySetWrite with EpochKey0 null fails INVALID_COMMAND\n");
+            err = TestKeySetWriteWithEpochKey0NullFailsInvalidCommand_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : KeySet Write 2 CacheAndSync\n");
-            if (ShouldSkip("GRPKEY.S.F00")) {
-                NextTest();
-                return;
-            }
-            err = TestKeySetWrite2CacheAndSync_7();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : KeySetWrite with EpochStartTime0 null fails INVALID_COMMAND\n");
+            err = TestKeySetWriteWithEpochStartTime0NullFailsInvalidCommand_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : KeySet Write 2 TrustFirst\n");
-            if (ShouldSkip("!GRPKEY.S.F00")) {
-                NextTest();
-                return;
-            }
-            err = TestKeySetWrite2TrustFirst_8();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : KeySetWrite with EpochStartTime0 set to zero fails INVALID_COMMAND\n");
+            err = TestKeySetWriteWithEpochStartTime0SetToZeroFailsInvalidCommand_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : KeySet Write 3 CacheAndSync\n");
-            if (ShouldSkip("GRPKEY.S.F00")) {
-                NextTest();
-                return;
-            }
-            err = TestKeySetWrite3CacheAndSync_9();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 9 : KeySetWrite with EpochKey0 with length 1 != 16 fails with CONSTRAINT_ERROR\n");
+            err = TestKeySetWriteWithEpochKey0WithLength116FailsWithConstraintError_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : KeySet Write 3 TrustFirst\n");
-            if (ShouldSkip("!GRPKEY.S.F00")) {
-                NextTest();
-                return;
-            }
-            err = TestKeySetWrite3TrustFirst_10();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 10 : KeySetWrite with EpochKey0 with length 0 != 16 fails with CONSTRAINT_ERROR\n");
+            err = TestKeySetWriteWithEpochKey0WithLength016FailsWithConstraintError_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : KeySet Read\n");
-            err = TestKeySetRead_11();
+            ChipLogProgress(chipTool, " ***** Test Step 11 : KeySetWrite with EpochStartTime1 null fails INVALID_COMMAND\n");
+            err = TestKeySetWriteWithEpochStartTime1NullFailsInvalidCommand_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : KeySet Read All Indices\n");
-            err = TestKeySetReadAllIndices_12();
+            ChipLogProgress(chipTool, " ***** Test Step 12 : KeySetWrite with EpochKey1 null fails INVALID_COMMAND\n");
+            err = TestKeySetWriteWithEpochKey1NullFailsInvalidCommand_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Write Group Keys (invalid)\n");
-            err = TestWriteGroupKeysInvalid_13();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 13 : KeySetWrite with EpochKey1 with length 1 != 16 fails with CONSTRAINT_ERROR\n");
+            err = TestKeySetWriteWithEpochKey1WithLength116FailsWithConstraintError_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : Write Group Keys (too many)\n");
-            err = TestWriteGroupKeysTooMany_14();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 14 : KeySetWrite with EpochKey1 with length 0 != 16 fails with CONSTRAINT_ERROR\n");
+            err = TestKeySetWriteWithEpochKey1WithLength016FailsWithConstraintError_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : Write Group Keys on alpha\n");
-            err = TestWriteGroupKeysOnAlpha_15();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 15 : KeySetWrite with EpochStartTime1 not later than EpochStart0 fails with INVALID_COMMAND\n");
+            err = TestKeySetWriteWithEpochStartTime1NotLaterThanEpochStart0FailsWithInvalidCommand_15();
             break;
         case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : Write Group Keys on beta\n");
-            err = TestWriteGroupKeysOnBeta_16();
+            ChipLogProgress(chipTool, " ***** Test Step 16 : KeySetWrite with EpochStartTime2 null fails INVALID_COMMAND\n");
+            err = TestKeySetWriteWithEpochStartTime2NullFailsInvalidCommand_16();
             break;
         case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : Read Group Keys on alpha\n");
-            err = TestReadGroupKeysOnAlpha_17();
+            ChipLogProgress(chipTool, " ***** Test Step 17 : KeySetWrite with EpochKey2 null fails INVALID_COMMAND\n");
+            err = TestKeySetWriteWithEpochKey2NullFailsInvalidCommand_17();
             break;
         case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : Read Group Keys on alpha without fabric filtering\n");
-            err = TestReadGroupKeysOnAlphaWithoutFabricFiltering_18();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 18 : KeySetWrite with EpochKey2 with length 1 != 16 fails with CONSTRAINT_ERROR\n");
+            err = TestKeySetWriteWithEpochKey2WithLength116FailsWithConstraintError_18();
             break;
         case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : Read Group Keys on beta\n");
-            err = TestReadGroupKeysOnBeta_19();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 19 : KeySetWrite with EpochKey2 with length 0 != 16 fails with CONSTRAINT_ERROR\n");
+            err = TestKeySetWriteWithEpochKey2WithLength016FailsWithConstraintError_19();
             break;
         case 20:
-            ChipLogProgress(chipTool, " ***** Test Step 20 : Read Group Keys on beta without fabric filtering\n");
-            err = TestReadGroupKeysOnBetaWithoutFabricFiltering_20();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 20 : KeySetWrite with EpochStartTime2 not later than EpochStart1 fails with INVALID_COMMAND\n");
+            err = TestKeySetWriteWithEpochStartTime2NotLaterThanEpochStart1FailsWithInvalidCommand_20();
             break;
         case 21:
-            ChipLogProgress(chipTool, " ***** Test Step 21 : Add Group 1\n");
-            err = TestAddGroup1_21();
+            ChipLogProgress(chipTool, " ***** Test Step 21 : KeySet Write 1\n");
+            err = TestKeySetWrite1_21();
             break;
         case 22:
-            ChipLogProgress(chipTool, " ***** Test Step 22 : Add Group 2\n");
-            err = TestAddGroup2_22();
+            ChipLogProgress(chipTool, " ***** Test Step 22 : KeySet Write 2 CacheAndSync\n");
+            if (ShouldSkip("GRPKEY.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestKeySetWrite2CacheAndSync_22();
             break;
         case 23:
-            ChipLogProgress(chipTool, " ***** Test Step 23 : Add Group 3\n");
-            err = TestAddGroup3_23();
-            break;
-        case 24:
-            ChipLogProgress(chipTool, " ***** Test Step 24 : Add Group 4\n");
-            err = TestAddGroup4_24();
-            break;
-        case 25:
-            ChipLogProgress(chipTool, " ***** Test Step 25 : Add Group 5\n");
-            err = TestAddGroup5_25();
-            break;
-        case 26:
-            ChipLogProgress(chipTool, " ***** Test Step 26 : Read GroupTable from alpha\n");
-            err = TestReadGroupTableFromAlpha_26();
-            break;
-        case 27:
-            ChipLogProgress(chipTool, " ***** Test Step 27 : Read GroupTable from alpha without fabric filtering\n");
-            err = TestReadGroupTableFromAlphaWithoutFabricFiltering_27();
-            break;
-        case 28:
-            ChipLogProgress(chipTool, " ***** Test Step 28 : Read GroupTable from beta\n");
-            err = TestReadGroupTableFromBeta_28();
-            break;
-        case 29:
-            ChipLogProgress(chipTool, " ***** Test Step 29 : Read GroupTable from beta without fabric filtering\n");
-            err = TestReadGroupTableFromBetaWithoutFabricFiltering_29();
-            break;
-        case 30:
-            ChipLogProgress(chipTool, " ***** Test Step 30 : KeySet Remove 1\n");
-            err = TestKeySetRemove1_30();
-            break;
-        case 31:
-            ChipLogProgress(chipTool, " ***** Test Step 31 : KeySet Read (removed)\n");
-            err = TestKeySetReadRemoved_31();
-            break;
-        case 32:
-            ChipLogProgress(chipTool, " ***** Test Step 32 : KeySet Read (not removed) CacheAndSync\n");
-            if (ShouldSkip("GRPKEY.S.F00")) {
-                NextTest();
-                return;
-            }
-            err = TestKeySetReadNotRemovedCacheAndSync_32();
-            break;
-        case 33:
-            ChipLogProgress(chipTool, " ***** Test Step 33 : KeySet Read (not removed) TrustFirst\n");
-            if (ShouldSkip("GRPKEY.S.F00")) {
-                NextTest();
-                return;
-            }
-            err = TestKeySetReadNotRemovedTrustFirst_33();
-            break;
-        case 34:
-            ChipLogProgress(chipTool, " ***** Test Step 34 : Remove Group 1\n");
-            err = TestRemoveGroup1_34();
-            break;
-        case 35:
-            ChipLogProgress(chipTool, " ***** Test Step 35 : Read GroupTable 2\n");
-            err = TestReadGroupTable2_35();
-            break;
-        case 36:
-            ChipLogProgress(chipTool, " ***** Test Step 36 : Remove All\n");
-            err = TestRemoveAll_36();
-            break;
-        case 37:
-            ChipLogProgress(chipTool, " ***** Test Step 37 : Read GroupTable 3\n");
-            err = TestReadGroupTable3_37();
-            break;
-        case 38:
-            ChipLogProgress(chipTool, " ***** Test Step 38 : KeySet Remove 2\n");
-            err = TestKeySetRemove2_38();
-            break;
-        case 39:
-            ChipLogProgress(chipTool, " ***** Test Step 39 : KeySet Read (also removed)\n");
-            err = TestKeySetReadAlsoRemoved_39();
-            break;
-        case 40:
-            ChipLogProgress(chipTool, " ***** Test Step 40 : KeySet Write 1\n");
-            err = TestKeySetWrite1_40();
-            break;
-        case 41:
-            ChipLogProgress(chipTool, " ***** Test Step 41 : KeySet Write 2 CacheAndSync\n");
-            if (ShouldSkip("GRPKEY.S.F00")) {
-                NextTest();
-                return;
-            }
-            err = TestKeySetWrite2CacheAndSync_41();
-            break;
-        case 42:
-            ChipLogProgress(chipTool, " ***** Test Step 42 : KeySet Write 2 TrustFirst\n");
+            ChipLogProgress(chipTool, " ***** Test Step 23 : KeySet Write 2 TrustFirst\n");
             if (ShouldSkip("!GRPKEY.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestKeySetWrite2TrustFirst_42();
+            err = TestKeySetWrite2TrustFirst_23();
+            break;
+        case 24:
+            ChipLogProgress(chipTool, " ***** Test Step 24 : KeySet Write 3 CacheAndSync\n");
+            if (ShouldSkip("GRPKEY.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestKeySetWrite3CacheAndSync_24();
+            break;
+        case 25:
+            ChipLogProgress(chipTool, " ***** Test Step 25 : KeySet Write 3 TrustFirst\n");
+            if (ShouldSkip("!GRPKEY.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestKeySetWrite3TrustFirst_25();
+            break;
+        case 26:
+            ChipLogProgress(chipTool, " ***** Test Step 26 : KeySet Read\n");
+            err = TestKeySetRead_26();
+            break;
+        case 27:
+            ChipLogProgress(chipTool, " ***** Test Step 27 : KeySet Read All Indices\n");
+            err = TestKeySetReadAllIndices_27();
+            break;
+        case 28:
+            ChipLogProgress(chipTool, " ***** Test Step 28 : Write Group Keys (invalid)\n");
+            err = TestWriteGroupKeysInvalid_28();
+            break;
+        case 29:
+            ChipLogProgress(chipTool, " ***** Test Step 29 : Write Group Keys (too many)\n");
+            err = TestWriteGroupKeysTooMany_29();
+            break;
+        case 30:
+            ChipLogProgress(chipTool, " ***** Test Step 30 : Write Group Keys on alpha\n");
+            err = TestWriteGroupKeysOnAlpha_30();
+            break;
+        case 31:
+            ChipLogProgress(chipTool, " ***** Test Step 31 : Write Group Keys on beta\n");
+            err = TestWriteGroupKeysOnBeta_31();
+            break;
+        case 32:
+            ChipLogProgress(chipTool, " ***** Test Step 32 : Read Group Keys on alpha\n");
+            err = TestReadGroupKeysOnAlpha_32();
+            break;
+        case 33:
+            ChipLogProgress(chipTool, " ***** Test Step 33 : Read Group Keys on alpha without fabric filtering\n");
+            err = TestReadGroupKeysOnAlphaWithoutFabricFiltering_33();
+            break;
+        case 34:
+            ChipLogProgress(chipTool, " ***** Test Step 34 : Read Group Keys on beta\n");
+            err = TestReadGroupKeysOnBeta_34();
+            break;
+        case 35:
+            ChipLogProgress(chipTool, " ***** Test Step 35 : Read Group Keys on beta without fabric filtering\n");
+            err = TestReadGroupKeysOnBetaWithoutFabricFiltering_35();
+            break;
+        case 36:
+            ChipLogProgress(chipTool, " ***** Test Step 36 : Add Group 1\n");
+            err = TestAddGroup1_36();
+            break;
+        case 37:
+            ChipLogProgress(chipTool, " ***** Test Step 37 : Add Group 2\n");
+            err = TestAddGroup2_37();
+            break;
+        case 38:
+            ChipLogProgress(chipTool, " ***** Test Step 38 : Add Group 3\n");
+            err = TestAddGroup3_38();
+            break;
+        case 39:
+            ChipLogProgress(chipTool, " ***** Test Step 39 : Add Group 4\n");
+            err = TestAddGroup4_39();
+            break;
+        case 40:
+            ChipLogProgress(chipTool, " ***** Test Step 40 : Add Group 5\n");
+            err = TestAddGroup5_40();
+            break;
+        case 41:
+            ChipLogProgress(chipTool, " ***** Test Step 41 : Read GroupTable from alpha\n");
+            err = TestReadGroupTableFromAlpha_41();
+            break;
+        case 42:
+            ChipLogProgress(chipTool, " ***** Test Step 42 : Read GroupTable from alpha without fabric filtering\n");
+            err = TestReadGroupTableFromAlphaWithoutFabricFiltering_42();
             break;
         case 43:
-            ChipLogProgress(chipTool, " ***** Test Step 43 : Map Group 1 and Group 2 to KeySet 1 and group 2 to KeySet 2\n");
-            err = TestMapGroup1AndGroup2ToKeySet1AndGroup2ToKeySet2_43();
+            ChipLogProgress(chipTool, " ***** Test Step 43 : Read GroupTable from beta\n");
+            err = TestReadGroupTableFromBeta_43();
             break;
         case 44:
-            ChipLogProgress(chipTool, " ***** Test Step 44 : Remove keyset 1\n");
-            err = TestRemoveKeyset1_44();
+            ChipLogProgress(chipTool, " ***** Test Step 44 : Read GroupTable from beta without fabric filtering\n");
+            err = TestReadGroupTableFromBetaWithoutFabricFiltering_44();
             break;
         case 45:
-            ChipLogProgress(chipTool, " ***** Test Step 45 : TH verifies GroupKeyMap entries for KeySet 1 have been removed\n");
-            err = TestThVerifiesGroupKeyMapEntriesForKeySet1HaveBeenRemoved_45();
+            ChipLogProgress(chipTool, " ***** Test Step 45 : KeySet Remove 1\n");
+            err = TestKeySetRemove1_45();
             break;
         case 46:
-            ChipLogProgress(chipTool, " ***** Test Step 46 : Remove keyset 2\n");
-            err = TestRemoveKeyset2_46();
+            ChipLogProgress(chipTool, " ***** Test Step 46 : KeySet Read (removed)\n");
+            err = TestKeySetReadRemoved_46();
             break;
         case 47:
-            ChipLogProgress(chipTool, " ***** Test Step 47 : TH verifies GroupKeyMap entries for KeySet 2 have been removed\n");
-            err = TestThVerifiesGroupKeyMapEntriesForKeySet2HaveBeenRemoved_47();
+            ChipLogProgress(chipTool, " ***** Test Step 47 : KeySet Read (not removed) CacheAndSync\n");
+            if (ShouldSkip("GRPKEY.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestKeySetReadNotRemovedCacheAndSync_47();
+            break;
+        case 48:
+            ChipLogProgress(chipTool, " ***** Test Step 48 : KeySet Read (not removed) TrustFirst\n");
+            if (ShouldSkip("GRPKEY.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestKeySetReadNotRemovedTrustFirst_48();
+            break;
+        case 49:
+            ChipLogProgress(chipTool, " ***** Test Step 49 : Remove Group 1\n");
+            err = TestRemoveGroup1_49();
+            break;
+        case 50:
+            ChipLogProgress(chipTool, " ***** Test Step 50 : Read GroupTable 2\n");
+            err = TestReadGroupTable2_50();
+            break;
+        case 51:
+            ChipLogProgress(chipTool, " ***** Test Step 51 : Remove All\n");
+            err = TestRemoveAll_51();
+            break;
+        case 52:
+            ChipLogProgress(chipTool, " ***** Test Step 52 : Read GroupTable 3\n");
+            err = TestReadGroupTable3_52();
+            break;
+        case 53:
+            ChipLogProgress(chipTool, " ***** Test Step 53 : KeySet Remove 2\n");
+            err = TestKeySetRemove2_53();
+            break;
+        case 54:
+            ChipLogProgress(chipTool, " ***** Test Step 54 : KeySet Read (also removed)\n");
+            err = TestKeySetReadAlsoRemoved_54();
+            break;
+        case 55:
+            ChipLogProgress(chipTool, " ***** Test Step 55 : KeySet Write 1\n");
+            err = TestKeySetWrite1_55();
+            break;
+        case 56:
+            ChipLogProgress(chipTool, " ***** Test Step 56 : KeySet Write 2 CacheAndSync\n");
+            if (ShouldSkip("GRPKEY.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestKeySetWrite2CacheAndSync_56();
+            break;
+        case 57:
+            ChipLogProgress(chipTool, " ***** Test Step 57 : KeySet Write 2 TrustFirst\n");
+            if (ShouldSkip("!GRPKEY.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestKeySetWrite2TrustFirst_57();
+            break;
+        case 58:
+            ChipLogProgress(chipTool, " ***** Test Step 58 : Map Group 1 and Group 2 to KeySet 1 and group 2 to KeySet 2\n");
+            err = TestMapGroup1AndGroup2ToKeySet1AndGroup2ToKeySet2_58();
+            break;
+        case 59:
+            ChipLogProgress(chipTool, " ***** Test Step 59 : Remove keyset 1\n");
+            err = TestRemoveKeyset1_59();
+            break;
+        case 60:
+            ChipLogProgress(chipTool, " ***** Test Step 60 : TH verifies GroupKeyMap entries for KeySet 1 have been removed\n");
+            err = TestThVerifiesGroupKeyMapEntriesForKeySet1HaveBeenRemoved_60();
+            break;
+        case 61:
+            ChipLogProgress(chipTool, " ***** Test Step 61 : Remove keyset 2\n");
+            err = TestRemoveKeyset2_61();
+            break;
+        case 62:
+            ChipLogProgress(chipTool, " ***** Test Step 62 : TH verifies GroupKeyMap entries for KeySet 2 have been removed\n");
+            err = TestThVerifiesGroupKeyMapEntriesForKeySet2HaveBeenRemoved_62();
             break;
         }
 
@@ -175945,49 +176013,49 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 10:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 18:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 19:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 20:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -176011,16 +176079,16 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 28:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 29:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 30:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 31:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 32:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -176044,7 +176112,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 39:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 40:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -176065,9 +176133,54 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 46:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
             break;
         case 47:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 48:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 49:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 50:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 51:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 52:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 53:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 54:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
+            break;
+        case 55:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 56:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 57:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 58:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 59:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 60:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 61:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 62:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         }
@@ -176083,7 +176196,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 48;
+    const uint16_t mTestCount = 63;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -176183,7 +176296,620 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetWrite1_6()
+    CHIP_ERROR TestKeySetWriteWithEpochKey0NullFailsInvalidCommand_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupKeyManagementClusterKeySetWriteParams alloc] init];
+        params.groupKeySet = [[MTRGroupKeyManagementClusterGroupKeySetStruct alloc] init];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySetID =
+            [NSNumber numberWithUnsignedShort:417U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySecurityPolicy =
+            [NSNumber numberWithUnsignedChar:0U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey0 = nil;
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime0 =
+            [NSNumber numberWithUnsignedLongLong:1110000ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey1 = nil;
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime1 = nil;
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey2 = nil;
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime2 = nil;
+
+        [cluster
+            keySetWriteWithParams:params
+                       completion:^(NSError * _Nullable err) {
+                           NSLog(@"KeySetWrite with EpochKey0 null fails INVALID_COMMAND Error: %@", err);
+
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_INVALID_COMMAND));
+                           NextTest();
+                       }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestKeySetWriteWithEpochStartTime0NullFailsInvalidCommand_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupKeyManagementClusterKeySetWriteParams alloc] init];
+        params.groupKeySet = [[MTRGroupKeyManagementClusterGroupKeySetStruct alloc] init];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySetID =
+            [NSNumber numberWithUnsignedShort:417U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySecurityPolicy =
+            [NSNumber numberWithUnsignedChar:0U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey0 =
+            [[NSData alloc] initWithBytes:"\240\241\242\243\244\245\246\247\250\251\252\253\254\255\256\257" length:16];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime0 = nil;
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey1 = nil;
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime1 = nil;
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey2 = nil;
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime2 = nil;
+
+        [cluster
+            keySetWriteWithParams:params
+                       completion:^(NSError * _Nullable err) {
+                           NSLog(@"KeySetWrite with EpochStartTime0 null fails INVALID_COMMAND Error: %@", err);
+
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_INVALID_COMMAND));
+                           NextTest();
+                       }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestKeySetWriteWithEpochStartTime0SetToZeroFailsInvalidCommand_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupKeyManagementClusterKeySetWriteParams alloc] init];
+        params.groupKeySet = [[MTRGroupKeyManagementClusterGroupKeySetStruct alloc] init];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySetID =
+            [NSNumber numberWithUnsignedShort:417U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySecurityPolicy =
+            [NSNumber numberWithUnsignedChar:0U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey0 =
+            [[NSData alloc] initWithBytes:"\240\241\242\243\244\245\246\247\250\251\252\253\254\255\256\257" length:16];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime0 =
+            [NSNumber numberWithUnsignedLongLong:0ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey1 = nil;
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime1 = nil;
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey2 = nil;
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime2 = nil;
+
+        [cluster
+            keySetWriteWithParams:params
+                       completion:^(NSError * _Nullable err) {
+                           NSLog(@"KeySetWrite with EpochStartTime0 set to zero fails INVALID_COMMAND Error: %@", err);
+
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_INVALID_COMMAND));
+                           NextTest();
+                       }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestKeySetWriteWithEpochKey0WithLength116FailsWithConstraintError_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupKeyManagementClusterKeySetWriteParams alloc] init];
+        params.groupKeySet = [[MTRGroupKeyManagementClusterGroupKeySetStruct alloc] init];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySetID =
+            [NSNumber numberWithUnsignedShort:417U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySecurityPolicy =
+            [NSNumber numberWithUnsignedChar:0U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey0 = [[NSData alloc] initWithBytes:"\240"
+                                                                                                                  length:1];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime0 =
+            [NSNumber numberWithUnsignedLongLong:1ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey1 = nil;
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime1 = nil;
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey2 = nil;
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime2 = nil;
+
+        [cluster
+            keySetWriteWithParams:params
+                       completion:^(NSError * _Nullable err) {
+                           NSLog(@"KeySetWrite with EpochKey0 with length 1 != 16 fails with CONSTRAINT_ERROR Error: %@", err);
+
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                           NextTest();
+                       }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestKeySetWriteWithEpochKey0WithLength016FailsWithConstraintError_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupKeyManagementClusterKeySetWriteParams alloc] init];
+        params.groupKeySet = [[MTRGroupKeyManagementClusterGroupKeySetStruct alloc] init];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySetID =
+            [NSNumber numberWithUnsignedShort:417U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySecurityPolicy =
+            [NSNumber numberWithUnsignedChar:0U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey0 = [[NSData alloc] initWithBytes:""
+                                                                                                                  length:0];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime0 =
+            [NSNumber numberWithUnsignedLongLong:1ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey1 = nil;
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime1 = nil;
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey2 = nil;
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime2 = nil;
+
+        [cluster
+            keySetWriteWithParams:params
+                       completion:^(NSError * _Nullable err) {
+                           NSLog(@"KeySetWrite with EpochKey0 with length 0 != 16 fails with CONSTRAINT_ERROR Error: %@", err);
+
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                           NextTest();
+                       }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestKeySetWriteWithEpochStartTime1NullFailsInvalidCommand_11()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupKeyManagementClusterKeySetWriteParams alloc] init];
+        params.groupKeySet = [[MTRGroupKeyManagementClusterGroupKeySetStruct alloc] init];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySetID =
+            [NSNumber numberWithUnsignedShort:417U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySecurityPolicy =
+            [NSNumber numberWithUnsignedChar:0U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey0 =
+            [[NSData alloc] initWithBytes:"\240\241\242\243\244\245\246\247\250\251\252\253\254\255\256\257" length:16];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime0 =
+            [NSNumber numberWithUnsignedLongLong:1110000ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey1 =
+            [[NSData alloc] initWithBytes:"\260\261\262\263\264\265\266\267\270\271\272\273\274\275\276\277" length:16];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime1 = nil;
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey2 = nil;
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime2 = nil;
+
+        [cluster
+            keySetWriteWithParams:params
+                       completion:^(NSError * _Nullable err) {
+                           NSLog(@"KeySetWrite with EpochStartTime1 null fails INVALID_COMMAND Error: %@", err);
+
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_INVALID_COMMAND));
+                           NextTest();
+                       }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestKeySetWriteWithEpochKey1NullFailsInvalidCommand_12()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupKeyManagementClusterKeySetWriteParams alloc] init];
+        params.groupKeySet = [[MTRGroupKeyManagementClusterGroupKeySetStruct alloc] init];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySetID =
+            [NSNumber numberWithUnsignedShort:417U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySecurityPolicy =
+            [NSNumber numberWithUnsignedChar:0U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey0 =
+            [[NSData alloc] initWithBytes:"\240\241\242\243\244\245\246\247\250\251\252\253\254\255\256\257" length:16];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime0 =
+            [NSNumber numberWithUnsignedLongLong:1110000ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey1 = nil;
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime1 =
+            [NSNumber numberWithUnsignedLongLong:1110001ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey2 = nil;
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime2 = nil;
+
+        [cluster
+            keySetWriteWithParams:params
+                       completion:^(NSError * _Nullable err) {
+                           NSLog(@"KeySetWrite with EpochKey1 null fails INVALID_COMMAND Error: %@", err);
+
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_INVALID_COMMAND));
+                           NextTest();
+                       }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestKeySetWriteWithEpochKey1WithLength116FailsWithConstraintError_13()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupKeyManagementClusterKeySetWriteParams alloc] init];
+        params.groupKeySet = [[MTRGroupKeyManagementClusterGroupKeySetStruct alloc] init];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySetID =
+            [NSNumber numberWithUnsignedShort:417U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySecurityPolicy =
+            [NSNumber numberWithUnsignedChar:0U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey0 =
+            [[NSData alloc] initWithBytes:"\240\241\242\243\244\245\246\247\250\251\252\253\254\255\256\257" length:16];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime0 =
+            [NSNumber numberWithUnsignedLongLong:1110000ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey1 = [[NSData alloc] initWithBytes:"\260"
+                                                                                                                  length:1];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime1 =
+            [NSNumber numberWithUnsignedLongLong:1110001ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey2 = nil;
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime2 = nil;
+
+        [cluster
+            keySetWriteWithParams:params
+                       completion:^(NSError * _Nullable err) {
+                           NSLog(@"KeySetWrite with EpochKey1 with length 1 != 16 fails with CONSTRAINT_ERROR Error: %@", err);
+
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                           NextTest();
+                       }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestKeySetWriteWithEpochKey1WithLength016FailsWithConstraintError_14()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupKeyManagementClusterKeySetWriteParams alloc] init];
+        params.groupKeySet = [[MTRGroupKeyManagementClusterGroupKeySetStruct alloc] init];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySetID =
+            [NSNumber numberWithUnsignedShort:417U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySecurityPolicy =
+            [NSNumber numberWithUnsignedChar:0U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey0 =
+            [[NSData alloc] initWithBytes:"\240\241\242\243\244\245\246\247\250\251\252\253\254\255\256\257" length:16];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime0 =
+            [NSNumber numberWithUnsignedLongLong:1110000ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey1 = [[NSData alloc] initWithBytes:""
+                                                                                                                  length:0];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime1 =
+            [NSNumber numberWithUnsignedLongLong:1110001ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey2 = nil;
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime2 = nil;
+
+        [cluster
+            keySetWriteWithParams:params
+                       completion:^(NSError * _Nullable err) {
+                           NSLog(@"KeySetWrite with EpochKey1 with length 0 != 16 fails with CONSTRAINT_ERROR Error: %@", err);
+
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                           NextTest();
+                       }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestKeySetWriteWithEpochStartTime1NotLaterThanEpochStart0FailsWithInvalidCommand_15()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupKeyManagementClusterKeySetWriteParams alloc] init];
+        params.groupKeySet = [[MTRGroupKeyManagementClusterGroupKeySetStruct alloc] init];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySetID =
+            [NSNumber numberWithUnsignedShort:417U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySecurityPolicy =
+            [NSNumber numberWithUnsignedChar:0U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey0 =
+            [[NSData alloc] initWithBytes:"\240\241\242\243\244\245\246\247\250\251\252\253\254\255\256\257" length:16];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime0 =
+            [NSNumber numberWithUnsignedLongLong:1110000ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey1 =
+            [[NSData alloc] initWithBytes:"\260\261\262\263\264\265\266\267\270\271\272\273\274\275\276\277" length:16];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime1 =
+            [NSNumber numberWithUnsignedLongLong:1ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey2 = nil;
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime2 = nil;
+
+        [cluster
+            keySetWriteWithParams:params
+                       completion:^(NSError * _Nullable err) {
+                           NSLog(
+                               @"KeySetWrite with EpochStartTime1 not later than EpochStart0 fails with INVALID_COMMAND Error: %@",
+                               err);
+
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_INVALID_COMMAND));
+                           NextTest();
+                       }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestKeySetWriteWithEpochStartTime2NullFailsInvalidCommand_16()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupKeyManagementClusterKeySetWriteParams alloc] init];
+        params.groupKeySet = [[MTRGroupKeyManagementClusterGroupKeySetStruct alloc] init];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySetID =
+            [NSNumber numberWithUnsignedShort:417U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySecurityPolicy =
+            [NSNumber numberWithUnsignedChar:0U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey0 =
+            [[NSData alloc] initWithBytes:"\240\241\242\243\244\245\246\247\250\251\252\253\254\255\256\257" length:16];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime0 =
+            [NSNumber numberWithUnsignedLongLong:1110000ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey1 =
+            [[NSData alloc] initWithBytes:"\260\261\262\263\264\265\266\267\270\271\272\273\274\275\276\277" length:16];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime1 =
+            [NSNumber numberWithUnsignedLongLong:1110001ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey2 =
+            [[NSData alloc] initWithBytes:"\360\361\362\363\364\365\366\367\370\371\372\373\374\375\376\377" length:16];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime2 = nil;
+
+        [cluster
+            keySetWriteWithParams:params
+                       completion:^(NSError * _Nullable err) {
+                           NSLog(@"KeySetWrite with EpochStartTime2 null fails INVALID_COMMAND Error: %@", err);
+
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_INVALID_COMMAND));
+                           NextTest();
+                       }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestKeySetWriteWithEpochKey2NullFailsInvalidCommand_17()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupKeyManagementClusterKeySetWriteParams alloc] init];
+        params.groupKeySet = [[MTRGroupKeyManagementClusterGroupKeySetStruct alloc] init];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySetID =
+            [NSNumber numberWithUnsignedShort:417U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySecurityPolicy =
+            [NSNumber numberWithUnsignedChar:0U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey0 =
+            [[NSData alloc] initWithBytes:"\240\241\242\243\244\245\246\247\250\251\252\253\254\255\256\257" length:16];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime0 =
+            [NSNumber numberWithUnsignedLongLong:1110000ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey1 =
+            [[NSData alloc] initWithBytes:"\260\261\262\263\264\265\266\267\270\271\272\273\274\275\276\277" length:16];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime1 =
+            [NSNumber numberWithUnsignedLongLong:1110001ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey2 = nil;
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime2 =
+            [NSNumber numberWithUnsignedLongLong:1110002ULL];
+
+        [cluster
+            keySetWriteWithParams:params
+                       completion:^(NSError * _Nullable err) {
+                           NSLog(@"KeySetWrite with EpochKey2 null fails INVALID_COMMAND Error: %@", err);
+
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_INVALID_COMMAND));
+                           NextTest();
+                       }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestKeySetWriteWithEpochKey2WithLength116FailsWithConstraintError_18()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupKeyManagementClusterKeySetWriteParams alloc] init];
+        params.groupKeySet = [[MTRGroupKeyManagementClusterGroupKeySetStruct alloc] init];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySetID =
+            [NSNumber numberWithUnsignedShort:417U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySecurityPolicy =
+            [NSNumber numberWithUnsignedChar:0U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey0 =
+            [[NSData alloc] initWithBytes:"\240\241\242\243\244\245\246\247\250\251\252\253\254\255\256\257" length:16];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime0 =
+            [NSNumber numberWithUnsignedLongLong:1110000ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey1 =
+            [[NSData alloc] initWithBytes:"\260\261\262\263\264\265\266\267\270\271\272\273\274\275\276\277" length:16];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime1 =
+            [NSNumber numberWithUnsignedLongLong:1110001ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey2 = [[NSData alloc] initWithBytes:"\300"
+                                                                                                                  length:1];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime2 =
+            [NSNumber numberWithUnsignedLongLong:1110002ULL];
+
+        [cluster
+            keySetWriteWithParams:params
+                       completion:^(NSError * _Nullable err) {
+                           NSLog(@"KeySetWrite with EpochKey2 with length 1 != 16 fails with CONSTRAINT_ERROR Error: %@", err);
+
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                           NextTest();
+                       }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestKeySetWriteWithEpochKey2WithLength016FailsWithConstraintError_19()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupKeyManagementClusterKeySetWriteParams alloc] init];
+        params.groupKeySet = [[MTRGroupKeyManagementClusterGroupKeySetStruct alloc] init];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySetID =
+            [NSNumber numberWithUnsignedShort:417U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySecurityPolicy =
+            [NSNumber numberWithUnsignedChar:0U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey0 =
+            [[NSData alloc] initWithBytes:"\240\241\242\243\244\245\246\247\250\251\252\253\254\255\256\257" length:16];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime0 =
+            [NSNumber numberWithUnsignedLongLong:1110000ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey1 =
+            [[NSData alloc] initWithBytes:"\260\261\262\263\264\265\266\267\270\271\272\273\274\275\276\277" length:16];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime1 =
+            [NSNumber numberWithUnsignedLongLong:1110001ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey2 = [[NSData alloc] initWithBytes:""
+                                                                                                                  length:0];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime2 =
+            [NSNumber numberWithUnsignedLongLong:1110002ULL];
+
+        [cluster
+            keySetWriteWithParams:params
+                       completion:^(NSError * _Nullable err) {
+                           NSLog(@"KeySetWrite with EpochKey2 with length 0 != 16 fails with CONSTRAINT_ERROR Error: %@", err);
+
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                           NextTest();
+                       }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestKeySetWriteWithEpochStartTime2NotLaterThanEpochStart1FailsWithInvalidCommand_20()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupKeyManagementClusterKeySetWriteParams alloc] init];
+        params.groupKeySet = [[MTRGroupKeyManagementClusterGroupKeySetStruct alloc] init];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySetID =
+            [NSNumber numberWithUnsignedShort:417U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySecurityPolicy =
+            [NSNumber numberWithUnsignedChar:0U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey0 =
+            [[NSData alloc] initWithBytes:"\240\241\242\243\244\245\246\247\250\251\252\253\254\255\256\257" length:16];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime0 =
+            [NSNumber numberWithUnsignedLongLong:1110000ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey1 =
+            [[NSData alloc] initWithBytes:"\260\261\262\263\264\265\266\267\270\271\272\273\274\275\276\277" length:16];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime1 =
+            [NSNumber numberWithUnsignedLongLong:1110001ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey2 =
+            [[NSData alloc] initWithBytes:"\360\361\362\363\364\365\366\367\370\371\372\373\374\375\376\377" length:16];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime2 =
+            [NSNumber numberWithUnsignedLongLong:100ULL];
+
+        [cluster
+            keySetWriteWithParams:params
+                       completion:^(NSError * _Nullable err) {
+                           NSLog(
+                               @"KeySetWrite with EpochStartTime2 not later than EpochStart1 fails with INVALID_COMMAND Error: %@",
+                               err);
+
+                           VerifyOrReturn(CheckValue("status",
+                               err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                   : 0,
+                               EMBER_ZCL_STATUS_INVALID_COMMAND));
+                           NextTest();
+                       }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestKeySetWrite1_21()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -176223,7 +176949,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetWrite2CacheAndSync_7()
+    CHIP_ERROR TestKeySetWrite2CacheAndSync_22()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -176263,7 +176989,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetWrite2TrustFirst_8()
+    CHIP_ERROR TestKeySetWrite2TrustFirst_23()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -176303,7 +177029,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetWrite3CacheAndSync_9()
+    CHIP_ERROR TestKeySetWrite3CacheAndSync_24()
     {
 
         MTRBaseDevice * device = GetDevice("beta");
@@ -176343,7 +177069,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetWrite3TrustFirst_10()
+    CHIP_ERROR TestKeySetWrite3TrustFirst_25()
     {
 
         MTRBaseDevice * device = GetDevice("beta");
@@ -176383,7 +177109,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetRead_11()
+    CHIP_ERROR TestKeySetRead_26()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -176434,7 +177160,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetReadAllIndices_12()
+    CHIP_ERROR TestKeySetReadAllIndices_27()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -176459,7 +177185,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteGroupKeysInvalid_13()
+    CHIP_ERROR TestWriteGroupKeysInvalid_28()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -176494,7 +177220,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteGroupKeysTooMany_14()
+    CHIP_ERROR TestWriteGroupKeysTooMany_29()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -176594,7 +177320,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteGroupKeysOnAlpha_15()
+    CHIP_ERROR TestWriteGroupKeysOnAlpha_30()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -176640,7 +177366,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteGroupKeysOnBeta_16()
+    CHIP_ERROR TestWriteGroupKeysOnBeta_31()
     {
 
         MTRBaseDevice * device = GetDevice("beta");
@@ -176686,7 +177412,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadGroupKeysOnAlpha_17()
+    CHIP_ERROR TestReadGroupKeysOnAlpha_32()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -176748,7 +177474,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadGroupKeysOnAlphaWithoutFabricFiltering_18()
+    CHIP_ERROR TestReadGroupKeysOnAlphaWithoutFabricFiltering_33()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -176842,7 +177568,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadGroupKeysOnBeta_19()
+    CHIP_ERROR TestReadGroupKeysOnBeta_34()
     {
 
         MTRBaseDevice * device = GetDevice("beta");
@@ -176904,7 +177630,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadGroupKeysOnBetaWithoutFabricFiltering_20()
+    CHIP_ERROR TestReadGroupKeysOnBetaWithoutFabricFiltering_35()
     {
 
         MTRBaseDevice * device = GetDevice("beta");
@@ -176998,7 +177724,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestAddGroup1_21()
+    CHIP_ERROR TestAddGroup1_36()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -177030,7 +177756,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestAddGroup2_22()
+    CHIP_ERROR TestAddGroup2_37()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -177062,7 +177788,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestAddGroup3_23()
+    CHIP_ERROR TestAddGroup3_38()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -177094,7 +177820,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestAddGroup4_24()
+    CHIP_ERROR TestAddGroup4_39()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -177126,7 +177852,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestAddGroup5_25()
+    CHIP_ERROR TestAddGroup5_40()
     {
 
         MTRBaseDevice * device = GetDevice("beta");
@@ -177158,7 +177884,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadGroupTableFromAlpha_26()
+    CHIP_ERROR TestReadGroupTableFromAlpha_41()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -177247,7 +177973,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadGroupTableFromAlphaWithoutFabricFiltering_27()
+    CHIP_ERROR TestReadGroupTableFromAlphaWithoutFabricFiltering_42()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -177351,7 +178077,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadGroupTableFromBeta_28()
+    CHIP_ERROR TestReadGroupTableFromBeta_43()
     {
 
         MTRBaseDevice * device = GetDevice("beta");
@@ -177395,7 +178121,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadGroupTableFromBetaWithoutFabricFiltering_29()
+    CHIP_ERROR TestReadGroupTableFromBetaWithoutFabricFiltering_44()
     {
 
         MTRBaseDevice * device = GetDevice("beta");
@@ -177499,7 +178225,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetRemove1_30()
+    CHIP_ERROR TestKeySetRemove1_45()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -177522,7 +178248,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetReadRemoved_31()
+    CHIP_ERROR TestKeySetReadRemoved_46()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -177549,7 +178275,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetReadNotRemovedCacheAndSync_32()
+    CHIP_ERROR TestKeySetReadNotRemovedCacheAndSync_47()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -177600,7 +178326,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetReadNotRemovedTrustFirst_33()
+    CHIP_ERROR TestKeySetReadNotRemovedTrustFirst_48()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -177651,7 +178377,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestRemoveGroup1_34()
+    CHIP_ERROR TestRemoveGroup1_49()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -177682,7 +178408,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadGroupTable2_35()
+    CHIP_ERROR TestReadGroupTable2_50()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -177756,7 +178482,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestRemoveAll_36()
+    CHIP_ERROR TestRemoveAll_51()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -177774,7 +178500,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadGroupTable3_37()
+    CHIP_ERROR TestReadGroupTable3_52()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -177803,7 +178529,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetRemove2_38()
+    CHIP_ERROR TestKeySetRemove2_53()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -177826,7 +178552,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetReadAlsoRemoved_39()
+    CHIP_ERROR TestKeySetReadAlsoRemoved_54()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -177853,7 +178579,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetWrite1_40()
+    CHIP_ERROR TestKeySetWrite1_55()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -177893,7 +178619,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetWrite2CacheAndSync_41()
+    CHIP_ERROR TestKeySetWrite2CacheAndSync_56()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -177933,7 +178659,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetWrite2TrustFirst_42()
+    CHIP_ERROR TestKeySetWrite2TrustFirst_57()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -177973,7 +178699,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestMapGroup1AndGroup2ToKeySet1AndGroup2ToKeySet2_43()
+    CHIP_ERROR TestMapGroup1AndGroup2ToKeySet1AndGroup2ToKeySet2_58()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -178014,7 +178740,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestRemoveKeyset1_44()
+    CHIP_ERROR TestRemoveKeyset1_59()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -178037,7 +178763,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThVerifiesGroupKeyMapEntriesForKeySet1HaveBeenRemoved_45()
+    CHIP_ERROR TestThVerifiesGroupKeyMapEntriesForKeySet1HaveBeenRemoved_60()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -178075,7 +178801,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestRemoveKeyset2_46()
+    CHIP_ERROR TestRemoveKeyset2_61()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -178098,7 +178824,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThVerifiesGroupKeyMapEntriesForKeySet2HaveBeenRemoved_47()
+    CHIP_ERROR TestThVerifiesGroupKeyMapEntriesForKeySet2HaveBeenRemoved_62()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
