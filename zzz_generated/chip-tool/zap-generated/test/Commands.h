@@ -32078,7 +32078,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("idleModeInterval", value, 500UL));
+                VerifyOrReturn(CheckValue("idleModeInterval", value, 2000UL));
             }
             break;
         case 2:

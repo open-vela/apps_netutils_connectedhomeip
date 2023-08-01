@@ -43148,7 +43148,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("IdleModeInterval", actualValue, 500UL));
+                VerifyOrReturn(CheckValue("IdleModeInterval", actualValue, 2000UL));
             }
 
             NextTest();
