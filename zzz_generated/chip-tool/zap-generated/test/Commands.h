@@ -125,6 +125,7 @@ public:
         printf("Test_TC_CGEN_2_1\n");
         printf("Test_TC_DGGEN_1_1\n");
         printf("Test_TC_DGGEN_2_1\n");
+        printf("Test_TC_GRPKEY_1_1\n");
         printf("Test_TC_ICDM_1_1\n");
         printf("Test_TC_ICDM_2_1\n");
         printf("Test_TC_I_1_1\n");
@@ -218,6 +219,7 @@ public:
         printf("Test_TC_SMOKECO_2_6\n");
         printf("Test_TC_SWTCH_1_1\n");
         printf("Test_TC_SWTCH_2_1\n");
+        printf("Test_TC_RVCOPSTATE_1_1\n");
         printf("Test_TC_TMP_1_1\n");
         printf("Test_TC_TMP_2_1\n");
         printf("Test_TC_TSTAT_1_1\n");
@@ -376,6 +378,7 @@ public:
         printf("TestGroupDemoConfig\n");
         printf("Test_TC_G_2_2\n");
         printf("Test_TC_G_2_3\n");
+        printf("Test_TC_G_2_4\n");
         printf("Test_TC_G_3_2\n");
         printf("Test_TC_BDX_1_1\n");
         printf("Test_TC_BDX_1_2\n");
@@ -417,9 +420,6 @@ public:
         printf("Test_TC_CNET_4_14\n");
         printf("Test_TC_CNET_4_15\n");
         printf("Test_TC_CNET_4_16\n");
-        printf("Test_TC_CNET_4_17\n");
-        printf("Test_TC_CNET_4_18\n");
-        printf("Test_TC_CNET_4_19\n");
         printf("Test_TC_CNET_4_20\n");
         printf("Test_TC_CNET_4_21\n");
         printf("Test_TC_CNET_4_22\n");
@@ -441,12 +441,9 @@ public:
         printf("Test_TC_DISHM_3_2\n");
         printf("Test_TC_DISHM_3_3\n");
         printf("Test_TC_DESC_2_1\n");
-        printf("Test_TC_FAN_3_3\n");
-        printf("Test_TC_FAN_3_5\n");
         printf("Test_TC_CGEN_2_2\n");
         printf("Test_TC_DGGEN_2_2\n");
         printf("Test_TC_DGGEN_2_3\n");
-        printf("Test_TC_DGGEN_3_1\n");
         printf("Test_TC_ICDM_2_2\n");
         printf("Test_TC_ICDM_2_3\n");
         printf("Test_TC_I_3_2\n");
@@ -467,6 +464,8 @@ public:
         printf("Test_TC_IDM_6_4\n");
         printf("Test_TC_IDM_7_1\n");
         printf("Test_TC_IDM_8_1\n");
+        printf("Test_TC_IDM_10_1\n");
+        printf("Test_TC_IDM_11_1\n");
         printf("Test_TC_LOWPOWER_2_2\n");
         printf("Test_TC_APPLAUNCHER_3_7_1\n");
         printf("Test_TC_APPLAUNCHER_3_8_1\n");
@@ -512,6 +511,8 @@ public:
         printf("Test_TC_CADMIN_1_13\n");
         printf("Test_TC_CADMIN_1_23\n");
         printf("Test_TC_CADMIN_1_24\n");
+        printf("Test_TC_CADMIN_1_25\n");
+        printf("Test_TC_CADMIN_1_26\n");
         printf("Test_TC_MOD_1_2\n");
         printf("Test_TC_MOD_1_3\n");
         printf("Test_TC_MOD_2_1\n");
@@ -576,9 +577,7 @@ public:
         printf("Test_TC_CC_9_3\n");
         printf("Test_TC_DRLK_2_10\n");
         printf("Test_TC_DRLK_3_2\n");
-        printf("Test_TC_DRLK_3_3\n");
         printf("Test_TC_LCFG_2_1\n");
-        printf("Test_TC_LVL_8_1\n");
         printf("Test_TC_LWM_1_1\n");
         printf("Test_TC_LWM_1_2\n");
         printf("Test_TC_LWM_2_1\n");
@@ -624,26 +623,19 @@ public:
         printf("Test_TC_TCTL_3_2\n");
         printf("Test_TC_TCTL_3_3\n");
         printf("Test_TC_TMP_2_2\n");
-        printf("Test_TC_TSTAT_3_1\n");
         printf("Test_TC_TSTAT_3_2\n");
         printf("Test_TC_DGTHREAD_2_5\n");
         printf("Test_TC_ACT_2_1\n");
         printf("Test_TC_ACT_2_2\n");
         printf("Test_TC_ACT_3_2\n");
-        printf("Test_TC_LTIME_2_1\n");
         printf("Test_TC_LTIME_3_1\n");
-        printf("Test_TC_TIMESYNC_2_15\n");
         printf("Test_TC_BIND_2_1\n");
         printf("Test_TC_BIND_2_2\n");
         printf("Test_TC_BIND_2_3\n");
         printf("Test_TC_S_1_1\n");
         printf("Test_TC_S_2_1\n");
-        printf("Test_TC_S_2_2\n");
-        printf("Test_TC_S_2_3\n");
-        printf("Test_TC_S_2_4\n");
         printf("Test_TC_S_2_5\n");
         printf("Test_TC_S_2_6\n");
-        printf("Test_TC_S_3_1\n");
         printf("Test_TC_BRBINFO_2_2\n");
         printf("Test_TC_BRBINFO_3_1\n");
         printf("Test_TC_WASHERCTRL_1_1\n");
@@ -10837,12 +10829,7 @@ private:
             break;
         case 1:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                uint16_t value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
-                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
-            }
+            shouldContinue = true;
             break;
         case 2:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -11072,8 +11059,13 @@ private:
         }
         case 1: {
             LogStep(1, "Step 2: TH reads the ClusterRevision from DUT");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
-                                 BridgedDeviceBasicInformation::Attributes::ClusterRevision::Id, true, chip::NullOptional);
+            VerifyOrDo(!ShouldSkip("PICS_USER_PROMPT"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
         }
         case 2: {
             LogStep(2, "Step 3: TH reads the FeatureMap from DUT");
@@ -12640,12 +12632,7 @@ private:
             break;
         case 1:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                uint16_t value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("clusterRevision", value, 5U));
-                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
-            }
+            shouldContinue = true;
             break;
         case 2:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -13387,8 +13374,13 @@ private:
         }
         case 1: {
             LogStep(1, "Step 2: read the global attribute: ClusterRevision");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::ClusterRevision::Id,
-                                 true, chip::NullOptional);
+            VerifyOrDo(!ShouldSkip("PICS_USER_PROMPT"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
         }
         case 2: {
             LogStep(2, "Step 3a: Read the global attribute: FeatureMap");
@@ -16923,7 +16915,7 @@ private:
             return WaitForMs(kIdentityAlpha, value);
         }
         case 19: {
-            LogStep(19, "TStep 3c: H reads CurrentSaturation attribute from DUT");
+            LogStep(19, "Step 3c: H reads CurrentSaturation attribute from DUT");
             VerifyOrDo(!ShouldSkip("CC.S.F00 && CC.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::CurrentSaturation::Id,
                                  true, chip::NullOptional);
@@ -16994,7 +16986,7 @@ private:
                                  chip::NullOptional);
         }
         case 28: {
-            LogStep(28, "TStep 4b: H reads EnhancedColorMode attribute from DUT");
+            LogStep(28, "Step 4b: H reads EnhancedColorMode attribute from DUT");
             VerifyOrDo(!ShouldSkip("CC.S.F00 && CC.S.A4001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::EnhancedColorMode::Id,
                                  true, chip::NullOptional);
@@ -19240,7 +19232,7 @@ private:
             );
         }
         case 3: {
-            LogStep(3, "TStep 1a: H reads ColorTempPhysicalMinMireds attribute from DUT");
+            LogStep(3, "Step 1a: H reads ColorTempPhysicalMinMireds attribute from DUT");
             VerifyOrDo(!ShouldSkip("CC.S.F04 && CC.S.A400b"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id,
                                  ColorControl::Attributes::ColorTempPhysicalMinMireds::Id, true, chip::NullOptional);
@@ -22345,7 +22337,7 @@ private:
         }
         case 3: {
             LogStep(3,
-                    "TStep 2a: H sends MoveToHue command to DUT with Hue=200, Direction=0x00 (shortest distance) and "
+                    "Step 2a: H sends MoveToHue command to DUT with Hue=200, Direction=0x00 (shortest distance) and "
                     "TransitionTime=0 (immediately).");
             VerifyOrDo(!ShouldSkip("CC.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -24288,7 +24280,7 @@ class Test_TC_CDOCONC_1_1Suite : public TestCommand
 {
 public:
     Test_TC_CDOCONC_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_CDOCONC_1_1", 29, credsIssuerConfig)
+        TestCommand("Test_TC_CDOCONC_1_1", 30, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -24339,8 +24331,8 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("featureMap", value, 0UL));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
         case 3:
@@ -24349,7 +24341,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
         case 4:
@@ -24358,7 +24350,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 1UL));
             }
             break;
         case 5:
@@ -24367,10 +24359,19 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
             }
             break;
         case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 2UL));
+            }
+            break;
+        case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -24380,16 +24381,17 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
             }
             break;
-        case 7:
+        case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 4UL));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 2UL));
             }
             break;
-        case 8:
+        case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -24399,16 +24401,17 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
             }
             break;
-        case 9:
+        case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 8UL));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 2UL));
             }
             break;
-        case 10:
+        case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -24418,16 +24421,17 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
-        case 11:
+        case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 16UL));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 1UL));
             }
             break;
-        case 12:
+        case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -24437,16 +24441,17 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
-        case 13:
+        case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 32UL));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 1UL));
             }
             break;
-        case 14:
+        case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -24461,7 +24466,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
             }
             break;
-        case 15:
+        case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -24475,7 +24480,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
             }
             break;
-        case 16:
+        case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -24484,7 +24489,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 7UL));
             }
             break;
-        case 17:
+        case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -24493,7 +24498,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 7UL));
             }
             break;
-        case 18:
+        case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -24505,7 +24510,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 8UL));
             }
             break;
-        case 19:
+        case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -24518,7 +24523,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 8UL));
             }
             break;
-        case 20:
+        case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -24528,7 +24533,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
             }
             break;
-        case 21:
+        case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -24538,7 +24543,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 4UL));
             }
             break;
-        case 22:
+        case 23:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -24548,7 +24553,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 6UL));
             }
             break;
-        case 23:
+        case 24:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -24558,7 +24563,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 6UL));
             }
             break;
-        case 24:
+        case 25:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -24567,7 +24572,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 10UL));
             }
             break;
-        case 25:
+        case 26:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -24576,7 +24581,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 10UL));
             }
             break;
-        case 26:
+        case 27:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::EventId> value;
@@ -24588,7 +24593,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 27:
+        case 28:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -24600,7 +24605,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 28:
+        case 29:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -24636,185 +24641,190 @@ private:
         }
         case 1: {
             LogStep(1, "Step 2: Read the global attribute: ClusterRevision");
-            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffd"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
                                  CarbonDioxideConcentrationMeasurement::Attributes::ClusterRevision::Id, true, chip::NullOptional);
         }
         case 2: {
-            LogStep(2, "Step 3b: Given CDOCONC.S.F00(MEA) ensure featuremap has the correct bit set");
-            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffc && CDOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(2, "Step 3a: Read the global attribute: FeatureMap and check for either bit 0 or 1 set");
+            VerifyOrDo(
+                !ShouldSkip(
+                    " !CDOCONC.S.F00 && !CDOCONC.S.F01 && !CDOCONC.S.F02 && !CDOCONC.S.F03 && !CDOCONC.S.F04 && !CDOCONC.S.F05"),
+                return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
                                  CarbonDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 3: {
-            LogStep(3, "Step 3c: Given CDOCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffc && !CDOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(3, "Step 3b: Given CDOCONC.S.F00(MEA) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
                                  CarbonDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 4: {
-            LogStep(4, "Step 3d: Given CDOCONC.S.F01(LEV) ensure featuremap has the correct bit set");
-            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffc && CDOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(4, "Step 3c: Given CDOCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !CDOCONC.S.F00 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
                                  CarbonDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 5: {
-            LogStep(5, "Step 3e: Given CDOCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffc && !CDOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(5, "Step 3d: Given CDOCONC.S.F01(LEV) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
                                  CarbonDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 6: {
-            LogStep(6, "Step 3f: Given CDOCONC.S.F02(MED) ensure featuremap has the correct bit set");
-            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffc && CDOCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(6, "Step 3e: Given CDOCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !CDOCONC.S.F01 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
                                  CarbonDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 7: {
-            LogStep(7, "Step 3g: Given CDOCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffc && !CDOCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(7, "Step 3f: Given CDOCONC.S.F02(MED) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.F02 && CDOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
                                  CarbonDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 8: {
-            LogStep(8, "Step 3h: Given CDOCONC.S.F03(CRI) ensure featuremap has the correct bits set");
-            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffc && CDOCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(8, "Step 3g: Given CDOCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !CDOCONC.S.F02 && !CDOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
                                  CarbonDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 9: {
-            LogStep(9, "Step 3i: Given CDOCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffc && !CDOCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(9, "Step 3h: Given CDOCONC.S.F03(CRI) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.F03 && CDOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
                                  CarbonDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 10: {
-            LogStep(10, "Step 3j: Given CDOCONC.S.F04(PEA) ensure featuremap has the correct bits set");
-            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffc && CDOCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(10, "Step 3i: Given CDOCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !CDOCONC.S.F03 && !CDOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
                                  CarbonDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 11: {
-            LogStep(11, "Step 3k: Given CDOCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffc && !CDOCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(11, "Step 3j: Given CDOCONC.S.F04(PEA) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.F04 && CDOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
                                  CarbonDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 12: {
-            LogStep(12, "Step 3l: Given CDOCONC.S.F05(AVG) ensure featuremap has the correct bits set");
-            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffc && CDOCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(12, "Step 3k: Given CDOCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !CDOCONC.S.F04 && !CDOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
                                  CarbonDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 13: {
-            LogStep(13, "Step 3m: Given CDOCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffc && !CDOCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(13, "Step 3l: Given CDOCONC.S.F05(AVG) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.F05 && CDOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
                                  CarbonDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 14: {
-            LogStep(14, "Step 4a: Read the global attribute: AttributeList");
-            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED && CDOCONC.S.Afffb"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(14, "Step 3m: Given CDOCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !CDOCONC.S.F05 && !CDOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
-                                 CarbonDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+                                 CarbonDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 15: {
             LogStep(15, "Step 4a: Read the global attribute: AttributeList");
-            VerifyOrDo(!ShouldSkip("!PICS_EVENT_LIST_ENABLED && CDOCONC.S.Afffb"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
                                  CarbonDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 16: {
-            LogStep(16, "Step 4b: Read the optional attribute Uncertainty in AttributeList");
-            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffb && CDOCONC.S.A0007 && CDOCONC.S.F00"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(16, "Step 4a: Read the global attribute: AttributeList");
+            VerifyOrDo(!ShouldSkip("!PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
                                  CarbonDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 17: {
-            LogStep(
-                17,
-                "Step 4c: Check the optional attribute Uncertainty is excluded from AttributeList when CDOCONC.S.A0007 is not set");
-            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffb && !CDOCONC.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(17, "Step 4b: Read the optional attribute Uncertainty in AttributeList");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.A0007 && CDOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
                                  CarbonDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 18: {
-            LogStep(18,
-                    "Step 4d: Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue "
-                    "and Measurement Unit in AttributeList");
-            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffb && CDOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(
+                18,
+                "Step 4c: Check the optional attribute Uncertainty is excluded from AttributeList when CDOCONC.S.A0007 is not set");
+            VerifyOrDo(!ShouldSkip(" !CDOCONC.S.A0007 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
                                  CarbonDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 19: {
             LogStep(19,
-                    "Step 4e: Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are "
-                    "excluded from AttributeList when CDOCONC.S.F00 (MEA) is not set");
-            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffb && !CDOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4d: Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue "
+                    "and Measurement Unit in AttributeList");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
                                  CarbonDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 20: {
             LogStep(20,
-                    "Step 4f: Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in "
-                    "AttributeList");
-            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffb && CDOCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4e: Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are "
+                    "excluded from AttributeList when CDOCONC.S.F00 (MEA) is not set");
+            VerifyOrDo(!ShouldSkip(" !CDOCONC.S.F00 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
                                  CarbonDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 21: {
             LogStep(21,
-                    "Step 4g: Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when "
-                    "CDOCONC.S.F04 (PEA) is not set");
-            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffb && !CDOCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4f: Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in "
+                    "AttributeList");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
                                  CarbonDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 22: {
             LogStep(22,
-                    "Step 4h: Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in "
-                    "AttributeList");
-            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffb && CDOCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4g: Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when "
+                    "CDOCONC.S.F04 (PEA) is not set");
+            VerifyOrDo(!ShouldSkip(" !CDOCONC.S.F04 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
                                  CarbonDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 23: {
             LogStep(23,
-                    "Step 4i: Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
-                    "CDOCONC.S.F05 (AVG) is not set");
-            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffb && !CDOCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4h: Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in "
+                    "AttributeList");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
                                  CarbonDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 24: {
-            LogStep(24, "Step 4j: Read the optional, feature dependent attribute LevelValue in AttributeList");
-            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffb && CDOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(24,
+                    "Step 4i: Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
+                    "CDOCONC.S.F05 (AVG) is not set");
+            VerifyOrDo(!ShouldSkip(" !CDOCONC.S.F05 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
                                  CarbonDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 25: {
-            LogStep(25, "Step 4k: Check that LevelValue is excluded from AttributeList when CDOCONC.S.F01 (LEV) is not set");
-            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afffb && !CDOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(25, "Step 4j: Read the optional, feature dependent attribute LevelValue in AttributeList");
+            VerifyOrDo(!ShouldSkip("CDOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
                                  CarbonDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 26: {
-            LogStep(26, "Step 5: Read the global attribute: EventList");
-            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED && CDOCONC.S.Afffa"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(26, "Step 4k: Check that LevelValue is excluded from AttributeList when CDOCONC.S.F01 (LEV) is not set");
+            VerifyOrDo(!ShouldSkip(" !CDOCONC.S.F01 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
+                                 CarbonDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 27: {
+            LogStep(27, "Step 5: Read the global attribute: EventList");
+            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
                                  CarbonDioxideConcentrationMeasurement::Attributes::EventList::Id, true, chip::NullOptional);
         }
-        case 27: {
-            LogStep(27, "Step 6: Read the global attribute: AcceptedCommandList");
-            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afff9"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+        case 28: {
+            LogStep(28, "Step 6: Read the global attribute: AcceptedCommandList");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
                                  CarbonDioxideConcentrationMeasurement::Attributes::AcceptedCommandList::Id, true,
                                  chip::NullOptional);
         }
-        case 28: {
-            LogStep(28, "Step 7: Read the global attribute: GeneratedCommandList");
-            VerifyOrDo(!ShouldSkip("CDOCONC.S.Afff8"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+        case 29: {
+            LogStep(29, "Step 7: Read the global attribute: GeneratedCommandList");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonDioxideConcentrationMeasurement::Id,
                                  CarbonDioxideConcentrationMeasurement::Attributes::GeneratedCommandList::Id, true,
                                  chip::NullOptional);
@@ -25064,7 +25074,7 @@ class Test_TC_CMOCONC_1_1Suite : public TestCommand
 {
 public:
     Test_TC_CMOCONC_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_CMOCONC_1_1", 29, credsIssuerConfig)
+        TestCommand("Test_TC_CMOCONC_1_1", 30, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -25115,8 +25125,8 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("featureMap", value, 0UL));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
         case 3:
@@ -25125,7 +25135,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
         case 4:
@@ -25134,7 +25144,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 1UL));
             }
             break;
         case 5:
@@ -25143,10 +25153,19 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
             }
             break;
         case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 2UL));
+            }
+            break;
+        case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -25156,7 +25175,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
             }
             break;
-        case 7:
+        case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -25165,7 +25184,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 4UL));
             }
             break;
-        case 8:
+        case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -25175,7 +25194,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
             }
             break;
-        case 9:
+        case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -25184,7 +25203,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 8UL));
             }
             break;
-        case 10:
+        case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -25194,7 +25213,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
-        case 11:
+        case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -25203,7 +25222,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 16UL));
             }
             break;
-        case 12:
+        case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -25213,7 +25232,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
-        case 13:
+        case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -25222,7 +25241,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 32UL));
             }
             break;
-        case 14:
+        case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -25237,7 +25256,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
             }
             break;
-        case 15:
+        case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -25251,7 +25270,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
             }
             break;
-        case 16:
+        case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -25260,7 +25279,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 7UL));
             }
             break;
-        case 17:
+        case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -25269,7 +25288,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 7UL));
             }
             break;
-        case 18:
+        case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -25281,7 +25300,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 8UL));
             }
             break;
-        case 19:
+        case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -25294,7 +25313,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 8UL));
             }
             break;
-        case 20:
+        case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -25304,7 +25323,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
             }
             break;
-        case 21:
+        case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -25314,7 +25333,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 4UL));
             }
             break;
-        case 22:
+        case 23:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -25324,7 +25343,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 6UL));
             }
             break;
-        case 23:
+        case 24:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -25334,7 +25353,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 6UL));
             }
             break;
-        case 24:
+        case 25:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -25343,7 +25362,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 10UL));
             }
             break;
-        case 25:
+        case 26:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -25352,7 +25371,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 10UL));
             }
             break;
-        case 26:
+        case 27:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::EventId> value;
@@ -25364,7 +25383,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 27:
+        case 28:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -25376,7 +25395,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 28:
+        case 29:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -25412,185 +25431,190 @@ private:
         }
         case 1: {
             LogStep(1, "Step 2: Read the global attribute: ClusterRevision");
-            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffd"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
                                  CarbonMonoxideConcentrationMeasurement::Attributes::ClusterRevision::Id, true, chip::NullOptional);
         }
         case 2: {
-            LogStep(2, "Step 3b: Given CMOCONC.S.F00(MEA) ensure featuremap has the correct bit set");
-            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffc && CMOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(2, "Step 3a: Read the global attribute: FeatureMap and check for either bit 0 or 1 set");
+            VerifyOrDo(
+                !ShouldSkip(
+                    " !CMOCONC.S.F00 && !CMOCONC.S.F01 && !CMOCONC.S.F02 && !CMOCONC.S.F03 && !CMOCONC.S.F04 && !CMOCONC.S.F05 "),
+                return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
                                  CarbonMonoxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 3: {
-            LogStep(3, "Step 3c: Given CMOCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffc && !CMOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(3, "Step 3b: Given CMOCONC.S.F00(MEA) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
                                  CarbonMonoxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 4: {
-            LogStep(4, "Step 3d: Given CMOCONC.S.F01(LEV) ensure featuremap has the correct bit set");
-            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffc && CMOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(4, "Step 3c: Given CMOCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !CMOCONC.S.F00 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
                                  CarbonMonoxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 5: {
-            LogStep(5, "Step 3e: Given CMOCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffc && !CMOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(5, "Step 3d: Given CMOCONC.S.F01(LEV) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
                                  CarbonMonoxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 6: {
-            LogStep(6, "Step 3f: Given CMOCONC.S.F02(MED) ensure featuremap has the correct bit set");
-            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffc && CMOCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(6, "Step 3e: Given CMOCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !CMOCONC.S.F01 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
                                  CarbonMonoxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 7: {
-            LogStep(7, "Step 3g: Given CMOCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffc && !CMOCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(7, "Step 3f: Given CMOCONC.S.F02(MED) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.F02 && CMOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
                                  CarbonMonoxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 8: {
-            LogStep(8, "Step 3h: Given CMOCONC.S.F03(CRI) ensure featuremap has the correct bits set");
-            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffc && CMOCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(8, "Step 3g: Given CMOCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !CMOCONC.S.F02 && !CMOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
                                  CarbonMonoxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 9: {
-            LogStep(9, "Step 3i: Given CMOCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffc && !CMOCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(9, "Step 3h: Given CMOCONC.S.F03(CRI) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.F03 && CMOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
                                  CarbonMonoxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 10: {
-            LogStep(10, "Step 3j: Given CMOCONC.S.F04(PEA) ensure featuremap has the correct bits set");
-            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffc && CMOCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(10, "Step 3i: Given CMOCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !CMOCONC.S.F03 && !CMOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
                                  CarbonMonoxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 11: {
-            LogStep(11, "Step 3k: Given CMOCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffc && !CMOCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(11, "Step 3j: Given CMOCONC.S.F04(PEA) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.F04 && CMOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
                                  CarbonMonoxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 12: {
-            LogStep(12, "Step 3l: Given CMOCONC.S.F05(AVG) ensure featuremap has the correct bits set");
-            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffc && CMOCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(12, "Step 3k: Given CMOCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !CMOCONC.S.F04 && !CMOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
                                  CarbonMonoxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 13: {
-            LogStep(13, "Step 3m: Given CMOCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffc && !CMOCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(13, "Step 3l: Given CMOCONC.S.F05(AVG) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.F05 && CMOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
                                  CarbonMonoxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 14: {
-            LogStep(14, "Step 4a: Read the global attribute: AttributeList");
-            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED && CMOCONC.S.Afffb"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(14, "Step 3m: Given CMOCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !CMOCONC.S.F05 && !CMOCONC.S.F00 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
-                                 CarbonMonoxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 15: {
             LogStep(15, "Step 4a: Read the global attribute: AttributeList");
-            VerifyOrDo(!ShouldSkip("!PICS_EVENT_LIST_ENABLED && CMOCONC.S.Afffb"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
                                  CarbonMonoxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 16: {
-            LogStep(16, "Step 4b: Read the optional attribute Uncertainty in AttributeList");
-            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffb && CMOCONC.S.A0007 && CMOCONC.S.F00"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(16, "Step 4a: Read the global attribute: AttributeList");
+            VerifyOrDo(!ShouldSkip("!PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
                                  CarbonMonoxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 17: {
-            LogStep(
-                17,
-                "Step 4c: Check the optional attribute Uncertainty is excluded from AttributeList when CMOCONC.S.A0007 is not set");
-            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffb && !CMOCONC.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(17, "Step 4b: Read the optional attribute Uncertainty in AttributeList");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.A0007 && CMOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
                                  CarbonMonoxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 18: {
-            LogStep(18,
-                    "Step 4d: Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue "
-                    "and Measurement Unit in AttributeList");
-            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffb && CMOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(
+                18,
+                "Step 4c: Check the optional attribute Uncertainty is excluded from AttributeList when CMOCONC.S.A0007 is not set");
+            VerifyOrDo(!ShouldSkip(" !CMOCONC.S.A0007 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
                                  CarbonMonoxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 19: {
             LogStep(19,
-                    "Step 4e: Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are "
-                    "excluded from AttributeList when CMOCONC.S.F00 (MEA) is not set");
-            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffb && !CMOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4d: Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue "
+                    "and Measurement Unit in AttributeList");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
                                  CarbonMonoxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 20: {
             LogStep(20,
-                    "Step 4f: Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in "
-                    "AttributeList");
-            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffb && CMOCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4e: Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are "
+                    "excluded from AttributeList when CMOCONC.S.F00 (MEA) is not set");
+            VerifyOrDo(!ShouldSkip(" !CMOCONC.S.F00 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
                                  CarbonMonoxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 21: {
             LogStep(21,
-                    "Step 4g: Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when "
-                    "CMOCONC.S.F04 (PEA) is not set");
-            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffb && !CMOCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4f: Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in "
+                    "AttributeList");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
                                  CarbonMonoxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 22: {
             LogStep(22,
-                    "Step 4h: Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in "
-                    "AttributeList");
-            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffb && CMOCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4g: Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when "
+                    "CMOCONC.S.F04 (PEA) is not set");
+            VerifyOrDo(!ShouldSkip(" !CMOCONC.S.F04 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
                                  CarbonMonoxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 23: {
             LogStep(23,
-                    "Step 4i: Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
-                    "CMOCONC.S.F05 (AVG) is not set");
-            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffb && !CMOCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4h: Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in "
+                    "AttributeList");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
                                  CarbonMonoxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 24: {
-            LogStep(24, "Step 4j: Read the optional, feature dependent attribute LevelValue in AttributeList");
-            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffb && CMOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(24,
+                    "Step 4i: Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
+                    "CMOCONC.S.F05 (AVG) is not set");
+            VerifyOrDo(!ShouldSkip(" !CMOCONC.S.F05 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
                                  CarbonMonoxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 25: {
-            LogStep(25, "Step 4k: Check that LevelValue is excluded from AttributeList when CMOCONC.S.F01 (LEV) is not set");
-            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afffb && !CMOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(25, "Step 4j: Read the optional, feature dependent attribute LevelValue in AttributeList");
+            VerifyOrDo(!ShouldSkip("CMOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
                                  CarbonMonoxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 26: {
-            LogStep(26, "Step 5: Read the global attribute: EventList");
-            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED && CMOCONC.S.Afffa"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(26, "Step 4k: Check that LevelValue is excluded from AttributeList when CMOCONC.S.F01 (LEV) is not set");
+            VerifyOrDo(!ShouldSkip(" !CMOCONC.S.F01 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
+                                 CarbonMonoxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 27: {
+            LogStep(27, "Step 5: Read the global attribute: EventList");
+            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
                                  CarbonMonoxideConcentrationMeasurement::Attributes::EventList::Id, true, chip::NullOptional);
         }
-        case 27: {
-            LogStep(27, "Step 6: Read the global attribute: AcceptedCommandList");
-            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afff9"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+        case 28: {
+            LogStep(28, "Step 6: Read the global attribute: AcceptedCommandList");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
                                  CarbonMonoxideConcentrationMeasurement::Attributes::AcceptedCommandList::Id, true,
                                  chip::NullOptional);
         }
-        case 28: {
-            LogStep(28, "Step 7: Read the global attribute: GeneratedCommandList");
-            VerifyOrDo(!ShouldSkip("CMOCONC.S.Afff8"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+        case 29: {
+            LogStep(29, "Step 7: Read the global attribute: GeneratedCommandList");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), CarbonMonoxideConcentrationMeasurement::Id,
                                  CarbonMonoxideConcentrationMeasurement::Attributes::GeneratedCommandList::Id, true,
                                  chip::NullOptional);
@@ -25842,7 +25866,7 @@ class Test_TC_FLDCONC_1_1Suite : public TestCommand
 {
 public:
     Test_TC_FLDCONC_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_FLDCONC_1_1", 29, credsIssuerConfig)
+        TestCommand("Test_TC_FLDCONC_1_1", 30, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -25893,8 +25917,8 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("featureMap", value, 0UL));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
         case 3:
@@ -25903,7 +25927,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
         case 4:
@@ -25912,7 +25936,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 1UL));
             }
             break;
         case 5:
@@ -25921,10 +25945,19 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
             }
             break;
         case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 2UL));
+            }
+            break;
+        case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -25934,7 +25967,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
             }
             break;
-        case 7:
+        case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -25943,7 +25976,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 4UL));
             }
             break;
-        case 8:
+        case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -25953,7 +25986,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
             }
             break;
-        case 9:
+        case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -25962,7 +25995,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 8UL));
             }
             break;
-        case 10:
+        case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -25972,7 +26005,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
-        case 11:
+        case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -25981,7 +26014,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 16UL));
             }
             break;
-        case 12:
+        case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -25991,7 +26024,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
-        case 13:
+        case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -26000,7 +26033,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 32UL));
             }
             break;
-        case 14:
+        case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -26015,7 +26048,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
             }
             break;
-        case 15:
+        case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -26029,7 +26062,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
             }
             break;
-        case 16:
+        case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -26038,7 +26071,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 7UL));
             }
             break;
-        case 17:
+        case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -26047,7 +26080,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 7UL));
             }
             break;
-        case 18:
+        case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -26059,7 +26092,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 8UL));
             }
             break;
-        case 19:
+        case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -26072,7 +26105,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 8UL));
             }
             break;
-        case 20:
+        case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -26082,7 +26115,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
             }
             break;
-        case 21:
+        case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -26092,7 +26125,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 4UL));
             }
             break;
-        case 22:
+        case 23:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -26102,7 +26135,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 6UL));
             }
             break;
-        case 23:
+        case 24:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -26112,7 +26145,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 6UL));
             }
             break;
-        case 24:
+        case 25:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -26121,7 +26154,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 10UL));
             }
             break;
-        case 25:
+        case 26:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -26130,7 +26163,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 10UL));
             }
             break;
-        case 26:
+        case 27:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::EventId> value;
@@ -26142,7 +26175,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 27:
+        case 28:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -26154,7 +26187,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 28:
+        case 29:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -26190,185 +26223,190 @@ private:
         }
         case 1: {
             LogStep(1, "Step 2: Read the global attribute: ClusterRevision");
-            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffd"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
                                  FormaldehydeConcentrationMeasurement::Attributes::ClusterRevision::Id, true, chip::NullOptional);
         }
         case 2: {
-            LogStep(2, "Step 3b: Given FLDCONC.S.F00(MEA) ensure featuremap has the correct bit set");
-            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffc && FLDCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(2, "Step 3a: Read the global attribute: FeatureMap and check for either bit 0 or 1 set");
+            VerifyOrDo(
+                !ShouldSkip(
+                    " !FLDCONC.S.F00 && !FLDCONC.S.F01 && !FLDCONC.S.F02 && !FLDCONC.S.F03 && !FLDCONC.S.F04 && !FLDCONC.S.F05"),
+                return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
                                  FormaldehydeConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 3: {
-            LogStep(3, "Step 3c: Given FLDCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffc && !FLDCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(3, "Step 3b: Given FLDCONC.S.F00(MEA) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
                                  FormaldehydeConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 4: {
-            LogStep(4, "Step 3d: Given FLDCONC.S.F01(LEV) ensure featuremap has the correct bit set");
-            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffc && FLDCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(4, "Step 3c: Given FLDCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !FLDCONC.S.F00 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
                                  FormaldehydeConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 5: {
-            LogStep(5, "Step 3e: Given FLDCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffc && !FLDCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(5, "Step 3d: Given FLDCONC.S.F01(LEV) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
                                  FormaldehydeConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 6: {
-            LogStep(6, "Step 3f: Given FLDCONC.S.F02(MED) ensure featuremap has the correct bit set");
-            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffc && FLDCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(6, "Step 3e: Given FLDCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !FLDCONC.S.F01 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
                                  FormaldehydeConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 7: {
-            LogStep(7, "Step 3g: Given FLDCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffc && !FLDCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(7, "Step 3f: Given FLDCONC.S.F02(MED) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.F02 && FLDCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
                                  FormaldehydeConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 8: {
-            LogStep(8, "Step 3h: Given FLDCONC.S.F03(CRI) ensure featuremap has the correct bits set");
-            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffc && FLDCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(8, "Step 3g: Given FLDCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !FLDCONC.S.F02 && !FLDCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
                                  FormaldehydeConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 9: {
-            LogStep(9, "Step 3i: Given FLDCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffc && !FLDCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(9, "Step 3h: Given FLDCONC.S.F03(CRI) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.F03 && FLDCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
                                  FormaldehydeConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 10: {
-            LogStep(10, "Step 3j: Given FLDCONC.S.F04(PEA) ensure featuremap has the correct bits set");
-            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffc && FLDCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(10, "Step 3i: Given FLDCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !FLDCONC.S.F03 && !FLDCONC.S.F01 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
                                  FormaldehydeConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 11: {
-            LogStep(11, "Step 3k: Given FLDCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffc && !FLDCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(11, "Step 3j: Given FLDCONC.S.F04(PEA) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.F04 && FLDCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
                                  FormaldehydeConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 12: {
-            LogStep(12, "Step 3l: Given FLDCONC.S.F05(AVG) ensure featuremap has the correct bits set");
-            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffc && FLDCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(12, "Step 3k: Given FLDCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !FLDCONC.S.F04 && !FLDCONC.S.F00 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
                                  FormaldehydeConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 13: {
-            LogStep(13, "Step 3m: Given FLDCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffc && !FLDCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(13, "Step 3l: Given FLDCONC.S.F05(AVG) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.F05 && FLDCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
                                  FormaldehydeConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 14: {
-            LogStep(14, "Step 4a: Read the global attribute: AttributeList");
-            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED && FLDCONC.S.Afffb"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(14, "Step 3m: Given FLDCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !FLDCONC.S.F05 && !FLDCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
-                                 FormaldehydeConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+                                 FormaldehydeConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 15: {
             LogStep(15, "Step 4a: Read the global attribute: AttributeList");
-            VerifyOrDo(!ShouldSkip("!PICS_EVENT_LIST_ENABLED && FLDCONC.S.Afffb"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
                                  FormaldehydeConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 16: {
-            LogStep(16, "Step 4b: Read the optional attribute Uncertainty in AttributeList");
-            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffb && FLDCONC.S.A0007 && FLDCONC.S.F00"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(16, "Step 4a: Read the global attribute: AttributeList");
+            VerifyOrDo(!ShouldSkip("!PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
                                  FormaldehydeConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 17: {
-            LogStep(
-                17,
-                "Step 4c: Check the optional attribute Uncertainty is excluded from AttributeList when FLDCONC.S.A0007 is not set");
-            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffb && !FLDCONC.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(17, "Step 4b: Read the optional attribute Uncertainty in AttributeList");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.A0007 && FLDCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
                                  FormaldehydeConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 18: {
-            LogStep(18,
-                    "Step 4d: Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue "
-                    "and Measurement Unit in AttributeList");
-            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffb && FLDCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(
+                18,
+                "Step 4c: Check the optional attribute Uncertainty is excluded from AttributeList when FLDCONC.S.A0007 is not set");
+            VerifyOrDo(!ShouldSkip(" !FLDCONC.S.A0007 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
                                  FormaldehydeConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 19: {
             LogStep(19,
-                    "Step 4e: Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are "
-                    "excluded from AttributeList when FLDCONC.S.F00 (MEA) is not set");
-            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffb && !FLDCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4d: Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue "
+                    "and Measurement Unit in AttributeList");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
                                  FormaldehydeConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 20: {
             LogStep(20,
-                    "Step 4f: Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in "
-                    "AttributeList");
-            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffb && FLDCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4e: Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are "
+                    "excluded from AttributeList when FLDCONC.S.F00 (MEA) is not set");
+            VerifyOrDo(!ShouldSkip(" !FLDCONC.S.F00 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
                                  FormaldehydeConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 21: {
             LogStep(21,
-                    "Step 4g: Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when "
-                    "FLDCONC.S.F04 (PEA) is not set");
-            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffb && !FLDCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4f: Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in "
+                    "AttributeList");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
                                  FormaldehydeConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 22: {
             LogStep(22,
-                    "Step 4h: Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in "
-                    "AttributeList");
-            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffb && FLDCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4g: Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when "
+                    "FLDCONC.S.F04 (PEA) is not set");
+            VerifyOrDo(!ShouldSkip(" !FLDCONC.S.F04 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
                                  FormaldehydeConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 23: {
             LogStep(23,
-                    "Step 4i: Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
-                    "FLDCONC.S.F05 (AVG) is not set");
-            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffb && !FLDCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4h: Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in "
+                    "AttributeList");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
                                  FormaldehydeConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 24: {
-            LogStep(24, "Step 4j: Read the optional, feature dependent attribute LevelValue in AttributeList");
-            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffb && FLDCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(24,
+                    "Step 4i: Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
+                    "FLDCONC.S.F05 (AVG) is not set");
+            VerifyOrDo(!ShouldSkip(" !FLDCONC.S.F05 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
                                  FormaldehydeConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 25: {
-            LogStep(25, "Step 4k: Check that LevelValue is excluded from AttributeList when FLDCONC.S.F01 (LEV) is not set");
-            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afffb && !FLDCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(25, "Step 4j: Read the optional, feature dependent attribute LevelValue in AttributeList");
+            VerifyOrDo(!ShouldSkip("FLDCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
                                  FormaldehydeConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 26: {
-            LogStep(26, "Step 5: Read the global attribute: EventList");
-            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED && FLDCONC.S.Afffa"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(26, "Step 4k: Check that LevelValue is excluded from AttributeList when FLDCONC.S.F01 (LEV) is not set");
+            VerifyOrDo(!ShouldSkip(" !FLDCONC.S.F01 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
+                                 FormaldehydeConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 27: {
+            LogStep(27, "Step 5: Read the global attribute: EventList");
+            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
                                  FormaldehydeConcentrationMeasurement::Attributes::EventList::Id, true, chip::NullOptional);
         }
-        case 27: {
-            LogStep(27, "Step 6: Read the global attribute: AcceptedCommandList");
-            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afff9"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+        case 28: {
+            LogStep(28, "Step 6: Read the global attribute: AcceptedCommandList");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
                                  FormaldehydeConcentrationMeasurement::Attributes::AcceptedCommandList::Id, true,
                                  chip::NullOptional);
         }
-        case 28: {
-            LogStep(28, "Step 7: Read the global attribute: GeneratedCommandList");
-            VerifyOrDo(!ShouldSkip("FLDCONC.S.Afff8"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+        case 29: {
+            LogStep(29, "Step 7: Read the global attribute: GeneratedCommandList");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FormaldehydeConcentrationMeasurement::Id,
                                  FormaldehydeConcentrationMeasurement::Attributes::GeneratedCommandList::Id, true,
                                  chip::NullOptional);
@@ -26616,7 +26654,7 @@ class Test_TC_NDOCONC_1_1Suite : public TestCommand
 {
 public:
     Test_TC_NDOCONC_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_NDOCONC_1_1", 29, credsIssuerConfig)
+        TestCommand("Test_TC_NDOCONC_1_1", 30, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -26667,8 +26705,8 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("featureMap", value, 0UL));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
         case 3:
@@ -26677,7 +26715,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
         case 4:
@@ -26686,7 +26724,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 1UL));
             }
             break;
         case 5:
@@ -26695,10 +26733,19 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
             }
             break;
         case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 2UL));
+            }
+            break;
+        case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -26708,7 +26755,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
             }
             break;
-        case 7:
+        case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -26717,7 +26764,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 4UL));
             }
             break;
-        case 8:
+        case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -26727,7 +26774,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
             }
             break;
-        case 9:
+        case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -26736,7 +26783,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 8UL));
             }
             break;
-        case 10:
+        case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -26746,7 +26793,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
-        case 11:
+        case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -26755,7 +26802,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 16UL));
             }
             break;
-        case 12:
+        case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -26765,7 +26812,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
-        case 13:
+        case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -26774,7 +26821,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 32UL));
             }
             break;
-        case 14:
+        case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -26789,7 +26836,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
             }
             break;
-        case 15:
+        case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -26803,7 +26850,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
             }
             break;
-        case 16:
+        case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -26812,7 +26859,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 7UL));
             }
             break;
-        case 17:
+        case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -26821,7 +26868,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 7UL));
             }
             break;
-        case 18:
+        case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -26833,7 +26880,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 8UL));
             }
             break;
-        case 19:
+        case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -26846,7 +26893,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 8UL));
             }
             break;
-        case 20:
+        case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -26856,7 +26903,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
             }
             break;
-        case 21:
+        case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -26866,7 +26913,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 4UL));
             }
             break;
-        case 22:
+        case 23:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -26876,7 +26923,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 6UL));
             }
             break;
-        case 23:
+        case 24:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -26886,7 +26933,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 6UL));
             }
             break;
-        case 24:
+        case 25:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -26895,7 +26942,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 10UL));
             }
             break;
-        case 25:
+        case 26:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -26904,7 +26951,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 10UL));
             }
             break;
-        case 26:
+        case 27:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::EventId> value;
@@ -26916,7 +26963,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 27:
+        case 28:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -26928,7 +26975,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 28:
+        case 29:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -26964,186 +27011,191 @@ private:
         }
         case 1: {
             LogStep(1, "Step 2: Read the global attribute: ClusterRevision");
-            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffd"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
                                  NitrogenDioxideConcentrationMeasurement::Attributes::ClusterRevision::Id, true,
                                  chip::NullOptional);
         }
         case 2: {
-            LogStep(2, "Step 3b: Given NDOCONC.S.F00(MEA) ensure featuremap has the correct bit set");
-            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffc && NDOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(2, "Step 3a: Read the global attribute: FeatureMap and check for either bit 0 or 1 set");
+            VerifyOrDo(
+                !ShouldSkip(
+                    " !NDOCONC.S.F00 && !NDOCONC.S.F01 && !NDOCONC.S.F02 && !NDOCONC.S.F03 && !NDOCONC.S.F04 && !NDOCONC.S.F05"),
+                return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
                                  NitrogenDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 3: {
-            LogStep(3, "Step 3c: Given NDOCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffc && !NDOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(3, "Step 3b: Given NDOCONC.S.F00(MEA) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
                                  NitrogenDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 4: {
-            LogStep(4, "Step 3d: Given NDOCONC.S.F01(LEV) ensure featuremap has the correct bit set");
-            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffc && NDOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(4, "Step 3c: Given NDOCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !NDOCONC.S.F00 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
                                  NitrogenDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 5: {
-            LogStep(5, "Step 3e: Given NDOCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffc && !NDOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(5, "Step 3d: Given NDOCONC.S.F01(LEV) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
                                  NitrogenDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 6: {
-            LogStep(6, "Step 3f: Given NDOCONC.S.F02(MED) ensure featuremap has the correct bit set");
-            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffc && NDOCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(6, "Step 3e: Given NDOCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !NDOCONC.S.F01 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
                                  NitrogenDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 7: {
-            LogStep(7, "Step 3g: Given NDOCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffc && !NDOCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(7, "Step 3f: Given NDOCONC.S.F02(MED) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.F02 && NDOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
                                  NitrogenDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 8: {
-            LogStep(8, "Step 3h: Given NDOCONC.S.F03(CRI) ensure featuremap has the correct bits set");
-            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffc && NDOCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(8, "Step 3g: Given NDOCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !NDOCONC.S.F02 && !NDOCONC.S.F01 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
                                  NitrogenDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 9: {
-            LogStep(9, "Step 3i: Given NDOCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffc && !NDOCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(9, "Step 3h: Given NDOCONC.S.F03(CRI) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.F03 && NDOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
                                  NitrogenDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 10: {
-            LogStep(10, "Step 3j: Given NDOCONC.S.F04(PEA) ensure featuremap has the correct bits set");
-            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffc && NDOCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(10, "Step 3i: Given NDOCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !NDOCONC.S.F03 && !NDOCONC.S.F01 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
                                  NitrogenDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 11: {
-            LogStep(11, "Step 3k: Given NDOCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffc && !NDOCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(11, "Step 3j: Given NDOCONC.S.F04(PEA) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.F04 && NDOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
                                  NitrogenDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 12: {
-            LogStep(12, "Step 3l: Given NDOCONC.S.F05(AVG) ensure featuremap has the correct bits set");
-            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffc && NDOCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(12, "Step 3k: Given NDOCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !NDOCONC.S.F04 && NDOCONC.S.F00 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
                                  NitrogenDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 13: {
-            LogStep(13, "Step 3m: Given NDOCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffc && !NDOCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(13, "Step 3l: Given NDOCONC.S.F05(AVG) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.F05 && NDOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
                                  NitrogenDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 14: {
-            LogStep(14, "Step 4a: Read the global attribute: AttributeList");
-            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED && NDOCONC.S.Afffb"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(14, "Step 3m: Given NDOCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !NDOCONC.S.F05 && !NDOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
-                                 NitrogenDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 15: {
             LogStep(15, "Step 4a: Read the global attribute: AttributeList");
-            VerifyOrDo(!ShouldSkip("!PICS_EVENT_LIST_ENABLED && NDOCONC.S.Afffb"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
                                  NitrogenDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 16: {
-            LogStep(16, "Step 4b: Read the optional attribute Uncertainty in AttributeList");
-            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffb && NDOCONC.S.A0007 && NDOCONC.S.F00"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(16, "Step 4a: Read the global attribute: AttributeList");
+            VerifyOrDo(!ShouldSkip("!PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
                                  NitrogenDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 17: {
-            LogStep(
-                17,
-                "Step 4c: Check the optional attribute Uncertainty is excluded from AttributeList when NDOCONC.S.A0007 is not set");
-            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffb && !NDOCONC.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(17, "Step 4b: Read the optional attribute Uncertainty in AttributeList");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.A0007 && NDOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
                                  NitrogenDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 18: {
-            LogStep(18,
-                    "Step 4d: Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue "
-                    "and Measurement Unit in AttributeList");
-            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffb && NDOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(
+                18,
+                "Step 4c: Check the optional attribute Uncertainty is excluded from AttributeList when NDOCONC.S.A0007 is not set");
+            VerifyOrDo(!ShouldSkip(" !NDOCONC.S.A0007 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
                                  NitrogenDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 19: {
             LogStep(19,
-                    "Step 4e: Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are "
-                    "excluded from AttributeList when NDOCONC.S.F00 (MEA) is not set");
-            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffb && !NDOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4d: Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue "
+                    "and Measurement Unit in AttributeList");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
                                  NitrogenDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 20: {
             LogStep(20,
-                    "Step 4f: Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in "
-                    "AttributeList");
-            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffb && NDOCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4e: Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are "
+                    "excluded from AttributeList when NDOCONC.S.F00 (MEA) is not set");
+            VerifyOrDo(!ShouldSkip(" !NDOCONC.S.F00 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
                                  NitrogenDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 21: {
             LogStep(21,
-                    "Step 4g: Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when "
-                    "NDOCONC.S.F04 (PEA) is not set");
-            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffb && !NDOCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4f: Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in "
+                    "AttributeList");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
                                  NitrogenDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 22: {
             LogStep(22,
-                    "Step 4h: Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in "
-                    "AttributeList");
-            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffb && NDOCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4g: Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when "
+                    "NDOCONC.S.F04 (PEA) is not set");
+            VerifyOrDo(!ShouldSkip(" !NDOCONC.S.F04 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
                                  NitrogenDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 23: {
             LogStep(23,
-                    "Step 3i: Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
-                    "NDOCONC.S.F05 (AVG) is not set");
-            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffb && !NDOCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4h: Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in "
+                    "AttributeList");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
                                  NitrogenDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 24: {
-            LogStep(24, "Step 3j: Read the optional, feature dependent attribute LevelValue in AttributeList");
-            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffb && NDOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(24,
+                    "Step 3i: Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
+                    "NDOCONC.S.F05 (AVG) is not set");
+            VerifyOrDo(!ShouldSkip(" !NDOCONC.S.F05 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
                                  NitrogenDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 25: {
-            LogStep(25, "Step 3k: Check that LevelValue is excluded from AttributeList when NDOCONC.S.F01 (LEV) is not set");
-            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afffb && !NDOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(25, "Step 3j: Read the optional, feature dependent attribute LevelValue in AttributeList");
+            VerifyOrDo(!ShouldSkip("NDOCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
                                  NitrogenDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 26: {
-            LogStep(26, "Step 5: Read the global attribute: EventList");
-            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED && NDOCONC.S.Afffa"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(26, "Step 3k: Check that LevelValue is excluded from AttributeList when NDOCONC.S.F01 (LEV) is not set");
+            VerifyOrDo(!ShouldSkip(" !NDOCONC.S.F01 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
+                                 NitrogenDioxideConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 27: {
+            LogStep(27, "Step 5: Read the global attribute: EventList");
+            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
                                  NitrogenDioxideConcentrationMeasurement::Attributes::EventList::Id, true, chip::NullOptional);
         }
-        case 27: {
-            LogStep(27, "Step 6: Read the global attribute: AcceptedCommandList");
-            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afff9"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+        case 28: {
+            LogStep(28, "Step 6: Read the global attribute: AcceptedCommandList");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
                                  NitrogenDioxideConcentrationMeasurement::Attributes::AcceptedCommandList::Id, true,
                                  chip::NullOptional);
         }
-        case 28: {
-            LogStep(28, "Step 7: Read the global attribute: GeneratedCommandList");
-            VerifyOrDo(!ShouldSkip("NDOCONC.S.Afff8"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+        case 29: {
+            LogStep(29, "Step 7: Read the global attribute: GeneratedCommandList");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), NitrogenDioxideConcentrationMeasurement::Id,
                                  NitrogenDioxideConcentrationMeasurement::Attributes::GeneratedCommandList::Id, true,
                                  chip::NullOptional);
@@ -27395,7 +27447,7 @@ private:
 class Test_TC_OZCONC_1_1Suite : public TestCommand
 {
 public:
-    Test_TC_OZCONC_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_OZCONC_1_1", 29, credsIssuerConfig)
+    Test_TC_OZCONC_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_OZCONC_1_1", 30, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -27446,8 +27498,8 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("featureMap", value, 0UL));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
         case 3:
@@ -27456,7 +27508,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
         case 4:
@@ -27465,7 +27517,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 1UL));
             }
             break;
         case 5:
@@ -27474,10 +27526,19 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
             }
             break;
         case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 2UL));
+            }
+            break;
+        case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -27487,7 +27548,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
             }
             break;
-        case 7:
+        case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -27496,7 +27557,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 4UL));
             }
             break;
-        case 8:
+        case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -27506,7 +27567,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
             }
             break;
-        case 9:
+        case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -27515,7 +27576,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 8UL));
             }
             break;
-        case 10:
+        case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -27525,7 +27586,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
-        case 11:
+        case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -27534,7 +27595,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 16UL));
             }
             break;
-        case 12:
+        case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -27544,7 +27605,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
-        case 13:
+        case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -27553,7 +27614,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 32UL));
             }
             break;
-        case 14:
+        case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -27568,7 +27629,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
             }
             break;
-        case 15:
+        case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -27582,7 +27643,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
             }
             break;
-        case 16:
+        case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -27591,7 +27652,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 7UL));
             }
             break;
-        case 17:
+        case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -27600,7 +27661,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 7UL));
             }
             break;
-        case 18:
+        case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -27612,7 +27673,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 8UL));
             }
             break;
-        case 19:
+        case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -27625,7 +27686,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 8UL));
             }
             break;
-        case 20:
+        case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -27635,7 +27696,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
             }
             break;
-        case 21:
+        case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -27645,7 +27706,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 4UL));
             }
             break;
-        case 22:
+        case 23:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -27655,7 +27716,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 6UL));
             }
             break;
-        case 23:
+        case 24:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -27665,7 +27726,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 6UL));
             }
             break;
-        case 24:
+        case 25:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -27674,7 +27735,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 10UL));
             }
             break;
-        case 25:
+        case 26:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -27683,7 +27744,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 10UL));
             }
             break;
-        case 26:
+        case 27:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::EventId> value;
@@ -27695,7 +27756,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 27:
+        case 28:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -27707,7 +27768,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 28:
+        case 29:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -27743,184 +27804,188 @@ private:
         }
         case 1: {
             LogStep(1, "Step 2: Read the global attribute: ClusterRevision");
-            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffd"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
                                  OzoneConcentrationMeasurement::Attributes::ClusterRevision::Id, true, chip::NullOptional);
         }
         case 2: {
-            LogStep(2, "Step 3b: Given OZCONC.S.F00(MEA) ensure featuremap has the correct bit set");
-            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffc && OZCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(2, "Step 3a: Read the global attribute: FeatureMap and check for either bit 0 or 1 set");
+            VerifyOrDo(
+                !ShouldSkip(" !OZCONC.S.F00 && !OZCONC.S.F01 && !OZCONC.S.F02 && !OZCONC.S.F03 && !OZCONC.S.F04 && !OZCONC.S.F05"),
+                return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
                                  OzoneConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 3: {
-            LogStep(3, "Step 3c: Given OZCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffc && !OZCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(3, "Step 3b: Given OZCONC.S.F00(MEA) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
                                  OzoneConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 4: {
-            LogStep(4, "Step 3d: Given OZCONC.S.F01(LEV) ensure featuremap has the correct bit set");
-            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffc && OZCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(4, "Step 3c: Given OZCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !OZCONC.S.F00 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
                                  OzoneConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 5: {
-            LogStep(5, "Step 3e: Given OZCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffc && !OZCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(5, "Step 3d: Given OZCONC.S.F01(LEV) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
                                  OzoneConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 6: {
-            LogStep(6, "Step 3f: Given OZCONC.S.F02(MED) ensure featuremap has the correct bit set");
-            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffc && OZCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(6, "Step 3e: Given OZCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !OZCONC.S.F01 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
                                  OzoneConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 7: {
-            LogStep(7, "Step 3g: Given OZCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffc && !OZCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(7, "Step 3f: Given OZCONC.S.F02(MED) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.F02 && OZCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
                                  OzoneConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 8: {
-            LogStep(8, "Step 3h: Given OZCONC.S.F03(CRI) ensure featuremap has the correct bits set");
-            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffc && OZCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(8, "Step 3g: Given OZCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !OZCONC.S.F02 && !OZCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
                                  OzoneConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 9: {
-            LogStep(9, "Step 3i: Given OZCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffc && !OZCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(9, "Step 3h: Given OZCONC.S.F03(CRI) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.F03 && OZCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
                                  OzoneConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 10: {
-            LogStep(10, "Step 3j: Given OZCONC.S.F04(PEA) ensure featuremap has the correct bits set");
-            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffc && OZCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(10, "Step 3i: Given OZCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !OZCONC.S.F03 && !OZCONC.S.F01 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
                                  OzoneConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 11: {
-            LogStep(11, "Step 3k: Given OZCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffc && !OZCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(11, "Step 3j: Given OZCONC.S.F04(PEA) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.F04 && OZCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
                                  OzoneConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 12: {
-            LogStep(12, "Step 3l: Given OZCONC.S.F05(AVG) ensure featuremap has the correct bits set");
-            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffc && OZCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(12, "Step 3k: Given OZCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !OZCONC.S.F04 && !OZCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
                                  OzoneConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 13: {
-            LogStep(13, "Step 3m: Given OZCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffc && !OZCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(13, "Step 3l: Given OZCONC.S.F05(AVG) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.F05 && OZCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
                                  OzoneConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 14: {
-            LogStep(14, "Step 4a: Read the global attribute: AttributeList");
-            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED && OZCONC.S.Afffb"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(14, "Step 3m: Given OZCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !OZCONC.S.F05 && !OZCONC.S.F00 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
-                                 OzoneConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+                                 OzoneConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 15: {
             LogStep(15, "Step 4a: Read the global attribute: AttributeList");
-            VerifyOrDo(!ShouldSkip("!PICS_EVENT_LIST_ENABLED && OZCONC.S.Afffb"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
                                  OzoneConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 16: {
-            LogStep(16, "Step 4b: Read the optional attribute Uncertainty in AttributeList");
-            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffb && OZCONC.S.A0007 && OZCONC.S.F00"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(16, "Step 4a: Read the global attribute: AttributeList");
+            VerifyOrDo(!ShouldSkip("!PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
                                  OzoneConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 17: {
-            LogStep(
-                17,
-                "Step 4c: Check the optional attribute Uncertainty is excluded from AttributeList when OZCONC.S.A0007 is not set");
-            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffb && !OZCONC.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(17, "Step 4b: Read the optional attribute Uncertainty in AttributeList");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.A0007 && OZCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
                                  OzoneConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 18: {
-            LogStep(18,
-                    "Step 4d: Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue "
-                    "and Measurement Unit in AttributeList");
-            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffb && OZCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(
+                18,
+                "Step 4c: Check the optional attribute Uncertainty is excluded from AttributeList when OZCONC.S.A0007 is not set");
+            VerifyOrDo(!ShouldSkip(" !OZCONC.S.A0007 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
                                  OzoneConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 19: {
             LogStep(19,
-                    "Step 4e: Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are "
-                    "excluded from AttributeList when OZCONC.S.F00 (MEA) is not set");
-            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffb && !OZCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4d: Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue "
+                    "and Measurement Unit in AttributeList");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
                                  OzoneConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 20: {
             LogStep(20,
-                    "Step 4f: Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in "
-                    "AttributeList");
-            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffb && OZCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4e: Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are "
+                    "excluded from AttributeList when OZCONC.S.F00 (MEA) is not set");
+            VerifyOrDo(!ShouldSkip(" !OZCONC.S.F00 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
                                  OzoneConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 21: {
             LogStep(21,
-                    "Step 4g: Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when "
-                    "OZCONC.S.F04 (PEA) is not set");
-            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffb && !OZCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4f: Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in "
+                    "AttributeList");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
                                  OzoneConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 22: {
             LogStep(22,
-                    "Step 4h: Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in "
-                    "AttributeList");
-            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffb && OZCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4g: Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when "
+                    "OZCONC.S.F04 (PEA) is not set");
+            VerifyOrDo(!ShouldSkip(" !OZCONC.S.F04 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
                                  OzoneConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 23: {
             LogStep(23,
-                    "Step 4i: Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
-                    "OZCONC.S.F05 (AVG) is not set");
-            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffb && !OZCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4h: Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in "
+                    "AttributeList");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
                                  OzoneConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 24: {
-            LogStep(24, "Step 4j: Read the optional, feature dependent attribute LevelValue in AttributeList");
-            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffb && OZCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(24,
+                    "Step 4i: Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
+                    "OZCONC.S.F05 (AVG) is not set");
+            VerifyOrDo(!ShouldSkip(" !OZCONC.S.F05 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
                                  OzoneConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 25: {
-            LogStep(25, "Step 4k: Check that LevelValue is excluded from AttributeList when OZCONC.S.F01 (LEV) is not set");
-            VerifyOrDo(!ShouldSkip("OZCONC.S.Afffb && !OZCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(25, "Step 4j: Read the optional, feature dependent attribute LevelValue in AttributeList");
+            VerifyOrDo(!ShouldSkip("OZCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
                                  OzoneConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 26: {
-            LogStep(26, "Step 5: Read the global attribute: EventList");
-            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED && OZCONC.S.Afffa"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(26, "Step 4k: Check that LevelValue is excluded from AttributeList when OZCONC.S.F01 (LEV) is not set");
+            VerifyOrDo(!ShouldSkip(" !OZCONC.S.F01 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
+                                 OzoneConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 27: {
+            LogStep(27, "Step 5: Read the global attribute: EventList");
+            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
                                  OzoneConcentrationMeasurement::Attributes::EventList::Id, true, chip::NullOptional);
         }
-        case 27: {
-            LogStep(27, "Step 6: Read the global attribute: AcceptedCommandList");
-            VerifyOrDo(!ShouldSkip("OZCONC.S.Afff9"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+        case 28: {
+            LogStep(28, "Step 6: Read the global attribute: AcceptedCommandList");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
                                  OzoneConcentrationMeasurement::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
         }
-        case 28: {
-            LogStep(28, "Step 7: Read the global attribute: GeneratedCommandList");
-            VerifyOrDo(!ShouldSkip("OZCONC.S.Afff8"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+        case 29: {
+            LogStep(29, "Step 7: Read the global attribute: GeneratedCommandList");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OzoneConcentrationMeasurement::Id,
                                  OzoneConcentrationMeasurement::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
         }
@@ -28164,7 +28229,7 @@ class Test_TC_PMHCONC_1_1Suite : public TestCommand
 {
 public:
     Test_TC_PMHCONC_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_PMHCONC_1_1", 29, credsIssuerConfig)
+        TestCommand("Test_TC_PMHCONC_1_1", 30, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -28215,8 +28280,8 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("featureMap", value, 0UL));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
         case 3:
@@ -28225,7 +28290,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
         case 4:
@@ -28234,7 +28299,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 1UL));
             }
             break;
         case 5:
@@ -28243,10 +28308,19 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
             }
             break;
         case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 2UL));
+            }
+            break;
+        case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -28256,7 +28330,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
             }
             break;
-        case 7:
+        case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -28265,7 +28339,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 4UL));
             }
             break;
-        case 8:
+        case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -28275,7 +28349,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
             }
             break;
-        case 9:
+        case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -28284,7 +28358,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 8UL));
             }
             break;
-        case 10:
+        case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -28294,7 +28368,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
-        case 11:
+        case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -28303,7 +28377,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 16UL));
             }
             break;
-        case 12:
+        case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -28313,7 +28387,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
-        case 13:
+        case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -28322,7 +28396,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 32UL));
             }
             break;
-        case 14:
+        case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -28337,7 +28411,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
             }
             break;
-        case 15:
+        case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -28351,7 +28425,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
             }
             break;
-        case 16:
+        case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -28360,7 +28434,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 7UL));
             }
             break;
-        case 17:
+        case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -28369,7 +28443,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 7UL));
             }
             break;
-        case 18:
+        case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -28381,7 +28455,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 8UL));
             }
             break;
-        case 19:
+        case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -28394,7 +28468,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 8UL));
             }
             break;
-        case 20:
+        case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -28404,7 +28478,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
             }
             break;
-        case 21:
+        case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -28414,7 +28488,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 4UL));
             }
             break;
-        case 22:
+        case 23:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -28424,7 +28498,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 6UL));
             }
             break;
-        case 23:
+        case 24:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -28434,7 +28508,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 6UL));
             }
             break;
-        case 24:
+        case 25:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -28443,7 +28517,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 10UL));
             }
             break;
-        case 25:
+        case 26:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -28452,7 +28526,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 10UL));
             }
             break;
-        case 26:
+        case 27:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::EventId> value;
@@ -28464,7 +28538,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 27:
+        case 28:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -28476,7 +28550,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 28:
+        case 29:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -28512,184 +28586,189 @@ private:
         }
         case 1: {
             LogStep(1, "Step 2: Read the global attribute: ClusterRevision");
-            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffd"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
                                  Pm1ConcentrationMeasurement::Attributes::ClusterRevision::Id, true, chip::NullOptional);
         }
         case 2: {
-            LogStep(2, "Step 3b: Given PMHCONC.S.F00(MEA) ensure featuremap has the correct bit set");
-            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffc && PMHCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(2, "Step 3a: Read the global attribute: FeatureMap and check for either bit 0 or 1 set");
+            VerifyOrDo(
+                !ShouldSkip(
+                    " !PMHCONC.S.F00 && !PMHCONC.S.F01 && !PMHCONC.S.F02 && !PMHCONC.S.F03 && !PMHCONC.S.F04 && !PMHCONC.S.F05"),
+                return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
                                  Pm1ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 3: {
-            LogStep(3, "Step 3c: Given PMHCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffc && !PMHCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(3, "Step 3b: Given PMHCONC.S.F00(MEA) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
                                  Pm1ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 4: {
-            LogStep(4, "Step 3d: Given PMHCONC.S.F01(LEV) ensure featuremap has the correct bit set");
-            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffc && PMHCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(4, "Step 3c: Given PMHCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !PMHCONC.S.F00 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
                                  Pm1ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 5: {
-            LogStep(5, "Step 3e: Given PMHCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffc && !PMHCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(5, "Step 3d: Given PMHCONC.S.F01(LEV) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
                                  Pm1ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 6: {
-            LogStep(6, "Step 3f: Given PMHCONC.S.F02(MED) ensure featuremap has the correct bit set");
-            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffc && PMHCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(6, "Step 3e: Given PMHCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !PMHCONC.S.F01 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
                                  Pm1ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 7: {
-            LogStep(7, "Step 3g: Given PMHCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffc && !PMHCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(7, "Step 3f: Given PMHCONC.S.F02(MED) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.F02 && PMHCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
                                  Pm1ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 8: {
-            LogStep(8, "Step 3h: Given PMHCONC.S.F03(CRI) ensure featuremap has the correct bits set");
-            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffc && PMHCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(8, "Step 3g: Given PMHCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !PMHCONC.S.F02 && !PMHCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
                                  Pm1ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 9: {
-            LogStep(9, "Step 3i: Given PMHCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffc && !PMHCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(9, "Step 3h: Given PMHCONC.S.F03(CRI) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.F03 && PMHCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
                                  Pm1ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 10: {
-            LogStep(10, "Step 3j: Given PMHCONC.S.F04(PEA) ensure featuremap has the correct bits set");
-            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffc && PMHCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(10, "Step 3i: Given PMHCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !PMHCONC.S.F03 && !PMHCONC.S.F01 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
                                  Pm1ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 11: {
-            LogStep(11, "Step 3k: Given PMHCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffc && !PMHCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(11, "Step 3j: Given PMHCONC.S.F04(PEA) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.F04 && PMHCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
                                  Pm1ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 12: {
-            LogStep(12, "Step 3l: Given PMHCONC.S.F05(AVG) ensure featuremap has the correct bits set");
-            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffc && PMHCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(12, "Step 3k: Given PMHCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !PMHCONC.S.F04 && PMHCONC.S.F00 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
                                  Pm1ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 13: {
-            LogStep(13, "Step 3m: Given PMHCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffc && !PMHCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(13, "Step 3l: Given PMHCONC.S.F05(AVG) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.F05 && PMHCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
                                  Pm1ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 14: {
-            LogStep(14, "Step 4a: Read the global attribute: AttributeList");
-            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED && PMHCONC.S.Afffb"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(14, "Step 3m: Given PMHCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !PMHCONC.S.F05 && !PMHCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
-                                 Pm1ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+                                 Pm1ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 15: {
             LogStep(15, "Step 4a: Read the global attribute: AttributeList");
-            VerifyOrDo(!ShouldSkip("!PICS_EVENT_LIST_ENABLED && PMHCONC.S.Afffb"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
                                  Pm1ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 16: {
-            LogStep(16, "Step 4b: Read the optional attribute Uncertainty in AttributeList");
-            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffb && PMHCONC.S.A0007 && PMHCONC.S.F00"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(16, "Step 4a: Read the global attribute: AttributeList");
+            VerifyOrDo(!ShouldSkip("!PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
                                  Pm1ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 17: {
-            LogStep(
-                17,
-                "Step 4c: Check the optional attribute Uncertainty is excluded from AttributeList when PMHCONC.S.A0007 is not set");
-            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffb && !PMHCONC.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(17, "Step 4b: Read the optional attribute Uncertainty in AttributeList");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.A0007 && PMHCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
                                  Pm1ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 18: {
-            LogStep(18,
-                    "Step 4d: Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue "
-                    "and Measurement Unit in AttributeList");
-            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffb && PMHCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(
+                18,
+                "Step 4c: Check the optional attribute Uncertainty is excluded from AttributeList when PMHCONC.S.A0007 is not set");
+            VerifyOrDo(!ShouldSkip(" !PMHCONC.S.A0007 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
                                  Pm1ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 19: {
             LogStep(19,
-                    "Step 4e: Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are "
-                    "excluded from AttributeList when PMHCONC.S.F00 (MEA) is not set");
-            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffb && !PMHCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4d: Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue "
+                    "and Measurement Unit in AttributeList");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
                                  Pm1ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 20: {
             LogStep(20,
-                    "Step 4f: Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in "
-                    "AttributeList");
-            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffb && PMHCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4e: Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are "
+                    "excluded from AttributeList when PMHCONC.S.F00 (MEA) is not set");
+            VerifyOrDo(!ShouldSkip(" !PMHCONC.S.F00 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
                                  Pm1ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 21: {
             LogStep(21,
-                    "Step 4g: Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when "
-                    "PMHCONC.S.F04 (PEA) is not set");
-            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffb && !PMHCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4f: Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in "
+                    "AttributeList");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
                                  Pm1ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 22: {
             LogStep(22,
-                    "Step 4h: Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in "
-                    "AttributeList");
-            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffb && PMHCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4g: Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when "
+                    "PMHCONC.S.F04 (PEA) is not set");
+            VerifyOrDo(!ShouldSkip(" !PMHCONC.S.F04 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
                                  Pm1ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 23: {
             LogStep(23,
-                    "Step 4i: Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
-                    "PMHCONC.S.F05 (AVG) is not set");
-            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffb && !PMHCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4h: Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in "
+                    "AttributeList");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
                                  Pm1ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 24: {
-            LogStep(24, "Step 4j: Read the optional, feature dependent attribute LevelValue in AttributeList");
-            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffb && PMHCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(24,
+                    "Step 4i: Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
+                    "PMHCONC.S.F05 (AVG) is not set");
+            VerifyOrDo(!ShouldSkip(" !PMHCONC.S.F05 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
                                  Pm1ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 25: {
-            LogStep(25, "Step 4k: Check that LevelValue is excluded from AttributeList when PMHCONC.S.F01 (LEV) is not set");
-            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afffb && !PMHCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(25, "Step 4j: Read the optional, feature dependent attribute LevelValue in AttributeList");
+            VerifyOrDo(!ShouldSkip("PMHCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
                                  Pm1ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 26: {
-            LogStep(26, "Step 5: Read the global attribute: EventList");
-            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED && PMHCONC.S.Afffa"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(26, "Step 4k: Check that LevelValue is excluded from AttributeList when PMHCONC.S.F01 (LEV) is not set");
+            VerifyOrDo(!ShouldSkip(" !PMHCONC.S.F01 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
+                                 Pm1ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 27: {
+            LogStep(27, "Step 5: Read the global attribute: EventList");
+            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
                                  Pm1ConcentrationMeasurement::Attributes::EventList::Id, true, chip::NullOptional);
         }
-        case 27: {
-            LogStep(27, "Step 6: Read the global attribute: AcceptedCommandList");
-            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afff9"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+        case 28: {
+            LogStep(28, "Step 6: Read the global attribute: AcceptedCommandList");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
                                  Pm1ConcentrationMeasurement::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
         }
-        case 28: {
-            LogStep(28, "Step 7: Read the global attribute: GeneratedCommandList");
-            VerifyOrDo(!ShouldSkip("PMHCONC.S.Afff8"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+        case 29: {
+            LogStep(29, "Step 7: Read the global attribute: GeneratedCommandList");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm1ConcentrationMeasurement::Id,
                                  Pm1ConcentrationMeasurement::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
         }
@@ -28933,7 +29012,7 @@ class Test_TC_PMICONC_1_1Suite : public TestCommand
 {
 public:
     Test_TC_PMICONC_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_PMICONC_1_1", 29, credsIssuerConfig)
+        TestCommand("Test_TC_PMICONC_1_1", 30, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -28984,8 +29063,8 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("featureMap", value, 0UL));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
         case 3:
@@ -28994,7 +29073,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
         case 4:
@@ -29003,7 +29082,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 1UL));
             }
             break;
         case 5:
@@ -29012,10 +29091,19 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
             }
             break;
         case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 2UL));
+            }
+            break;
+        case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -29025,7 +29113,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
             }
             break;
-        case 7:
+        case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -29034,7 +29122,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 4UL));
             }
             break;
-        case 8:
+        case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -29044,7 +29132,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
             }
             break;
-        case 9:
+        case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -29053,7 +29141,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 8UL));
             }
             break;
-        case 10:
+        case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -29063,7 +29151,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
-        case 11:
+        case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -29072,7 +29160,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 16UL));
             }
             break;
-        case 12:
+        case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -29082,7 +29170,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
-        case 13:
+        case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -29091,7 +29179,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 32UL));
             }
             break;
-        case 14:
+        case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -29106,7 +29194,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
             }
             break;
-        case 15:
+        case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -29120,7 +29208,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
             }
             break;
-        case 16:
+        case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -29129,7 +29217,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 7UL));
             }
             break;
-        case 17:
+        case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -29138,7 +29226,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 7UL));
             }
             break;
-        case 18:
+        case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -29150,7 +29238,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 8UL));
             }
             break;
-        case 19:
+        case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -29163,7 +29251,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 8UL));
             }
             break;
-        case 20:
+        case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -29173,7 +29261,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
             }
             break;
-        case 21:
+        case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -29183,7 +29271,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 4UL));
             }
             break;
-        case 22:
+        case 23:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -29193,7 +29281,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 6UL));
             }
             break;
-        case 23:
+        case 24:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -29203,7 +29291,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 6UL));
             }
             break;
-        case 24:
+        case 25:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -29212,7 +29300,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 10UL));
             }
             break;
-        case 25:
+        case 26:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -29221,7 +29309,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 10UL));
             }
             break;
-        case 26:
+        case 27:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::EventId> value;
@@ -29233,7 +29321,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 27:
+        case 28:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -29245,7 +29333,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 28:
+        case 29:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -29281,184 +29369,189 @@ private:
         }
         case 1: {
             LogStep(1, "Step 2: Read the global attribute: ClusterRevision");
-            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffd"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
                                  Pm25ConcentrationMeasurement::Attributes::ClusterRevision::Id, true, chip::NullOptional);
         }
         case 2: {
-            LogStep(2, "Step 3b: Given PMICONC.S.F00(MEA) ensure featuremap has the correct bit set");
-            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffc && PMICONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(2, "Step 3a: Read the global attribute: FeatureMap and check for either bit 0 or 1 set");
+            VerifyOrDo(
+                !ShouldSkip(
+                    " !PMICONC.S.F00 && !PMICONC.S.F01 && !PMICONC.S.F02 && !PMICONC.S.F03 && !PMICONC.S.F04 && !PMICONC.S.F05 "),
+                return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
                                  Pm25ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 3: {
-            LogStep(3, "Step 3c: Given PMICONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffc && !PMICONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(3, "Step 3b: Given PMICONC.S.F00(MEA) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
                                  Pm25ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 4: {
-            LogStep(4, "Step 3d: Given PMICONC.S.F01(LEV) ensure featuremap has the correct bit set");
-            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffc && PMICONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(4, "Step 3c: Given PMICONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !PMICONC.S.F00 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
                                  Pm25ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 5: {
-            LogStep(5, "Step 3e: Given PMICONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffc && !PMICONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(5, "Step 3d: Given PMICONC.S.F01(LEV) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
                                  Pm25ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 6: {
-            LogStep(6, "Step 3f: Given PMICONC.S.F02(MED) ensure featuremap has the correct bit set");
-            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffc && PMICONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(6, "Step 3e: Given PMICONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !PMICONC.S.F01 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
                                  Pm25ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 7: {
-            LogStep(7, "Step 3g: Given PMICONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffc && !PMICONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(7, "Step 3f: Given PMICONC.S.F02(MED) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.F02 && PMICONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
                                  Pm25ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 8: {
-            LogStep(8, "Step 3h: Given PMICONC.S.F03(CRI) ensure featuremap has the correct bits set");
-            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffc && PMICONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(8, "Step 3g: Given PMICONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !PMICONC.S.F02 && !PMICONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
                                  Pm25ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 9: {
-            LogStep(9, "Step 3i: Given PMICONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffc && !PMICONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(9, "Step 3h: Given PMICONC.S.F03(CRI) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.F03 && PMICONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
                                  Pm25ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 10: {
-            LogStep(10, "Step 3j: Given PMICONC.S.F04(PEA) ensure featuremap has the correct bits set");
-            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffc && PMICONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(10, "Step 3i: Given PMICONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !PMICONC.S.F03 && !PMICONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
                                  Pm25ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 11: {
-            LogStep(11, "Step 3k: Given PMICONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffc && !PMICONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(11, "Step 3j: Given PMICONC.S.F04(PEA) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.F04 && PMICONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
                                  Pm25ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 12: {
-            LogStep(12, "Step 3l: Given PMICONC.S.F05(AVG) ensure featuremap has the correct bits set");
-            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffc && PMICONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(12, "Step 3k: Given PMICONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !PMICONC.S.F04 && !PMICONC.S.F00 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
                                  Pm25ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 13: {
-            LogStep(13, "Step 3m: Given PMICONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffc && !PMICONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(13, "Step 3l: Given PMICONC.S.F05(AVG) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.F05 && PMICONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
                                  Pm25ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 14: {
-            LogStep(14, "Step 4a: Read the global attribute: AttributeList");
-            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED && PMICONC.S.Afffb"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(14, "Step 3m: Given PMICONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !PMICONC.S.F05 && !PMICONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
-                                 Pm25ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+                                 Pm25ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 15: {
             LogStep(15, "Step 4a: Read the global attribute: AttributeList");
-            VerifyOrDo(!ShouldSkip("!PICS_EVENT_LIST_ENABLED && PMICONC.S.Afffb"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
                                  Pm25ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 16: {
-            LogStep(16, "Step 4b: Read the optional attribute Uncertainty in AttributeList");
-            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffb && PMICONC.S.A0007 && PMICONC.S.F00"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(16, "Step 4a: Read the global attribute: AttributeList");
+            VerifyOrDo(!ShouldSkip("!PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
                                  Pm25ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 17: {
-            LogStep(
-                17,
-                "Step 4c: Check the optional attribute Uncertainty is excluded from AttributeList when PMICONC.S.A0007 is not set");
-            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffb && !PMICONC.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(17, "Step 4b: Read the optional attribute Uncertainty in AttributeList");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.A0007 && PMICONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
                                  Pm25ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 18: {
-            LogStep(18,
-                    "Step 4d: Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue "
-                    "and Measurement Unit in AttributeList");
-            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffb && PMICONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(
+                18,
+                "Step 4c: Check the optional attribute Uncertainty is excluded from AttributeList when PMICONC.S.A0007 is not set");
+            VerifyOrDo(!ShouldSkip(" !PMICONC.S.A0007 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
                                  Pm25ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 19: {
             LogStep(19,
-                    "Step 4e: Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are "
-                    "excluded from AttributeList when PMICONC.S.F00 (MEA) is not set");
-            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffb && !PMICONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4d: Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue "
+                    "and Measurement Unit in AttributeList");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
                                  Pm25ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 20: {
             LogStep(20,
-                    "Step 4f: Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in "
-                    "AttributeList");
-            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffb && PMICONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4e: Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are "
+                    "excluded from AttributeList when PMICONC.S.F00 (MEA) is not set");
+            VerifyOrDo(!ShouldSkip(" !PMICONC.S.F00 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
                                  Pm25ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 21: {
             LogStep(21,
-                    "Step 4g: Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when "
-                    "PMICONC.S.F04 (PEA) is not set");
-            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffb && !PMICONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4f: Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in "
+                    "AttributeList");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
                                  Pm25ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 22: {
             LogStep(22,
-                    "Step 4h: Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in "
-                    "AttributeList");
-            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffb && PMICONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4g: Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when "
+                    "PMICONC.S.F04 (PEA) is not set");
+            VerifyOrDo(!ShouldSkip(" !PMICONC.S.F04 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
                                  Pm25ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 23: {
             LogStep(23,
-                    "Step 4i: Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
-                    "PMICONC.S.F05 (AVG) is not set");
-            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffb && !PMICONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4h: Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in "
+                    "AttributeList");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
                                  Pm25ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 24: {
-            LogStep(24, "Step 4j: Read the optional, feature dependent attribute LevelValue in AttributeList");
-            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffb && PMICONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(24,
+                    "Step 4i: Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
+                    "PMICONC.S.F05 (AVG) is not set");
+            VerifyOrDo(!ShouldSkip(" !PMICONC.S.F05 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
                                  Pm25ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 25: {
-            LogStep(25, "Step 4k: Check that LevelValue is excluded from AttributeList when PMICONC.S.F01 (LEV) is not set");
-            VerifyOrDo(!ShouldSkip("PMICONC.S.Afffb && !PMICONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(25, "Step 4j: Read the optional, feature dependent attribute LevelValue in AttributeList");
+            VerifyOrDo(!ShouldSkip("PMICONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
                                  Pm25ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 26: {
-            LogStep(26, "Step 5: Read the global attribute: EventList");
-            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED && PMICONC.S.Afffa"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(26, "Step 4k: Check that LevelValue is excluded from AttributeList when PMICONC.S.F01 (LEV) is not set");
+            VerifyOrDo(!ShouldSkip(" !PMICONC.S.F01 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
+                                 Pm25ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 27: {
+            LogStep(27, "Step 5: Read the global attribute: EventList");
+            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
                                  Pm25ConcentrationMeasurement::Attributes::EventList::Id, true, chip::NullOptional);
         }
-        case 27: {
-            LogStep(27, "Step 6: Read the global attribute: AcceptedCommandList");
-            VerifyOrDo(!ShouldSkip("PMICONC.S.Afff9"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+        case 28: {
+            LogStep(28, "Step 6: Read the global attribute: AcceptedCommandList");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
                                  Pm25ConcentrationMeasurement::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
         }
-        case 28: {
-            LogStep(28, "Step 7: Read the global attribute: GeneratedCommandList");
-            VerifyOrDo(!ShouldSkip("PMICONC.S.Afff8"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+        case 29: {
+            LogStep(29, "Step 7: Read the global attribute: GeneratedCommandList");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm25ConcentrationMeasurement::Id,
                                  Pm25ConcentrationMeasurement::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
         }
@@ -29703,7 +29796,7 @@ class Test_TC_PMKCONC_1_1Suite : public TestCommand
 {
 public:
     Test_TC_PMKCONC_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_PMKCONC_1_1", 29, credsIssuerConfig)
+        TestCommand("Test_TC_PMKCONC_1_1", 30, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -29754,8 +29847,8 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("featureMap", value, 0UL));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
         case 3:
@@ -29764,7 +29857,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
         case 4:
@@ -29773,7 +29866,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 1UL));
             }
             break;
         case 5:
@@ -29782,10 +29875,19 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
             }
             break;
         case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 2UL));
+            }
+            break;
+        case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -29795,7 +29897,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
             }
             break;
-        case 7:
+        case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -29804,7 +29906,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 4UL));
             }
             break;
-        case 8:
+        case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -29814,7 +29916,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
             }
             break;
-        case 9:
+        case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -29823,7 +29925,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 8UL));
             }
             break;
-        case 10:
+        case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -29833,7 +29935,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
-        case 11:
+        case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -29842,7 +29944,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 16UL));
             }
             break;
-        case 12:
+        case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -29852,7 +29954,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
-        case 13:
+        case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -29861,7 +29963,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 32UL));
             }
             break;
-        case 14:
+        case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -29876,7 +29978,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
             }
             break;
-        case 15:
+        case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -29890,7 +29992,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
             }
             break;
-        case 16:
+        case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -29899,7 +30001,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 7UL));
             }
             break;
-        case 17:
+        case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -29908,7 +30010,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 7UL));
             }
             break;
-        case 18:
+        case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -29920,7 +30022,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 8UL));
             }
             break;
-        case 19:
+        case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -29933,7 +30035,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 8UL));
             }
             break;
-        case 20:
+        case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -29943,7 +30045,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
             }
             break;
-        case 21:
+        case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -29953,7 +30055,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 4UL));
             }
             break;
-        case 22:
+        case 23:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -29963,7 +30065,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 6UL));
             }
             break;
-        case 23:
+        case 24:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -29973,7 +30075,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 6UL));
             }
             break;
-        case 24:
+        case 25:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -29982,7 +30084,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 10UL));
             }
             break;
-        case 25:
+        case 26:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -29991,7 +30093,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 10UL));
             }
             break;
-        case 26:
+        case 27:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::EventId> value;
@@ -30003,7 +30105,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 27:
+        case 28:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -30015,7 +30117,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 28:
+        case 29:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -30051,184 +30153,189 @@ private:
         }
         case 1: {
             LogStep(1, "Step 2: Read the global attribute: ClusterRevision");
-            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffd"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
                                  Pm10ConcentrationMeasurement::Attributes::ClusterRevision::Id, true, chip::NullOptional);
         }
         case 2: {
-            LogStep(2, "Step 3b: Given PMKCONC.S.F00(MEA) ensure featuremap has the correct bit set");
-            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffc && PMKCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(2, "Step 3a: Read the global attribute: FeatureMap and check for either bit 0 or 1 set");
+            VerifyOrDo(
+                !ShouldSkip(
+                    " !PMKCONC.S.F00 && !PMKCONC.S.F01 && !PMKCONC.S.F02 && !PMKCONC.S.F03 && !PMKCONC.S.F04 && !PMKCONC.S.F05 "),
+                return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
                                  Pm10ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 3: {
-            LogStep(3, "Step 3c: Given PMKCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffc && !PMKCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(3, "Step 3b: Given PMKCONC.S.F00(MEA) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
                                  Pm10ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 4: {
-            LogStep(4, "Step 3d: Given PMKCONC.S.F01(LEV) ensure featuremap has the correct bit set");
-            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffc && PMKCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(4, "Step 3c: Given PMKCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !PMKCONC.S.F00 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
                                  Pm10ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 5: {
-            LogStep(5, "Step 3e: Given PMKCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffc && !PMKCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(5, "Step 3d: Given PMKCONC.S.F01(LEV) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
                                  Pm10ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 6: {
-            LogStep(6, "Step 3f: Given PMKCONC.S.F02(MED) ensure featuremap has the correct bit set");
-            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffc && PMKCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(6, "Step 3e: Given PMKCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !PMKCONC.S.F01 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
                                  Pm10ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 7: {
-            LogStep(7, "Step 3g: Given PMKCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffc && !PMKCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(7, "Step 3f: Given PMKCONC.S.F02(MED) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.F02 && PMKCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
                                  Pm10ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 8: {
-            LogStep(8, "Step 3h: Given PMKCONC.S.F03(CRI) ensure featuremap has the correct bits set");
-            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffc && PMKCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(8, "Step 3g: Given PMKCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !PMKCONC.S.F02 && !PMKCONC.S.F01 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
                                  Pm10ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 9: {
-            LogStep(9, "Step 3i: Given PMKCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffc && !PMKCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(9, "Step 3h: Given PMKCONC.S.F03(CRI) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.F03 && PMKCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
                                  Pm10ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 10: {
-            LogStep(10, "Step 3j: Given PMKCONC.S.F04(PEA) ensure featuremap has the correct bits set");
-            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffc && PMKCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(10, "Step 3i: Given PMKCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !PMKCONC.S.F03 && !PMKCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
                                  Pm10ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 11: {
-            LogStep(11, "Step 3k: Given PMKCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffc && !PMKCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(11, "Step 3j: Given PMKCONC.S.F04(PEA) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.F04 && PMKCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
                                  Pm10ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 12: {
-            LogStep(12, "Step 3l: Given PMKCONC.S.F05(AVG) ensure featuremap has the correct bits set");
-            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffc && PMKCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(12, "Step 3k: Given PMKCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !PMKCONC.S.F04 && !PMKCONC.S.F00 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
                                  Pm10ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 13: {
-            LogStep(13, "Step 3m: Given PMKCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffc && !PMKCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(13, "Step 3l: Given PMKCONC.S.F05(AVG) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.F05 && PMKCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
                                  Pm10ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 14: {
-            LogStep(14, "Step 4a: Read the global attribute: AttributeList");
-            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED && PMKCONC.S.Afffb"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(14, "Step 3m: Given PMKCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !PMKCONC.S.F05 && !PMKCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
-                                 Pm10ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+                                 Pm10ConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 15: {
             LogStep(15, "Step 4a: Read the global attribute: AttributeList");
-            VerifyOrDo(!ShouldSkip("!PICS_EVENT_LIST_ENABLED && PMKCONC.S.Afffb"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
                                  Pm10ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 16: {
-            LogStep(16, "Step 4b: Read the optional attribute Uncertainty in AttributeList");
-            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffb && PMKCONC.S.A0007 && PMKCONC.S.F00"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(16, "Step 4a: Read the global attribute: AttributeList");
+            VerifyOrDo(!ShouldSkip("!PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
                                  Pm10ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 17: {
-            LogStep(
-                17,
-                "Step 4c: Check the optional attribute Uncertainty is excluded from AttributeList when PMKCONC.S.A0007 is not set");
-            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffb && !PMKCONC.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(17, "Step 4b: Read the optional attribute Uncertainty in AttributeList");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.A0007 && PMKCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
                                  Pm10ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 18: {
-            LogStep(18,
-                    "Step 4d: Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue "
-                    "and Measurement Unit in AttributeList");
-            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffb && PMKCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(
+                18,
+                "Step 4c: Check the optional attribute Uncertainty is excluded from AttributeList when PMKCONC.S.A0007 is not set");
+            VerifyOrDo(!ShouldSkip(" !PMKCONC.S.A0007 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
                                  Pm10ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 19: {
             LogStep(19,
-                    "Step 4e: Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are "
-                    "excluded from AttributeList when PMKCONC.S.F00 (MEA) is not set");
-            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffb && !PMKCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4d: Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue "
+                    "and Measurement Unit in AttributeList");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
                                  Pm10ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 20: {
             LogStep(20,
-                    "Step 4f: Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in "
-                    "AttributeList");
-            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffb && PMKCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4e: Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are "
+                    "excluded from AttributeList when PMKCONC.S.F00 (MEA) is not set");
+            VerifyOrDo(!ShouldSkip(" !PMKCONC.S.F00 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
                                  Pm10ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 21: {
             LogStep(21,
-                    "Step 4g: Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when "
-                    "PMKCONC.S.F04 (PEA) is not set");
-            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffb && !PMKCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4f: Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in "
+                    "AttributeList");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
                                  Pm10ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 22: {
             LogStep(22,
-                    "Step 4h: Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in "
-                    "AttributeList");
-            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffb && PMKCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4g: Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when "
+                    "PMKCONC.S.F04 (PEA) is not set");
+            VerifyOrDo(!ShouldSkip(" !PMKCONC.S.F04 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
                                  Pm10ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 23: {
             LogStep(23,
-                    "Step 4i: Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
-                    "PMKCONC.S.F05 (AVG) is not set");
-            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffb && !PMKCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4h: Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in "
+                    "AttributeList");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
                                  Pm10ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 24: {
-            LogStep(24, "Step 4j: Read the optional, feature dependent attribute LevelValue in AttributeList");
-            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffb && PMKCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(24,
+                    "Step 4i: Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
+                    "PMKCONC.S.F05 (AVG) is not set");
+            VerifyOrDo(!ShouldSkip(" !PMKCONC.S.F05 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
                                  Pm10ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 25: {
-            LogStep(25, "Step 4k: Check that LevelValue is excluded from AttributeList when PMKCONC.S.F01 (LEV) is not set");
-            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afffb && !PMKCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(25, "Step 4j: Read the optional, feature dependent attribute LevelValue in AttributeList");
+            VerifyOrDo(!ShouldSkip("PMKCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
                                  Pm10ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 26: {
-            LogStep(26, "Step 5: Read the global attribute: EventList");
-            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED && PMKCONC.S.Afffa"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(26, "Step 4k: Check that LevelValue is excluded from AttributeList when PMKCONC.S.F01 (LEV) is not set");
+            VerifyOrDo(!ShouldSkip(" !PMKCONC.S.F01 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
+                                 Pm10ConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 27: {
+            LogStep(27, "Step 5: Read the global attribute: EventList");
+            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
                                  Pm10ConcentrationMeasurement::Attributes::EventList::Id, true, chip::NullOptional);
         }
-        case 27: {
-            LogStep(27, "Step 6: Read the global attribute: AcceptedCommandList");
-            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afff9"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+        case 28: {
+            LogStep(28, "Step 6: Read the global attribute: AcceptedCommandList");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
                                  Pm10ConcentrationMeasurement::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
         }
-        case 28: {
-            LogStep(28, "Step 7: Read the global attribute: GeneratedCommandList");
-            VerifyOrDo(!ShouldSkip("PMKCONC.S.Afff8"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+        case 29: {
+            LogStep(29, "Step 7: Read the global attribute: GeneratedCommandList");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Pm10ConcentrationMeasurement::Id,
                                  Pm10ConcentrationMeasurement::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
         }
@@ -30472,7 +30579,7 @@ private:
 class Test_TC_RNCONC_1_1Suite : public TestCommand
 {
 public:
-    Test_TC_RNCONC_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_RNCONC_1_1", 29, credsIssuerConfig)
+    Test_TC_RNCONC_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_RNCONC_1_1", 30, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -30523,8 +30630,8 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("featureMap", value, 0UL));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
         case 3:
@@ -30533,7 +30640,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
         case 4:
@@ -30542,7 +30649,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 1UL));
             }
             break;
         case 5:
@@ -30551,10 +30658,19 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
             }
             break;
         case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 2UL));
+            }
+            break;
+        case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -30564,7 +30680,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
             }
             break;
-        case 7:
+        case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -30573,7 +30689,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 4UL));
             }
             break;
-        case 8:
+        case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -30583,7 +30699,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
             }
             break;
-        case 9:
+        case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -30592,7 +30708,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 8UL));
             }
             break;
-        case 10:
+        case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -30602,7 +30718,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
-        case 11:
+        case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -30611,7 +30727,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 16UL));
             }
             break;
-        case 12:
+        case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -30621,7 +30737,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
-        case 13:
+        case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -30630,7 +30746,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 32UL));
             }
             break;
-        case 14:
+        case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -30645,7 +30761,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
             }
             break;
-        case 15:
+        case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -30659,7 +30775,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
             }
             break;
-        case 16:
+        case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -30668,7 +30784,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 7UL));
             }
             break;
-        case 17:
+        case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -30677,7 +30793,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 7UL));
             }
             break;
-        case 18:
+        case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -30689,7 +30805,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 8UL));
             }
             break;
-        case 19:
+        case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -30702,7 +30818,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 8UL));
             }
             break;
-        case 20:
+        case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -30712,7 +30828,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
             }
             break;
-        case 21:
+        case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -30722,7 +30838,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 4UL));
             }
             break;
-        case 22:
+        case 23:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -30732,7 +30848,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 6UL));
             }
             break;
-        case 23:
+        case 24:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -30742,7 +30858,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 6UL));
             }
             break;
-        case 24:
+        case 25:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -30751,7 +30867,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 10UL));
             }
             break;
-        case 25:
+        case 26:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -30760,7 +30876,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 10UL));
             }
             break;
-        case 26:
+        case 27:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::EventId> value;
@@ -30772,7 +30888,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 27:
+        case 28:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -30784,7 +30900,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 28:
+        case 29:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -30820,184 +30936,188 @@ private:
         }
         case 1: {
             LogStep(1, "Step 2: Read the global attribute: ClusterRevision");
-            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffd"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
                                  RadonConcentrationMeasurement::Attributes::ClusterRevision::Id, true, chip::NullOptional);
         }
         case 2: {
-            LogStep(2, "Step 3b: Given RNCONC.S.F00(MEA) ensure featuremap has the correct bit set");
-            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffc && RNCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(2, "Step 3a: Read the global attribute: FeatureMap and check for either bit 0 or 1 set");
+            VerifyOrDo(
+                !ShouldSkip(" !RNCONC.S.F00 && !RNCONC.S.F01 && !RNCONC.S.F02 && !RNCONC.S.F03 && !RNCONC.S.F04 && !RNCONC.S.F05"),
+                return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
                                  RadonConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 3: {
-            LogStep(3, "Step 3c: Given RNCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffc && !RNCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(3, "Step 3b: Given RNCONC.S.F00(MEA) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
                                  RadonConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 4: {
-            LogStep(4, "Step 3d: Given RNCONC.S.F01(LEV) ensure featuremap has the correct bit set");
-            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffc && RNCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(4, "Step 3c: Given RNCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !RNCONC.S.F00 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
                                  RadonConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 5: {
-            LogStep(5, "Step 3e: Given RNCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffc && !RNCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(5, "Step 3d: Given RNCONC.S.F01(LEV) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
                                  RadonConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 6: {
-            LogStep(6, "Step 3f: Given RNCONC.S.F02(MED) ensure featuremap has the correct bit set");
-            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffc && RNCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(6, "Step 3e: Given RNCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !RNCONC.S.F01 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
                                  RadonConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 7: {
-            LogStep(7, "Step 3g: Given RNCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffc && !RNCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(7, "Step 3f: Given RNCONC.S.F02(MED) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.F02 && RNCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
                                  RadonConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 8: {
-            LogStep(8, "Step 3h: Given RNCONC.S.F03(CRI) ensure featuremap has the correct bits set");
-            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffc && RNCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(8, "Step 3g: Given RNCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !RNCONC.S.F02 && !RNCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
                                  RadonConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 9: {
-            LogStep(9, "Step 3i: Given RNCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffc && !RNCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(9, "Step 3h: Given RNCONC.S.F03(CRI) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.F03 && RNCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
                                  RadonConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 10: {
-            LogStep(10, "Step 3j: Given RNCONC.S.F04(PEA) ensure featuremap has the correct bits set");
-            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffc && RNCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(10, "Step 3i: Given RNCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !RNCONC.S.F03 && !RNCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
                                  RadonConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 11: {
-            LogStep(11, "Step 3k: Given RNCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffc && !RNCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(11, "Step 3j: Given RNCONC.S.F04(PEA) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.F04 && RNCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
                                  RadonConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 12: {
-            LogStep(12, "Step 3l: Given RNCONC.S.F05(AVG) ensure featuremap has the correct bits set");
-            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffc && RNCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(12, "Step 3k: Given RNCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !RNCONC.S.F04 && RNCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
                                  RadonConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 13: {
-            LogStep(13, "Step 3m: Given RNCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffc && !RNCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(13, "Step 3l: Given RNCONC.S.F05(AVG) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.F05 && RNCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
                                  RadonConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 14: {
-            LogStep(14, "Step 4a: Read the global attribute: AttributeList");
-            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED && RNCONC.S.Afffb"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(14, "Step 3m: Given RNCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !RNCONC.S.F05 && !RNCONC.S.F00 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
-                                 RadonConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+                                 RadonConcentrationMeasurement::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 15: {
             LogStep(15, "Step 4a: Read the global attribute: AttributeList");
-            VerifyOrDo(!ShouldSkip("!PICS_EVENT_LIST_ENABLED && RNCONC.S.Afffb"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
                                  RadonConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 16: {
-            LogStep(16, "Step 4b: Read the optional attribute Uncertainty in AttributeList");
-            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffb && RNCONC.S.A0007 && RNCONC.S.F00"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(16, "Step 4a: Read the global attribute: AttributeList");
+            VerifyOrDo(!ShouldSkip("!PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
                                  RadonConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 17: {
-            LogStep(
-                17,
-                "Step 4c: Check the optional attribute Uncertainty is excluded from AttributeList when RNCONC.S.A0007 is not set");
-            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffb && !RNCONC.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(17, "Step 4b: Read the optional attribute Uncertainty in AttributeList");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.A0007 && RNCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
                                  RadonConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 18: {
-            LogStep(18,
-                    "Step 4d: Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue "
-                    "and Measurement Unit in AttributeList");
-            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffb && RNCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(
+                18,
+                "Step 4c: Check the optional attribute Uncertainty is excluded from AttributeList when RNCONC.S.A0007 is not set");
+            VerifyOrDo(!ShouldSkip(" !RNCONC.S.A0007 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
                                  RadonConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 19: {
             LogStep(19,
-                    "Step 4e: Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are "
-                    "excluded from AttributeList when RNCONC.S.F00 (MEA) is not set");
-            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffb && !RNCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4d: Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue "
+                    "and Measurement Unit in AttributeList");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
                                  RadonConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 20: {
             LogStep(20,
-                    "Step 4f: Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in "
-                    "AttributeList");
-            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffb && RNCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4e: Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are "
+                    "excluded from AttributeList when RNCONC.S.F00 (MEA) is not set");
+            VerifyOrDo(!ShouldSkip(" !RNCONC.S.F00 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
                                  RadonConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 21: {
             LogStep(21,
-                    "Step 4g: Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when "
-                    "RNCONC.S.F04 (PEA) is not set");
-            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffb && !RNCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4f: Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in "
+                    "AttributeList");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
                                  RadonConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 22: {
             LogStep(22,
-                    "Step 4h: Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in "
-                    "AttributeList");
-            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffb && RNCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4g: Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when "
+                    "RNCONC.S.F04 (PEA) is not set");
+            VerifyOrDo(!ShouldSkip(" !RNCONC.S.F04 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
                                  RadonConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 23: {
             LogStep(23,
-                    "Step 4i: Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
-                    "RNCONC.S.F05 (AVG) is not set");
-            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffb && !RNCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4h: Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in "
+                    "AttributeList");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
                                  RadonConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 24: {
-            LogStep(24, "Step 4j: Read the optional, feature dependent attribute LevelValue in AttributeList");
-            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffb && RNCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(24,
+                    "Step 4i: Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
+                    "RNCONC.S.F05 (AVG) is not set");
+            VerifyOrDo(!ShouldSkip(" !RNCONC.S.F05 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
                                  RadonConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 25: {
-            LogStep(25, "Step 4k: Check that LevelValue is excluded from AttributeList when RNCONC.S.F01 (LEV) is not set");
-            VerifyOrDo(!ShouldSkip("RNCONC.S.Afffb && !RNCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(25, "Step 4j: Read the optional, feature dependent attribute LevelValue in AttributeList");
+            VerifyOrDo(!ShouldSkip("RNCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
                                  RadonConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 26: {
-            LogStep(26, "Step 5: Read the global attribute: EventList");
-            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED && RNCONC.S.Afffa"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(26, "Step 4k: Check that LevelValue is excluded from AttributeList when RNCONC.S.F01 (LEV) is not set");
+            VerifyOrDo(!ShouldSkip(" !RNCONC.S.F01 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
+                                 RadonConcentrationMeasurement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 27: {
+            LogStep(27, "Step 5: Read the global attribute: EventList");
+            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
                                  RadonConcentrationMeasurement::Attributes::EventList::Id, true, chip::NullOptional);
         }
-        case 27: {
-            LogStep(27, "Step 6: Read the global attribute: AcceptedCommandList");
-            VerifyOrDo(!ShouldSkip("RNCONC.S.Afff9"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+        case 28: {
+            LogStep(28, "Step 6: Read the global attribute: AcceptedCommandList");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
                                  RadonConcentrationMeasurement::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
         }
-        case 28: {
-            LogStep(28, "Step 7: Read the global attribute: GeneratedCommandList");
-            VerifyOrDo(!ShouldSkip("RNCONC.S.Afff8"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+        case 29: {
+            LogStep(29, "Step 7: Read the global attribute: GeneratedCommandList");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RadonConcentrationMeasurement::Id,
                                  RadonConcentrationMeasurement::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
         }
@@ -31241,7 +31361,7 @@ class Test_TC_TVOCCONC_1_1Suite : public TestCommand
 {
 public:
     Test_TC_TVOCCONC_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_TVOCCONC_1_1", 29, credsIssuerConfig)
+        TestCommand("Test_TC_TVOCCONC_1_1", 30, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -31292,8 +31412,8 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("featureMap", value, 0UL));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
         case 3:
@@ -31302,7 +31422,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
         case 4:
@@ -31311,7 +31431,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 1UL));
             }
             break;
         case 5:
@@ -31320,10 +31440,19 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
             }
             break;
         case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 2UL));
+            }
+            break;
+        case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -31333,7 +31462,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
             }
             break;
-        case 7:
+        case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -31342,7 +31471,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 4UL));
             }
             break;
-        case 8:
+        case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -31352,7 +31481,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
             }
             break;
-        case 9:
+        case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -31361,7 +31490,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 8UL));
             }
             break;
-        case 10:
+        case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -31371,7 +31500,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
-        case 11:
+        case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -31380,7 +31509,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 16UL));
             }
             break;
-        case 12:
+        case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -31390,7 +31519,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
-        case 13:
+        case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint32_t value;
@@ -31399,7 +31528,7 @@ private:
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 32UL));
             }
             break;
-        case 14:
+        case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -31414,7 +31543,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
             }
             break;
-        case 15:
+        case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -31428,7 +31557,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
             }
             break;
-        case 16:
+        case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -31437,7 +31566,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 7UL));
             }
             break;
-        case 17:
+        case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -31446,7 +31575,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 7UL));
             }
             break;
-        case 18:
+        case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -31458,7 +31587,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 8UL));
             }
             break;
-        case 19:
+        case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -31471,7 +31600,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 8UL));
             }
             break;
-        case 20:
+        case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -31481,7 +31610,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
             }
             break;
-        case 21:
+        case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -31491,7 +31620,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 4UL));
             }
             break;
-        case 22:
+        case 23:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -31501,7 +31630,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 6UL));
             }
             break;
-        case 23:
+        case 24:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -31511,7 +31640,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 6UL));
             }
             break;
-        case 24:
+        case 25:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -31520,7 +31649,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 10UL));
             }
             break;
-        case 25:
+        case 26:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -31529,7 +31658,7 @@ private:
                 VerifyOrReturn(CheckConstraintExcludes("value", value, 10UL));
             }
             break;
-        case 26:
+        case 27:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::EventId> value;
@@ -31541,7 +31670,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 27:
+        case 28:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -31553,7 +31682,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 28:
+        case 29:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -31589,211 +31718,216 @@ private:
         }
         case 1: {
             LogStep(1, "Step 2: Read the global attribute: ClusterRevision");
-            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffd"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
                                  TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::ClusterRevision::Id, true,
                                  chip::NullOptional);
         }
         case 2: {
-            LogStep(2, "Step 3b: Given TVOCCONC.S.F00(MEA) ensure featuremap has the correct bit set");
-            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffc && TVOCCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(2, "Step 3a: Read the global attribute: FeatureMap and check for either bit 0 or 1 set");
+            VerifyOrDo(!ShouldSkip(" !TVOCCONC.S.F00 && !TVOCCONC.S.F01 && !TVOCCONC.S.F02 && !TVOCCONC.S.F03 && !TVOCCONC.S.F04 "
+                                   "&& !TVOCCONC.S.F05 "),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
                                  TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::FeatureMap::Id, true,
                                  chip::NullOptional);
         }
         case 3: {
-            LogStep(3, "Step 3c: Given TVOCCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffc && !TVOCCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(3, "Step 3b: Given TVOCCONC.S.F00(MEA) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
                                  TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::FeatureMap::Id, true,
                                  chip::NullOptional);
         }
         case 4: {
-            LogStep(4, "Step 3d: Given TVOCCONC.S.F01(LEV) ensure featuremap has the correct bit set");
-            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffc && TVOCCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(4, "Step 3c: Given TVOCCONC.S.F00(MEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !TVOCCONC.S.F00 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
                                  TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::FeatureMap::Id, true,
                                  chip::NullOptional);
         }
         case 5: {
-            LogStep(5, "Step 3e: Given TVOCCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffc && !TVOCCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(5, "Step 3d: Given TVOCCONC.S.F01(LEV) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
                                  TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::FeatureMap::Id, true,
                                  chip::NullOptional);
         }
         case 6: {
-            LogStep(6, "Step 3f: Given TVOCCONC.S.F02(MED) ensure featuremap has the correct bit set");
-            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffc && TVOCCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(6, "Step 3e: Given TVOCCONC.S.F01(LEV) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !TVOCCONC.S.F01 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
                                  TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::FeatureMap::Id, true,
                                  chip::NullOptional);
         }
         case 7: {
-            LogStep(7, "Step 3g: Given TVOCCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffc && !TVOCCONC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(7, "Step 3f: Given TVOCCONC.S.F02(MED) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.F02 && TVOCCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
                                  TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::FeatureMap::Id, true,
                                  chip::NullOptional);
         }
         case 8: {
-            LogStep(8, "Step 3h: Given TVOCCONC.S.F03(CRI) ensure featuremap has the correct bits set");
-            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffc && TVOCCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(8, "Step 3g: Given TVOCCONC.S.F02(MED) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !TVOCCONC.S.F02 && !TVOCCONC.S.F01 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
                                  TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::FeatureMap::Id, true,
                                  chip::NullOptional);
         }
         case 9: {
-            LogStep(9, "Step 3i: Given TVOCCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffc && !TVOCCONC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(9, "Step 3h: Given TVOCCONC.S.F03(CRI) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.F03 && TVOCCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
                                  TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::FeatureMap::Id, true,
                                  chip::NullOptional);
         }
         case 10: {
-            LogStep(10, "Step 3j: Given TVOCCONC.S.F04(PEA) ensure featuremap has the correct bits set");
-            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffc && TVOCCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(10, "Step 3i: Given TVOCCONC.S.F03(CRI) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !TVOCCONC.S.F03 && !TVOCCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
                                  TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::FeatureMap::Id, true,
                                  chip::NullOptional);
         }
         case 11: {
-            LogStep(11, "Step 3k: Given TVOCCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffc && !TVOCCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(11, "Step 3j: Given TVOCCONC.S.F04(PEA) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.F04 && TVOCCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
                                  TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::FeatureMap::Id, true,
                                  chip::NullOptional);
         }
         case 12: {
-            LogStep(12, "Step 3l: Given TVOCCONC.S.F05(AVG) ensure featuremap has the correct bits set");
-            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffc && TVOCCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(12, "Step 3k: Given TVOCCONC.S.F04(PEA) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !TVOCCONC.S.F04 && !TVOCCONC.S.F00 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
                                  TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::FeatureMap::Id, true,
                                  chip::NullOptional);
         }
         case 13: {
-            LogStep(13, "Step 3m: Given TVOCCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear");
-            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffc && !TVOCCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(13, "Step 3l: Given TVOCCONC.S.F05(AVG) ensure featuremap has the correct bits set");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.F05 && TVOCCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
                                  TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::FeatureMap::Id, true,
                                  chip::NullOptional);
         }
         case 14: {
-            LogStep(14, "Step 4a: Read the global attribute: AttributeList");
-            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED && TVOCCONC.S.Afffb"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(14, "Step 3m: Given TVOCCONC.S.F05(AVG) is not set, ensure featuremap has the correct bit clear");
+            VerifyOrDo(!ShouldSkip(" !TVOCCONC.S.F05 && !TVOCCONC.S.F00 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
-                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::AttributeList::Id, true,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::FeatureMap::Id, true,
                                  chip::NullOptional);
         }
         case 15: {
             LogStep(15, "Step 4a: Read the global attribute: AttributeList");
-            VerifyOrDo(!ShouldSkip("!PICS_EVENT_LIST_ENABLED && TVOCCONC.S.Afffb"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
                                  TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::AttributeList::Id, true,
                                  chip::NullOptional);
         }
         case 16: {
-            LogStep(16, "Step 4b: Read the optional attribute Uncertainty in AttributeList");
-            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffb && TVOCCONC.S.A0007 && TVOCCONC.S.F00"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(16, "Step 4a: Read the global attribute: AttributeList");
+            VerifyOrDo(!ShouldSkip("!PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
                                  TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::AttributeList::Id, true,
                                  chip::NullOptional);
         }
         case 17: {
-            LogStep(17,
-                    "Step 4c: Check the optional attribute Uncertainty is excluded from AttributeList when TVOCCONC.S.A0007 is not "
-                    "set");
-            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffb && !TVOCCONC.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(17, "Step 4b: Read the optional attribute Uncertainty in AttributeList");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.A0007 && TVOCCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
                                  TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::AttributeList::Id, true,
                                  chip::NullOptional);
         }
         case 18: {
             LogStep(18,
-                    "Step 4d: Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue "
-                    "and Measurement Unit in AttributeList");
-            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffb && TVOCCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4c: Check the optional attribute Uncertainty is excluded from AttributeList when TVOCCONC.S.A0007 is not "
+                    "set");
+            VerifyOrDo(!ShouldSkip(" !TVOCCONC.S.A0007 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
                                  TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::AttributeList::Id, true,
                                  chip::NullOptional);
         }
         case 19: {
             LogStep(19,
-                    "Step 4e: Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are "
-                    "excluded from AttributeList when TVOCCONC.S.F00 (MEA) is not set");
-            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffb && !TVOCCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4d: Read the optional, feature dependent attributes MeasuredValue, MinMeasuredValue, MaxMeasuredValue "
+                    "and Measurement Unit in AttributeList");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
                                  TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::AttributeList::Id, true,
                                  chip::NullOptional);
         }
         case 20: {
             LogStep(20,
-                    "Step 4f: Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in "
-                    "AttributeList");
-            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffb && TVOCCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4e: Check that MeasuredValue, MinMeasuredValue, MaxMeasuredValue, Measurement Unit and Uncertainty are "
+                    "excluded from AttributeList when TVOCCONC.S.F00 (MEA) is not set");
+            VerifyOrDo(!ShouldSkip(" !TVOCCONC.S.F00 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
                                  TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::AttributeList::Id, true,
                                  chip::NullOptional);
         }
         case 21: {
             LogStep(21,
-                    "Step 4g: Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when "
-                    "TVOCCONC.S.F04 (PEA) is not set");
-            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffb && !TVOCCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4f: Read the optional, feature dependent attributes PeakMeasuredValue & PeakMeasuredValueWindow in "
+                    "AttributeList");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
                                  TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::AttributeList::Id, true,
                                  chip::NullOptional);
         }
         case 22: {
             LogStep(22,
-                    "Step 4h: Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in "
-                    "AttributeList");
-            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffb && TVOCCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4g: Check that PeakMeasuredValue & PeakMeasuredValueWindow are excluded from AttributeList when "
+                    "TVOCCONC.S.F04 (PEA) is not set");
+            VerifyOrDo(!ShouldSkip(" !TVOCCONC.S.F04 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
                                  TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::AttributeList::Id, true,
                                  chip::NullOptional);
         }
         case 23: {
             LogStep(23,
-                    "Step 4i: Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
-                    "TVOCCONC.S.F05 (AVG) is not set");
-            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffb && !TVOCCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+                    "Step 4h: Read the optional, feature dependent attributes AverageMeasuredValue AverageMeasuredValueWindow in "
+                    "AttributeList");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
                                  TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::AttributeList::Id, true,
                                  chip::NullOptional);
         }
         case 24: {
-            LogStep(24, "Step 4j: Read the optional, feature dependent attribute LevelValue in AttributeList");
-            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffb && TVOCCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(24,
+                    "Step 4i: Check that AverageMeasuredValue and AverageMeasuredValueWindow are excluded from AttributeList when "
+                    "TVOCCONC.S.F05 (AVG) is not set");
+            VerifyOrDo(!ShouldSkip(" !TVOCCONC.S.F05 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
                                  TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::AttributeList::Id, true,
                                  chip::NullOptional);
         }
         case 25: {
-            LogStep(25, "Step 4k: Check that LevelValue is excluded from AttributeList when TVOCCONC.S.F01 (LEV) is not set");
-            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afffb && !TVOCCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(25, "Step 4j: Read the optional, feature dependent attribute LevelValue in AttributeList");
+            VerifyOrDo(!ShouldSkip("TVOCCONC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
                                  TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::AttributeList::Id, true,
                                  chip::NullOptional);
         }
         case 26: {
-            LogStep(26, "Step 5l: Read the global attribute: EventList");
-            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED && TVOCCONC.S.Afffa"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(26, "Step 4k: Check that LevelValue is excluded from AttributeList when TVOCCONC.S.F01 (LEV) is not set");
+            VerifyOrDo(!ShouldSkip(" !TVOCCONC.S.F01 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
+                                 TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 27: {
+            LogStep(27, "Step 5l: Read the global attribute: EventList");
+            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
                                  TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::EventList::Id, true,
                                  chip::NullOptional);
         }
-        case 27: {
-            LogStep(27, "Step 6: Read the global attribute: AcceptedCommandList");
-            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afff9"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+        case 28: {
+            LogStep(28, "Step 6: Read the global attribute: AcceptedCommandList");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
                                  TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::AcceptedCommandList::Id, true,
                                  chip::NullOptional);
         }
-        case 28: {
-            LogStep(28, "Step 7: Read the global attribute: GeneratedCommandList");
-            VerifyOrDo(!ShouldSkip("TVOCCONC.S.Afff8"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+        case 29: {
+            LogStep(29, "Step 7: Read the global attribute: GeneratedCommandList");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TotalVolatileOrganicCompoundsConcentrationMeasurement::Id,
                                  TotalVolatileOrganicCompoundsConcentrationMeasurement::Attributes::GeneratedCommandList::Id, true,
                                  chip::NullOptional);
@@ -35314,25 +35448,23 @@ private:
         }
         case 1: {
             LogStep(1, "Step 2: Read the global attribute: ClusterRevision");
-            VerifyOrDo(!ShouldSkip("DESC.S.Afffd"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Descriptor::Id, Descriptor::Attributes::ClusterRevision::Id, true,
                                  chip::NullOptional);
         }
         case 2: {
             LogStep(2, "Step 3: Read the global attribute: FeatureMap");
-            VerifyOrDo(!ShouldSkip("DESC.S.Afffc"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Descriptor::Id, Descriptor::Attributes::FeatureMap::Id, true,
                                  chip::NullOptional);
         }
         case 3: {
             LogStep(3, "Step 4a: Read the global attribute: AttributeList");
-            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED && DESC.S.Afffb"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Descriptor::Id, Descriptor::Attributes::AttributeList::Id, true,
                                  chip::NullOptional);
         }
         case 4: {
             LogStep(4, "Step 4a: Read the global attribute: AttributeList");
-            VerifyOrDo(!ShouldSkip("!PICS_EVENT_LIST_ENABLED && DESC.S.Afffb"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("!PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Descriptor::Id, Descriptor::Attributes::AttributeList::Id, true,
                                  chip::NullOptional);
         }
@@ -35344,7 +35476,7 @@ private:
                     "allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT contain any values "
                     "in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 - 0xXXXX_FFFF) "
                     "and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)");
-            VerifyOrDo(!ShouldSkip("PICS_USER_PROMPT && DESC.S.Afffb"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PICS_USER_PROMPT"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
             value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
@@ -35359,7 +35491,7 @@ private:
                     "these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test Vendor or invalid range: "
                     "(0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the "
                     "allowed MEI range (0x0001 - 0xFFF1)");
-            VerifyOrDo(!ShouldSkip("PICS_USER_PROMPT && DESC.S.Afffa"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PICS_USER_PROMPT"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
             value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
@@ -35374,7 +35506,7 @@ private:
                     "0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test Vendor or invalid "
                     "range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX "
                     "is the allowed MEI range (0x0001 - 0xFFF1)");
-            VerifyOrDo(!ShouldSkip("PICS_USER_PROMPT && DESC.S.Afff9"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PICS_USER_PROMPT"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
             value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
@@ -35389,7 +35521,7 @@ private:
                     "0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test Vendor or invalid "
                     "range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX "
                     "is the allowed MEI range (0x0001 - 0xFFF1)");
-            VerifyOrDo(!ShouldSkip("PICS_USER_PROMPT && DESC.S.Afff8"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PICS_USER_PROMPT"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
             value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
@@ -38685,7 +38817,7 @@ private:
                                  chip::NullOptional);
         }
         case 2: {
-            LogStep(2, "Step 3: TH writes TH writes to the DUT the a value less than or equal to the value read in step 2");
+            LogStep(2, "Step 3: TH writes to the DUT the a value less than or equal to the value read in step 2");
             VerifyOrDo(!ShouldSkip("FAN.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::DataModel::Nullable<uint8_t> value;
@@ -38703,13 +38835,13 @@ private:
             return WaitForMs(kIdentityAlpha, value);
         }
         case 4: {
-            LogStep(4, "Step 4: TH reads from the DUT the the SpeedSetting attribute");
+            LogStep(4, "Step 4: TH reads from the DUT the SpeedSetting attribute");
             VerifyOrDo(!ShouldSkip("FAN.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FanControl::Id, FanControl::Attributes::SpeedSetting::Id, true,
                                  chip::NullOptional);
         }
         case 5: {
-            LogStep(5, "Step 5: TH reads from the DUT the the SpeedCurrent attribute");
+            LogStep(5, "Step 5: TH reads from the DUT the SpeedCurrent attribute");
             VerifyOrDo(!ShouldSkip("FAN.S.A0006"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), FanControl::Id, FanControl::Attributes::SpeedCurrent::Id, true,
                                  chip::NullOptional);
@@ -39901,6 +40033,292 @@ private:
         case 17: {
             LogStep(17, "Step 10: TH reads TestEventTriggersEnabled attribute value");
             VerifyOrDo(!ShouldSkip("PICS_USER_PROMPT && DGGEN.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_GRPKEY_1_1Suite : public TestCommand
+{
+public:
+    Test_TC_GRPKEY_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_GRPKEY_1_1", 13, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_GRPKEY_1_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 2U));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("featureMap", value, 0UL));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65530UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65532UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65532UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("eventList", iter_0, 0));
+                }
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 5UL));
+            }
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Step 1: Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Step 2: TH reads the ClusterRevision from DUT");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
+                                 GroupKeyManagement::Attributes::ClusterRevision::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Step 3a: TH reads the FeatureMap from DUT");
+            VerifyOrDo(!ShouldSkip(" !GRPKEY.S.F00 "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
+                                 GroupKeyManagement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "Step 3b: Given GRPKEY.S.F00(CS) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("GRPKEY.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
+                                 GroupKeyManagement::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "Step 4a: TH reads AttributeList from DUT");
+            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
+                                 GroupKeyManagement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "Step 4a: TH reads AttributeList from DUT");
+            VerifyOrDo(!ShouldSkip(" !PICS_EVENT_LIST_ENABLED "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
+                                 GroupKeyManagement::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6,
+                    "Step 4b: The list SHALL NOT contain any additional values in the standard or scoped range: (0x0000_0000 - "
+                    "0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE). 2.The list MAY contain values in the Manufacturer Extensible "
+                    "Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1), "
+                    "these values SHALL be ignored. 3.TThe list SHALL NOT contain any values in the Test Vendor or invalid range: "
+                    "(0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), "
+                    "where XXXX is the allowed MEI range (0x0001 - 0xFFF1)");
+            VerifyOrDo(!ShouldSkip("PICS_USER_PROMPT"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 7: {
+            LogStep(7, "Step 5a: TH1 reads EventList from DUT");
+            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
+                                 GroupKeyManagement::Attributes::EventList::Id, true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8,
+                    "Step 5b: TH reads EventList attribute from DUT. 1.The list SHALL NOT contain any additional values in the "
+                    "standard or scoped range: (0x0000_0000 - 0x0000_00FF). 2.The list MAY contain values in the Manufacturer "
+                    "Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI range (0x0001 - "
+                    "0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT contain any values in the Test Vendor or invalid "
+                    "range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX "
+                    "is the allowed MEI range (0x0001 - 0xFFF1)");
+            VerifyOrDo(!ShouldSkip("PICS_USER_PROMPT"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 9: {
+            LogStep(9, "Step 6a: TH reads AcceptedCommandList from DUT");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
+                                 GroupKeyManagement::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10,
+                    "Step 6b: TH reads AcceptedCommandList attribute from DUT. 1.The list MAY contain values in the Manufacturer "
+                    "Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI range (0x0001 - "
+                    "0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test Vendor or invalid "
+                    "range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX "
+                    "is the allowed MEI range (0x0001 - 0xFFF1)");
+            VerifyOrDo(!ShouldSkip("PICS_USER_PROMPT"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 11: {
+            LogStep(11, "Step 7a: TH reads GeneratedCommandList from DUT");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
+                                 GroupKeyManagement::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
+        }
+        case 12: {
+            LogStep(12,
+                    "Step 7b: TH reads GeneratedCommandList attribute from DUT. 1.The list MAY contain values in the Manufacturer "
+                    "Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI range (0x0001 - "
+                    "0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test Vendor or invalid "
+                    "range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX "
+                    "is the allowed MEI range (0x0001 - 0xFFF1)");
+            VerifyOrDo(!ShouldSkip("PICS_USER_PROMPT"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
             value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
@@ -65662,6 +66080,276 @@ private:
     }
 };
 
+class Test_TC_RVCOPSTATE_1_1Suite : public TestCommand
+{
+public:
+    Test_TC_RVCOPSTATE_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_RVCOPSTATE_1_1", 13, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_RVCOPSTATE_1_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("featureMap", value, 0UL));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 5UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65530UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65532UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 5UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65532UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::EventId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
+            }
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+            }
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Step 1: Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Step 2: TH reads the ClusterRevision attribute from the DUT");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RvcOperationalState::Id,
+                                 RvcOperationalState::Attributes::ClusterRevision::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Step 3: TH reads the FeatureMap attribute from the DUT");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RvcOperationalState::Id,
+                                 RvcOperationalState::Attributes::FeatureMap::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "Step 4a: TH reads the AttributeList attribute from the DUT");
+            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RvcOperationalState::Id,
+                                 RvcOperationalState::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "Step 4a: TH reads the AttributeList attribute from the DUT");
+            VerifyOrDo(!ShouldSkip("!PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RvcOperationalState::Id,
+                                 RvcOperationalState::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "Step 4b: TH reads from the DUT the optional attribute(CountdownTime) in the AttributeList from the DUT");
+            VerifyOrDo(!ShouldSkip("RVCOPSTATE.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RvcOperationalState::Id,
+                                 RvcOperationalState::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "Step 5a: TH reads from the DUT the EventList attribute.");
+            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RvcOperationalState::Id,
+                                 RvcOperationalState::Attributes::EventList::Id, true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "Step 5b: TH reads from the DUT the optional event(OperationCompletion) in EventList.");
+            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED && RVCOPSTATE.S.E01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RvcOperationalState::Id,
+                                 RvcOperationalState::Attributes::EventList::Id, true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "Step 6a: Read the optional command(Pause) in AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("RVCOPSTATE.S.C00.Rsp || RVCOPSTATE.S.C03.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RvcOperationalState::Id,
+                                 RvcOperationalState::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "Step 6b: Read the optional command(Stop) in AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("RVCOPSTATE.S.C01.Rsp || RVCOPSTATE.S.C02.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RvcOperationalState::Id,
+                                 RvcOperationalState::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "Step 6c: Read the optional command(Start) in AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("RVCOPSTATE.S.C02.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RvcOperationalState::Id,
+                                 RvcOperationalState::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11, "Step 6d: Read the optional command(Resume) in AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("RVCOPSTATE.S.C03.Rsp || RVCOPSTATE.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RvcOperationalState::Id,
+                                 RvcOperationalState::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+        }
+        case 12: {
+            LogStep(12, "Step 7: Read the global attribute: GeneratedCommandList");
+            VerifyOrDo(
+                !ShouldSkip(" RVCOPSTATE.S.C00.Rsp || RVCOPSTATE.S.C01.Rsp || RVCOPSTATE.S.C02.Rsp || RVCOPSTATE.S.C03.Rsp "),
+                return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), RvcOperationalState::Id,
+                                 RvcOperationalState::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
 class Test_TC_TMP_1_1Suite : public TestCommand
 {
 public:
@@ -66006,7 +66694,7 @@ private:
 class Test_TC_TSTAT_1_1Suite : public TestCommand
 {
 public:
-    Test_TC_TSTAT_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_TSTAT_1_1", 26, credsIssuerConfig)
+    Test_TC_TSTAT_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_TSTAT_1_1", 59, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -66045,12 +66733,7 @@ private:
             break;
         case 1:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                uint16_t value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("clusterRevision", value, 5U));
-                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
-            }
+            shouldContinue = true;
             break;
         case 2:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -66118,6 +66801,15 @@ private:
         case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 64UL));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
@@ -66132,7 +66824,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
             }
             break;
-        case 10:
+        case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -66148,7 +66840,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
             }
             break;
-        case 11:
+        case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -66157,7 +66849,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 18UL));
             }
             break;
-        case 12:
+        case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -66166,7 +66858,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 17UL));
             }
             break;
-        case 13:
+        case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -66175,7 +66867,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
             }
             break;
-        case 14:
+        case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -66184,7 +66876,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 20UL));
             }
             break;
-        case 15:
+        case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -66193,7 +66885,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 19UL));
             }
             break;
-        case 16:
+        case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -66204,7 +66896,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 25UL));
             }
             break;
-        case 17:
+        case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -66215,7 +66907,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 34UL));
             }
             break;
-        case 18:
+        case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -66226,7 +66918,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 54UL));
             }
             break;
-        case 19:
+        case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -66237,16 +66929,295 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 57UL));
             }
             break;
-        case 20:
+        case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
-                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
+                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
             }
             break;
-        case 21:
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 9UL));
+            }
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 16UL));
+            }
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 26UL));
+            }
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 29UL));
+            }
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 35UL));
+            }
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 36UL));
+            }
+            break;
+        case 28:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 37UL));
+            }
+            break;
+        case 29:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 41UL));
+            }
+            break;
+        case 30:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 48UL));
+            }
+            break;
+        case 31:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 49UL));
+            }
+            break;
+        case 32:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 50UL));
+            }
+            break;
+        case 33:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 58UL));
+            }
+            break;
+        case 34:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 64UL));
+            }
+            break;
+        case 35:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 65UL));
+            }
+            break;
+        case 36:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 66UL));
+            }
+            break;
+        case 37:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 67UL));
+            }
+            break;
+        case 38:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 68UL));
+            }
+            break;
+        case 39:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 69UL));
+            }
+            break;
+        case 40:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 70UL));
+            }
+            break;
+        case 41:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 71UL));
+            }
+            break;
+        case 42:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
+            }
+            break;
+        case 43:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
+            }
+            break;
+        case 44:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 8UL));
+            }
+            break;
+        case 45:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 21UL));
+            }
+            break;
+        case 46:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 22UL));
+            }
+            break;
+        case 47:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 5UL));
+            }
+            break;
+        case 48:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 6UL));
+            }
+            break;
+        case 49:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 7UL));
+            }
+            break;
+        case 50:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 23UL));
+            }
+            break;
+        case 51:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 24UL));
+            }
+            break;
+        case 52:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 30UL));
+            }
+            break;
+        case 53:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -66258,7 +67229,16 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
             }
             break;
-        case 22:
+        case 54:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::CommandId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
+            }
+            break;
+        case 55:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -66270,7 +67250,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 23:
+        case 56:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -66279,7 +67259,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
             }
             break;
-        case 24:
+        case 57:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -66288,7 +67268,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
             }
             break;
-        case 25:
+        case 58:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             shouldContinue = true;
             break;
@@ -66316,8 +67296,13 @@ private:
         }
         case 1: {
             LogStep(1, "Step 2: Read the global attribute: ClusterRevision");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::ClusterRevision::Id, true,
-                                 chip::NullOptional);
+            VerifyOrDo(!ShouldSkip("PICS_USER_PROMPT"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
         }
         case 2: {
             LogStep(2, "Step 3a: Read the global attribute: FeatureMap");
@@ -66363,102 +67348,301 @@ private:
                                  chip::NullOptional);
         }
         case 9: {
-            LogStep(9, "Step 4a: Read the global attribute: AttributeList");
-            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
+            LogStep(9, "Step 3h: Given TSTAT.S.F06(LTNE) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F06"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::FeatureMap::Id, true,
                                  chip::NullOptional);
         }
         case 10: {
             LogStep(10, "Step 4a: Read the global attribute: AttributeList");
-            VerifyOrDo(!ShouldSkip("!PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
                                  chip::NullOptional);
         }
         case 11: {
-            LogStep(11, "Step 4b: Read the Feature dependent(TSTAT.S.F00(HEAT)) attribute in AttributeList");
-            VerifyOrDo(!ShouldSkip("TSTAT.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(11, "Step 4a: Read the global attribute: AttributeList");
+            VerifyOrDo(!ShouldSkip("!PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
                                  chip::NullOptional);
         }
         case 12: {
-            LogStep(12, "Step 4c: Read the Feature dependent(TSTAT.S.F01(COOL)) attribute in AttributeList");
-            VerifyOrDo(!ShouldSkip("TSTAT.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(12, "Step 4b: Read the Feature dependent(TSTAT.S.F00(HEAT)) attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
                                  chip::NullOptional);
         }
         case 13: {
-            LogStep(13, "Step 4d: Read the Feature dependent(TSTAT.S.F02(OCC)) attribute in AttributeList");
-            VerifyOrDo(!ShouldSkip("TSTAT.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(13, "Step 4c: Read the Feature dependent(TSTAT.S.F01(COOL)) attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
                                  chip::NullOptional);
         }
         case 14: {
-            LogStep(14, "Step 4e: Read the Feature dependent(TSTAT.S.F00(HEAT) & TSTAT.S.F02(OCC)) attribute in AttributeList");
-            VerifyOrDo(!ShouldSkip("TSTAT.S.F00 && TSTAT.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(14, "Step 4d: Read the Feature dependent(TSTAT.S.F02(OCC)) attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
                                  chip::NullOptional);
         }
         case 15: {
-            LogStep(15, "Step 4f: Read the Feature dependent(TSTAT.S.F01(COOL) & TSTAT.S.F02(OCC)) attribute in AttributeList");
-            VerifyOrDo(!ShouldSkip("TSTAT.S.F01 && TSTAT.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(15, "Step 4e: Read the Feature dependent(TSTAT.S.F00(HEAT) & TSTAT.S.F02(OCC)) attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F00 && TSTAT.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
                                  chip::NullOptional);
         }
         case 16: {
-            LogStep(16, "Step 4g: Read the Feature dependent(TSTAT.S.F05(AUTO)) attribute in AttributeList");
-            VerifyOrDo(!ShouldSkip("TSTAT.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(16, "Step 4f: Read the Feature dependent(TSTAT.S.F01(COOL) & TSTAT.S.F02(OCC)) attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F01 && TSTAT.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
                                  chip::NullOptional);
         }
         case 17: {
-            LogStep(17, "Step 4h: Read the Feature dependent(TSTAT.S.F03(SCH)) attribute in AttributeList");
-            VerifyOrDo(!ShouldSkip("TSTAT.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(17, "Step 4g: Read the Feature dependent(TSTAT.S.F05(AUTO)) attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
                                  chip::NullOptional);
         }
         case 18: {
-            LogStep(18, "Step 4i: Read the Feature dependent(TSTAT.S.F04(SB)) attribute in AttributeList");
-            VerifyOrDo(!ShouldSkip("TSTAT.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(18, "Step 4h: Read the Feature dependent(TSTAT.S.F03(SCH)) attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
                                  chip::NullOptional);
         }
         case 19: {
-            LogStep(19, "Step 4j: Read the Feature dependent(TSTAT.S.F04(SB) & TSTAT.S.F02(OCC)) attribute in AttributeList");
-            VerifyOrDo(!ShouldSkip("TSTAT.S.F04 && TSTAT.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(19, "Step 4i: Read the Feature dependent(TSTAT.S.F04(SB)) attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
                                  chip::NullOptional);
         }
         case 20: {
-            LogStep(20, "Step 5a: Read the global attribute: AcceptedCommandList");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AcceptedCommandList::Id,
-                                 true, chip::NullOptional);
+            LogStep(20, "Step 4j: Read the Feature dependent(TSTAT.S.F04(SB) & TSTAT.S.F02(OCC)) attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F04 && TSTAT.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
         }
         case 21: {
-            LogStep(21, "Step 5b: Read Feature dependent(TSTAT.S.F03(SCH)) commands in AcceptedCommandList");
+            LogStep(21, "Step 4k: Read the optional attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 22: {
+            LogStep(22, "Step 4l: Read the optional attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.A0009"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 23: {
+            LogStep(23, "Step 4m: Read the optional attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.A0010"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 24: {
+            LogStep(24, "Step 4n: Read the optional attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.A001a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 25: {
+            LogStep(25, "Step 4o: Read the optional attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.A001d"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 26: {
+            LogStep(26, "Step 4p: Read the optional attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.A0023"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 27: {
+            LogStep(27, "Step 4q: Read the optional attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.A0024"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 28: {
+            LogStep(28, "Step 4r: Read the optional attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.A0025"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 29: {
+            LogStep(29, "Step 4s: Read the optional attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.A0029"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 30: {
+            LogStep(30, "Step 4t: Read the optional attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.A0030"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 31: {
+            LogStep(31, "Step 4u: Read the optional attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.A0031"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 32: {
+            LogStep(32, "Step 4x: Read the optional attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.A0032"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 33: {
+            LogStep(33, "Step 5y: Read the optional attribute: AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.A003a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 34: {
+            LogStep(34, "Step 4z: Read the optional attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.A0040"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 35: {
+            LogStep(35, "Step 4A: Read the optional attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.A0041"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 36: {
+            LogStep(36, "Step 4B: Read the optional attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.A0042"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 37: {
+            LogStep(37, "Step 4C: Read the optional attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.A0043"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 38: {
+            LogStep(38, "Step 5D: Read the optional attribute: AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.A0044"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 39: {
+            LogStep(39, "Step 4E: Read the optional attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.A0045"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 40: {
+            LogStep(40, "Step 4F: Read the optional attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.A0046"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 41: {
+            LogStep(41, "Step 5G: Read the optional attribute: AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.A0047"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 42: {
+            LogStep(42, "Step 4H: Read the Feature dependent(TSTAT.S.F00(HEAT)) optional attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F00 && TSTAT.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 43: {
+            LogStep(43, "Step 4I: Read the Feature dependent(TSTAT.S.F00(HEAT)) optional attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F00 && TSTAT.S.A0004"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 44: {
+            LogStep(44, "Step 4J: Read the Feature dependent(TSTAT.S.F00(HEAT)) optional attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F00 && TSTAT.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 45: {
+            LogStep(45, "Step 4K: Read the Feature dependent(TSTAT.S.F00(HEAT)) optional attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F00 && TSTAT.S.A0015"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 46: {
+            LogStep(46, "Step 4L: Read the Feature dependent(TSTAT.S.F00(HEAT)) optional attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F00 && TSTAT.S.A0016"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 47: {
+            LogStep(47, "Step 4M: Read the Feature dependent(TSTAT.S.F01(COOL)) optional attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 48: {
+            LogStep(48, "Step 4N: Read the Feature dependent(TSTAT.S.F01(COOL)) optional attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 49: {
+            LogStep(49, "Step 4O: Read the Feature dependent(TSTAT.S.F01(COOL)) optional attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 50: {
+            LogStep(50, "Step 4P: Read the Feature dependent(TSTAT.S.F01(COOL)) optional attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0017"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 51: {
+            LogStep(51, "Step 4Q: Read the Feature dependent(TSTAT.S.F01(COOL)) optional attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0018"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 52: {
+            LogStep(52, "Step 4R: Read the Feature dependent(TSTAT.S.F05(AUTO)) optional attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F05 && TSTAT.S.A001e"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 53: {
+            LogStep(53, "Step 5a: Read Feature dependent(TSTAT.S.F03(SCH)) commands in AcceptedCommandList");
             VerifyOrDo(!ShouldSkip("TSTAT.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AcceptedCommandList::Id,
                                  true, chip::NullOptional);
         }
-        case 22: {
-            LogStep(22, "Step 6a: Read the global attribute: GeneratedCommandList");
+        case 54: {
+            LogStep(54, "Step 5b: Read the optional attribute: AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.C04.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::AcceptedCommandList::Id,
+                                 true, chip::NullOptional);
+        }
+        case 55: {
+            LogStep(55, "Step 6a: Read the global attribute: GeneratedCommandList");
             VerifyOrDo(!ShouldSkip(" !TSTAT.S.C04.Rsp && !TSTAT.S.C02.Rsp "), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::GeneratedCommandList::Id,
                                  true, chip::NullOptional);
         }
-        case 23: {
-            LogStep(23, "Step 6b: Read Feature dependent(TSTAT.S.F03(SCH)) commands in GeneratedCommandList");
+        case 56: {
+            LogStep(56, "Step 6b: Read Feature dependent(TSTAT.S.F03(SCH)) commands in GeneratedCommandList");
             VerifyOrDo(!ShouldSkip("TSTAT.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::GeneratedCommandList::Id,
                                  true, chip::NullOptional);
         }
-        case 24: {
-            LogStep(24, "Step 6c: Read optional command (GetRelayStatusLogResponse) in GeneratedCommandList");
+        case 57: {
+            LogStep(57, "Step 6c: Read optional command (GetRelayStatusLogResponse) in GeneratedCommandList");
             VerifyOrDo(!ShouldSkip("TSTAT.S.C04.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::GeneratedCommandList::Id,
                                  true, chip::NullOptional);
         }
-        case 25: {
-            LogStep(25,
+        case 58: {
+            LogStep(58,
                     "Step 7: Read EventList attribute from the DUT.For this cluster the list is usually empty but it can contain "
                     "manufacturer specific event IDs.");
             VerifyOrDo(!ShouldSkip("PICS_USER_PROMPT"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
@@ -108156,7 +109340,7 @@ private:
             );
         }
         case 16: {
-            LogStep(16, "TStep 10a: H reads the WrongCodeEntryLimit attribute from the DUT");
+            LogStep(16, "Step 10a: H reads the WrongCodeEntryLimit attribute from the DUT");
             VerifyOrDo(!ShouldSkip("DRLK.S.A0030"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::WrongCodeEntryLimit::Id, true,
                                  chip::NullOptional);
@@ -113993,7 +115177,7 @@ class Test_TC_ACFREMON_1_1Suite : public TestCommand
 {
 public:
     Test_TC_ACFREMON_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_ACFREMON_1_1", 14, credsIssuerConfig)
+        TestCommand("Test_TC_ACFREMON_1_1", 16, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -114127,6 +115311,24 @@ private:
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
+            }
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 5UL));
+            }
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
                 chip::app::DataModel::DecodableList<chip::EventId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
@@ -114136,7 +115338,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 11:
+        case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -114144,7 +115346,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 12:
+        case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -114153,7 +115355,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
             }
             break;
-        case 13:
+        case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -114236,30 +115438,42 @@ private:
                                  ActivatedCarbonFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 9: {
-            LogStep(9, "Step 4c: Read the optional attribute InPlaceIndicator (ACFREMON.S.A0002) in AttributeList");
-            VerifyOrDo(!ShouldSkip("ACFREMON.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(9, "Step 4c: Read the optional attribute InPlaceIndicator (ACFREMON.S.A0003) in AttributeList");
+            VerifyOrDo(!ShouldSkip("ACFREMON.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
                                  ActivatedCarbonFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 10: {
-            LogStep(10, "Step 5: TH reads EventList attribute from DUT");
+            LogStep(10, "Step 4d: Read the optional attribute LastChangedTime (ACFREMON.S.A0004) in AttributeList");
+            VerifyOrDo(!ShouldSkip("ACFREMON.S.A0004"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
+                                 ActivatedCarbonFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11, "Step 4e: Read the optional attribute ReplacementProductList (ACFREMON.S.F02) in AttributeList");
+            VerifyOrDo(!ShouldSkip("ACFREMON.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
+                                 ActivatedCarbonFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 12: {
+            LogStep(12, "Step 5: TH reads EventList attribute from DUT");
             VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
                                  ActivatedCarbonFilterMonitoring::Attributes::EventList::Id, true, chip::NullOptional);
         }
-        case 11: {
-            LogStep(11, "Step 6a: Read the global attribute: AcceptedCommandList");
+        case 13: {
+            LogStep(13, "Step 6a: Read the global attribute: AcceptedCommandList");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
                                  ActivatedCarbonFilterMonitoring::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
         }
-        case 12: {
-            LogStep(12, "Step 6b: Read the optional command (ResetCondition) in AcceptedCommandList");
+        case 14: {
+            LogStep(14, "Step 6b: Read the optional command (ResetCondition) in AcceptedCommandList");
             VerifyOrDo(!ShouldSkip("ACFREMON.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
                                  ActivatedCarbonFilterMonitoring::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
         }
-        case 13: {
-            LogStep(13, "Step 7: Read the global attribute: GeneratedCommandList");
+        case 15: {
+            LogStep(15, "Step 7: Read the global attribute: GeneratedCommandList");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ActivatedCarbonFilterMonitoring::Id,
                                  ActivatedCarbonFilterMonitoring::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
         }
@@ -114432,7 +115646,7 @@ class Test_TC_HEPAFREMON_1_1Suite : public TestCommand
 {
 public:
     Test_TC_HEPAFREMON_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_HEPAFREMON_1_1", 14, credsIssuerConfig)
+        TestCommand("Test_TC_HEPAFREMON_1_1", 16, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -114566,6 +115780,24 @@ private:
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
+            }
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::AttributeId> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
+                VerifyOrReturn(CheckConstraintContains("value", value, 5UL));
+            }
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
                 chip::app::DataModel::DecodableList<chip::EventId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
@@ -114575,7 +115807,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 11:
+        case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -114583,7 +115815,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 12:
+        case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -114592,7 +115824,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
             }
             break;
-        case 13:
+        case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -114669,36 +115901,48 @@ private:
                                  HepaFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 8: {
-            LogStep(8, "Step 4a: Read the feature dependent(HEPAFREMON.S.F00) attribute in AttributeList");
+            LogStep(8, "Step 4b: Read the feature dependent(HEPAFREMON.S.F00) attribute in AttributeList");
             VerifyOrDo(!ShouldSkip("HEPAFREMON.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
                                  HepaFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 9: {
-            LogStep(9, "Step 4b: Read the optional attribute InPlaceIndicator (HEPAFREMON.S.A0002) in AttributeList");
-            VerifyOrDo(!ShouldSkip("HEPAFREMON.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(9, "Step 4c: Read the optional attribute InPlaceIndicator (HEPAFREMON.S.A0003) in AttributeList");
+            VerifyOrDo(!ShouldSkip("HEPAFREMON.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
                                  HepaFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 10: {
-            LogStep(10, "Step 5: TH reads EventList attribute from DUT");
+            LogStep(10, "Step 4d: Read the optional attribute LastChangedTime (HEPAFREMON.S.A0004) in AttributeList");
+            VerifyOrDo(!ShouldSkip("HEPAFREMON.S.A0004"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
+                                 HepaFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11, "Step 4e: Read the optional attribute ReplacementProductList (HEPAFREMON.S.F02) in AttributeList");
+            VerifyOrDo(!ShouldSkip("HEPAFREMON.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
+                                 HepaFilterMonitoring::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 12: {
+            LogStep(12, "Step 5: TH reads EventList attribute from DUT");
             VerifyOrDo(!ShouldSkip("PICS_EVENT_LIST_ENABLED"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
                                  HepaFilterMonitoring::Attributes::EventList::Id, true, chip::NullOptional);
         }
-        case 11: {
-            LogStep(11, "Step 6a: Read the global attribute: AcceptedCommandList");
+        case 13: {
+            LogStep(13, "Step 6a: Read the global attribute: AcceptedCommandList");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
                                  HepaFilterMonitoring::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
         }
-        case 12: {
-            LogStep(12, "Step 6b: Read the optional command (ResetCondition) in AcceptedCommandList");
+        case 14: {
+            LogStep(14, "Step 6b: Read the optional command (ResetCondition) in AcceptedCommandList");
             VerifyOrDo(!ShouldSkip("HEPAFREMON.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
                                  HepaFilterMonitoring::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
         }
-        case 13: {
-            LogStep(13, "Step 7: Read the global attribute: GeneratedCommandList");
+        case 15: {
+            LogStep(15, "Step 7: Read the global attribute: GeneratedCommandList");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), HepaFilterMonitoring::Id,
                                  HepaFilterMonitoring::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
         }
@@ -117304,6 +118548,61 @@ private:
     }
 };
 
+class Test_TC_G_2_4Suite : public TestCommand
+{
+public:
+    Test_TC_G_2_4Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_G_2_4", 0, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_G_2_4Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {}
+        return CHIP_NO_ERROR;
+    }
+};
+
 class Test_TC_G_3_2Suite : public TestCommand
 {
 public:
@@ -119565,171 +120864,6 @@ private:
     }
 };
 
-class Test_TC_CNET_4_17Suite : public TestCommand
-{
-public:
-    Test_TC_CNET_4_17Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_CNET_4_17", 0, credsIssuerConfig)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_CNET_4_17Suite() {}
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
-
-    //
-    // Tests methods
-    //
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    CHIP_ERROR DoTestStep(uint16_t testIndex) override
-    {
-        using namespace chip::app::Clusters;
-        switch (testIndex)
-        {}
-        return CHIP_NO_ERROR;
-    }
-};
-
-class Test_TC_CNET_4_18Suite : public TestCommand
-{
-public:
-    Test_TC_CNET_4_18Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_CNET_4_18", 0, credsIssuerConfig)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_CNET_4_18Suite() {}
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
-
-    //
-    // Tests methods
-    //
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    CHIP_ERROR DoTestStep(uint16_t testIndex) override
-    {
-        using namespace chip::app::Clusters;
-        switch (testIndex)
-        {}
-        return CHIP_NO_ERROR;
-    }
-};
-
-class Test_TC_CNET_4_19Suite : public TestCommand
-{
-public:
-    Test_TC_CNET_4_19Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_CNET_4_19", 0, credsIssuerConfig)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_CNET_4_19Suite() {}
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
-
-    //
-    // Tests methods
-    //
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    CHIP_ERROR DoTestStep(uint16_t testIndex) override
-    {
-        using namespace chip::app::Clusters;
-        switch (testIndex)
-        {}
-        return CHIP_NO_ERROR;
-    }
-};
-
 class Test_TC_CNET_4_20Suite : public TestCommand
 {
 public:
@@ -120893,116 +122027,6 @@ private:
     }
 };
 
-class Test_TC_FAN_3_3Suite : public TestCommand
-{
-public:
-    Test_TC_FAN_3_3Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_FAN_3_3", 0, credsIssuerConfig)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_FAN_3_3Suite() {}
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
-
-    //
-    // Tests methods
-    //
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    CHIP_ERROR DoTestStep(uint16_t testIndex) override
-    {
-        using namespace chip::app::Clusters;
-        switch (testIndex)
-        {}
-        return CHIP_NO_ERROR;
-    }
-};
-
-class Test_TC_FAN_3_5Suite : public TestCommand
-{
-public:
-    Test_TC_FAN_3_5Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_FAN_3_5", 0, credsIssuerConfig)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_FAN_3_5Suite() {}
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
-
-    //
-    // Tests methods
-    //
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    CHIP_ERROR DoTestStep(uint16_t testIndex) override
-    {
-        using namespace chip::app::Clusters;
-        switch (testIndex)
-        {}
-        return CHIP_NO_ERROR;
-    }
-};
-
 class Test_TC_CGEN_2_2Suite : public TestCommand
 {
 public:
@@ -121125,61 +122149,6 @@ public:
     }
 
     ~Test_TC_DGGEN_2_3Suite() {}
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
-
-    //
-    // Tests methods
-    //
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    CHIP_ERROR DoTestStep(uint16_t testIndex) override
-    {
-        using namespace chip::app::Clusters;
-        switch (testIndex)
-        {}
-        return CHIP_NO_ERROR;
-    }
-};
-
-class Test_TC_DGGEN_3_1Suite : public TestCommand
-{
-public:
-    Test_TC_DGGEN_3_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_DGGEN_3_1", 0, credsIssuerConfig)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_DGGEN_3_1Suite() {}
 
     chip::System::Clock::Timeout GetWaitDuration() const override
     {
@@ -122280,6 +123249,116 @@ public:
     }
 
     ~Test_TC_IDM_8_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {}
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_IDM_10_1Suite : public TestCommand
+{
+public:
+    Test_TC_IDM_10_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_IDM_10_1", 0, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_IDM_10_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {}
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_IDM_11_1Suite : public TestCommand
+{
+public:
+    Test_TC_IDM_11_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_IDM_11_1", 0, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_IDM_11_1Suite() {}
 
     chip::System::Clock::Timeout GetWaitDuration() const override
     {
@@ -126919,6 +127998,118 @@ private:
                                  AdministratorCommissioning::Attributes::WindowStatus::Id, true, chip::NullOptional);
         }
         }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_CADMIN_1_25Suite : public TestCommand
+{
+public:
+    Test_TC_CADMIN_1_25Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_CADMIN_1_25", 0, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_CADMIN_1_25Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {}
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_CADMIN_1_26Suite : public TestCommand
+{
+public:
+    Test_TC_CADMIN_1_26Suite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("Test_TC_CADMIN_1_26", 0, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_CADMIN_1_26Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -132385,7 +133576,7 @@ private:
             return WaitForMs(kIdentityAlpha, value);
         }
         case 13: {
-            LogStep(13, "TStep 2f: H reads CurrentHue attribute from DUT");
+            LogStep(13, "Step 2f: H reads CurrentHue attribute from DUT");
             VerifyOrDo(!ShouldSkip("CC.S.F00 && CC.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::CurrentHue::Id, true,
                                  chip::NullOptional);
@@ -132529,8 +133720,7 @@ private:
             return WaitForMs(kIdentityAlpha, value);
         }
         case 27: {
-            LogStep(27,
-                    "TStep 4b: H sends MoveToHue command to DUT with Hue=120, Direction=0x02 (up) and TransitionTime=300 (30s)");
+            LogStep(27, "Step 4b: H sends MoveToHue command to DUT with Hue=120, Direction=0x02 (up) and TransitionTime=300 (30s)");
             VerifyOrDo(!ShouldSkip("CC.S.F00 && CC.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::ColorControl::Commands::MoveToHue::Type value;
@@ -135902,61 +137092,6 @@ private:
     }
 };
 
-class Test_TC_DRLK_3_3Suite : public TestCommand
-{
-public:
-    Test_TC_DRLK_3_3Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_DRLK_3_3", 0, credsIssuerConfig)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_DRLK_3_3Suite() {}
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
-
-    //
-    // Tests methods
-    //
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    CHIP_ERROR DoTestStep(uint16_t testIndex) override
-    {
-        using namespace chip::app::Clusters;
-        switch (testIndex)
-        {}
-        return CHIP_NO_ERROR;
-    }
-};
-
 class Test_TC_LCFG_2_1Suite : public TestCommand
 {
 public:
@@ -135969,61 +137104,6 @@ public:
     }
 
     ~Test_TC_LCFG_2_1Suite() {}
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
-
-    //
-    // Tests methods
-    //
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    CHIP_ERROR DoTestStep(uint16_t testIndex) override
-    {
-        using namespace chip::app::Clusters;
-        switch (testIndex)
-        {}
-        return CHIP_NO_ERROR;
-    }
-};
-
-class Test_TC_LVL_8_1Suite : public TestCommand
-{
-public:
-    Test_TC_LVL_8_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_LVL_8_1", 0, credsIssuerConfig)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_LVL_8_1Suite() {}
 
     chip::System::Clock::Timeout GetWaitDuration() const override
     {
@@ -140935,61 +142015,6 @@ private:
     }
 };
 
-class Test_TC_TSTAT_3_1Suite : public TestCommand
-{
-public:
-    Test_TC_TSTAT_3_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_TSTAT_3_1", 0, credsIssuerConfig)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_TSTAT_3_1Suite() {}
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
-
-    //
-    // Tests methods
-    //
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    CHIP_ERROR DoTestStep(uint16_t testIndex) override
-    {
-        using namespace chip::app::Clusters;
-        switch (testIndex)
-        {}
-        return CHIP_NO_ERROR;
-    }
-};
-
 class Test_TC_TSTAT_3_2Suite : public TestCommand
 {
 public:
@@ -141266,61 +142291,6 @@ private:
     }
 };
 
-class Test_TC_LTIME_2_1Suite : public TestCommand
-{
-public:
-    Test_TC_LTIME_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_LTIME_2_1", 0, credsIssuerConfig)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_LTIME_2_1Suite() {}
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
-
-    //
-    // Tests methods
-    //
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    CHIP_ERROR DoTestStep(uint16_t testIndex) override
-    {
-        using namespace chip::app::Clusters;
-        switch (testIndex)
-        {}
-        return CHIP_NO_ERROR;
-    }
-};
-
 class Test_TC_LTIME_3_1Suite : public TestCommand
 {
 public:
@@ -141333,62 +142303,6 @@ public:
     }
 
     ~Test_TC_LTIME_3_1Suite() {}
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
-
-    //
-    // Tests methods
-    //
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    CHIP_ERROR DoTestStep(uint16_t testIndex) override
-    {
-        using namespace chip::app::Clusters;
-        switch (testIndex)
-        {}
-        return CHIP_NO_ERROR;
-    }
-};
-
-class Test_TC_TIMESYNC_2_15Suite : public TestCommand
-{
-public:
-    Test_TC_TIMESYNC_2_15Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_TIMESYNC_2_15", 0, credsIssuerConfig)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_TIMESYNC_2_15Suite() {}
 
     chip::System::Clock::Timeout GetWaitDuration() const override
     {
@@ -142056,7 +142970,7 @@ private:
             {
                 bool value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "boolean", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "int8u"));
             }
             break;
         case 5:
@@ -142065,7 +142979,7 @@ private:
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("nameSupport", value, 128U));
-                VerifyOrReturn(CheckConstraintType("value", "bitmap8", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap8", "int8u"));
             }
             break;
         case 6:
@@ -142074,7 +142988,7 @@ private:
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("nameSupport", value, 0U));
-                VerifyOrReturn(CheckConstraintType("value", "bitmap8", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap8", "int8u"));
             }
             break;
         case 7:
@@ -142098,7 +143012,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "int8u", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
             }
             break;
         default:
@@ -142182,2409 +143096,6 @@ private:
     }
 };
 
-class Test_TC_S_2_2Suite : public TestCommand
-{
-public:
-    Test_TC_S_2_2Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_S_2_2", 50, credsIssuerConfig)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_S_2_2Suite() {}
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    uint16_t maxScenes;
-
-    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
-
-    //
-    // Tests methods
-    //
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                uint16_t value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                maxScenes = value;
-            }
-            break;
-        case 3:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 4:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Groups::Commands::AddGroupResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
-            }
-            break;
-        case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Scenes::Commands::RemoveAllScenesResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
-            }
-            break;
-        case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Scenes::Commands::GetSceneMembershipResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValueNonNull("capacity", value.capacity));
-                VerifyOrReturn(CheckValue("capacity.Value()", value.capacity.Value(), (maxScenes / 2)));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
-            }
-            break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 10:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Scenes::Commands::StoreSceneResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
-                VerifyOrReturn(CheckValue("sceneID", value.sceneID, 1U));
-            }
-            break;
-        case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                uint8_t value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("sceneCount", value, 1U));
-                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
-            }
-            break;
-        case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                uint8_t value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("currentScene", value, 1U));
-                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
-            }
-            break;
-        case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::GroupId value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("currentGroup", value, 1U));
-                VerifyOrReturn(CheckConstraintType("value", "group_id", "groupid"));
-            }
-            break;
-        case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                bool value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("sceneValid", value, true));
-                VerifyOrReturn(CheckConstraintType("value", "boolean", "uint8"));
-            }
-            break;
-        case 18:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 19:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 20:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 21:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 22:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 23:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Scenes::Commands::ViewSceneResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
-                VerifyOrReturn(CheckValue("sceneID", value.sceneID, 1U));
-                VerifyOrReturn(CheckValuePresent("transitionTime", value.transitionTime));
-                VerifyOrReturn(CheckValue("transitionTime.Value()", value.transitionTime.Value(), 0U));
-                VerifyOrReturn(CheckValuePresent("extensionFieldSets", value.extensionFieldSets));
-                {
-                    auto iter_1 = value.extensionFieldSets.Value().begin();
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value.extensionFieldSets.Value())>(
-                        "extensionFieldSets.Value()", iter_1, 0));
-                    VerifyOrReturn(CheckValue("extensionFieldSets.Value()[0].clusterID", iter_1.GetValue().clusterID, 6UL));
-                    {
-                        auto iter_3 = iter_1.GetValue().attributeValueList.begin();
-                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_1.GetValue().attributeValueList)>(
-                            "extensionFieldSets.Value()[0].attributeValueList", iter_3, 0));
-                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[0].attributeValueList[0].attributeID",
-                                                  iter_3.GetValue().attributeID, 0UL));
-                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[0].attributeValueList[0].attributeValue",
-                                                  iter_3.GetValue().attributeValue, 1UL));
-                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_1.GetValue().attributeValueList)>(
-                            "extensionFieldSets.Value()[0].attributeValueList", iter_3, 1));
-                    }
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value.extensionFieldSets.Value())>(
-                        "extensionFieldSets.Value()", iter_1, 1));
-                    VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].clusterID", iter_1.GetValue().clusterID, 8UL));
-                    {
-                        auto iter_3 = iter_1.GetValue().attributeValueList.begin();
-                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_1.GetValue().attributeValueList)>(
-                            "extensionFieldSets.Value()[1].attributeValueList", iter_3, 0));
-                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[0].attributeID",
-                                                  iter_3.GetValue().attributeID, 0UL));
-                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[0].attributeValue",
-                                                  iter_3.GetValue().attributeValue, 100UL));
-                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_1.GetValue().attributeValueList)>(
-                            "extensionFieldSets.Value()[1].attributeValueList", iter_3, 1));
-                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[1].attributeID",
-                                                  iter_3.GetValue().attributeID, 1UL));
-                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[1].attributeValue",
-                                                  iter_3.GetValue().attributeValue, 0UL));
-                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_1.GetValue().attributeValueList)>(
-                            "extensionFieldSets.Value()[1].attributeValueList", iter_3, 2));
-                    }
-                    VerifyOrReturn(
-                        CheckNoMoreListItems<decltype(value.extensionFieldSets.Value())>("extensionFieldSets.Value()", iter_1, 2));
-                }
-            }
-            break;
-        case 24:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Scenes::Commands::ViewSceneResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
-                VerifyOrReturn(CheckValue("sceneID", value.sceneID, 1U));
-                VerifyOrReturn(CheckValuePresent("transitionTime", value.transitionTime));
-                VerifyOrReturn(CheckValue("transitionTime.Value()", value.transitionTime.Value(), 0U));
-            }
-            break;
-        case 25:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Scenes::Commands::GetSceneMembershipResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValueNonNull("capacity", value.capacity));
-                VerifyOrReturn(CheckValue("capacity.Value()", value.capacity.Value(), static_cast<uint8_t>((maxScenes / 2) - 1)));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
-                VerifyOrReturn(CheckValuePresent("sceneList", value.sceneList));
-                {
-                    auto iter_1 = value.sceneList.Value().begin();
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value.sceneList.Value())>("sceneList.Value()", iter_1, 0));
-                    VerifyOrReturn(CheckValue("sceneList.Value()[0]", iter_1.GetValue(), 1U));
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value.sceneList.Value())>("sceneList.Value()", iter_1, 1));
-                }
-            }
-            break;
-        case 26:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Scenes::Commands::RemoveAllScenesResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
-            }
-            break;
-        case 27:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Scenes::Commands::GetSceneMembershipResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValueNonNull("capacity", value.capacity));
-                VerifyOrReturn(CheckValue("capacity.Value()", value.capacity.Value(), (maxScenes / 2)));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
-            }
-            break;
-        case 28:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Scenes::Commands::AddSceneResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
-                VerifyOrReturn(CheckValue("sceneID", value.sceneID, 1U));
-            }
-            break;
-        case 29:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 30:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Scenes::Commands::GetSceneMembershipResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValueNonNull("capacity", value.capacity));
-                VerifyOrReturn(CheckValue("capacity.Value()", value.capacity.Value(), static_cast<uint8_t>((maxScenes / 2) - 1)));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
-                VerifyOrReturn(CheckValuePresent("sceneList", value.sceneList));
-                {
-                    auto iter_1 = value.sceneList.Value().begin();
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value.sceneList.Value())>("sceneList.Value()", iter_1, 0));
-                    VerifyOrReturn(CheckValue("sceneList.Value()[0]", iter_1.GetValue(), 1U));
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value.sceneList.Value())>("sceneList.Value()", iter_1, 1));
-                }
-            }
-            break;
-        case 31:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Scenes::Commands::RemoveSceneResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
-                VerifyOrReturn(CheckValue("sceneID", value.sceneID, 1U));
-            }
-            break;
-        case 32:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Scenes::Commands::GetSceneMembershipResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValueNonNull("capacity", value.capacity));
-                VerifyOrReturn(CheckValue("capacity.Value()", value.capacity.Value(), (maxScenes / 2)));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
-            }
-            break;
-        case 33:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 34:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 35:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
-            break;
-        case 36:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 37:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 38:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Scenes::Commands::StoreSceneResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
-                VerifyOrReturn(CheckValue("sceneID", value.sceneID, 1U));
-            }
-            break;
-        case 39:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 40:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 41:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Scenes::Commands::StoreSceneResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
-                VerifyOrReturn(CheckValue("sceneID", value.sceneID, 2U));
-            }
-            break;
-        case 42:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Scenes::Commands::GetSceneMembershipResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValueNonNull("capacity", value.capacity));
-                VerifyOrReturn(CheckValue("capacity.Value()", value.capacity.Value(), static_cast<uint8_t>((maxScenes / 2) - 2)));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
-                VerifyOrReturn(CheckValuePresent("sceneList", value.sceneList));
-                {
-                    auto iter_1 = value.sceneList.Value().begin();
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value.sceneList.Value())>("sceneList.Value()", iter_1, 0));
-                    VerifyOrReturn(CheckValue("sceneList.Value()[0]", iter_1.GetValue(), 1U));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value.sceneList.Value())>("sceneList.Value()", iter_1, 1));
-                    VerifyOrReturn(CheckValue("sceneList.Value()[1]", iter_1.GetValue(), 2U));
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value.sceneList.Value())>("sceneList.Value()", iter_1, 2));
-                }
-            }
-            break;
-        case 43:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Groups::Commands::AddGroupResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, 2U));
-            }
-            break;
-        case 44:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Scenes::Commands::RemoveAllScenesResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, 2U));
-            }
-            break;
-        case 45:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Scenes::Commands::GetSceneMembershipResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValueNonNull("capacity", value.capacity));
-                VerifyOrReturn(CheckValue("capacity.Value()", value.capacity.Value(), static_cast<uint8_t>((maxScenes / 2) - 2)));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, 2U));
-            }
-            break;
-        case 46:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 47:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 48:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Scenes::Commands::StoreSceneResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, 2U));
-                VerifyOrReturn(CheckValue("sceneID", value.sceneID, 3U));
-            }
-            break;
-        case 49:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Scenes::Commands::GetSceneMembershipResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValueNonNull("capacity", value.capacity));
-                VerifyOrReturn(CheckValue("capacity.Value()", value.capacity.Value(), static_cast<uint8_t>((maxScenes / 2) - 3)));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, 2U));
-                VerifyOrReturn(CheckValuePresent("sceneList", value.sceneList));
-                {
-                    auto iter_1 = value.sceneList.Value().begin();
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value.sceneList.Value())>("sceneList.Value()", iter_1, 0));
-                    VerifyOrReturn(CheckValue("sceneList.Value()[0]", iter_1.GetValue(), 3U));
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value.sceneList.Value())>("sceneList.Value()", iter_1, 1));
-                }
-            }
-            break;
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    CHIP_ERROR DoTestStep(uint16_t testIndex) override
-    {
-        using namespace chip::app::Clusters;
-        switch (testIndex)
-        {
-        case 0: {
-            LogStep(0, "Wait for the commissioned device to be retrieved");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-            return WaitForCommissionee(kIdentityAlpha, value);
-        }
-        case 1: {
-            LogStep(1, "TH sends a RemoveAllGroups command to DUT.");
-            VerifyOrDo(!ShouldSkip("G.S.C04.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Groups::Commands::RemoveAllGroups::Type value;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Groups::Id, Groups::Commands::RemoveAllGroups::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 2: {
-            LogStep(2, "TH reads from the DUT the (0x0006) SceneTableSize attribute");
-            VerifyOrDo(!ShouldSkip("S.S.A0006"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Attributes::SceneTableSize::Id, true,
-                                 chip::NullOptional);
-        }
-        case 3: {
-            LogStep(3, "Step 0a: preparation step for using commands from Groups cluster: Add KeySet");
-            ListFreer listFreer;
-            chip::app::Clusters::GroupKeyManagement::Commands::KeySetWrite::Type value;
-
-            value.groupKeySet.groupKeySetID = 417U;
-            value.groupKeySet.groupKeySecurityPolicy =
-                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicyEnum>(0);
-            value.groupKeySet.epochKey0.SetNonNull();
-            value.groupKeySet.epochKey0.Value() = chip::ByteSpan(
-                chip::Uint8::from_const_char(
-                    "\240\241\242\243\244\245\246\247\250\251\252\253\254\255\256\257garbage: not in length on purpose"),
-                16);
-            value.groupKeySet.epochStartTime0.SetNonNull();
-            value.groupKeySet.epochStartTime0.Value() = 0ULL;
-            value.groupKeySet.epochKey1.SetNonNull();
-            value.groupKeySet.epochKey1.Value() = chip::ByteSpan(
-                chip::Uint8::from_const_char(
-                    "\260\261\262\263\264\265\266\267\270\271\272\273\274\275\276\277garbage: not in length on purpose"),
-                16);
-            value.groupKeySet.epochStartTime1.SetNonNull();
-            value.groupKeySet.epochStartTime1.Value() = 0ULL;
-            value.groupKeySet.epochKey2.SetNonNull();
-            value.groupKeySet.epochKey2.Value() = chip::ByteSpan(
-                chip::Uint8::from_const_char(
-                    "\300\301\302\303\304\305\306\307\310\311\312\313\314\315\316\317garbage: not in length on purpose"),
-                16);
-            value.groupKeySet.epochStartTime2.SetNonNull();
-            value.groupKeySet.epochStartTime2.Value() = 0ULL;
-
-            return SendCommand(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
-                               GroupKeyManagement::Commands::KeySetWrite::Id, value, chip::NullOptional
-
-            );
-        }
-        case 4: {
-            LogStep(4, "Step 0b: Preparation step for using commands from Groups cluster: Write Group Keys");
-            ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type> value;
-
-            {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>(2);
-                listFreer.add(listHolder_0);
-
-                listHolder_0->mList[0].groupId       = 1U;
-                listHolder_0->mList[0].groupKeySetID = 417U;
-                listHolder_0->mList[0].fabricIndex   = 1U;
-
-                listHolder_0->mList[1].groupId       = 2U;
-                listHolder_0->mList[1].groupKeySetID = 417U;
-                listHolder_0->mList[1].fabricIndex   = 1U;
-
-                value = chip::app::DataModel::List<chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>(
-                    listHolder_0->mList, 2);
-            }
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
-                                  GroupKeyManagement::Attributes::GroupKeyMap::Id, value, chip::NullOptional, chip::NullOptional);
-        }
-        case 5: {
-            LogStep(5, "Step 1a: TH sends a AddGroup command to DUT with the GroupID field set to 0x0001.");
-            VerifyOrDo(!ShouldSkip("G.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Groups::Commands::AddGroup::Type value;
-            value.groupID   = 1U;
-            value.groupName = chip::Span<const char>("Group1garbage: not in length on purpose", 6);
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Groups::Id, Groups::Commands::AddGroup::Id, value, chip::NullOptional
-
-            );
-        }
-        case 6: {
-            LogStep(6, "Step 1b: TH sends a RemoveAllScenes command to DUT with the GroupID field set to 0x0001.");
-            VerifyOrDo(!ShouldSkip("S.S.C03.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::RemoveAllScenes::Type value;
-            value.groupID = 1U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::RemoveAllScenes::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 7: {
-            LogStep(7, "Step 1c: TH sends a GetSceneMembership command to DUT with the GroupID field set to 0x0001.");
-            VerifyOrDo(!ShouldSkip("S.S.C06.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::GetSceneMembership::Type value;
-            value.groupID = 1U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::GetSceneMembership::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 8: {
-            LogStep(8, "STep 2a: TH configures AC1 on DUT for all implemented application clusters supporting scenes.");
-            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LevelControl::Commands::MoveToLevelWithOnOff::Type value;
-            value.level = 100U;
-            value.transitionTime.SetNonNull();
-            value.transitionTime.Value() = 0U;
-            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
-            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevelWithOnOff::Id,
-                               value, chip::NullOptional
-
-            );
-        }
-        case 9: {
-            LogStep(9, "Step 2a: TH configures AC1 on DUT for all implemented application clusters supporting scenes.");
-            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>(
-                "Please configure AC1 on DUT and enter 'y' after the configuration is completegarbage: not in length on purpose",
-                77);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 10: {
-            LogStep(10,
-                    "Step 2b: TH sends a StoreScene command to DUT with the GroupID field set to 0x0001 and the SceneID field set "
-                    "to 0x01.");
-            VerifyOrDo(!ShouldSkip("S.S.C04.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::StoreScene::Type value;
-            value.groupID = 1U;
-            value.sceneID = 1U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::StoreScene::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 11: {
-            LogStep(11, "Step 3a: TH configures AC2 on DUT for all implemented application clusters supporting scenes.");
-            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LevelControl::Commands::MoveToLevelWithOnOff::Type value;
-            value.level = 200U;
-            value.transitionTime.SetNonNull();
-            value.transitionTime.Value() = 0U;
-            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
-            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevelWithOnOff::Id,
-                               value, chip::NullOptional
-
-            );
-        }
-        case 12: {
-            LogStep(12, "Step 3a: TH configures AC2 on DUT for all implemented application clusters supporting scenes.");
-            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>(
-                "Please configure AC2 on DUT and enter 'y' after the configuration is completegarbage: not in length on purpose",
-                77);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 13: {
-            LogStep(13,
-                    "Step 3b: TH sends a RecallScene command to DUT with the GroupID field set to 0x0001 and the SceneID field set "
-                    "to 0x01.");
-            VerifyOrDo(!ShouldSkip("S.S.C05.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::RecallScene::Type value;
-            value.groupID = 1U;
-            value.sceneID = 1U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::RecallScene::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 14: {
-            LogStep(14, "Step 3c: TH reads the SceneCount attribute from DUT.");
-            VerifyOrDo(!ShouldSkip("S.S.A0000 && S.S.A0001 && S.S.A0002 && S.S.A0003"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Attributes::SceneCount::Id, true,
-                                 chip::NullOptional);
-        }
-        case 15: {
-            LogStep(15, "Step 3c: TH reads the CurrentScene attribute from DUT.");
-            VerifyOrDo(!ShouldSkip("S.S.A0000 && S.S.A0001 && S.S.A0002 && S.S.A0003"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Attributes::CurrentScene::Id, true,
-                                 chip::NullOptional);
-        }
-        case 16: {
-            LogStep(16, "Step 3c: TH reads the CurrentGroup attribute from DUT.");
-            VerifyOrDo(!ShouldSkip("S.S.A0000 && S.S.A0001 && S.S.A0002 && S.S.A0003"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Attributes::CurrentGroup::Id, true,
-                                 chip::NullOptional);
-        }
-        case 17: {
-            LogStep(17, "Step 3c: TH reads the SceneValid attribute from DUT.");
-            VerifyOrDo(!ShouldSkip("S.S.A0000 && S.S.A0001 && S.S.A0002 && S.S.A0003"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Attributes::SceneValid::Id, true,
-                                 chip::NullOptional);
-        }
-        case 18: {
-            LogStep(18, "Step 4a: Reboot target device");
-            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
-            return Reboot(kIdentityAlpha, value);
-        }
-        case 19: {
-            LogStep(19, "Step 4a: Reboot target device(DUT)");
-            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message =
-                chip::Span<const char>("Please reboot the DUT and enter 'y' after DUT startsgarbage: not in length on purpose", 52);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 20: {
-            LogStep(20, "Step 4c: TH configures AC2 on DUT for all implemented application clusters supporting scenes.");
-            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LevelControl::Commands::MoveToLevelWithOnOff::Type value;
-            value.level = 200U;
-            value.transitionTime.SetNonNull();
-            value.transitionTime.Value() = 0U;
-            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
-            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevelWithOnOff::Id,
-                               value, chip::NullOptional
-
-            );
-        }
-        case 21: {
-            LogStep(21, "Step 4c: TH configures AC2 on DUT for all implemented application clusters supporting scenes.");
-            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>(
-                "Please configure AC2 on DUT and enter 'y' after the configuration is completegarbage: not in length on purpose",
-                77);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 22: {
-            LogStep(22,
-                    "Step 4d: TH sends a RecallScene command to DUT with the GroupID field set to 0x0001 and the SceneID field set "
-                    "to 0x01.");
-            VerifyOrDo(!ShouldSkip("S.S.C05.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::RecallScene::Type value;
-            value.groupID = 1U;
-            value.sceneID = 1U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::RecallScene::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 23: {
-            LogStep(23,
-                    "Step 5: TH sends a ViewScene command to DUT with the GroupID field set to 0x0001 and the SceneID field set to "
-                    "0x01.");
-            VerifyOrDo(!ShouldSkip("S.S.C01.Rsp && PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::ViewScene::Type value;
-            value.groupID = 1U;
-            value.sceneID = 1U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::ViewScene::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 24: {
-            LogStep(24,
-                    "Step 5: TH sends a ViewScene command to DUT with the GroupID field set to 0x0001 and the SceneID field set to "
-                    "0x01.");
-            VerifyOrDo(!ShouldSkip("S.S.C01.Rsp && PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::ViewScene::Type value;
-            value.groupID = 1U;
-            value.sceneID = 1U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::ViewScene::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 25: {
-            LogStep(25, "Step 6: TH sends a GetSceneMembership command to DUT with the GroupID field set to 0x0001.");
-            VerifyOrDo(!ShouldSkip("S.S.C06.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::GetSceneMembership::Type value;
-            value.groupID = 1U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::GetSceneMembership::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 26: {
-            LogStep(26, "Step 7a: TH sends a RemoveAllScenes command to DUT with the GroupID field set to 0x0001.");
-            VerifyOrDo(!ShouldSkip("S.S.C03.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::RemoveAllScenes::Type value;
-            value.groupID = 1U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::RemoveAllScenes::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 27: {
-            LogStep(27, "Step 7b: TH sends a GetSceneMembership command to DUT with the GroupID field set to 0x0001.");
-            VerifyOrDo(!ShouldSkip("S.S.C06.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::GetSceneMembership::Type value;
-            value.groupID = 1U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::GetSceneMembership::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 28: {
-            LogStep(28,
-                    "Step 8a: TH sends a AddScene command to DUT with the GroupID field set to 0x0001, the SceneID field set to "
-                    "0x01, the TransitionTime field set to 0x0001 and a set of extension fields appropriate to AC1.");
-            VerifyOrDo(!ShouldSkip("S.S.C00.Rsp && && PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::AddScene::Type value;
-            value.groupID        = 1U;
-            value.sceneID        = 1U;
-            value.transitionTime = 1U;
-            value.sceneName      = chip::Span<const char>("Scene1garbage: not in length on purpose", 6);
-
-            {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::Scenes::Structs::ExtensionFieldSet::Type>(2);
-                listFreer.add(listHolder_0);
-
-                listHolder_0->mList[0].clusterID = 6UL;
-
-                {
-                    auto * listHolder_2 = new ListHolder<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(1);
-                    listFreer.add(listHolder_2);
-
-                    listHolder_2->mList[0].attributeID    = 0UL;
-                    listHolder_2->mList[0].attributeValue = 1UL;
-
-                    listHolder_0->mList[0].attributeValueList =
-                        chip::app::DataModel::List<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(
-                            listHolder_2->mList, 1);
-                }
-
-                listHolder_0->mList[1].clusterID = 8UL;
-
-                {
-                    auto * listHolder_2 = new ListHolder<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(2);
-                    listFreer.add(listHolder_2);
-
-                    listHolder_2->mList[0].attributeID    = 0UL;
-                    listHolder_2->mList[0].attributeValue = 100UL;
-
-                    listHolder_2->mList[1].attributeID    = 1UL;
-                    listHolder_2->mList[1].attributeValue = 0UL;
-
-                    listHolder_0->mList[1].attributeValueList =
-                        chip::app::DataModel::List<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(
-                            listHolder_2->mList, 2);
-                }
-
-                value.extensionFieldSets =
-                    chip::app::DataModel::List<chip::app::Clusters::Scenes::Structs::ExtensionFieldSet::Type>(listHolder_0->mList,
-                                                                                                              2);
-            }
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::AddScene::Id, value, chip::NullOptional
-
-            );
-        }
-        case 29: {
-            LogStep(29,
-                    "Step 8a: TH sends a AddScene command to DUT with the GroupID field set to 0x0001, the SceneID field set to "
-                    "0x01, the TransitionTime field set to 0x0001 and a set of extension fields appropriate to AC1.");
-            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message =
-                chip::Span<const char>("Please execute the add scene command with extensionfieldsets in accordance with AC1 on DUT "
-                                       "and enter 'y' if the command is successfulgarbage: not in length on purpose",
-                                       133);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 30: {
-            LogStep(30, "Step 8b: TH sends a GetSceneMembership command to DUT with the GroupID field set to 0x0001.");
-            VerifyOrDo(!ShouldSkip("S.S.C06.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::GetSceneMembership::Type value;
-            value.groupID = 1U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::GetSceneMembership::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 31: {
-            LogStep(31,
-                    "Step 9a: TH sends a RemoveScene command to DUT with the GroupID field set to 0x0001 and the SceneID field set "
-                    "to 0x01.");
-            VerifyOrDo(!ShouldSkip("S.S.C02.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::RemoveScene::Type value;
-            value.groupID = 1U;
-            value.sceneID = 1U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::RemoveScene::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 32: {
-            LogStep(32, "Step 9b: TH sends a GetSceneMembership command to DUT with the GroupID field set to 0x0001.");
-            VerifyOrDo(!ShouldSkip("S.S.C06.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::GetSceneMembership::Type value;
-            value.groupID = 1U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::GetSceneMembership::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 33: {
-            LogStep(33, "Step 10a: TH configures AC2 on DUT for all implemented application clusters supporting scenes.");
-            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LevelControl::Commands::MoveToLevelWithOnOff::Type value;
-            value.level = 200U;
-            value.transitionTime.SetNonNull();
-            value.transitionTime.Value() = 0U;
-            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
-            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevelWithOnOff::Id,
-                               value, chip::NullOptional
-
-            );
-        }
-        case 34: {
-            LogStep(34, "Step 10a: TH configures AC2 on DUT for all implemented application clusters supporting scenes.");
-            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>(
-                "Please configure AC2 on DUT and enter 'y' after the configuration is completegarbage: not in length on purpose",
-                77);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 35: {
-            LogStep(35,
-                    "Step 10b: TH sends a RecallScene command to DUT with the GroupID field set to 0x0001 and the SceneID field "
-                    "set to 0x01.");
-            VerifyOrDo(!ShouldSkip("S.S.C05.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::RecallScene::Type value;
-            value.groupID = 1U;
-            value.sceneID = 1U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::RecallScene::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 36: {
-            LogStep(36, "Step 11a: TH configures AC1 on DUT for all implemented application clusters supporting scenes.");
-            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LevelControl::Commands::MoveToLevelWithOnOff::Type value;
-            value.level = 100U;
-            value.transitionTime.SetNonNull();
-            value.transitionTime.Value() = 0U;
-            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
-            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevelWithOnOff::Id,
-                               value, chip::NullOptional
-
-            );
-        }
-        case 37: {
-            LogStep(37, "Step 11a: TH configures AC1 on DUT for all implemented application clusters supporting scenes.");
-            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>(
-                "Please configure AC1 on DUT and enter 'y' after the configuration is completegarbage: not in length on purpose",
-                77);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 38: {
-            LogStep(38,
-                    "Step 11b: TH sends a StoreScene command to DUT with the GroupID field set to 0x0001 and the SceneID field set "
-                    "to 0x01.");
-            VerifyOrDo(!ShouldSkip("S.S.C04.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::StoreScene::Type value;
-            value.groupID = 1U;
-            value.sceneID = 1U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::StoreScene::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 39: {
-            LogStep(39, "Step 12a: TH configures AC2 on DUT for all implemented application clusters supporting scenes.");
-            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LevelControl::Commands::MoveToLevelWithOnOff::Type value;
-            value.level = 200U;
-            value.transitionTime.SetNonNull();
-            value.transitionTime.Value() = 0U;
-            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
-            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevelWithOnOff::Id,
-                               value, chip::NullOptional
-
-            );
-        }
-        case 40: {
-            LogStep(40, "Step 12a: TH configures AC2 on DUT for all implemented application clusters supporting scenes.");
-            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>(
-                "Please configure AC2 on DUT and enter 'y' after the configuration is completegarbage: not in length on purpose",
-                77);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 41: {
-            LogStep(41,
-                    "Step 12b: TH sends a StoreScene command to DUT with the GroupID field set to 0x0001 and the SceneID field set "
-                    "to 0x02.");
-            VerifyOrDo(!ShouldSkip("S.S.C04.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::StoreScene::Type value;
-            value.groupID = 1U;
-            value.sceneID = 2U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::StoreScene::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 42: {
-            LogStep(42, "Step 12c: TH sends a GetSceneMembership command to DUT with the GroupID field set to 0x0001.");
-            VerifyOrDo(!ShouldSkip("S.S.C06.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::GetSceneMembership::Type value;
-            value.groupID = 1U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::GetSceneMembership::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 43: {
-            LogStep(43, "Step 13a: If capacity allows, TH sends a AddGroup command to DUT with the GroupID field set to 0x0002.");
-            VerifyOrDo(!ShouldSkip("G.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Groups::Commands::AddGroup::Type value;
-            value.groupID   = 2U;
-            value.groupName = chip::Span<const char>("Group2garbage: not in length on purpose", 6);
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Groups::Id, Groups::Commands::AddGroup::Id, value, chip::NullOptional
-
-            );
-        }
-        case 44: {
-            LogStep(44, "Step 13b: TH sends a RemoveAllScenes command to DUT with the GroupID field set to 0x0002.");
-            VerifyOrDo(!ShouldSkip("S.S.C03.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::RemoveAllScenes::Type value;
-            value.groupID = 2U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::RemoveAllScenes::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 45: {
-            LogStep(45, "Step 13c: TH sends a GetSceneMembership command to DUT with the GroupID field set to 0x0002.");
-            VerifyOrDo(!ShouldSkip("S.S.C06.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::GetSceneMembership::Type value;
-            value.groupID = 2U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::GetSceneMembership::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 46: {
-            LogStep(46, "Step 14a: TH configures AC3 on DUT for all implemented application clusters supporting scenes.");
-            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LevelControl::Commands::MoveToLevelWithOnOff::Type value;
-            value.level = 1U;
-            value.transitionTime.SetNonNull();
-            value.transitionTime.Value() = 0U;
-            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
-            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevelWithOnOff::Id,
-                               value, chip::NullOptional
-
-            );
-        }
-        case 47: {
-            LogStep(47, "Step 14a: TH configures AC3 on DUT for all implemented application clusters supporting scenes.");
-            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>(
-                "Please configure AC3 on DUT and enter 'y' after the configuration is completegarbage: not in length on purpose",
-                77);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 48: {
-            LogStep(48,
-                    "Step 14b: TH sends a StoreScene command to DUT with the GroupID field set to 0x0002 and the SceneID field set "
-                    "to 0x03.");
-            VerifyOrDo(!ShouldSkip("S.S.C04.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::StoreScene::Type value;
-            value.groupID = 2U;
-            value.sceneID = 3U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::StoreScene::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 49: {
-            LogStep(49, "Step 14c: TH sends a GetSceneMembership command to DUT with the GroupID field set to 0x0002.");
-            VerifyOrDo(!ShouldSkip("S.S.C06.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::GetSceneMembership::Type value;
-            value.groupID = 2U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::GetSceneMembership::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        }
-        return CHIP_NO_ERROR;
-    }
-};
-
-class Test_TC_S_2_3Suite : public TestCommand
-{
-public:
-    Test_TC_S_2_3Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_S_2_3", 24, credsIssuerConfig)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("G1", 0, UINT16_MAX, &mG1);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_S_2_3Suite() {}
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mG1;
-    chip::Optional<uint16_t> mTimeout;
-
-    uint16_t maxScenes;
-
-    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
-
-    //
-    // Tests methods
-    //
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                uint16_t value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                maxScenes = value;
-            }
-            break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 3:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 4:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Groups::Commands::AddGroupResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, mG1.HasValue() ? mG1.Value() : 1U));
-            }
-            break;
-        case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Scenes::Commands::RemoveAllScenesResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, mG1.HasValue() ? mG1.Value() : 1U));
-            }
-            break;
-        case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Scenes::Commands::GetSceneMembershipResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValueNonNull("capacity", value.capacity));
-                VerifyOrReturn(CheckValue("capacity.Value()", value.capacity.Value(), (maxScenes / 2)));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, mG1.HasValue() ? mG1.Value() : 1U));
-                VerifyOrReturn(CheckValuePresent("sceneList", value.sceneList));
-                {
-                    auto iter_1 = value.sceneList.Value().begin();
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value.sceneList.Value())>("sceneList.Value()", iter_1, 0));
-                }
-            }
-            break;
-        case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Scenes::Commands::EnhancedAddSceneResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, mG1.HasValue() ? mG1.Value() : 1U));
-                VerifyOrReturn(CheckValue("sceneID", value.sceneID, 1U));
-            }
-            break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Scenes::Commands::AddSceneResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, mG1.HasValue() ? mG1.Value() : 1U));
-                VerifyOrReturn(CheckValue("sceneID", value.sceneID, 1U));
-            }
-            break;
-        case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 10:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Scenes::Commands::EnhancedViewSceneResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, mG1.HasValue() ? mG1.Value() : 1U));
-                VerifyOrReturn(CheckValue("sceneID", value.sceneID, 1U));
-                VerifyOrReturn(CheckValuePresent("transitionTime", value.transitionTime));
-                VerifyOrReturn(CheckValue("transitionTime.Value()", value.transitionTime.Value(), 10U));
-                VerifyOrReturn(CheckValuePresent("extensionFieldSets", value.extensionFieldSets));
-                {
-                    auto iter_1 = value.extensionFieldSets.Value().begin();
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value.extensionFieldSets.Value())>(
-                        "extensionFieldSets.Value()", iter_1, 0));
-                    VerifyOrReturn(CheckValue("extensionFieldSets.Value()[0].clusterID", iter_1.GetValue().clusterID, 6UL));
-                    {
-                        auto iter_3 = iter_1.GetValue().attributeValueList.begin();
-                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_1.GetValue().attributeValueList)>(
-                            "extensionFieldSets.Value()[0].attributeValueList", iter_3, 0));
-                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[0].attributeValueList[0].attributeID",
-                                                  iter_3.GetValue().attributeID, 0UL));
-                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[0].attributeValueList[0].attributeValue",
-                                                  iter_3.GetValue().attributeValue, 1UL));
-                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_1.GetValue().attributeValueList)>(
-                            "extensionFieldSets.Value()[0].attributeValueList", iter_3, 1));
-                    }
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value.extensionFieldSets.Value())>(
-                        "extensionFieldSets.Value()", iter_1, 1));
-                    VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].clusterID", iter_1.GetValue().clusterID, 8UL));
-                    {
-                        auto iter_3 = iter_1.GetValue().attributeValueList.begin();
-                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_1.GetValue().attributeValueList)>(
-                            "extensionFieldSets.Value()[1].attributeValueList", iter_3, 0));
-                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[0].attributeID",
-                                                  iter_3.GetValue().attributeID, 0UL));
-                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[0].attributeValue",
-                                                  iter_3.GetValue().attributeValue, 100UL));
-                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_1.GetValue().attributeValueList)>(
-                            "extensionFieldSets.Value()[1].attributeValueList", iter_3, 1));
-                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[1].attributeID",
-                                                  iter_3.GetValue().attributeID, 1UL));
-                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[1].attributeValue",
-                                                  iter_3.GetValue().attributeValue, 0UL));
-                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_1.GetValue().attributeValueList)>(
-                            "extensionFieldSets.Value()[1].attributeValueList", iter_3, 2));
-                    }
-                    VerifyOrReturn(
-                        CheckNoMoreListItems<decltype(value.extensionFieldSets.Value())>("extensionFieldSets.Value()", iter_1, 2));
-                }
-            }
-            break;
-        case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Scenes::Commands::ViewSceneResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, mG1.HasValue() ? mG1.Value() : 1U));
-                VerifyOrReturn(CheckValue("sceneID", value.sceneID, 1U));
-                VerifyOrReturn(CheckValuePresent("transitionTime", value.transitionTime));
-                VerifyOrReturn(CheckValue("transitionTime.Value()", value.transitionTime.Value(), 1U));
-                VerifyOrReturn(CheckValuePresent("extensionFieldSets", value.extensionFieldSets));
-                {
-                    auto iter_1 = value.extensionFieldSets.Value().begin();
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value.extensionFieldSets.Value())>(
-                        "extensionFieldSets.Value()", iter_1, 0));
-                    VerifyOrReturn(CheckValue("extensionFieldSets.Value()[0].clusterID", iter_1.GetValue().clusterID, 6UL));
-                    {
-                        auto iter_3 = iter_1.GetValue().attributeValueList.begin();
-                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_1.GetValue().attributeValueList)>(
-                            "extensionFieldSets.Value()[0].attributeValueList", iter_3, 0));
-                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[0].attributeValueList[0].attributeID",
-                                                  iter_3.GetValue().attributeID, 0UL));
-                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[0].attributeValueList[0].attributeValue",
-                                                  iter_3.GetValue().attributeValue, 1UL));
-                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_1.GetValue().attributeValueList)>(
-                            "extensionFieldSets.Value()[0].attributeValueList", iter_3, 1));
-                    }
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value.extensionFieldSets.Value())>(
-                        "extensionFieldSets.Value()", iter_1, 1));
-                    VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].clusterID", iter_1.GetValue().clusterID, 8UL));
-                    {
-                        auto iter_3 = iter_1.GetValue().attributeValueList.begin();
-                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_1.GetValue().attributeValueList)>(
-                            "extensionFieldSets.Value()[1].attributeValueList", iter_3, 0));
-                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[0].attributeID",
-                                                  iter_3.GetValue().attributeID, 0UL));
-                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[0].attributeValue",
-                                                  iter_3.GetValue().attributeValue, 100UL));
-                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_1.GetValue().attributeValueList)>(
-                            "extensionFieldSets.Value()[1].attributeValueList", iter_3, 1));
-                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[1].attributeID",
-                                                  iter_3.GetValue().attributeID, 1UL));
-                        VerifyOrReturn(CheckValue("extensionFieldSets.Value()[1].attributeValueList[1].attributeValue",
-                                                  iter_3.GetValue().attributeValue, 0UL));
-                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_1.GetValue().attributeValueList)>(
-                            "extensionFieldSets.Value()[1].attributeValueList", iter_3, 2));
-                    }
-                    VerifyOrReturn(
-                        CheckNoMoreListItems<decltype(value.extensionFieldSets.Value())>("extensionFieldSets.Value()", iter_1, 2));
-                }
-            }
-            break;
-        case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Scenes::Commands::GetSceneMembershipResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValueNonNull("capacity", value.capacity));
-                VerifyOrReturn(CheckValue("capacity.Value()", value.capacity.Value(), static_cast<uint8_t>((maxScenes / 2) - 1)));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, mG1.HasValue() ? mG1.Value() : 1U));
-                VerifyOrReturn(CheckValuePresent("sceneList", value.sceneList));
-                {
-                    auto iter_1 = value.sceneList.Value().begin();
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value.sceneList.Value())>("sceneList.Value()", iter_1, 0));
-                    VerifyOrReturn(CheckValue("sceneList.Value()[0]", iter_1.GetValue(), 1U));
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value.sceneList.Value())>("sceneList.Value()", iter_1, 1));
-                }
-            }
-            break;
-        case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 18:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 19:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 20:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::Nullable<uint8_t> value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
-                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 100U));
-            }
-            break;
-        case 21:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 22:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Scenes::Commands::CopySceneResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValue("groupIdentifierFrom", value.groupIdentifierFrom, mG1.HasValue() ? mG1.Value() : 1U));
-                VerifyOrReturn(CheckValue("sceneIdentifierFrom", value.sceneIdentifierFrom, 1U));
-            }
-            break;
-        case 23:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Scenes::Commands::GetSceneMembershipResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValueNonNull("capacity", value.capacity));
-                VerifyOrReturn(CheckValue("capacity.Value()", value.capacity.Value(), static_cast<uint8_t>((maxScenes / 2) - 2)));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, mG1.HasValue() ? mG1.Value() : 1U));
-                VerifyOrReturn(CheckValuePresent("sceneList", value.sceneList));
-                {
-                    auto iter_1 = value.sceneList.Value().begin();
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value.sceneList.Value())>("sceneList.Value()", iter_1, 0));
-                    VerifyOrReturn(CheckValue("sceneList.Value()[0]", iter_1.GetValue(), 1U));
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value.sceneList.Value())>("sceneList.Value()", iter_1, 1));
-                    VerifyOrReturn(CheckValue("sceneList.Value()[1]", iter_1.GetValue(), 2U));
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value.sceneList.Value())>("sceneList.Value()", iter_1, 2));
-                }
-            }
-            break;
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    CHIP_ERROR DoTestStep(uint16_t testIndex) override
-    {
-        using namespace chip::app::Clusters;
-        switch (testIndex)
-        {
-        case 0: {
-            LogStep(0, "Wait for the commissioned device to be retrieved");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-            return WaitForCommissionee(kIdentityAlpha, value);
-        }
-        case 1: {
-            LogStep(1, "TH reads from the DUT the (0x0006) SceneTableSize attribute");
-            VerifyOrDo(!ShouldSkip("S.S.A0006"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Attributes::SceneTableSize::Id, true,
-                                 chip::NullOptional);
-        }
-        case 2: {
-            LogStep(2, "Step 0a: preparation step for using commands from Groups cluster: Add KeySet");
-            ListFreer listFreer;
-            chip::app::Clusters::GroupKeyManagement::Commands::KeySetWrite::Type value;
-
-            value.groupKeySet.groupKeySetID = 417U;
-            value.groupKeySet.groupKeySecurityPolicy =
-                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicyEnum>(0);
-            value.groupKeySet.epochKey0.SetNonNull();
-            value.groupKeySet.epochKey0.Value() = chip::ByteSpan(
-                chip::Uint8::from_const_char(
-                    "\240\241\242\243\244\245\246\247\250\251\252\253\254\255\256\257garbage: not in length on purpose"),
-                16);
-            value.groupKeySet.epochStartTime0.SetNonNull();
-            value.groupKeySet.epochStartTime0.Value() = 0ULL;
-            value.groupKeySet.epochKey1.SetNonNull();
-            value.groupKeySet.epochKey1.Value() = chip::ByteSpan(
-                chip::Uint8::from_const_char(
-                    "\260\261\262\263\264\265\266\267\270\271\272\273\274\275\276\277garbage: not in length on purpose"),
-                16);
-            value.groupKeySet.epochStartTime1.SetNonNull();
-            value.groupKeySet.epochStartTime1.Value() = 0ULL;
-            value.groupKeySet.epochKey2.SetNonNull();
-            value.groupKeySet.epochKey2.Value() = chip::ByteSpan(
-                chip::Uint8::from_const_char(
-                    "\300\301\302\303\304\305\306\307\310\311\312\313\314\315\316\317garbage: not in length on purpose"),
-                16);
-            value.groupKeySet.epochStartTime2.SetNonNull();
-            value.groupKeySet.epochStartTime2.Value() = 0ULL;
-
-            return SendCommand(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
-                               GroupKeyManagement::Commands::KeySetWrite::Id, value, chip::NullOptional
-
-            );
-        }
-        case 3: {
-            LogStep(3, "Step 0b: Preparation step for using commands from Groups cluster: Write Group Keys");
-            ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type> value;
-
-            {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>(1);
-                listFreer.add(listHolder_0);
-
-                listHolder_0->mList[0].groupId       = mG1.HasValue() ? mG1.Value() : 1U;
-                listHolder_0->mList[0].groupKeySetID = 417U;
-                listHolder_0->mList[0].fabricIndex   = 1U;
-
-                value = chip::app::DataModel::List<chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>(
-                    listHolder_0->mList, 1);
-            }
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
-                                  GroupKeyManagement::Attributes::GroupKeyMap::Id, value, chip::NullOptional, chip::NullOptional);
-        }
-        case 4: {
-            LogStep(4, "Step 1a: TH sends a AddGroup command to DUT with the GroupID field set to G1.");
-            VerifyOrDo(!ShouldSkip("G.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Groups::Commands::AddGroup::Type value;
-            value.groupID   = mG1.HasValue() ? mG1.Value() : 1U;
-            value.groupName = chip::Span<const char>("Group1garbage: not in length on purpose", 6);
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Groups::Id, Groups::Commands::AddGroup::Id, value, chip::NullOptional
-
-            );
-        }
-        case 5: {
-            LogStep(5, "Step 1b: TH sends a RemoveAllScenes command to DUT with the GroupID field set to G1.");
-            VerifyOrDo(!ShouldSkip("S.S.C03.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::RemoveAllScenes::Type value;
-            value.groupID = mG1.HasValue() ? mG1.Value() : 1U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::RemoveAllScenes::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 6: {
-            LogStep(6, "Step 1c: TH sends a GetSceneMembership command to DUT with the GroupID field set to G1.");
-            VerifyOrDo(!ShouldSkip("S.S.C06.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::GetSceneMembership::Type value;
-            value.groupID = mG1.HasValue() ? mG1.Value() : 1U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::GetSceneMembership::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 7: {
-            LogStep(7,
-                    "Step 2a: TH sends a EnhancedAddScene command to DUT with the GroupID field set to G1, the SceneID field set "
-                    "to 0x01, the TransitionTime field set to 0x000a (1s) and a set of extension fields appropriate to AC1.");
-            VerifyOrDo(!ShouldSkip("S.S.C40.Rsp && PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::EnhancedAddScene::Type value;
-            value.groupID        = mG1.HasValue() ? mG1.Value() : 1U;
-            value.sceneID        = 1U;
-            value.transitionTime = 10U;
-            value.sceneName      = chip::Span<const char>("Scene1garbage: not in length on purpose", 6);
-
-            {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::Scenes::Structs::ExtensionFieldSet::Type>(2);
-                listFreer.add(listHolder_0);
-
-                listHolder_0->mList[0].clusterID = 6UL;
-
-                {
-                    auto * listHolder_2 = new ListHolder<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(1);
-                    listFreer.add(listHolder_2);
-
-                    listHolder_2->mList[0].attributeID    = 0UL;
-                    listHolder_2->mList[0].attributeValue = 1UL;
-
-                    listHolder_0->mList[0].attributeValueList =
-                        chip::app::DataModel::List<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(
-                            listHolder_2->mList, 1);
-                }
-
-                listHolder_0->mList[1].clusterID = 8UL;
-
-                {
-                    auto * listHolder_2 = new ListHolder<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(2);
-                    listFreer.add(listHolder_2);
-
-                    listHolder_2->mList[0].attributeID    = 0UL;
-                    listHolder_2->mList[0].attributeValue = 100UL;
-
-                    listHolder_2->mList[1].attributeID    = 1UL;
-                    listHolder_2->mList[1].attributeValue = 0UL;
-
-                    listHolder_0->mList[1].attributeValueList =
-                        chip::app::DataModel::List<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(
-                            listHolder_2->mList, 2);
-                }
-
-                value.extensionFieldSets =
-                    chip::app::DataModel::List<chip::app::Clusters::Scenes::Structs::ExtensionFieldSet::Type>(listHolder_0->mList,
-                                                                                                              2);
-            }
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::EnhancedAddScene::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 8: {
-            LogStep(8,
-                    "Step 2a: TH sends a AddScene command to DUT with the GroupID field set to G1, the SceneID field set to 0x01, "
-                    "the TransitionTime field set to 0x0001 (1s) and a set of extension fields appropriate to AC1.");
-            VerifyOrDo(!ShouldSkip("(!S.S.C40.Rsp) && PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::AddScene::Type value;
-            value.groupID        = mG1.HasValue() ? mG1.Value() : 1U;
-            value.sceneID        = 1U;
-            value.transitionTime = 1U;
-            value.sceneName      = chip::Span<const char>("Scene1garbage: not in length on purpose", 6);
-
-            {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::Scenes::Structs::ExtensionFieldSet::Type>(2);
-                listFreer.add(listHolder_0);
-
-                listHolder_0->mList[0].clusterID = 6UL;
-
-                {
-                    auto * listHolder_2 = new ListHolder<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(1);
-                    listFreer.add(listHolder_2);
-
-                    listHolder_2->mList[0].attributeID    = 0UL;
-                    listHolder_2->mList[0].attributeValue = 1UL;
-
-                    listHolder_0->mList[0].attributeValueList =
-                        chip::app::DataModel::List<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(
-                            listHolder_2->mList, 1);
-                }
-
-                listHolder_0->mList[1].clusterID = 8UL;
-
-                {
-                    auto * listHolder_2 = new ListHolder<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(2);
-                    listFreer.add(listHolder_2);
-
-                    listHolder_2->mList[0].attributeID    = 0UL;
-                    listHolder_2->mList[0].attributeValue = 100UL;
-
-                    listHolder_2->mList[1].attributeID    = 1UL;
-                    listHolder_2->mList[1].attributeValue = 0UL;
-
-                    listHolder_0->mList[1].attributeValueList =
-                        chip::app::DataModel::List<chip::app::Clusters::Scenes::Structs::AttributeValuePair::Type>(
-                            listHolder_2->mList, 2);
-                }
-
-                value.extensionFieldSets =
-                    chip::app::DataModel::List<chip::app::Clusters::Scenes::Structs::ExtensionFieldSet::Type>(listHolder_0->mList,
-                                                                                                              2);
-            }
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::AddScene::Id, value, chip::NullOptional
-
-            );
-        }
-        case 9: {
-            LogStep(9,
-                    "Step 2b: TH sends a EnhancedAddScene command to DUT with the GroupID field set to G1, the SceneID field set "
-                    "to 0x01, the TransitionTime field set to 0x000a and a set of extension fields appropriate to AC1.");
-            VerifyOrDo(!ShouldSkip("S.S.C40.Rsp && PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message =
-                chip::Span<const char>("Please execute the enhanced add scene command with extensionfieldsets in accordance with "
-                                       "AC1 on DUT and enter 'y' if the command is successfulgarbage: not in length on purpose",
-                                       142);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 10: {
-            LogStep(10,
-                    "Step 2b: TH sends a AddScene command to DUT with the GroupID field set to G1, the SceneID field set to 0x01, "
-                    "the TransitionTime field set to 0x0001 and a set of extension fields appropriate to AC1.");
-            VerifyOrDo(!ShouldSkip("(!S.S.C40.Rsp) && PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message =
-                chip::Span<const char>("Please execute the add scene command with extensionfieldsets in accordance with AC1 on DUT "
-                                       "and enter 'y' if the command is successfulgarbage: not in length on purpose",
-                                       133);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 11: {
-            LogStep(11,
-                    "Step 3a: TH sends a EnhancedViewScene command to DUT with the GroupID field set to G1 and the SceneID field "
-                    "set to 0x01.");
-            VerifyOrDo(!ShouldSkip("S.S.C41.Rsp && PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::EnhancedViewScene::Type value;
-            value.groupID = mG1.HasValue() ? mG1.Value() : 1U;
-            value.sceneID = 1U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::EnhancedViewScene::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 12: {
-            LogStep(
-                12,
-                "Step 3a: TH sends a ViewScene command to DUT with the GroupID field set to G1 and the SceneID field set to 0x01.");
-            VerifyOrDo(!ShouldSkip("(!S.S.C41.Rsp) && PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::ViewScene::Type value;
-            value.groupID = mG1.HasValue() ? mG1.Value() : 1U;
-            value.sceneID = 1U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::ViewScene::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 13: {
-            LogStep(13,
-                    "Step 3b: TH sends a EnhancedViewScene command to DUT with the GroupID field set to G1 and the SceneID field "
-                    "set to 0x01.");
-            VerifyOrDo(!ShouldSkip("S.S.C41.Rsp && PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>(
-                "Please execute the ehanced-view-scene command and verify that the extensionfieldsets, status, groupID and SceneID "
-                "are in accordance with AC1 on DUT and enter 'y' if the command is successfulgarbage: not in length on purpose",
-                190);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 14: {
-            LogStep(
-                14,
-                "Step 3b: TH sends a ViewScene command to DUT with the GroupID field set to G1 and the SceneID field set to 0x01.");
-            VerifyOrDo(!ShouldSkip("(!S.S.C41.Rsp) && PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>(
-                "Please execute the view-scene command and verify that the extensionfieldsets, status, groupID and SceneID are in "
-                "accordance with AC1 on DUT and enter 'y' if the command is successfulgarbage: not in length on purpose",
-                182);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 15: {
-            LogStep(15, "Step 4: TH sends a GetSceneMembership command to DUT with the GroupID field set to G1.");
-            VerifyOrDo(!ShouldSkip("S.S.C06.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::GetSceneMembership::Type value;
-            value.groupID = mG1.HasValue() ? mG1.Value() : 1U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::GetSceneMembership::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 16: {
-            LogStep(16, "Step 5a: TH configures AC2 on DUT for all implemented application clusters supporting scenes.");
-            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LevelControl::Commands::MoveToLevelWithOnOff::Type value;
-            value.level = 200U;
-            value.transitionTime.SetNonNull();
-            value.transitionTime.Value() = 0U;
-            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
-            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevelWithOnOff::Id,
-                               value, chip::NullOptional
-
-            );
-        }
-        case 17: {
-            LogStep(17, "Step 5a: TH configures AC2 on DUT for all implemented application clusters supporting scenes.");
-            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>(
-                "Please configure AC2 on DUT and enter 'y' after the configuration is completegarbage: not in length on purpose",
-                77);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 18: {
-            LogStep(18,
-                    "Step 5b: TH sends a RecallScene command to group G1 with the GroupID field set to G1 and the scene ID field "
-                    "set to 0x01.");
-            VerifyOrDo(!ShouldSkip("S.S.C05.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::RecallScene::Type value;
-            value.groupID = mG1.HasValue() ? mG1.Value() : 1U;
-            value.sceneID = 1U;
-            return SendGroupCommand(kIdentityAlpha, 1, Scenes::Id, Scenes::Commands::RecallScene::Id, value);
-        }
-        case 19: {
-            LogStep(19, "Wait 1s");
-            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-            value.ms = 1000UL;
-            return WaitForMs(kIdentityAlpha, value);
-        }
-        case 20: {
-            LogStep(20, "TH confirm the DUT reached AC1 (on level control cluster) after 1s");
-            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
-                                 chip::NullOptional);
-        }
-        case 21: {
-            LogStep(21, "Verify DUT returns to AC1.");
-            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>("Please confirm AC1 on DUT and enter 'y'.garbage: not in length on purpose", 40);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 22: {
-            LogStep(22,
-                    "Step 6a: TH sends a CopyScene command to DUT with the mode field set to 0x00, the group identifier from field "
-                    "set to G1, the scene identifier from field set to 0x01, the group identifier to field set to G1 and the scene "
-                    "identifier to field set to 0x02.");
-            VerifyOrDo(!ShouldSkip("S.S.C42.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::CopyScene::Type value;
-            value.mode                = static_cast<chip::BitMask<chip::app::Clusters::Scenes::ScenesCopyMode>>(0U);
-            value.groupIdentifierFrom = mG1.HasValue() ? mG1.Value() : 1U;
-            value.sceneIdentifierFrom = 1U;
-            value.groupIdentifierTo   = mG1.HasValue() ? mG1.Value() : 1U;
-            value.sceneIdentifierTo   = 2U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::CopyScene::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 23: {
-            LogStep(23, "Step 6b: TH sends a GetSceneMembership command to DUT with the GroupID field set to G1.");
-            VerifyOrDo(!ShouldSkip("S.S.C06.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::GetSceneMembership::Type value;
-            value.groupID = mG1.HasValue() ? mG1.Value() : 1U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::GetSceneMembership::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        }
-        return CHIP_NO_ERROR;
-    }
-};
-
-class Test_TC_S_2_4Suite : public TestCommand
-{
-public:
-    Test_TC_S_2_4Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_S_2_4", 27, credsIssuerConfig)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_S_2_4Suite() {}
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
-
-    //
-    // Tests methods
-    //
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 3:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 4:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Groups::Commands::AddGroupResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
-            }
-            break;
-        case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Scenes::Commands::RemoveAllScenesResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
-            }
-            break;
-        case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Scenes::Commands::AddSceneResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
-                VerifyOrReturn(CheckValue("sceneID", value.sceneID, 1U));
-            }
-            break;
-        case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Scenes::Commands::StoreSceneResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValue("groupID", value.groupID, 1U));
-                VerifyOrReturn(CheckValue("sceneID", value.sceneID, 1U));
-            }
-            break;
-        case 10:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::Nullable<uint8_t> value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
-                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 200U));
-            }
-            break;
-        case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::Nullable<uint8_t> value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
-                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 100U));
-            }
-            break;
-        case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 18:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 19:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 20:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 21:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 22:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::Nullable<uint8_t> value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
-                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 100U));
-            }
-            break;
-        case 23:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 24:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 25:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 26:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    CHIP_ERROR DoTestStep(uint16_t testIndex) override
-    {
-        using namespace chip::app::Clusters;
-        switch (testIndex)
-        {
-        case 0: {
-            LogStep(0, "Wait for the commissioned device to be retrieved");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-            return WaitForCommissionee(kIdentityAlpha, value);
-        }
-        case 1: {
-            LogStep(1, "TH sends a RemoveAllGroups command to DUT.");
-            VerifyOrDo(!ShouldSkip("G.S.C04.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Groups::Commands::RemoveAllGroups::Type value;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Groups::Id, Groups::Commands::RemoveAllGroups::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 2: {
-            LogStep(2, "Step 0a: preparation step for using commands from Groups cluster: Add KeySet");
-            ListFreer listFreer;
-            chip::app::Clusters::GroupKeyManagement::Commands::KeySetWrite::Type value;
-
-            value.groupKeySet.groupKeySetID = 417U;
-            value.groupKeySet.groupKeySecurityPolicy =
-                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicyEnum>(0);
-            value.groupKeySet.epochKey0.SetNonNull();
-            value.groupKeySet.epochKey0.Value() = chip::ByteSpan(
-                chip::Uint8::from_const_char(
-                    "\240\241\242\243\244\245\246\247\250\251\252\253\254\255\256\257garbage: not in length on purpose"),
-                16);
-            value.groupKeySet.epochStartTime0.SetNonNull();
-            value.groupKeySet.epochStartTime0.Value() = 0ULL;
-            value.groupKeySet.epochKey1.SetNonNull();
-            value.groupKeySet.epochKey1.Value() = chip::ByteSpan(
-                chip::Uint8::from_const_char(
-                    "\260\261\262\263\264\265\266\267\270\271\272\273\274\275\276\277garbage: not in length on purpose"),
-                16);
-            value.groupKeySet.epochStartTime1.SetNonNull();
-            value.groupKeySet.epochStartTime1.Value() = 0ULL;
-            value.groupKeySet.epochKey2.SetNonNull();
-            value.groupKeySet.epochKey2.Value() = chip::ByteSpan(
-                chip::Uint8::from_const_char(
-                    "\300\301\302\303\304\305\306\307\310\311\312\313\314\315\316\317garbage: not in length on purpose"),
-                16);
-            value.groupKeySet.epochStartTime2.SetNonNull();
-            value.groupKeySet.epochStartTime2.Value() = 0ULL;
-
-            return SendCommand(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
-                               GroupKeyManagement::Commands::KeySetWrite::Id, value, chip::NullOptional
-
-            );
-        }
-        case 3: {
-            LogStep(3, "Step 0b: Preparation step for using commands from Groups cluster: Write Group Keys");
-            ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type> value;
-
-            {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>(1);
-                listFreer.add(listHolder_0);
-
-                listHolder_0->mList[0].groupId       = 1U;
-                listHolder_0->mList[0].groupKeySetID = 417U;
-                listHolder_0->mList[0].fabricIndex   = 1U;
-
-                value = chip::app::DataModel::List<chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>(
-                    listHolder_0->mList, 1);
-            }
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
-                                  GroupKeyManagement::Attributes::GroupKeyMap::Id, value, chip::NullOptional, chip::NullOptional);
-        }
-        case 4: {
-            LogStep(4, "Step 2a: TH sends a AddGroup command to DUT with the GroupID field set to 0x0001.");
-            VerifyOrDo(!ShouldSkip("G.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Groups::Commands::AddGroup::Type value;
-            value.groupID   = 1U;
-            value.groupName = chip::Span<const char>("Group1garbage: not in length on purpose", 6);
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Groups::Id, Groups::Commands::AddGroup::Id, value, chip::NullOptional
-
-            );
-        }
-        case 5: {
-            LogStep(5, "Step 2b: TH sends a RemoveAllScenes command to DUT with the GroupID field set to 0x0001.");
-            VerifyOrDo(!ShouldSkip("S.S.C03.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::RemoveAllScenes::Type value;
-            value.groupID = 1U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::RemoveAllScenes::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 6: {
-            LogStep(6,
-                    "Step 3: TH sends a AddScene command to DUT with the GroupID field set to 0x0001, the SceneID field set to "
-                    "0x01, the TransitionTime field set to 0x0001 and a set of extension fields appropriate to AC1.");
-            VerifyOrDo(!ShouldSkip("S.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::AddScene::Type value;
-            value.groupID        = 1U;
-            value.sceneID        = 1U;
-            value.transitionTime = 20U;
-            value.sceneName      = chip::Span<const char>("Scene1garbage: not in length on purpose", 6);
-
-            value.extensionFieldSets = chip::app::DataModel::List<chip::app::Clusters::Scenes::Structs::ExtensionFieldSet::Type>();
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::AddScene::Id, value, chip::NullOptional
-
-            );
-        }
-        case 7: {
-            LogStep(7, "Step 4a: TH configures AC1 on DUT for all implemented application clusters supporting scenes.");
-            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LevelControl::Commands::MoveToLevelWithOnOff::Type value;
-            value.level = 100U;
-            value.transitionTime.SetNonNull();
-            value.transitionTime.Value() = 0U;
-            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
-            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevelWithOnOff::Id,
-                               value, chip::NullOptional
-
-            );
-        }
-        case 8: {
-            LogStep(8, "Step 4a: TH configures AC1 on DUT for all implemented application clusters supporting scenes.");
-            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>(
-                "Please configure AC1 on DUT and enter 'y' after the configuration is completegarbage: not in length on purpose",
-                77);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 9: {
-            LogStep(9,
-                    "Step 4b: TH sends a StoreScene command to DUT with the GroupID field set to 0x0001 and the SceneID field set "
-                    "to 0x01.");
-            VerifyOrDo(!ShouldSkip("S.S.C04.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::StoreScene::Type value;
-            value.groupID = 1U;
-            value.sceneID = 1U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::StoreScene::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 10: {
-            LogStep(10, "Step 5a: TH configures AC2 on DUT for all implemented application clusters supporting scenes.");
-            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LevelControl::Commands::MoveToLevelWithOnOff::Type value;
-            value.level = 200U;
-            value.transitionTime.SetNonNull();
-            value.transitionTime.Value() = 0U;
-            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
-            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevelWithOnOff::Id,
-                               value, chip::NullOptional
-
-            );
-        }
-        case 11: {
-            LogStep(11, "Wait 1s for level to change");
-            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-            value.ms = 1000UL;
-            return WaitForMs(kIdentityAlpha, value);
-        }
-        case 12: {
-            LogStep(12, "TH confirm the DUT reached AC2 (on level control cluster) after 1s, which is different from AC1");
-            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
-                                 chip::NullOptional);
-        }
-        case 13: {
-            LogStep(13, "Step 5a: TH configures AC2 on DUT for all implemented application clusters supporting scenes.");
-            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>(
-                "Please configure AC2 on DUT and enter 'y' after the configuration is completegarbage: not in length on purpose",
-                77);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 14: {
-            LogStep(14,
-                    "Step 5b: TH sends a RecallScene command to DUT with the GroupID field set to 0x0001 and the SceneID field set "
-                    "to 0x01 and the TransitionTime field omitted.");
-            VerifyOrDo(!ShouldSkip("S.S.C05.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::RecallScene::Type value;
-            value.groupID = 1U;
-            value.sceneID = 1U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::RecallScene::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 15: {
-            LogStep(15, "Wait 20s");
-            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-            value.ms = 20000UL;
-            return WaitForMs(kIdentityAlpha, value);
-        }
-        case 16: {
-            LogStep(16, "TH confirm the DUT reached AC1 (on level control cluster) after 20s");
-            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
-                                 chip::NullOptional);
-        }
-        case 17: {
-            LogStep(17, "DUT transitions to AC1 over 20s.");
-            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>(
-                "Please confirm that transition to AC1 was made over 20sgarbage: not in length on purpose", 55);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 18: {
-            LogStep(18, "TH configures AC2 on DUT for all implemented application clusters supporting scenes.");
-            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LevelControl::Commands::MoveToLevelWithOnOff::Type value;
-            value.level = 200U;
-            value.transitionTime.SetNonNull();
-            value.transitionTime.Value() = 0U;
-            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
-            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevelWithOnOff::Id,
-                               value, chip::NullOptional
-
-            );
-        }
-        case 19: {
-            LogStep(19, "TH configures AC2 on DUT for all implemented application clusters supporting scenes.");
-            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>(
-                "Please configure AC2 on DUT and enter 'y' after the configuration is completegarbage: not in length on purpose",
-                77);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 20: {
-            LogStep(20,
-                    "Step 6a: TH sends a RecallScene command to DUT with the GroupID field set to 0x0001, the SceneID field set to "
-                    "0x01 and the TransitionTime field set to 0x0032 (5s).");
-            VerifyOrDo(!ShouldSkip("S.S.C05.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::RecallScene::Type value;
-            value.groupID = 1U;
-            value.sceneID = 1U;
-            value.transitionTime.Emplace();
-            value.transitionTime.Value().SetNonNull();
-            value.transitionTime.Value().Value() = 50U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::RecallScene::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        case 21: {
-            LogStep(21, "Wait 5s");
-            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-            value.ms = 5000UL;
-            return WaitForMs(kIdentityAlpha, value);
-        }
-        case 22: {
-            LogStep(22, "TH confirm the DUT reached AC2 (on level control cluster) after 5s");
-            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
-                                 chip::NullOptional);
-        }
-        case 23: {
-            LogStep(23, "DUT transitions to AC1 over 5.");
-            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>(
-                "Please confirm that transition to AC1 was made over 5sgarbage: not in length on purpose", 54);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 24: {
-            LogStep(24, "Step 7a: TH configures AC2 on DUT for all implemented application clusters supporting scenes.");
-            VerifyOrDo(!ShouldSkip("PICS_SDK_CI_ONLY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LevelControl::Commands::MoveToLevelWithOnOff::Type value;
-            value.level = 200U;
-            value.transitionTime.SetNonNull();
-            value.transitionTime.Value() = 0U;
-            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
-            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevelWithOnOff::Id,
-                               value, chip::NullOptional
-
-            );
-        }
-        case 25: {
-            LogStep(25, "Step 7a: TH configures AC2 on DUT for all implemented application clusters supporting scenes.");
-            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-            value.message = chip::Span<const char>(
-                "Please configure AC2 on DUT and enter 'y' after the configuration is completegarbage: not in length on purpose",
-                77);
-            value.expectedValue.Emplace();
-            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-            return UserPrompt(kIdentityAlpha, value);
-        }
-        case 26: {
-            LogStep(26,
-                    "Step 7b: TH sends a RecallScene command to DUT with the GroupID field set to 0x0001, the SceneID field set to "
-                    "0x01 and the TransitionTime field set to null (no transition time override).");
-            VerifyOrDo(!ShouldSkip("S.S.C05.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::Scenes::Commands::RecallScene::Type value;
-            value.groupID = 1U;
-            value.sceneID = 1U;
-            value.transitionTime.Emplace();
-            value.transitionTime.Value().SetNull();
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Scenes::Id, Scenes::Commands::RecallScene::Id, value,
-                               chip::NullOptional
-
-            );
-        }
-        }
-        return CHIP_NO_ERROR;
-    }
-};
-
 class Test_TC_S_2_5Suite : public TestCommand
 {
 public:
@@ -144652,61 +143163,6 @@ public:
     }
 
     ~Test_TC_S_2_6Suite() {}
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
-
-    //
-    // Tests methods
-    //
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    CHIP_ERROR DoTestStep(uint16_t testIndex) override
-    {
-        using namespace chip::app::Clusters;
-        switch (testIndex)
-        {}
-        return CHIP_NO_ERROR;
-    }
-};
-
-class Test_TC_S_3_1Suite : public TestCommand
-{
-public:
-    Test_TC_S_3_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_S_3_1", 0, credsIssuerConfig)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_S_3_1Suite() {}
 
     chip::System::Clock::Timeout GetWaitDuration() const override
     {
@@ -145243,6 +143699,7 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_CGEN_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_DGGEN_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_DGGEN_2_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_GRPKEY_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_ICDM_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_ICDM_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_I_1_1Suite>(credsIssuerConfig),
@@ -145336,6 +143793,7 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_SMOKECO_2_6Suite>(credsIssuerConfig),
         make_unique<Test_TC_SWTCH_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_SWTCH_2_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_RVCOPSTATE_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_TMP_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_TMP_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_TSTAT_1_1Suite>(credsIssuerConfig),
@@ -145483,6 +143941,7 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<TestGroupDemoConfigSuite>(credsIssuerConfig),
         make_unique<Test_TC_G_2_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_G_2_3Suite>(credsIssuerConfig),
+        make_unique<Test_TC_G_2_4Suite>(credsIssuerConfig),
         make_unique<Test_TC_G_3_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_BDX_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_BDX_1_2Suite>(credsIssuerConfig),
@@ -145524,9 +143983,6 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_CNET_4_14Suite>(credsIssuerConfig),
         make_unique<Test_TC_CNET_4_15Suite>(credsIssuerConfig),
         make_unique<Test_TC_CNET_4_16Suite>(credsIssuerConfig),
-        make_unique<Test_TC_CNET_4_17Suite>(credsIssuerConfig),
-        make_unique<Test_TC_CNET_4_18Suite>(credsIssuerConfig),
-        make_unique<Test_TC_CNET_4_19Suite>(credsIssuerConfig),
         make_unique<Test_TC_CNET_4_20Suite>(credsIssuerConfig),
         make_unique<Test_TC_CNET_4_21Suite>(credsIssuerConfig),
         make_unique<Test_TC_CNET_4_22Suite>(credsIssuerConfig),
@@ -145548,12 +144004,9 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_DISHM_3_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_DISHM_3_3Suite>(credsIssuerConfig),
         make_unique<Test_TC_DESC_2_1Suite>(credsIssuerConfig),
-        make_unique<Test_TC_FAN_3_3Suite>(credsIssuerConfig),
-        make_unique<Test_TC_FAN_3_5Suite>(credsIssuerConfig),
         make_unique<Test_TC_CGEN_2_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_DGGEN_2_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_DGGEN_2_3Suite>(credsIssuerConfig),
-        make_unique<Test_TC_DGGEN_3_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_ICDM_2_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_ICDM_2_3Suite>(credsIssuerConfig),
         make_unique<Test_TC_I_3_2Suite>(credsIssuerConfig),
@@ -145574,6 +144027,8 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_IDM_6_4Suite>(credsIssuerConfig),
         make_unique<Test_TC_IDM_7_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_IDM_8_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_IDM_10_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_IDM_11_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_LOWPOWER_2_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_APPLAUNCHER_3_7_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_APPLAUNCHER_3_8_1Suite>(credsIssuerConfig),
@@ -145619,6 +144074,8 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_CADMIN_1_13Suite>(credsIssuerConfig),
         make_unique<Test_TC_CADMIN_1_23Suite>(credsIssuerConfig),
         make_unique<Test_TC_CADMIN_1_24Suite>(credsIssuerConfig),
+        make_unique<Test_TC_CADMIN_1_25Suite>(credsIssuerConfig),
+        make_unique<Test_TC_CADMIN_1_26Suite>(credsIssuerConfig),
         make_unique<Test_TC_MOD_1_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_MOD_1_3Suite>(credsIssuerConfig),
         make_unique<Test_TC_MOD_2_1Suite>(credsIssuerConfig),
@@ -145683,9 +144140,7 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_CC_9_3Suite>(credsIssuerConfig),
         make_unique<Test_TC_DRLK_2_10Suite>(credsIssuerConfig),
         make_unique<Test_TC_DRLK_3_2Suite>(credsIssuerConfig),
-        make_unique<Test_TC_DRLK_3_3Suite>(credsIssuerConfig),
         make_unique<Test_TC_LCFG_2_1Suite>(credsIssuerConfig),
-        make_unique<Test_TC_LVL_8_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_LWM_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_LWM_1_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_LWM_2_1Suite>(credsIssuerConfig),
@@ -145731,26 +144186,19 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_TCTL_3_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_TCTL_3_3Suite>(credsIssuerConfig),
         make_unique<Test_TC_TMP_2_2Suite>(credsIssuerConfig),
-        make_unique<Test_TC_TSTAT_3_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_TSTAT_3_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_DGTHREAD_2_5Suite>(credsIssuerConfig),
         make_unique<Test_TC_ACT_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_ACT_2_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_ACT_3_2Suite>(credsIssuerConfig),
-        make_unique<Test_TC_LTIME_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_LTIME_3_1Suite>(credsIssuerConfig),
-        make_unique<Test_TC_TIMESYNC_2_15Suite>(credsIssuerConfig),
         make_unique<Test_TC_BIND_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_BIND_2_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_BIND_2_3Suite>(credsIssuerConfig),
         make_unique<Test_TC_S_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_S_2_1Suite>(credsIssuerConfig),
-        make_unique<Test_TC_S_2_2Suite>(credsIssuerConfig),
-        make_unique<Test_TC_S_2_3Suite>(credsIssuerConfig),
-        make_unique<Test_TC_S_2_4Suite>(credsIssuerConfig),
         make_unique<Test_TC_S_2_5Suite>(credsIssuerConfig),
         make_unique<Test_TC_S_2_6Suite>(credsIssuerConfig),
-        make_unique<Test_TC_S_3_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_BRBINFO_2_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_BRBINFO_3_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_WASHERCTRL_1_1Suite>(credsIssuerConfig),
