@@ -117246,7 +117246,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("DataModelRevision", actualValue, 1U));
+                VerifyOrReturn(CheckValue("DataModelRevision", actualValue, 17U));
             }
 
             NextTest();
@@ -117315,7 +117315,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("DataModelRevision", actualValue, 1U));
+                VerifyOrReturn(CheckValue("DataModelRevision", actualValue, 17U));
             }
 
             NextTest();

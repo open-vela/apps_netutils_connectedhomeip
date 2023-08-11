@@ -81101,7 +81101,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("dataModelRevision", value, 1U));
+                VerifyOrReturn(CheckValue("dataModelRevision", value, 17U));
             }
             break;
         case 2:
@@ -81124,7 +81124,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("dataModelRevision", value, 1U));
+                VerifyOrReturn(CheckValue("dataModelRevision", value, 17U));
             }
             break;
         default:
