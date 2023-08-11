@@ -25166,6 +25166,10 @@ typedef NS_OPTIONS(uint8_t, MTRLevelControlOptions) {
     MTRLevelControlOptionsCoupleColorTempToLevel API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x2,
 } API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 
+typedef NS_OPTIONS(uint32_t, MTRDescriptorFeature) {
+    MTRDescriptorFeatureTagList MTR_NEWLY_AVAILABLE = 0x1,
+} MTR_NEWLY_AVAILABLE;
+
 typedef NS_ENUM(uint8_t, MTRAccessControlEntryAuthMode) {
     MTRAccessControlEntryAuthModePASE API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x01,
     MTRAccessControlEntryAuthModeCASE API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x02,
