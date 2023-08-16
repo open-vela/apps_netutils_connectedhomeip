@@ -140900,10 +140900,13 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("DeviceTypeList", [actualValue count], static_cast<uint32_t>(1)));
+                VerifyOrReturn(CheckValue("DeviceTypeList", [actualValue count], static_cast<uint32_t>(2)));
                 VerifyOrReturn(
-                    CheckValue("DeviceType", ((MTRDescriptorClusterDeviceTypeStruct *) actualValue[0]).deviceType, 22UL));
+                    CheckValue("DeviceType", ((MTRDescriptorClusterDeviceTypeStruct *) actualValue[0]).deviceType, 17UL));
                 VerifyOrReturn(CheckValue("Revision", ((MTRDescriptorClusterDeviceTypeStruct *) actualValue[0]).revision, 1U));
+                VerifyOrReturn(
+                    CheckValue("DeviceType", ((MTRDescriptorClusterDeviceTypeStruct *) actualValue[1]).deviceType, 22UL));
+                VerifyOrReturn(CheckValue("Revision", ((MTRDescriptorClusterDeviceTypeStruct *) actualValue[1]).revision, 1U));
             }
 
             NextTest();
