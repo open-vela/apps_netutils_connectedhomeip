@@ -25105,6 +25105,9 @@ typedef NS_OPTIONS(uint8_t, MTRGroupsNameSupportBitmap) {
 
 typedef NS_OPTIONS(uint32_t, MTRScenesFeature) {
     MTRScenesFeatureSceneNames API_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0)) = 0x1,
+    MTRScenesFeatureExplicit MTR_NEWLY_AVAILABLE = 0x2,
+    MTRScenesFeatureTableSize MTR_NEWLY_AVAILABLE = 0x4,
+    MTRScenesFeatureFabricScenes MTR_NEWLY_AVAILABLE = 0x8,
 } API_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0));
 
 typedef NS_OPTIONS(uint8_t, MTRScenesCopyMode) {
