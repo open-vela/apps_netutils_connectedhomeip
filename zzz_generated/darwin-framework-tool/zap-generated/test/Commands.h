@@ -140929,7 +140929,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("ServerList", [actualValue count], static_cast<uint32_t>(28)));
+                VerifyOrReturn(CheckValue("ServerList", [actualValue count], static_cast<uint32_t>(29)));
                 VerifyOrReturn(CheckValue("", actualValue[0], 3UL));
                 VerifyOrReturn(CheckValue("", actualValue[1], 4UL));
                 VerifyOrReturn(CheckValue("", actualValue[2], 29UL));
@@ -140940,24 +140940,25 @@ private:
                 VerifyOrReturn(CheckValue("", actualValue[7], 43UL));
                 VerifyOrReturn(CheckValue("", actualValue[8], 44UL));
                 VerifyOrReturn(CheckValue("", actualValue[9], 45UL));
-                VerifyOrReturn(CheckValue("", actualValue[10], 47UL));
-                VerifyOrReturn(CheckValue("", actualValue[11], 48UL));
-                VerifyOrReturn(CheckValue("", actualValue[12], 49UL));
-                VerifyOrReturn(CheckValue("", actualValue[13], 50UL));
-                VerifyOrReturn(CheckValue("", actualValue[14], 51UL));
-                VerifyOrReturn(CheckValue("", actualValue[15], 52UL));
-                VerifyOrReturn(CheckValue("", actualValue[16], 53UL));
-                VerifyOrReturn(CheckValue("", actualValue[17], 54UL));
-                VerifyOrReturn(CheckValue("", actualValue[18], 55UL));
-                VerifyOrReturn(CheckValue("", actualValue[19], 56UL));
-                VerifyOrReturn(CheckValue("", actualValue[20], 60UL));
-                VerifyOrReturn(CheckValue("", actualValue[21], 62UL));
-                VerifyOrReturn(CheckValue("", actualValue[22], 63UL));
-                VerifyOrReturn(CheckValue("", actualValue[23], 64UL));
-                VerifyOrReturn(CheckValue("", actualValue[24], 65UL));
-                VerifyOrReturn(CheckValue("", actualValue[25], 70UL));
-                VerifyOrReturn(CheckValue("", actualValue[26], 1029UL));
-                VerifyOrReturn(CheckValue("", actualValue[27], 4294048774UL));
+                VerifyOrReturn(CheckValue("", actualValue[10], 46UL));
+                VerifyOrReturn(CheckValue("", actualValue[11], 47UL));
+                VerifyOrReturn(CheckValue("", actualValue[12], 48UL));
+                VerifyOrReturn(CheckValue("", actualValue[13], 49UL));
+                VerifyOrReturn(CheckValue("", actualValue[14], 50UL));
+                VerifyOrReturn(CheckValue("", actualValue[15], 51UL));
+                VerifyOrReturn(CheckValue("", actualValue[16], 52UL));
+                VerifyOrReturn(CheckValue("", actualValue[17], 53UL));
+                VerifyOrReturn(CheckValue("", actualValue[18], 54UL));
+                VerifyOrReturn(CheckValue("", actualValue[19], 55UL));
+                VerifyOrReturn(CheckValue("", actualValue[20], 56UL));
+                VerifyOrReturn(CheckValue("", actualValue[21], 60UL));
+                VerifyOrReturn(CheckValue("", actualValue[22], 62UL));
+                VerifyOrReturn(CheckValue("", actualValue[23], 63UL));
+                VerifyOrReturn(CheckValue("", actualValue[24], 64UL));
+                VerifyOrReturn(CheckValue("", actualValue[25], 65UL));
+                VerifyOrReturn(CheckValue("", actualValue[26], 70UL));
+                VerifyOrReturn(CheckValue("", actualValue[27], 1029UL));
+                VerifyOrReturn(CheckValue("", actualValue[28], 4294048774UL));
             }
 
             NextTest();
