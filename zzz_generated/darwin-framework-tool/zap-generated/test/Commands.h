@@ -195,7 +195,6 @@ public:
         printf("Test_TC_RH_2_1\n");
         printf("Test_TC_SMOKECO_1_1\n");
         printf("Test_TC_SMOKECO_2_1\n");
-        printf("Test_TC_SMOKECO_2_6\n");
         printf("Test_TC_SWTCH_1_1\n");
         printf("Test_TC_RVCOPSTATE_1_1\n");
         printf("Test_TC_TMP_1_1\n");
@@ -92394,120 +92393,124 @@ public:
         // incorrect mTestIndex value observed when we get the response.
         switch (mTestIndex++) {
         case 0:
-            ChipLogProgress(chipTool, " ***** Test Step 0 : Commission DUT to TH\n");
-            err = TestCommissionDutToTh_0();
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Step 1: Commission DUT to TH\n");
+            err = TestStep1CommissionDutToTh_0();
             break;
         case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads the ClusterRevision attribute from the DUT\n");
-            err = TestThReadsTheClusterRevisionAttributeFromTheDut_1();
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Step 2: TH reads the ClusterRevision attribute from the DUT\n");
+            err = TestStep2ThReadsTheClusterRevisionAttributeFromTheDut_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads from the DUT the FeatureMap attribute\n");
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Step 3a: TH reads from the DUT the FeatureMap attribute\n");
             if (ShouldSkip("!SMOKECO.S.F00 && !SMOKECO.S.F01")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFromTheDutTheFeatureMapAttribute_2();
+            err = TestStep3aThReadsFromTheDutTheFeatureMapAttribute_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads from the DUT the FeatureMap attribute(Smoke Alarm)\n");
+            ChipLogProgress(
+                chipTool, " ***** Test Step 3 : Step 3b: TH reads from the DUT the FeatureMap attribute(Smoke Alarm)\n");
             if (ShouldSkip("SMOKECO.S.F00 && !SMOKECO.S.F01")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFromTheDutTheFeatureMapAttributeSmokeAlarm_3();
+            err = TestStep3bThReadsFromTheDutTheFeatureMapAttributeSmokeAlarm_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads from the DUT the FeatureMap attribute(CO Alarm)\n");
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Step 3c: TH reads from the DUT the FeatureMap attribute(CO Alarm)\n");
             if (ShouldSkip("SMOKECO.S.F01 && !SMOKECO.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFromTheDutTheFeatureMapAttributeCOAlarm_4();
+            err = TestStep3cThReadsFromTheDutTheFeatureMapAttributeCOAlarm_4();
             break;
         case 5:
             ChipLogProgress(
-                chipTool, " ***** Test Step 5 : TH reads from the DUT the FeatureMap attribute(Smoke Alarm & CO Alarm)\n");
+                chipTool, " ***** Test Step 5 : Step 3d: TH reads from the DUT the FeatureMap attribute(Smoke Alarm & CO Alarm)\n");
             if (ShouldSkip("SMOKECO.S.F00 && SMOKECO.S.F01")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFromTheDutTheFeatureMapAttributeSmokeAlarmCoAlarm_5();
+            err = TestStep3dThReadsFromTheDutTheFeatureMapAttributeSmokeAlarmCoAlarm_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : TH reads from the DUT the AttributeList attribute\n");
-            err = TestThReadsFromTheDutTheAttributeListAttribute_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Step 4a: TH reads from the DUT the AttributeList attribute\n");
+            err = TestStep4aThReadsFromTheDutTheAttributeListAttribute_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : TH reads from the DUT the AttributeList attribute(SmokeState)\n");
-            if (ShouldSkip("SMOKECO.S.A0001")) {
+            ChipLogProgress(
+                chipTool, " ***** Test Step 7 : Step 4b: TH reads from the DUT the AttributeList attribute(SmokeState)\n");
+            if (ShouldSkip("SMOKECO.S.A0001 && SMOKECO.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFromTheDutTheAttributeListAttributeSmokeState_7();
+            err = TestStep4bThReadsFromTheDutTheAttributeListAttributeSmokeState_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : TH reads from the DUT the AttributeList attribute(COState)\n");
-            if (ShouldSkip("SMOKECO.S.A0002")) {
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Step 4c: TH reads from the DUT the AttributeList attribute(COState)\n");
+            if (ShouldSkip("SMOKECO.S.A0002 && SMOKECO.S.F01")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFromTheDutTheAttributeListAttributeCOState_8();
+            err = TestStep4cThReadsFromTheDutTheAttributeListAttributeCOState_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : TH reads from the DUT the AttributeList attribute(DeviceMuted)\n");
+            ChipLogProgress(
+                chipTool, " ***** Test Step 9 : Step 4d: TH reads from the DUT the AttributeList attribute(DeviceMuted)\n");
             if (ShouldSkip("SMOKECO.S.A0004")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFromTheDutTheAttributeListAttributeDeviceMuted_9();
+            err = TestStep4dThReadsFromTheDutTheAttributeListAttributeDeviceMuted_9();
             break;
         case 10:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 10 : TH reads from the DUT the AttributeList attribute(InterconnectSmokeAlarm)\n");
+            ChipLogProgress(chipTool,
+                " ***** Test Step 10 : Step 4e: TH reads from the DUT the AttributeList attribute(InterconnectSmokeAlarm)\n");
             if (ShouldSkip("SMOKECO.S.A0008")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFromTheDutTheAttributeListAttributeInterconnectSmokeAlarm_10();
+            err = TestStep4eThReadsFromTheDutTheAttributeListAttributeInterconnectSmokeAlarm_10();
             break;
         case 11:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 11 : TH reads from the DUT the AttributeList attribute(InterconnectCOAlarm)\n");
+            ChipLogProgress(chipTool,
+                " ***** Test Step 11 : Step 4f: TH reads from the DUT the AttributeList attribute(InterconnectCOAlarm)\n");
             if (ShouldSkip("SMOKECO.S.A0009")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFromTheDutTheAttributeListAttributeInterconnectCOAlarm_11();
+            err = TestStep4fThReadsFromTheDutTheAttributeListAttributeInterconnectCOAlarm_11();
             break;
         case 12:
             ChipLogProgress(
-                chipTool, " ***** Test Step 12 : TH reads from the DUT the AttributeList attribute(ContaminationState)\n");
+                chipTool, " ***** Test Step 12 : Step 4g: TH reads from the DUT the AttributeList attribute(ContaminationState)\n");
             if (ShouldSkip("SMOKECO.S.A000a")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFromTheDutTheAttributeListAttributeContaminationState_12();
+            err = TestStep4gThReadsFromTheDutTheAttributeListAttributeContaminationState_12();
             break;
         case 13:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 13 : TH reads from the DUT the AttributeList attribute(SmokeSensitivityLevel)\n");
+            ChipLogProgress(chipTool,
+                " ***** Test Step 13 : Step 4h: TH reads from the DUT the AttributeList attribute(SmokeSensitivityLevel)\n");
             if (ShouldSkip("SMOKECO.S.A000b")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFromTheDutTheAttributeListAttributeSmokeSensitivityLevel_13();
+            err = TestStep4hThReadsFromTheDutTheAttributeListAttributeSmokeSensitivityLevel_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : TH reads from the DUT the AttributeList attribute(ExpiryDate)\n");
+            ChipLogProgress(
+                chipTool, " ***** Test Step 14 : Step 4i: TH reads from the DUT the AttributeList attribute(ExpiryDate)\n");
             if (ShouldSkip("SMOKECO.S.A000c")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFromTheDutTheAttributeListAttributeExpiryDate_14();
+            err = TestStep4iThReadsFromTheDutTheAttributeListAttributeExpiryDate_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : TH reads from the DUT the EventList attribute\n");
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Step 5a: TH reads from the DUT the EventList attribute\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
@@ -92515,7 +92518,7 @@ public:
             NextTest();
             return;
         case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : TH reads from the DUT the EventList attribute(SmokeAlarm)\n");
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Step 5b: TH reads from the DUT the EventList attribute(SmokeAlarm)\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED && SMOKECO.S.E00")) {
                 NextTest();
                 return;
@@ -92523,7 +92526,7 @@ public:
             NextTest();
             return;
         case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : TH reads from the DUT the EventList attribute(COAlarm)\n");
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Step 5c: TH reads from the DUT the EventList attribute(COAlarm)\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED && SMOKECO.S.E01")) {
                 NextTest();
                 return;
@@ -92531,7 +92534,7 @@ public:
             NextTest();
             return;
         case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : TH reads from the DUT the EventList attribute(AlarmMuted)\n");
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Step 5d: TH reads from the DUT the EventList attribute(AlarmMuted)\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED && SMOKECO.S.E06")) {
                 NextTest();
                 return;
@@ -92539,7 +92542,7 @@ public:
             NextTest();
             return;
         case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : TH reads from the DUT the EventList attribute(MuteEnded)\n");
+            ChipLogProgress(chipTool, " ***** Test Step 19 : Step 5e: TH reads from the DUT the EventList attribute(MuteEnded)\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED && SMOKECO.S.E07")) {
                 NextTest();
                 return;
@@ -92548,7 +92551,7 @@ public:
             return;
         case 20:
             ChipLogProgress(
-                chipTool, " ***** Test Step 20 : TH reads from the DUT the EventList attribute(InterconnectSmokeAlarm)\n");
+                chipTool, " ***** Test Step 20 : Step 5f: TH reads from the DUT the EventList attribute(InterconnectSmokeAlarm)\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED && SMOKECO.S.E08")) {
                 NextTest();
                 return;
@@ -92556,7 +92559,8 @@ public:
             NextTest();
             return;
         case 21:
-            ChipLogProgress(chipTool, " ***** Test Step 21 : TH reads from the DUT the EventList attribute(InterconnectCOAlarm)\n");
+            ChipLogProgress(
+                chipTool, " ***** Test Step 21 : Step 5g: TH reads from the DUT the EventList attribute(InterconnectCOAlarm)\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED && SMOKECO.S.E09")) {
                 NextTest();
                 return;
@@ -92564,24 +92568,24 @@ public:
             NextTest();
             return;
         case 22:
-            ChipLogProgress(chipTool, " ***** Test Step 22 : TH reads from the DUT the AcceptedCommandList attribute\n");
+            ChipLogProgress(chipTool, " ***** Test Step 22 : Step 6a: TH reads from the DUT the AcceptedCommandList attribute\n");
             if (ShouldSkip("!SMOKECO.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFromTheDutTheAcceptedCommandListAttribute_22();
+            err = TestStep6aThReadsFromTheDutTheAcceptedCommandListAttribute_22();
             break;
         case 23:
-            ChipLogProgress(chipTool, " ***** Test Step 23 : TH reads from the DUT the AcceptedCommandList attribute\n");
+            ChipLogProgress(chipTool, " ***** Test Step 23 : Step 6b: TH reads from the DUT the AcceptedCommandList attribute\n");
             if (ShouldSkip("SMOKECO.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFromTheDutTheAcceptedCommandListAttribute_23();
+            err = TestStep6bThReadsFromTheDutTheAcceptedCommandListAttribute_23();
             break;
         case 24:
-            ChipLogProgress(chipTool, " ***** Test Step 24 : TH reads from the DUT the GeneratedCommandList attribute\n");
-            err = TestThReadsFromTheDutTheGeneratedCommandListAttribute_24();
+            ChipLogProgress(chipTool, " ***** Test Step 24 : Step 7: TH reads from the DUT the GeneratedCommandList attribute\n");
+            err = TestStep7ThReadsFromTheDutTheGeneratedCommandListAttribute_24();
             break;
         }
 
@@ -92689,7 +92693,7 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    CHIP_ERROR TestCommissionDutToTh_0()
+    CHIP_ERROR TestStep1CommissionDutToTh_0()
     {
 
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
@@ -92697,7 +92701,7 @@ private:
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestThReadsTheClusterRevisionAttributeFromTheDut_1()
+    CHIP_ERROR TestStep2ThReadsTheClusterRevisionAttributeFromTheDut_1()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -92705,7 +92709,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads the ClusterRevision attribute from the DUT Error: %@", err);
+            NSLog(@"Step 2: TH reads the ClusterRevision attribute from the DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -92721,7 +92725,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFromTheDutTheFeatureMapAttribute_2()
+    CHIP_ERROR TestStep3aThReadsFromTheDutTheFeatureMapAttribute_2()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -92729,7 +92733,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads from the DUT the FeatureMap attribute Error: %@", err);
+            NSLog(@"Step 3a: TH reads from the DUT the FeatureMap attribute Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -92745,7 +92749,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFromTheDutTheFeatureMapAttributeSmokeAlarm_3()
+    CHIP_ERROR TestStep3bThReadsFromTheDutTheFeatureMapAttributeSmokeAlarm_3()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -92753,7 +92757,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads from the DUT the FeatureMap attribute(Smoke Alarm) Error: %@", err);
+            NSLog(@"Step 3b: TH reads from the DUT the FeatureMap attribute(Smoke Alarm) Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -92769,7 +92773,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFromTheDutTheFeatureMapAttributeCOAlarm_4()
+    CHIP_ERROR TestStep3cThReadsFromTheDutTheFeatureMapAttributeCOAlarm_4()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -92777,7 +92781,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads from the DUT the FeatureMap attribute(CO Alarm) Error: %@", err);
+            NSLog(@"Step 3c: TH reads from the DUT the FeatureMap attribute(CO Alarm) Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -92793,7 +92797,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFromTheDutTheFeatureMapAttributeSmokeAlarmCoAlarm_5()
+    CHIP_ERROR TestStep3dThReadsFromTheDutTheFeatureMapAttributeSmokeAlarmCoAlarm_5()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -92801,7 +92805,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads from the DUT the FeatureMap attribute(Smoke Alarm & CO Alarm) Error: %@", err);
+            NSLog(@"Step 3d: TH reads from the DUT the FeatureMap attribute(Smoke Alarm & CO Alarm) Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -92817,7 +92821,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFromTheDutTheAttributeListAttribute_6()
+    CHIP_ERROR TestStep4aThReadsFromTheDutTheAttributeListAttribute_6()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -92825,7 +92829,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads from the DUT the AttributeList attribute Error: %@", err);
+            NSLog(@"Step 4a: TH reads from the DUT the AttributeList attribute Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -92835,6 +92839,11 @@ private:
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 5UL));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 6UL));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 7UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
 
             NextTest();
         }];
@@ -92842,7 +92851,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFromTheDutTheAttributeListAttributeSmokeState_7()
+    CHIP_ERROR TestStep4bThReadsFromTheDutTheAttributeListAttributeSmokeState_7()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -92850,7 +92859,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads from the DUT the AttributeList attribute(SmokeState) Error: %@", err);
+            NSLog(@"Step 4b: TH reads from the DUT the AttributeList attribute(SmokeState) Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -92863,7 +92872,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFromTheDutTheAttributeListAttributeCOState_8()
+    CHIP_ERROR TestStep4cThReadsFromTheDutTheAttributeListAttributeCOState_8()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -92871,7 +92880,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads from the DUT the AttributeList attribute(COState) Error: %@", err);
+            NSLog(@"Step 4c: TH reads from the DUT the AttributeList attribute(COState) Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -92884,7 +92893,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFromTheDutTheAttributeListAttributeDeviceMuted_9()
+    CHIP_ERROR TestStep4dThReadsFromTheDutTheAttributeListAttributeDeviceMuted_9()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -92892,7 +92901,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads from the DUT the AttributeList attribute(DeviceMuted) Error: %@", err);
+            NSLog(@"Step 4d: TH reads from the DUT the AttributeList attribute(DeviceMuted) Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -92905,7 +92914,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFromTheDutTheAttributeListAttributeInterconnectSmokeAlarm_10()
+    CHIP_ERROR TestStep4eThReadsFromTheDutTheAttributeListAttributeInterconnectSmokeAlarm_10()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -92913,7 +92922,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads from the DUT the AttributeList attribute(InterconnectSmokeAlarm) Error: %@", err);
+            NSLog(@"Step 4e: TH reads from the DUT the AttributeList attribute(InterconnectSmokeAlarm) Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -92926,7 +92935,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFromTheDutTheAttributeListAttributeInterconnectCOAlarm_11()
+    CHIP_ERROR TestStep4fThReadsFromTheDutTheAttributeListAttributeInterconnectCOAlarm_11()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -92934,7 +92943,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads from the DUT the AttributeList attribute(InterconnectCOAlarm) Error: %@", err);
+            NSLog(@"Step 4f: TH reads from the DUT the AttributeList attribute(InterconnectCOAlarm) Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -92947,7 +92956,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFromTheDutTheAttributeListAttributeContaminationState_12()
+    CHIP_ERROR TestStep4gThReadsFromTheDutTheAttributeListAttributeContaminationState_12()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -92955,7 +92964,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads from the DUT the AttributeList attribute(ContaminationState) Error: %@", err);
+            NSLog(@"Step 4g: TH reads from the DUT the AttributeList attribute(ContaminationState) Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -92968,7 +92977,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFromTheDutTheAttributeListAttributeSmokeSensitivityLevel_13()
+    CHIP_ERROR TestStep4hThReadsFromTheDutTheAttributeListAttributeSmokeSensitivityLevel_13()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -92976,7 +92985,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads from the DUT the AttributeList attribute(SmokeSensitivityLevel) Error: %@", err);
+            NSLog(@"Step 4h: TH reads from the DUT the AttributeList attribute(SmokeSensitivityLevel) Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -92989,7 +92998,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFromTheDutTheAttributeListAttributeExpiryDate_14()
+    CHIP_ERROR TestStep4iThReadsFromTheDutTheAttributeListAttributeExpiryDate_14()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -92997,7 +93006,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads from the DUT the AttributeList attribute(ExpiryDate) Error: %@", err);
+            NSLog(@"Step 4i: TH reads from the DUT the AttributeList attribute(ExpiryDate) Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -93010,7 +93019,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFromTheDutTheAcceptedCommandListAttribute_22()
+    CHIP_ERROR TestStep6aThReadsFromTheDutTheAcceptedCommandListAttribute_22()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -93018,7 +93027,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads from the DUT the AcceptedCommandList attribute Error: %@", err);
+            NSLog(@"Step 6a: TH reads from the DUT the AcceptedCommandList attribute Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -93034,7 +93043,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFromTheDutTheAcceptedCommandListAttribute_23()
+    CHIP_ERROR TestStep6bThReadsFromTheDutTheAcceptedCommandListAttribute_23()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -93042,7 +93051,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads from the DUT the AcceptedCommandList attribute Error: %@", err);
+            NSLog(@"Step 6b: TH reads from the DUT the AcceptedCommandList attribute Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -93055,7 +93064,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFromTheDutTheGeneratedCommandListAttribute_24()
+    CHIP_ERROR TestStep7ThReadsFromTheDutTheGeneratedCommandListAttribute_24()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -93063,7 +93072,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads from the DUT the GeneratedCommandList attribute Error: %@", err);
+            NSLog(@"Step 7: TH reads from the DUT the GeneratedCommandList attribute Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -93119,112 +93128,112 @@ public:
         // incorrect mTestIndex value observed when we get the response.
         switch (mTestIndex++) {
         case 0:
-            ChipLogProgress(chipTool, " ***** Test Step 0 : Commission DUT to TH\n");
-            err = TestCommissionDutToTh_0();
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Step 1: Commission DUT to TH\n");
+            err = TestStep1CommissionDutToTh_0();
             break;
         case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads from the DUT the ExpressedState attribute\n");
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Step 2: TH reads from the DUT the ExpressedState attribute\n");
             if (ShouldSkip("SMOKECO.S.A0000")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFromTheDutTheExpressedStateAttribute_1();
+            err = TestStep2ThReadsFromTheDutTheExpressedStateAttribute_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads from the DUT the SmokeState attribute\n");
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Step 3: TH reads from the DUT the SmokeState attribute\n");
             if (ShouldSkip("SMOKECO.S.A0001")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFromTheDutTheSmokeStateAttribute_2();
+            err = TestStep3ThReadsFromTheDutTheSmokeStateAttribute_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads from the DUT the COState attribute\n");
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Step 4: TH reads from the DUT the COState attribute\n");
             if (ShouldSkip("SMOKECO.S.A0002")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFromTheDutTheCOStateAttribute_3();
+            err = TestStep4ThReadsFromTheDutTheCOStateAttribute_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads from the DUT the BatteryAlert attribute\n");
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Step 5: TH reads from the DUT the BatteryAlert attribute\n");
             if (ShouldSkip("SMOKECO.S.A0003")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFromTheDutTheBatteryAlertAttribute_4();
+            err = TestStep5ThReadsFromTheDutTheBatteryAlertAttribute_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads from the DUT the DeviceMuted attribute\n");
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Step 6: TH reads from the DUT the DeviceMuted attribute\n");
             if (ShouldSkip("SMOKECO.S.A0004")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFromTheDutTheDeviceMutedAttribute_5();
+            err = TestStep6ThReadsFromTheDutTheDeviceMutedAttribute_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : TH reads from the DUT the TestInProgress attribute\n");
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Step 7: TH reads from the DUT the TestInProgress attribute\n");
             if (ShouldSkip("SMOKECO.S.A0005")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFromTheDutTheTestInProgressAttribute_6();
+            err = TestStep7ThReadsFromTheDutTheTestInProgressAttribute_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : TH reads from the DUT the HardwareFaultAlert attribute\n");
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Step 8: TH reads from the DUT the HardwareFaultAlert attribute\n");
             if (ShouldSkip("SMOKECO.S.A0006")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFromTheDutTheHardwareFaultAlertAttribute_7();
+            err = TestStep8ThReadsFromTheDutTheHardwareFaultAlertAttribute_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : TH reads from the DUT the EndOfServiceAlert attribute\n");
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Step 9: TH reads from the DUT the EndOfServiceAlert attribute\n");
             if (ShouldSkip("SMOKECO.S.A0007")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFromTheDutTheEndOfServiceAlertAttribute_8();
+            err = TestStep9ThReadsFromTheDutTheEndOfServiceAlertAttribute_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : TH reads from the DUT the InterconnectSmokeAlarm attribute\n");
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Step 10: TH reads from the DUT the InterconnectSmokeAlarm attribute\n");
             if (ShouldSkip("SMOKECO.S.A0008")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFromTheDutTheInterconnectSmokeAlarmAttribute_9();
+            err = TestStep10ThReadsFromTheDutTheInterconnectSmokeAlarmAttribute_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : TH reads from the DUT the InterconnectCOAlarm attribute\n");
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Step 11: TH reads from the DUT the InterconnectCOAlarm attribute\n");
             if (ShouldSkip("SMOKECO.S.A0009")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFromTheDutTheInterconnectCOAlarmAttribute_10();
+            err = TestStep11ThReadsFromTheDutTheInterconnectCOAlarmAttribute_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : TH reads from the DUT the ContaminationState attribute\n");
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Step 12: TH reads from the DUT the ContaminationState attribute\n");
             if (ShouldSkip("SMOKECO.S.A000a")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFromTheDutTheContaminationStateAttribute_11();
+            err = TestStep12ThReadsFromTheDutTheContaminationStateAttribute_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : TH reads from the DUT the SmokeSensitivityLevel attribute\n");
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Step 13: TH reads from the DUT the SmokeSensitivityLevel attribute\n");
             if (ShouldSkip("SMOKECO.S.A000b")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFromTheDutTheSmokeSensitivityLevelAttribute_12();
+            err = TestStep13ThReadsFromTheDutTheSmokeSensitivityLevelAttribute_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : TH reads from the DUT the ExpiryDate attribute\n");
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Step 14: TH reads from the DUT the ExpiryDate attribute\n");
             if (ShouldSkip("SMOKECO.S.A000c")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFromTheDutTheExpiryDateAttribute_13();
+            err = TestStep14ThReadsFromTheDutTheExpiryDateAttribute_13();
             break;
         }
 
@@ -93299,7 +93308,7 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    CHIP_ERROR TestCommissionDutToTh_0()
+    CHIP_ERROR TestStep1CommissionDutToTh_0()
     {
 
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
@@ -93307,7 +93316,7 @@ private:
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestThReadsFromTheDutTheExpressedStateAttribute_1()
+    CHIP_ERROR TestStep2ThReadsFromTheDutTheExpressedStateAttribute_1()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -93315,7 +93324,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeExpressedStateWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads from the DUT the ExpressedState attribute Error: %@", err);
+            NSLog(@"Step 2: TH reads from the DUT the ExpressedState attribute Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -93329,7 +93338,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFromTheDutTheSmokeStateAttribute_2()
+    CHIP_ERROR TestStep3ThReadsFromTheDutTheSmokeStateAttribute_2()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -93337,7 +93346,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeSmokeStateWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads from the DUT the SmokeState attribute Error: %@", err);
+            NSLog(@"Step 3: TH reads from the DUT the SmokeState attribute Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -93351,7 +93360,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFromTheDutTheCOStateAttribute_3()
+    CHIP_ERROR TestStep4ThReadsFromTheDutTheCOStateAttribute_3()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -93359,7 +93368,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeCOStateWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads from the DUT the COState attribute Error: %@", err);
+            NSLog(@"Step 4: TH reads from the DUT the COState attribute Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -93373,7 +93382,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFromTheDutTheBatteryAlertAttribute_4()
+    CHIP_ERROR TestStep5ThReadsFromTheDutTheBatteryAlertAttribute_4()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -93381,7 +93390,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeBatteryAlertWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads from the DUT the BatteryAlert attribute Error: %@", err);
+            NSLog(@"Step 5: TH reads from the DUT the BatteryAlert attribute Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -93395,7 +93404,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFromTheDutTheDeviceMutedAttribute_5()
+    CHIP_ERROR TestStep6ThReadsFromTheDutTheDeviceMutedAttribute_5()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -93403,7 +93412,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeDeviceMutedWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads from the DUT the DeviceMuted attribute Error: %@", err);
+            NSLog(@"Step 6: TH reads from the DUT the DeviceMuted attribute Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -93417,7 +93426,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFromTheDutTheTestInProgressAttribute_6()
+    CHIP_ERROR TestStep7ThReadsFromTheDutTheTestInProgressAttribute_6()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -93425,7 +93434,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeTestInProgressWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads from the DUT the TestInProgress attribute Error: %@", err);
+            NSLog(@"Step 7: TH reads from the DUT the TestInProgress attribute Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -93436,7 +93445,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFromTheDutTheHardwareFaultAlertAttribute_7()
+    CHIP_ERROR TestStep8ThReadsFromTheDutTheHardwareFaultAlertAttribute_7()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -93444,7 +93453,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeHardwareFaultAlertWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads from the DUT the HardwareFaultAlert attribute Error: %@", err);
+            NSLog(@"Step 8: TH reads from the DUT the HardwareFaultAlert attribute Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -93455,7 +93464,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFromTheDutTheEndOfServiceAlertAttribute_8()
+    CHIP_ERROR TestStep9ThReadsFromTheDutTheEndOfServiceAlertAttribute_8()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -93463,7 +93472,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeEndOfServiceAlertWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads from the DUT the EndOfServiceAlert attribute Error: %@", err);
+            NSLog(@"Step 9: TH reads from the DUT the EndOfServiceAlert attribute Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -93477,7 +93486,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFromTheDutTheInterconnectSmokeAlarmAttribute_9()
+    CHIP_ERROR TestStep10ThReadsFromTheDutTheInterconnectSmokeAlarmAttribute_9()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -93485,7 +93494,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeInterconnectSmokeAlarmWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads from the DUT the InterconnectSmokeAlarm attribute Error: %@", err);
+            NSLog(@"Step 10: TH reads from the DUT the InterconnectSmokeAlarm attribute Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -93499,7 +93508,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFromTheDutTheInterconnectCOAlarmAttribute_10()
+    CHIP_ERROR TestStep11ThReadsFromTheDutTheInterconnectCOAlarmAttribute_10()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -93507,7 +93516,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeInterconnectCOAlarmWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads from the DUT the InterconnectCOAlarm attribute Error: %@", err);
+            NSLog(@"Step 11: TH reads from the DUT the InterconnectCOAlarm attribute Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -93521,7 +93530,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFromTheDutTheContaminationStateAttribute_11()
+    CHIP_ERROR TestStep12ThReadsFromTheDutTheContaminationStateAttribute_11()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -93529,7 +93538,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeContaminationStateWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads from the DUT the ContaminationState attribute Error: %@", err);
+            NSLog(@"Step 12: TH reads from the DUT the ContaminationState attribute Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -93543,7 +93552,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFromTheDutTheSmokeSensitivityLevelAttribute_12()
+    CHIP_ERROR TestStep13ThReadsFromTheDutTheSmokeSensitivityLevelAttribute_12()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -93551,7 +93560,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeSmokeSensitivityLevelWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads from the DUT the SmokeSensitivityLevel attribute Error: %@", err);
+            NSLog(@"Step 13: TH reads from the DUT the SmokeSensitivityLevel attribute Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -93565,7 +93574,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFromTheDutTheExpiryDateAttribute_13()
+    CHIP_ERROR TestStep14ThReadsFromTheDutTheExpiryDateAttribute_13()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -93573,1629 +93582,11 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeExpiryDateWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads from the DUT the ExpiryDate attribute Error: %@", err);
+            NSLog(@"Step 14: TH reads from the DUT the ExpiryDate attribute Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("expiryDate", "epoch_s", "epoch_s"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-};
-
-class Test_TC_SMOKECO_2_6 : public TestCommandBridge {
-public:
-    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_SMOKECO_2_6()
-        : TestCommandBridge("Test_TC_SMOKECO_2_6")
-        , mTestIndex(0)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-        AddArgument("TEST_EVENT_TRIGGER_KEY", &mTestEventTriggerKey);
-        AddArgument("TEST_EVENT_TRIGGER_WARNING_SMOKE_ALARM", 0, UINT64_MAX, &mTestEventTriggerWarningSmokeAlarm);
-        AddArgument("TEST_EVENT_TRIGGER_SMOKE_ALARM_CLEAR", 0, UINT64_MAX, &mTestEventTriggerSmokeAlarmClear);
-        AddArgument("TEST_EVENT_TRIGGER_WARNING_CO_ALARM", 0, UINT64_MAX, &mTestEventTriggerWarningCoAlarm);
-        AddArgument("TEST_EVENT_TRIGGER_CO_ALARM_CLEAR", 0, UINT64_MAX, &mTestEventTriggerCoAlarmClear);
-        AddArgument("TEST_EVENT_TRIGGER_WARNING_BATTERY_ALERT", 0, UINT64_MAX, &mTestEventTriggerWarningBatteryAlert);
-        AddArgument("TEST_EVENT_TRIGGER_BATTERY_ALERT_CLEAR", 0, UINT64_MAX, &mTestEventTriggerBatteryAlertClear);
-        AddArgument("TEST_EVENT_TRIGGER_INTERCONNECT_SMOKE_ALARM", 0, UINT64_MAX, &mTestEventTriggerInterconnectSmokeAlarm);
-        AddArgument(
-            "TEST_EVENT_TRIGGER_INTERCONNECT_SMOKE_ALARM_CLEAR", 0, UINT64_MAX, &mTestEventTriggerInterconnectSmokeAlarmClear);
-        AddArgument("TEST_EVENT_TRIGGER_INTERCONNECT_CO_ALARM", 0, UINT64_MAX, &mTestEventTriggerInterconnectCoAlarm);
-        AddArgument("TEST_EVENT_TRIGGER_INTERCONNECT_CO_ALARM_CLEAR", 0, UINT64_MAX, &mTestEventTriggerInterconnectCoAlarmClear);
-        AddArgument("HIEST_PRI_ALARM", 0, UINT8_MAX, &mHiestPriAlarm);
-        AddArgument("HIEST_PRI_ALARM_2", 0, UINT8_MAX, &mHiestPriAlarm2);
-        AddArgument("HIEST_PRI_ALARM_3", 0, UINT8_MAX, &mHiestPriAlarm3);
-        AddArgument("HIEST_PRI_ALARM_4", 0, UINT8_MAX, &mHiestPriAlarm4);
-        AddArgument("HIEST_PRI_ALARM_5", 0, UINT8_MAX, &mHiestPriAlarm5);
-    }
-    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
-
-    ~Test_TC_SMOKECO_2_6() {}
-
-    /////////// TestCommand Interface /////////
-    void NextTest() override
-    {
-        CHIP_ERROR err = CHIP_NO_ERROR;
-
-        if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_SMOKECO_2_6\n");
-        }
-
-        if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_SMOKECO_2_6\n");
-            SetCommandExitStatus(CHIP_NO_ERROR);
-            return;
-        }
-
-        Wait();
-
-        // Ensure we increment mTestIndex before we start running the relevant
-        // command.  That way if we lose the timeslice after we send the message
-        // but before our function call returns, we won't end up with an
-        // incorrect mTestIndex value observed when we get the response.
-        switch (mTestIndex++) {
-        case 0:
-            ChipLogProgress(chipTool, " ***** Test Step 0 : Commission DUT to TH\n");
-            err = TestCommissionDutToTh_0();
-            break;
-        case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads ExpressedState attribute from DUT\n");
-            if (ShouldSkip("SMOKECO.S.A0000")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsExpressedStateAttributeFromDut_1();
-            break;
-        case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Report: TH subscribes to BatteryAlert attribute from DUT\n");
-            err = TestReportThSubscribesToBatteryAlertAttributeFromDut_2();
-            break;
-        case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : TH subscribes to BatteryAlert attribute from DUT\n");
-            if (ShouldSkip("SMOKECO.S.A0003")) {
-                NextTest();
-                return;
-            }
-            err = TestThSubscribesToBatteryAlertAttributeFromDut_3();
-            break;
-        case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Report: TH subscribes to InterconnectSmokeAlarm attribute from DUT\n");
-            err = TestReportThSubscribesToInterconnectSmokeAlarmAttributeFromDut_4();
-            break;
-        case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : TH subscribes to InterconnectSmokeAlarm attribute from DUT\n");
-            if (ShouldSkip("SMOKECO.S.A0008")) {
-                NextTest();
-                return;
-            }
-            err = TestThSubscribesToInterconnectSmokeAlarmAttributeFromDut_5();
-            break;
-        case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Report: TH subscribes to InterconnectCOAlarm attribute from DUT\n");
-            err = TestReportThSubscribesToInterconnectCOAlarmAttributeFromDut_6();
-            break;
-        case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : TH subscribes to InterconnectCOAlarm attribute from DUT\n");
-            if (ShouldSkip("SMOKECO.S.A0009")) {
-                NextTest();
-                return;
-            }
-            err = TestThSubscribesToInterconnectCOAlarmAttributeFromDut_7();
-            break;
-        case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Report: TH subscribes to COState attribute from DUT\n");
-            err = TestReportThSubscribesToCOStateAttributeFromDut_8();
-            break;
-        case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : TH subscribes to COState attribute from DUT\n");
-            if (ShouldSkip("SMOKECO.S.A0002")) {
-                NextTest();
-                return;
-            }
-            err = TestThSubscribesToCOStateAttributeFromDut_9();
-            break;
-        case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Report: TH subscribes to SmokeState attribute from DUT\n");
-            err = TestReportThSubscribesToSmokeStateAttributeFromDut_10();
-            break;
-        case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : TH subscribes to SmokeState attribute from DUT\n");
-            if (ShouldSkip("SMOKECO.S.A0001")) {
-                NextTest();
-                return;
-            }
-            err = TestThSubscribesToSmokeStateAttributeFromDut_11();
-            break;
-        case 12:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 12 : TH reads TestEventTriggersEnabled attribute from General Diagnostics Cluster\n");
-            if (ShouldSkip("DGGEN.S.A0008")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsTestEventTriggersEnabledAttributeFromGeneralDiagnosticsCluster_12();
-            break;
-        case 13:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 13 : TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with "
-                "EnableKey field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to "
-                "PIXIT.SMOKECO.TEST_EVENT_TRIGGER for Warning Battery Alert Test Event\n");
-            if (ShouldSkip("DGGEN.S.C00.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsTestEventTriggerCommandToGeneralDiagnosticsClusterOnEndpoint0WithEnableKeyFieldSetToPixitsmokecotestEventTriggerKeyAndEventTriggerFieldSetToPixitsmokecotestEventTriggerForWarningBatteryAlertTestEvent_13();
-            break;
-        case 14:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 14 : TH waits for a report of BatteryAlert attribute from DUT with a timeout of 300 seconds\n");
-            if (ShouldSkip("SMOKECO.S.A0003")) {
-                NextTest();
-                return;
-            }
-            err = TestThWaitsForAReportOfBatteryAlertAttributeFromDutWithATimeoutOf300Seconds_14();
-            break;
-        case 15:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 15 : TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with "
-                "EnableKey field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to "
-                "PIXIT.SMOKECO.TEST_EVENT_TRIGGER for Interconnect Smoke Alarm Test Event\n");
-            if (ShouldSkip("SMOKECO.S.A0008 && DGGEN.S.C00.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsTestEventTriggerCommandToGeneralDiagnosticsClusterOnEndpoint0WithEnableKeyFieldSetToPixitsmokecotestEventTriggerKeyAndEventTriggerFieldSetToPixitsmokecotestEventTriggerForInterconnectSmokeAlarmTestEvent_15();
-            break;
-        case 16:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 16 : TH waits for a report of InterconnectSmokeAlarm attribute from DUT with a timeout of 300 "
-                "seconds\n");
-            if (ShouldSkip("SMOKECO.S.A0008")) {
-                NextTest();
-                return;
-            }
-            err = TestThWaitsForAReportOfInterconnectSmokeAlarmAttributeFromDutWithATimeoutOf300Seconds_16();
-            break;
-        case 17:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 17 : TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with "
-                "EnableKey field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to "
-                "PIXIT.SMOKECO.TEST_EVENT_TRIGGER for Interconnect CO Alarm Test Event\n");
-            if (ShouldSkip("SMOKECO.S.A0009 && DGGEN.S.C00.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsTestEventTriggerCommandToGeneralDiagnosticsClusterOnEndpoint0WithEnableKeyFieldSetToPixitsmokecotestEventTriggerKeyAndEventTriggerFieldSetToPixitsmokecotestEventTriggerForInterconnectCoAlarmTestEvent_17();
-            break;
-        case 18:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 18 : TH waits for a report of InterconnectCOAlarm attribute from DUT with a timeout of 300 "
-                "seconds\n");
-            if (ShouldSkip("SMOKECO.S.A0009")) {
-                NextTest();
-                return;
-            }
-            err = TestThWaitsForAReportOfInterconnectCOAlarmAttributeFromDutWithATimeoutOf300Seconds_18();
-            break;
-        case 19:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 19 : TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with "
-                "EnableKey field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to "
-                "PIXIT.SMOKECO.TEST_EVENT_TRIGGER for Warning CO Alarm Test Event\n");
-            if (ShouldSkip("DGGEN.S.C00.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsTestEventTriggerCommandToGeneralDiagnosticsClusterOnEndpoint0WithEnableKeyFieldSetToPixitsmokecotestEventTriggerKeyAndEventTriggerFieldSetToPixitsmokecotestEventTriggerForWarningCoAlarmTestEvent_19();
-            break;
-        case 20:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 20 : TH waits for a report of COState attribute from DUT with a timeout of 300 seconds\n");
-            if (ShouldSkip("SMOKECO.S.A0002")) {
-                NextTest();
-                return;
-            }
-            err = TestThWaitsForAReportOfCOStateAttributeFromDutWithATimeoutOf300Seconds_20();
-            break;
-        case 21:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 21 : TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with "
-                "EnableKey field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to "
-                "PIXIT.SMOKECO.TEST_EVENT_TRIGGER for Warning Smoke Alarm Test Event\n");
-            if (ShouldSkip("DGGEN.S.C00.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsTestEventTriggerCommandToGeneralDiagnosticsClusterOnEndpoint0WithEnableKeyFieldSetToPixitsmokecotestEventTriggerKeyAndEventTriggerFieldSetToPixitsmokecotestEventTriggerForWarningSmokeAlarmTestEvent_21();
-            break;
-        case 22:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 22 : TH waits for a report of SmokeState attribute from DUT with a timeout of 300 seconds\n");
-            if (ShouldSkip("SMOKECO.S.A0001")) {
-                NextTest();
-                return;
-            }
-            err = TestThWaitsForAReportOfSmokeStateAttributeFromDutWithATimeoutOf300Seconds_22();
-            break;
-        case 23:
-            ChipLogProgress(chipTool, " ***** Test Step 23 : TH reads ExpressedState attribute from DUT\n");
-            if (ShouldSkip("SMOKECO.S.A0000")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsExpressedStateAttributeFromDut_23();
-            break;
-        case 24:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 24 : TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with "
-                "EnableKey field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to "
-                "PIXIT.SMOKECO.TEST_EVENT_TRIGGER for Smoke Alarm Test Event Clear\n");
-            if (ShouldSkip("DGGEN.S.C00.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsTestEventTriggerCommandToGeneralDiagnosticsClusterOnEndpoint0WithEnableKeyFieldSetToPixitsmokecotestEventTriggerKeyAndEventTriggerFieldSetToPixitsmokecotestEventTriggerForSmokeAlarmTestEventClear_24();
-            break;
-        case 25:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 25 : TH waits for a report of SmokeState attribute from DUT with a timeout of 300 seconds\n");
-            if (ShouldSkip("SMOKECO.S.A0001")) {
-                NextTest();
-                return;
-            }
-            err = TestThWaitsForAReportOfSmokeStateAttributeFromDutWithATimeoutOf300Seconds_25();
-            break;
-        case 26:
-            ChipLogProgress(chipTool, " ***** Test Step 26 : TH reads ExpressedState attribute from DUT\n");
-            if (ShouldSkip("SMOKECO.S.A0000")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsExpressedStateAttributeFromDut_26();
-            break;
-        case 27:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 27 : TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with "
-                "EnableKey field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to "
-                "PIXIT.SMOKECO.TEST_EVENT_TRIGGER for CO Alarm Test Event clear\n");
-            if (ShouldSkip("DGGEN.S.C00.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsTestEventTriggerCommandToGeneralDiagnosticsClusterOnEndpoint0WithEnableKeyFieldSetToPixitsmokecotestEventTriggerKeyAndEventTriggerFieldSetToPixitsmokecotestEventTriggerForCoAlarmTestEventClear_27();
-            break;
-        case 28:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 28 : TH waits for a report of COState attribute from DUT with a timeout of 300 seconds\n");
-            if (ShouldSkip("SMOKECO.S.A0002")) {
-                NextTest();
-                return;
-            }
-            err = TestThWaitsForAReportOfCOStateAttributeFromDutWithATimeoutOf300Seconds_28();
-            break;
-        case 29:
-            ChipLogProgress(chipTool, " ***** Test Step 29 : TH reads ExpressedState attribute from DUT\n");
-            if (ShouldSkip("SMOKECO.S.A0000")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsExpressedStateAttributeFromDut_29();
-            break;
-        case 30:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 30 : TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with "
-                "EnableKey field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to "
-                "PIXIT.SMOKECO.TEST_EVENT_TRIGGER for Interconnect CO Alarm Test Event Clear\n");
-            if (ShouldSkip("SMOKECO.S.A0009 && DGGEN.S.C00.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsTestEventTriggerCommandToGeneralDiagnosticsClusterOnEndpoint0WithEnableKeyFieldSetToPixitsmokecotestEventTriggerKeyAndEventTriggerFieldSetToPixitsmokecotestEventTriggerForInterconnectCoAlarmTestEventClear_30();
-            break;
-        case 31:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 31 : TH waits for a report of InterconnectCOAlarm attribute from DUT with a timeout of 300 "
-                "seconds\n");
-            if (ShouldSkip("SMOKECO.S.A0009")) {
-                NextTest();
-                return;
-            }
-            err = TestThWaitsForAReportOfInterconnectCOAlarmAttributeFromDutWithATimeoutOf300Seconds_31();
-            break;
-        case 32:
-            ChipLogProgress(chipTool, " ***** Test Step 32 : TH reads ExpressedState attribute from DUT\n");
-            if (ShouldSkip("SMOKECO.S.A0000")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsExpressedStateAttributeFromDut_32();
-            break;
-        case 33:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 33 : TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with "
-                "EnableKey field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to "
-                "PIXIT.SMOKECO.TEST_EVENT_TRIGGER for Interconnect Smoke Alarm Test Event Clear\n");
-            if (ShouldSkip("SMOKECO.S.A0008 && DGGEN.S.C00.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsTestEventTriggerCommandToGeneralDiagnosticsClusterOnEndpoint0WithEnableKeyFieldSetToPixitsmokecotestEventTriggerKeyAndEventTriggerFieldSetToPixitsmokecotestEventTriggerForInterconnectSmokeAlarmTestEventClear_33();
-            break;
-        case 34:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 34 : TH waits for a report of InterconnectSmokeAlarm attribute from DUT with a timeout of 300 "
-                "seconds\n");
-            if (ShouldSkip("SMOKECO.S.A0008")) {
-                NextTest();
-                return;
-            }
-            err = TestThWaitsForAReportOfInterconnectSmokeAlarmAttributeFromDutWithATimeoutOf300Seconds_34();
-            break;
-        case 35:
-            ChipLogProgress(chipTool, " ***** Test Step 35 : TH reads ExpressedState attribute from DUT\n");
-            if (ShouldSkip("SMOKECO.S.A0000")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsExpressedStateAttributeFromDut_35();
-            break;
-        case 36:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 36 : TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with "
-                "EnableKey field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to "
-                "PIXIT.SMOKECO.TEST_EVENT_TRIGGER for Battery Alert Test Event Clear\n");
-            if (ShouldSkip("DGGEN.S.C00.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsTestEventTriggerCommandToGeneralDiagnosticsClusterOnEndpoint0WithEnableKeyFieldSetToPixitsmokecotestEventTriggerKeyAndEventTriggerFieldSetToPixitsmokecotestEventTriggerForBatteryAlertTestEventClear_36();
-            break;
-        case 37:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 37 : TH waits for a report of BatteryAlert attribute from DUT with a timeout of 300 seconds\n");
-            if (ShouldSkip("SMOKECO.S.A0003")) {
-                NextTest();
-                return;
-            }
-            err = TestThWaitsForAReportOfBatteryAlertAttributeFromDutWithATimeoutOf300Seconds_37();
-            break;
-        case 38:
-            ChipLogProgress(chipTool, " ***** Test Step 38 : TH reads ExpressedState attribute from DUT\n");
-            if (ShouldSkip("SMOKECO.S.A0000")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsExpressedStateAttributeFromDut_38();
-            break;
-        }
-
-        if (CHIP_NO_ERROR != err) {
-            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
-            SetCommandExitStatus(err);
-        }
-    }
-
-    void OnStatusUpdate(const chip::app::StatusIB & status) override
-    {
-        switch (mTestIndex - 1) {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 3:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 4:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 10:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 18:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 19:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 20:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 21:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 22:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 23:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 24:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 25:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 26:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 27:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 28:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 29:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 30:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 31:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 32:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 33:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 34:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 35:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 36:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 37:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 38:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        }
-
-        // Go on to the next test.
-        ContinueOnChipMainThread(CHIP_NO_ERROR);
-    }
-
-    chip::System::Clock::Timeout GetWaitDuration() const override { return chip::System::Clock::Seconds16(mTimeout.ValueOr(3090)); }
-
-private:
-    std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 39;
-
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-    chip::Optional<chip::ByteSpan> mTestEventTriggerKey;
-    chip::Optional<uint64_t> mTestEventTriggerWarningSmokeAlarm;
-    chip::Optional<uint64_t> mTestEventTriggerSmokeAlarmClear;
-    chip::Optional<uint64_t> mTestEventTriggerWarningCoAlarm;
-    chip::Optional<uint64_t> mTestEventTriggerCoAlarmClear;
-    chip::Optional<uint64_t> mTestEventTriggerWarningBatteryAlert;
-    chip::Optional<uint64_t> mTestEventTriggerBatteryAlertClear;
-    chip::Optional<uint64_t> mTestEventTriggerInterconnectSmokeAlarm;
-    chip::Optional<uint64_t> mTestEventTriggerInterconnectSmokeAlarmClear;
-    chip::Optional<uint64_t> mTestEventTriggerInterconnectCoAlarm;
-    chip::Optional<uint64_t> mTestEventTriggerInterconnectCoAlarmClear;
-    chip::Optional<uint8_t> mHiestPriAlarm;
-    chip::Optional<uint8_t> mHiestPriAlarm2;
-    chip::Optional<uint8_t> mHiestPriAlarm3;
-    chip::Optional<uint8_t> mHiestPriAlarm4;
-    chip::Optional<uint8_t> mHiestPriAlarm5;
-
-    CHIP_ERROR TestCommissionDutToTh_0()
-    {
-
-        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        return WaitForCommissionee("alpha", value);
-    }
-
-    CHIP_ERROR TestThReadsExpressedStateAttributeFromDut_1()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeExpressedStateWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads ExpressedState attribute from DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("ExpressedState", actualValue, 0U));
-            }
-
-            VerifyOrReturn(CheckConstraintType("expressedState", "enum8", "enum8"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-    bool testSendClusterTest_TC_SMOKECO_2_6_2_WaitForReport_Fulfilled = false;
-    ResponseHandler _Nullable test_Test_TC_SMOKECO_2_6_BatteryAlert_Reported = nil;
-
-    CHIP_ERROR TestReportThSubscribesToBatteryAlertAttributeFromDut_2()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        test_Test_TC_SMOKECO_2_6_BatteryAlert_Reported = ^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Report: TH subscribes to BatteryAlert attribute from DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("BatteryAlert", actualValue, 0U));
-            }
-
-            VerifyOrReturn(CheckConstraintType("batteryAlert", "enum8", "enum8"));
-            testSendClusterTest_TC_SMOKECO_2_6_2_WaitForReport_Fulfilled = true;
-        };
-
-        NextTest();
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThSubscribesToBatteryAlertAttributeFromDut_3()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        uint16_t minIntervalArgument = 3U;
-        uint16_t maxIntervalArgument = 30U;
-        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(minIntervalArgument)
-                                                                   maxInterval:@(maxIntervalArgument)];
-        params.filterByFabric = true;
-        params.replaceExistingSubscriptions = true;
-        [cluster subscribeAttributeBatteryAlertWithParams:params
-            subscriptionEstablished:^{
-                VerifyOrReturn(
-                    testSendClusterTest_TC_SMOKECO_2_6_2_WaitForReport_Fulfilled, SetCommandExitStatus(CHIP_ERROR_INCORRECT_STATE));
-                NextTest();
-            }
-            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-                NSLog(@"TH subscribes to BatteryAlert attribute from DUT Error: %@", err);
-
-                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-                if (test_Test_TC_SMOKECO_2_6_BatteryAlert_Reported != nil) {
-                    ResponseHandler callback = test_Test_TC_SMOKECO_2_6_BatteryAlert_Reported;
-                    test_Test_TC_SMOKECO_2_6_BatteryAlert_Reported = nil;
-                    callback(value, err);
-                }
-            }];
-
-        return CHIP_NO_ERROR;
-    }
-    bool testSendClusterTest_TC_SMOKECO_2_6_4_WaitForReport_Fulfilled = false;
-    ResponseHandler _Nullable test_Test_TC_SMOKECO_2_6_InterconnectSmokeAlarm_Reported = nil;
-
-    CHIP_ERROR TestReportThSubscribesToInterconnectSmokeAlarmAttributeFromDut_4()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        test_Test_TC_SMOKECO_2_6_InterconnectSmokeAlarm_Reported = ^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Report: TH subscribes to InterconnectSmokeAlarm attribute from DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("InterconnectSmokeAlarm", actualValue, 0U));
-            }
-
-            VerifyOrReturn(CheckConstraintType("interconnectSmokeAlarm", "enum8", "enum8"));
-            testSendClusterTest_TC_SMOKECO_2_6_4_WaitForReport_Fulfilled = true;
-        };
-
-        NextTest();
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThSubscribesToInterconnectSmokeAlarmAttributeFromDut_5()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        uint16_t minIntervalArgument = 3U;
-        uint16_t maxIntervalArgument = 30U;
-        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(minIntervalArgument)
-                                                                   maxInterval:@(maxIntervalArgument)];
-        params.filterByFabric = true;
-        params.replaceExistingSubscriptions = false;
-        [cluster subscribeAttributeInterconnectSmokeAlarmWithParams:params
-            subscriptionEstablished:^{
-                VerifyOrReturn(
-                    testSendClusterTest_TC_SMOKECO_2_6_4_WaitForReport_Fulfilled, SetCommandExitStatus(CHIP_ERROR_INCORRECT_STATE));
-                NextTest();
-            }
-            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-                NSLog(@"TH subscribes to InterconnectSmokeAlarm attribute from DUT Error: %@", err);
-
-                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-                if (test_Test_TC_SMOKECO_2_6_InterconnectSmokeAlarm_Reported != nil) {
-                    ResponseHandler callback = test_Test_TC_SMOKECO_2_6_InterconnectSmokeAlarm_Reported;
-                    test_Test_TC_SMOKECO_2_6_InterconnectSmokeAlarm_Reported = nil;
-                    callback(value, err);
-                }
-            }];
-
-        return CHIP_NO_ERROR;
-    }
-    bool testSendClusterTest_TC_SMOKECO_2_6_6_WaitForReport_Fulfilled = false;
-    ResponseHandler _Nullable test_Test_TC_SMOKECO_2_6_InterconnectCOAlarm_Reported = nil;
-
-    CHIP_ERROR TestReportThSubscribesToInterconnectCOAlarmAttributeFromDut_6()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        test_Test_TC_SMOKECO_2_6_InterconnectCOAlarm_Reported = ^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Report: TH subscribes to InterconnectCOAlarm attribute from DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("InterconnectCOAlarm", actualValue, 0U));
-            }
-
-            VerifyOrReturn(CheckConstraintType("interconnectCOAlarm", "enum8", "enum8"));
-            testSendClusterTest_TC_SMOKECO_2_6_6_WaitForReport_Fulfilled = true;
-        };
-
-        NextTest();
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThSubscribesToInterconnectCOAlarmAttributeFromDut_7()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        uint16_t minIntervalArgument = 3U;
-        uint16_t maxIntervalArgument = 30U;
-        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(minIntervalArgument)
-                                                                   maxInterval:@(maxIntervalArgument)];
-        params.filterByFabric = true;
-        params.replaceExistingSubscriptions = false;
-        [cluster subscribeAttributeInterconnectCOAlarmWithParams:params
-            subscriptionEstablished:^{
-                VerifyOrReturn(
-                    testSendClusterTest_TC_SMOKECO_2_6_6_WaitForReport_Fulfilled, SetCommandExitStatus(CHIP_ERROR_INCORRECT_STATE));
-                NextTest();
-            }
-            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-                NSLog(@"TH subscribes to InterconnectCOAlarm attribute from DUT Error: %@", err);
-
-                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-                if (test_Test_TC_SMOKECO_2_6_InterconnectCOAlarm_Reported != nil) {
-                    ResponseHandler callback = test_Test_TC_SMOKECO_2_6_InterconnectCOAlarm_Reported;
-                    test_Test_TC_SMOKECO_2_6_InterconnectCOAlarm_Reported = nil;
-                    callback(value, err);
-                }
-            }];
-
-        return CHIP_NO_ERROR;
-    }
-    bool testSendClusterTest_TC_SMOKECO_2_6_8_WaitForReport_Fulfilled = false;
-    ResponseHandler _Nullable test_Test_TC_SMOKECO_2_6_COState_Reported = nil;
-
-    CHIP_ERROR TestReportThSubscribesToCOStateAttributeFromDut_8()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        test_Test_TC_SMOKECO_2_6_COState_Reported = ^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Report: TH subscribes to COState attribute from DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("COState", actualValue, 0U));
-            }
-
-            VerifyOrReturn(CheckConstraintType("COState", "enum8", "enum8"));
-            testSendClusterTest_TC_SMOKECO_2_6_8_WaitForReport_Fulfilled = true;
-        };
-
-        NextTest();
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThSubscribesToCOStateAttributeFromDut_9()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        uint16_t minIntervalArgument = 3U;
-        uint16_t maxIntervalArgument = 30U;
-        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(minIntervalArgument)
-                                                                   maxInterval:@(maxIntervalArgument)];
-        params.filterByFabric = true;
-        params.replaceExistingSubscriptions = false;
-        [cluster subscribeAttributeCOStateWithParams:params
-            subscriptionEstablished:^{
-                VerifyOrReturn(
-                    testSendClusterTest_TC_SMOKECO_2_6_8_WaitForReport_Fulfilled, SetCommandExitStatus(CHIP_ERROR_INCORRECT_STATE));
-                NextTest();
-            }
-            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-                NSLog(@"TH subscribes to COState attribute from DUT Error: %@", err);
-
-                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-                if (test_Test_TC_SMOKECO_2_6_COState_Reported != nil) {
-                    ResponseHandler callback = test_Test_TC_SMOKECO_2_6_COState_Reported;
-                    test_Test_TC_SMOKECO_2_6_COState_Reported = nil;
-                    callback(value, err);
-                }
-            }];
-
-        return CHIP_NO_ERROR;
-    }
-    bool testSendClusterTest_TC_SMOKECO_2_6_10_WaitForReport_Fulfilled = false;
-    ResponseHandler _Nullable test_Test_TC_SMOKECO_2_6_SmokeState_Reported = nil;
-
-    CHIP_ERROR TestReportThSubscribesToSmokeStateAttributeFromDut_10()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        test_Test_TC_SMOKECO_2_6_SmokeState_Reported = ^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Report: TH subscribes to SmokeState attribute from DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("SmokeState", actualValue, 0U));
-            }
-
-            VerifyOrReturn(CheckConstraintType("smokeState", "enum8", "enum8"));
-            testSendClusterTest_TC_SMOKECO_2_6_10_WaitForReport_Fulfilled = true;
-        };
-
-        NextTest();
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThSubscribesToSmokeStateAttributeFromDut_11()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        uint16_t minIntervalArgument = 3U;
-        uint16_t maxIntervalArgument = 30U;
-        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(minIntervalArgument)
-                                                                   maxInterval:@(maxIntervalArgument)];
-        params.filterByFabric = true;
-        params.replaceExistingSubscriptions = false;
-        [cluster subscribeAttributeSmokeStateWithParams:params
-            subscriptionEstablished:^{
-                VerifyOrReturn(testSendClusterTest_TC_SMOKECO_2_6_10_WaitForReport_Fulfilled,
-                    SetCommandExitStatus(CHIP_ERROR_INCORRECT_STATE));
-                NextTest();
-            }
-            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-                NSLog(@"TH subscribes to SmokeState attribute from DUT Error: %@", err);
-
-                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-                if (test_Test_TC_SMOKECO_2_6_SmokeState_Reported != nil) {
-                    ResponseHandler callback = test_Test_TC_SMOKECO_2_6_SmokeState_Reported;
-                    test_Test_TC_SMOKECO_2_6_SmokeState_Reported = nil;
-                    callback(value, err);
-                }
-            }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsTestEventTriggersEnabledAttributeFromGeneralDiagnosticsCluster_12()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterGeneralDiagnostics alloc] initWithDevice:device
-                                                                              endpointID:@(0)
-                                                                                   queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeTestEventTriggersEnabledWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads TestEventTriggersEnabled attribute from General Diagnostics Cluster Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("TestEventTriggersEnabled", actualValue, 1));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestThSendsTestEventTriggerCommandToGeneralDiagnosticsClusterOnEndpoint0WithEnableKeyFieldSetToPixitsmokecotestEventTriggerKeyAndEventTriggerFieldSetToPixitsmokecotestEventTriggerForWarningBatteryAlertTestEvent_13()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterGeneralDiagnostics alloc] initWithDevice:device
-                                                                              endpointID:@(0)
-                                                                                   queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRGeneralDiagnosticsClusterTestEventTriggerParams alloc] init];
-        params.enableKey = mTestEventTriggerKey.HasValue()
-            ? [NSData dataWithBytes:mTestEventTriggerKey.Value().data() length:mTestEventTriggerKey.Value().size()]
-            : [[NSData alloc] initWithBytes:"\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff" length:16];
-        params.eventTrigger = mTestEventTriggerWarningBatteryAlert.HasValue()
-            ? [NSNumber numberWithUnsignedLongLong:mTestEventTriggerWarningBatteryAlert.Value()]
-            : [NSNumber numberWithUnsignedLongLong:0xffffffff00000095ULL];
-        [cluster
-            testEventTriggerWithParams:params
-                            completion:^(NSError * _Nullable err) {
-                                NSLog(@"TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with "
-                                      @"EnableKey field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to "
-                                      @"PIXIT.SMOKECO.TEST_EVENT_TRIGGER for Warning Battery Alert Test Event Error: %@",
-                                    err);
-
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                NextTest();
-                            }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThWaitsForAReportOfBatteryAlertAttributeFromDutWithATimeoutOf300Seconds_14()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        test_Test_TC_SMOKECO_2_6_BatteryAlert_Reported = ^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH waits for a report of BatteryAlert attribute from DUT with a timeout of 300 seconds Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("BatteryAlert", actualValue, 1U));
-            }
-
-            VerifyOrReturn(CheckConstraintType("batteryAlert", "enum8", "enum8"));
-            NextTest();
-        };
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestThSendsTestEventTriggerCommandToGeneralDiagnosticsClusterOnEndpoint0WithEnableKeyFieldSetToPixitsmokecotestEventTriggerKeyAndEventTriggerFieldSetToPixitsmokecotestEventTriggerForInterconnectSmokeAlarmTestEvent_15()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterGeneralDiagnostics alloc] initWithDevice:device
-                                                                              endpointID:@(0)
-                                                                                   queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRGeneralDiagnosticsClusterTestEventTriggerParams alloc] init];
-        params.enableKey = mTestEventTriggerKey.HasValue()
-            ? [NSData dataWithBytes:mTestEventTriggerKey.Value().data() length:mTestEventTriggerKey.Value().size()]
-            : [[NSData alloc] initWithBytes:"\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff" length:16];
-        params.eventTrigger = mTestEventTriggerInterconnectSmokeAlarm.HasValue()
-            ? [NSNumber numberWithUnsignedLongLong:mTestEventTriggerInterconnectSmokeAlarm.Value()]
-            : [NSNumber numberWithUnsignedLongLong:0xffffffff00000092ULL];
-        [cluster
-            testEventTriggerWithParams:params
-                            completion:^(NSError * _Nullable err) {
-                                NSLog(@"TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with "
-                                      @"EnableKey field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to "
-                                      @"PIXIT.SMOKECO.TEST_EVENT_TRIGGER for Interconnect Smoke Alarm Test Event Error: %@",
-                                    err);
-
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                NextTest();
-                            }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThWaitsForAReportOfInterconnectSmokeAlarmAttributeFromDutWithATimeoutOf300Seconds_16()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        test_Test_TC_SMOKECO_2_6_InterconnectSmokeAlarm_Reported = ^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(
-                @"TH waits for a report of InterconnectSmokeAlarm attribute from DUT with a timeout of 300 seconds Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("interconnectSmokeAlarm", "enum8", "enum8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("interconnectSmokeAlarm", [value unsignedCharValue], 1U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("interconnectSmokeAlarm", [value unsignedCharValue], 2U));
-
-            NextTest();
-        };
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestThSendsTestEventTriggerCommandToGeneralDiagnosticsClusterOnEndpoint0WithEnableKeyFieldSetToPixitsmokecotestEventTriggerKeyAndEventTriggerFieldSetToPixitsmokecotestEventTriggerForInterconnectCoAlarmTestEvent_17()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterGeneralDiagnostics alloc] initWithDevice:device
-                                                                              endpointID:@(0)
-                                                                                   queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRGeneralDiagnosticsClusterTestEventTriggerParams alloc] init];
-        params.enableKey = mTestEventTriggerKey.HasValue()
-            ? [NSData dataWithBytes:mTestEventTriggerKey.Value().data() length:mTestEventTriggerKey.Value().size()]
-            : [[NSData alloc] initWithBytes:"\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff" length:16];
-        params.eventTrigger = mTestEventTriggerInterconnectCoAlarm.HasValue()
-            ? [NSNumber numberWithUnsignedLongLong:mTestEventTriggerInterconnectCoAlarm.Value()]
-            : [NSNumber numberWithUnsignedLongLong:0xffffffff00000094ULL];
-        [cluster
-            testEventTriggerWithParams:params
-                            completion:^(NSError * _Nullable err) {
-                                NSLog(@"TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with "
-                                      @"EnableKey field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to "
-                                      @"PIXIT.SMOKECO.TEST_EVENT_TRIGGER for Interconnect CO Alarm Test Event Error: %@",
-                                    err);
-
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                NextTest();
-                            }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThWaitsForAReportOfInterconnectCOAlarmAttributeFromDutWithATimeoutOf300Seconds_18()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        test_Test_TC_SMOKECO_2_6_InterconnectCOAlarm_Reported = ^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH waits for a report of InterconnectCOAlarm attribute from DUT with a timeout of 300 seconds Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("interconnectCOAlarm", "enum8", "enum8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("interconnectCOAlarm", [value unsignedCharValue], 1U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("interconnectCOAlarm", [value unsignedCharValue], 2U));
-
-            NextTest();
-        };
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestThSendsTestEventTriggerCommandToGeneralDiagnosticsClusterOnEndpoint0WithEnableKeyFieldSetToPixitsmokecotestEventTriggerKeyAndEventTriggerFieldSetToPixitsmokecotestEventTriggerForWarningCoAlarmTestEvent_19()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterGeneralDiagnostics alloc] initWithDevice:device
-                                                                              endpointID:@(0)
-                                                                                   queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRGeneralDiagnosticsClusterTestEventTriggerParams alloc] init];
-        params.enableKey = mTestEventTriggerKey.HasValue()
-            ? [NSData dataWithBytes:mTestEventTriggerKey.Value().data() length:mTestEventTriggerKey.Value().size()]
-            : [[NSData alloc] initWithBytes:"\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff" length:16];
-        params.eventTrigger = mTestEventTriggerWarningCoAlarm.HasValue()
-            ? [NSNumber numberWithUnsignedLongLong:mTestEventTriggerWarningCoAlarm.Value()]
-            : [NSNumber numberWithUnsignedLongLong:0xffffffff00000091ULL];
-        [cluster testEventTriggerWithParams:params
-                                 completion:^(NSError * _Nullable err) {
-                                     NSLog(@"TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with "
-                                           @"EnableKey field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field "
-                                           @"set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for Warning CO Alarm Test Event Error: %@",
-                                         err);
-
-                                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                     NextTest();
-                                 }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThWaitsForAReportOfCOStateAttributeFromDutWithATimeoutOf300Seconds_20()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        test_Test_TC_SMOKECO_2_6_COState_Reported = ^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH waits for a report of COState attribute from DUT with a timeout of 300 seconds Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("COState", actualValue, 1U));
-            }
-
-            VerifyOrReturn(CheckConstraintType("COState", "enum8", "enum8"));
-            NextTest();
-        };
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestThSendsTestEventTriggerCommandToGeneralDiagnosticsClusterOnEndpoint0WithEnableKeyFieldSetToPixitsmokecotestEventTriggerKeyAndEventTriggerFieldSetToPixitsmokecotestEventTriggerForWarningSmokeAlarmTestEvent_21()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterGeneralDiagnostics alloc] initWithDevice:device
-                                                                              endpointID:@(0)
-                                                                                   queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRGeneralDiagnosticsClusterTestEventTriggerParams alloc] init];
-        params.enableKey = mTestEventTriggerKey.HasValue()
-            ? [NSData dataWithBytes:mTestEventTriggerKey.Value().data() length:mTestEventTriggerKey.Value().size()]
-            : [[NSData alloc] initWithBytes:"\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff" length:16];
-        params.eventTrigger = mTestEventTriggerWarningSmokeAlarm.HasValue()
-            ? [NSNumber numberWithUnsignedLongLong:mTestEventTriggerWarningSmokeAlarm.Value()]
-            : [NSNumber numberWithUnsignedLongLong:0xffffffff00000090ULL];
-        [cluster testEventTriggerWithParams:params
-                                 completion:^(NSError * _Nullable err) {
-                                     NSLog(@"TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with "
-                                           @"EnableKey field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field "
-                                           @"set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for Warning Smoke Alarm Test Event Error: %@",
-                                         err);
-
-                                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                     NextTest();
-                                 }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThWaitsForAReportOfSmokeStateAttributeFromDutWithATimeoutOf300Seconds_22()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        test_Test_TC_SMOKECO_2_6_SmokeState_Reported = ^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH waits for a report of SmokeState attribute from DUT with a timeout of 300 seconds Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("SmokeState", actualValue, 1U));
-            }
-
-            VerifyOrReturn(CheckConstraintType("smokeState", "enum8", "enum8"));
-            NextTest();
-        };
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsExpressedStateAttributeFromDut_23()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeExpressedStateWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads ExpressedState attribute from DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("ExpressedState", actualValue, mHiestPriAlarm.HasValue() ? mHiestPriAlarm.Value() : 1U));
-            }
-
-            VerifyOrReturn(CheckConstraintType("expressedState", "enum8", "enum8"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestThSendsTestEventTriggerCommandToGeneralDiagnosticsClusterOnEndpoint0WithEnableKeyFieldSetToPixitsmokecotestEventTriggerKeyAndEventTriggerFieldSetToPixitsmokecotestEventTriggerForSmokeAlarmTestEventClear_24()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterGeneralDiagnostics alloc] initWithDevice:device
-                                                                              endpointID:@(0)
-                                                                                   queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRGeneralDiagnosticsClusterTestEventTriggerParams alloc] init];
-        params.enableKey = mTestEventTriggerKey.HasValue()
-            ? [NSData dataWithBytes:mTestEventTriggerKey.Value().data() length:mTestEventTriggerKey.Value().size()]
-            : [[NSData alloc] initWithBytes:"\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff" length:16];
-        params.eventTrigger = mTestEventTriggerSmokeAlarmClear.HasValue()
-            ? [NSNumber numberWithUnsignedLongLong:mTestEventTriggerSmokeAlarmClear.Value()]
-            : [NSNumber numberWithUnsignedLongLong:0xffffffff000000a0ULL];
-        [cluster testEventTriggerWithParams:params
-                                 completion:^(NSError * _Nullable err) {
-                                     NSLog(@"TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with "
-                                           @"EnableKey field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field "
-                                           @"set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for Smoke Alarm Test Event Clear Error: %@",
-                                         err);
-
-                                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                     NextTest();
-                                 }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThWaitsForAReportOfSmokeStateAttributeFromDutWithATimeoutOf300Seconds_25()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        test_Test_TC_SMOKECO_2_6_SmokeState_Reported = ^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH waits for a report of SmokeState attribute from DUT with a timeout of 300 seconds Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("SmokeState", actualValue, 0U));
-            }
-
-            VerifyOrReturn(CheckConstraintType("smokeState", "enum8", "enum8"));
-            NextTest();
-        };
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsExpressedStateAttributeFromDut_26()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeExpressedStateWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads ExpressedState attribute from DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(
-                    CheckValue("ExpressedState", actualValue, mHiestPriAlarm2.HasValue() ? mHiestPriAlarm2.Value() : 2U));
-            }
-
-            VerifyOrReturn(CheckConstraintType("expressedState", "enum8", "enum8"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestThSendsTestEventTriggerCommandToGeneralDiagnosticsClusterOnEndpoint0WithEnableKeyFieldSetToPixitsmokecotestEventTriggerKeyAndEventTriggerFieldSetToPixitsmokecotestEventTriggerForCoAlarmTestEventClear_27()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterGeneralDiagnostics alloc] initWithDevice:device
-                                                                              endpointID:@(0)
-                                                                                   queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRGeneralDiagnosticsClusterTestEventTriggerParams alloc] init];
-        params.enableKey = mTestEventTriggerKey.HasValue()
-            ? [NSData dataWithBytes:mTestEventTriggerKey.Value().data() length:mTestEventTriggerKey.Value().size()]
-            : [[NSData alloc] initWithBytes:"\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff" length:16];
-        params.eventTrigger = mTestEventTriggerCoAlarmClear.HasValue()
-            ? [NSNumber numberWithUnsignedLongLong:mTestEventTriggerCoAlarmClear.Value()]
-            : [NSNumber numberWithUnsignedLongLong:0xffffffff000000a1ULL];
-        [cluster testEventTriggerWithParams:params
-                                 completion:^(NSError * _Nullable err) {
-                                     NSLog(@"TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with "
-                                           @"EnableKey field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field "
-                                           @"set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for CO Alarm Test Event clear Error: %@",
-                                         err);
-
-                                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                     NextTest();
-                                 }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThWaitsForAReportOfCOStateAttributeFromDutWithATimeoutOf300Seconds_28()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        test_Test_TC_SMOKECO_2_6_COState_Reported = ^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH waits for a report of COState attribute from DUT with a timeout of 300 seconds Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("COState", actualValue, 0U));
-            }
-
-            VerifyOrReturn(CheckConstraintType("COState", "enum8", "enum8"));
-            NextTest();
-        };
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsExpressedStateAttributeFromDut_29()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeExpressedStateWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads ExpressedState attribute from DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(
-                    CheckValue("ExpressedState", actualValue, mHiestPriAlarm3.HasValue() ? mHiestPriAlarm3.Value() : 7U));
-            }
-
-            VerifyOrReturn(CheckConstraintType("expressedState", "enum8", "enum8"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestThSendsTestEventTriggerCommandToGeneralDiagnosticsClusterOnEndpoint0WithEnableKeyFieldSetToPixitsmokecotestEventTriggerKeyAndEventTriggerFieldSetToPixitsmokecotestEventTriggerForInterconnectCoAlarmTestEventClear_30()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterGeneralDiagnostics alloc] initWithDevice:device
-                                                                              endpointID:@(0)
-                                                                                   queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRGeneralDiagnosticsClusterTestEventTriggerParams alloc] init];
-        params.enableKey = mTestEventTriggerKey.HasValue()
-            ? [NSData dataWithBytes:mTestEventTriggerKey.Value().data() length:mTestEventTriggerKey.Value().size()]
-            : [[NSData alloc] initWithBytes:"\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff" length:16];
-        params.eventTrigger = mTestEventTriggerInterconnectCoAlarmClear.HasValue()
-            ? [NSNumber numberWithUnsignedLongLong:mTestEventTriggerInterconnectCoAlarmClear.Value()]
-            : [NSNumber numberWithUnsignedLongLong:0xffffffff000000a4ULL];
-        [cluster
-            testEventTriggerWithParams:params
-                            completion:^(NSError * _Nullable err) {
-                                NSLog(@"TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with "
-                                      @"EnableKey field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to "
-                                      @"PIXIT.SMOKECO.TEST_EVENT_TRIGGER for Interconnect CO Alarm Test Event Clear Error: %@",
-                                    err);
-
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                NextTest();
-                            }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThWaitsForAReportOfInterconnectCOAlarmAttributeFromDutWithATimeoutOf300Seconds_31()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        test_Test_TC_SMOKECO_2_6_InterconnectCOAlarm_Reported = ^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH waits for a report of InterconnectCOAlarm attribute from DUT with a timeout of 300 seconds Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("InterconnectCOAlarm", actualValue, 0U));
-            }
-
-            VerifyOrReturn(CheckConstraintType("interconnectCOAlarm", "enum8", "enum8"));
-            NextTest();
-        };
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsExpressedStateAttributeFromDut_32()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeExpressedStateWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads ExpressedState attribute from DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(
-                    CheckValue("ExpressedState", actualValue, mHiestPriAlarm4.HasValue() ? mHiestPriAlarm4.Value() : 7U));
-            }
-
-            VerifyOrReturn(CheckConstraintType("expressedState", "enum8", "enum8"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestThSendsTestEventTriggerCommandToGeneralDiagnosticsClusterOnEndpoint0WithEnableKeyFieldSetToPixitsmokecotestEventTriggerKeyAndEventTriggerFieldSetToPixitsmokecotestEventTriggerForInterconnectSmokeAlarmTestEventClear_33()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterGeneralDiagnostics alloc] initWithDevice:device
-                                                                              endpointID:@(0)
-                                                                                   queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRGeneralDiagnosticsClusterTestEventTriggerParams alloc] init];
-        params.enableKey = mTestEventTriggerKey.HasValue()
-            ? [NSData dataWithBytes:mTestEventTriggerKey.Value().data() length:mTestEventTriggerKey.Value().size()]
-            : [[NSData alloc] initWithBytes:"\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff" length:16];
-        params.eventTrigger = mTestEventTriggerInterconnectSmokeAlarmClear.HasValue()
-            ? [NSNumber numberWithUnsignedLongLong:mTestEventTriggerInterconnectSmokeAlarmClear.Value()]
-            : [NSNumber numberWithUnsignedLongLong:0xffffffff000000a2ULL];
-        [cluster
-            testEventTriggerWithParams:params
-                            completion:^(NSError * _Nullable err) {
-                                NSLog(@"TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with "
-                                      @"EnableKey field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field set to "
-                                      @"PIXIT.SMOKECO.TEST_EVENT_TRIGGER for Interconnect Smoke Alarm Test Event Clear Error: %@",
-                                    err);
-
-                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                NextTest();
-                            }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThWaitsForAReportOfInterconnectSmokeAlarmAttributeFromDutWithATimeoutOf300Seconds_34()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        test_Test_TC_SMOKECO_2_6_InterconnectSmokeAlarm_Reported = ^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(
-                @"TH waits for a report of InterconnectSmokeAlarm attribute from DUT with a timeout of 300 seconds Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("InterconnectSmokeAlarm", actualValue, 0U));
-            }
-
-            VerifyOrReturn(CheckConstraintType("interconnectSmokeAlarm", "enum8", "enum8"));
-            NextTest();
-        };
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsExpressedStateAttributeFromDut_35()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeExpressedStateWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads ExpressedState attribute from DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(
-                    CheckValue("ExpressedState", actualValue, mHiestPriAlarm5.HasValue() ? mHiestPriAlarm5.Value() : 3U));
-            }
-
-            VerifyOrReturn(CheckConstraintType("expressedState", "enum8", "enum8"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestThSendsTestEventTriggerCommandToGeneralDiagnosticsClusterOnEndpoint0WithEnableKeyFieldSetToPixitsmokecotestEventTriggerKeyAndEventTriggerFieldSetToPixitsmokecotestEventTriggerForBatteryAlertTestEventClear_36()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterGeneralDiagnostics alloc] initWithDevice:device
-                                                                              endpointID:@(0)
-                                                                                   queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRGeneralDiagnosticsClusterTestEventTriggerParams alloc] init];
-        params.enableKey = mTestEventTriggerKey.HasValue()
-            ? [NSData dataWithBytes:mTestEventTriggerKey.Value().data() length:mTestEventTriggerKey.Value().size()]
-            : [[NSData alloc] initWithBytes:"\x00\x11\x22\x33\x44\x55\x66\x77\x88\x99\xaa\xbb\xcc\xdd\xee\xff" length:16];
-        params.eventTrigger = mTestEventTriggerBatteryAlertClear.HasValue()
-            ? [NSNumber numberWithUnsignedLongLong:mTestEventTriggerBatteryAlertClear.Value()]
-            : [NSNumber numberWithUnsignedLongLong:0xffffffff000000a5ULL];
-        [cluster testEventTriggerWithParams:params
-                                 completion:^(NSError * _Nullable err) {
-                                     NSLog(@"TH sends TestEventTrigger command to General Diagnostics Cluster on Endpoint 0 with "
-                                           @"EnableKey field set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER_KEY and EventTrigger field "
-                                           @"set to PIXIT.SMOKECO.TEST_EVENT_TRIGGER for Battery Alert Test Event Clear Error: %@",
-                                         err);
-
-                                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                     NextTest();
-                                 }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThWaitsForAReportOfBatteryAlertAttributeFromDutWithATimeoutOf300Seconds_37()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        test_Test_TC_SMOKECO_2_6_BatteryAlert_Reported = ^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH waits for a report of BatteryAlert attribute from DUT with a timeout of 300 seconds Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("BatteryAlert", actualValue, 0U));
-            }
-
-            VerifyOrReturn(CheckConstraintType("batteryAlert", "enum8", "enum8"));
-            NextTest();
-        };
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsExpressedStateAttributeFromDut_38()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterSmokeCOAlarm alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeExpressedStateWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads ExpressedState attribute from DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("ExpressedState", actualValue, 0U));
-            }
-
-            VerifyOrReturn(CheckConstraintType("expressedState", "enum8", "enum8"));
             NextTest();
         }];
 
@@ -178676,7 +177067,6 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_RH_2_1>(),
         make_unique<Test_TC_SMOKECO_1_1>(),
         make_unique<Test_TC_SMOKECO_2_1>(),
-        make_unique<Test_TC_SMOKECO_2_6>(),
         make_unique<Test_TC_SWTCH_1_1>(),
         make_unique<Test_TC_RVCOPSTATE_1_1>(),
         make_unique<Test_TC_TMP_1_1>(),
