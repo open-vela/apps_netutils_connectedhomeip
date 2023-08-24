@@ -27805,11 +27805,6 @@ public:
         case 2:
             ChipLogProgress(chipTool,
                 " ***** Test Step 2 : Step 3a: Read the global attribute: FeatureMap and check for either bit 0 or 1 set\n");
-            if (ShouldSkip(
-                    " !CDOCONC.S.F00 && !CDOCONC.S.F01 && !CDOCONC.S.F02 && !CDOCONC.S.F03 && !CDOCONC.S.F04 && !CDOCONC.S.F05")) {
-                NextTest();
-                return;
-            }
             err = TestStep3aReadTheGlobalAttributeFeatureMapAndCheckForEitherBit0Or1Set_2();
             break;
         case 3:
@@ -28286,11 +28281,6 @@ private:
             NSLog(@"Step 3a: Read the global attribute: FeatureMap and check for either bit 0 or 1 set Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 0UL));
-            }
 
             VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
             NextTest();
@@ -29472,11 +29462,6 @@ public:
         case 2:
             ChipLogProgress(chipTool,
                 " ***** Test Step 2 : Step 3a: Read the global attribute: FeatureMap and check for either bit 0 or 1 set\n");
-            if (ShouldSkip(
-                    " !CMOCONC.S.F00 && !CMOCONC.S.F01 && !CMOCONC.S.F02 && !CMOCONC.S.F03 && !CMOCONC.S.F04 && !CMOCONC.S.F05 ")) {
-                NextTest();
-                return;
-            }
             err = TestStep3aReadTheGlobalAttributeFeatureMapAndCheckForEitherBit0Or1Set_2();
             break;
         case 3:
@@ -29953,11 +29938,6 @@ private:
             NSLog(@"Step 3a: Read the global attribute: FeatureMap and check for either bit 0 or 1 set Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 0UL));
-            }
 
             VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
             NextTest();
@@ -31139,11 +31119,6 @@ public:
         case 2:
             ChipLogProgress(chipTool,
                 " ***** Test Step 2 : Step 3a: Read the global attribute: FeatureMap and check for either bit 0 or 1 set\n");
-            if (ShouldSkip(
-                    " !FLDCONC.S.F00 && !FLDCONC.S.F01 && !FLDCONC.S.F02 && !FLDCONC.S.F03 && !FLDCONC.S.F04 && !FLDCONC.S.F05")) {
-                NextTest();
-                return;
-            }
             err = TestStep3aReadTheGlobalAttributeFeatureMapAndCheckForEitherBit0Or1Set_2();
             break;
         case 3:
@@ -31620,11 +31595,6 @@ private:
             NSLog(@"Step 3a: Read the global attribute: FeatureMap and check for either bit 0 or 1 set Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 0UL));
-            }
 
             VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
             NextTest();
@@ -32806,11 +32776,6 @@ public:
         case 2:
             ChipLogProgress(chipTool,
                 " ***** Test Step 2 : Step 3a: Read the global attribute: FeatureMap and check for either bit 0 or 1 set\n");
-            if (ShouldSkip(
-                    " !NDOCONC.S.F00 && !NDOCONC.S.F01 && !NDOCONC.S.F02 && !NDOCONC.S.F03 && !NDOCONC.S.F04 && !NDOCONC.S.F05")) {
-                NextTest();
-                return;
-            }
             err = TestStep3aReadTheGlobalAttributeFeatureMapAndCheckForEitherBit0Or1Set_2();
             break;
         case 3:
@@ -33288,11 +33253,6 @@ private:
             NSLog(@"Step 3a: Read the global attribute: FeatureMap and check for either bit 0 or 1 set Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 0UL));
-            }
 
             VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
             NextTest();
@@ -34474,10 +34434,6 @@ public:
         case 2:
             ChipLogProgress(chipTool,
                 " ***** Test Step 2 : Step 3a: Read the global attribute: FeatureMap and check for either bit 0 or 1 set\n");
-            if (ShouldSkip(" !OZCONC.S.F00 && !OZCONC.S.F01 && !OZCONC.S.F02 && !OZCONC.S.F03 && !OZCONC.S.F04 && !OZCONC.S.F05")) {
-                NextTest();
-                return;
-            }
             err = TestStep3aReadTheGlobalAttributeFeatureMapAndCheckForEitherBit0Or1Set_2();
             break;
         case 3:
@@ -34950,11 +34906,6 @@ private:
             NSLog(@"Step 3a: Read the global attribute: FeatureMap and check for either bit 0 or 1 set Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 0UL));
-            }
 
             VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
             NextTest();
@@ -36135,11 +36086,6 @@ public:
         case 2:
             ChipLogProgress(chipTool,
                 " ***** Test Step 2 : Step 3a: Read the global attribute: FeatureMap and check for either bit 0 or 1 set\n");
-            if (ShouldSkip(
-                    " !PMHCONC.S.F00 && !PMHCONC.S.F01 && !PMHCONC.S.F02 && !PMHCONC.S.F03 && !PMHCONC.S.F04 && !PMHCONC.S.F05")) {
-                NextTest();
-                return;
-            }
             err = TestStep3aReadTheGlobalAttributeFeatureMapAndCheckForEitherBit0Or1Set_2();
             break;
         case 3:
@@ -36616,11 +36562,6 @@ private:
             NSLog(@"Step 3a: Read the global attribute: FeatureMap and check for either bit 0 or 1 set Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 0UL));
-            }
 
             VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
             NextTest();
@@ -37802,11 +37743,6 @@ public:
         case 2:
             ChipLogProgress(chipTool,
                 " ***** Test Step 2 : Step 3a: Read the global attribute: FeatureMap and check for either bit 0 or 1 set\n");
-            if (ShouldSkip(
-                    " !PMICONC.S.F00 && !PMICONC.S.F01 && !PMICONC.S.F02 && !PMICONC.S.F03 && !PMICONC.S.F04 && !PMICONC.S.F05 ")) {
-                NextTest();
-                return;
-            }
             err = TestStep3aReadTheGlobalAttributeFeatureMapAndCheckForEitherBit0Or1Set_2();
             break;
         case 3:
@@ -38283,11 +38219,6 @@ private:
             NSLog(@"Step 3a: Read the global attribute: FeatureMap and check for either bit 0 or 1 set Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 0UL));
-            }
 
             VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
             NextTest();
@@ -39469,11 +39400,6 @@ public:
         case 2:
             ChipLogProgress(chipTool,
                 " ***** Test Step 2 : Step 3a: Read the global attribute: FeatureMap and check for either bit 0 or 1 set\n");
-            if (ShouldSkip(
-                    " !PMKCONC.S.F00 && !PMKCONC.S.F01 && !PMKCONC.S.F02 && !PMKCONC.S.F03 && !PMKCONC.S.F04 && !PMKCONC.S.F05 ")) {
-                NextTest();
-                return;
-            }
             err = TestStep3aReadTheGlobalAttributeFeatureMapAndCheckForEitherBit0Or1Set_2();
             break;
         case 3:
@@ -39950,11 +39876,6 @@ private:
             NSLog(@"Step 3a: Read the global attribute: FeatureMap and check for either bit 0 or 1 set Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 0UL));
-            }
 
             VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
             NextTest();
@@ -41136,10 +41057,6 @@ public:
         case 2:
             ChipLogProgress(chipTool,
                 " ***** Test Step 2 : Step 3a: Read the global attribute: FeatureMap and check for either bit 0 or 1 set\n");
-            if (ShouldSkip(" !RNCONC.S.F00 && !RNCONC.S.F01 && !RNCONC.S.F02 && !RNCONC.S.F03 && !RNCONC.S.F04 && !RNCONC.S.F05")) {
-                NextTest();
-                return;
-            }
             err = TestStep3aReadTheGlobalAttributeFeatureMapAndCheckForEitherBit0Or1Set_2();
             break;
         case 3:
@@ -41616,11 +41533,6 @@ private:
             NSLog(@"Step 3a: Read the global attribute: FeatureMap and check for either bit 0 or 1 set Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 0UL));
-            }
 
             VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
             NextTest();
@@ -42801,11 +42713,6 @@ public:
         case 2:
             ChipLogProgress(chipTool,
                 " ***** Test Step 2 : Step 3a: Read the global attribute: FeatureMap and check for either bit 0 or 1 set\n");
-            if (ShouldSkip(" !TVOCCONC.S.F00 && !TVOCCONC.S.F01 && !TVOCCONC.S.F02 && !TVOCCONC.S.F03 && !TVOCCONC.S.F04 && "
-                           "!TVOCCONC.S.F05 ")) {
-                NextTest();
-                return;
-            }
             err = TestStep3aReadTheGlobalAttributeFeatureMapAndCheckForEitherBit0Or1Set_2();
             break;
         case 3:
@@ -43289,11 +43196,6 @@ private:
             NSLog(@"Step 3a: Read the global attribute: FeatureMap and check for either bit 0 or 1 set Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 0UL));
-            }
 
             VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
             NextTest();
