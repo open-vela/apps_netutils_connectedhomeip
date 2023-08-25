@@ -47449,11 +47449,6 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 0UL));
-            }
-
             VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
             NextTest();
         }];
@@ -138849,6 +138844,18 @@ public:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Read attribute Parts list\n");
             err = TestReadAttributePartsList_4();
             break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Read attribute ClusterRevision\n");
+            err = TestReadAttributeClusterRevision_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Read attribute Tag list\n");
+            err = TestReadAttributeTagList_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Read feature map Attribute\n");
+            err = TestReadFeatureMapAttribute_7();
+            break;
         }
 
         if (CHIP_NO_ERROR != err) {
@@ -138875,6 +138882,15 @@ public:
         case 4:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -138888,7 +138904,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 5;
+    const uint16_t mTestCount = 8;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -139027,6 +139043,80 @@ private:
                 VerifyOrReturn(CheckValue("", actualValue[1], 2U));
             }
 
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadAttributeClusterRevision_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterDescriptor alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read attribute ClusterRevision Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 2U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadAttributeTagList_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterDescriptor alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeTagListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read attribute Tag list Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("TagList", [actualValue count], static_cast<uint32_t>(2)));
+                VerifyOrReturn(CheckValueNull("MfgCode", ((MTRDescriptorClusterSemanticTagStruct *) actualValue[0]).mfgCode));
+                VerifyOrReturn(
+                    CheckValue("NamespaceID", ((MTRDescriptorClusterSemanticTagStruct *) actualValue[0]).namespaceID, 7U));
+                VerifyOrReturn(CheckValue("Tag", ((MTRDescriptorClusterSemanticTagStruct *) actualValue[0]).tag, 0U));
+                VerifyOrReturn(CheckValueNull("MfgCode", ((MTRDescriptorClusterSemanticTagStruct *) actualValue[1]).mfgCode));
+                VerifyOrReturn(
+                    CheckValue("NamespaceID", ((MTRDescriptorClusterSemanticTagStruct *) actualValue[1]).namespaceID, 8U));
+                VerifyOrReturn(CheckValue("Tag", ((MTRDescriptorClusterSemanticTagStruct *) actualValue[1]).tag, 3U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadFeatureMapAttribute_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterDescriptor alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read feature map Attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
             NextTest();
         }];
 
