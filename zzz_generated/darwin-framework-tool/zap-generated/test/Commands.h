@@ -2550,66 +2550,20 @@ public:
             err = TestStep4bThReadsOptionalAttributeExtensionInAttributeList_5();
             break;
         case 6:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 6 : Step 4c: TH reads AttributeList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE). "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep4cThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_6();
-            break;
-        case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Step 5a: TH reads EventList attribute from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Step 5: TH reads EventList attribute from DUT\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Step 6: TH reads AcceptedCommandList attribute from DUT\n");
+            err = TestStep6ThReadsAcceptedCommandListAttributeFromDut_7();
+            break;
         case 8:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 8 : Step 5b: TH reads EventList attribute from DUT. 1.The list SHALL NOT contain any additional "
-                "values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF). 2.The list MAY contain values in the "
-                "Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI range "
-                "(0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT contain any values in the Test Vendor or "
-                "invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where "
-                "XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5bThReadsEventListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_8();
-            break;
-        case 9:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 9 : Step 6: TH reads AcceptedCommandList attribute from DUT. 1. The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6ThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_9();
-            break;
-        case 10:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 10 : Step 7: TH reads GeneratedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7ThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_10();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Step 7: TH reads GeneratedCommandList attribute from DUT\n");
+            err = TestStep7ThReadsGeneratedCommandListAttributeFromDut_8();
             break;
         }
 
@@ -2649,12 +2603,6 @@ public:
         case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 10:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -2668,7 +2616,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 11;
+    const uint16_t mTestCount = 9;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -2811,48 +2759,52 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4cThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_6()
+    CHIP_ERROR TestStep6ThReadsAcceptedCommandListAttributeFromDut_7()
     {
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 6: TH reads AcceptedCommandList attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("AcceptedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep5bThReadsEventListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_8()
+    CHIP_ERROR TestStep7ThReadsGeneratedCommandListAttributeFromDut_8()
     {
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-    CHIP_ERROR
-    TestStep6ThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_9()
-    {
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 7: TH reads GeneratedCommandList attribute from DUT Error: %@", err);
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-    CHIP_ERROR
-    TestStep7ThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_10()
-    {
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 };
 
@@ -6437,94 +6389,36 @@ public:
             err = TestStep3eGivenAIRQUALSF03ExtremelyPoorEnsureFeaturemapHasTheCorrectBitSet_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Step 4a: Read the global attribute: AttributeList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Step 4: Read the global attribute: AttributeList\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep4aReadTheGlobalAttributeAttributeList_7();
+            err = TestStep4ReadTheGlobalAttributeAttributeList_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Step 4a: Read the global attribute: AttributeList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Step 4: Read the global attribute: AttributeList\n");
             if (ShouldSkip("!PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep4aReadTheGlobalAttributeAttributeList_8();
+            err = TestStep4ReadTheGlobalAttributeAttributeList_8();
             break;
         case 9:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 9 : Step 4b: TH reads from the DUT the AttributeList attribute. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE). "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep4bThReadsFromTheDutTheAttributeListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_9();
-            break;
-        case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Step 5a: TH reads EventList attribute from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Step 5: TH reads EventList attribute from DUT\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Step 6: Read the global attribute: AcceptedCommandList\n");
+            err = TestStep6ReadTheGlobalAttributeAcceptedCommandList_10();
+            break;
         case 11:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 11 : Step 5b: TH reads from the DUT the EventList attribute. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) 2. "
-                "The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5bThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_11();
-            break;
-        case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : Step 6a: Read the global attribute: AcceptedCommandList\n");
-            err = TestStep6aReadTheGlobalAttributeAcceptedCommandList_12();
-            break;
-        case 13:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 13 : Step 6b: TH reads from the DUT the AcceptedCommandList attribute. 1.The list SHALL NOT "
-                "contain any additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - "
-                "0x0000_FFFE). 2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - "
-                "0xXXXX_4FFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list "
-                "SHALL NOT contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), "
-                "(0xXXXX_5000 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - "
-                "0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6bThReadsFromTheDutTheAcceptedCommandListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_13();
-            break;
-        case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : Step 7a: Read the global attribute: GeneratedCommandList\n");
-            err = TestStep7aReadTheGlobalAttributeGeneratedCommandList_14();
-            break;
-        case 15:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 15 : Step 7b: TH reads from the DUT the GeneratedCommandList attribute. 1.The list SHALL NOT "
-                "contain any additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - "
-                "0x0000_FFFE). 2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - "
-                "0xXXXX_4FFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list "
-                "SHALL NOT contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), "
-                "(0xXXXX_5000 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - "
-                "0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7bThReadsFromTheDutTheGeneratedCommandListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_15();
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Step 7: Read the global attribute: GeneratedCommandList\n");
+            err = TestStep7ReadTheGlobalAttributeGeneratedCommandList_11();
             break;
         }
 
@@ -6573,18 +6467,6 @@ public:
         case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -6598,7 +6480,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 16;
+    const uint16_t mTestCount = 12;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -6737,7 +6619,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4aReadTheGlobalAttributeAttributeList_7()
+    CHIP_ERROR TestStep4ReadTheGlobalAttributeAttributeList_7()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -6745,7 +6627,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 4a: Read the global attribute: AttributeList Error: %@", err);
+            NSLog(@"Step 4: Read the global attribute: AttributeList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -6764,7 +6646,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4aReadTheGlobalAttributeAttributeList_8()
+    CHIP_ERROR TestStep4ReadTheGlobalAttributeAttributeList_8()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -6772,7 +6654,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 4a: Read the global attribute: AttributeList Error: %@", err);
+            NSLog(@"Step 4: Read the global attribute: AttributeList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -6790,29 +6672,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4bThReadsFromTheDutTheAttributeListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_9()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestStep5bThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_11()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep6aReadTheGlobalAttributeAcceptedCommandList_12()
+    CHIP_ERROR TestStep6ReadTheGlobalAttributeAcceptedCommandList_10()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -6820,7 +6680,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6a: Read the global attribute: AcceptedCommandList Error: %@", err);
+            NSLog(@"Step 6: Read the global attribute: AcceptedCommandList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -6831,18 +6691,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep6bThReadsFromTheDutTheAcceptedCommandListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_13()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep7aReadTheGlobalAttributeGeneratedCommandList_14()
+    CHIP_ERROR TestStep7ReadTheGlobalAttributeGeneratedCommandList_11()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -6850,7 +6699,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 7a: Read the global attribute: GeneratedCommandList Error: %@", err);
+            NSLog(@"Step 7: Read the global attribute: GeneratedCommandList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -6864,17 +6713,6 @@ private:
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestStep7bThReadsFromTheDutTheGeneratedCommandListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_15()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 };
 
@@ -7607,90 +7445,36 @@ public:
             err = TestStep4oThReadsOptionalAttributeUniqueIDInAttributeList_18();
             break;
         case 19:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 19 : Step 4p: TH reads AttributeList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE). "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep4pThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_19();
-            break;
-        case 20:
-            ChipLogProgress(chipTool, " ***** Test Step 20 : Step 5a: TH reads optional event(StartUp) in EventList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 19 : Step 5a: TH reads optional event(StartUp) in EventList\n");
             if (ShouldSkip("BRBINFO.S.E00 && PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
-        case 21:
-            ChipLogProgress(chipTool, " ***** Test Step 21 : Step 5b: TH reads optional attribute(ShutDown) in EventList\n");
+        case 20:
+            ChipLogProgress(chipTool, " ***** Test Step 20 : Step 5b: TH reads optional attribute(ShutDown) in EventList\n");
             if (ShouldSkip("BRBINFO.S.E01 && PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
-        case 22:
-            ChipLogProgress(chipTool, " ***** Test Step 22 : Step 5c: TH reads optional attribute(Leave) in EventList\n");
+        case 21:
+            ChipLogProgress(chipTool, " ***** Test Step 21 : Step 5c: TH reads optional attribute(Leave) in EventList\n");
             if (ShouldSkip("BRBINFO.S.E02 && PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
+        case 22:
+            ChipLogProgress(chipTool, " ***** Test Step 22 : Step 6: TH reads AcceptedCommandList from DUT\n");
+            err = TestStep6ThReadsAcceptedCommandListFromDut_22();
+            break;
         case 23:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 23 : Step 5d: TH reads EventList attribute from DUT. 1.The list SHALL NOT contain any additional "
-                "values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF). 2.The list MAY contain values in the "
-                "Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI range "
-                "(0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT contain any values in the Test Vendor or "
-                "invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where "
-                "XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5dThReadsEventListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_23();
-            break;
-        case 24:
-            ChipLogProgress(chipTool, " ***** Test Step 24 : Step 6a: TH1 reads AcceptedCommandList from DUT\n");
-            err = TestStep6aTh1ReadsAcceptedCommandListFromDut_24();
-            break;
-        case 25:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 25 : Step 6b: TH reads AcceptedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6bThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_25();
-            break;
-        case 26:
-            ChipLogProgress(chipTool, " ***** Test Step 26 : Step 7a: TH1 reads GeneratedCommandList from DUT\n");
-            err = TestStep7aTh1ReadsGeneratedCommandListFromDut_26();
-            break;
-        case 27:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 27 : Step 7b: TH1 reads GeneratedCommandList from DUT. 1.The list MAY contain values in the "
-                "Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI range "
-                "(0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test Vendor or "
-                "invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where "
-                "XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7bTh1ReadsGeneratedCommandListFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_27();
+            ChipLogProgress(chipTool, " ***** Test Step 23 : Step 7: TH1 reads GeneratedCommandList from DUT\n");
+            err = TestStep7Th1ReadsGeneratedCommandListFromDut_23();
             break;
         }
 
@@ -7775,18 +7559,6 @@ public:
         case 23:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 24:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 25:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 26:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 27:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -7800,7 +7572,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 28;
+    const uint16_t mTestCount = 24;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -8230,29 +8002,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4pThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_19()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestStep5dThReadsEventListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_23()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep6aTh1ReadsAcceptedCommandListFromDut_24()
+    CHIP_ERROR TestStep6ThReadsAcceptedCommandListFromDut_22()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -8262,7 +8012,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6a: TH1 reads AcceptedCommandList from DUT Error: %@", err);
+            NSLog(@"Step 6: TH reads AcceptedCommandList from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -8278,18 +8028,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep6bThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_25()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep7aTh1ReadsGeneratedCommandListFromDut_26()
+    CHIP_ERROR TestStep7Th1ReadsGeneratedCommandListFromDut_23()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -8299,7 +8038,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 7a: TH1 reads GeneratedCommandList from DUT Error: %@", err);
+            NSLog(@"Step 7: TH1 reads GeneratedCommandList from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -8313,17 +8052,6 @@ private:
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestStep7bTh1ReadsGeneratedCommandListFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_27()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 };
 
@@ -8713,74 +8441,36 @@ public:
             err = TestStep3ThReadsTheFeatureMapFromDut_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Step 4a: TH reads AttributeList from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Step 4: TH reads AttributeList from DUT\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep4aThReadsAttributeListFromDut_3();
+            err = TestStep4ThReadsAttributeListFromDut_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Step 4a: TH reads AttributeList from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Step 4: TH reads AttributeList from DUT\n");
             if (ShouldSkip("!PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep4aThReadsAttributeListFromDut_4();
+            err = TestStep4ThReadsAttributeListFromDut_4();
             break;
         case 5:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 5 : Step 4b: TH reads AttributeList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE). "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Step 5: TH reads EventList attribute from DUT\n");
+            if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep4bThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_5();
-            break;
+            NextTest();
+            return;
         case 6:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 6 : Step 5: TH reads from the DUT the EventList attribute. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) 2. "
-                "The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5ThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Step 6: TH reads AcceptedCommandList attribute from DUT\n");
+            err = TestStep6ThReadsAcceptedCommandListAttributeFromDut_6();
             break;
         case 7:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 7 : Step 6: TH reads AcceptedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6ThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_7();
-            break;
-        case 8:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 8 : Step 7: TH reads GeneratedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7ThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_8();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Step 7: TH reads GeneratedCommandList attribute from DUT\n");
+            err = TestStep7ThReadsGeneratedCommandListAttributeFromDut_7();
             break;
         }
 
@@ -8817,9 +8507,6 @@ public:
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -8833,7 +8520,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 9;
+    const uint16_t mTestCount = 8;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -8896,7 +8583,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4aThReadsAttributeListFromDut_3()
+    CHIP_ERROR TestStep4ThReadsAttributeListFromDut_3()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -8904,7 +8591,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 4a: TH reads AttributeList from DUT Error: %@", err);
+            NSLog(@"Step 4: TH reads AttributeList from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -8923,7 +8610,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4aThReadsAttributeListFromDut_4()
+    CHIP_ERROR TestStep4ThReadsAttributeListFromDut_4()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -8931,7 +8618,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 4a: TH reads AttributeList from DUT Error: %@", err);
+            NSLog(@"Step 4: TH reads AttributeList from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -8949,48 +8636,52 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4bThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_5()
+    CHIP_ERROR TestStep6ThReadsAcceptedCommandListAttributeFromDut_6()
     {
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterBinding alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 6: TH reads AcceptedCommandList attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("AcceptedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep5ThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_6()
+    CHIP_ERROR TestStep7ThReadsGeneratedCommandListAttributeFromDut_7()
     {
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterBinding alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-    CHIP_ERROR
-    TestStep6ThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_7()
-    {
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 7: TH reads GeneratedCommandList attribute from DUT Error: %@", err);
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-    CHIP_ERROR
-    TestStep7ThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_8()
-    {
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 };
 
@@ -9038,10 +8729,6 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Step 2: read the global attribute: ClusterRevision\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
             err = TestStep2ReadTheGlobalAttributeClusterRevision_1();
             break;
         case 2:
@@ -9991,11 +9678,25 @@ private:
     CHIP_ERROR TestStep2ReadTheGlobalAttributeClusterRevision_1()
     {
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 2: read the global attribute: ClusterRevision Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 6U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 
     CHIP_ERROR TestStep3aReadTheGlobalAttributeFeatureMap_2()
@@ -28038,74 +27739,20 @@ public:
             err = TestStep4kCheckThatLevelValueIsExcludedFromAttributeListWhenCdoconcsf01LevIsNotSet_26();
             break;
         case 27:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 27 : Step 4l: TH reads AttributeList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE). "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep4lThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_27();
-            break;
-        case 28:
-            ChipLogProgress(chipTool, " ***** Test Step 28 : Step 5a: Read the global attribute: EventList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Step 5: Read the global attribute: EventList\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
+        case 28:
+            ChipLogProgress(chipTool, " ***** Test Step 28 : Step 6: Read the global attribute: AcceptedCommandList\n");
+            err = TestStep6ReadTheGlobalAttributeAcceptedCommandList_28();
+            break;
         case 29:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 29 : Step 5b: TH reads EventList attribute from DUT. 1.The list SHALL NOT contain any additional "
-                "values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF). 2.The list MAY contain values in the "
-                "Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI range "
-                "(0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT contain any values in the Test Vendor or "
-                "invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where "
-                "XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5bThReadsEventListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_29();
-            break;
-        case 30:
-            ChipLogProgress(chipTool, " ***** Test Step 30 : Step 6a: Read the global attribute: AcceptedCommandList\n");
-            err = TestStep6aReadTheGlobalAttributeAcceptedCommandList_30();
-            break;
-        case 31:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 31 : Step 6b: TH reads AcceptedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6bThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_31();
-            break;
-        case 32:
-            ChipLogProgress(chipTool, " ***** Test Step 32 : Step 7a: Read the global attribute: GeneratedCommandList\n");
-            err = TestStep7aReadTheGlobalAttributeGeneratedCommandList_32();
-            break;
-        case 33:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 33 : Step 7b: TH reads GeneratedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7bThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_33();
+            ChipLogProgress(chipTool, " ***** Test Step 29 : Step 7: Read the global attribute: GeneratedCommandList\n");
+            err = TestStep7ReadTheGlobalAttributeGeneratedCommandList_29();
             break;
         }
 
@@ -28208,18 +27855,6 @@ public:
         case 29:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 30:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 31:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 32:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 33:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -28233,7 +27868,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 34;
+    const uint16_t mTestCount = 30;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -28864,29 +28499,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4lThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_27()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestStep5bThReadsEventListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_29()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep6aReadTheGlobalAttributeAcceptedCommandList_30()
+    CHIP_ERROR TestStep6ReadTheGlobalAttributeAcceptedCommandList_28()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -28896,7 +28509,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6a: Read the global attribute: AcceptedCommandList Error: %@", err);
+            NSLog(@"Step 6: Read the global attribute: AcceptedCommandList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -28912,18 +28525,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep6bThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_31()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep7aReadTheGlobalAttributeGeneratedCommandList_32()
+    CHIP_ERROR TestStep7ReadTheGlobalAttributeGeneratedCommandList_29()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -28933,7 +28535,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 7a: Read the global attribute: GeneratedCommandList Error: %@", err);
+            NSLog(@"Step 7: Read the global attribute: GeneratedCommandList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -28947,17 +28549,6 @@ private:
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestStep7bThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_33()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 };
 
@@ -29695,74 +29286,20 @@ public:
             err = TestStep4kCheckThatLevelValueIsExcludedFromAttributeListWhenCmoconcsf01LevIsNotSet_26();
             break;
         case 27:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 27 : Step 4l: TH reads AttributeList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE). "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep4lThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_27();
-            break;
-        case 28:
-            ChipLogProgress(chipTool, " ***** Test Step 28 : Step 5a: Read the global attribute: EventList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Step 5: Read the global attribute: EventList\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
+        case 28:
+            ChipLogProgress(chipTool, " ***** Test Step 28 : Step 6: Read the global attribute: AcceptedCommandList\n");
+            err = TestStep6ReadTheGlobalAttributeAcceptedCommandList_28();
+            break;
         case 29:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 29 : Step 5b: TH reads from the DUT the EventList attribute. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) 2. "
-                "The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5bThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_29();
-            break;
-        case 30:
-            ChipLogProgress(chipTool, " ***** Test Step 30 : Step 6a: Read the global attribute: AcceptedCommandList\n");
-            err = TestStep6aReadTheGlobalAttributeAcceptedCommandList_30();
-            break;
-        case 31:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 31 : Step 6b: TH reads AcceptedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6bThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_31();
-            break;
-        case 32:
-            ChipLogProgress(chipTool, " ***** Test Step 32 : Step 7a: Read the global attribute: GeneratedCommandList\n");
-            err = TestStep7aReadTheGlobalAttributeGeneratedCommandList_32();
-            break;
-        case 33:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 33 : Step 7b: TH1 reads GeneratedCommandList from DUT. 1.The list MAY contain values in the "
-                "Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI range "
-                "(0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test Vendor or "
-                "invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where "
-                "XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7bTh1ReadsGeneratedCommandListFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_33();
+            ChipLogProgress(chipTool, " ***** Test Step 29 : Step 7: Read the global attribute: GeneratedCommandList\n");
+            err = TestStep7ReadTheGlobalAttributeGeneratedCommandList_29();
             break;
         }
 
@@ -29865,18 +29402,6 @@ public:
         case 29:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 30:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 31:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 32:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 33:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -29890,7 +29415,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 34;
+    const uint16_t mTestCount = 30;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -30521,29 +30046,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4lThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_27()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestStep5bThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_29()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep6aReadTheGlobalAttributeAcceptedCommandList_30()
+    CHIP_ERROR TestStep6ReadTheGlobalAttributeAcceptedCommandList_28()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -30553,7 +30056,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6a: Read the global attribute: AcceptedCommandList Error: %@", err);
+            NSLog(@"Step 6: Read the global attribute: AcceptedCommandList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -30569,18 +30072,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep6bThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_31()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep7aReadTheGlobalAttributeGeneratedCommandList_32()
+    CHIP_ERROR TestStep7ReadTheGlobalAttributeGeneratedCommandList_29()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -30590,7 +30082,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 7a: Read the global attribute: GeneratedCommandList Error: %@", err);
+            NSLog(@"Step 7: Read the global attribute: GeneratedCommandList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -30604,17 +30096,6 @@ private:
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestStep7bTh1ReadsGeneratedCommandListFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_33()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 };
 
@@ -31352,74 +30833,20 @@ public:
             err = TestStep4kCheckThatLevelValueIsExcludedFromAttributeListWhenFldconcsf01LevIsNotSet_26();
             break;
         case 27:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 27 : Step 4l: TH reads AttributeList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE). "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep4lThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_27();
-            break;
-        case 28:
-            ChipLogProgress(chipTool, " ***** Test Step 28 : Step 5a: Read the global attribute: EventList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Step 5: Read the global attribute: EventList\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
+        case 28:
+            ChipLogProgress(chipTool, " ***** Test Step 28 : Step 6: Read the global attribute: AcceptedCommandList\n");
+            err = TestStep6ReadTheGlobalAttributeAcceptedCommandList_28();
+            break;
         case 29:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 29 : Step 5b: TH reads from the DUT the EventList attribute. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) 2. "
-                "The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5bThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_29();
-            break;
-        case 30:
-            ChipLogProgress(chipTool, " ***** Test Step 30 : Step 6a: Read the global attribute: AcceptedCommandList\n");
-            err = TestStep6aReadTheGlobalAttributeAcceptedCommandList_30();
-            break;
-        case 31:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 31 : Step 6b: TH reads AcceptedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6bThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_31();
-            break;
-        case 32:
-            ChipLogProgress(chipTool, " ***** Test Step 32 : Step 7: Read the global attribute: GeneratedCommandList\n");
-            err = TestStep7ReadTheGlobalAttributeGeneratedCommandList_32();
-            break;
-        case 33:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 33 : Step 7: TH reads GeneratedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7ThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_33();
+            ChipLogProgress(chipTool, " ***** Test Step 29 : Step 7: Read the global attribute: GeneratedCommandList\n");
+            err = TestStep7ReadTheGlobalAttributeGeneratedCommandList_29();
             break;
         }
 
@@ -31522,18 +30949,6 @@ public:
         case 29:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 30:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 31:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 32:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 33:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -31547,7 +30962,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 34;
+    const uint16_t mTestCount = 30;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -32178,29 +31593,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4lThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_27()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestStep5bThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_29()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep6aReadTheGlobalAttributeAcceptedCommandList_30()
+    CHIP_ERROR TestStep6ReadTheGlobalAttributeAcceptedCommandList_28()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -32210,7 +31603,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6a: Read the global attribute: AcceptedCommandList Error: %@", err);
+            NSLog(@"Step 6: Read the global attribute: AcceptedCommandList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -32226,18 +31619,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep6bThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_31()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep7ReadTheGlobalAttributeGeneratedCommandList_32()
+    CHIP_ERROR TestStep7ReadTheGlobalAttributeGeneratedCommandList_29()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -32261,17 +31643,6 @@ private:
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestStep7ThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_33()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 };
 
@@ -33009,75 +32380,20 @@ public:
             err = TestStep4kCheckThatLevelValueIsExcludedFromAttributeListWhenNdoconcsf01LevIsNotSet_26();
             break;
         case 27:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 27 : Step 4l: TH reads AttributeList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep4lThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_27();
-            break;
-        case 28:
-            ChipLogProgress(chipTool, " ***** Test Step 28 : Step 5a: Read the global attribute: EventList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Step 5: Read the global attribute: EventList\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
+        case 28:
+            ChipLogProgress(chipTool, " ***** Test Step 28 : Step 6: Read the global attribute: AcceptedCommandList\n");
+            err = TestStep6ReadTheGlobalAttributeAcceptedCommandList_28();
+            break;
         case 29:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 29 : Step 5b: TH reads from the DUT the EventList attribute. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) 2. "
-                "The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5bThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_29();
-            break;
-        case 30:
-            ChipLogProgress(chipTool, " ***** Test Step 30 : Step 6a: Read the global attribute: AcceptedCommandList\n");
-            err = TestStep6aReadTheGlobalAttributeAcceptedCommandList_30();
-            break;
-        case 31:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 31 : Step 6b: TH reads AcceptedCommandList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF). 2.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored.3.The list SHALL NOT contain any values in the Test Vendor "
-                "or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where "
-                "XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6bThReadsAcceptedCommandListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_31();
-            break;
-        case 32:
-            ChipLogProgress(chipTool, " ***** Test Step 32 : Step 7a: Read the global attribute: GeneratedCommandList\n");
-            err = TestStep7aReadTheGlobalAttributeGeneratedCommandList_32();
-            break;
-        case 33:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 33 : Step 7b: TH reads GeneratedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7bThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_33();
+            ChipLogProgress(chipTool, " ***** Test Step 29 : Step 7: Read the global attribute: GeneratedCommandList\n");
+            err = TestStep7ReadTheGlobalAttributeGeneratedCommandList_29();
             break;
         }
 
@@ -33180,18 +32496,6 @@ public:
         case 29:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 30:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 31:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 32:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 33:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -33205,7 +32509,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 34;
+    const uint16_t mTestCount = 30;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -33836,29 +33140,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4lThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_27()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestStep5bThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_29()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep6aReadTheGlobalAttributeAcceptedCommandList_30()
+    CHIP_ERROR TestStep6ReadTheGlobalAttributeAcceptedCommandList_28()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -33868,7 +33150,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6a: Read the global attribute: AcceptedCommandList Error: %@", err);
+            NSLog(@"Step 6: Read the global attribute: AcceptedCommandList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -33884,18 +33166,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep6bThReadsAcceptedCommandListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_31()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep7aReadTheGlobalAttributeGeneratedCommandList_32()
+    CHIP_ERROR TestStep7ReadTheGlobalAttributeGeneratedCommandList_29()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -33905,7 +33176,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 7a: Read the global attribute: GeneratedCommandList Error: %@", err);
+            NSLog(@"Step 7: Read the global attribute: GeneratedCommandList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -33919,17 +33190,6 @@ private:
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestStep7bThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_33()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 };
 
@@ -34664,73 +33924,20 @@ public:
             err = TestStep4kCheckThatLevelValueIsExcludedFromAttributeListWhenOzconcsf01LevIsNotSet_26();
             break;
         case 27:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 27 : Step 4l: TH reads AttributeList attribute from DUT. 1.The list MAY contain values in the "
-                "Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), where XXXX is the allowed MEI range "
-                "(0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test Vendor or "
-                "invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep4lThReadsAttributeListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_27();
-            break;
-        case 28:
-            ChipLogProgress(chipTool, " ***** Test Step 28 : Step 5a: Read the global attribute: EventList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Step 5: Read the global attribute: EventList\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
+        case 28:
+            ChipLogProgress(chipTool, " ***** Test Step 28 : Step 6: Read the global attribute: AcceptedCommandList\n");
+            err = TestStep6ReadTheGlobalAttributeAcceptedCommandList_28();
+            break;
         case 29:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 29 : Step 5b: Read the global attribute: EventList. 1.The list SHALL NOT contain any additional "
-                "values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) 2. The list "
-                "MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), where XXXX "
-                "is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT contain any "
-                "values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 - "
-                "0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5bReadTheGlobalAttributeEventList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_29();
-            break;
-        case 30:
-            ChipLogProgress(chipTool, " ***** Test Step 30 : Step 6a: Read the global attribute: AcceptedCommandList\n");
-            err = TestStep6aReadTheGlobalAttributeAcceptedCommandList_30();
-            break;
-        case 31:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 31 : Step 6b: TH reads AcceptedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6bThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_31();
-            break;
-        case 32:
-            ChipLogProgress(chipTool, " ***** Test Step 32 : Step 7a: Read the global attribute: GeneratedCommandList\n");
-            err = TestStep7aReadTheGlobalAttributeGeneratedCommandList_32();
-            break;
-        case 33:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 33 : Step 7b: TH reads GeneratedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7bThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_33();
+            ChipLogProgress(chipTool, " ***** Test Step 29 : Step 7: Read the global attribute: GeneratedCommandList\n");
+            err = TestStep7ReadTheGlobalAttributeGeneratedCommandList_29();
             break;
         }
 
@@ -34833,18 +34040,6 @@ public:
         case 29:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 30:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 31:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 32:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 33:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -34858,7 +34053,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 34;
+    const uint16_t mTestCount = 30;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -35488,29 +34683,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4lThReadsAttributeListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_27()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestStep5bReadTheGlobalAttributeEventList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_29()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep6aReadTheGlobalAttributeAcceptedCommandList_30()
+    CHIP_ERROR TestStep6ReadTheGlobalAttributeAcceptedCommandList_28()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -35520,7 +34693,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6a: Read the global attribute: AcceptedCommandList Error: %@", err);
+            NSLog(@"Step 6: Read the global attribute: AcceptedCommandList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -35536,18 +34709,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep6bThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_31()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep7aReadTheGlobalAttributeGeneratedCommandList_32()
+    CHIP_ERROR TestStep7ReadTheGlobalAttributeGeneratedCommandList_29()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -35557,7 +34719,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 7a: Read the global attribute: GeneratedCommandList Error: %@", err);
+            NSLog(@"Step 7: Read the global attribute: GeneratedCommandList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -35571,17 +34733,6 @@ private:
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestStep7bThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_33()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 };
 
@@ -36319,74 +35470,20 @@ public:
             err = TestStep4kCheckThatLevelValueIsExcludedFromAttributeListWhenPmhconcsf01LevIsNotSet_26();
             break;
         case 27:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 27 : Step 4l: TH reads AttributeList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE). "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep4lThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_27();
-            break;
-        case 28:
-            ChipLogProgress(chipTool, " ***** Test Step 28 : Step 5a: Read the global attribute: EventList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Step 5: Read the global attribute: EventList\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
+        case 28:
+            ChipLogProgress(chipTool, " ***** Test Step 28 : Step 6: Read the global attribute: AcceptedCommandList\n");
+            err = TestStep6ReadTheGlobalAttributeAcceptedCommandList_28();
+            break;
         case 29:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 29 : Step 5b: TH reads from the DUT the EventList attribute. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) 2. "
-                "The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5bThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_29();
-            break;
-        case 30:
-            ChipLogProgress(chipTool, " ***** Test Step 30 : Step 6a: Read the global attribute: AcceptedCommandList\n");
-            err = TestStep6aReadTheGlobalAttributeAcceptedCommandList_30();
-            break;
-        case 31:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 31 : Step 6b: TH reads AcceptedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6bThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_31();
-            break;
-        case 32:
-            ChipLogProgress(chipTool, " ***** Test Step 32 : Step 7a: Read the global attribute: GeneratedCommandList\n");
-            err = TestStep7aReadTheGlobalAttributeGeneratedCommandList_32();
-            break;
-        case 33:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 33 : Step 7b: TH reads GeneratedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7bThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_33();
+            ChipLogProgress(chipTool, " ***** Test Step 29 : Step 7: Read the global attribute: GeneratedCommandList\n");
+            err = TestStep7ReadTheGlobalAttributeGeneratedCommandList_29();
             break;
         }
 
@@ -36489,18 +35586,6 @@ public:
         case 29:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 30:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 31:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 32:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 33:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -36514,7 +35599,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 34;
+    const uint16_t mTestCount = 30;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -37145,29 +36230,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4lThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_27()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestStep5bThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_29()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep6aReadTheGlobalAttributeAcceptedCommandList_30()
+    CHIP_ERROR TestStep6ReadTheGlobalAttributeAcceptedCommandList_28()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -37177,7 +36240,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6a: Read the global attribute: AcceptedCommandList Error: %@", err);
+            NSLog(@"Step 6: Read the global attribute: AcceptedCommandList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -37193,18 +36256,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep6bThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_31()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep7aReadTheGlobalAttributeGeneratedCommandList_32()
+    CHIP_ERROR TestStep7ReadTheGlobalAttributeGeneratedCommandList_29()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -37214,7 +36266,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 7a: Read the global attribute: GeneratedCommandList Error: %@", err);
+            NSLog(@"Step 7: Read the global attribute: GeneratedCommandList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -37228,17 +36280,6 @@ private:
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestStep7bThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_33()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 };
 
@@ -37976,74 +37017,20 @@ public:
             err = TestStep4kCheckThatLevelValueIsExcludedFromAttributeListWhenPmiconcsf01LevIsNotSet_26();
             break;
         case 27:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 27 : Step 4l: TH reads AttributeList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE). "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep4lThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_27();
-            break;
-        case 28:
-            ChipLogProgress(chipTool, " ***** Test Step 28 : Step 5a: Read the global attribute: EventList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Step 5: Read the global attribute: EventList\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
+        case 28:
+            ChipLogProgress(chipTool, " ***** Test Step 28 : Step 6: Read the global attribute: AcceptedCommandList\n");
+            err = TestStep6ReadTheGlobalAttributeAcceptedCommandList_28();
+            break;
         case 29:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 29 : Step 5b: TH reads from the DUT the EventList attribute. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) 2. "
-                "The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5bThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_29();
-            break;
-        case 30:
-            ChipLogProgress(chipTool, " ***** Test Step 30 : Step 6a: Read the global attribute: AcceptedCommandList\n");
-            err = TestStep6aReadTheGlobalAttributeAcceptedCommandList_30();
-            break;
-        case 31:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 31 : Step 6b: TH reads AcceptedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6bThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_31();
-            break;
-        case 32:
-            ChipLogProgress(chipTool, " ***** Test Step 32 : Step 7b: Read the global attribute: GeneratedCommandList\n");
-            err = TestStep7bReadTheGlobalAttributeGeneratedCommandList_32();
-            break;
-        case 33:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 33 : Step 7b: TH reads GeneratedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7bThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_33();
+            ChipLogProgress(chipTool, " ***** Test Step 29 : Step 7: Read the global attribute: GeneratedCommandList\n");
+            err = TestStep7ReadTheGlobalAttributeGeneratedCommandList_29();
             break;
         }
 
@@ -38146,18 +37133,6 @@ public:
         case 29:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 30:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 31:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 32:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 33:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -38171,7 +37146,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 34;
+    const uint16_t mTestCount = 30;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -38802,29 +37777,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4lThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_27()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestStep5bThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_29()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep6aReadTheGlobalAttributeAcceptedCommandList_30()
+    CHIP_ERROR TestStep6ReadTheGlobalAttributeAcceptedCommandList_28()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -38834,7 +37787,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6a: Read the global attribute: AcceptedCommandList Error: %@", err);
+            NSLog(@"Step 6: Read the global attribute: AcceptedCommandList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -38850,18 +37803,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep6bThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_31()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep7bReadTheGlobalAttributeGeneratedCommandList_32()
+    CHIP_ERROR TestStep7ReadTheGlobalAttributeGeneratedCommandList_29()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -38871,7 +37813,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 7b: Read the global attribute: GeneratedCommandList Error: %@", err);
+            NSLog(@"Step 7: Read the global attribute: GeneratedCommandList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -38885,17 +37827,6 @@ private:
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestStep7bThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_33()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 };
 
@@ -39633,74 +38564,20 @@ public:
             err = TestStep4kCheckThatLevelValueIsExcludedFromAttributeListWhenPmkconcsf01LevIsNotSet_26();
             break;
         case 27:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 27 : Step 4l: TH reads AttributeList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE). "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep4lThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_27();
-            break;
-        case 28:
-            ChipLogProgress(chipTool, " ***** Test Step 28 : Step 5a: Read the global attribute: EventList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Step 5: Read the global attribute: EventList\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
+        case 28:
+            ChipLogProgress(chipTool, " ***** Test Step 28 : Step 6: Read the global attribute: AcceptedCommandList\n");
+            err = TestStep6ReadTheGlobalAttributeAcceptedCommandList_28();
+            break;
         case 29:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 29 : Step 5b: TH reads from the DUT the EventList attribute. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) 2. "
-                "The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5bThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_29();
-            break;
-        case 30:
-            ChipLogProgress(chipTool, " ***** Test Step 30 : Step 6a: Read the global attribute: AcceptedCommandList\n");
-            err = TestStep6aReadTheGlobalAttributeAcceptedCommandList_30();
-            break;
-        case 31:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 31 : Step 6b: TH reads AcceptedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6bThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_31();
-            break;
-        case 32:
-            ChipLogProgress(chipTool, " ***** Test Step 32 : Step 7a: Read the global attribute: GeneratedCommandList\n");
-            err = TestStep7aReadTheGlobalAttributeGeneratedCommandList_32();
-            break;
-        case 33:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 33 : Step 7b: TH reads GeneratedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7bThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_33();
+            ChipLogProgress(chipTool, " ***** Test Step 29 : Step 7: Read the global attribute: GeneratedCommandList\n");
+            err = TestStep7ReadTheGlobalAttributeGeneratedCommandList_29();
             break;
         }
 
@@ -39803,18 +38680,6 @@ public:
         case 29:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 30:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 31:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 32:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 33:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -39828,7 +38693,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 34;
+    const uint16_t mTestCount = 30;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -40459,29 +39324,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4lThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_27()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestStep5bThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_29()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep6aReadTheGlobalAttributeAcceptedCommandList_30()
+    CHIP_ERROR TestStep6ReadTheGlobalAttributeAcceptedCommandList_28()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -40491,7 +39334,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6a: Read the global attribute: AcceptedCommandList Error: %@", err);
+            NSLog(@"Step 6: Read the global attribute: AcceptedCommandList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -40507,18 +39350,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep6bThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_31()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep7aReadTheGlobalAttributeGeneratedCommandList_32()
+    CHIP_ERROR TestStep7ReadTheGlobalAttributeGeneratedCommandList_29()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -40528,7 +39360,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 7a: Read the global attribute: GeneratedCommandList Error: %@", err);
+            NSLog(@"Step 7: Read the global attribute: GeneratedCommandList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -40542,17 +39374,6 @@ private:
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestStep7bThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_33()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 };
 
@@ -41287,77 +40108,20 @@ public:
             err = TestStep4kCheckThatLevelValueIsExcludedFromAttributeListWhenRnconcsf01LevIsNotSet_26();
             break;
         case 27:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 27 : Step 4l: TH reads the AttributeList attribute from the DUT. 1.The list SHALL NOT contain "
-                "any additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - "
-                "0x0000_FFFE) 2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - "
-                "0xXXXX_4FFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list "
-                "SHALL NOT contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), "
-                "(0xXXXX_5000 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - "
-                "0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep4lThReadsTheAttributeListAttributeFromTheDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_27();
-            break;
-        case 28:
-            ChipLogProgress(chipTool, " ***** Test Step 28 : Step 5a: Read the global attribute: EventList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Step 5: Read the global attribute: EventList\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
+        case 28:
+            ChipLogProgress(chipTool, " ***** Test Step 28 : Step 6: Read the global attribute: AcceptedCommandList\n");
+            err = TestStep6ReadTheGlobalAttributeAcceptedCommandList_28();
+            break;
         case 29:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 29 : Step 5b: TH reads from the DUT the EventList attribute. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) 2. "
-                "The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5bThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_29();
-            break;
-        case 30:
-            ChipLogProgress(chipTool, " ***** Test Step 30 : Step 6a: Read the global attribute: AcceptedCommandList\n");
-            err = TestStep6aReadTheGlobalAttributeAcceptedCommandList_30();
-            break;
-        case 31:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 31 : Step 6b: Read the global attribute AcceptedCommandList. 1. The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF) 2. The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6bReadTheGlobalAttributeAcceptedCommandList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_31();
-            break;
-        case 32:
-            ChipLogProgress(chipTool, " ***** Test Step 32 : Step 7a: Read the global attribute: GeneratedCommandList\n");
-            err = TestStep7aReadTheGlobalAttributeGeneratedCommandList_32();
-            break;
-        case 33:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 33 : Step 7b: Read the global attribute: GeneratedCommandList. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF). 2.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7bReadTheGlobalAttributeGeneratedCommandList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_33();
+            ChipLogProgress(chipTool, " ***** Test Step 29 : Step 7: Read the global attribute: GeneratedCommandList\n");
+            err = TestStep7ReadTheGlobalAttributeGeneratedCommandList_29();
             break;
         }
 
@@ -41460,18 +40224,6 @@ public:
         case 29:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 30:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 31:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 32:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 33:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -41485,7 +40237,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 34;
+    const uint16_t mTestCount = 30;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -42115,29 +40867,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4lThReadsTheAttributeListAttributeFromTheDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_27()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestStep5bThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_29()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep6aReadTheGlobalAttributeAcceptedCommandList_30()
+    CHIP_ERROR TestStep6ReadTheGlobalAttributeAcceptedCommandList_28()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -42147,7 +40877,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6a: Read the global attribute: AcceptedCommandList Error: %@", err);
+            NSLog(@"Step 6: Read the global attribute: AcceptedCommandList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -42163,18 +40893,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep6bReadTheGlobalAttributeAcceptedCommandList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_31()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep7aReadTheGlobalAttributeGeneratedCommandList_32()
+    CHIP_ERROR TestStep7ReadTheGlobalAttributeGeneratedCommandList_29()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -42184,7 +40903,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 7a: Read the global attribute: GeneratedCommandList Error: %@", err);
+            NSLog(@"Step 7: Read the global attribute: GeneratedCommandList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -42198,17 +40917,6 @@ private:
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestStep7bReadTheGlobalAttributeGeneratedCommandList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_33()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 };
 
@@ -42949,76 +41657,20 @@ public:
             err = TestStep4kCheckThatLevelValueIsExcludedFromAttributeListWhenTvocconcsf01LevIsNotSet_26();
             break;
         case 27:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 27 : Step 4b: Read the global attribute: AttributeList. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep4bReadTheGlobalAttributeAttributeList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_27();
-            break;
-        case 28:
-            ChipLogProgress(chipTool, " ***** Test Step 28 : Step 5a: Read the global attribute: EventList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Step 5: Read the global attribute: EventList\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
+        case 28:
+            ChipLogProgress(chipTool, " ***** Test Step 28 : Step 6: Read the global attribute: AcceptedCommandList\n");
+            err = TestStep6ReadTheGlobalAttributeAcceptedCommandList_28();
+            break;
         case 29:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 29 : Step 5b: TH reads from the DUT the EventList attribute. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) 2. "
-                "The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5bThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_29();
-            break;
-        case 30:
-            ChipLogProgress(chipTool, " ***** Test Step 30 : Step 6a: Read the global attribute: AcceptedCommandList\n");
-            err = TestStep6aReadTheGlobalAttributeAcceptedCommandList_30();
-            break;
-        case 31:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 31 : Step 6b: Read the global attribute: AcceptedCommandList. 1. The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF) 2. The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6bReadTheGlobalAttributeAcceptedCommandList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_31();
-            break;
-        case 32:
-            ChipLogProgress(chipTool, " ***** Test Step 32 : Step 7a: Read the global attribute: GeneratedCommandList\n");
-            err = TestStep7aReadTheGlobalAttributeGeneratedCommandList_32();
-            break;
-        case 33:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 33 : Step 7b: Read the global attribute: GeneratedCommandList. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF). 2.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7bReadTheGlobalAttributeGeneratedCommandList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_33();
+            ChipLogProgress(chipTool, " ***** Test Step 29 : Step 7: Read the global attribute: GeneratedCommandList\n");
+            err = TestStep7ReadTheGlobalAttributeGeneratedCommandList_29();
             break;
         }
 
@@ -43121,18 +41773,6 @@ public:
         case 29:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 30:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 31:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 32:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 33:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -43146,7 +41786,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 34;
+    const uint16_t mTestCount = 30;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -43803,29 +42443,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4bReadTheGlobalAttributeAttributeList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_27()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestStep5bThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_29()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep6aReadTheGlobalAttributeAcceptedCommandList_30()
+    CHIP_ERROR TestStep6ReadTheGlobalAttributeAcceptedCommandList_28()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -43836,7 +42454,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6a: Read the global attribute: AcceptedCommandList Error: %@", err);
+            NSLog(@"Step 6: Read the global attribute: AcceptedCommandList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -43852,18 +42470,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep6bReadTheGlobalAttributeAcceptedCommandList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_31()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep7aReadTheGlobalAttributeGeneratedCommandList_32()
+    CHIP_ERROR TestStep7ReadTheGlobalAttributeGeneratedCommandList_29()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -43874,7 +42481,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 7a: Read the global attribute: GeneratedCommandList Error: %@", err);
+            NSLog(@"Step 7: Read the global attribute: GeneratedCommandList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -43888,17 +42495,6 @@ private:
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestStep7bReadTheGlobalAttributeGeneratedCommandList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_33()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 };
 
@@ -45408,83 +44004,36 @@ public:
             err = TestStep3ThReadsTheFeatureMapFromDut_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Step 4a: TH reads AttributeList from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Step 4: TH reads AttributeList from DUT\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep4aThReadsAttributeListFromDut_3();
+            err = TestStep4ThReadsAttributeListFromDut_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Step 4a: TH reads AttributeList from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Step 4: TH reads AttributeList from DUT\n");
             if (ShouldSkip("!PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep4aThReadsAttributeListFromDut_4();
+            err = TestStep4ThReadsAttributeListFromDut_4();
             break;
         case 5:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 5 : Step 4b: TH reads AttributeList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Step 5: TH reads EventList from DUT\n");
+            if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep4bThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_5();
-            break;
+            NextTest();
+            return;
         case 6:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 6 : Step 5: TH reads from the DUT the EventList attribute. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) 2. "
-                "The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5ThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Step 6: TH reads AcceptedCommandList from DUT\n");
+            err = TestStep6ThReadsAcceptedCommandListFromDut_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Step 6a: TH reads AcceptedCommandList from DUT\n");
-            err = TestStep6aThReadsAcceptedCommandListFromDut_7();
-            break;
-        case 8:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 8 : Step 6b: TH reads AcceptedCommandList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF). 2.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored.3.The list SHALL NOT contain any values in the Test Vendor "
-                "or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where "
-                "XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6bThReadsAcceptedCommandListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_8();
-            break;
-        case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Step 7a: TH reads GeneratedCommandList from DUT\n");
-            err = TestStep7aThReadsGeneratedCommandListFromDut_9();
-            break;
-        case 10:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 10 : Step 7b: TH reads GeneratedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7bThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_10();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Step 7: TH reads GeneratedCommandList from DUT\n");
+            err = TestStep7ThReadsGeneratedCommandListFromDut_7();
             break;
         }
 
@@ -45521,15 +44070,6 @@ public:
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 10:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -45543,7 +44083,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 11;
+    const uint16_t mTestCount = 8;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -45610,7 +44150,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4aThReadsAttributeListFromDut_3()
+    CHIP_ERROR TestStep4ThReadsAttributeListFromDut_3()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -45620,7 +44160,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 4a: TH reads AttributeList from DUT Error: %@", err);
+            NSLog(@"Step 4: TH reads AttributeList from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -45644,7 +44184,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4aThReadsAttributeListFromDut_4()
+    CHIP_ERROR TestStep4ThReadsAttributeListFromDut_4()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -45654,7 +44194,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 4a: TH reads AttributeList from DUT Error: %@", err);
+            NSLog(@"Step 4: TH reads AttributeList from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -45677,29 +44217,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4bThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_5()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestStep5ThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_6()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep6aThReadsAcceptedCommandListFromDut_7()
+    CHIP_ERROR TestStep6ThReadsAcceptedCommandListFromDut_6()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -45709,7 +44227,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6a: TH reads AcceptedCommandList from DUT Error: %@", err);
+            NSLog(@"Step 6: TH reads AcceptedCommandList from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -45729,18 +44247,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep6bThReadsAcceptedCommandListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_8()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep7aThReadsGeneratedCommandListFromDut_9()
+    CHIP_ERROR TestStep7ThReadsGeneratedCommandListFromDut_7()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -45750,7 +44257,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 7a: TH reads GeneratedCommandList from DUT Error: %@", err);
+            NSLog(@"Step 7: TH reads GeneratedCommandList from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -45764,17 +44271,6 @@ private:
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestStep7bThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_10()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 };
 
@@ -45911,98 +44407,52 @@ public:
             err = TestStep4iThReadsOptionalAttributeUniqueIDInAttributeList_12();
             break;
         case 13:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 13 : Step 4j: TH reads AttributeList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE). "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep4jThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_13();
-            break;
-        case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : Step 5a: TH1 reads EventList from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Step 5a: TH reads EventList from DUT\n");
             if (ShouldSkip(" !BINFO.S.E00 && !BINFO.S.E01 && !BINFO.S.E02 && !BINFO.S.A0011 && PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
-        case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : Step 5b: Read BINFO.S.E00(StartUp) event in EventList\n");
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Step 5b: Read BINFO.S.E00(StartUp) event in EventList\n");
             if (ShouldSkip("BINFO.S.E00 && PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
-        case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : Step 5c: Read BINFO.S.E01(ShutDown) event in EventList\n");
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Step 5c: Read BINFO.S.E01(ShutDown) event in EventList\n");
             if (ShouldSkip("BINFO.S.E01 && PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
-        case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : Step 5d: Read BINFO.S.E02(Leave) event in EventList\n");
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Step 5d: Read BINFO.S.E02(Leave) event in EventList\n");
             if (ShouldSkip("BINFO.S.E02 && PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
-        case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : Step 5e: Read (ReachableChanged) event in EventList\n");
+        case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Step 5e: Read (ReachableChanged) event in EventList\n");
             if (ShouldSkip("BINFO.S.A0011 && PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
+        case 18:
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Step 6: TH reads from the DUT the AcceptedCommandList attribute.\n");
+            err = TestStep6ThReadsFromTheDutTheAcceptedCommandListAttribute_18();
+            break;
         case 19:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 19 : Step 5f: TH reads EventList attribute from DUT. 1.The list SHALL NOT contain any additional "
-                "values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF). 2.The list MAY contain values in the "
-                "Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI range "
-                "(0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT contain any values in the Test Vendor or "
-                "invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where "
-                "XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5fThReadsEventListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_19();
-            break;
-        case 20:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 20 : Step 6: TH reads AcceptedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6ThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_20();
-            break;
-        case 21:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 21 : Step 7: TH reads GeneratedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7ThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_21();
+            ChipLogProgress(chipTool, " ***** Test Step 19 : Step 7: TH reads from the DUT the GeneratedCommandList attribute.\n");
+            err = TestStep7ThReadsFromTheDutTheGeneratedCommandListAttribute_19();
             break;
         }
 
@@ -46075,12 +44525,6 @@ public:
         case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 20:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 21:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -46094,7 +44538,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 22;
+    const uint16_t mTestCount = 20;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -46400,48 +44844,47 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4jThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_13()
+    CHIP_ERROR TestStep6ThReadsFromTheDutTheAcceptedCommandListAttribute_18()
     {
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterBasicInformation alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 6: TH reads from the DUT the AcceptedCommandList attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep5fThReadsEventListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_19()
+    CHIP_ERROR TestStep7ThReadsFromTheDutTheGeneratedCommandListAttribute_19()
     {
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterBasicInformation alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-    CHIP_ERROR
-    TestStep6ThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_20()
-    {
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 7: TH reads from the DUT the GeneratedCommandList attribute. Error: %@", err);
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-    CHIP_ERROR
-    TestStep7ThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_21()
-    {
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 };
 
@@ -46571,119 +45014,72 @@ public:
             err = TestStep4dReadingOptionalAttributeConnectMaxTimeSecondsInAttributeList_10();
             break;
         case 11:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 11 : Step 4e: TH reads AttributeList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Step 5: Read the global attribute: EventList\n");
+            if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep4eThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_11();
-            break;
+            NextTest();
+            return;
         case 12:
             ChipLogProgress(chipTool,
-                " ***** Test Step 12 : Step 5: TH reads from the DUT the EventList attribute. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) 2. "
-                "The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5ThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_12();
-            break;
-        case 13:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 13 : Step 6a: Read AcceptedCommandList If DUT supports Wi-Fi/Thread related features "
+                " ***** Test Step 12 : Step 6a: Read AcceptedCommandList If DUT supports Wi-Fi/Thread related features "
                 "CNET.S.F00(WI),CNET.S.F01(TH)\n");
             if (ShouldSkip("( CNET.S.F00 || CNET.S.F01 )")) {
                 NextTest();
                 return;
             }
-            err = TestStep6aReadAcceptedCommandListIfDutSupportsWiFiThreadRelatedFeaturesCnetsf00wicnetsf01th_13();
+            err = TestStep6aReadAcceptedCommandListIfDutSupportsWiFiThreadRelatedFeaturesCnetsf00wicnetsf01th_12();
             break;
-        case 14:
+        case 13:
             ChipLogProgress(chipTool,
-                " ***** Test Step 14 : Step 6b: Read AcceptedCommandList If DUT supports Wi-Fi related features (CNET.S.F00(WI) is "
+                " ***** Test Step 13 : Step 6b: Read AcceptedCommandList If DUT supports Wi-Fi related features (CNET.S.F00(WI) is "
                 "true)\n");
             if (ShouldSkip("CNET.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestStep6bReadAcceptedCommandListIfDutSupportsWiFiRelatedFeaturesCnetsf00wiIsTrue_14();
+            err = TestStep6bReadAcceptedCommandListIfDutSupportsWiFiRelatedFeaturesCnetsf00wiIsTrue_13();
             break;
-        case 15:
+        case 14:
             ChipLogProgress(chipTool,
-                " ***** Test Step 15 : Step 6c: Read AcceptedCommandList If DUT supports Thread related features(CNET.S.F01(TH) is "
+                " ***** Test Step 14 : Step 6c: Read AcceptedCommandList If DUT supports Thread related features(CNET.S.F01(TH) is "
                 "true)\n");
             if (ShouldSkip("CNET.S.F01")) {
                 NextTest();
                 return;
             }
-            err = TestStep6cReadAcceptedCommandListIfDutSupportsThreadRelatedFeaturesCNETSF01THIsTrue_15();
+            err = TestStep6cReadAcceptedCommandListIfDutSupportsThreadRelatedFeaturesCNETSF01THIsTrue_14();
             break;
-        case 16:
+        case 15:
             ChipLogProgress(chipTool,
-                " ***** Test Step 16 : Step 6d: Read AcceptedCommandList If DUT supports Ethernet related features(CNET.S.F02(TH) "
+                " ***** Test Step 15 : Step 6d: Read AcceptedCommandList If DUT supports Ethernet related features(CNET.S.F02(TH) "
                 "is true)\n");
             if (ShouldSkip("CNET.S.F02")) {
                 NextTest();
                 return;
             }
-            err = TestStep6dReadAcceptedCommandListIfDutSupportsEthernetRelatedFeaturesCNETSF02THIsTrue_16();
+            err = TestStep6dReadAcceptedCommandListIfDutSupportsEthernetRelatedFeaturesCNETSF02THIsTrue_15();
             break;
-        case 17:
+        case 16:
             ChipLogProgress(chipTool,
-                " ***** Test Step 17 : Step 6e: TH reads AcceptedCommandList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF). 2.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored.3.The list SHALL NOT contain any values in the Test Vendor "
-                "or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where "
-                "XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6eThReadsAcceptedCommandListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_17();
-            break;
-        case 18:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 18 : Step 7a: Read the GeneratedCommandList If DUT supports Wi-Fi/Thread related "
+                " ***** Test Step 16 : Step 7a: Read the GeneratedCommandList If DUT supports Wi-Fi/Thread related "
                 "features(CNET.S.F00(WI) or CNET.S.F01(TH) is true)\n");
             if (ShouldSkip("( CNET.S.F00 || CNET.S.F01 )")) {
                 NextTest();
                 return;
             }
-            err = TestStep7aReadTheGeneratedCommandListIfDutSupportsWiFiThreadRelatedFeaturesCNETSF00WIOrCnetsf01thIsTrue_18();
+            err = TestStep7aReadTheGeneratedCommandListIfDutSupportsWiFiThreadRelatedFeaturesCNETSF00WIOrCnetsf01thIsTrue_16();
             break;
-        case 19:
+        case 17:
             ChipLogProgress(chipTool,
-                " ***** Test Step 19 : Step 7b: Read the GeneratedCommandList If DUT supports Ethernet related "
+                " ***** Test Step 17 : Step 7b: Read the GeneratedCommandList If DUT supports Ethernet related "
                 "features(CNET.S.F02(ET) must be true)\n");
             if (ShouldSkip("CNET.S.F02")) {
                 NextTest();
                 return;
             }
-            err = TestStep7bReadTheGeneratedCommandListIfDutSupportsEthernetRelatedFeaturesCNETSF02ETMustBeTrue_19();
-            break;
-        case 20:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 20 : Step 7c: TH reads GeneratedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7cThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_20();
+            err = TestStep7bReadTheGeneratedCommandListIfDutSupportsEthernetRelatedFeaturesCNETSF02ETMustBeTrue_17();
             break;
         }
 
@@ -46750,15 +45146,6 @@ public:
         case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 18:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 19:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 20:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -46772,7 +45159,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 21;
+    const uint16_t mTestCount = 18;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -47044,29 +45431,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4eThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_11()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestStep5ThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_12()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep6aReadAcceptedCommandListIfDutSupportsWiFiThreadRelatedFeaturesCnetsf00wicnetsf01th_13()
+    CHIP_ERROR TestStep6aReadAcceptedCommandListIfDutSupportsWiFiThreadRelatedFeaturesCnetsf00wicnetsf01th_12()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -47094,7 +45459,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep6bReadAcceptedCommandListIfDutSupportsWiFiRelatedFeaturesCnetsf00wiIsTrue_14()
+    CHIP_ERROR TestStep6bReadAcceptedCommandListIfDutSupportsWiFiRelatedFeaturesCnetsf00wiIsTrue_13()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -47118,7 +45483,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep6cReadAcceptedCommandListIfDutSupportsThreadRelatedFeaturesCNETSF01THIsTrue_15()
+    CHIP_ERROR TestStep6cReadAcceptedCommandListIfDutSupportsThreadRelatedFeaturesCNETSF01THIsTrue_14()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -47142,7 +45507,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep6dReadAcceptedCommandListIfDutSupportsEthernetRelatedFeaturesCNETSF02THIsTrue_16()
+    CHIP_ERROR TestStep6dReadAcceptedCommandListIfDutSupportsEthernetRelatedFeaturesCNETSF02THIsTrue_15()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -47168,18 +45533,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep6eThReadsAcceptedCommandListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_17()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep7aReadTheGeneratedCommandListIfDutSupportsWiFiThreadRelatedFeaturesCNETSF00WIOrCnetsf01thIsTrue_18()
+    CHIP_ERROR TestStep7aReadTheGeneratedCommandListIfDutSupportsWiFiThreadRelatedFeaturesCNETSF00WIOrCnetsf01thIsTrue_16()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -47206,7 +45560,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep7bReadTheGeneratedCommandListIfDutSupportsEthernetRelatedFeaturesCNETSF02ETMustBeTrue_19()
+    CHIP_ERROR TestStep7bReadTheGeneratedCommandListIfDutSupportsEthernetRelatedFeaturesCNETSF02ETMustBeTrue_17()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -47231,17 +45585,6 @@ private:
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestStep7cThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_20()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 };
 
@@ -47288,82 +45631,68 @@ public:
             err = TestStep1WaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
         case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : Step 2: Read the global attribute: ClusterRevision\n");
-            err = TestStep2ReadTheGlobalAttributeClusterRevision_1();
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Step 2: TH reads from the DUT the ClusterRevision attribute.\n");
+            err = TestStep2ThReadsFromTheDutTheClusterRevisionAttribute_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Step 3: Read the global attribute: FeatureMap\n");
-            err = TestStep3ReadTheGlobalAttributeFeatureMap_2();
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Step 3: TH reads from the DUT the FeatureMap attribute.\n");
+            if (ShouldSkip("!DESC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestStep3ThReadsFromTheDutTheFeatureMapAttribute_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Step 4a: Read the global attribute: AttributeList\n");
+            ChipLogProgress(chipTool,
+                " ***** Test Step 3 : Step 3: TH reads from the DUT the FeatureMap attribute. 0x0001: SHALL be included if and "
+                "only if DESC.S.F00(TagList)\n");
+            if (ShouldSkip("DESC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestStep3ThReadsFromTheDutTheFeatureMapAttribute0x0001ShallBeIncludedIfAndOnlyIfDESCSF00TagList_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Step 4a: TH reads from the DUT the AttributeList attribute.\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep4aReadTheGlobalAttributeAttributeList_3();
+            err = TestStep4aThReadsFromTheDutTheAttributeListAttribute_4();
             break;
-        case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Step 4a: Read the global attribute: AttributeList\n");
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Step 4a: TH reads from the DUT the AttributeList attribute.\n");
             if (ShouldSkip("!PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep4aReadTheGlobalAttributeAttributeList_4();
-            break;
-        case 5:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 5 : Step 4b: TH reads AttributeList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE). "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep4bThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_5();
+            err = TestStep4aThReadsFromTheDutTheAttributeListAttribute_5();
             break;
         case 6:
             ChipLogProgress(chipTool,
-                " ***** Test Step 6 : Step 5: TH reads from the DUT the EventList attribute. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) 2. "
-                "The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
+                " ***** Test Step 6 : Step 4b: TH reads from the DUT the AttributeList attribute. 0x0004: SHALL be included if and "
+                "only if DESC.S.F00\n");
+            if (ShouldSkip("DESC.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestStep5ThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_6();
+            err = TestStep4bThReadsFromTheDutTheAttributeListAttribute0x0004ShallBeIncludedIfAndOnlyIfDescsf00_6();
             break;
         case 7:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 7 : Step 6: TH reads AcceptedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Step 5: TH reads from the DUT the EventList attribute.\n");
+            if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep6ThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_7();
-            break;
+            NextTest();
+            return;
         case 8:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 8 : Step 7: TH reads GeneratedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7ThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_8();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Step 6: TH reads AcceptedCommandList attribute from DUT\n");
+            err = TestStep6ThReadsAcceptedCommandListAttributeFromDut_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Step 7: TH reads GeneratedCommandList attribute from DUT\n");
+            err = TestStep7ThReadsGeneratedCommandListAttributeFromDut_9();
             break;
         }
 
@@ -47403,6 +45732,9 @@ public:
         case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -47416,7 +45748,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 9;
+    const uint16_t mTestCount = 10;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -47431,7 +45763,7 @@ private:
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestStep2ReadTheGlobalAttributeClusterRevision_1()
+    CHIP_ERROR TestStep2ThReadsFromTheDutTheClusterRevisionAttribute_1()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -47439,7 +45771,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 2: Read the global attribute: ClusterRevision Error: %@", err);
+            NSLog(@"Step 2: TH reads from the DUT the ClusterRevision attribute. Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -47455,7 +45787,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep3ReadTheGlobalAttributeFeatureMap_2()
+    CHIP_ERROR TestStep3ThReadsFromTheDutTheFeatureMapAttribute_2()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -47463,7 +45795,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 3: Read the global attribute: FeatureMap Error: %@", err);
+            NSLog(@"Step 3: TH reads from the DUT the FeatureMap attribute. Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -47474,7 +45806,28 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4aReadTheGlobalAttributeAttributeList_3()
+    CHIP_ERROR TestStep3ThReadsFromTheDutTheFeatureMapAttribute0x0001ShallBeIncludedIfAndOnlyIfDESCSF00TagList_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterDescriptor alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 3: TH reads from the DUT the FeatureMap attribute. 0x0001: SHALL be included if and only if "
+                  @"DESC.S.F00(TagList) Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestStep4aThReadsFromTheDutTheAttributeListAttribute_4()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -47482,7 +45835,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 4a: Read the global attribute: AttributeList Error: %@", err);
+            NSLog(@"Step 4a: TH reads from the DUT the AttributeList attribute. Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -47504,7 +45857,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4aReadTheGlobalAttributeAttributeList_4()
+    CHIP_ERROR TestStep4aThReadsFromTheDutTheAttributeListAttribute_5()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -47512,7 +45865,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 4a: Read the global attribute: AttributeList Error: %@", err);
+            NSLog(@"Step 4a: TH reads from the DUT the AttributeList attribute. Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -47533,48 +45886,75 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4bThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_5()
+    CHIP_ERROR TestStep4bThReadsFromTheDutTheAttributeListAttribute0x0004ShallBeIncludedIfAndOnlyIfDescsf00_6()
     {
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterDescriptor alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 4b: TH reads from the DUT the AttributeList attribute. 0x0004: SHALL be included if and only if "
+                  @"DESC.S.F00 Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 4UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep5ThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_6()
+    CHIP_ERROR TestStep6ThReadsAcceptedCommandListAttributeFromDut_8()
     {
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterDescriptor alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 6: TH reads AcceptedCommandList attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("AcceptedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep6ThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_7()
+    CHIP_ERROR TestStep7ThReadsGeneratedCommandListAttributeFromDut_9()
     {
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterDescriptor alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-    CHIP_ERROR
-    TestStep7ThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_8()
-    {
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 7: TH reads GeneratedCommandList attribute from DUT Error: %@", err);
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 };
 
@@ -47617,95 +45997,48 @@ public:
         // incorrect mTestIndex value observed when we get the response.
         switch (mTestIndex++) {
         case 0:
-            ChipLogProgress(chipTool, " ***** Test Step 0 : Step 1: TWait for the commissioned device to be retrieved\n");
-            err = TestStep1TWaitForTheCommissionedDeviceToBeRetrieved_0();
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Step 1: Wait for the commissioned device to be retrieved\n");
+            err = TestStep1WaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Step 2: TH reads the ClusterRevision from DUT\n");
             err = TestStep2ThReadsTheClusterRevisionFromDut_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Step 3: TTH reads the FeatureMap from DUT\n");
-            err = TestStep3TthReadsTheFeatureMapFromDut_2();
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Step 3: TH reads the FeatureMap from DUT\n");
+            err = TestStep3ThReadsTheFeatureMapFromDut_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Step 4a: TTH reads AttributeList from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Step 4: TH reads AttributeList from DUT\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep4aTthReadsAttributeListFromDut_3();
+            err = TestStep4ThReadsAttributeListFromDut_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Step 4a: TTH reads AttributeList from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Step 4: TH reads AttributeList from DUT\n");
             if (ShouldSkip("!PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep4aTthReadsAttributeListFromDut_4();
+            err = TestStep4ThReadsAttributeListFromDut_4();
             break;
         case 5:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 5 : Step 4b: TH reads AttributeList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Step 5: TH reads EventList from DUT\n");
+            if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep4bThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_5();
-            break;
+            NextTest();
+            return;
         case 6:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 6 : Step 5: TH reads from the DUT the EventList attribute. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) 2. "
-                "The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5ThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Step 6: TH reads AcceptedCommandList from DUT\n");
+            err = TestStep6ThReadsAcceptedCommandListFromDut_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Step 6a: TTH reads AcceptedCommandList from DUT\n");
-            err = TestStep6aTthReadsAcceptedCommandListFromDut_7();
-            break;
-        case 8:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 8 : Step 6b: TTH reads AcceptedCommandList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF). 2.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored.3.The list SHALL NOT contain any values in the Test Vendor "
-                "or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where "
-                "XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6bTthReadsAcceptedCommandListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_8();
-            break;
-        case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Step 7a: TTH reads GeneratedCommandList from DUT\n");
-            err = TestStep7aTthReadsGeneratedCommandListFromDut_9();
-            break;
-        case 10:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 10 : Step 7b: TTH reads GeneratedCommandList attribute from DUT. 1.The list MAY contain values "
-                "in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7bTthReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_10();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Step 7: TH reads GeneratedCommandList from DUT\n");
+            err = TestStep7ThReadsGeneratedCommandListFromDut_7();
             break;
         }
 
@@ -47742,15 +46075,6 @@ public:
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 10:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -47764,14 +46088,14 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 11;
+    const uint16_t mTestCount = 8;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    CHIP_ERROR TestStep1TWaitForTheCommissionedDeviceToBeRetrieved_0()
+    CHIP_ERROR TestStep1WaitForTheCommissionedDeviceToBeRetrieved_0()
     {
 
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
@@ -47803,7 +46127,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep3TthReadsTheFeatureMapFromDut_2()
+    CHIP_ERROR TestStep3ThReadsTheFeatureMapFromDut_2()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -47811,7 +46135,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 3: TTH reads the FeatureMap from DUT Error: %@", err);
+            NSLog(@"Step 3: TH reads the FeatureMap from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -47827,7 +46151,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4aTthReadsAttributeListFromDut_3()
+    CHIP_ERROR TestStep4ThReadsAttributeListFromDut_3()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -47835,7 +46159,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 4a: TTH reads AttributeList from DUT Error: %@", err);
+            NSLog(@"Step 4: TH reads AttributeList from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -47853,7 +46177,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4aTthReadsAttributeListFromDut_4()
+    CHIP_ERROR TestStep4ThReadsAttributeListFromDut_4()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -47861,7 +46185,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 4a: TTH reads AttributeList from DUT Error: %@", err);
+            NSLog(@"Step 4: TH reads AttributeList from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -47878,29 +46202,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4bThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_5()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestStep5ThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_6()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep6aTthReadsAcceptedCommandListFromDut_7()
+    CHIP_ERROR TestStep6ThReadsAcceptedCommandListFromDut_6()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -47908,7 +46210,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6a: TTH reads AcceptedCommandList from DUT Error: %@", err);
+            NSLog(@"Step 6: TH reads AcceptedCommandList from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -47925,18 +46227,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep6bTthReadsAcceptedCommandListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_8()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep7aTthReadsGeneratedCommandListFromDut_9()
+    CHIP_ERROR TestStep7ThReadsGeneratedCommandListFromDut_7()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -47944,7 +46235,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 7a: TTH reads GeneratedCommandList from DUT Error: %@", err);
+            NSLog(@"Step 7: TH reads GeneratedCommandList from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -47959,17 +46250,6 @@ private:
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestStep7bTthReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_10()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 };
 
@@ -48146,75 +46426,32 @@ public:
             err = TestStep4jThReadsOptionalAttributeTimeSinceResetInAttributeList_15();
             break;
         case 16:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 16 : Step 4k: TH reads AttributeList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Step 5: TH reads EventList from DUT\n");
+            if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep4kThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_16();
-            break;
+            NextTest();
+            return;
         case 17:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 17 : Step 5: TH reads from the DUT the EventList attribute. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) 2. "
-                "The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5ThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_17();
-            break;
-        case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : Step 6a: TH reads AcceptedCommandList from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Step 6: TH reads AcceptedCommandList from DUT\n");
             if (ShouldSkip("( DGETH.S.F00 || DGETH.S.F01 )")) {
                 NextTest();
                 return;
             }
-            err = TestStep6aThReadsAcceptedCommandListFromDut_18();
+            err = TestStep6ThReadsAcceptedCommandListFromDut_17();
             break;
-        case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : Step 6b: TH reads AcceptedCommandList from DUT\n");
+        case 18:
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Step 6: TH reads AcceptedCommandList from DUT\n");
             if (ShouldSkip(" !DGETH.S.F00 && !DGETH.S.F01 ")) {
                 NextTest();
                 return;
             }
-            err = TestStep6bThReadsAcceptedCommandListFromDut_19();
+            err = TestStep6ThReadsAcceptedCommandListFromDut_18();
             break;
-        case 20:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 20 : Step 6c: TH reads AcceptedCommandList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF). 2.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored.3.The list SHALL NOT contain any values in the Test Vendor "
-                "or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where "
-                "XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6cThReadsAcceptedCommandListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_20();
-            break;
-        case 21:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 21 : Step 7: TH reads GeneratedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7ThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_21();
+        case 19:
+            ChipLogProgress(chipTool, " ***** Test Step 19 : Step 7: TH reads GeneratedCommandList from DUT\n");
+            err = TestStep7ThReadsGeneratedCommandListFromDut_19();
             break;
         }
 
@@ -48287,12 +46524,6 @@ public:
         case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 20:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 21:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -48306,7 +46537,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 22;
+    const uint16_t mTestCount = 20;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -48687,29 +46918,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4kThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_16()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestStep5ThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_17()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep6aThReadsAcceptedCommandListFromDut_18()
+    CHIP_ERROR TestStep6ThReadsAcceptedCommandListFromDut_17()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -48719,7 +46928,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6a: TH reads AcceptedCommandList from DUT Error: %@", err);
+            NSLog(@"Step 6: TH reads AcceptedCommandList from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -48732,7 +46941,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep6bThReadsAcceptedCommandListFromDut_19()
+    CHIP_ERROR TestStep6ThReadsAcceptedCommandListFromDut_18()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -48742,7 +46951,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6b: TH reads AcceptedCommandList from DUT Error: %@", err);
+            NSLog(@"Step 6: TH reads AcceptedCommandList from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -48758,26 +46967,30 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep6cThReadsAcceptedCommandListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_20()
+    CHIP_ERROR TestStep7ThReadsGeneratedCommandListFromDut_19()
     {
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterEthernetNetworkDiagnostics alloc] initWithDevice:device
+                                                                                      endpointID:@(0)
+                                                                                           queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-    CHIP_ERROR
-    TestStep7ThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_21()
-    {
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 7: TH reads GeneratedCommandList from DUT Error: %@", err);
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 };
 
@@ -50225,59 +48438,20 @@ public:
             err = TestStep4bReadTheOptionalAttributeToleranceInAttributeList_5();
             break;
         case 6:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 6 : Step 4c: TH reads AttributeList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Step 5: TH reads EventList from DUT\n");
+            if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep4cThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_6();
-            break;
+            NextTest();
+            return;
         case 7:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 7 : Step 5: TH reads from the DUT the EventList attribute. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) 2. "
-                "The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5ThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_7();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Step 6: TH reads AcceptedCommandList from DUT\n");
+            err = TestStep6ThReadsAcceptedCommandListFromDut_7();
             break;
         case 8:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 8 : Step 6: TH reads AcceptedCommandList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF). 2.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored.3.The list SHALL NOT contain any values in the Test Vendor "
-                "or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where "
-                "XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6ThReadsAcceptedCommandListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_8();
-            break;
-        case 9:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 9 : Step 7: TH reads GeneratedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7ThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_9();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Step 7: TH reads GeneratedCommandList from DUT\n");
+            err = TestStep7ThReadsGeneratedCommandListFromDut_8();
             break;
         }
 
@@ -50317,9 +48491,6 @@ public:
         case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -50333,7 +48504,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 10;
+    const uint16_t mTestCount = 9;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -50474,48 +48645,52 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4cThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_6()
+    CHIP_ERROR TestStep6ThReadsAcceptedCommandListFromDut_7()
     {
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFlowMeasurement alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 6: TH reads AcceptedCommandList from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("AcceptedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep5ThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_7()
+    CHIP_ERROR TestStep7ThReadsGeneratedCommandListFromDut_8()
     {
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFlowMeasurement alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-    CHIP_ERROR
-    TestStep6ThReadsAcceptedCommandListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_8()
-    {
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 7: TH reads GeneratedCommandList from DUT Error: %@", err);
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-    CHIP_ERROR
-    TestStep7ThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_9()
-    {
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 };
 
@@ -50805,74 +48980,36 @@ public:
             err = TestStep3ThReadsTheFeatureMapFromDut_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Step 4a: TH reads AttributeList from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Step 4: TH reads AttributeList from DUT\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep4aThReadsAttributeListFromDut_3();
+            err = TestStep4ThReadsAttributeListFromDut_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Step 4a: TH reads AttributeList from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Step 4: TH reads AttributeList from DUT\n");
             if (ShouldSkip("!PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep4aThReadsAttributeListFromDut_4();
+            err = TestStep4ThReadsAttributeListFromDut_4();
             break;
         case 5:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 5 : Step 4b: TH reads AttributeList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE). "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Step 5: TH reads EventList attribute from DUT\n");
+            if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep4bThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_5();
-            break;
+            NextTest();
+            return;
         case 6:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 6 : Step 5: TH reads from the DUT the EventList attribute. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) 2. "
-                "The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5ThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Step 6: TH reads AcceptedCommandList attribute from DUT\n");
+            err = TestStep6ThReadsAcceptedCommandListAttributeFromDut_6();
             break;
         case 7:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 7 : Step 6: TH reads AcceptedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6ThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_7();
-            break;
-        case 8:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 8 : Step 7: TH reads GeneratedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7ThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_8();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Step 7: TH reads GeneratedCommandList attribute from DUT\n");
+            err = TestStep7ThReadsGeneratedCommandListAttributeFromDut_7();
             break;
         }
 
@@ -50909,9 +49046,6 @@ public:
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -50925,7 +49059,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 9;
+    const uint16_t mTestCount = 8;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -50988,7 +49122,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4aThReadsAttributeListFromDut_3()
+    CHIP_ERROR TestStep4ThReadsAttributeListFromDut_3()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -50996,7 +49130,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 4a: TH reads AttributeList from DUT Error: %@", err);
+            NSLog(@"Step 4: TH reads AttributeList from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -51015,7 +49149,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4aThReadsAttributeListFromDut_4()
+    CHIP_ERROR TestStep4ThReadsAttributeListFromDut_4()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -51023,7 +49157,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 4a: TH reads AttributeList from DUT Error: %@", err);
+            NSLog(@"Step 4: TH reads AttributeList from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -51041,48 +49175,52 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4bThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_5()
+    CHIP_ERROR TestStep6ThReadsAcceptedCommandListAttributeFromDut_6()
     {
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFixedLabel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 6: TH reads AcceptedCommandList attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("AcceptedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep5ThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_6()
+    CHIP_ERROR TestStep7ThReadsGeneratedCommandListAttributeFromDut_7()
     {
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFixedLabel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-    CHIP_ERROR
-    TestStep6ThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_7()
-    {
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 7: TH reads GeneratedCommandList attribute from DUT Error: %@", err);
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-    CHIP_ERROR
-    TestStep7ThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_8()
-    {
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 };
 
@@ -51262,6 +49400,10 @@ public:
             }
             err = TestStep6ReadTheOptionalCommandStepInAcceptedCommandList_16();
             break;
+        case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Step 7: Read the global attribute: GeneratedCommandList\n");
+            err = TestStep7ReadTheGlobalAttributeGeneratedCommandList_17();
+            break;
         }
 
         if (CHIP_NO_ERROR != err) {
@@ -51324,6 +49466,9 @@ public:
         case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -51337,7 +49482,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 17;
+    const uint16_t mTestCount = 18;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -51700,6 +49845,30 @@ private:
             VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 0UL));
 
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestStep7ReadTheGlobalAttributeGeneratedCommandList_17()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterFanControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 7: Read the global attribute: GeneratedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
             NextTest();
         }];
 
@@ -54178,95 +52347,44 @@ public:
             err = TestStep4gReadOptionalAttributeActiveNetworkFaultsInAttributeList_10();
             break;
         case 11:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 11 : Step 4h: TH reads AttributeList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep4hThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_11();
-            break;
-        case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : Step 5a: Read the global attribute: EventList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Step 5a: Read the global attribute: EventList\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
-        case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Step 5b: Read optional event(HardwareFaultChange) in EventList\n");
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Step 5b: Read optional event(HardwareFaultChange) in EventList\n");
             if (ShouldSkip("DGGEN.S.E00 && PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
-        case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : Step 5c: Read optional event(RadioFaultChange) in EventList\n");
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Step 5c: Read optional event(RadioFaultChange) in EventList\n");
             if (ShouldSkip("DGGEN.S.E01 && PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
-        case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : Step 5d: Read optional event(NetworkFaultChange) in EventList\n");
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Step 5d: Read optional event(NetworkFaultChange) in EventList\n");
             if (ShouldSkip("DGGEN.S.E02 && PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Step 6: Read the global attribute: AcceptedCommandList\n");
+            err = TestStep6ReadTheGlobalAttributeAcceptedCommandList_15();
+            break;
         case 16:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 16 : Step 5e: TH reads from the DUT the EventList attribute. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) 2. "
-                "The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5eThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_16();
-            break;
-        case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : Step 6a: Read the global attribute: AcceptedCommandList\n");
-            err = TestStep6aReadTheGlobalAttributeAcceptedCommandList_17();
-            break;
-        case 18:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 18 : Step 6b: TH reads AcceptedCommandList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF). 2.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored.3.The list SHALL NOT contain any values in the Test Vendor "
-                "or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where "
-                "XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6bThReadsAcceptedCommandListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_18();
-            break;
-        case 19:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 19 : Step 7: TH reads GeneratedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7ThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_19();
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Step 7: TH reads GeneratedCommandList from DUT\n");
+            err = TestStep7ThReadsGeneratedCommandListFromDut_16();
             break;
         }
 
@@ -54330,15 +52448,6 @@ public:
         case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 18:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 19:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -54352,7 +52461,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 20;
+    const uint16_t mTestCount = 17;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -54618,29 +52727,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4hThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_11()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestStep5eThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_16()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep6aReadTheGlobalAttributeAcceptedCommandList_17()
+    CHIP_ERROR TestStep6ReadTheGlobalAttributeAcceptedCommandList_15()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -54650,7 +52737,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6a: Read the global attribute: AcceptedCommandList Error: %@", err);
+            NSLog(@"Step 6: Read the global attribute: AcceptedCommandList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -54663,26 +52750,30 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep6bThReadsAcceptedCommandListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_18()
+    CHIP_ERROR TestStep7ThReadsGeneratedCommandListFromDut_16()
     {
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterGeneralDiagnostics alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-    CHIP_ERROR
-    TestStep7ThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_19()
-    {
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 7: TH reads GeneratedCommandList from DUT Error: %@", err);
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 };
 
@@ -54750,104 +52841,36 @@ public:
             err = TestStep3bGivenGrpkeysf00csEnsureFeaturemapHasTheCorrectBitSet_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Step 4a: TH reads AttributeList from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Step 4: TH reads AttributeList from DUT\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep4aThReadsAttributeListFromDut_4();
+            err = TestStep4ThReadsAttributeListFromDut_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Step 4a: TH reads AttributeList from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Step 4: TH reads AttributeList from DUT\n");
             if (ShouldSkip(" !PICS_EVENT_LIST_ENABLED ")) {
                 NextTest();
                 return;
             }
-            err = TestStep4aThReadsAttributeListFromDut_5();
+            err = TestStep4ThReadsAttributeListFromDut_5();
             break;
         case 6:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 6 : Step 4b: The list SHALL NOT contain any additional values in the standard or scoped range: "
-                "(0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE). 2.The list MAY contain values in the Manufacturer "
-                "Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), where XXXX is the allowed MEI range (0x0001 - "
-                "0xFFF1), these values SHALL be ignored. 3.TThe list SHALL NOT contain any values in the Test Vendor or invalid "
-                "range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep4bTheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TTheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_6();
-            break;
-        case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Step 5a: TH1 reads EventList from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Step 5: TH1 reads EventList from DUT\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Step 6: TH reads AcceptedCommandList from DUT\n");
+            err = TestStep6ThReadsAcceptedCommandListFromDut_7();
+            break;
         case 8:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 8 : Step 5b: TH reads from the DUT the EventList attribute. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) 2. "
-                "The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5bThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_8();
-            break;
-        case 9:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 9 : Step 5b: TH reads EventList attribute from DUT. 1.The list SHALL NOT contain any additional "
-                "values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF). 2.The list MAY contain values in the "
-                "Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI range "
-                "(0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT contain any values in the Test Vendor or "
-                "invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where "
-                "XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5bThReadsEventListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_9();
-            break;
-        case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Step 6a: TH reads AcceptedCommandList from DUT\n");
-            err = TestStep6aThReadsAcceptedCommandListFromDut_10();
-            break;
-        case 11:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 11 : Step 6b: TH reads AcceptedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6bThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_11();
-            break;
-        case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : Step 7a: TH reads GeneratedCommandList from DUT\n");
-            err = TestStep7aThReadsGeneratedCommandListFromDut_12();
-            break;
-        case 13:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 13 : Step 7b: TH reads GeneratedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7bThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_13();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Step 7: TH reads GeneratedCommandList from DUT\n");
+            err = TestStep7ThReadsGeneratedCommandListFromDut_8();
             break;
         }
 
@@ -54887,21 +52910,6 @@ public:
         case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 10:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -54915,7 +52923,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 14;
+    const uint16_t mTestCount = 9;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -55003,7 +53011,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4aThReadsAttributeListFromDut_4()
+    CHIP_ERROR TestStep4ThReadsAttributeListFromDut_4()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -55013,7 +53021,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 4a: TH reads AttributeList from DUT Error: %@", err);
+            NSLog(@"Step 4: TH reads AttributeList from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -55035,7 +53043,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4aThReadsAttributeListFromDut_5()
+    CHIP_ERROR TestStep4ThReadsAttributeListFromDut_5()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -55045,7 +53053,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 4a: TH reads AttributeList from DUT Error: %@", err);
+            NSLog(@"Step 4: TH reads AttributeList from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -55066,40 +53074,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4bTheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TTheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_6()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestStep5bThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_8()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestStep5bThReadsEventListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_9()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep6aThReadsAcceptedCommandListFromDut_10()
+    CHIP_ERROR TestStep6ThReadsAcceptedCommandListFromDut_7()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -55109,7 +53084,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6a: TH reads AcceptedCommandList from DUT Error: %@", err);
+            NSLog(@"Step 6: TH reads AcceptedCommandList from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -55125,18 +53100,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep6bThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_11()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep7aThReadsGeneratedCommandListFromDut_12()
+    CHIP_ERROR TestStep7ThReadsGeneratedCommandListFromDut_8()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -55146,7 +53110,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 7a: TH reads GeneratedCommandList from DUT Error: %@", err);
+            NSLog(@"Step 7: TH reads GeneratedCommandList from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -55158,17 +53122,6 @@ private:
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestStep7bThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_13()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 };
 
@@ -57103,109 +55056,54 @@ public:
             err = TestStep4dReadTheOptionalAttributeClientsSupportedPerFabricInAttributeList_8();
             break;
         case 9:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 9 : Step 4e: TH reads AttributeList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep4eThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_9();
-            break;
-        case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Step 5a: Read the global attribute: EventList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Step 5: Read the global attribute: EventList\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
-        case 11:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 11 : Step 5b: TH reads from the DUT the EventList attribute. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) 2. "
-                "The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5bThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_11();
-            break;
-        case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : Step 6a: TH reads AcceptedCommandList attribute from DUT\n");
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Step 6a: TH reads AcceptedCommandList attribute from DUT\n");
             if (ShouldSkip(" !ICDM.S.F00 && !ICDM.S.C03.Rsp ")) {
                 NextTest();
                 return;
             }
-            err = TestStep6aThReadsAcceptedCommandListAttributeFromDut_12();
+            err = TestStep6aThReadsAcceptedCommandListAttributeFromDut_10();
             break;
-        case 13:
+        case 11:
             ChipLogProgress(
-                chipTool, " ***** Test Step 13 : Step 6b: TH reads AcceptedCommandList attribute from DUT if ICDM.S.F00 is true\n");
+                chipTool, " ***** Test Step 11 : Step 6b: TH reads AcceptedCommandList attribute from DUT if ICDM.S.F00 is true\n");
             if (ShouldSkip("ICDM.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestStep6bThReadsAcceptedCommandListAttributeFromDutIfIcdmsf00IsTrue_13();
+            err = TestStep6bThReadsAcceptedCommandListAttributeFromDutIfIcdmsf00IsTrue_11();
             break;
-        case 14:
+        case 12:
             ChipLogProgress(
-                chipTool, " ***** Test Step 14 : Step 6c: Read the optional command (StayActiveRequest) in AttributeList\n");
+                chipTool, " ***** Test Step 12 : Step 6c: Read the optional command (StayActiveRequest) in AttributeList\n");
             if (ShouldSkip("ICDM.S.C03.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestStep6cReadTheOptionalCommandStayActiveRequestInAttributeList_14();
+            err = TestStep6cReadTheOptionalCommandStayActiveRequestInAttributeList_12();
             break;
-        case 15:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 15 : Step 6d: TH reads AcceptedCommandList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF). 2.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored.3.The list SHALL NOT contain any values in the Test Vendor "
-                "or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where "
-                "XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6dThReadsAcceptedCommandListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_15();
-            break;
-        case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : Step 7a: TH reads GeneratedCommandList attribute from DUT\n");
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Step 7: TH reads GeneratedCommandList attribute from DUT\n");
             if (ShouldSkip(" !ICDM.S.F00 ")) {
                 NextTest();
                 return;
             }
-            err = TestStep7aThReadsGeneratedCommandListAttributeFromDut_16();
+            err = TestStep7ThReadsGeneratedCommandListAttributeFromDut_13();
             break;
-        case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : Step 7a: TH reads GeneratedCommandList attribute from DUT\n");
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Step 7: TH reads GeneratedCommandList attribute from DUT\n");
             if (ShouldSkip("ICDM.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestStep7aThReadsGeneratedCommandListAttributeFromDut_17();
-            break;
-        case 18:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 18 : Step 7b: TH reads GeneratedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7bThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_18();
+            err = TestStep7ThReadsGeneratedCommandListAttributeFromDut_14();
             break;
         }
 
@@ -57263,18 +55161,6 @@ public:
         case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 18:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -57288,7 +55174,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 19;
+    const uint16_t mTestCount = 15;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -57495,29 +55381,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4eThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_9()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestStep5bThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_11()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep6aThReadsAcceptedCommandListAttributeFromDut_12()
+    CHIP_ERROR TestStep6aThReadsAcceptedCommandListAttributeFromDut_10()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -57541,7 +55405,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep6bThReadsAcceptedCommandListAttributeFromDutIfIcdmsf00IsTrue_13()
+    CHIP_ERROR TestStep6bThReadsAcceptedCommandListAttributeFromDutIfIcdmsf00IsTrue_11()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -57563,7 +55427,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep6cReadTheOptionalCommandStayActiveRequestInAttributeList_14()
+    CHIP_ERROR TestStep6cReadTheOptionalCommandStayActiveRequestInAttributeList_12()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -57584,18 +55448,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep6dThReadsAcceptedCommandListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_15()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep7aThReadsGeneratedCommandListAttributeFromDut_16()
+    CHIP_ERROR TestStep7ThReadsGeneratedCommandListAttributeFromDut_13()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -57603,7 +55456,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 7a: TH reads GeneratedCommandList attribute from DUT Error: %@", err);
+            NSLog(@"Step 7: TH reads GeneratedCommandList attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -57619,7 +55472,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep7aThReadsGeneratedCommandListAttributeFromDut_17()
+    CHIP_ERROR TestStep7ThReadsGeneratedCommandListAttributeFromDut_14()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -57627,7 +55480,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 7a: TH reads GeneratedCommandList attribute from DUT Error: %@", err);
+            NSLog(@"Step 7: TH reads GeneratedCommandList attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -57638,17 +55491,6 @@ private:
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestStep7bThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_18()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 };
 
@@ -57736,15 +55578,13 @@ public:
             err = TestStep6ReadTheGlobalAttributeGeneratedCommandList_7();
             break;
         case 8:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 8 : Step 7: Read EventList attribute from the DUT. For this cluster the list is usually empty "
-                "but it can contain manufacturer specific event IDs.\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Step 7: Read EventList attribute from the DUT.\n");
+            if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep7ReadEventListAttributeFromTheDutForThisClusterTheListIsUsuallyEmptyButItCanContainManufacturerSpecificEventIDs_8();
-            break;
+            NextTest();
+            return;
         }
 
         if (CHIP_NO_ERROR != err) {
@@ -57978,17 +55818,6 @@ private:
 
         return CHIP_NO_ERROR;
     }
-
-    CHIP_ERROR
-    TestStep7ReadEventListAttributeFromTheDutForThisClusterTheListIsUsuallyEmptyButItCanContainManufacturerSpecificEventIDs_8()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
 };
 
 class Test_TC_I_2_1 : public TestCommandBridge {
@@ -58194,23 +56023,23 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool,
-                " ***** Test Step 2 : Step 2a: TH sends Identify command to DUT, with the IdentifyTime field set to 0x003c "
-                "(60s).\n");
-            if (ShouldSkip("I.S.C00.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestStep2aThSendsIdentifyCommandToDutWithTheIdentifyTimeFieldSetTo0x003c60s_2();
-            break;
-        case 3:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 3 : Verify that the device enters its identification state using the IdentifyType from Step 1b, "
+                " ***** Test Step 2 : Verify that the device enters its identification state using the IdentifyType from Step 1b, "
                 "in order to indicate to an observer which of several nodes and/or endpoints it is.\n");
             if (ShouldSkip("PICS_USER_PROMPT && I.S.A0001")) {
                 NextTest();
                 return;
             }
-            err = TestVerifyThatTheDeviceEntersItsIdentificationStateUsingTheIdentifyTypeFromStep1bInOrderToIndicateToAnObserverWhichOfSeveralNodesAndOrEndpointsItIs_3();
+            err = TestVerifyThatTheDeviceEntersItsIdentificationStateUsingTheIdentifyTypeFromStep1bInOrderToIndicateToAnObserverWhichOfSeveralNodesAndOrEndpointsItIs_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 3 : Step 2a: TH sends Identify command to DUT, with the IdentifyTime field set to 0x003c "
+                "(60s).\n");
+            if (ShouldSkip("I.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestStep2aThSendsIdentifyCommandToDutWithTheIdentifyTimeFieldSetTo0x003c60s_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Step 2b: TH reads immediately IdentifyTime attribute from DUT\n");
@@ -58261,27 +56090,27 @@ public:
             err = TestStep6aThWritesAValueOf0x000f15sToIdentifyTimeAttributeOfDut_9();
             break;
         case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Wait 15000ms\n");
+            err = TestWait15000ms_10();
+            break;
+        case 11:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 11 : Step 6b: After 15 seconds, the TH reads IdentifyTime attribute from DUT\n");
+            if (ShouldSkip("I.S.A0000")) {
+                NextTest();
+                return;
+            }
+            err = TestStep6bAfter15SecondsTheThReadsIdentifyTimeAttributeFromDut_11();
+            break;
+        case 12:
             ChipLogProgress(chipTool,
-                " ***** Test Step 10 : Verify that the device enters its identification state using the IdentifyType from Step 1b, "
+                " ***** Test Step 12 : Verify that the device enters its identification state using the IdentifyType from Step 1b, "
                 "in order to indicate to an observer which of several nodes and/or endpoints it is.\n");
             if (ShouldSkip("PICS_USER_PROMPT && I.S.A0001")) {
                 NextTest();
                 return;
             }
-            err = TestVerifyThatTheDeviceEntersItsIdentificationStateUsingTheIdentifyTypeFromStep1bInOrderToIndicateToAnObserverWhichOfSeveralNodesAndOrEndpointsItIs_10();
-            break;
-        case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Wait 5000ms\n");
-            err = TestWait5000ms_11();
-            break;
-        case 12:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 12 : Step 6b: After 5 seconds, the TH reads IdentifyTime attribute from DUT\n");
-            if (ShouldSkip("I.S.A0000")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6bAfter5SecondsTheThReadsIdentifyTimeAttributeFromDut_12();
+            err = TestVerifyThatTheDeviceEntersItsIdentificationStateUsingTheIdentifyTypeFromStep1bInOrderToIndicateToAnObserverWhichOfSeveralNodesAndOrEndpointsItIs_12();
             break;
         }
 
@@ -58387,7 +56216,18 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep2aThSendsIdentifyCommandToDutWithTheIdentifyTimeFieldSetTo0x003c60s_2()
+    CHIP_ERROR
+    TestVerifyThatTheDeviceEntersItsIdentificationStateUsingTheIdentifyTypeFromStep1bInOrderToIndicateToAnObserverWhichOfSeveralNodesAndOrEndpointsItIs_2()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestStep2aThSendsIdentifyCommandToDutWithTheIdentifyTimeFieldSetTo0x003c60s_3()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -58408,17 +56248,6 @@ private:
                          }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestVerifyThatTheDeviceEntersItsIdentificationStateUsingTheIdentifyTypeFromStep1bInOrderToIndicateToAnObserverWhichOfSeveralNodesAndOrEndpointsItIs_3()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestStep2bThReadsImmediatelyIdentifyTimeAttributeFromDut_4()
@@ -58540,26 +56369,15 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestVerifyThatTheDeviceEntersItsIdentificationStateUsingTheIdentifyTypeFromStep1bInOrderToIndicateToAnObserverWhichOfSeveralNodesAndOrEndpointsItIs_10()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestWait5000ms_11()
+    CHIP_ERROR TestWait15000ms_10()
     {
 
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 5000UL;
+        value.ms = 15000UL;
         return WaitForMs("alpha", value);
     }
 
-    CHIP_ERROR TestStep6bAfter5SecondsTheThReadsIdentifyTimeAttributeFromDut_12()
+    CHIP_ERROR TestStep6bAfter15SecondsTheThReadsIdentifyTimeAttributeFromDut_11()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -58567,17 +56385,28 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeIdentifyTimeWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6b: After 5 seconds, the TH reads IdentifyTime attribute from DUT Error: %@", err);
+            NSLog(@"Step 6b: After 15 seconds, the TH reads IdentifyTime attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("identifyTime", [value unsignedShortValue], 5U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("identifyTime", [value unsignedShortValue], 15U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("identifyTime", [value unsignedShortValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("identifyTime", [value unsignedShortValue], 5U));
 
             NextTest();
         }];
 
         return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestVerifyThatTheDeviceEntersItsIdentificationStateUsingTheIdentifyTypeFromStep1bInOrderToIndicateToAnObserverWhichOfSeveralNodesAndOrEndpointsItIs_12()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
     }
 };
 
@@ -59340,15 +57169,13 @@ public:
             err = TestStep4cReadTheOptionalAttributeLightSensorTypeInAttributeList_6();
             break;
         case 7:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 7 : Step 5: Read EventList attribute from the DUT.For this cluster the list is usually empty but "
-                "it can contain manufacturer specific event IDs.\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Step 5: Read EventList attribute from the DUT.\n");
+            if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep5ReadEventListAttributeFromTheDUTForThisClusterTheListIsUsuallyEmptyButItCanContainManufacturerSpecificEventIDs_7();
-            break;
+            NextTest();
+            return;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Step 6: Read the global attribute: AcceptedCommandList\n");
             err = TestStep6ReadTheGlobalAttributeAcceptedCommandList_8();
@@ -59583,17 +57410,6 @@ private:
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestStep5ReadEventListAttributeFromTheDUTForThisClusterTheListIsUsuallyEmptyButItCanContainManufacturerSpecificEventIDs_7()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestStep6ReadTheGlobalAttributeAcceptedCommandList_8()
@@ -68990,80 +66806,20 @@ public:
             err = TestStep4cReadTheFeatureDependentAttributeDEPONOFFInAttributeList_7();
             break;
         case 8:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 8 : Step 4d: TH reads AttributeList attribute from DUT 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored 3.The list SHALL NOT contain "
-                "any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 - "
-                "0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep4dThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_8();
-            break;
-        case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Step 5a: TH reads from the DUT the EventList attribute.\n");
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Step 5: TH reads from the DUT the EventList attribute.\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Step 6: TH reads from the DUT the AcceptedCommandList attribute.\n");
+            err = TestStep6ThReadsFromTheDutTheAcceptedCommandListAttribute_9();
+            break;
         case 10:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 10 : Step 5b: TH reads EventList attribute from DUT 1.The list SHALL NOT contain any additional "
-                "values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF) 2.The list MAY contain values in the "
-                "Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI range "
-                "(0x0001 - 0xFFF1), these values SHALL be ignore 3.The list SHALL NOT contain any values in the Test Vendor or "
-                "invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where "
-                "XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5bThReadsEventListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnore3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_10();
-            break;
-        case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Step 6a: TH reads from the DUT the AcceptedCommandList attribute.\n");
-            err = TestStep6aThReadsFromTheDutTheAcceptedCommandListAttribute_11();
-            break;
-        case 12:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 12 : Step 6b: TH reads AcceptedCommandList attribute from DUT.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF) 2.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored 3.The list SHALL NOT contain any values in the Test Vendor "
-                "or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where "
-                "XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6bThReadsAcceptedCommandListAttributeFromDUTTheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_12();
-            break;
-        case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Step 7a: TH reads from the DUT the GeneratedCommandList attribute.\n");
-            err = TestStep7aThReadsFromTheDutTheGeneratedCommandListAttribute_13();
-            break;
-        case 14:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 14 : Step 7b: TH reads GeneratedCommandList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF) 2.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored 3.The list SHALL NOT contain any values in the Test Vendor "
-                "or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), "
-                "where[1688447564.178537][4220:4222] CHIP:TOO: Endpoint: 1 Cluster: 0x0000_0057 Attribute 0x0000_FFF8 DataVersion: "
-                "1795162772 [1688447564.178684][4220:4222] CHIP:TOO:   GeneratedCommandList: 0 entries "
-                "[1688447564.178984][4220:4222] CHIP:EM: <<< [E:5540i S:25125 M:256711779 (Ack:197472718)] (S) Msg TX to "
-                "1:0000000000000001 [10DB] --- Type 0000:10 (SecureChannel:StandaloneAck) XXXX is the allowed MEI range (0x0001 - "
-                "0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7bThReadsGeneratedCommandListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhere168844756417853742204222ChiptooEndpoint1Cluster0x00000057Attribute0x0000Fff8DataVersion1795162772168844756417868442204222ChiptooGeneratedCommandList0Entries168844756417898442204222ChipemE5540iS25125M256711779Ack197472718SMsgTxTo1000000000000000110dbType000010SecureChannelStandaloneAckXxxxIsTheAllowedMeiRange0x00010xFFF1_14();
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Step 7: TH reads from the DUT the GeneratedCommandList attribute.\n");
+            err = TestStep7ThReadsFromTheDutTheGeneratedCommandListAttribute_10();
             break;
         }
 
@@ -69109,18 +66865,6 @@ public:
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -69134,7 +66878,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 15;
+    const uint16_t mTestCount = 11;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -69329,29 +67073,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4dThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_8()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestStep5bThReadsEventListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnore3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_10()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep6aThReadsFromTheDutTheAcceptedCommandListAttribute_11()
+    CHIP_ERROR TestStep6ThReadsFromTheDutTheAcceptedCommandListAttribute_9()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -69361,7 +67083,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6a: TH reads from the DUT the AcceptedCommandList attribute. Error: %@", err);
+            NSLog(@"Step 6: TH reads from the DUT the AcceptedCommandList attribute. Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -69374,18 +67096,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep6bThReadsAcceptedCommandListAttributeFromDUTTheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_12()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep7aThReadsFromTheDutTheGeneratedCommandListAttribute_13()
+    CHIP_ERROR TestStep7ThReadsFromTheDutTheGeneratedCommandListAttribute_10()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -69395,7 +67106,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 7a: TH reads from the DUT the GeneratedCommandList attribute. Error: %@", err);
+            NSLog(@"Step 7: TH reads from the DUT the GeneratedCommandList attribute. Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -69406,17 +67117,6 @@ private:
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestStep7bThReadsGeneratedCommandListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhere168844756417853742204222ChiptooEndpoint1Cluster0x00000057Attribute0x0000Fff8DataVersion1795162772168844756417868442204222ChiptooGeneratedCommandList0Entries168844756417898442204222ChipemE5540iS25125M256711779Ack197472718SMsgTxTo1000000000000000110dbType000010SecureChannelStandaloneAckXxxxIsTheAllowedMeiRange0x00010xFFF1_14()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 };
 
@@ -82710,20 +80410,20 @@ public:
             err = TestStep2ThReadsTheClusterRevisionAttributeFromTheDut_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Step 3a: TH reads the FeatureMap attribute from the DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Step 3: TH reads the FeatureMap attribute from the DUT\n");
             if (ShouldSkip("MOD.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestStep3aThReadsTheFeatureMapAttributeFromTheDut_2();
+            err = TestStep3ThReadsTheFeatureMapAttributeFromTheDut_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Step 3b: TH reads the FeatureMap attribute from the DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Step 3: TH reads the FeatureMap attribute from the DUT\n");
             if (ShouldSkip(" !MOD.S.F00 ")) {
                 NextTest();
                 return;
             }
-            err = TestStep3bThReadsTheFeatureMapAttributeFromTheDut_3();
+            err = TestStep3ThReadsTheFeatureMapAttributeFromTheDut_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Step 4a: TH reads the AttributeList attribute from the DUT\n");
@@ -82760,75 +80460,20 @@ public:
             err = TestStep4cThReadsTheOptionalAttributeOnModeInAttributeListFromTheDut_7();
             break;
         case 8:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 8 : Step 4d: TH reads AttributeList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep4dThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_8();
-            break;
-        case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Step 5a: TH reads from the DUT the EventList attribute\n");
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Step 5: TH reads from the DUT the EventList attribute\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Step 6: TH reads AcceptedCommandList attribute from DUT\n");
+            err = TestStep6ThReadsAcceptedCommandListAttributeFromDut_9();
+            break;
         case 10:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 10 : Step 5b: TH reads from the DUT the EventList attribute. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) 2. "
-                "The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5bThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_10();
-            break;
-        case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Step 6a: TH reads AcceptedCommandList attribute from DUT\n");
-            err = TestStep6aThReadsAcceptedCommandListAttributeFromDut_11();
-            break;
-        case 12:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 12 : Step 6b: TH reads AcceptedCommandList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF). 2.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored.3.The list SHALL NOT contain any values in the Test Vendor "
-                "or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where "
-                "XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6bThReadsAcceptedCommandListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_12();
-            break;
-        case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Step 7a: TH reads GeneratedCommandList attribute from DUT\n");
-            err = TestStep7aThReadsGeneratedCommandListAttributeFromDut_13();
-            break;
-        case 14:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 14 : Step 7b: TH reads GeneratedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7bThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_14();
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Step 7: TH reads GeneratedCommandList attribute from DUT\n");
+            err = TestStep7ThReadsGeneratedCommandListAttributeFromDut_10();
             break;
         }
 
@@ -82874,18 +80519,6 @@ public:
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -82899,7 +80532,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 15;
+    const uint16_t mTestCount = 11;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -82924,7 +80557,7 @@ private:
         return UserPrompt("alpha", value);
     }
 
-    CHIP_ERROR TestStep3aThReadsTheFeatureMapAttributeFromTheDut_2()
+    CHIP_ERROR TestStep3ThReadsTheFeatureMapAttributeFromTheDut_2()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -82932,7 +80565,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 3a: TH reads the FeatureMap attribute from the DUT Error: %@", err);
+            NSLog(@"Step 3: TH reads the FeatureMap attribute from the DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -82948,7 +80581,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep3bThReadsTheFeatureMapAttributeFromTheDut_3()
+    CHIP_ERROR TestStep3ThReadsTheFeatureMapAttributeFromTheDut_3()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -82956,7 +80589,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 3b: TH reads the FeatureMap attribute from the DUT Error: %@", err);
+            NSLog(@"Step 3: TH reads the FeatureMap attribute from the DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -83073,29 +80706,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4dThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_8()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestStep5bThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_10()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep6aThReadsAcceptedCommandListAttributeFromDut_11()
+    CHIP_ERROR TestStep6ThReadsAcceptedCommandListAttributeFromDut_9()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -83103,7 +80714,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6a: TH reads AcceptedCommandList attribute from DUT Error: %@", err);
+            NSLog(@"Step 6: TH reads AcceptedCommandList attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -83116,18 +80727,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep6bThReadsAcceptedCommandListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_12()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep7aThReadsGeneratedCommandListAttributeFromDut_13()
+    CHIP_ERROR TestStep7ThReadsGeneratedCommandListAttributeFromDut_10()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -83135,7 +80735,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 7a: TH reads GeneratedCommandList attribute from DUT Error: %@", err);
+            NSLog(@"Step 7: TH reads GeneratedCommandList attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -83149,17 +80749,6 @@ private:
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestStep7bThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_14()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 };
 
@@ -84555,76 +82144,29 @@ public:
             err = TestStep4bReadTheFeatureDependentOOSF00AttributeInAttributeList_7();
             break;
         case 8:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 8 : Step 4c: TH reads AttributeList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Step 5: Read the global attribute: EventList\n");
+            if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep4cThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_8();
-            break;
+            NextTest();
+            return;
         case 9:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 9 : Step 5: TH reads from the DUT the EventList attribute. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) 2. "
-                "The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5ThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_9();
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Step 6a: Read the global attribute: AcceptedCommandList\n");
+            err = TestStep6aReadTheGlobalAttributeAcceptedCommandList_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Step 6a: Read the global attribute: AcceptedCommandList\n");
-            err = TestStep6aReadTheGlobalAttributeAcceptedCommandList_10();
-            break;
-        case 11:
             ChipLogProgress(
-                chipTool, " ***** Test Step 11 : Step 6b: Read the feature dependent(OO.S.F00) commands in AcceptedCommandList\n");
+                chipTool, " ***** Test Step 10 : Step 6b: Read the feature dependent(OO.S.F00) commands in AcceptedCommandList\n");
             if (ShouldSkip("OO.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestStep6bReadTheFeatureDependentOOSF00CommandsInAcceptedCommandList_11();
+            err = TestStep6bReadTheFeatureDependentOOSF00CommandsInAcceptedCommandList_10();
             break;
-        case 12:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 12 : Step 6c: TH reads AcceptedCommandList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF). 2.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored.3.The list SHALL NOT contain any values in the Test Vendor "
-                "or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where "
-                "XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6cThReadsAcceptedCommandListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_12();
-            break;
-        case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Step 7a: Read the global attribute: GeneratedCommandList\n");
-            err = TestStep7aReadTheGlobalAttributeGeneratedCommandList_13();
-            break;
-        case 14:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 14 : Step 7b: TH reads GeneratedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7bThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_14();
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Step 7: Read the global attribute: GeneratedCommandList\n");
+            err = TestStep7ReadTheGlobalAttributeGeneratedCommandList_11();
             break;
         }
 
@@ -84673,15 +82215,6 @@ public:
         case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -84695,7 +82228,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 15;
+    const uint16_t mTestCount = 12;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -84871,29 +82404,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4cThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_8()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestStep5ThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_9()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep6aReadTheGlobalAttributeAcceptedCommandList_10()
+    CHIP_ERROR TestStep6aReadTheGlobalAttributeAcceptedCommandList_9()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -84916,7 +82427,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep6bReadTheFeatureDependentOOSF00CommandsInAcceptedCommandList_11()
+    CHIP_ERROR TestStep6bReadTheFeatureDependentOOSF00CommandsInAcceptedCommandList_10()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -84939,18 +82450,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep6cThReadsAcceptedCommandListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_12()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep7aReadTheGlobalAttributeGeneratedCommandList_13()
+    CHIP_ERROR TestStep7ReadTheGlobalAttributeGeneratedCommandList_11()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -84958,7 +82458,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 7a: Read the global attribute: GeneratedCommandList Error: %@", err);
+            NSLog(@"Step 7: Read the global attribute: GeneratedCommandList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -84972,17 +82472,6 @@ private:
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestStep7bThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_14()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 };
 
@@ -86879,122 +84368,69 @@ public:
             err = TestStep4bThReadsFromTheDutTheOptionalAttributeCountdownTimeInTheAttributeListFromTheDut_5();
             break;
         case 6:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 6 : Step 4c: TH reads AttributeList attribute from DUT. 1.The list MAY contain values in the "
-                "Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), where XXXX is the allowed MEI range "
-                "(0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test Vendor or "
-                "invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep4cThReadsAttributeListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_6();
-            break;
-        case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Step 5a: TH reads from the DUT the EventList attribute.\n");
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Step 5a: TH reads from the DUT the EventList attribute.\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
-        case 8:
+        case 7:
             ChipLogProgress(chipTool,
-                " ***** Test Step 8 : Step 5b: TH reads from the DUT the optional event(OperationCompletion) in EventList.\n");
+                " ***** Test Step 7 : Step 5b: TH reads from the DUT the optional event(OperationCompletion) in EventList.\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED && OPSTATE.S.E01")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
-        case 9:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 9 : Step 5c: TH reads from the DUT the EventList attribute. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) 2. "
-                "The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Step 6a: Read the optional command(Start) in AcceptedCommandList\n");
+            if (ShouldSkip("OPSTATE.S.C02.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestStep5cThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_9();
+            err = TestStep6aReadTheOptionalCommandStartInAcceptedCommandList_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Step 6b: Read the optional command(Stop) in AcceptedCommandList\n");
+            if (ShouldSkip("OPSTATE.S.C01.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestStep6bReadTheOptionalCommandStopInAcceptedCommandList_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Step 6a: Read the optional command(Start) in AcceptedCommandList\n");
-            if (ShouldSkip("OPSTATE.S.C02")) {
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Step 6c: Read the optional command(Pause) in AcceptedCommandList\n");
+            if (ShouldSkip("OPSTATE.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestStep6aReadTheOptionalCommandStartInAcceptedCommandList_10();
+            err = TestStep6cReadTheOptionalCommandPauseInAcceptedCommandList_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Step 6b: Read the optional command(Stop) in AcceptedCommandList\n");
-            if (ShouldSkip("OPSTATE.S.C01")) {
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Step 6d: Read the optional command(Resume) in AcceptedCommandList\n");
+            if (ShouldSkip("OPSTATE.S.C03.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestStep6bReadTheOptionalCommandStopInAcceptedCommandList_11();
+            err = TestStep6dReadTheOptionalCommandResumeInAcceptedCommandList_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : Step 6c: Read the optional command(Pause) in AcceptedCommandList\n");
-            if (ShouldSkip("OPSTATE.S.C00")) {
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Step 7: Read the global attribute: GeneratedCommandList\n");
+            if (ShouldSkip("!OPSTATE.S.C00.Rsp && !OPSTATE.S.C01.Rsp && !OPSTATE.S.C02.Rsp && !OPSTATE.S.C03.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestStep6cReadTheOptionalCommandPauseInAcceptedCommandList_12();
+            err = TestStep7ReadTheGlobalAttributeGeneratedCommandList_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Step 6d: Read the optional command(Resume) in AcceptedCommandList\n");
-            if (ShouldSkip("OPSTATE.S.C03")) {
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Step 7: Read the global attribute: GeneratedCommandList\n");
+            if (ShouldSkip("(OPSTATE.S.C00.Rsp || OPSTATE.S.C01.Rsp || OPSTATE.S.C02.Rsp || OPSTATE.S.C03.Rsp)")) {
                 NextTest();
                 return;
             }
-            err = TestStep6dReadTheOptionalCommandResumeInAcceptedCommandList_13();
-            break;
-        case 14:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 14 : Step 6e: TH reads AcceptedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6eThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_14();
-            break;
-        case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : Step 7a: Read the global attribute: GeneratedCommandList\n");
-            if (ShouldSkip("!OPSTATE.S.C00 || !OPSTATE.S.C01 || !OPSTATE.S.C02 || !OPSTATE.S.C03")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7aReadTheGlobalAttributeGeneratedCommandList_15();
-            break;
-        case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : Step 7a: Read the global attribute: GeneratedCommandList\n");
-            if (ShouldSkip("(OPSTATE.S.C00 || OPSTATE.S.C01 || OPSTATE.S.C02 || OPSTATE.S.C03)")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7aReadTheGlobalAttributeGeneratedCommandList_16();
-            break;
-        case 17:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 17 : Step 7b: TH reads GeneratedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7bThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_17();
+            err = TestStep7ReadTheGlobalAttributeGeneratedCommandList_13();
             break;
         }
 
@@ -87049,18 +84485,6 @@ public:
         case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -87074,7 +84498,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 18;
+    const uint16_t mTestCount = 14;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -87221,29 +84645,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4cThReadsAttributeListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_6()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestStep5cThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_9()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep6aReadTheOptionalCommandStartInAcceptedCommandList_10()
+    CHIP_ERROR TestStep6aReadTheOptionalCommandStartInAcceptedCommandList_8()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -87265,7 +84667,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep6bReadTheOptionalCommandStopInAcceptedCommandList_11()
+    CHIP_ERROR TestStep6bReadTheOptionalCommandStopInAcceptedCommandList_9()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -87286,7 +84688,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep6cReadTheOptionalCommandPauseInAcceptedCommandList_12()
+    CHIP_ERROR TestStep6cReadTheOptionalCommandPauseInAcceptedCommandList_10()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -87308,7 +84710,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep6dReadTheOptionalCommandResumeInAcceptedCommandList_13()
+    CHIP_ERROR TestStep6dReadTheOptionalCommandResumeInAcceptedCommandList_11()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -87330,18 +84732,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep6eThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_14()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep7aReadTheGlobalAttributeGeneratedCommandList_15()
+    CHIP_ERROR TestStep7ReadTheGlobalAttributeGeneratedCommandList_12()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -87349,7 +84740,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 7a: Read the global attribute: GeneratedCommandList Error: %@", err);
+            NSLog(@"Step 7: Read the global attribute: GeneratedCommandList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -87365,7 +84756,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep7aReadTheGlobalAttributeGeneratedCommandList_16()
+    CHIP_ERROR TestStep7ReadTheGlobalAttributeGeneratedCommandList_13()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -87373,7 +84764,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 7a: Read the global attribute: GeneratedCommandList Error: %@", err);
+            NSLog(@"Step 7: Read the global attribute: GeneratedCommandList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -87384,17 +84775,6 @@ private:
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestStep7bThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_17()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 };
 
@@ -87580,16 +84960,6 @@ public:
             }
             NextTest();
             return;
-        case 19:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 19 : Step 7e: Read EventList attribute from the DUT.For this cluster the list is usually empty "
-                "but it can contain manufacturer specific event IDs.\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7eReadEventListAttributeFromTheDUTForThisClusterTheListIsUsuallyEmptyButItCanContainManufacturerSpecificEventIDs_19();
-            break;
         }
 
         if (CHIP_NO_ERROR != err) {
@@ -87658,9 +85028,6 @@ public:
         case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 19:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -87674,7 +85041,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 20;
+    const uint16_t mTestCount = 19;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -88006,17 +85373,6 @@ private:
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestStep7eReadEventListAttributeFromTheDUTForThisClusterTheListIsUsuallyEmptyButItCanContainManufacturerSpecificEventIDs_19()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 };
 
@@ -89310,58 +86666,20 @@ public:
             err = TestStep4gReadTheOptionalAttributeScaledToleranceInAttributeList_11();
             break;
         case 12:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 12 : Step 4h: TH reads AttributeList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE). "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Step 5: Read the global attribute: EventList\n");
+            if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep4hThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_12();
-            break;
+            NextTest();
+            return;
         case 13:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 13 : Step 5: TH reads from the DUT the EventList attribute. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) 2. "
-                "The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5ThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_13();
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Step 6: Read the global attribute: AcceptedCommandList\n");
+            err = TestStep6ReadTheGlobalAttributeAcceptedCommandList_13();
             break;
         case 14:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 14 : Step 6: TH reads AcceptedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6ThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_14();
-            break;
-        case 15:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 15 : Step 7: TH reads GeneratedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7ThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_15();
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Step 7:  Read the global attribute: GeneratedCommandList\n");
+            err = TestStep7ReadTheGlobalAttributeGeneratedCommandList_14();
             break;
         }
 
@@ -89419,9 +86737,6 @@ public:
         case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -89435,7 +86750,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 16;
+    const uint16_t mTestCount = 15;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -89722,48 +87037,56 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4hThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_12()
+    CHIP_ERROR TestStep6ReadTheGlobalAttributeAcceptedCommandList_13()
     {
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPressureMeasurement alloc] initWithDevice:device
+                                                                               endpointID:@(1)
+                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 6: Read the global attribute: AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("AcceptedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep5ThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_13()
+    CHIP_ERROR TestStep7ReadTheGlobalAttributeGeneratedCommandList_14()
     {
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPressureMeasurement alloc] initWithDevice:device
+                                                                               endpointID:@(1)
+                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-    CHIP_ERROR
-    TestStep6ThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_14()
-    {
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 7:  Read the global attribute: GeneratedCommandList Error: %@", err);
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-    CHIP_ERROR
-    TestStep7ThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_15()
-    {
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 };
 
@@ -90685,20 +88008,7 @@ public:
             err = TestStep4qThReadsOptionalAttributeControlModeAttributeInAttributeListFromTheDut_27();
             break;
         case 28:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 28 : Step 4r: TH reads AttributeList attribute from DUT. 1.The list MAY contain values in the "
-                "Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), where XXXX is the allowed MEI range "
-                "(0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test Vendor or "
-                "invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep4rThReadsAttributeListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_28();
-            break;
-        case 29:
-            ChipLogProgress(chipTool, " ***** Test Step 29 : Step 5a: TH reads EventList from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 28 : Step 5a: TH reads EventList from DUT\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED && !PCC.S.E00 && !PCC.S.E01 && !PCC.S.E02 && !PCC.S.E03 && !PCC.S.E04 && "
                            "!PCC.S.E05 && !PCC.S.E06 && !PCC.S.E07 && !PCC.S.E08 && !PCC.S.E09 && !PCC.S.E0a && !PCC.S.E0b && "
                            "!PCC.S.E0c && !PCC.S.E0d && !PCC.S.E0e && !PCC.S.E0f && !PCC.S.E10 ")) {
@@ -90707,10 +88017,19 @@ public:
             }
             NextTest();
             return;
+        case 29:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 29 : Step 5b: TH reads from the DUT the EventList optional (SupplyVoltageLow)attribute.\n");
+            if (ShouldSkip("PICS_EVENT_LIST_ENABLED && PCC.S.E00")) {
+                NextTest();
+                return;
+            }
+            NextTest();
+            return;
         case 30:
             ChipLogProgress(chipTool,
-                " ***** Test Step 30 : Step 5b: TH reads from the DUT the EventList optional (SupplyVoltageLow)attribute.\n");
-            if (ShouldSkip("PICS_EVENT_LIST_ENABLED && PCC.S.E00")) {
+                " ***** Test Step 30 : Step 5c: TH reads from the DUT the EventList optional (SupplyVoltageHigh)attribute.\n");
+            if (ShouldSkip("PICS_EVENT_LIST_ENABLED && PCC.S.E01")) {
                 NextTest();
                 return;
             }
@@ -90718,8 +88037,8 @@ public:
             return;
         case 31:
             ChipLogProgress(chipTool,
-                " ***** Test Step 31 : Step 5c: TH reads from the DUT the EventList optional (SupplyVoltageHigh)attribute.\n");
-            if (ShouldSkip("PICS_EVENT_LIST_ENABLED && PCC.S.E01")) {
+                " ***** Test Step 31 : Step 5d: TH reads from the DUT the EventList optional (PowerMissingPhase)attribute.\n");
+            if (ShouldSkip("PICS_EVENT_LIST_ENABLED && PCC.S.E02")) {
                 NextTest();
                 return;
             }
@@ -90727,8 +88046,8 @@ public:
             return;
         case 32:
             ChipLogProgress(chipTool,
-                " ***** Test Step 32 : Step 5d: TH reads from the DUT the EventList optional (PowerMissingPhase)attribute.\n");
-            if (ShouldSkip("PICS_EVENT_LIST_ENABLED && PCC.S.E02")) {
+                " ***** Test Step 32 : Step 5e: TH reads from the DUT the EventList optional (SystemPressureLow)attribute.\n");
+            if (ShouldSkip("PICS_EVENT_LIST_ENABLED && PCC.S.E03")) {
                 NextTest();
                 return;
             }
@@ -90736,26 +88055,26 @@ public:
             return;
         case 33:
             ChipLogProgress(chipTool,
-                " ***** Test Step 33 : Step 5e: TH reads from the DUT the EventList optional (SystemPressureLow)attribute.\n");
-            if (ShouldSkip("PICS_EVENT_LIST_ENABLED && PCC.S.E03")) {
-                NextTest();
-                return;
-            }
-            NextTest();
-            return;
-        case 34:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 34 : Step 5f: TH reads from the DUT the EventList optional (SystemPressureHigh)attribute.\n");
+                " ***** Test Step 33 : Step 5f: TH reads from the DUT the EventList optional (SystemPressureHigh)attribute.\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED && PCC.S.E04")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
-        case 35:
+        case 34:
             ChipLogProgress(
-                chipTool, " ***** Test Step 35 : Step 5g: TH reads from the DUT the EventList optional (DryRunning)attribute.\n");
+                chipTool, " ***** Test Step 34 : Step 5g: TH reads from the DUT the EventList optional (DryRunning)attribute.\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED && PCC.S.E05")) {
+                NextTest();
+                return;
+            }
+            NextTest();
+            return;
+        case 35:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 35 : Step 5h: TH reads from the DUT the EventList optional (MotorTemperatureHigh)attribute.\n");
+            if (ShouldSkip("PICS_EVENT_LIST_ENABLED && PCC.S.E06")) {
                 NextTest();
                 return;
             }
@@ -90763,8 +88082,8 @@ public:
             return;
         case 36:
             ChipLogProgress(chipTool,
-                " ***** Test Step 36 : Step 5h: TH reads from the DUT the EventList optional (MotorTemperatureHigh)attribute.\n");
-            if (ShouldSkip("PICS_EVENT_LIST_ENABLED && PCC.S.E06")) {
+                " ***** Test Step 36 : Step 5i: TH reads from the DUT the EventList optional (PumpMotorFatalFailure)attribute.\n");
+            if (ShouldSkip("PICS_EVENT_LIST_ENABLED && PCC.S.E07")) {
                 NextTest();
                 return;
             }
@@ -90772,16 +88091,7 @@ public:
             return;
         case 37:
             ChipLogProgress(chipTool,
-                " ***** Test Step 37 : Step 5i: TH reads from the DUT the EventList optional (PumpMotorFatalFailure)attribute.\n");
-            if (ShouldSkip("PICS_EVENT_LIST_ENABLED && PCC.S.E07")) {
-                NextTest();
-                return;
-            }
-            NextTest();
-            return;
-        case 38:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 38 : Step 5j: TH reads from the DUT the EventList optional "
+                " ***** Test Step 37 : Step 5j: TH reads from the DUT the EventList optional "
                 "(ElectronicTemperatureHigh)attribute.\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED && PCC.S.E08")) {
                 NextTest();
@@ -90789,10 +88099,19 @@ public:
             }
             NextTest();
             return;
-        case 39:
+        case 38:
             ChipLogProgress(
-                chipTool, " ***** Test Step 39 : Step 5k: TH reads from the DUT the EventList optional (PumpBlocked)attribute.\n");
+                chipTool, " ***** Test Step 38 : Step 5k: TH reads from the DUT the EventList optional (PumpBlocked)attribute.\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED && PCC.S.E09")) {
+                NextTest();
+                return;
+            }
+            NextTest();
+            return;
+        case 39:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 39 : Step 5l: TH reads from the DUT the EventList optional (SensorFailure)attribute.\n");
+            if (ShouldSkip("PICS_EVENT_LIST_ENABLED && PCC.S.E0a")) {
                 NextTest();
                 return;
             }
@@ -90800,16 +88119,7 @@ public:
             return;
         case 40:
             ChipLogProgress(chipTool,
-                " ***** Test Step 40 : Step 5l: TH reads from the DUT the EventList optional (SensorFailure)attribute.\n");
-            if (ShouldSkip("PICS_EVENT_LIST_ENABLED && PCC.S.E0a")) {
-                NextTest();
-                return;
-            }
-            NextTest();
-            return;
-        case 41:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 41 : Step 5m: TH reads from the DUT the EventList optional "
+                " ***** Test Step 40 : Step 5m: TH reads from the DUT the EventList optional "
                 "(ElectronicNonFatalFailure)attribute.\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED && PCC.S.E0b")) {
                 NextTest();
@@ -90817,10 +88127,19 @@ public:
             }
             NextTest();
             return;
-        case 42:
+        case 41:
             ChipLogProgress(chipTool,
-                " ***** Test Step 42 : Step 5n: TH reads from the DUT the EventList optional (ElectronicFatalFailure)attribute.\n");
+                " ***** Test Step 41 : Step 5n: TH reads from the DUT the EventList optional (ElectronicFatalFailure)attribute.\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED && PCC.S.E0c")) {
+                NextTest();
+                return;
+            }
+            NextTest();
+            return;
+        case 42:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 42 : Step 5o: TH reads from the DUT the EventList optional (GeneralFault)attribute.\n");
+            if (ShouldSkip("PICS_EVENT_LIST_ENABLED && PCC.S.E0d")) {
                 NextTest();
                 return;
             }
@@ -90828,8 +88147,8 @@ public:
             return;
         case 43:
             ChipLogProgress(
-                chipTool, " ***** Test Step 43 : Step 5o: TH reads from the DUT the EventList optional (GeneralFault)attribute.\n");
-            if (ShouldSkip("PICS_EVENT_LIST_ENABLED && PCC.S.E0d")) {
+                chipTool, " ***** Test Step 43 : Step 5p: TH reads from the DUT the EventList optional (Leakage)attribute.\n");
+            if (ShouldSkip("PICS_EVENT_LIST_ENABLED && PCC.S.E0e")) {
                 NextTest();
                 return;
             }
@@ -90837,70 +88156,29 @@ public:
             return;
         case 44:
             ChipLogProgress(
-                chipTool, " ***** Test Step 44 : Step 5p: TH reads from the DUT the EventList optional (Leakage)attribute.\n");
-            if (ShouldSkip("PICS_EVENT_LIST_ENABLED && PCC.S.E0e")) {
-                NextTest();
-                return;
-            }
-            NextTest();
-            return;
-        case 45:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 45 : Step 5q: TH reads from the DUT the EventList optional (AirDetection)attribute.\n");
+                chipTool, " ***** Test Step 44 : Step 5q: TH reads from the DUT the EventList optional (AirDetection)attribute.\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED && PCC.S.E0f")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
-        case 46:
+        case 45:
             ChipLogProgress(chipTool,
-                " ***** Test Step 46 : Step 5r: TH reads from the DUT the EventList optional (TurbineOperation)attribute.\n");
+                " ***** Test Step 45 : Step 5r: TH reads from the DUT the EventList optional (TurbineOperation)attribute.\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED && PCC.S.E10")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
+        case 46:
+            ChipLogProgress(chipTool, " ***** Test Step 46 : Step 6: TH reads from the DUT the AcceptedCommandList attribute.\n");
+            err = TestStep6ThReadsFromTheDutTheAcceptedCommandListAttribute_46();
+            break;
         case 47:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 47 : Step 5s: TH reads from the DUT the EventList attribute. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) 2. "
-                "The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5sThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_47();
-            break;
-        case 48:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 48 : Step 6: TH reads AcceptedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6ThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_48();
-            break;
-        case 49:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 49 : Step 7: TH reads GeneratedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7ThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_49();
+            ChipLogProgress(chipTool, " ***** Test Step 47 : Step 7:  TH reads from the DUT the GeneratedCommandList attribute.\n");
+            err = TestStep7ThReadsFromTheDutTheGeneratedCommandListAttribute_47();
             break;
         }
 
@@ -91057,12 +88335,6 @@ public:
         case 47:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 48:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 49:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -91076,7 +88348,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 50;
+    const uint16_t mTestCount = 48;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -91729,48 +89001,56 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4rThReadsAttributeListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_28()
+    CHIP_ERROR TestStep6ThReadsFromTheDutTheAcceptedCommandListAttribute_46()
     {
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPumpConfigurationAndControl alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 6: TH reads from the DUT the AcceptedCommandList attribute. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("AcceptedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep5sThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_47()
+    CHIP_ERROR TestStep7ThReadsFromTheDutTheGeneratedCommandListAttribute_47()
     {
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterPumpConfigurationAndControl alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-    CHIP_ERROR
-    TestStep6ThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_48()
-    {
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 7:  TH reads from the DUT the GeneratedCommandList attribute. Error: %@", err);
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-    CHIP_ERROR
-    TestStep7ThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_49()
-    {
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 };
 
@@ -94266,90 +91546,36 @@ public:
             err = TestStep3ThReadsFromTheDutTheFeatureMapAttribute_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Step 4a: TH reads from the DUT the AttributeList attribute\n");
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Step 4: TH reads from the DUT the AttributeList attribute\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep4aThReadsFromTheDutTheAttributeListAttribute_3();
+            err = TestStep4ThReadsFromTheDutTheAttributeListAttribute_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Step 4a: TH reads from the DUT the AttributeList attribute\n");
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Step 4: TH reads from the DUT the AttributeList attribute\n");
             if (ShouldSkip("!PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep4aThReadsFromTheDutTheAttributeListAttribute_4();
+            err = TestStep4ThReadsFromTheDutTheAttributeListAttribute_4();
             break;
         case 5:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 5 : Step 4b: TH reads AttributeList attribute from DUT 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored 3.The list SHALL NOT contain "
-                "any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 - "
-                "0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep4bThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_5();
-            break;
-        case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Step 5a: TH reads from the DUT the EventList attribute.\n");
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Step 5: TH reads from the DUT the EventList attribute.\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Step 6: TH reads from the DUT the AcceptedCommandList attribute.\n");
+            err = TestStep6ThReadsFromTheDutTheAcceptedCommandListAttribute_6();
+            break;
         case 7:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 7 : Step 5b: TH reads EventList attribute from DUT. 1.The list SHALL NOT contain any additional "
-                "values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF). 2.The list MAY contain values in the "
-                "Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI range "
-                "(0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT contain any values in the Test Vendor or "
-                "invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where "
-                "XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5bThReadsEventListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_7();
-            break;
-        case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Step 6a: TH reads from the DUT the AcceptedCommandList attribute.\n");
-            err = TestStep6aThReadsFromTheDutTheAcceptedCommandListAttribute_8();
-            break;
-        case 9:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 9 : Step 6: TH reads AcceptedCommandList attribute from DUT. 1. The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6ThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_9();
-            break;
-        case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Step 7a: TH reads from the DUT the AcceptedCommandList attribute.\n");
-            err = TestStep7aThReadsFromTheDutTheAcceptedCommandListAttribute_10();
-            break;
-        case 11:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 11 : Step 7b: TH reads GeneratedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7bThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_11();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Step 7: TH reads from the DUT the GeneratedCommandList attribute.\n");
+            err = TestStep7ThReadsFromTheDutTheGeneratedCommandListAttribute_7();
             break;
         }
 
@@ -94386,18 +91612,6 @@ public:
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 10:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -94411,7 +91625,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 12;
+    const uint16_t mTestCount = 8;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -94478,7 +91692,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4aThReadsFromTheDutTheAttributeListAttribute_3()
+    CHIP_ERROR TestStep4ThReadsFromTheDutTheAttributeListAttribute_3()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -94488,7 +91702,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 4a: TH reads from the DUT the AttributeList attribute Error: %@", err);
+            NSLog(@"Step 4: TH reads from the DUT the AttributeList attribute Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -94510,7 +91724,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4aThReadsFromTheDutTheAttributeListAttribute_4()
+    CHIP_ERROR TestStep4ThReadsFromTheDutTheAttributeListAttribute_4()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -94520,7 +91734,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 4a: TH reads from the DUT the AttributeList attribute Error: %@", err);
+            NSLog(@"Step 4: TH reads from the DUT the AttributeList attribute Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -94541,29 +91755,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4bThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_5()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestStep5bThReadsEventListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_7()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep6aThReadsFromTheDutTheAcceptedCommandListAttribute_8()
+    CHIP_ERROR TestStep6ThReadsFromTheDutTheAcceptedCommandListAttribute_6()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -94573,7 +91765,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6a: TH reads from the DUT the AcceptedCommandList attribute. Error: %@", err);
+            NSLog(@"Step 6: TH reads from the DUT the AcceptedCommandList attribute. Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -94589,18 +91781,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep6ThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_9()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep7aThReadsFromTheDutTheAcceptedCommandListAttribute_10()
+    CHIP_ERROR TestStep7ThReadsFromTheDutTheGeneratedCommandListAttribute_7()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -94610,7 +91791,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 7a: TH reads from the DUT the AcceptedCommandList attribute. Error: %@", err);
+            NSLog(@"Step 7: TH reads from the DUT the GeneratedCommandList attribute. Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -94624,17 +91805,6 @@ private:
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestStep7bThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_11()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 };
 
@@ -94721,15 +91891,13 @@ public:
             err = TestStep6ReadTheGlobalAttributeGeneratedCommandList_7();
             break;
         case 8:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 8 : Step 7: Read EventList attribute from the DUT.For this cluster the list is usually empty but "
-                "it can contain manufacturer specific event IDs.\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Step 7: Read the global attribute: EventList\n");
+            if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep7ReadEventListAttributeFromTheDUTForThisClusterTheListIsUsuallyEmptyButItCanContainManufacturerSpecificEventIDs_8();
-            break;
+            NextTest();
+            return;
         }
 
         if (CHIP_NO_ERROR != err) {
@@ -94982,17 +92150,6 @@ private:
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestStep7ReadEventListAttributeFromTheDUTForThisClusterTheListIsUsuallyEmptyButItCanContainManufacturerSpecificEventIDs_8()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 };
 
@@ -95348,89 +92505,32 @@ public:
             err = TestStep4cReadTheFeatureDependentRVCCLEANMSF00DeponoffAndOptionalAttributeOnModeIsNotInAttributeListFromTheDut_8();
             break;
         case 9:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 9 : Step 4d: TH reads the AttributeList attribute from the DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep4dThReadsTheAttributeListAttributeFromTheDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_9();
-            break;
-        case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Step 5a: Read the global attribute: EventList from the DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Step 5: Read the global attribute: EventList from the DUT\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
-        case 11:
+        case 10:
             ChipLogProgress(chipTool,
-                " ***** Test Step 11 : Step 5b: Read the global attribute: EventList from the DUT. 1.The list SHALL NOT contain "
-                "any additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - "
-                "0x0000_FFFE) 2. The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - "
-                "0xXXXX_4FFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list "
-                "SHALL NOT contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), "
-                "(0xXXXX_5000 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - "
-                "0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5bReadTheGlobalAttributeEventListFromTheDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_11();
-            break;
-        case 12:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 12 : Step 6a: Read the global attribute AcceptedCommandList. Check if it contains id 0x0 "
+                " ***** Test Step 10 : Step 6: Read the global attribute AcceptedCommandList. Check if it contains id 0x0 "
                 "(ChangeToMode)\n");
             if (ShouldSkip("RVCCLEANM.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestStep6aReadTheGlobalAttributeAcceptedCommandListCheckIfItContainsId0x0ChangeToMode_12();
+            err = TestStep6ReadTheGlobalAttributeAcceptedCommandListCheckIfItContainsId0x0ChangeToMode_10();
             break;
-        case 13:
+        case 11:
             ChipLogProgress(chipTool,
-                " ***** Test Step 13 : Step 6b: Read the global attribute AcceptedCommandList. 1. The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF) 2. The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6bReadTheGlobalAttributeAcceptedCommandList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_13();
-            break;
-        case 14:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 14 : Step 7a: Read the global attribute: GeneratedCommandList. Check if it contains id 0x1 "
+                " ***** Test Step 11 : Step 7: Read the global attribute: GeneratedCommandList. Check if it contains id 0x1 "
                 "(ChangeToModeResponse)\n");
             if (ShouldSkip("RVCCLEANM.S.C01.Tx")) {
                 NextTest();
                 return;
             }
-            err = TestStep7aReadTheGlobalAttributeGeneratedCommandListCheckIfItContainsId0x1ChangeToModeResponse_14();
-            break;
-        case 15:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 15 : Step 7b: Read the global attribute: GeneratedCommandList. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF). 2.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7bReadTheGlobalAttributeGeneratedCommandList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_15();
+            err = TestStep7ReadTheGlobalAttributeGeneratedCommandListCheckIfItContainsId0x1ChangeToModeResponse_11();
             break;
         }
 
@@ -95479,18 +92579,6 @@ public:
         case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -95504,7 +92592,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 16;
+    const uint16_t mTestCount = 12;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -95708,29 +92796,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4dThReadsTheAttributeListAttributeFromTheDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_9()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestStep5bReadTheGlobalAttributeEventListFromTheDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_11()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep6aReadTheGlobalAttributeAcceptedCommandListCheckIfItContainsId0x0ChangeToMode_12()
+    CHIP_ERROR TestStep6ReadTheGlobalAttributeAcceptedCommandListCheckIfItContainsId0x0ChangeToMode_10()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -95738,7 +92804,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6a: Read the global attribute AcceptedCommandList. Check if it contains id 0x0 (ChangeToMode) Error: %@",
+            NSLog(@"Step 6: Read the global attribute AcceptedCommandList. Check if it contains id 0x0 (ChangeToMode) Error: %@",
                 err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
@@ -95756,18 +92822,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep6bReadTheGlobalAttributeAcceptedCommandList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_13()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep7aReadTheGlobalAttributeGeneratedCommandListCheckIfItContainsId0x1ChangeToModeResponse_14()
+    CHIP_ERROR TestStep7ReadTheGlobalAttributeGeneratedCommandListCheckIfItContainsId0x1ChangeToModeResponse_11()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -95775,7 +92830,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 7a: Read the global attribute: GeneratedCommandList. Check if it contains id 0x1 (ChangeToModeResponse) "
+            NSLog(@"Step 7: Read the global attribute: GeneratedCommandList. Check if it contains id 0x1 (ChangeToModeResponse) "
                   @"Error: %@",
                 err);
 
@@ -95792,17 +92847,6 @@ private:
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestStep7bReadTheGlobalAttributeGeneratedCommandList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_15()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 };
 
@@ -96276,88 +93320,32 @@ public:
             err = TestStep4dReadTheFeatureDependentRVCRUNMSF00DeponoffAndOptionalAttributeOnModeIsNotInAttributeListFromTheDut_8();
             break;
         case 9:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 9 : Step 4e: Check for mandatory attributes in AttributeList. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep4eCheckForMandatoryAttributesInAttributeList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_9();
-            break;
-        case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Step 5a: Read the global attribute: EventList from the DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Step 5: Read the global attribute: EventList from the DUT\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
-        case 11:
+        case 10:
             ChipLogProgress(chipTool,
-                " ***** Test Step 11 : Step 5b: TH reads from the DUT the EventList attribute. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) 2. "
-                "The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5bThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_11();
-            break;
-        case 12:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 12 : Step 6a: Read the global attribute AcceptedCommandList. Check if it contains id 0x0 "
+                " ***** Test Step 10 : Step 6: Read the global attribute AcceptedCommandList. Check if it contains id 0x0 "
                 "(ChangeToMode)\n");
             if (ShouldSkip("RVCRUNM.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestStep6aReadTheGlobalAttributeAcceptedCommandListCheckIfItContainsId0x0ChangeToMode_12();
+            err = TestStep6ReadTheGlobalAttributeAcceptedCommandListCheckIfItContainsId0x0ChangeToMode_10();
             break;
-        case 13:
+        case 11:
             ChipLogProgress(chipTool,
-                " ***** Test Step 13 : Step 6b: Read the global attribute AcceptedCommandList. 1. The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF) 2. The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6bReadTheGlobalAttributeAcceptedCommandList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_13();
-            break;
-        case 14:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 14 : Step 7a: Read the global attribute: GeneratedCommandList. Check if it contains id 0x1 "
+                " ***** Test Step 11 : Step 7: Read the global attribute: GeneratedCommandList. Check if it contains id 0x1 "
                 "(ChangeToModeResponse)\n");
             if (ShouldSkip("RVCRUNM.S.C01.Tx")) {
                 NextTest();
                 return;
             }
-            err = TestStep7aReadTheGlobalAttributeGeneratedCommandListCheckIfItContainsId0x1ChangeToModeResponse_14();
-            break;
-        case 15:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 15 : Step 7b: Read the global attribute: GeneratedCommandList. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF). 2.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7bReadTheGlobalAttributeGeneratedCommandList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_15();
+            err = TestStep7ReadTheGlobalAttributeGeneratedCommandListCheckIfItContainsId0x1ChangeToModeResponse_11();
             break;
         }
 
@@ -96406,18 +93394,6 @@ public:
         case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -96431,7 +93407,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 16;
+    const uint16_t mTestCount = 12;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -96635,29 +93611,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4eCheckForMandatoryAttributesInAttributeList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_9()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestStep5bThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_11()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep6aReadTheGlobalAttributeAcceptedCommandListCheckIfItContainsId0x0ChangeToMode_12()
+    CHIP_ERROR TestStep6ReadTheGlobalAttributeAcceptedCommandListCheckIfItContainsId0x0ChangeToMode_10()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -96665,7 +93619,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6a: Read the global attribute AcceptedCommandList. Check if it contains id 0x0 (ChangeToMode) Error: %@",
+            NSLog(@"Step 6: Read the global attribute AcceptedCommandList. Check if it contains id 0x0 (ChangeToMode) Error: %@",
                 err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
@@ -96683,18 +93637,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep6bReadTheGlobalAttributeAcceptedCommandList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_13()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep7aReadTheGlobalAttributeGeneratedCommandListCheckIfItContainsId0x1ChangeToModeResponse_14()
+    CHIP_ERROR TestStep7ReadTheGlobalAttributeGeneratedCommandListCheckIfItContainsId0x1ChangeToModeResponse_11()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -96702,7 +93645,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 7a: Read the global attribute: GeneratedCommandList. Check if it contains id 0x1 (ChangeToModeResponse) "
+            NSLog(@"Step 7: Read the global attribute: GeneratedCommandList. Check if it contains id 0x1 (ChangeToModeResponse) "
                   @"Error: %@",
                 err);
 
@@ -96719,17 +93662,6 @@ private:
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestStep7bReadTheGlobalAttributeGeneratedCommandList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_15()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 };
 
@@ -99146,74 +96078,20 @@ public:
             err = TestStep4cThReadsFromTheDutTheAttributeListAttribute0x0003ShallBeIncludedIfAndOnlyIfTccmsf00deponoff_7();
             break;
         case 8:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 8 : Step 4d: TH reads AttributeList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1))\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep4dThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_8();
-            break;
-        case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Step 5a: TH reads from the DUT the EventList attribute.\n");
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Step 5: TH reads from the DUT the EventList attribute.\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Step 6: TH reads from the DUT the AcceptedCommandList attribute.\n");
+            err = TestStep6ThReadsFromTheDutTheAcceptedCommandListAttribute_9();
+            break;
         case 10:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 10 : Step 5b: TH reads EventList attribute from DUT 1.The list SHALL NOT contain any additional "
-                "values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF) 2.The list MAY contain values in the "
-                "Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI range "
-                "(0x0001 - 0xFFF1), these values SHALL be ignored 3.The list SHALL NOT contain any values in the Test Vendor or "
-                "invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where "
-                "XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5bThReadsEventListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_10();
-            break;
-        case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Step 6a: TH reads from the DUT the AcceptedCommandList attribute.\n");
-            err = TestStep6aThReadsFromTheDutTheAcceptedCommandListAttribute_11();
-            break;
-        case 12:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 12 : Step 6b: TH reads AcceptedCommandList attribute from DUT. 1. The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6bThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_12();
-            break;
-        case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Step 7a: TH reads from the DUT the GeneratedCommandList attribute.\n");
-            err = TestStep7aThReadsFromTheDutTheGeneratedCommandListAttribute_13();
-            break;
-        case 14:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 14 : Step 7b: TH reads GeneratedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7bThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_14();
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Step 7: TH reads from the DUT the GeneratedCommandList attribute.\n");
+            err = TestStep7ThReadsFromTheDutTheGeneratedCommandListAttribute_10();
             break;
         }
 
@@ -99259,18 +96137,6 @@ public:
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -99284,7 +96150,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 15;
+    const uint16_t mTestCount = 11;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -99492,29 +96358,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4dThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_8()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestStep5bThReadsEventListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_10()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep6aThReadsFromTheDutTheAcceptedCommandListAttribute_11()
+    CHIP_ERROR TestStep6ThReadsFromTheDutTheAcceptedCommandListAttribute_9()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -99525,7 +96369,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6a: TH reads from the DUT the AcceptedCommandList attribute. Error: %@", err);
+            NSLog(@"Step 6: TH reads from the DUT the AcceptedCommandList attribute. Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -99538,18 +96382,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep6bThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_12()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep7aThReadsFromTheDutTheGeneratedCommandListAttribute_13()
+    CHIP_ERROR TestStep7ThReadsFromTheDutTheGeneratedCommandListAttribute_10()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -99560,7 +96393,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 7a: TH reads from the DUT the GeneratedCommandList attribute. Error: %@", err);
+            NSLog(@"Step 7: TH reads from the DUT the GeneratedCommandList attribute. Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -99571,17 +96404,6 @@ private:
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestStep7bThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_14()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 };
 
@@ -99716,77 +96538,21 @@ public:
             err = TestStep4dThReadsFromTheDutTheAttributeListAttribute0x00040x0005ShallBeIncludedIfAndOnlyIfTctlsf01tl_10();
             break;
         case 11:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 11 : Step 4e: TH reads AttributeList attribute from DUT 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored 3.The list SHALL NOT contain "
-                "any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 - "
-                "0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep4eThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_11();
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Step 5: TH reads from the DUT the AcceptedCommandList attribute.\n");
+            err = TestStep5ThReadsFromTheDutTheAcceptedCommandListAttribute_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : Step 5a: TH reads from the DUT the AcceptedCommandList attribute.\n");
-            err = TestStep5aThReadsFromTheDutTheAcceptedCommandListAttribute_12();
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Step 6: TH reads from the DUT the GeneratedCommandList attribute.\n");
+            err = TestStep6ThReadsFromTheDutTheGeneratedCommandListAttribute_12();
             break;
         case 13:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 13 : Step 5b: TH reads AcceptedCommandList attribute from DUT 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF) 2. The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored 3.The list SHALL NOT contain any values in the Test Vendor "
-                "or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where "
-                "XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5bThReadsAcceptedCommandListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_13();
-            break;
-        case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : Step 6a: TH reads from the DUT the GeneratedCommandList attribute.\n");
-            err = TestStep6aThReadsFromTheDutTheGeneratedCommandListAttribute_14();
-            break;
-        case 15:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 15 : Step 6b: TH reads GeneratedCommandList attribute from DUT.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF) 2. The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored 3.The list SHALL NOT contain any values in the Test Vendor "
-                "or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where "
-                "XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6bThReadsGeneratedCommandListAttributeFromDUTTheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_15();
-            break;
-        case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : Step 7a: Read the global attribute: EventList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Step 7: TH reads from the DUT the EventList attribute.\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
-        case 17:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 17 : Step 7b: TH reads EventList attribute from DUT. 1.The list SHALL NOT contain any additional "
-                "values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF). 2.The list MAY contain values in the "
-                "Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI range "
-                "(0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT contain any values in the Test Vendor or "
-                "invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where "
-                "XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7bThReadsEventListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_17();
-            break;
         }
 
         if (CHIP_NO_ERROR != err) {
@@ -99840,18 +96606,6 @@ public:
         case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -99865,7 +96619,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 18;
+    const uint16_t mTestCount = 14;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -100134,18 +96888,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4eThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_11()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep5aThReadsFromTheDutTheAcceptedCommandListAttribute_12()
+    CHIP_ERROR TestStep5ThReadsFromTheDutTheAcceptedCommandListAttribute_11()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -100155,7 +96898,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 5a: TH reads from the DUT the AcceptedCommandList attribute. Error: %@", err);
+            NSLog(@"Step 5: TH reads from the DUT the AcceptedCommandList attribute. Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -100168,18 +96911,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep5bThReadsAcceptedCommandListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_13()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep6aThReadsFromTheDutTheGeneratedCommandListAttribute_14()
+    CHIP_ERROR TestStep6ThReadsFromTheDutTheGeneratedCommandListAttribute_12()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -100189,37 +96921,20 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6a: TH reads from the DUT the GeneratedCommandList attribute. Error: %@", err);
+            NSLog(@"Step 6: TH reads from the DUT the GeneratedCommandList attribute. Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
 
             VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
             NextTest();
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestStep6bThReadsGeneratedCommandListAttributeFromDUTTheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_15()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestStep7bThReadsEventListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_17()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 };
 
@@ -100306,15 +97021,13 @@ public:
             err = TestStep6ReadGeneratedCommandListAttributeFromTheDut_7();
             break;
         case 8:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 8 : Step 7: Read EventList attribute from the DUT.For this cluster the list is usually empty but "
-                "it can contain manufacturer specific event IDs.\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Step 7: Read EventList attribute from the DUT.\n");
+            if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep7ReadEventListAttributeFromTheDUTForThisClusterTheListIsUsuallyEmptyButItCanContainManufacturerSpecificEventIDs_8();
-            break;
+            NextTest();
+            return;
         }
 
         if (CHIP_NO_ERROR != err) {
@@ -100567,17 +97280,6 @@ private:
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestStep7ReadEventListAttributeFromTheDUTForThisClusterTheListIsUsuallyEmptyButItCanContainManufacturerSpecificEventIDs_8()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 };
 
@@ -101362,15 +98064,13 @@ public:
             err = TestStep6cReadOptionalCommandGetRelayStatusLogResponseInGeneratedCommandList_57();
             break;
         case 58:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 58 : Step 7: Read EventList attribute from the DUT.For this cluster the list is usually empty "
-                "but it can contain manufacturer specific event IDs.\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
+            ChipLogProgress(chipTool, " ***** Test Step 58 : Step 7: Read EventList attribute from the DUT.\n");
+            if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep7ReadEventListAttributeFromTheDUTForThisClusterTheListIsUsuallyEmptyButItCanContainManufacturerSpecificEventIDs_58();
-            break;
+            NextTest();
+            return;
         }
 
         if (CHIP_NO_ERROR != err) {
@@ -102807,17 +99507,6 @@ private:
 
         return CHIP_NO_ERROR;
     }
-
-    CHIP_ERROR
-    TestStep7ReadEventListAttributeFromTheDUTForThisClusterTheListIsUsuallyEmptyButItCanContainManufacturerSpecificEventIDs_58()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
 };
 
 class Test_TC_TSUIC_1_1 : public TestCommandBridge {
@@ -102887,65 +99576,21 @@ public:
             err = TestStep4ReadTheGlobalAttributeAttributeList_4();
             break;
         case 5:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 5 : Step 4b: Read the global attribute: AttributeList. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep4bReadTheGlobalAttributeAttributeList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Step 5: Read the global attribute: AcceptedCommandList\n");
+            err = TestStep5ReadTheGlobalAttributeAcceptedCommandList_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Step 5a: Read the global attribute: AcceptedCommandList\n");
-            err = TestStep5aReadTheGlobalAttributeAcceptedCommandList_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Step 6: Read the global attribute: GeneratedCommandList\n");
+            err = TestStep6ReadTheGlobalAttributeGeneratedCommandList_6();
             break;
         case 7:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 7 : Step 5b: Read the global attribute: AcceptedCommandList. 1. The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF) 2. The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Step 7: TH reads from the DUT the EventList attribute.\n");
+            if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep5bReadTheGlobalAttributeAcceptedCommandList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_7();
-            break;
-        case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Step 6a: Read the global attribute: GeneratedCommandList\n");
-            err = TestStep6aReadTheGlobalAttributeGeneratedCommandList_8();
-            break;
-        case 9:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 9 : Step 6b: Read the global attribute: GeneratedCommandList. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF). 2.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6bReadTheGlobalAttributeGeneratedCommandList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_9();
-            break;
-        case 10:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 10 : Step 7: Read EventList attribute from the DUT.For this cluster the list is usually empty "
-                "but it can contain manufacturer specific event IDs.\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7ReadEventListAttributeFromTheDUTForThisClusterTheListIsUsuallyEmptyButItCanContainManufacturerSpecificEventIDs_10();
-            break;
+            NextTest();
+            return;
         }
 
         if (CHIP_NO_ERROR != err) {
@@ -102981,15 +99626,6 @@ public:
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 10:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -103003,7 +99639,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 11;
+    const uint16_t mTestCount = 8;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -103131,18 +99767,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4bReadTheGlobalAttributeAttributeList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_5()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep5aReadTheGlobalAttributeAcceptedCommandList_6()
+    CHIP_ERROR TestStep5ReadTheGlobalAttributeAcceptedCommandList_5()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -103152,7 +99777,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 5a: Read the global attribute: AcceptedCommandList Error: %@", err);
+            NSLog(@"Step 5: Read the global attribute: AcceptedCommandList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -103168,18 +99793,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep5bReadTheGlobalAttributeAcceptedCommandList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_7()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep6aReadTheGlobalAttributeGeneratedCommandList_8()
+    CHIP_ERROR TestStep6ReadTheGlobalAttributeGeneratedCommandList_6()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -103189,7 +99803,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6a: Read the global attribute: GeneratedCommandList Error: %@", err);
+            NSLog(@"Step 6: Read the global attribute: GeneratedCommandList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -103203,28 +99817,6 @@ private:
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestStep6bReadTheGlobalAttributeGeneratedCommandList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_9()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestStep7ReadEventListAttributeFromTheDUTForThisClusterTheListIsUsuallyEmptyButItCanContainManufacturerSpecificEventIDs_10()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 };
 
@@ -104854,64 +101446,24 @@ public:
             NextTest();
             return;
         case 18:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 18 : Step 5d: TH reads from the DUT the EventList attribute. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) 2. "
-                "The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5dThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_18();
-            break;
-        case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : Step 6a: TH reads AcceptedCommandList from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Step 6: TH reads AcceptedCommandList from DUT\n");
             if (ShouldSkip(" !DGTHREAD.S.F01 ")) {
                 NextTest();
                 return;
             }
-            err = TestStep6aThReadsAcceptedCommandListFromDut_19();
+            err = TestStep6ThReadsAcceptedCommandListFromDut_18();
             break;
-        case 20:
-            ChipLogProgress(chipTool, " ***** Test Step 20 : Step 6b: TH reads AcceptedCommandList from DUT\n");
+        case 19:
+            ChipLogProgress(chipTool, " ***** Test Step 19 : Step 6: TH reads AcceptedCommandList from DUT\n");
             if (ShouldSkip("DGTHREAD.S.F01")) {
                 NextTest();
                 return;
             }
-            err = TestStep6bThReadsAcceptedCommandListFromDut_20();
+            err = TestStep6ThReadsAcceptedCommandListFromDut_19();
             break;
-        case 21:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 21 : Step 6c: TH reads AcceptedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6cThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_21();
-            break;
-        case 22:
-            ChipLogProgress(chipTool, " ***** Test Step 22 : Step 7a: TH reads GeneratedCommandList from DUT\n");
-            err = TestStep7aThReadsGeneratedCommandListFromDut_22();
-            break;
-        case 23:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 23 : Step 7b: TH reads GeneratedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7bThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_23();
+        case 20:
+            ChipLogProgress(chipTool, " ***** Test Step 20 : Step 7: TH reads GeneratedCommandList from DUT\n");
+            err = TestStep7ThReadsGeneratedCommandListFromDut_20();
             break;
         }
 
@@ -104987,15 +101539,6 @@ public:
         case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 21:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 22:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 23:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -105009,7 +101552,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 24;
+    const uint16_t mTestCount = 21;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -105427,18 +101970,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep5dThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_18()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep6aThReadsAcceptedCommandListFromDut_19()
+    CHIP_ERROR TestStep6ThReadsAcceptedCommandListFromDut_18()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -105448,7 +101980,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6a: TH reads AcceptedCommandList from DUT Error: %@", err);
+            NSLog(@"Step 6: TH reads AcceptedCommandList from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -105464,7 +101996,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep6bThReadsAcceptedCommandListFromDut_20()
+    CHIP_ERROR TestStep6ThReadsAcceptedCommandListFromDut_19()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -105474,7 +102006,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6b: TH reads AcceptedCommandList from DUT Error: %@", err);
+            NSLog(@"Step 6: TH reads AcceptedCommandList from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -105487,18 +102019,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep6cThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_21()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep7aThReadsGeneratedCommandListFromDut_22()
+    CHIP_ERROR TestStep7ThReadsGeneratedCommandListFromDut_20()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -105508,7 +102029,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 7a: TH reads GeneratedCommandList from DUT Error: %@", err);
+            NSLog(@"Step 7: TH reads GeneratedCommandList from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -105522,17 +102043,6 @@ private:
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestStep7bThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_23()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 };
 
@@ -105751,172 +102261,116 @@ public:
             err = TestTs4CheckForTscFeatureBasedAttributesNotInAttributeList_21();
             break;
         case 22:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 22 : TS4: Check for mandatory attributes in AttributeList. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestTs4CheckForMandatoryAttributesInAttributeList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_22();
-            break;
-        case 23:
-            ChipLogProgress(chipTool, " ***** Test Step 23 : TS5: Check for mandatory events in EventList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 22 : TS5: Check for mandatory events in EventList\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
-        case 24:
-            ChipLogProgress(chipTool, " ***** Test Step 24 : TS5: Check for TZ feature-based events in EventList\n");
+        case 23:
+            ChipLogProgress(chipTool, " ***** Test Step 23 : TS5: Check for TZ feature-based events in EventList\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED && TIMESYNC.S.F00")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
-        case 25:
-            ChipLogProgress(chipTool, " ***** Test Step 25 : TS5: Check for TZ feature-based events not in EventList\n");
+        case 24:
+            ChipLogProgress(chipTool, " ***** Test Step 24 : TS5: Check for TZ feature-based events not in EventList\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED && !TIMESYNC.S.F00")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
-        case 26:
-            ChipLogProgress(chipTool, " ***** Test Step 26 : TS5: Check for TSC feature-based events in EventList\n");
+        case 25:
+            ChipLogProgress(chipTool, " ***** Test Step 25 : TS5: Check for TSC feature-based events in EventList\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED && TIMESYNC.S.F03")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
-        case 27:
-            ChipLogProgress(chipTool, " ***** Test Step 27 : TS5: Check for TSC feature-based events not in EventList\n");
+        case 26:
+            ChipLogProgress(chipTool, " ***** Test Step 26 : TS5: Check for TSC feature-based events not in EventList\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED && !TIMESYNC.S.F03")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
+        case 27:
+            ChipLogProgress(chipTool, " ***** Test Step 27 : TS6: Check for mandatory commands in AcceptedCommandList\n");
+            err = TestTs6CheckForMandatoryCommandsInAcceptedCommandList_27();
+            break;
         case 28:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 28 : TS5: TH reads from the DUT the EventList attribute. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) 2. "
-                "The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestTs5ThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_28();
-            break;
-        case 29:
-            ChipLogProgress(chipTool, " ***** Test Step 29 : TS6: Check for mandatory commands in AcceptedCommandList\n");
-            err = TestTs6CheckForMandatoryCommandsInAcceptedCommandList_29();
-            break;
-        case 30:
-            ChipLogProgress(chipTool, " ***** Test Step 30 : TS6: Check for TZ feature-based commands in AcceptedCommandList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 28 : TS6: Check for TZ feature-based commands in AcceptedCommandList\n");
             if (ShouldSkip("TIMESYNC.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestTs6CheckForTzFeatureBasedCommandsInAcceptedCommandList_30();
+            err = TestTs6CheckForTzFeatureBasedCommandsInAcceptedCommandList_28();
             break;
-        case 31:
+        case 29:
             ChipLogProgress(
-                chipTool, " ***** Test Step 31 : TS6: Check for TZ feature-based commands in not AcceptedCommandList\n");
+                chipTool, " ***** Test Step 29 : TS6: Check for TZ feature-based commands in not AcceptedCommandList\n");
             if (ShouldSkip("!TIMESYNC.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestTs6CheckForTzFeatureBasedCommandsInNotAcceptedCommandList_31();
+            err = TestTs6CheckForTzFeatureBasedCommandsInNotAcceptedCommandList_29();
             break;
-        case 32:
-            ChipLogProgress(chipTool, " ***** Test Step 32 : TS6: Check for NTPC feature-based commands in AcceptedCommandList\n");
+        case 30:
+            ChipLogProgress(chipTool, " ***** Test Step 30 : TS6: Check for NTPC feature-based commands in AcceptedCommandList\n");
             if (ShouldSkip("TIMESYNC.S.F01")) {
                 NextTest();
                 return;
             }
-            err = TestTs6CheckForNtpcFeatureBasedCommandsInAcceptedCommandList_32();
+            err = TestTs6CheckForNtpcFeatureBasedCommandsInAcceptedCommandList_30();
             break;
-        case 33:
+        case 31:
             ChipLogProgress(
-                chipTool, " ***** Test Step 33 : TS6: Check for NTPC feature-based commands in not AcceptedCommandList\n");
+                chipTool, " ***** Test Step 31 : TS6: Check for NTPC feature-based commands in not AcceptedCommandList\n");
             if (ShouldSkip("!TIMESYNC.S.F01")) {
                 NextTest();
                 return;
             }
-            err = TestTs6CheckForNtpcFeatureBasedCommandsInNotAcceptedCommandList_33();
+            err = TestTs6CheckForNtpcFeatureBasedCommandsInNotAcceptedCommandList_31();
             break;
-        case 34:
-            ChipLogProgress(chipTool, " ***** Test Step 34 : TS6: Check for TSC feature-based commands in AcceptedCommandList\n");
+        case 32:
+            ChipLogProgress(chipTool, " ***** Test Step 32 : TS6: Check for TSC feature-based commands in AcceptedCommandList\n");
             if (ShouldSkip("TIMESYNC.S.F03")) {
                 NextTest();
                 return;
             }
-            err = TestTs6CheckForTscFeatureBasedCommandsInAcceptedCommandList_34();
+            err = TestTs6CheckForTscFeatureBasedCommandsInAcceptedCommandList_32();
             break;
-        case 35:
+        case 33:
             ChipLogProgress(
-                chipTool, " ***** Test Step 35 : TS6: Check for TSC feature-based commands in not AcceptedCommandList\n");
+                chipTool, " ***** Test Step 33 : TS6: Check for TSC feature-based commands in not AcceptedCommandList\n");
             if (ShouldSkip("!TIMESYNC.S.F03")) {
                 NextTest();
                 return;
             }
-            err = TestTs6CheckForTscFeatureBasedCommandsInNotAcceptedCommandList_35();
+            err = TestTs6CheckForTscFeatureBasedCommandsInNotAcceptedCommandList_33();
             break;
-        case 36:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 36 : TS6: Check for mandatory commands in AcceptedCommandList. 1. The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF) 2. The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestTs6CheckForMandatoryCommandsInAcceptedCommandList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_36();
-            break;
-        case 37:
-            ChipLogProgress(chipTool, " ***** Test Step 37 : TS7: Check for TZ feature-based commands in GeneratedCommandList\n");
+        case 34:
+            ChipLogProgress(chipTool, " ***** Test Step 34 : TS7: Check for TZ feature-based commands in GeneratedCommandList\n");
             if (ShouldSkip("TIMESYNC.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestTs7CheckForTzFeatureBasedCommandsInGeneratedCommandList_37();
+            err = TestTs7CheckForTzFeatureBasedCommandsInGeneratedCommandList_34();
             break;
-        case 38:
+        case 35:
             ChipLogProgress(
-                chipTool, " ***** Test Step 38 : TS7: Check for TZ feature-based commands in not GeneratedCommandList\n");
+                chipTool, " ***** Test Step 35 : TS7: Check for TZ feature-based commands in not GeneratedCommandList\n");
             if (ShouldSkip("!TIMESYNC.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestTs7CheckForTzFeatureBasedCommandsInNotGeneratedCommandList_38();
-            break;
-        case 39:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 39 : TS7: Check for mandatory commands in GeneratedCommandList. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF). 2.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestTs7CheckForMandatoryCommandsInGeneratedCommandList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_39();
+            err = TestTs7CheckForTzFeatureBasedCommandsInNotGeneratedCommandList_35();
             break;
         }
 
@@ -106037,18 +102491,6 @@ public:
         case 35:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 36:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 37:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 38:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 39:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -106062,7 +102504,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 40;
+    const uint16_t mTestCount = 36;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -106559,29 +103001,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestTs4CheckForMandatoryAttributesInAttributeList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_22()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestTs5ThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_28()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestTs6CheckForMandatoryCommandsInAcceptedCommandList_29()
+    CHIP_ERROR TestTs6CheckForMandatoryCommandsInAcceptedCommandList_27()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -106603,7 +103023,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestTs6CheckForTzFeatureBasedCommandsInAcceptedCommandList_30()
+    CHIP_ERROR TestTs6CheckForTzFeatureBasedCommandsInAcceptedCommandList_28()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -106626,7 +103046,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestTs6CheckForTzFeatureBasedCommandsInNotAcceptedCommandList_31()
+    CHIP_ERROR TestTs6CheckForTzFeatureBasedCommandsInNotAcceptedCommandList_29()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -106649,7 +103069,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestTs6CheckForNtpcFeatureBasedCommandsInAcceptedCommandList_32()
+    CHIP_ERROR TestTs6CheckForNtpcFeatureBasedCommandsInAcceptedCommandList_30()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -106671,7 +103091,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestTs6CheckForNtpcFeatureBasedCommandsInNotAcceptedCommandList_33()
+    CHIP_ERROR TestTs6CheckForNtpcFeatureBasedCommandsInNotAcceptedCommandList_31()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -106693,7 +103113,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestTs6CheckForTscFeatureBasedCommandsInAcceptedCommandList_34()
+    CHIP_ERROR TestTs6CheckForTscFeatureBasedCommandsInAcceptedCommandList_32()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -106715,7 +103135,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestTs6CheckForTscFeatureBasedCommandsInNotAcceptedCommandList_35()
+    CHIP_ERROR TestTs6CheckForTscFeatureBasedCommandsInNotAcceptedCommandList_33()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -106737,18 +103157,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestTs6CheckForMandatoryCommandsInAcceptedCommandList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_36()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestTs7CheckForTzFeatureBasedCommandsInGeneratedCommandList_37()
+    CHIP_ERROR TestTs7CheckForTzFeatureBasedCommandsInGeneratedCommandList_34()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -106770,7 +103179,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestTs7CheckForTzFeatureBasedCommandsInNotGeneratedCommandList_38()
+    CHIP_ERROR TestTs7CheckForTzFeatureBasedCommandsInNotGeneratedCommandList_35()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -106790,17 +103199,6 @@ private:
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestTs7CheckForMandatoryCommandsInGeneratedCommandList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_39()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 };
 
@@ -107135,81 +103533,44 @@ public:
             err = TestStep1WaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
         case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : Step 2: Read the global attribute: ClusterRevision\n");
-            err = TestStep2ReadTheGlobalAttributeClusterRevision_1();
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Step 2: TH reads from the DUT the ClusterRevision attribute.\n");
+            err = TestStep2ThReadsFromTheDutTheClusterRevisionAttribute_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Step 3: Read the global attribute: FeatureMap\n");
-            err = TestStep3ReadTheGlobalAttributeFeatureMap_2();
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Step 3: TH reads from the DUT the FeatureMap attribute.\n");
+            err = TestStep3ThReadsFromTheDutTheFeatureMapAttribute_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Step 4a: Read the global attribute: AttributeList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Step 4: TH reads from the DUT the AttributeList attribute.\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep4aReadTheGlobalAttributeAttributeList_3();
+            err = TestStep4ThReadsFromTheDutTheAttributeListAttribute_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Step 4a: Read the global attribute: AttributeList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Step 4: TH reads from the DUT the AttributeList attribute.\n");
             if (ShouldSkip("!PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep4aReadTheGlobalAttributeAttributeList_4();
+            err = TestStep4ThReadsFromTheDutTheAttributeListAttribute_4();
             break;
         case 5:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 5 : Step 4b: Read the global attribute: AttributeList. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Step 5: TH reads EventList attribute from DUT\n");
+            if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep4bReadTheGlobalAttributeAttributeList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_5();
-            break;
+            NextTest();
+            return;
         case 6:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 6 : Step 5: Read the global attribute: EventList. 1.The list MAY contain values in the "
-                "Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI range "
-                "(0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test Vendor or "
-                "invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where "
-                "XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5ReadTheGlobalAttributeEventList1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Step 6: TH reads AcceptedCommandList attribute from DUT\n");
+            err = TestStep6ThReadsAcceptedCommandListAttributeFromDut_6();
             break;
         case 7:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 7 : Step 6: Read the global attribute: AcceptedCommandList. 1.The list MAY contain values in the "
-                "Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI range "
-                "(0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test Vendor or "
-                "invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where "
-                "XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6ReadTheGlobalAttributeAcceptedCommandList1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_7();
-            break;
-        case 8:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 8 : Step 7: Read the global attribute: GeneratedCommandList. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7ReadTheGlobalAttributeGeneratedCommandList1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_8();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Step 7: TH reads GeneratedCommandList attribute from DUT\n");
+            err = TestStep7ThReadsGeneratedCommandListAttributeFromDut_7();
             break;
         }
 
@@ -107246,9 +103607,6 @@ public:
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -107262,7 +103620,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 9;
+    const uint16_t mTestCount = 8;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -107277,7 +103635,7 @@ private:
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestStep2ReadTheGlobalAttributeClusterRevision_1()
+    CHIP_ERROR TestStep2ThReadsFromTheDutTheClusterRevisionAttribute_1()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -107285,7 +103643,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 2: Read the global attribute: ClusterRevision Error: %@", err);
+            NSLog(@"Step 2: TH reads from the DUT the ClusterRevision attribute. Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -107301,7 +103659,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep3ReadTheGlobalAttributeFeatureMap_2()
+    CHIP_ERROR TestStep3ThReadsFromTheDutTheFeatureMapAttribute_2()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -107309,7 +103667,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 3: Read the global attribute: FeatureMap Error: %@", err);
+            NSLog(@"Step 3: TH reads from the DUT the FeatureMap attribute. Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -107325,7 +103683,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4aReadTheGlobalAttributeAttributeList_3()
+    CHIP_ERROR TestStep4ThReadsFromTheDutTheAttributeListAttribute_3()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -107333,7 +103691,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 4a: Read the global attribute: AttributeList Error: %@", err);
+            NSLog(@"Step 4: TH reads from the DUT the AttributeList attribute. Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -107352,7 +103710,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4aReadTheGlobalAttributeAttributeList_4()
+    CHIP_ERROR TestStep4ThReadsFromTheDutTheAttributeListAttribute_4()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -107360,7 +103718,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 4a: Read the global attribute: AttributeList Error: %@", err);
+            NSLog(@"Step 4: TH reads from the DUT the AttributeList attribute. Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -107378,48 +103736,52 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4bReadTheGlobalAttributeAttributeList1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_5()
+    CHIP_ERROR TestStep6ThReadsAcceptedCommandListAttributeFromDut_6()
     {
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUserLabel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 6: TH reads AcceptedCommandList attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("AcceptedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep5ReadTheGlobalAttributeEventList1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_6()
+    CHIP_ERROR TestStep7ThReadsGeneratedCommandListAttributeFromDut_7()
     {
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUserLabel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-    CHIP_ERROR
-    TestStep6ReadTheGlobalAttributeAcceptedCommandList1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_7()
-    {
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 7: TH reads GeneratedCommandList attribute from DUT Error: %@", err);
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-    CHIP_ERROR
-    TestStep7ReadTheGlobalAttributeGeneratedCommandList1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_8()
-    {
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 };
 
@@ -158393,91 +154755,40 @@ public:
             err = TestStep4eThReadsFeatureDependentAttributeCurrentHeapHighWatermarkInAttributeList_9();
             break;
         case 10:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 10 : Step 4f: TH reads AttributeList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep4fThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_10();
-            break;
-        case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Step 5a: TH reads EventList from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Step 5a: TH reads EventList from DUT\n");
             if (ShouldSkip("DGSW.S.E00 && PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
-        case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : Step 5b: TH reads EventList from DUT\n");
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Step 5b: TH reads EventList from DUT\n");
             if (ShouldSkip(" !DGSW.S.E00 && PICS_EVENT_LIST_ENABLED ")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
-        case 13:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 13 : Step 5c: TH reads from the DUT the EventList attribute. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) 2. "
-                "The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5cThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_13();
-            break;
-        case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : Step 6a: TH reads AcceptedCommandList from DUT\n");
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Step 6: TH reads AcceptedCommandList from DUT\n");
             if (ShouldSkip("DGSW.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestStep6aThReadsAcceptedCommandListFromDut_14();
+            err = TestStep6ThReadsAcceptedCommandListFromDut_12();
             break;
-        case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : Step 6b: TH reads AcceptedCommandList from DUT\n");
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Step 6: TH reads AcceptedCommandList from DUT\n");
             if (ShouldSkip(" !DGSW.S.F00 ")) {
                 NextTest();
                 return;
             }
-            err = TestStep6bThReadsAcceptedCommandListFromDut_15();
+            err = TestStep6ThReadsAcceptedCommandListFromDut_13();
             break;
-        case 16:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 16 : Step 6c: TH reads AcceptedCommandList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_00FF). 2.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored.3.The list SHALL NOT contain any values in the Test Vendor "
-                "or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where "
-                "XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6cThReadsAcceptedCommandListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_16();
-            break;
-        case 17:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 17 : Step 7: TH reads GeneratedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7ThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_17();
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Step 7: TH reads GeneratedCommandList from DUT\n");
+            err = TestStep7ThReadsGeneratedCommandListFromDut_14();
             break;
         }
 
@@ -158535,15 +154846,6 @@ public:
         case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -158557,7 +154859,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 18;
+    const uint16_t mTestCount = 15;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -158792,29 +155094,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4fThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_10()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestStep5cThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_13()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep6aThReadsAcceptedCommandListFromDut_14()
+    CHIP_ERROR TestStep6ThReadsAcceptedCommandListFromDut_12()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -158824,7 +155104,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6a: TH reads AcceptedCommandList from DUT Error: %@", err);
+            NSLog(@"Step 6: TH reads AcceptedCommandList from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -158837,7 +155117,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep6bThReadsAcceptedCommandListFromDut_15()
+    CHIP_ERROR TestStep6ThReadsAcceptedCommandListFromDut_13()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -158847,7 +155127,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6b: TH reads AcceptedCommandList from DUT Error: %@", err);
+            NSLog(@"Step 6: TH reads AcceptedCommandList from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -158863,26 +155143,30 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep6cThReadsAcceptedCommandListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x000000ff2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_16()
+    CHIP_ERROR TestStep7ThReadsGeneratedCommandListFromDut_14()
     {
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterSoftwareDiagnostics alloc] initWithDevice:device
+                                                                               endpointID:@(0)
+                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-    CHIP_ERROR
-    TestStep7ThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_17()
-    {
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 7: TH reads GeneratedCommandList from DUT Error: %@", err);
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 };
 
@@ -180790,91 +177074,33 @@ public:
             err = TestStep4eReadTheOptionalAttributeReplacementProductListAcfremonsf02InAttributeList_11();
             break;
         case 12:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 12 : Step 4f: TH reads AttributeList attribute from DUT. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE). "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep4fThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_12();
-            break;
-        case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Step 5a: TH reads EventList attribute from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Step 5: TH reads EventList attribute from DUT\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
-        case 14:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 14 : Step 5b: TH reads from the DUT the EventList attribute. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) 2. "
-                "The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5bThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_14();
-            break;
-        case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : Step 6a: Read the global attribute: AcceptedCommandList\n");
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Step 6: Read the global attribute: AcceptedCommandList\n");
             if (ShouldSkip("!ACFREMON.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestStep6aReadTheGlobalAttributeAcceptedCommandList_15();
+            err = TestStep6ReadTheGlobalAttributeAcceptedCommandList_13();
             break;
-        case 16:
+        case 14:
             ChipLogProgress(
-                chipTool, " ***** Test Step 16 : Step 6a: Read the optional command (ResetCondition) in AcceptedCommandList\n");
+                chipTool, " ***** Test Step 14 : Step 6: Read the optional command (ResetCondition) in AcceptedCommandList\n");
             if (ShouldSkip("ACFREMON.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestStep6aReadTheOptionalCommandResetConditionInAcceptedCommandList_16();
+            err = TestStep6ReadTheOptionalCommandResetConditionInAcceptedCommandList_14();
             break;
-        case 17:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 17 : Step 6b: TH reads from the DUT the AcceptedCommandList attribute. 1.The list SHALL NOT "
-                "contain any additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - "
-                "0x0000_FFFE). 2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - "
-                "0xXXXX_4FFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list "
-                "SHALL NOT contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), "
-                "(0xXXXX_5000 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - "
-                "0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6bThReadsFromTheDutTheAcceptedCommandListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_17();
-            break;
-        case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : Step 7a: Read the global attribute: GeneratedCommandList\n");
-            err = TestStep7aReadTheGlobalAttributeGeneratedCommandList_18();
-            break;
-        case 19:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 19 : Step 7b: TH reads from the DUT the GeneratedCommandList attribute. 1.The list SHALL NOT "
-                "contain any additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - "
-                "0x0000_FFFE). 2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - "
-                "0xXXXX_4FFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.The list "
-                "SHALL NOT contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), "
-                "(0xXXXX_5000 - 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - "
-                "0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7bThReadsFromTheDutTheGeneratedCommandListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_19();
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Step 7: Read the global attribute: GeneratedCommandList\n");
+            err = TestStep7ReadTheGlobalAttributeGeneratedCommandList_15();
             break;
         }
 
@@ -180935,18 +177161,6 @@ public:
         case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 18:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 19:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -180960,7 +177174,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 20;
+    const uint16_t mTestCount = 16;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -181242,29 +177456,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4fThReadsAttributeListAttributeFromDut1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_12()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestStep5bThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_14()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep6aReadTheGlobalAttributeAcceptedCommandList_15()
+    CHIP_ERROR TestStep6ReadTheGlobalAttributeAcceptedCommandList_13()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -181274,7 +177466,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6a: Read the global attribute: AcceptedCommandList Error: %@", err);
+            NSLog(@"Step 6: Read the global attribute: AcceptedCommandList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -181290,7 +177482,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep6aReadTheOptionalCommandResetConditionInAcceptedCommandList_16()
+    CHIP_ERROR TestStep6ReadTheOptionalCommandResetConditionInAcceptedCommandList_14()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -181300,7 +177492,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6a: Read the optional command (ResetCondition) in AcceptedCommandList Error: %@", err);
+            NSLog(@"Step 6: Read the optional command (ResetCondition) in AcceptedCommandList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -181313,18 +177505,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep6bThReadsFromTheDutTheAcceptedCommandListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_17()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep7aReadTheGlobalAttributeGeneratedCommandList_18()
+    CHIP_ERROR TestStep7ReadTheGlobalAttributeGeneratedCommandList_15()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -181334,7 +177515,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 7a: Read the global attribute: GeneratedCommandList Error: %@", err);
+            NSLog(@"Step 7: Read the global attribute: GeneratedCommandList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -181348,17 +177529,6 @@ private:
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestStep7bThReadsFromTheDutTheGeneratedCommandListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_19()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 };
 
@@ -181790,83 +177960,33 @@ public:
             err = TestStep4eReadTheOptionalAttributeReplacementProductListHepafremonsf02InAttributeList_11();
             break;
         case 12:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 12 : Step 4f: TH reads from the DUT the AttributeList attribute. The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE). "
-                "2.The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3.TThe list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep4fThReadsFromTheDutTheAttributeListAttributeTheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TTheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_12();
-            break;
-        case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Step 5a: TH reads EventList attribute from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Step 5: TH reads EventList attribute from DUT\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Step 6: Read the global attribute: AcceptedCommandList\n");
+            if (ShouldSkip("!HEPAFREMON.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestStep6ReadTheGlobalAttributeAcceptedCommandList_13();
+            break;
         case 14:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 14 : Step 5b: TH reads from the DUT the EventList attribute. 1.The list SHALL NOT contain any "
-                "additional values in the standard or scoped range: (0x0000_0000 - 0x0000_4FFF) and (0x0000_F000 - 0x0000_FFFE) 2. "
-                "The list MAY contain values in the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_4FFF), "
-                "where XXXX is the allowed MEI range (0x0001 - 0xFFF1), these values SHALL be ignored. 3. The list SHALL NOT "
-                "contain any values in the Test Vendor or invalid range: (0x0000_5000 - 0x0000_EFFF and 0x0000_FFFF), (0xXXXX_5000 "
-                "- 0xXXXX_FFFF) and (0xFFF1_0000 - 0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT && PICS_EVENT_LIST_ENABLED")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5bThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_14();
-            break;
-        case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : Step 6a: Read the global attribute: AcceptedCommandList\n");
-            err = TestStep6aReadTheGlobalAttributeAcceptedCommandList_15();
-            break;
-        case 16:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 16 : Step 6b: TH reads AcceptedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6bThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_16();
-            break;
-        case 17:
             ChipLogProgress(
-                chipTool, " ***** Test Step 17 : Step 6b: Read the optional command (ResetCondition) in AcceptedCommandList\n");
+                chipTool, " ***** Test Step 14 : Step 6: Read the optional command (ResetCondition) in AcceptedCommandList\n");
             if (ShouldSkip("HEPAFREMON.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestStep6bReadTheOptionalCommandResetConditionInAcceptedCommandList_17();
+            err = TestStep6ReadTheOptionalCommandResetConditionInAcceptedCommandList_14();
             break;
-        case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : Step 7a: Read the global attribute: GeneratedCommandList\n");
-            err = TestStep7aReadTheGlobalAttributeGeneratedCommandList_18();
-            break;
-        case 19:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 19 : Step 7b: TH reads GeneratedCommandList attribute from DUT. 1.The list MAY contain values in "
-                "the Manufacturer Extensible Identifier (MEI) range: (0xXXXX_0000 - 0xXXXX_00FF), where XXXX is the allowed MEI "
-                "range (0x0001 - 0xFFF1), these values SHALL be ignored. 2.The list SHALL NOT contain any values in the Test "
-                "Vendor or invalid range: (0x0000_0100 - 0x0000_FFFF), (0xXXXX_0100 - 0xXXXX_FFFF) and (0xFFF1_0000 - "
-                "0xFFFF_FFFF), where XXXX is the allowed MEI range (0x0001 - 0xFFF1)\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7bThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_19();
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Step 7: Read the global attribute: GeneratedCommandList\n");
+            err = TestStep7ReadTheGlobalAttributeGeneratedCommandList_15();
             break;
         }
 
@@ -181927,18 +178047,6 @@ public:
         case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 18:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 19:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -181952,7 +178060,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 20;
+    const uint16_t mTestCount = 16;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -182235,29 +178343,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep4fThReadsFromTheDutTheAttributeListAttributeTheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TTheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_12()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestStep5bThReadsFromTheDutTheEventListAttribute1TheListShallNotContainAnyAdditionalValuesInTheStandardOrScopedRange0x000000000x00004fffAnd0x0000F0000x0000Fffe2TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX4fffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored3TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000050000x0000EfffAnd0x0000Ffff0xXXXX50000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_14()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep6aReadTheGlobalAttributeAcceptedCommandList_15()
+    CHIP_ERROR TestStep6ReadTheGlobalAttributeAcceptedCommandList_13()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -182267,9 +178353,14 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6a: Read the global attribute: AcceptedCommandList Error: %@", err);
+            NSLog(@"Step 6: Read the global attribute: AcceptedCommandList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("AcceptedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
 
             VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
             NextTest();
@@ -182278,18 +178369,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep6bThReadsAcceptedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_16()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep6bReadTheOptionalCommandResetConditionInAcceptedCommandList_17()
+    CHIP_ERROR TestStep6ReadTheOptionalCommandResetConditionInAcceptedCommandList_14()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -182299,7 +178379,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6b: Read the optional command (ResetCondition) in AcceptedCommandList Error: %@", err);
+            NSLog(@"Step 6: Read the optional command (ResetCondition) in AcceptedCommandList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -182312,7 +178392,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep7aReadTheGlobalAttributeGeneratedCommandList_18()
+    CHIP_ERROR TestStep7ReadTheGlobalAttributeGeneratedCommandList_15()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -182322,7 +178402,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 7a: Read the global attribute: GeneratedCommandList Error: %@", err);
+            NSLog(@"Step 7: Read the global attribute: GeneratedCommandList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -182336,17 +178416,6 @@ private:
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestStep7bThReadsGeneratedCommandListAttributeFromDut1TheListMayContainValuesInTheManufacturerExtensibleIdentifierMeiRange0xXXXX00000xXXXX00ffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1TheseValuesShallBeIgnored2TheListShallNotContainAnyValuesInTheTestVendorOrInvalidRange0x000001000x0000Ffff0xXXXX01000xXXXXFfffAnd0xFFF100000xFFFFFfffWhereXxxxIsTheAllowedMeiRange0x00010xFFF1_19()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 };
 
