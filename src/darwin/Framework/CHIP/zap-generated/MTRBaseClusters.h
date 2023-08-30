@@ -25519,6 +25519,10 @@ typedef NS_ENUM(uint8_t, MTRTimeFormatLocalizationHourFormat) {
     MTRTimeFormatLocalizationHourFormat24hr API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x01,
 } API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
+typedef NS_OPTIONS(uint32_t, MTRTimeFormatLocalizationFeature) {
+    MTRTimeFormatLocalizationFeatureCalendarFormat MTR_NEWLY_AVAILABLE = 0x1,
+} MTR_NEWLY_AVAILABLE;
+
 typedef NS_ENUM(uint8_t, MTRUnitLocalizationTempUnit) {
     MTRUnitLocalizationTempUnitFahrenheit API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x00,
     MTRUnitLocalizationTempUnitCelsius API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x01,
