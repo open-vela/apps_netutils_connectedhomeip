@@ -26616,6 +26616,10 @@ typedef NS_OPTIONS(uint32_t, MTRDishwasherAlarmAlarmMap) {
     MTRDishwasherAlarmAlarmMapWaterLevelError MTR_PROVISIONALLY_AVAILABLE = 0x20,
 } MTR_PROVISIONALLY_AVAILABLE;
 
+typedef NS_OPTIONS(uint32_t, MTRDishwasherAlarmFeature) {
+    MTRDishwasherAlarmFeatureReset MTR_PROVISIONALLY_AVAILABLE = 0x1,
+} MTR_PROVISIONALLY_AVAILABLE;
+
 typedef NS_ENUM(uint8_t, MTROperationalStateErrorState) {
     MTROperationalStateErrorStateNoError MTR_PROVISIONALLY_AVAILABLE = 0x00,
     MTROperationalStateErrorStateUnableToStartOrResume MTR_PROVISIONALLY_AVAILABLE = 0x01,
