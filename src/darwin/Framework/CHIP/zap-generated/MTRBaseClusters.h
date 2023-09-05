@@ -1754,16 +1754,16 @@ API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
     API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 
 - (void)readAttributeTagListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
-    MTR_NEWLY_AVAILABLE;
+    MTR_PROVISIONALLY_AVAILABLE;
 - (void)subscribeAttributeTagListWithParams:(MTRSubscribeParams *)params
                     subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                               reportHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
-    MTR_NEWLY_AVAILABLE;
+    MTR_PROVISIONALLY_AVAILABLE;
 + (void)readAttributeTagListWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
                                          endpoint:(NSNumber *)endpoint
                                             queue:(dispatch_queue_t)queue
                                        completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
-    MTR_NEWLY_AVAILABLE;
+    MTR_PROVISIONALLY_AVAILABLE;
 
 - (void)readAttributeGeneratedCommandListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
     API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
@@ -3974,16 +3974,16 @@ API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
     API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 
 - (void)readAttributeEndpointListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
-    MTR_NEWLY_AVAILABLE;
+    MTR_PROVISIONALLY_AVAILABLE;
 - (void)subscribeAttributeEndpointListWithParams:(MTRSubscribeParams *)params
                          subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                    reportHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
-    MTR_NEWLY_AVAILABLE;
+    MTR_PROVISIONALLY_AVAILABLE;
 + (void)readAttributeEndpointListWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
                                               endpoint:(NSNumber *)endpoint
                                                  queue:(dispatch_queue_t)queue
                                             completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
-    MTR_NEWLY_AVAILABLE;
+    MTR_PROVISIONALLY_AVAILABLE;
 
 - (void)readAttributeGeneratedCommandListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
     API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
@@ -25105,9 +25105,9 @@ typedef NS_OPTIONS(uint8_t, MTRGroupsNameSupportBitmap) {
 
 typedef NS_OPTIONS(uint32_t, MTRScenesFeature) {
     MTRScenesFeatureSceneNames API_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0)) = 0x1,
-    MTRScenesFeatureExplicit MTR_NEWLY_AVAILABLE = 0x2,
-    MTRScenesFeatureTableSize MTR_NEWLY_AVAILABLE = 0x4,
-    MTRScenesFeatureFabricScenes MTR_NEWLY_AVAILABLE = 0x8,
+    MTRScenesFeatureExplicit MTR_PROVISIONALLY_AVAILABLE = 0x2,
+    MTRScenesFeatureTableSize MTR_PROVISIONALLY_AVAILABLE = 0x4,
+    MTRScenesFeatureFabricScenes MTR_PROVISIONALLY_AVAILABLE = 0x8,
 } API_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0));
 
 typedef NS_OPTIONS(uint8_t, MTRScenesCopyMode) {
@@ -25141,7 +25141,7 @@ typedef NS_ENUM(uint8_t, MTROnOffStartUpOnOff) {
 
 typedef NS_OPTIONS(uint32_t, MTROnOffFeature) {
     MTROnOffFeatureLighting API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x1,
-    MTROnOffFeatureDeadFront MTR_NEWLY_AVAILABLE = 0x2,
+    MTROnOffFeatureDeadFront API_AVAILABLE(ios(17.1), macos(14.1), watchos(10.1), tvos(17.1)) = 0x2,
 } API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 typedef NS_OPTIONS(uint8_t, MTROnOffControl) {
@@ -25170,8 +25170,8 @@ typedef NS_OPTIONS(uint8_t, MTRLevelControlOptions) {
 } API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 
 typedef NS_OPTIONS(uint32_t, MTRDescriptorFeature) {
-    MTRDescriptorFeatureTagList MTR_NEWLY_AVAILABLE = 0x1,
-} MTR_NEWLY_AVAILABLE;
+    MTRDescriptorFeatureTagList MTR_PROVISIONALLY_AVAILABLE = 0x1,
+} MTR_PROVISIONALLY_AVAILABLE;
 
 typedef NS_ENUM(uint8_t, MTRAccessControlEntryAuthMode) {
     MTRAccessControlEntryAuthModePASE API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x01,
@@ -25520,8 +25520,8 @@ typedef NS_ENUM(uint8_t, MTRTimeFormatLocalizationHourFormat) {
 } API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 typedef NS_OPTIONS(uint32_t, MTRTimeFormatLocalizationFeature) {
-    MTRTimeFormatLocalizationFeatureCalendarFormat MTR_NEWLY_AVAILABLE = 0x1,
-} MTR_NEWLY_AVAILABLE;
+    MTRTimeFormatLocalizationFeatureCalendarFormat API_AVAILABLE(ios(17.1), macos(14.1), watchos(10.1), tvos(17.1)) = 0x1,
+} API_AVAILABLE(ios(17.1), macos(14.1), watchos(10.1), tvos(17.1));
 
 typedef NS_ENUM(uint8_t, MTRUnitLocalizationTempUnit) {
     MTRUnitLocalizationTempUnitFahrenheit API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x00,
@@ -26444,8 +26444,8 @@ typedef NS_ENUM(uint8_t, MTRGroupKeyManagementGroupKeySecurityPolicy) {
 } API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 typedef NS_OPTIONS(uint32_t, MTRGroupKeyManagementFeature) {
-    MTRGroupKeyManagementFeatureCacheAndSync MTR_NEWLY_AVAILABLE = 0x1,
-} MTR_NEWLY_AVAILABLE;
+    MTRGroupKeyManagementFeatureCacheAndSync MTR_PROVISIONALLY_AVAILABLE = 0x1,
+} MTR_PROVISIONALLY_AVAILABLE;
 
 typedef NS_OPTIONS(uint32_t, MTRICDManagementFeature) {
     MTRICDManagementFeatureCheckInProtocolSupport MTR_PROVISIONALLY_AVAILABLE = 0x1,
