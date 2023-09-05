@@ -10096,6 +10096,8 @@ public:
     }
 };
 
+#if MTR_ENABLE_PROVISIONAL
+
 /*
  * Attribute TagList
  */
@@ -10173,6 +10175,8 @@ public:
         return CHIP_NO_ERROR;
     }
 };
+
+#endif // MTR_ENABLE_PROVISIONAL
 
 /*
  * Attribute GeneratedCommandList
@@ -22772,6 +22776,8 @@ public:
     }
 };
 
+#if MTR_ENABLE_PROVISIONAL
+
 /*
  * Attribute EndpointList
  */
@@ -22849,6 +22855,8 @@ public:
         return CHIP_NO_ERROR;
     }
 };
+
+#endif // MTR_ENABLE_PROVISIONAL
 
 /*
  * Attribute GeneratedCommandList
@@ -147946,8 +147954,10 @@ void registerClusterDescriptor(Commands & commands)
               make_unique<SubscribeAttributeDescriptorClientList>(), //
               make_unique<ReadDescriptorPartsList>(), //
               make_unique<SubscribeAttributeDescriptorPartsList>(), //
+#if MTR_ENABLE_PROVISIONAL
               make_unique<ReadDescriptorTagList>(), //
               make_unique<SubscribeAttributeDescriptorTagList>(), //
+#endif // MTR_ENABLE_PROVISIONAL
               make_unique<ReadDescriptorGeneratedCommandList>(), //
               make_unique<SubscribeAttributeDescriptorGeneratedCommandList>(), //
               make_unique<ReadDescriptorAcceptedCommandList>(), //
@@ -148446,8 +148456,10 @@ void registerClusterPowerSource(Commands & commands)
               make_unique<SubscribeAttributePowerSourceBatChargingCurrent>(), //
               make_unique<ReadPowerSourceActiveBatChargeFaults>(), //
               make_unique<SubscribeAttributePowerSourceActiveBatChargeFaults>(), //
+#if MTR_ENABLE_PROVISIONAL
               make_unique<ReadPowerSourceEndpointList>(), //
               make_unique<SubscribeAttributePowerSourceEndpointList>(), //
+#endif // MTR_ENABLE_PROVISIONAL
               make_unique<ReadPowerSourceGeneratedCommandList>(), //
               make_unique<SubscribeAttributePowerSourceGeneratedCommandList>(), //
               make_unique<ReadPowerSourceAcceptedCommandList>(), //
