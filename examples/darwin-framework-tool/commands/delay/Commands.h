@@ -1,5 +1,5 @@
 /*
- *   Copyright (c) 2022 Project CHIP Authors
+ *   Copyright (c) 2023 Project CHIP Authors
  *   All rights reserved.
  *
  *   Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,23 +18,17 @@
 
 #pragma once
 
-#import <Matter/Matter.h>
+#include "commands/common/Commands.h"
+#include "commands/delay/SleepCommand.h"
+#include "commands/delay/WaitForCommissioneeCommand.h"
 
-#include "../common/CHIPCommandBridge.h"
-#include <commands/common/Command.h>
-
-#include "InteractiveCommands.h"
-
-void registerCommandsInteractive(Commands & commands)
+void registerCommandsDelay(Commands & commands)
 {
-    const char * clusterName = "interactive";
-
+    const char * clusterName      = "Delay";
     commands_list clusterCommands = {
-#if CONFIG_USE_INTERACTIVE_MODE
-        make_unique<InteractiveStartCommand>(&commands),
-        make_unique<InteractiveServerCommand>(&commands),
-#endif // CONFIG_USE_INTERACTIVE_MODE
+        make_unique<SleepCommand>(),               //
+        make_unique<WaitForCommissioneeCommand>(), //
     };
 
-    commands.RegisterCommandSet(clusterName, clusterCommands, "Commands for starting long-lived interactive modes.");
+    commands.RegisterCommandSet(clusterName, clusterCommands, "Commands for waiting for something to happen.");
 }
