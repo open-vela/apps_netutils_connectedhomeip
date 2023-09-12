@@ -3353,7 +3353,7 @@ private:
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
         return WaitForCommissionee("alpha", value);
     }
-    NSNumber * _Nonnull CurrentFabricIndex;
+    NSNumber * _Nonnull CurrentFabricIndexValue;
 
     CHIP_ERROR TestStep2Th1ReadsDutEndpoint0OperationalCredentialsClusterCurrentFabricIndexAttribute_1()
     {
@@ -3370,7 +3370,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             {
-                CurrentFabricIndex = value;
+                CurrentFabricIndexValue = value;
             }
 
             NextTest();
@@ -3422,7 +3422,7 @@ private:
             ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).data = mDOkEmpty.HasValue()
                 ? [NSData dataWithBytes:mDOkEmpty.Value().data() length:mDOkEmpty.Value().size()]
                 : [[NSData alloc] initWithBytes:"\x17\x18" length:2];
-            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).fabricIndex = [CurrentFabricIndexValue copy];
 
             extensionArgument = temp_0;
         }
@@ -3470,7 +3470,7 @@ private:
                                               ));
                                           VerifyOrReturn(CheckValue("FabricIndex",
                                               ((MTRAccessControlClusterAccessControlExtensionStruct *) actualValue[0]).fabricIndex,
-                                              CurrentFabricIndex));
+                                              CurrentFabricIndexValue));
                                       }
 
                                       NextTest();
@@ -3498,7 +3498,7 @@ private:
                                   "\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x6C"
                                   "\x69\x76\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00\x18"
                            length:71];
-            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).fabricIndex = [CurrentFabricIndexValue copy];
 
             extensionArgument = temp_0;
         }
@@ -3555,7 +3555,7 @@ private:
                                               ));
                                           VerifyOrReturn(CheckValue("FabricIndex",
                                               ((MTRAccessControlClusterAccessControlExtensionStruct *) actualValue[0]).fabricIndex,
-                                              CurrentFabricIndex));
+                                              CurrentFabricIndexValue));
                                       }
 
                                       NextTest();
@@ -3586,7 +3586,7 @@ private:
                         "\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C\x64\x2E\x20\x54\x68\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E"
                         "\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x61\x67\x61\x69\x6E\x2E\x2E\x2E\x2E\x2E\x00\x18"
                            length:128];
-            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).fabricIndex = [CurrentFabricIndexValue copy];
 
             extensionArgument = temp_0;
         }
@@ -3648,7 +3648,7 @@ private:
                                               ));
                                           VerifyOrReturn(CheckValue("FabricIndex",
                                               ((MTRAccessControlClusterAccessControlExtensionStruct *) actualValue[0]).fabricIndex,
-                                              CurrentFabricIndex));
+                                              CurrentFabricIndexValue));
                                       }
 
                                       NextTest();
@@ -3679,7 +3679,7 @@ private:
                         "\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C\x64\x2E\x20\x54\x68\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E"
                         "\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x61\x67\x61\x69\x6E\x2E\x2E\x2E\x2E\x2E\x2E\x00\x18"
                            length:129];
-            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).fabricIndex = [CurrentFabricIndexValue copy];
 
             extensionArgument = temp_0;
         }
@@ -3721,7 +3721,7 @@ private:
             ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).data = mDBadStruct.HasValue()
                 ? [NSData dataWithBytes:mDBadStruct.Value().data() length:mDBadStruct.Value().size()]
                 : [[NSData alloc] initWithBytes:"\x15\x18" length:2];
-            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).fabricIndex = [CurrentFabricIndexValue copy];
 
             extensionArgument = temp_0;
         }
@@ -3763,7 +3763,7 @@ private:
                                   "\x68\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20"
                                   "\x6C\x69\x76\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00\x18"
                            length:72];
-            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).fabricIndex = [CurrentFabricIndexValue copy];
 
             extensionArgument = temp_0;
         }
@@ -3807,7 +3807,7 @@ private:
                                   "\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x6C\x69\x76\x69\x6E\x67\x20"
                                   "\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00\x18"
                            length:65];
-            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).fabricIndex = [CurrentFabricIndexValue copy];
 
             extensionArgument = temp_0;
         }
@@ -3851,7 +3851,7 @@ private:
                                   "\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x6C"
                                   "\x69\x76\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00\x18\xFF"
                            length:72];
-            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).fabricIndex = [CurrentFabricIndexValue copy];
 
             extensionArgument = temp_0;
         }
@@ -3895,7 +3895,7 @@ private:
                                   "\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x6C"
                                   "\x69\x76\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00"
                            length:70];
-            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).fabricIndex = [CurrentFabricIndexValue copy];
 
             extensionArgument = temp_0;
         }
@@ -3935,7 +3935,7 @@ private:
             ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).data = mDBadNone.HasValue()
                 ? [NSData dataWithBytes:mDBadNone.Value().data() length:mDBadNone.Value().size()]
                 : [[NSData alloc] initWithBytes:"" length:0];
-            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).fabricIndex = [CurrentFabricIndexValue copy];
 
             extensionArgument = temp_0;
         }
@@ -3973,7 +3973,7 @@ private:
             ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).data = mDOkEmpty.HasValue()
                 ? [NSData dataWithBytes:mDOkEmpty.Value().data() length:mDOkEmpty.Value().size()]
                 : [[NSData alloc] initWithBytes:"\x17\x18" length:2];
-            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).fabricIndex = [CurrentFabricIndexValue copy];
 
             temp_0[1] = [[MTRAccessControlClusterAccessControlExtensionStruct alloc] init];
             ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[1]).data = mDOkSingle.HasValue()
@@ -3983,7 +3983,7 @@ private:
                                   "\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x6C"
                                   "\x69\x76\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00\x18"
                            length:71];
-            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[1]).fabricIndex = [CurrentFabricIndex copy];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[1]).fabricIndex = [CurrentFabricIndexValue copy];
 
             extensionArgument = temp_0;
         }
@@ -4039,7 +4039,7 @@ private:
                                               ));
                                           VerifyOrReturn(CheckValue("FabricIndex",
                                               ((MTRAccessControlClusterAccessControlExtensionStruct *) actualValue[0]).fabricIndex,
-                                              CurrentFabricIndex));
+                                              CurrentFabricIndexValue));
                                       }
 
                                       NextTest();
@@ -27259,7 +27259,7 @@ private:
         value.ms = 5000UL;
         return WaitForMs("alpha", value);
     }
-    NSNumber * _Nonnull ColorLoopStartEnhancedHue;
+    NSNumber * _Nonnull ColorLoopStartEnhancedHueValue2;
 
     CHIP_ERROR TestSavingValueForComparisionReadColorLoopStartEnhancedHueAttributeFromDut_21()
     {
@@ -27274,7 +27274,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             {
-                ColorLoopStartEnhancedHue = value;
+                ColorLoopStartEnhancedHueValue2 = value;
             }
 
             NextTest();
@@ -27296,8 +27296,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("enhancedCurrentHue", "int16u", "int16u"));
-            VerifyOrReturn(
-                CheckConstraintMinValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], ColorLoopStartEnhancedHue));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>(
+                "enhancedCurrentHue", [value unsignedShortValue], ColorLoopStartEnhancedHueValue2));
             VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 65535U));
 
             NextTest();
@@ -27327,8 +27327,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("enhancedCurrentHue", "int16u", "int16u"));
-            VerifyOrReturn(
-                CheckConstraintMinValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], ColorLoopStartEnhancedHue));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>(
+                "enhancedCurrentHue", [value unsignedShortValue], ColorLoopStartEnhancedHueValue2));
             VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 65535U));
 
             NextTest();
@@ -27388,7 +27388,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nonnull ColorLoopStoredEnhancedHueValue;
+    NSNumber * _Nonnull ColorLoopStoredEnhancedHueValue3;
 
     CHIP_ERROR TestSavingValueForComparisionReadColorLoopStoredEnhancedHueAttributeFromDut_27()
     {
@@ -27403,7 +27403,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             {
-                ColorLoopStoredEnhancedHueValue = value;
+                ColorLoopStoredEnhancedHueValue3 = value;
             }
 
             NextTest();
@@ -27426,7 +27426,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("EnhancedCurrentHue", actualValue, ColorLoopStoredEnhancedHueValue));
+                VerifyOrReturn(CheckValue("EnhancedCurrentHue", actualValue, ColorLoopStoredEnhancedHueValue3));
             }
 
             NextTest();
@@ -28761,7 +28761,7 @@ private:
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
         return WaitForCommissionee("alpha", value);
     }
-    NSNumber * _Nullable MinMeasuredValue;
+    NSNumber * _Nullable MinMeasuredValueValue;
 
     CHIP_ERROR TestStep2ThReadsFromTheDutTheMinMeasuredValueAttribute_1()
     {
@@ -28783,7 +28783,7 @@ private:
                 VerifyOrReturn(CheckConstraintMinValue<float>("minMeasuredValue", [value floatValue], 0.0f));
             }
             {
-                MinMeasuredValue = value;
+                MinMeasuredValueValue = value;
             }
 
             NextTest();
@@ -28791,7 +28791,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nullable MaxMeasuredValue;
+    NSNumber * _Nullable MaxMeasuredValueValue;
 
     CHIP_ERROR TestStep3ThReadsFromTheDutTheMaxMeasuredValueAttribute_2()
     {
@@ -28810,10 +28810,10 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("maxMeasuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("maxMeasuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("maxMeasuredValue", [value floatValue], MinMeasuredValueValue));
             }
             {
-                MaxMeasuredValue = value;
+                MaxMeasuredValueValue = value;
             }
 
             NextTest();
@@ -28839,8 +28839,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("measuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("measuredValue", [value floatValue], MinMeasuredValue));
-                VerifyOrReturn(CheckConstraintMaxValue<float>("measuredValue", [value floatValue], MaxMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("measuredValue", [value floatValue], MinMeasuredValueValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("measuredValue", [value floatValue], MaxMeasuredValueValue));
             }
 
             NextTest();
@@ -28866,8 +28866,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("peakMeasuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("peakMeasuredValue", [value floatValue], MinMeasuredValue));
-                VerifyOrReturn(CheckConstraintMaxValue<float>("peakMeasuredValue", [value floatValue], MaxMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("peakMeasuredValue", [value floatValue], MinMeasuredValueValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("peakMeasuredValue", [value floatValue], MaxMeasuredValueValue));
             }
 
             NextTest();
@@ -28917,8 +28917,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("averageMeasuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("averageMeasuredValue", [value floatValue], MinMeasuredValue));
-                VerifyOrReturn(CheckConstraintMaxValue<float>("averageMeasuredValue", [value floatValue], MaxMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("averageMeasuredValue", [value floatValue], MinMeasuredValueValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("averageMeasuredValue", [value floatValue], MaxMeasuredValueValue));
             }
 
             NextTest();
@@ -30308,7 +30308,7 @@ private:
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
         return WaitForCommissionee("alpha", value);
     }
-    NSNumber * _Nullable MinMeasuredValue;
+    NSNumber * _Nullable MinMeasuredValueValue;
 
     CHIP_ERROR TestStep2ThReadsFromTheDutTheMinMeasuredValueAttribute_1()
     {
@@ -30330,7 +30330,7 @@ private:
                 VerifyOrReturn(CheckConstraintMinValue<float>("minMeasuredValue", [value floatValue], 0.0f));
             }
             {
-                MinMeasuredValue = value;
+                MinMeasuredValueValue = value;
             }
 
             NextTest();
@@ -30338,7 +30338,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nullable MaxMeasuredValue;
+    NSNumber * _Nullable MaxMeasuredValueValue;
 
     CHIP_ERROR TestStep3ThReadsFromTheDutTheMaxMeasuredValueAttribute_2()
     {
@@ -30357,10 +30357,10 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("maxMeasuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("maxMeasuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("maxMeasuredValue", [value floatValue], MinMeasuredValueValue));
             }
             {
-                MaxMeasuredValue = value;
+                MaxMeasuredValueValue = value;
             }
 
             NextTest();
@@ -30386,8 +30386,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("measuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("measuredValue", [value floatValue], MinMeasuredValue));
-                VerifyOrReturn(CheckConstraintMaxValue<float>("measuredValue", [value floatValue], MaxMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("measuredValue", [value floatValue], MinMeasuredValueValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("measuredValue", [value floatValue], MaxMeasuredValueValue));
             }
 
             NextTest();
@@ -30413,8 +30413,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("peakMeasuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("peakMeasuredValue", [value floatValue], MinMeasuredValue));
-                VerifyOrReturn(CheckConstraintMaxValue<float>("peakMeasuredValue", [value floatValue], MaxMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("peakMeasuredValue", [value floatValue], MinMeasuredValueValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("peakMeasuredValue", [value floatValue], MaxMeasuredValueValue));
             }
 
             NextTest();
@@ -30464,8 +30464,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("averageMeasuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("averageMeasuredValue", [value floatValue], MinMeasuredValue));
-                VerifyOrReturn(CheckConstraintMaxValue<float>("averageMeasuredValue", [value floatValue], MaxMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("averageMeasuredValue", [value floatValue], MinMeasuredValueValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("averageMeasuredValue", [value floatValue], MaxMeasuredValueValue));
             }
 
             NextTest();
@@ -31855,7 +31855,7 @@ private:
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
         return WaitForCommissionee("alpha", value);
     }
-    NSNumber * _Nullable MinMeasuredValue;
+    NSNumber * _Nullable MinMeasuredValueValue;
 
     CHIP_ERROR TestStep2ThReadsFromTheDutTheMinMeasuredValueAttribute_1()
     {
@@ -31877,7 +31877,7 @@ private:
                 VerifyOrReturn(CheckConstraintMinValue<float>("minMeasuredValue", [value floatValue], 0.0f));
             }
             {
-                MinMeasuredValue = value;
+                MinMeasuredValueValue = value;
             }
 
             NextTest();
@@ -31885,7 +31885,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nullable MaxMeasuredValue;
+    NSNumber * _Nullable MaxMeasuredValueValue;
 
     CHIP_ERROR TestStep3ThReadsFromTheDutTheMaxMeasuredValueAttribute_2()
     {
@@ -31904,10 +31904,10 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("maxMeasuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("maxMeasuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("maxMeasuredValue", [value floatValue], MinMeasuredValueValue));
             }
             {
-                MaxMeasuredValue = value;
+                MaxMeasuredValueValue = value;
             }
 
             NextTest();
@@ -31933,8 +31933,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("measuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("measuredValue", [value floatValue], MinMeasuredValue));
-                VerifyOrReturn(CheckConstraintMaxValue<float>("measuredValue", [value floatValue], MaxMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("measuredValue", [value floatValue], MinMeasuredValueValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("measuredValue", [value floatValue], MaxMeasuredValueValue));
             }
 
             NextTest();
@@ -31960,8 +31960,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("peakMeasuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("peakMeasuredValue", [value floatValue], MinMeasuredValue));
-                VerifyOrReturn(CheckConstraintMaxValue<float>("peakMeasuredValue", [value floatValue], MaxMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("peakMeasuredValue", [value floatValue], MinMeasuredValueValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("peakMeasuredValue", [value floatValue], MaxMeasuredValueValue));
             }
 
             NextTest();
@@ -32011,8 +32011,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("averageMeasuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("averageMeasuredValue", [value floatValue], MinMeasuredValue));
-                VerifyOrReturn(CheckConstraintMaxValue<float>("averageMeasuredValue", [value floatValue], MaxMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("averageMeasuredValue", [value floatValue], MinMeasuredValueValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("averageMeasuredValue", [value floatValue], MaxMeasuredValueValue));
             }
 
             NextTest();
@@ -33402,7 +33402,7 @@ private:
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
         return WaitForCommissionee("alpha", value);
     }
-    NSNumber * _Nullable MinMeasuredValue;
+    NSNumber * _Nullable MinMeasuredValueValue;
 
     CHIP_ERROR TestStep2ThReadsFromTheDutTheMinMeasuredValueAttribute_1()
     {
@@ -33424,7 +33424,7 @@ private:
                 VerifyOrReturn(CheckConstraintMinValue<float>("minMeasuredValue", [value floatValue], 0.0f));
             }
             {
-                MinMeasuredValue = value;
+                MinMeasuredValueValue = value;
             }
 
             NextTest();
@@ -33432,7 +33432,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nullable MaxMeasuredValue;
+    NSNumber * _Nullable MaxMeasuredValueValue;
 
     CHIP_ERROR TestStep3ThReadsFromTheDutTheMaxMeasuredValueAttribute_2()
     {
@@ -33451,10 +33451,10 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("maxMeasuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("maxMeasuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("maxMeasuredValue", [value floatValue], MinMeasuredValueValue));
             }
             {
-                MaxMeasuredValue = value;
+                MaxMeasuredValueValue = value;
             }
 
             NextTest();
@@ -33480,8 +33480,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("measuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("measuredValue", [value floatValue], MinMeasuredValue));
-                VerifyOrReturn(CheckConstraintMaxValue<float>("measuredValue", [value floatValue], MaxMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("measuredValue", [value floatValue], MinMeasuredValueValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("measuredValue", [value floatValue], MaxMeasuredValueValue));
             }
 
             NextTest();
@@ -33507,8 +33507,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("peakMeasuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("peakMeasuredValue", [value floatValue], MinMeasuredValue));
-                VerifyOrReturn(CheckConstraintMaxValue<float>("peakMeasuredValue", [value floatValue], MaxMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("peakMeasuredValue", [value floatValue], MinMeasuredValueValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("peakMeasuredValue", [value floatValue], MaxMeasuredValueValue));
             }
 
             NextTest();
@@ -33558,8 +33558,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("averageMeasuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("averageMeasuredValue", [value floatValue], MinMeasuredValue));
-                VerifyOrReturn(CheckConstraintMaxValue<float>("averageMeasuredValue", [value floatValue], MaxMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("averageMeasuredValue", [value floatValue], MinMeasuredValueValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("averageMeasuredValue", [value floatValue], MaxMeasuredValueValue));
             }
 
             NextTest();
@@ -34945,7 +34945,7 @@ private:
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
         return WaitForCommissionee("alpha", value);
     }
-    NSNumber * _Nullable MinMeasuredValue;
+    NSNumber * _Nullable MinMeasuredValueValue;
 
     CHIP_ERROR TestStep2ThReadsFromTheDutTheMinMeasuredValueAttribute_1()
     {
@@ -34967,7 +34967,7 @@ private:
                 VerifyOrReturn(CheckConstraintMinValue<float>("minMeasuredValue", [value floatValue], 0.0f));
             }
             {
-                MinMeasuredValue = value;
+                MinMeasuredValueValue = value;
             }
 
             NextTest();
@@ -34975,7 +34975,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nullable MaxMeasuredValue;
+    NSNumber * _Nullable MaxMeasuredValueValue;
 
     CHIP_ERROR TestStep3ThReadsFromTheDutTheMaxMeasuredValueAttribute_2()
     {
@@ -34994,10 +34994,10 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("maxMeasuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("maxMeasuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("maxMeasuredValue", [value floatValue], MinMeasuredValueValue));
             }
             {
-                MaxMeasuredValue = value;
+                MaxMeasuredValueValue = value;
             }
 
             NextTest();
@@ -35023,8 +35023,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("measuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("measuredValue", [value floatValue], MinMeasuredValue));
-                VerifyOrReturn(CheckConstraintMaxValue<float>("measuredValue", [value floatValue], MaxMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("measuredValue", [value floatValue], MinMeasuredValueValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("measuredValue", [value floatValue], MaxMeasuredValueValue));
             }
 
             NextTest();
@@ -35050,8 +35050,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("peakMeasuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("peakMeasuredValue", [value floatValue], MinMeasuredValue));
-                VerifyOrReturn(CheckConstraintMaxValue<float>("peakMeasuredValue", [value floatValue], MaxMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("peakMeasuredValue", [value floatValue], MinMeasuredValueValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("peakMeasuredValue", [value floatValue], MaxMeasuredValueValue));
             }
 
             NextTest();
@@ -35101,8 +35101,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("averageMeasuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("averageMeasuredValue", [value floatValue], MinMeasuredValue));
-                VerifyOrReturn(CheckConstraintMaxValue<float>("averageMeasuredValue", [value floatValue], MaxMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("averageMeasuredValue", [value floatValue], MinMeasuredValueValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("averageMeasuredValue", [value floatValue], MaxMeasuredValueValue));
             }
 
             NextTest();
@@ -36492,7 +36492,7 @@ private:
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
         return WaitForCommissionee("alpha", value);
     }
-    NSNumber * _Nullable MinMeasuredValue;
+    NSNumber * _Nullable MinMeasuredValueValue;
 
     CHIP_ERROR TestStep2ThReadsFromTheDutTheMinMeasuredValueAttribute_1()
     {
@@ -36514,7 +36514,7 @@ private:
                 VerifyOrReturn(CheckConstraintMinValue<float>("minMeasuredValue", [value floatValue], 0.0f));
             }
             {
-                MinMeasuredValue = value;
+                MinMeasuredValueValue = value;
             }
 
             NextTest();
@@ -36522,7 +36522,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nullable MaxMeasuredValue;
+    NSNumber * _Nullable MaxMeasuredValueValue;
 
     CHIP_ERROR TestStep3ThReadsFromTheDutTheMaxMeasuredValueAttribute_2()
     {
@@ -36541,10 +36541,10 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("maxMeasuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("maxMeasuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("maxMeasuredValue", [value floatValue], MinMeasuredValueValue));
             }
             {
-                MaxMeasuredValue = value;
+                MaxMeasuredValueValue = value;
             }
 
             NextTest();
@@ -36570,8 +36570,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("measuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("measuredValue", [value floatValue], MinMeasuredValue));
-                VerifyOrReturn(CheckConstraintMaxValue<float>("measuredValue", [value floatValue], MaxMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("measuredValue", [value floatValue], MinMeasuredValueValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("measuredValue", [value floatValue], MaxMeasuredValueValue));
             }
 
             NextTest();
@@ -36597,8 +36597,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("peakMeasuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("peakMeasuredValue", [value floatValue], MinMeasuredValue));
-                VerifyOrReturn(CheckConstraintMaxValue<float>("peakMeasuredValue", [value floatValue], MaxMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("peakMeasuredValue", [value floatValue], MinMeasuredValueValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("peakMeasuredValue", [value floatValue], MaxMeasuredValueValue));
             }
 
             NextTest();
@@ -36648,8 +36648,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("averageMeasuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("averageMeasuredValue", [value floatValue], MinMeasuredValue));
-                VerifyOrReturn(CheckConstraintMaxValue<float>("averageMeasuredValue", [value floatValue], MaxMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("averageMeasuredValue", [value floatValue], MinMeasuredValueValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("averageMeasuredValue", [value floatValue], MaxMeasuredValueValue));
             }
 
             NextTest();
@@ -38039,7 +38039,7 @@ private:
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
         return WaitForCommissionee("alpha", value);
     }
-    NSNumber * _Nullable MinMeasuredValue;
+    NSNumber * _Nullable MinMeasuredValueValue;
 
     CHIP_ERROR TestStep2ThReadsFromTheDutTheMinMeasuredValueAttribute_1()
     {
@@ -38061,7 +38061,7 @@ private:
                 VerifyOrReturn(CheckConstraintMinValue<float>("minMeasuredValue", [value floatValue], 0.0f));
             }
             {
-                MinMeasuredValue = value;
+                MinMeasuredValueValue = value;
             }
 
             NextTest();
@@ -38069,7 +38069,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nullable MaxMeasuredValue;
+    NSNumber * _Nullable MaxMeasuredValueValue;
 
     CHIP_ERROR TestStep3ThReadsFromTheDutTheMaxMeasuredValueAttribute_2()
     {
@@ -38088,10 +38088,10 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("maxMeasuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("maxMeasuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("maxMeasuredValue", [value floatValue], MinMeasuredValueValue));
             }
             {
-                MaxMeasuredValue = value;
+                MaxMeasuredValueValue = value;
             }
 
             NextTest();
@@ -38117,8 +38117,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("measuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("measuredValue", [value floatValue], MinMeasuredValue));
-                VerifyOrReturn(CheckConstraintMaxValue<float>("measuredValue", [value floatValue], MaxMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("measuredValue", [value floatValue], MinMeasuredValueValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("measuredValue", [value floatValue], MaxMeasuredValueValue));
             }
 
             NextTest();
@@ -38144,8 +38144,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("peakMeasuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("peakMeasuredValue", [value floatValue], MinMeasuredValue));
-                VerifyOrReturn(CheckConstraintMaxValue<float>("peakMeasuredValue", [value floatValue], MaxMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("peakMeasuredValue", [value floatValue], MinMeasuredValueValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("peakMeasuredValue", [value floatValue], MaxMeasuredValueValue));
             }
 
             NextTest();
@@ -38195,8 +38195,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("averageMeasuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("averageMeasuredValue", [value floatValue], MinMeasuredValue));
-                VerifyOrReturn(CheckConstraintMaxValue<float>("averageMeasuredValue", [value floatValue], MaxMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("averageMeasuredValue", [value floatValue], MinMeasuredValueValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("averageMeasuredValue", [value floatValue], MaxMeasuredValueValue));
             }
 
             NextTest();
@@ -39586,7 +39586,7 @@ private:
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
         return WaitForCommissionee("alpha", value);
     }
-    NSNumber * _Nullable MinMeasuredValue;
+    NSNumber * _Nullable MinMeasuredValueValue;
 
     CHIP_ERROR TestStep2ThReadsFromTheDutTheMinMeasuredValueAttribute_1()
     {
@@ -39608,7 +39608,7 @@ private:
                 VerifyOrReturn(CheckConstraintMinValue<float>("minMeasuredValue", [value floatValue], 0.0f));
             }
             {
-                MinMeasuredValue = value;
+                MinMeasuredValueValue = value;
             }
 
             NextTest();
@@ -39616,7 +39616,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nullable MaxMeasuredValue;
+    NSNumber * _Nullable MaxMeasuredValueValue;
 
     CHIP_ERROR TestStep3ThReadsFromTheDutTheMaxMeasuredValueAttribute_2()
     {
@@ -39635,10 +39635,10 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("maxMeasuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("maxMeasuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("maxMeasuredValue", [value floatValue], MinMeasuredValueValue));
             }
             {
-                MaxMeasuredValue = value;
+                MaxMeasuredValueValue = value;
             }
 
             NextTest();
@@ -39664,8 +39664,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("measuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("measuredValue", [value floatValue], MinMeasuredValue));
-                VerifyOrReturn(CheckConstraintMaxValue<float>("measuredValue", [value floatValue], MaxMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("measuredValue", [value floatValue], MinMeasuredValueValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("measuredValue", [value floatValue], MaxMeasuredValueValue));
             }
 
             NextTest();
@@ -39691,8 +39691,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("peakMeasuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("peakMeasuredValue", [value floatValue], MinMeasuredValue));
-                VerifyOrReturn(CheckConstraintMaxValue<float>("peakMeasuredValue", [value floatValue], MaxMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("peakMeasuredValue", [value floatValue], MinMeasuredValueValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("peakMeasuredValue", [value floatValue], MaxMeasuredValueValue));
             }
 
             NextTest();
@@ -39742,8 +39742,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("averageMeasuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("averageMeasuredValue", [value floatValue], MinMeasuredValue));
-                VerifyOrReturn(CheckConstraintMaxValue<float>("averageMeasuredValue", [value floatValue], MaxMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("averageMeasuredValue", [value floatValue], MinMeasuredValueValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("averageMeasuredValue", [value floatValue], MaxMeasuredValueValue));
             }
 
             NextTest();
@@ -41129,7 +41129,7 @@ private:
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
         return WaitForCommissionee("alpha", value);
     }
-    NSNumber * _Nullable MinMeasuredValue;
+    NSNumber * _Nullable MinMeasuredValueValue;
 
     CHIP_ERROR TestStep2ThReadsFromTheDutTheMinMeasuredValueAttribute_1()
     {
@@ -41151,7 +41151,7 @@ private:
                 VerifyOrReturn(CheckConstraintMinValue<float>("minMeasuredValue", [value floatValue], 0.0f));
             }
             {
-                MinMeasuredValue = value;
+                MinMeasuredValueValue = value;
             }
 
             NextTest();
@@ -41159,7 +41159,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nullable MaxMeasuredValue;
+    NSNumber * _Nullable MaxMeasuredValueValue;
 
     CHIP_ERROR TestStep3ThReadsFromTheDutTheMaxMeasuredValueAttribute_2()
     {
@@ -41178,10 +41178,10 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("maxMeasuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("maxMeasuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("maxMeasuredValue", [value floatValue], MinMeasuredValueValue));
             }
             {
-                MaxMeasuredValue = value;
+                MaxMeasuredValueValue = value;
             }
 
             NextTest();
@@ -41207,8 +41207,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("measuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("measuredValue", [value floatValue], MinMeasuredValue));
-                VerifyOrReturn(CheckConstraintMaxValue<float>("measuredValue", [value floatValue], MaxMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("measuredValue", [value floatValue], MinMeasuredValueValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("measuredValue", [value floatValue], MaxMeasuredValueValue));
             }
 
             NextTest();
@@ -41234,8 +41234,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("peakMeasuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("peakMeasuredValue", [value floatValue], MinMeasuredValue));
-                VerifyOrReturn(CheckConstraintMaxValue<float>("peakMeasuredValue", [value floatValue], MaxMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("peakMeasuredValue", [value floatValue], MinMeasuredValueValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("peakMeasuredValue", [value floatValue], MaxMeasuredValueValue));
             }
 
             NextTest();
@@ -41285,8 +41285,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("averageMeasuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("averageMeasuredValue", [value floatValue], MinMeasuredValue));
-                VerifyOrReturn(CheckConstraintMaxValue<float>("averageMeasuredValue", [value floatValue], MaxMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("averageMeasuredValue", [value floatValue], MinMeasuredValueValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("averageMeasuredValue", [value floatValue], MaxMeasuredValueValue));
             }
 
             NextTest();
@@ -42707,7 +42707,7 @@ private:
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
         return WaitForCommissionee("alpha", value);
     }
-    NSNumber * _Nullable MinMeasuredValue;
+    NSNumber * _Nullable MinMeasuredValueValue;
 
     CHIP_ERROR TestStep2ThReadsFromTheDutTheMinMeasuredValueAttribute_1()
     {
@@ -42730,7 +42730,7 @@ private:
                 VerifyOrReturn(CheckConstraintMinValue<float>("minMeasuredValue", [value floatValue], 0.0f));
             }
             {
-                MinMeasuredValue = value;
+                MinMeasuredValueValue = value;
             }
 
             NextTest();
@@ -42738,7 +42738,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nullable MaxMeasuredValue;
+    NSNumber * _Nullable MaxMeasuredValueValue;
 
     CHIP_ERROR TestStep3ThReadsFromTheDutTheMaxMeasuredValueAttribute_2()
     {
@@ -42758,10 +42758,10 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("maxMeasuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("maxMeasuredValue", [value floatValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("maxMeasuredValue", [value floatValue], MinMeasuredValueValue));
             }
             {
-                MaxMeasuredValue = value;
+                MaxMeasuredValueValue = value;
             }
 
             NextTest();
@@ -42788,8 +42788,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("measuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("measuredValue", [value floatValue], MinMeasuredValue));
-                VerifyOrReturn(CheckConstraintMaxValue<float>("measuredValue", [value floatValue], MaxMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("measuredValue", [value floatValue], MinMeasuredValueValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("measuredValue", [value floatValue], MaxMeasuredValueValue));
             }
 
             NextTest();
@@ -42816,8 +42816,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("peakMeasuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("peakMeasuredValue", [value floatValue], MinMeasuredValue));
-                VerifyOrReturn(CheckConstraintMaxValue<float>("peakMeasuredValue", [value floatValue], MaxMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("peakMeasuredValue", [value floatValue], MinMeasuredValueValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("peakMeasuredValue", [value floatValue], MaxMeasuredValueValue));
             }
 
             NextTest();
@@ -42869,8 +42869,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("averageMeasuredValue", "single", "single"));
-                VerifyOrReturn(CheckConstraintMinValue<float>("averageMeasuredValue", [value floatValue], MinMeasuredValue));
-                VerifyOrReturn(CheckConstraintMaxValue<float>("averageMeasuredValue", [value floatValue], MaxMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<float>("averageMeasuredValue", [value floatValue], MinMeasuredValueValue));
+                VerifyOrReturn(CheckConstraintMaxValue<float>("averageMeasuredValue", [value floatValue], MaxMeasuredValueValue));
             }
 
             NextTest();
@@ -57916,7 +57916,7 @@ private:
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
         return WaitForCommissionee("alpha", value);
     }
-    NSNumber * _Nullable MinMeasuredValue;
+    NSNumber * _Nullable MinMeasuredValueValue;
 
     CHIP_ERROR TestStep2aThReadsMinMeasuredValueAttributeFromDut_1()
     {
@@ -57937,7 +57937,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("minMeasuredValue", "int16u", "int16u"));
             }
             {
-                MinMeasuredValue = value;
+                MinMeasuredValueValue = value;
             }
 
             NextTest();
@@ -57945,7 +57945,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nullable MaxMeasuredValue;
+    NSNumber * _Nullable MaxMeasuredValueValue;
 
     CHIP_ERROR TestStep2bThReadsMaxMeasuredValueAttributeFromDut_2()
     {
@@ -57966,7 +57966,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("maxMeasuredValue", "int16u", "int16u"));
             }
             {
-                MaxMeasuredValue = value;
+                MaxMeasuredValueValue = value;
             }
 
             NextTest();
@@ -88385,7 +88385,7 @@ private:
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
         return WaitForCommissionee("alpha", value);
     }
-    NSNumber * _Nullable MinMeasuredValue;
+    NSNumber * _Nullable MinMeasuredValueValue;
 
     CHIP_ERROR TestStep2ReadTheMandatoryAttributeConstraintsMinMeasuredValue_1()
     {
@@ -88408,7 +88408,7 @@ private:
                 VerifyOrReturn(CheckConstraintMaxValue<int16_t>("minMeasuredValue", [value shortValue], 32766));
             }
             {
-                MinMeasuredValue = value;
+                MinMeasuredValueValue = value;
             }
 
             NextTest();
@@ -88416,7 +88416,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nullable MaxMeasuredValue;
+    NSNumber * _Nullable MaxMeasuredValueValue;
 
     CHIP_ERROR TestStep3ReadTheMandatoryAttributeConstraintsMaxMeasuredValue_2()
     {
@@ -88435,11 +88435,11 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("maxMeasuredValue", "int16s", "int16s"));
-                VerifyOrReturn(CheckConstraintMinValue<int16_t>("maxMeasuredValue", [value shortValue], MinMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("maxMeasuredValue", [value shortValue], MinMeasuredValueValue));
                 VerifyOrReturn(CheckConstraintMaxValue<int16_t>("maxMeasuredValue", [value shortValue], 32767));
             }
             {
-                MaxMeasuredValue = value;
+                MaxMeasuredValueValue = value;
             }
 
             NextTest();
@@ -88465,8 +88465,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("measuredValue", "int16s", "int16s"));
-                VerifyOrReturn(CheckConstraintMinValue<int16_t>("measuredValue", [value shortValue], MinMeasuredValue));
-                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("measuredValue", [value shortValue], MaxMeasuredValue));
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("measuredValue", [value shortValue], MinMeasuredValueValue));
+                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("measuredValue", [value shortValue], MaxMeasuredValueValue));
             }
 
             NextTest();
@@ -88498,7 +88498,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nullable MinScaledValue;
+    NSNumber * _Nullable MinScaledValueValue;
 
     CHIP_ERROR TestStep6ReadTheOptionalAttributeMinScaledValue_5()
     {
@@ -88521,7 +88521,7 @@ private:
                 VerifyOrReturn(CheckConstraintMaxValue<int16_t>("minScaledValue", [value shortValue], 32766));
             }
             {
-                MinScaledValue = value;
+                MinScaledValueValue = value;
             }
 
             NextTest();
@@ -88529,7 +88529,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nullable MaxScaledValue;
+    NSNumber * _Nullable MaxScaledValueValue;
 
     CHIP_ERROR TestStep7ReadTheOptionalAttributeMaxScaledValue_6()
     {
@@ -88548,11 +88548,11 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("maxScaledValue", "int16s", "int16s"));
-                VerifyOrReturn(CheckConstraintMinValue<int16_t>("maxScaledValue", [value shortValue], MinScaledValue));
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("maxScaledValue", [value shortValue], MinScaledValueValue));
                 VerifyOrReturn(CheckConstraintMaxValue<int16_t>("maxScaledValue", [value shortValue], 32767));
             }
             {
-                MaxScaledValue = value;
+                MaxScaledValueValue = value;
             }
 
             NextTest();
@@ -88578,8 +88578,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("scaledValue", "int16s", "int16s"));
-                VerifyOrReturn(CheckConstraintMinValue<int16_t>("scaledValue", [value shortValue], MinScaledValue));
-                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("scaledValue", [value shortValue], MaxScaledValue));
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("scaledValue", [value shortValue], MinScaledValueValue));
+                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("scaledValue", [value shortValue], MaxScaledValueValue));
             }
 
             NextTest();
@@ -108093,7 +108093,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nonnull InstalledOpenLimitLift;
+    NSNumber * _Nonnull InstalledOpenLimitLiftValue;
 
     CHIP_ERROR TestStep2eReadTheRoOptionalAttributeDefaultInstalledOpenLimitLift_11()
     {
@@ -108111,7 +108111,7 @@ private:
             VerifyOrReturn(CheckConstraintMinValue<uint16_t>("installedOpenLimitLift", [value unsignedShortValue], 0U));
             VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("installedOpenLimitLift", [value unsignedShortValue], 65535U));
             {
-                InstalledOpenLimitLift = value;
+                InstalledOpenLimitLiftValue = value;
             }
 
             NextTest();
@@ -108119,7 +108119,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nonnull InstalledClosedLimitLift;
+    NSNumber * _Nonnull InstalledClosedLimitLiftValue;
 
     CHIP_ERROR TestStep2fReadTheRoOptionalAttributeDefaultInstalledClosedLimitLift_12()
     {
@@ -108137,7 +108137,7 @@ private:
             VerifyOrReturn(CheckConstraintMinValue<uint16_t>("installedClosedLimitLift", [value unsignedShortValue], 0U));
             VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("installedClosedLimitLift", [value unsignedShortValue], 65535U));
             {
-                InstalledClosedLimitLift = value;
+                InstalledClosedLimitLiftValue = value;
             }
 
             NextTest();
@@ -108145,7 +108145,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nonnull InstalledOpenLimitTilt;
+    NSNumber * _Nonnull InstalledOpenLimitTiltValue;
 
     CHIP_ERROR TestStep2gReadTheRoOptionalAttributeDefaultInstalledOpenLimitTilt_13()
     {
@@ -108163,7 +108163,7 @@ private:
             VerifyOrReturn(CheckConstraintMinValue<uint16_t>("installedOpenLimitTilt", [value unsignedShortValue], 0U));
             VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("installedOpenLimitTilt", [value unsignedShortValue], 65535U));
             {
-                InstalledOpenLimitTilt = value;
+                InstalledOpenLimitTiltValue = value;
             }
 
             NextTest();
@@ -108171,7 +108171,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nonnull InstalledClosedLimitTilt;
+    NSNumber * _Nonnull InstalledClosedLimitTiltValue;
 
     CHIP_ERROR TestStep2hReadTheRoOptionalAttributeDefaultInstalledClosedLimitTilt_14()
     {
@@ -108189,7 +108189,7 @@ private:
             VerifyOrReturn(CheckConstraintMinValue<uint16_t>("installedClosedLimitTilt", [value unsignedShortValue], 0U));
             VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("installedClosedLimitTilt", [value unsignedShortValue], 65535U));
             {
-                InstalledClosedLimitTilt = value;
+                InstalledClosedLimitTiltValue = value;
             }
 
             NextTest();
@@ -108304,10 +108304,10 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("currentPositionLift", "int16u", "int16u"));
-                VerifyOrReturn(
-                    CheckConstraintMinValue<uint16_t>("currentPositionLift", [value unsignedShortValue], InstalledOpenLimitLift));
-                VerifyOrReturn(
-                    CheckConstraintMaxValue<uint16_t>("currentPositionLift", [value unsignedShortValue], InstalledClosedLimitLift));
+                VerifyOrReturn(CheckConstraintMinValue<uint16_t>(
+                    "currentPositionLift", [value unsignedShortValue], InstalledOpenLimitLiftValue));
+                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>(
+                    "currentPositionLift", [value unsignedShortValue], InstalledClosedLimitLiftValue));
             }
 
             NextTest();
@@ -108356,10 +108356,10 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("currentPositionTilt", "int16u", "int16u"));
-                VerifyOrReturn(
-                    CheckConstraintMinValue<uint16_t>("currentPositionTilt", [value unsignedShortValue], InstalledOpenLimitTilt));
-                VerifyOrReturn(
-                    CheckConstraintMaxValue<uint16_t>("currentPositionTilt", [value unsignedShortValue], InstalledClosedLimitTilt));
+                VerifyOrReturn(CheckConstraintMinValue<uint16_t>(
+                    "currentPositionTilt", [value unsignedShortValue], InstalledOpenLimitTiltValue));
+                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>(
+                    "currentPositionTilt", [value unsignedShortValue], InstalledClosedLimitTiltValue));
             }
 
             NextTest();
@@ -138679,6 +138679,28 @@ public:
             ChipLogProgress(chipTool, " ***** Test Step 109 : Write attribute octet_string Default Value\n");
             err = TestWriteAttributeOctetStringDefaultValue_109();
             break;
+        case 110:
+            ChipLogProgress(chipTool, " ***** Test Step 110 : Read attribute nullable_boolean Default Value\n");
+            err = TestReadAttributeNullableBooleanDefaultValue_110();
+            break;
+        case 111:
+            ChipLogProgress(chipTool, " ***** Test Step 111 : Write attribute nullable_boolean to null\n");
+            err = TestWriteAttributeNullableBooleanToNull_111();
+            break;
+        case 112:
+            ChipLogProgress(chipTool, " ***** Test Step 112 : Read attribute nullable_boolean null Value\n");
+            err = TestReadAttributeNullableBooleanNullValue_112();
+            break;
+        case 113:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 113 : Read attribute nullable_boolean null Value again and compare it to the previously saved "
+                "value\n");
+            err = TestReadAttributeNullableBooleanNullValueAgainAndCompareItToThePreviouslySavedValue_113();
+            break;
+        case 114:
+            ChipLogProgress(chipTool, " ***** Test Step 114 : Write attribute nullable_boolean Default Value\n");
+            err = TestWriteAttributeNullableBooleanDefaultValue_114();
+            break;
         }
 
         if (CHIP_NO_ERROR != err) {
@@ -139020,6 +139042,21 @@ public:
         case 109:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 110:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 111:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 112:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 113:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 114:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -139033,7 +139070,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 110;
+    const uint16_t mTestCount = 115;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -141529,6 +141566,131 @@ private:
 
                                              NextTest();
                                          }];
+
+        return CHIP_NO_ERROR;
+    }
+    NSNumber * _Nullable readAttributeNullableBooleanDefaultValue;
+
+    CHIP_ERROR TestReadAttributeNullableBooleanDefaultValue_110()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeNullableBooleanWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read attribute nullable_boolean Default Value Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("nullable_boolean", actualValue));
+                VerifyOrReturn(CheckValue("nullable_boolean", actualValue, false));
+            }
+            {
+                readAttributeNullableBooleanDefaultValue = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWriteAttributeNullableBooleanToNull_111()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id nullableBooleanArgument;
+        nullableBooleanArgument = nil;
+        [cluster writeAttributeNullableBooleanWithValue:nullableBooleanArgument
+                                             completion:^(NSError * _Nullable err) {
+                                                 NSLog(@"Write attribute nullable_boolean to null Error: %@", err);
+
+                                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                 NextTest();
+                                             }];
+
+        return CHIP_NO_ERROR;
+    }
+    NSNumber * _Nullable readAttributeNullableBooleanNullValue;
+
+    CHIP_ERROR TestReadAttributeNullableBooleanNullValue_112()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeNullableBooleanWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read attribute nullable_boolean null Value Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNull("nullable_boolean", actualValue));
+            }
+            {
+                readAttributeNullableBooleanNullValue = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadAttributeNullableBooleanNullValueAgainAndCompareItToThePreviouslySavedValue_113()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeNullableBooleanWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read attribute nullable_boolean null Value again and compare it to the previously saved value Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                if (readAttributeNullableBooleanNullValue == nil) {
+                    VerifyOrReturn(CheckValueNull("nullable_boolean", actualValue));
+                } else {
+                    VerifyOrReturn(CheckValueNonNull("nullable_boolean", actualValue));
+                    VerifyOrReturn(CheckValue("nullable_boolean", actualValue, readAttributeNullableBooleanNullValue));
+                }
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWriteAttributeNullableBooleanDefaultValue_114()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id nullableBooleanArgument;
+        nullableBooleanArgument = [readAttributeNullableBooleanDefaultValue copy];
+        [cluster writeAttributeNullableBooleanWithValue:nullableBooleanArgument
+                                             completion:^(NSError * _Nullable err) {
+                                                 NSLog(@"Write attribute nullable_boolean Default Value Error: %@", err);
+
+                                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                 NextTest();
+                                             }];
 
         return CHIP_NO_ERROR;
     }
@@ -157869,7 +158031,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nonnull NumberOfTotalUsersSupported;
+    NSNumber * _Nonnull NumberOfTotalUsersSupportedValue;
 
     CHIP_ERROR TestGetNumberOfSupportedUsersAndVerifyDefaultValue_2()
     {
@@ -157888,7 +158050,7 @@ private:
                 VerifyOrReturn(CheckValue("NumberOfTotalUsersSupported", actualValue, 10U));
             }
             {
-                NumberOfTotalUsersSupported = value;
+                NumberOfTotalUsersSupportedValue = value;
             }
 
             NextTest();
@@ -157928,7 +158090,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
-        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupportedValue unsignedShortValue] + 1U];
         [cluster
             getUserWithParams:params
                    completion:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -159133,7 +159295,7 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetUserParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.userIndex = [NumberOfTotalUsersSupported copy];
+        params.userIndex = [NumberOfTotalUsersSupportedValue copy];
         params.userName = @"last_user";
         params.userUniqueID = nil;
         params.userStatus = nil;
@@ -159159,7 +159321,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
-        params.userIndex = [NumberOfTotalUsersSupported copy];
+        params.userIndex = [NumberOfTotalUsersSupportedValue copy];
         [cluster getUserWithParams:params
                         completion:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
                             NSLog(@"Read the last user back and verify its fields Error: %@", err);
@@ -159168,7 +159330,7 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("UserIndex", actualValue, NumberOfTotalUsersSupported));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, NumberOfTotalUsersSupportedValue));
                             }
 
                             {
@@ -159267,7 +159429,7 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetUserParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupportedValue unsignedShortValue] + 1U];
         params.userName = nil;
         params.userUniqueID = nil;
         params.userStatus = nil;
@@ -159518,7 +159680,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterClearUserParams alloc] init];
-        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupportedValue unsignedShortValue] + 1U];
         [cluster
             clearUserWithParams:params
                      completion:^(NSError * _Nullable err) {
@@ -159634,7 +159796,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
-        params.userIndex = [NumberOfTotalUsersSupported copy];
+        params.userIndex = [NumberOfTotalUsersSupportedValue copy];
         [cluster getUserWithParams:params
                         completion:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
                             NSLog(@"Read last cleared user and verify it is available Error: %@", err);
@@ -159643,7 +159805,7 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("UserIndex", actualValue, NumberOfTotalUsersSupported));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, NumberOfTotalUsersSupportedValue));
                             }
 
                             {
@@ -159696,7 +159858,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nonnull NumberOfPINUsersSupported;
+    NSNumber * _Nonnull NumberOfPINUsersSupportedValue;
 
     CHIP_ERROR TestGetNumberOfSupportedPinCredentialsAndVerifyDefaultValue_41()
     {
@@ -159715,7 +159877,7 @@ private:
                 VerifyOrReturn(CheckValue("NumberOfPINUsersSupported", actualValue, 10U));
             }
             {
-                NumberOfPINUsersSupported = value;
+                NumberOfPINUsersSupportedValue = value;
             }
 
             NextTest();
@@ -159835,7 +159997,7 @@ private:
         params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
         ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex =
-            [NSNumber numberWithUnsignedShort:[NumberOfPINUsersSupported unsignedShortValue] + 1U];
+            [NSNumber numberWithUnsignedShort:[NumberOfPINUsersSupportedValue unsignedShortValue] + 1U];
 
         [cluster
             getCredentialStatusWithParams:params
@@ -160208,7 +160370,7 @@ private:
         params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
         ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex =
-            [NSNumber numberWithUnsignedShort:[NumberOfPINUsersSupported unsignedShortValue] + 1U];
+            [NSNumber numberWithUnsignedShort:[NumberOfPINUsersSupportedValue unsignedShortValue] + 1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = nil;
@@ -160241,7 +160403,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nonnull NumberOfRFIDUsersSupported;
+    NSNumber * _Nonnull NumberOfRFIDUsersSupportedValue;
 
     CHIP_ERROR TestGetNumberOfSupportedRfidCredentialsAndVerifyDefaultValue_52()
     {
@@ -160260,7 +160422,7 @@ private:
                 VerifyOrReturn(CheckValue("NumberOfRFIDUsersSupported", actualValue, 10U));
             }
             {
-                NumberOfRFIDUsersSupported = value;
+                NumberOfRFIDUsersSupportedValue = value;
             }
 
             NextTest();
@@ -160330,7 +160492,7 @@ private:
         params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
         ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
         ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex =
-            [NSNumber numberWithUnsignedShort:[NumberOfRFIDUsersSupported unsignedShortValue] + 1U];
+            [NSNumber numberWithUnsignedShort:[NumberOfRFIDUsersSupportedValue unsignedShortValue] + 1U];
 
         [cluster
             getCredentialStatusWithParams:params
@@ -160808,7 +160970,7 @@ private:
         params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
         ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
         ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex =
-            [NSNumber numberWithUnsignedShort:[NumberOfRFIDUsersSupported unsignedShortValue] + 1U];
+            [NSNumber numberWithUnsignedShort:[NumberOfRFIDUsersSupportedValue unsignedShortValue] + 1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"new_rfid_data_field" length:19];
         params.userIndex = nil;
@@ -160902,7 +161064,7 @@ private:
         ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123465" length:6];
-        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupportedValue unsignedShortValue] + 1U];
         params.userStatus = nil;
         params.userType = nil;
         [cluster
@@ -163462,7 +163624,7 @@ private:
         params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
         ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex =
-            [NSNumber numberWithUnsignedShort:[NumberOfPINUsersSupported unsignedShortValue] + 1U];
+            [NSNumber numberWithUnsignedShort:[NumberOfPINUsersSupportedValue unsignedShortValue] + 1U];
 
         [cluster clearCredentialWithParams:params
                                 completion:^(NSError * _Nullable err) {
@@ -163517,7 +163679,7 @@ private:
         params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
         ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
         ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex =
-            [NSNumber numberWithUnsignedShort:[NumberOfRFIDUsersSupported unsignedShortValue] + 1U];
+            [NSNumber numberWithUnsignedShort:[NumberOfRFIDUsersSupportedValue unsignedShortValue] + 1U];
 
         [cluster clearCredentialWithParams:params
                                 completion:^(NSError * _Nullable err) {
@@ -164995,7 +165157,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nonnull NumberOfTotalUsersSupported;
+    NSNumber * _Nonnull NumberOfTotalUsersSupportedValue;
 
     CHIP_ERROR TestGetNumberOfSupportedUsers_2()
     {
@@ -165014,7 +165176,7 @@ private:
                 VerifyOrReturn(CheckValue("NumberOfTotalUsersSupported", actualValue, 10U));
             }
             {
-                NumberOfTotalUsersSupported = value;
+                NumberOfTotalUsersSupportedValue = value;
             }
 
             NextTest();
@@ -165022,7 +165184,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nonnull NumberOfWeekDaySchedulesSupportedPerUser;
+    NSNumber * _Nonnull NumberOfWeekDaySchedulesSupportedPerUserValue;
 
     CHIP_ERROR TestGetMaxNumberOfWeekDaySchedulesForUserAndVerifyDefaultValue_3()
     {
@@ -165042,7 +165204,7 @@ private:
                 VerifyOrReturn(CheckValue("NumberOfWeekDaySchedulesSupportedPerUser", actualValue, 10U));
             }
             {
-                NumberOfWeekDaySchedulesSupportedPerUser = value;
+                NumberOfWeekDaySchedulesSupportedPerUserValue = value;
             }
 
             NextTest();
@@ -165050,7 +165212,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nonnull NumberOfYearDaySchedulesSupportedPerUser;
+    NSNumber * _Nonnull NumberOfYearDaySchedulesSupportedPerUserValue;
 
     CHIP_ERROR TestGetMaxNumberOfYearDaySchedulesForUserAndVerifyDefaultValue_4()
     {
@@ -165070,7 +165232,7 @@ private:
                 VerifyOrReturn(CheckValue("NumberOfYearDaySchedulesSupportedPerUser", actualValue, 10U));
             }
             {
-                NumberOfYearDaySchedulesSupportedPerUser = value;
+                NumberOfYearDaySchedulesSupportedPerUserValue = value;
             }
 
             NextTest();
@@ -165078,7 +165240,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nonnull NumberOfHolidaySchedulesSupported;
+    NSNumber * _Nonnull NumberOfHolidaySchedulesSupportedValue;
 
     CHIP_ERROR TestGetMaxNumberOfHolidaySchedulesAndVerifyDefaultValue_5()
     {
@@ -165098,7 +165260,7 @@ private:
                     VerifyOrReturn(CheckValue("NumberOfHolidaySchedulesSupported", actualValue, 10U));
                 }
                 {
-                    NumberOfHolidaySchedulesSupported = value;
+                    NumberOfHolidaySchedulesSupportedValue = value;
                 }
 
                 NextTest();
@@ -165145,7 +165307,8 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterSetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:[NumberOfWeekDaySchedulesSupportedPerUser unsignedCharValue] + 1U];
+        params.weekDayIndex =
+            [NSNumber numberWithUnsignedChar:[NumberOfWeekDaySchedulesSupportedPerUserValue unsignedCharValue] + 1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.daysMask = [NSNumber numberWithUnsignedChar:1U];
         params.startHour = [NSNumber numberWithUnsignedChar:15U];
@@ -165206,7 +165369,7 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetWeekDayScheduleParams alloc] init];
         params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
-        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupportedValue unsignedShortValue] + 1U];
         params.daysMask = [NSNumber numberWithUnsignedChar:1U];
         params.startHour = [NSNumber numberWithUnsignedChar:15U];
         params.startMinute = [NSNumber numberWithUnsignedChar:16U];
@@ -165613,7 +165776,8 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:[NumberOfWeekDaySchedulesSupportedPerUser unsignedCharValue] + 1U];
+        params.weekDayIndex =
+            [NSNumber numberWithUnsignedChar:[NumberOfWeekDaySchedulesSupportedPerUserValue unsignedCharValue] + 1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getWeekDayScheduleWithParams:params
                                    completion:^(MTRDoorLockClusterGetWeekDayScheduleResponseParams * _Nullable values,
@@ -165625,7 +165789,7 @@ private:
                                        {
                                            id actualValue = values.weekDayIndex;
                                            VerifyOrReturn(CheckValue("WeekDayIndex", actualValue,
-                                               [NumberOfWeekDaySchedulesSupportedPerUser unsignedCharValue] + 1U));
+                                               [NumberOfWeekDaySchedulesSupportedPerUserValue unsignedCharValue] + 1U));
                                        }
 
                                        {
@@ -165691,7 +165855,7 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterGetWeekDayScheduleParams alloc] init];
         params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
-        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupportedValue unsignedShortValue] + 1U];
         [cluster getWeekDayScheduleWithParams:params
                                    completion:^(MTRDoorLockClusterGetWeekDayScheduleResponseParams * _Nullable values,
                                        NSError * _Nullable err) {
@@ -165706,8 +165870,8 @@ private:
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue(
-                                               "UserIndex", actualValue, [NumberOfTotalUsersSupported unsignedShortValue] + 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue,
+                                               [NumberOfTotalUsersSupportedValue unsignedShortValue] + 1U));
                                        }
 
                                        {
@@ -165794,7 +165958,8 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterSetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:[NumberOfYearDaySchedulesSupportedPerUser unsignedCharValue] + 1U];
+        params.yearDayIndex =
+            [NSNumber numberWithUnsignedChar:[NumberOfYearDaySchedulesSupportedPerUserValue unsignedCharValue] + 1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.localStartTime = [NSNumber numberWithUnsignedInt:12345UL];
         params.localEndTime = [NSNumber numberWithUnsignedInt:12345689UL];
@@ -165849,7 +166014,7 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetYearDayScheduleParams alloc] init];
         params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
-        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupportedValue unsignedShortValue] + 1U];
         params.localStartTime = [NSNumber numberWithUnsignedInt:12345UL];
         params.localEndTime = [NSNumber numberWithUnsignedInt:12345689UL];
         [cluster setYearDayScheduleWithParams:params
@@ -166005,7 +166170,8 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:[NumberOfYearDaySchedulesSupportedPerUser unsignedCharValue] + 1U];
+        params.yearDayIndex =
+            [NSNumber numberWithUnsignedChar:[NumberOfYearDaySchedulesSupportedPerUserValue unsignedCharValue] + 1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getYearDayScheduleWithParams:params
                                    completion:^(MTRDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values,
@@ -166017,7 +166183,7 @@ private:
                                        {
                                            id actualValue = values.yearDayIndex;
                                            VerifyOrReturn(CheckValue("YearDayIndex", actualValue,
-                                               [NumberOfYearDaySchedulesSupportedPerUser unsignedCharValue] + 1U));
+                                               [NumberOfYearDaySchedulesSupportedPerUserValue unsignedCharValue] + 1U));
                                        }
 
                                        {
@@ -166083,7 +166249,7 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterGetYearDayScheduleParams alloc] init];
         params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
-        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupportedValue unsignedShortValue] + 1U];
         [cluster getYearDayScheduleWithParams:params
                                    completion:^(MTRDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values,
                                        NSError * _Nullable err) {
@@ -166098,8 +166264,8 @@ private:
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue(
-                                               "UserIndex", actualValue, [NumberOfTotalUsersSupported unsignedShortValue] + 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue,
+                                               [NumberOfTotalUsersSupportedValue unsignedShortValue] + 1U));
                                        }
 
                                        {
@@ -166186,7 +166352,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterSetHolidayScheduleParams alloc] init];
-        params.holidayIndex = [NSNumber numberWithUnsignedChar:[NumberOfHolidaySchedulesSupported unsignedCharValue] + 1U];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:[NumberOfHolidaySchedulesSupportedValue unsignedCharValue] + 1U];
         params.localStartTime = [NSNumber numberWithUnsignedInt:12345UL];
         params.localEndTime = [NSNumber numberWithUnsignedInt:12345689UL];
         params.operatingMode = [NSNumber numberWithUnsignedChar:0U];
@@ -166331,7 +166497,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetHolidayScheduleParams alloc] init];
-        params.holidayIndex = [NSNumber numberWithUnsignedChar:[NumberOfHolidaySchedulesSupported unsignedCharValue] + 1U];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:[NumberOfHolidaySchedulesSupportedValue unsignedCharValue] + 1U];
         [cluster getHolidayScheduleWithParams:params
                                    completion:^(MTRDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values,
                                        NSError * _Nullable err) {
@@ -166342,7 +166508,7 @@ private:
                                        {
                                            id actualValue = values.holidayIndex;
                                            VerifyOrReturn(CheckValue("HolidayIndex", actualValue,
-                                               [NumberOfHolidaySchedulesSupported unsignedCharValue] + 1U));
+                                               [NumberOfHolidaySchedulesSupportedValue unsignedCharValue] + 1U));
                                        }
 
                                        {
@@ -166623,7 +166789,8 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterClearWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:[NumberOfWeekDaySchedulesSupportedPerUser unsignedCharValue] + 1U];
+        params.weekDayIndex =
+            [NSNumber numberWithUnsignedChar:[NumberOfWeekDaySchedulesSupportedPerUserValue unsignedCharValue] + 1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster
             clearWeekDayScheduleWithParams:params
@@ -166676,7 +166843,7 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterClearWeekDayScheduleParams alloc] init];
         params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
-        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupportedValue unsignedShortValue] + 1U];
         [cluster
             clearWeekDayScheduleWithParams:params
                                 completion:^(NSError * _Nullable err) {
@@ -166911,7 +167078,8 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterClearYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NSNumber numberWithUnsignedChar:[NumberOfYearDaySchedulesSupportedPerUser unsignedCharValue] + 1U];
+        params.yearDayIndex =
+            [NSNumber numberWithUnsignedChar:[NumberOfYearDaySchedulesSupportedPerUserValue unsignedCharValue] + 1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster
             clearYearDayScheduleWithParams:params
@@ -166964,7 +167132,7 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterClearYearDayScheduleParams alloc] init];
         params.yearDayIndex = [NSNumber numberWithUnsignedChar:1U];
-        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupportedValue unsignedShortValue] + 1U];
         [cluster
             clearYearDayScheduleWithParams:params
                                 completion:^(NSError * _Nullable err) {
@@ -167198,7 +167366,8 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterClearHolidayScheduleParams alloc] init];
-        params.holidayIndex = [NSNumber numberWithUnsignedChar:[NumberOfYearDaySchedulesSupportedPerUser unsignedCharValue] + 1U];
+        params.holidayIndex =
+            [NSNumber numberWithUnsignedChar:[NumberOfYearDaySchedulesSupportedPerUserValue unsignedCharValue] + 1U];
         [cluster
             clearHolidayScheduleWithParams:params
                                 completion:^(NSError * _Nullable err) {
@@ -168774,7 +168943,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterSetHolidayScheduleParams alloc] init];
-        params.holidayIndex = [NumberOfHolidaySchedulesSupported copy];
+        params.holidayIndex = [NumberOfHolidaySchedulesSupportedValue copy];
         params.localStartTime = [NSNumber numberWithUnsignedInt:1UL];
         params.localEndTime = [NSNumber numberWithUnsignedInt:100UL];
         params.operatingMode = [NSNumber numberWithUnsignedChar:4U];
@@ -168798,42 +168967,42 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetHolidayScheduleParams alloc] init];
-        params.holidayIndex = [NumberOfHolidaySchedulesSupported copy];
-        [cluster
-            getHolidayScheduleWithParams:params
-                              completion:^(
-                                  MTRDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
-                                  NSLog(@"Verify Created Holiday Schedule Error: %@", err);
+        params.holidayIndex = [NumberOfHolidaySchedulesSupportedValue copy];
+        [cluster getHolidayScheduleWithParams:params
+                                   completion:^(MTRDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values,
+                                       NSError * _Nullable err) {
+                                       NSLog(@"Verify Created Holiday Schedule Error: %@", err);
 
-                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                                  {
-                                      id actualValue = values.holidayIndex;
-                                      VerifyOrReturn(CheckValue("HolidayIndex", actualValue, NumberOfHolidaySchedulesSupported));
-                                  }
+                                       {
+                                           id actualValue = values.holidayIndex;
+                                           VerifyOrReturn(
+                                               CheckValue("HolidayIndex", actualValue, NumberOfHolidaySchedulesSupportedValue));
+                                       }
 
-                                  {
-                                      id actualValue = values.status;
-                                      VerifyOrReturn(CheckValue("Status", actualValue, 0U));
-                                  }
+                                       {
+                                           id actualValue = values.status;
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
+                                       }
 
-                                  {
-                                      id actualValue = values.localStartTime;
-                                      VerifyOrReturn(CheckValue("LocalStartTime", actualValue, 1UL));
-                                  }
+                                       {
+                                           id actualValue = values.localStartTime;
+                                           VerifyOrReturn(CheckValue("LocalStartTime", actualValue, 1UL));
+                                       }
 
-                                  {
-                                      id actualValue = values.localEndTime;
-                                      VerifyOrReturn(CheckValue("LocalEndTime", actualValue, 100UL));
-                                  }
+                                       {
+                                           id actualValue = values.localEndTime;
+                                           VerifyOrReturn(CheckValue("LocalEndTime", actualValue, 100UL));
+                                       }
 
-                                  {
-                                      id actualValue = values.operatingMode;
-                                      VerifyOrReturn(CheckValue("OperatingMode", actualValue, 4U));
-                                  }
+                                       {
+                                           id actualValue = values.operatingMode;
+                                           VerifyOrReturn(CheckValue("OperatingMode", actualValue, 4U));
+                                       }
 
-                                  NextTest();
-                              }];
+                                       NextTest();
+                                   }];
 
         return CHIP_NO_ERROR;
     }
@@ -169044,42 +169213,42 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetHolidayScheduleParams alloc] init];
-        params.holidayIndex = [NumberOfHolidaySchedulesSupported copy];
-        [cluster
-            getHolidayScheduleWithParams:params
-                              completion:^(
-                                  MTRDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
-                                  NSLog(@"Make sure that third holiday schedule was not deleted Error: %@", err);
+        params.holidayIndex = [NumberOfHolidaySchedulesSupportedValue copy];
+        [cluster getHolidayScheduleWithParams:params
+                                   completion:^(MTRDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values,
+                                       NSError * _Nullable err) {
+                                       NSLog(@"Make sure that third holiday schedule was not deleted Error: %@", err);
 
-                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                                  {
-                                      id actualValue = values.holidayIndex;
-                                      VerifyOrReturn(CheckValue("HolidayIndex", actualValue, NumberOfHolidaySchedulesSupported));
-                                  }
+                                       {
+                                           id actualValue = values.holidayIndex;
+                                           VerifyOrReturn(
+                                               CheckValue("HolidayIndex", actualValue, NumberOfHolidaySchedulesSupportedValue));
+                                       }
 
-                                  {
-                                      id actualValue = values.status;
-                                      VerifyOrReturn(CheckValue("Status", actualValue, 0U));
-                                  }
+                                       {
+                                           id actualValue = values.status;
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
+                                       }
 
-                                  {
-                                      id actualValue = values.localStartTime;
-                                      VerifyOrReturn(CheckValue("LocalStartTime", actualValue, 1UL));
-                                  }
+                                       {
+                                           id actualValue = values.localStartTime;
+                                           VerifyOrReturn(CheckValue("LocalStartTime", actualValue, 1UL));
+                                       }
 
-                                  {
-                                      id actualValue = values.localEndTime;
-                                      VerifyOrReturn(CheckValue("LocalEndTime", actualValue, 100UL));
-                                  }
+                                       {
+                                           id actualValue = values.localEndTime;
+                                           VerifyOrReturn(CheckValue("LocalEndTime", actualValue, 100UL));
+                                       }
 
-                                  {
-                                      id actualValue = values.operatingMode;
-                                      VerifyOrReturn(CheckValue("OperatingMode", actualValue, 4U));
-                                  }
+                                       {
+                                           id actualValue = values.operatingMode;
+                                           VerifyOrReturn(CheckValue("OperatingMode", actualValue, 4U));
+                                       }
 
-                                  NextTest();
-                              }];
+                                       NextTest();
+                                   }];
 
         return CHIP_NO_ERROR;
     }
@@ -169288,27 +169457,27 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetHolidayScheduleParams alloc] init];
-        params.holidayIndex = [NumberOfHolidaySchedulesSupported copy];
-        [cluster
-            getHolidayScheduleWithParams:params
-                              completion:^(
-                                  MTRDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
-                                  NSLog(@"Make sure that third holiday schedule was not deleted Error: %@", err);
+        params.holidayIndex = [NumberOfHolidaySchedulesSupportedValue copy];
+        [cluster getHolidayScheduleWithParams:params
+                                   completion:^(MTRDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values,
+                                       NSError * _Nullable err) {
+                                       NSLog(@"Make sure that third holiday schedule was not deleted Error: %@", err);
 
-                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                                  {
-                                      id actualValue = values.holidayIndex;
-                                      VerifyOrReturn(CheckValue("HolidayIndex", actualValue, NumberOfHolidaySchedulesSupported));
-                                  }
+                                       {
+                                           id actualValue = values.holidayIndex;
+                                           VerifyOrReturn(
+                                               CheckValue("HolidayIndex", actualValue, NumberOfHolidaySchedulesSupportedValue));
+                                       }
 
-                                  {
-                                      id actualValue = values.status;
-                                      VerifyOrReturn(CheckValue("Status", actualValue, 139U));
-                                  }
+                                       {
+                                           id actualValue = values.status;
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 139U));
+                                       }
 
-                                  NextTest();
-                              }];
+                                       NextTest();
+                                   }];
 
         return CHIP_NO_ERROR;
     }
@@ -172044,7 +172213,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nonnull NumberOfWeekDaySchedulesSupportedPerUser;
+    NSNumber * _Nonnull NumberOfWeekDaySchedulesSupportedPerUserValue;
 
     CHIP_ERROR TestStep1ThReadsNumberOfWeekDaySchedulesSupportedPerUserAttribute_3()
     {
@@ -172064,7 +172233,7 @@ private:
             VerifyOrReturn(
                 CheckConstraintMaxValue<uint8_t>("numberOfWeekDaySchedulesSupportedPerUser", [value unsignedCharValue], 255U));
             {
-                NumberOfWeekDaySchedulesSupportedPerUser = value;
+                NumberOfWeekDaySchedulesSupportedPerUserValue = value;
             }
 
             NextTest();
@@ -172072,7 +172241,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nonnull NumberOfTotalUsersSupported;
+    NSNumber * _Nonnull NumberOfTotalUsersSupportedValue;
 
     CHIP_ERROR TestStep2ThReadsNumberOfTotalUsersSupportedAttribute_4()
     {
@@ -172089,7 +172258,7 @@ private:
             VerifyOrReturn(CheckConstraintMinValue<uint16_t>("numberOfTotalUsersSupported", [value unsignedShortValue], 0U));
             VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("numberOfTotalUsersSupported", [value unsignedShortValue], 65534U));
             {
-                NumberOfTotalUsersSupported = value;
+                NumberOfTotalUsersSupportedValue = value;
             }
 
             NextTest();
@@ -172622,7 +172791,7 @@ private:
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
         return WaitForCommissionee("alpha", value);
     }
-    NSNumber * _Nonnull NumberOfHolidaySchedulesSupported;
+    NSNumber * _Nonnull NumberOfHolidaySchedulesSupportedValue;
 
     CHIP_ERROR TestStep1ThReadsNumberOfHolidaySchedulesSupportedAndSavesForFutureUse_1()
     {
@@ -172640,7 +172809,7 @@ private:
             VerifyOrReturn(CheckConstraintMinValue<uint8_t>("numberOfHolidaySchedulesSupported", [value unsignedCharValue], 0U));
             VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("numberOfHolidaySchedulesSupported", [value unsignedCharValue], 255U));
             {
-                NumberOfHolidaySchedulesSupported = value;
+                NumberOfHolidaySchedulesSupportedValue = value;
             }
 
             NextTest();
@@ -173272,7 +173441,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nonnull NumberOfYearDaySchedulesSupportedPerUser;
+    NSNumber * _Nonnull NumberOfYearDaySchedulesSupportedPerUserValue;
 
     CHIP_ERROR TestStep1ThReadsNumberOfYearDaySchedulesSupportedPerUserAttribute_3()
     {
@@ -173292,7 +173461,7 @@ private:
             VerifyOrReturn(
                 CheckConstraintMaxValue<uint8_t>("numberOfYearDaySchedulesSupportedPerUser", [value unsignedCharValue], 255U));
             {
-                NumberOfYearDaySchedulesSupportedPerUser = value;
+                NumberOfYearDaySchedulesSupportedPerUserValue = value;
             }
 
             NextTest();
@@ -173300,7 +173469,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nonnull NumberOfTotalUsersSupported;
+    NSNumber * _Nonnull NumberOfTotalUsersSupportedValue;
 
     CHIP_ERROR TestStep2ThReadsNumberOfTotalUsersSupportedAttribute_4()
     {
@@ -173317,7 +173486,7 @@ private:
             VerifyOrReturn(CheckConstraintMinValue<uint16_t>("numberOfTotalUsersSupported", [value unsignedShortValue], 0U));
             VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("numberOfTotalUsersSupported", [value unsignedShortValue], 65534U));
             {
-                NumberOfTotalUsersSupported = value;
+                NumberOfTotalUsersSupportedValue = value;
             }
 
             NextTest();
@@ -173512,7 +173681,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetYearDayScheduleParams alloc] init];
-        params.yearDayIndex = [NumberOfYearDaySchedulesSupportedPerUser copy];
+        params.yearDayIndex = [NumberOfYearDaySchedulesSupportedPerUserValue copy];
         params.userIndex = [NSNumber numberWithUnsignedShort:5U];
         [cluster getYearDayScheduleWithParams:params
                                    completion:^(MTRDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values,
@@ -173523,8 +173692,8 @@ private:
 
                                        {
                                            id actualValue = values.yearDayIndex;
-                                           VerifyOrReturn(
-                                               CheckValue("YearDayIndex", actualValue, NumberOfYearDaySchedulesSupportedPerUser));
+                                           VerifyOrReturn(CheckValue(
+                                               "YearDayIndex", actualValue, NumberOfYearDaySchedulesSupportedPerUserValue));
                                        }
 
                                        {
