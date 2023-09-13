@@ -27616,6 +27616,17 @@ typedef NS_OPTIONS(uint16_t, MTRWindowCoveringSafetyStatus) {
     MTRWindowCoveringSafetyStatusProtection API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x800,
 } API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
+typedef NS_OPTIONS(uint8_t, MTRBarrierControlCapabilities) {
+    MTRBarrierControlCapabilitiesPartialBarrier MTR_PROVISIONALLY_AVAILABLE = 0x1,
+} MTR_PROVISIONALLY_AVAILABLE;
+
+typedef NS_OPTIONS(uint16_t, MTRBarrierControlSafetyStatus) {
+    MTRBarrierControlSafetyStatusRemoteLockout MTR_PROVISIONALLY_AVAILABLE = 0x1,
+    MTRBarrierControlSafetyStatusTemperDetected MTR_PROVISIONALLY_AVAILABLE = 0x2,
+    MTRBarrierControlSafetyStatusFailedCommunication MTR_PROVISIONALLY_AVAILABLE = 0x4,
+    MTRBarrierControlSafetyStatusPositionFailure MTR_PROVISIONALLY_AVAILABLE = 0x8,
+} MTR_PROVISIONALLY_AVAILABLE;
+
 typedef NS_ENUM(uint8_t, MTRPumpConfigurationAndControlControlMode) {
     MTRPumpConfigurationAndControlControlModeConstantSpeed API_AVAILABLE(ios(16.5), macos(13.4), watchos(9.5), tvos(16.5)) = 0x00,
     MTRPumpConfigurationAndControlControlModeConstantPressure API_AVAILABLE(ios(16.5), macos(13.4), watchos(9.5), tvos(16.5))
