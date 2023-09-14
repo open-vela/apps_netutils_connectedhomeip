@@ -206,6 +206,8 @@ public:
         printf("Test_TC_SWTCH_1_1\n");
         printf("Test_TC_TCCM_1_1\n");
         printf("Test_TC_TCTL_1_1\n");
+        printf("Test_TC_TCTL_2_2\n");
+        printf("Test_TC_TCTL_2_3\n");
         printf("Test_TC_TMP_1_1\n");
         printf("Test_TC_TMP_2_1\n");
         printf("Test_TC_TSTAT_1_1\n");
@@ -47075,122 +47077,94 @@ public:
             err = TestStep4aReadPacketRxCountAttributeConstraints_3();
             break;
         case 4:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 4 : Step 4b: Read PacketRxCount value from DUT and verify the number of packets received on "
-                "ethernet network interface\n");
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Step 4b: Reboot target device\n");
+            if (ShouldSkip("PICS_SDK_CI_ONLY")) {
+                NextTest();
+                return;
+            }
+            err = TestStep4bRebootTargetDevice_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Step 4c: Reboot target device(DUT)\n");
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestStep4cRebootTargetDeviceDUT_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_6();
+            break;
+        case 7:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 7 : Step 4d: Upon a node reboot, PacketRxCount attribute value will be reset to 0\n");
             if (ShouldSkip("PICS_USER_PROMPT && DGETH.S.A0002")) {
                 NextTest();
                 return;
             }
-            err = TestStep4bReadPacketRxCountValueFromDutAndVerifyTheNumberOfPacketsReceivedOnEthernetNetworkInterface_4();
+            err = TestStep4dUponANodeRebootPacketRxCountAttributeValueWillBeResetTo0_7();
             break;
-        case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Step 5a: Read PacketTxCount attribute constraints\n");
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Step 5a: Read PacketTxCount attribute constraints\n");
             if (ShouldSkip("DGETH.S.A0003")) {
                 NextTest();
                 return;
             }
-            err = TestStep5aReadPacketTxCountAttributeConstraints_5();
+            err = TestStep5aReadPacketTxCountAttributeConstraints_8();
             break;
-        case 6:
+        case 9:
             ChipLogProgress(chipTool,
-                " ***** Test Step 6 : Step 5b: Read PacketTxCount value from DUT and verify the number of packets received on "
-                "ethernet network interface\n");
+                " ***** Test Step 9 : Step 5b: Read PacketTxCount attribute constraints, Upon a node reboot, the value will be "
+                "reset to 0\n");
             if (ShouldSkip("PICS_USER_PROMPT && DGETH.S.A0003")) {
                 NextTest();
                 return;
             }
-            err = TestStep5bReadPacketTxCountValueFromDutAndVerifyTheNumberOfPacketsReceivedOnEthernetNetworkInterface_6();
+            err = TestStep5bReadPacketTxCountAttributeConstraintsUponANodeRebootTheValueWillBeResetTo0_9();
             break;
-        case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Step 6a: Read TxErrCount attribute constraints\n");
+        case 10:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 10 : Step 6: Read TxErrCount attribute constraints, Upon a node reboot, the value will be reset "
+                "to 0\n");
             if (ShouldSkip("DGETH.S.A0004")) {
                 NextTest();
                 return;
             }
-            err = TestStep6aReadTxErrCountAttributeConstraints_7();
+            err = TestStep6ReadTxErrCountAttributeConstraintsUponANodeRebootTheValueWillBeResetTo0_10();
             break;
-        case 8:
+        case 11:
             ChipLogProgress(chipTool,
-                " ***** Test Step 8 : Step 6b: Read TxErrCount value from DUT and verify value indicates the number of failed "
-                "packet transmission on ethernet network interface\n");
-            if (ShouldSkip("PICS_USER_PROMPT && DGETH.S.A0004")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6bReadTxErrCountValueFromDutAndVerifyValueIndicatesTheNumberOfFailedPacketTransmissionOnEthernetNetworkInterface_8();
-            break;
-        case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Step 7a: Read CollisionCount attribute constraints\n");
+                " ***** Test Step 11 : Step 7: Read CollisionCount attribute , Upon a node reboot, the value will be reset to 0\n");
             if (ShouldSkip("DGETH.S.A0005")) {
                 NextTest();
                 return;
             }
-            err = TestStep7aReadCollisionCountAttributeConstraints_9();
+            err = TestStep7ReadCollisionCountAttributeUponANodeRebootTheValueWillBeResetTo0_11();
             break;
-        case 10:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 10 : Step 7b: Read CollisionCount value from DUT and verify value indicates the number of "
-                "collision occurred while transmitting packets on ethernet network interface\n");
-            if (ShouldSkip("PICS_USER_PROMPT && DGETH.S.A0005")) {
-                NextTest();
-                return;
-            }
-            err = TestStep7bReadCollisionCountValueFromDutAndVerifyValueIndicatesTheNumberOfCollisionOccurredWhileTransmittingPacketsOnEthernetNetworkInterface_10();
-            break;
-        case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Step 8a: Read OverrunCount attribute constraints\n");
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Step 8: Read OverrunCount attribute constraints\n");
             if (ShouldSkip("DGETH.S.A0006")) {
                 NextTest();
                 return;
             }
-            err = TestStep8aReadOverrunCountAttributeConstraints_11();
-            break;
-        case 12:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 12 : Step 8b: Read OverrunCount value from DUT and verify value indicates the number of packets "
-                "dropped due to lack of buffer memory on ethernet network interface\n");
-            if (ShouldSkip("PICS_USER_PROMPT && DGETH.S.A0006")) {
-                NextTest();
-                return;
-            }
-            err = TestStep8bReadOverrunCountValueFromDutAndVerifyValueIndicatesTheNumberOfPacketsDroppedDueToLackOfBufferMemoryOnEthernetNetworkInterface_12();
+            err = TestStep8ReadOverrunCountAttributeConstraints_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Step 9a: Read CarrierDetect attribute constraints\n");
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Step 9: Read CarrierDetect attribute constraints\n");
             if (ShouldSkip("DGETH.S.A0007")) {
                 NextTest();
                 return;
             }
-            err = TestStep9aReadCarrierDetectAttributeConstraints_13();
+            err = TestStep9ReadCarrierDetectAttributeConstraints_13();
             break;
         case 14:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 14 : Step 9b: Read CarrierDetect value from DUT and verify value indicates the presence of "
-                "carrier detect control signal on ethernet network interface\n");
-            if (ShouldSkip("PICS_USER_PROMPT && DGETH.S.A0007")) {
-                NextTest();
-                return;
-            }
-            err = TestStep9bReadCarrierDetectValueFromDutAndVerifyValueIndicatesThePresenceOfCarrierDetectControlSignalOnEthernetNetworkInterface_14();
-            break;
-        case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : Step 10a: Read TimeSinceReset attribute constraints\n");
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Step 10: Read TimeSinceReset attribute constraints\n");
             if (ShouldSkip("DGETH.S.A0008")) {
                 NextTest();
                 return;
             }
-            err = TestStep10aReadTimeSinceResetAttributeConstraints_15();
-            break;
-        case 16:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 16 : Step 10b: Read TimeSinceReset value from DUT and verify the value indicates the duration of "
-                "time, in minutes\n");
-            if (ShouldSkip("PICS_USER_PROMPT && DGETH.S.A0008")) {
-                NextTest();
-                return;
-            }
-            err = TestStep10bReadTimeSinceResetValueFromDutAndVerifyTheValueIndicatesTheDurationOfTimeInMinutes_16();
+            err = TestStep10ReadTimeSinceResetAttributeConstraints_14();
             break;
         }
 
@@ -47248,12 +47222,6 @@ public:
         case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -47267,7 +47235,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 17;
+    const uint16_t mTestCount = 15;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -47299,8 +47267,6 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("PHYRate", "enum8", "enum8"));
-                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("PHYRate", [value unsignedCharValue], 0U));
-                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("PHYRate", [value unsignedCharValue], 9U));
             }
 
             NextTest();
@@ -47349,13 +47315,43 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("packetRxCount", "int64u", "int64u"));
+            VerifyOrReturn(CheckConstraintMinValue<uint64_t>("packetRxCount", [value unsignedLongLongValue], 0ULL));
+            VerifyOrReturn(
+                CheckConstraintMaxValue<uint64_t>("packetRxCount", [value unsignedLongLongValue], 18446744073709551615ULL));
+
             NextTest();
         }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4bReadPacketRxCountValueFromDutAndVerifyTheNumberOfPacketsReceivedOnEthernetNetworkInterface_4()
+    CHIP_ERROR TestStep4bRebootTargetDevice_4()
+    {
+
+        chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
+        return Reboot("alpha", value);
+    }
+
+    CHIP_ERROR TestStep4cRebootTargetDeviceDUT_5()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message
+            = chip::Span<const char>("Please reboot the DUT and enter 'y' after DUT startsgarbage: not in length on purpose", 52);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_6()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestStep4dUponANodeRebootPacketRxCountAttributeValueWillBeResetTo0_7()
     {
 
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
@@ -47365,7 +47361,7 @@ private:
         return UserPrompt("alpha", value);
     }
 
-    CHIP_ERROR TestStep5aReadPacketTxCountAttributeConstraints_5()
+    CHIP_ERROR TestStep5aReadPacketTxCountAttributeConstraints_8()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -47380,13 +47376,17 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("packetTxCount", "int64u", "int64u"));
+            VerifyOrReturn(CheckConstraintMinValue<uint64_t>("packetTxCount", [value unsignedLongLongValue], 0ULL));
+            VerifyOrReturn(
+                CheckConstraintMaxValue<uint64_t>("packetTxCount", [value unsignedLongLongValue], 18446744073709551615ULL));
+
             NextTest();
         }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep5bReadPacketTxCountValueFromDutAndVerifyTheNumberOfPacketsReceivedOnEthernetNetworkInterface_6()
+    CHIP_ERROR TestStep5bReadPacketTxCountAttributeConstraintsUponANodeRebootTheValueWillBeResetTo0_9()
     {
 
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
@@ -47396,7 +47396,7 @@ private:
         return UserPrompt("alpha", value);
     }
 
-    CHIP_ERROR TestStep6aReadTxErrCountAttributeConstraints_7()
+    CHIP_ERROR TestStep6ReadTxErrCountAttributeConstraintsUponANodeRebootTheValueWillBeResetTo0_10()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -47406,9 +47406,15 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeTxErrCountWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6a: Read TxErrCount attribute constraints Error: %@", err);
+            NSLog(
+                @"Step 6: Read TxErrCount attribute constraints, Upon a node reboot, the value will be reset to 0 Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("TxErrCount", actualValue, 0ULL));
+            }
 
             VerifyOrReturn(CheckConstraintType("txErrCount", "int64u", "int64u"));
             NextTest();
@@ -47417,18 +47423,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep6bReadTxErrCountValueFromDutAndVerifyValueIndicatesTheNumberOfFailedPacketTransmissionOnEthernetNetworkInterface_8()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep7aReadCollisionCountAttributeConstraints_9()
+    CHIP_ERROR TestStep7ReadCollisionCountAttributeUponANodeRebootTheValueWillBeResetTo0_11()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -47438,9 +47433,14 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeCollisionCountWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 7a: Read CollisionCount attribute constraints Error: %@", err);
+            NSLog(@"Step 7: Read CollisionCount attribute , Upon a node reboot, the value will be reset to 0 Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("CollisionCount", actualValue, 0ULL));
+            }
 
             VerifyOrReturn(CheckConstraintType("collisionCount", "int64u", "int64u"));
             NextTest();
@@ -47449,18 +47449,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep7bReadCollisionCountValueFromDutAndVerifyValueIndicatesTheNumberOfCollisionOccurredWhileTransmittingPacketsOnEthernetNetworkInterface_10()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep8aReadOverrunCountAttributeConstraints_11()
+    CHIP_ERROR TestStep8ReadOverrunCountAttributeConstraints_12()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -47470,9 +47459,14 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeOverrunCountWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 8a: Read OverrunCount attribute constraints Error: %@", err);
+            NSLog(@"Step 8: Read OverrunCount attribute constraints Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("OverrunCount", actualValue, 0ULL));
+            }
 
             VerifyOrReturn(CheckConstraintType("overrunCount", "int64u", "int64u"));
             NextTest();
@@ -47481,18 +47475,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep8bReadOverrunCountValueFromDutAndVerifyValueIndicatesTheNumberOfPacketsDroppedDueToLackOfBufferMemoryOnEthernetNetworkInterface_12()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep9aReadCarrierDetectAttributeConstraints_13()
+    CHIP_ERROR TestStep9ReadCarrierDetectAttributeConstraints_13()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -47502,7 +47485,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeCarrierDetectWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 9a: Read CarrierDetect attribute constraints Error: %@", err);
+            NSLog(@"Step 9: Read CarrierDetect attribute constraints Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -47517,18 +47500,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestStep9bReadCarrierDetectValueFromDutAndVerifyValueIndicatesThePresenceOfCarrierDetectControlSignalOnEthernetNetworkInterface_14()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep10aReadTimeSinceResetAttributeConstraints_15()
+    CHIP_ERROR TestStep10ReadTimeSinceResetAttributeConstraints_14()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -47538,25 +47510,19 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeTimeSinceResetWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 10a: Read TimeSinceReset attribute constraints Error: %@", err);
+            NSLog(@"Step 10: Read TimeSinceReset attribute constraints Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("timeSinceReset", "int64u", "int64u"));
+            VerifyOrReturn(CheckConstraintMinValue<uint64_t>("timeSinceReset", [value unsignedLongLongValue], 0ULL));
+            VerifyOrReturn(
+                CheckConstraintMaxValue<uint64_t>("timeSinceReset", [value unsignedLongLongValue], 18446744073709551615ULL));
+
             NextTest();
         }];
 
         return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestStep10bReadTimeSinceResetValueFromDutAndVerifyTheValueIndicatesTheDurationOfTimeInMinutes_16()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
     }
 };
 
@@ -53204,7 +53170,7 @@ public:
             ChipLogProgress(chipTool,
                 " ***** Test Step 3 : Step 3: TH sends KeySetRead command to GroupKeyManagement cluster with GroupKeySetID as "
                 "0x01a\n");
-            if (ShouldSkip("GRPKEY.S.C01.Rsp")) {
+            if (ShouldSkip("GRPKEY.S.C01.Rsp && GRPKEY.S.C02.Tx")) {
                 NextTest();
                 return;
             }
@@ -53426,7 +53392,7 @@ public:
             ChipLogProgress(chipTool,
                 " ***** Test Step 26 : Step 18: TH sends KeySetRead command to GroupKeyManagement cluster with GroupKeySetID as "
                 "0x01a\n");
-            if (ShouldSkip("GRPKEY.S.C01.Rsp")) {
+            if (ShouldSkip("GRPKEY.S.C01.Rsp && GRPKEY.S.C02.Tx")) {
                 NextTest();
                 return;
             }
@@ -53465,42 +53431,42 @@ public:
             break;
         case 30:
             ChipLogProgress(chipTool,
-                " ***** Test Step 30 : Step 23: TH again sends KeySetWrite command to DUT with any other GroupKeySetID not used "
+                " ***** Test Step 30 : Step 22: TH again sends KeySetWrite command to DUT with any other GroupKeySetID not used "
                 "yet.\n");
             if (ShouldSkip("GRPKEY.S.C00.Rsp && PICS_SKIP_SAMPLE_APP")) {
                 NextTest();
                 return;
             }
-            err = TestStep23ThAgainSendsKeySetWriteCommandToDutWithAnyOtherGroupKeySetIDNotUsedYet_30();
+            err = TestStep22ThAgainSendsKeySetWriteCommandToDutWithAnyOtherGroupKeySetIDNotUsedYet_30();
             break;
         case 31:
-            ChipLogProgress(chipTool, " ***** Test Step 31 : Step 24: TH sends KeySetReadAllIndices command to DUT.\n");
-            if (ShouldSkip("GRPKEY.S.C05.Rsp && PICS_SKIP_SAMPLE_APP")) {
+            ChipLogProgress(chipTool, " ***** Test Step 31 : Step 23: TH sends KeySetReadAllIndices command to DUT.\n");
+            if (ShouldSkip("GRPKEY.S.C04.Rsp && GRPKEY.S.C05.Tx && PICS_SKIP_SAMPLE_APP")) {
                 NextTest();
                 return;
             }
-            err = TestStep24ThSendsKeySetReadAllIndicesCommandToDut_31();
+            err = TestStep23ThSendsKeySetReadAllIndicesCommandToDut_31();
             break;
         case 32:
             ChipLogProgress(chipTool,
-                " ***** Test Step 32 : Step 22: TH removes the Group key set that was added by sending a KeySetRemove command to "
+                " ***** Test Step 32 : Step 24: TH removes the Group key set that was added by sending a KeySetRemove command to "
                 "the GroupKeyManagement cluster with the GroupKeySetID field set to 0x0\n");
             if (ShouldSkip("GRPKEY.S.C03.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestStep22ThRemovesTheGroupKeySetThatWasAddedBySendingAKeySetRemoveCommandToTheGroupKeyManagementClusterWithTheGroupKeySetIDFieldSetTo0x0_32();
+            err = TestStep24ThRemovesTheGroupKeySetThatWasAddedBySendingAKeySetRemoveCommandToTheGroupKeyManagementClusterWithTheGroupKeySetIDFieldSetTo0x0_32();
             break;
         case 33:
             ChipLogProgress(chipTool,
-                " ***** Test Step 33 : Step 23: TH removes the Group key set that was added by sending a KeySetRemove command to "
+                " ***** Test Step 33 : Step 25: TH removes the Group key set that was added by sending a KeySetRemove command to "
                 "the GroupKeyManagement cluster with the GroupKeySetID field set to 0x01b that does not exist in the GroupKeyMap "
                 "attribute list.\n");
             if (ShouldSkip("GRPKEY.S.C03.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestStep23ThRemovesTheGroupKeySetThatWasAddedBySendingAKeySetRemoveCommandToTheGroupKeyManagementClusterWithTheGroupKeySetIDFieldSetTo0x01bThatDoesNotExistInTheGroupKeyMapAttributeList_33();
+            err = TestStep25ThRemovesTheGroupKeySetThatWasAddedBySendingAKeySetRemoveCommandToTheGroupKeyManagementClusterWithTheGroupKeySetIDFieldSetTo0x01bThatDoesNotExistInTheGroupKeyMapAttributeList_33();
             break;
         }
 
@@ -54850,7 +54816,7 @@ private:
         return UserPrompt("alpha", value);
     }
 
-    CHIP_ERROR TestStep23ThAgainSendsKeySetWriteCommandToDutWithAnyOtherGroupKeySetIDNotUsedYet_30()
+    CHIP_ERROR TestStep22ThAgainSendsKeySetWriteCommandToDutWithAnyOtherGroupKeySetIDNotUsedYet_30()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -54881,7 +54847,7 @@ private:
         [cluster
             keySetWriteWithParams:params
                        completion:^(NSError * _Nullable err) {
-                           NSLog(@"Step 23: TH again sends KeySetWrite command to DUT with any other GroupKeySetID not used yet. "
+                           NSLog(@"Step 22: TH again sends KeySetWrite command to DUT with any other GroupKeySetID not used yet. "
                                  @"Error: %@",
                                err);
 
@@ -54895,7 +54861,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep24ThSendsKeySetReadAllIndicesCommandToDut_31()
+    CHIP_ERROR TestStep23ThSendsKeySetReadAllIndicesCommandToDut_31()
     {
 
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
@@ -54906,7 +54872,7 @@ private:
     }
 
     CHIP_ERROR
-    TestStep22ThRemovesTheGroupKeySetThatWasAddedBySendingAKeySetRemoveCommandToTheGroupKeyManagementClusterWithTheGroupKeySetIDFieldSetTo0x0_32()
+    TestStep24ThRemovesTheGroupKeySetThatWasAddedBySendingAKeySetRemoveCommandToTheGroupKeyManagementClusterWithTheGroupKeySetIDFieldSetTo0x0_32()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -54920,7 +54886,7 @@ private:
         [cluster
             keySetRemoveWithParams:params
                         completion:^(NSError * _Nullable err) {
-                            NSLog(@"Step 22: TH removes the Group key set that was added by sending a KeySetRemove command to the "
+                            NSLog(@"Step 24: TH removes the Group key set that was added by sending a KeySetRemove command to the "
                                   @"GroupKeyManagement cluster with the GroupKeySetID field set to 0x0 Error: %@",
                                 err);
 
@@ -54935,7 +54901,7 @@ private:
     }
 
     CHIP_ERROR
-    TestStep23ThRemovesTheGroupKeySetThatWasAddedBySendingAKeySetRemoveCommandToTheGroupKeyManagementClusterWithTheGroupKeySetIDFieldSetTo0x01bThatDoesNotExistInTheGroupKeyMapAttributeList_33()
+    TestStep25ThRemovesTheGroupKeySetThatWasAddedBySendingAKeySetRemoveCommandToTheGroupKeyManagementClusterWithTheGroupKeySetIDFieldSetTo0x01bThatDoesNotExistInTheGroupKeyMapAttributeList_33()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -54949,7 +54915,7 @@ private:
         [cluster
             keySetRemoveWithParams:params
                         completion:^(NSError * _Nullable err) {
-                            NSLog(@"Step 23: TH removes the Group key set that was added by sending a KeySetRemove command to the "
+                            NSLog(@"Step 25: TH removes the Group key set that was added by sending a KeySetRemove command to the "
                                   @"GroupKeyManagement cluster with the GroupKeySetID field set to 0x01b that does not exist in "
                                   @"the GroupKeyMap attribute list. Error: %@",
                                 err);
@@ -66328,7 +66294,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Step 2: If (LTIME.S.A0000.12HR) TH writes 0 to HourFormat attribute\n");
-            if (ShouldSkip("LTIME.S.A0000.12HR")) {
+            if (ShouldSkip("LTIME.S.M.12HR")) {
                 NextTest();
                 return;
             }
@@ -66344,7 +66310,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Step 4: If (LTIME.S.A0000.24HR) TH writes 1 to HourFormat attribute\n");
-            if (ShouldSkip("LTIME.S.A0000.24HR")) {
+            if (ShouldSkip("LTIME.S.M.24HR")) {
                 NextTest();
                 return;
             }
@@ -77125,7 +77091,7 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Step 3: TH reads the StartTime attribute from the DUT\n");
-            if (ShouldSkip("MEDIAPLAYBACK.S.A0001 && PICS_USER_PROMPT")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.A0001")) {
                 NextTest();
                 return;
             }
@@ -77133,7 +77099,7 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Step 4: TH reads the SeekRangeEnd attribute from the DUT\n");
-            if (ShouldSkip("PICS_USER_PROMPT && MEDIAPLAYBACK.S.A0005")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.A0005")) {
                 NextTest();
                 return;
             }
@@ -77141,7 +77107,7 @@ public:
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : Step 5: TH reads the SeekRangeStart attribute from the DUT\n");
-            if (ShouldSkip("PICS_USER_PROMPT && MEDIAPLAYBACK.S.A0006")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.A0006")) {
                 NextTest();
                 return;
             }
@@ -77149,7 +77115,7 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Step 6: TH reads the Duration attribute from the DUT\n");
-            if (ShouldSkip("PICS_USER_PROMPT && MEDIAPLAYBACK.S.A0002")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.A0002")) {
                 NextTest();
                 return;
             }
@@ -77337,41 +77303,103 @@ private:
     CHIP_ERROR TestStep3ThReadsTheStartTimeAttributeFromTheDut_5()
     {
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterMediaPlayback alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeStartTimeWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 3: TH reads the StartTime attribute from the DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("startTime", "epoch_us", "epoch_us"));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 
     CHIP_ERROR TestStep4ThReadsTheSeekRangeEndAttributeFromTheDut_6()
     {
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterMediaPlayback alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeSeekRangeEndWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 4: TH reads the SeekRangeEnd attribute from the DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("seekRangeEnd", "int64u", "int64u"));
+                VerifyOrReturn(CheckConstraintMinValue<uint64_t>("seekRangeEnd", [value unsignedLongLongValue], 0ULL));
+                VerifyOrReturn(
+                    CheckConstraintMaxValue<uint64_t>("seekRangeEnd", [value unsignedLongLongValue], 18446744073709551615ULL));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 
     CHIP_ERROR TestStep5ThReadsTheSeekRangeStartAttributeFromTheDut_7()
     {
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterMediaPlayback alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeSeekRangeStartWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 5: TH reads the SeekRangeStart attribute from the DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("seekRangeStart", "int64u", "int64u"));
+                VerifyOrReturn(CheckConstraintMinValue<uint64_t>("seekRangeStart", [value unsignedLongLongValue], 0ULL));
+                VerifyOrReturn(
+                    CheckConstraintMaxValue<uint64_t>("seekRangeStart", [value unsignedLongLongValue], 18446744073709551615ULL));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 
     CHIP_ERROR TestStep6ThReadsTheDurationAttributeFromTheDut_8()
     {
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterMediaPlayback alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeDurationWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 6: TH reads the Duration attribute from the DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("duration", "int64u", "int64u"));
+                VerifyOrReturn(CheckConstraintMinValue<uint64_t>("duration", [value unsignedLongLongValue], 0ULL));
+                VerifyOrReturn(
+                    CheckConstraintMaxValue<uint64_t>("duration", [value unsignedLongLongValue], 18446744073709551615ULL));
+            }
+            VerifyOrReturn(CheckConstraintNotValue("duration", value, 0ULL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 
     CHIP_ERROR TestStep7ThSendsASeekCommandToTheDutWithAPositionValueBeyondTheFurthestValidPositionExBeyondTheDurationOfTheMedia_9()
@@ -97690,6 +97718,382 @@ private:
     }
 };
 
+class Test_TC_TCTL_2_2 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_TCTL_2_2()
+        : TestCommandBridge("Test_TC_TCTL_2_2")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_TCTL_2_2() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_TCTL_2_2\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_TCTL_2_2\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Step 1: Wait for the commissioned device to be retrieved\n");
+            err = TestStep1WaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Step 2: TH reads from the DUT the MinTemperature attribute\n");
+            if (ShouldSkip("TCTL.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestStep2ThReadsFromTheDutTheMinTemperatureAttribute_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Step 3: TH reads from the DUT the MaxTemperature attribute\n");
+            if (ShouldSkip("TCTL.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestStep3ThReadsFromTheDutTheMaxTemperatureAttribute_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Step 4: TH reads from the DUT the TemperatureSetpoint attribute\n");
+            if (ShouldSkip("TCTL.S.A0000")) {
+                NextTest();
+                return;
+            }
+            err = TestStep4ThReadsFromTheDutTheTemperatureSetpointAttribute_3();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 4;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestStep1WaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+    NSNumber * _Nonnull MinTemperatureValue;
+
+    CHIP_ERROR TestStep2ThReadsFromTheDutTheMinTemperatureAttribute_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterTemperatureControl alloc] initWithDevice:device
+                                                                              endpointID:@(1)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMinTemperatureWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 2: TH reads from the DUT the MinTemperature attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("minTemperature", "temperature", "temperature"));
+            {
+                MinTemperatureValue = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+    NSNumber * _Nonnull MaxTemperatureValue;
+
+    CHIP_ERROR TestStep3ThReadsFromTheDutTheMaxTemperatureAttribute_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterTemperatureControl alloc] initWithDevice:device
+                                                                              endpointID:@(1)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMaxTemperatureWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 3: TH reads from the DUT the MaxTemperature attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("maxTemperature", "temperature", "temperature"));
+            VerifyOrReturn(CheckConstraintMinValue<int16_t>("maxTemperature", [value shortValue], MinTemperatureValue));
+            {
+                MaxTemperatureValue = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+    NSNumber * _Nonnull temperatureValue;
+
+    CHIP_ERROR TestStep4ThReadsFromTheDutTheTemperatureSetpointAttribute_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterTemperatureControl alloc] initWithDevice:device
+                                                                              endpointID:@(1)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeTemperatureSetpointWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 4: TH reads from the DUT the TemperatureSetpoint attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintMinValue<int16_t>("temperatureSetpoint", [value shortValue], MinTemperatureValue));
+            VerifyOrReturn(CheckConstraintMaxValue<int16_t>("temperatureSetpoint", [value shortValue], MaxTemperatureValue));
+            {
+                temperatureValue = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_TCTL_2_3 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_TCTL_2_3()
+        : TestCommandBridge("Test_TC_TCTL_2_3")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_TCTL_2_3() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_TCTL_2_3\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_TCTL_2_3\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Step 1: Wait for the commissioned device to be retrieved\n");
+            err = TestStep1WaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 1 : Step 2: TH reads from the DUT the SelectedTemperatureLevel attribute\n");
+            if (ShouldSkip("TCTL.S.A0004")) {
+                NextTest();
+                return;
+            }
+            err = TestStep2ThReadsFromTheDutTheSelectedTemperatureLevelAttribute_1();
+            break;
+        case 2:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 2 : Step 3: TH reads from the DUT the SupportedTemperatureLevels attribute\n");
+            if (ShouldSkip("TCTL.S.A0005")) {
+                NextTest();
+                return;
+            }
+            err = TestStep3ThReadsFromTheDutTheSupportedTemperatureLevelsAttribute_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 3 : Verify that the DUT response contains a list of strings with each string length not "
+                "exceeding 16 characters.\n");
+            if (ShouldSkip("PICS_USER_PROMPT && TCTL.S.A0005")) {
+                NextTest();
+                return;
+            }
+            err = TestVerifyThatTheDutResponseContainsAListOfStringsWithEachStringLengthNotExceeding16Characters_3();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 4;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestStep1WaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestStep2ThReadsFromTheDutTheSelectedTemperatureLevelAttribute_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterTemperatureControl alloc] initWithDevice:device
+                                                                              endpointID:@(1)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeSelectedTemperatureLevelWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 2: TH reads from the DUT the SelectedTemperatureLevel attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("selectedTemperatureLevel", "int8u", "int8u"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("selectedTemperatureLevel", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("selectedTemperatureLevel", [value unsignedCharValue], 31U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestStep3ThReadsFromTheDutTheSupportedTemperatureLevelsAttribute_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterTemperatureControl alloc] initWithDevice:device
+                                                                              endpointID:@(1)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeSupportedTemperatureLevelsWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 3: TH reads from the DUT the SupportedTemperatureLevels attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("supportedTemperatureLevels", "list", "list"));
+            VerifyOrReturn(CheckConstraintMaxLength("supportedTemperatureLevels", value, 32));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatTheDutResponseContainsAListOfStringsWithEachStringLengthNotExceeding16Characters_3()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' after successgarbage: not in length on purpose", 30);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+};
+
 class Test_TC_TMP_1_1 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
@@ -109475,6 +109879,11 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("Step1bWaitTime", 0, UINT16_MAX, &mStep1bWaitTime);
+        AddArgument("Step2bWaitTime", 0, UINT16_MAX, &mStep2bWaitTime);
+        AddArgument("Step2eWaitTime", 0, UINT16_MAX, &mStep2eWaitTime);
+        AddArgument("Step4bWaitTime", 0, UINT16_MAX, &mStep4bWaitTime);
+        AddArgument("Step5aWaitTime", 0, UINT16_MAX, &mStep5aWaitTime);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
@@ -109517,8 +109926,8 @@ public:
             err = TestStep1aThSendsDownOrCloseCommandToPrepositionTheDutInTheOppositeDirection_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Step 1b: TH Waits for 10 seconds movement(s) on the device\n");
-            err = TestStep1bThWaitsFor10SecondsMovementsOnTheDevice_2();
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Step 1b: TH Waits for 5 - 15 seconds movement(s) on the device\n");
+            err = TestStep1bThWaitsFor515SecondsMovementsOnTheDevice_2();
             break;
         case 3:
             ChipLogProgress(chipTool,
@@ -109587,8 +109996,8 @@ public:
             err = TestStep2dIfPaTlThReadsTargetPositionTiltPercent100thsAttributeFromDut_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Step 2e: TH leave the device moving for 2 seconds\n");
-            err = TestStep2eThLeaveTheDeviceMovingFor2Seconds_11();
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Step 2e: TH leave the device moving for 1-5 seconds\n");
+            err = TestStep2eThLeaveTheDeviceMovingFor15Seconds_11();
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : Step 3a1: TH reads OperationalStatus attribute's bit 0..1\n");
@@ -109844,6 +110253,11 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mStep1bWaitTime;
+    chip::Optional<uint16_t> mStep2bWaitTime;
+    chip::Optional<uint16_t> mStep2eWaitTime;
+    chip::Optional<uint16_t> mStep4bWaitTime;
+    chip::Optional<uint16_t> mStep5aWaitTime;
     chip::Optional<uint16_t> mTimeout;
 
     CHIP_ERROR TestStep0WaitForTheCommissionedDeviceToBeRetrieved_0()
@@ -109872,11 +110286,11 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep1bThWaitsFor10SecondsMovementsOnTheDevice_2()
+    CHIP_ERROR TestStep1bThWaitsFor515SecondsMovementsOnTheDevice_2()
     {
 
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 10000UL;
+        value.ms = mStep1bWaitTime.HasValue() ? mStep1bWaitTime.Value() : 10000UL;
         return WaitForMs("alpha", value);
     }
 
@@ -110012,7 +110426,7 @@ private:
     {
 
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 100UL;
+        value.ms = mStep2bWaitTime.HasValue() ? mStep2bWaitTime.Value() : 500UL;
         return WaitForMs("alpha", value);
     }
 
@@ -110064,11 +110478,11 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep2eThLeaveTheDeviceMovingFor2Seconds_11()
+    CHIP_ERROR TestStep2eThLeaveTheDeviceMovingFor15Seconds_11()
     {
 
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 2000UL;
+        value.ms = mStep2eWaitTime.HasValue() ? mStep2eWaitTime.Value() : 1000UL;
         return WaitForMs("alpha", value);
     }
     NSNumber * _Nonnull OperationalStatusValue;
@@ -110355,7 +110769,7 @@ private:
     {
 
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 3000UL;
+        value.ms = mStep4bWaitTime.HasValue() ? mStep4bWaitTime.Value() : 1000UL;
         return WaitForMs("alpha", value);
     }
 
@@ -110386,7 +110800,7 @@ private:
     {
 
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 1000UL;
+        value.ms = mStep5aWaitTime.HasValue() ? mStep5aWaitTime.Value() : 500UL;
         return WaitForMs("alpha", value);
     }
 
@@ -110455,6 +110869,11 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("Step1bWaitTime", 0, UINT16_MAX, &mStep1bWaitTime);
+        AddArgument("Step2bWaitTime", 0, UINT16_MAX, &mStep2bWaitTime);
+        AddArgument("Step2eWaitTime", 0, UINT16_MAX, &mStep2eWaitTime);
+        AddArgument("Step4bWaitTime", 0, UINT16_MAX, &mStep4bWaitTime);
+        AddArgument("Step5aWaitTime", 0, UINT16_MAX, &mStep5aWaitTime);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
@@ -110824,6 +111243,11 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mStep1bWaitTime;
+    chip::Optional<uint16_t> mStep2bWaitTime;
+    chip::Optional<uint16_t> mStep2eWaitTime;
+    chip::Optional<uint16_t> mStep4bWaitTime;
+    chip::Optional<uint16_t> mStep5aWaitTime;
     chip::Optional<uint16_t> mTimeout;
 
     CHIP_ERROR TestStep0WaitForTheCommissionedDeviceToBeRetrieved_0()
@@ -110856,7 +111280,7 @@ private:
     {
 
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 10000UL;
+        value.ms = mStep1bWaitTime.HasValue() ? mStep1bWaitTime.Value() : 10000UL;
         return WaitForMs("alpha", value);
     }
 
@@ -110992,7 +111416,7 @@ private:
     {
 
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 100UL;
+        value.ms = mStep2bWaitTime.HasValue() ? mStep2bWaitTime.Value() : 500UL;
         return WaitForMs("alpha", value);
     }
 
@@ -111048,7 +111472,7 @@ private:
     {
 
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 2000UL;
+        value.ms = mStep2eWaitTime.HasValue() ? mStep2eWaitTime.Value() : 1000UL;
         return WaitForMs("alpha", value);
     }
     NSNumber * _Nonnull OperationalStatusValue;
@@ -111335,7 +111759,7 @@ private:
     {
 
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 3000UL;
+        value.ms = mStep4bWaitTime.HasValue() ? mStep4bWaitTime.Value() : 1000UL;
         return WaitForMs("alpha", value);
     }
 
@@ -111366,7 +111790,7 @@ private:
     {
 
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 1000UL;
+        value.ms = mStep5aWaitTime.HasValue() ? mStep5aWaitTime.Value() : 500UL;
         return WaitForMs("alpha", value);
     }
 
@@ -179858,6 +180282,8 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_SWTCH_1_1>(),
         make_unique<Test_TC_TCCM_1_1>(),
         make_unique<Test_TC_TCTL_1_1>(),
+        make_unique<Test_TC_TCTL_2_2>(),
+        make_unique<Test_TC_TCTL_2_3>(),
         make_unique<Test_TC_TMP_1_1>(),
         make_unique<Test_TC_TMP_2_1>(),
         make_unique<Test_TC_TSTAT_1_1>(),
