@@ -29070,6 +29070,7 @@ public:
 | * ActiveRadioFaults                                                 | 0x0006 |
 | * ActiveNetworkFaults                                               | 0x0007 |
 | * TestEventTriggersEnabled                                          | 0x0008 |
+| * AverageWearCount                                                  | 0x0009 |
 | * GeneratedCommandList                                              | 0xFFF8 |
 | * AcceptedCommandList                                               | 0xFFF9 |
 | * EventList                                                         | 0xFFFA |
@@ -29900,6 +29901,92 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"GeneralDiagnostics.TestEventTriggersEnabled response %@", [value description]);
+                if (error == nil) {
+                    RemoteDataModelLogger::LogAttributeAsJSON(@(endpointId), @(clusterId), @(attributeId), value);
+                } else {
+                    RemoteDataModelLogger::LogAttributeErrorAsJSON(@(endpointId), @(clusterId), @(attributeId), error);
+                }
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
+ * Attribute AverageWearCount
+ */
+class ReadGeneralDiagnosticsAverageWearCount : public ReadAttribute {
+public:
+    ReadGeneralDiagnosticsAverageWearCount()
+        : ReadAttribute("average-wear-count")
+    {
+    }
+
+    ~ReadGeneralDiagnosticsAverageWearCount() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::GeneralDiagnostics::Id;
+        constexpr chip::AttributeId attributeId = chip::app::Clusters::GeneralDiagnostics::Attributes::AverageWearCount::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") ReadAttribute (0x%08" PRIX32 ") on endpoint %u", endpointId,
+            clusterId, attributeId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterGeneralDiagnostics alloc] initWithDevice:device
+                                                                              endpointID:@(endpointId)
+                                                                                   queue:callbackQueue];
+        [cluster readAttributeAverageWearCountWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"GeneralDiagnostics.AverageWearCount response %@", [value description]);
+            if (error == nil) {
+                RemoteDataModelLogger::LogAttributeAsJSON(@(endpointId), @(clusterId), @(attributeId), value);
+            } else {
+                LogNSError("GeneralDiagnostics AverageWearCount read Error", error);
+                RemoteDataModelLogger::LogAttributeErrorAsJSON(@(endpointId), @(clusterId), @(attributeId), error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class SubscribeAttributeGeneralDiagnosticsAverageWearCount : public SubscribeAttribute {
+public:
+    SubscribeAttributeGeneralDiagnosticsAverageWearCount()
+        : SubscribeAttribute("average-wear-count")
+    {
+    }
+
+    ~SubscribeAttributeGeneralDiagnosticsAverageWearCount() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        constexpr chip::ClusterId clusterId = chip::app::Clusters::GeneralDiagnostics::Id;
+        constexpr chip::CommandId attributeId = chip::app::Clusters::GeneralDiagnostics::Attributes::AverageWearCount::Id;
+
+        ChipLogProgress(chipTool, "Sending cluster (0x%08" PRIX32 ") ReportAttribute (0x%08" PRIX32 ") on endpoint %u", clusterId,
+            attributeId, endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterGeneralDiagnostics alloc] initWithDevice:device
+                                                                              endpointID:@(endpointId)
+                                                                                   queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeAutomatically = mAutoResubscribe.Value();
+        }
+        [cluster subscribeAttributeAverageWearCountWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"GeneralDiagnostics.AverageWearCount response %@", [value description]);
                 if (error == nil) {
                     RemoteDataModelLogger::LogAttributeAsJSON(@(endpointId), @(clusterId), @(attributeId), value);
                 } else {
@@ -163480,6 +163567,8 @@ void registerClusterGeneralDiagnostics(Commands & commands)
               make_unique<SubscribeAttributeGeneralDiagnosticsActiveNetworkFaults>(), //
               make_unique<ReadGeneralDiagnosticsTestEventTriggersEnabled>(), //
               make_unique<SubscribeAttributeGeneralDiagnosticsTestEventTriggersEnabled>(), //
+              make_unique<ReadGeneralDiagnosticsAverageWearCount>(), //
+              make_unique<SubscribeAttributeGeneralDiagnosticsAverageWearCount>(), //
               make_unique<ReadGeneralDiagnosticsGeneratedCommandList>(), //
               make_unique<SubscribeAttributeGeneralDiagnosticsGeneratedCommandList>(), //
               make_unique<ReadGeneralDiagnosticsAcceptedCommandList>(), //
