@@ -146820,6 +146820,7 @@ public:
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
         AddArgument("payload", &mPayload);
+        AddArgument("secondNodeId", 0, UINT64_MAX, &mSecondNodeId);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
@@ -146914,28 +146915,46 @@ public:
             err = TestStartASecondAccessoryWithDifferentKvs_15();
             break;
         case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : Reboot the default accessory\n");
-            err = TestRebootTheDefaultAccessory_16();
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Commission second accessory with new KVS from alpha\n");
+            err = TestCommissionSecondAccessoryWithNewKvsFromAlpha_16();
             break;
         case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : Reboot the default accessory by key\n");
-            err = TestRebootTheDefaultAccessoryByKey_17();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 17 : Wait for the second commissioned device with new KVS to be retrieved for alpha\n");
+            err = TestWaitForTheSecondCommissionedDeviceWithNewKvsToBeRetrievedForAlpha_17();
             break;
         case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : Reboot the second accessory\n");
-            err = TestRebootTheSecondAccessory_18();
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Reboot the default accessory\n");
+            err = TestRebootTheDefaultAccessory_18();
             break;
         case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : Factory Reset the default accessory\n");
-            err = TestFactoryResetTheDefaultAccessory_19();
+            ChipLogProgress(chipTool, " ***** Test Step 19 : Reboot the default accessory by key\n");
+            err = TestRebootTheDefaultAccessoryByKey_19();
             break;
         case 20:
-            ChipLogProgress(chipTool, " ***** Test Step 20 : Factory Reset the default accessory by key\n");
-            err = TestFactoryResetTheDefaultAccessoryByKey_20();
+            ChipLogProgress(chipTool, " ***** Test Step 20 : Reboot the second accessory\n");
+            err = TestRebootTheSecondAccessory_20();
             break;
         case 21:
-            ChipLogProgress(chipTool, " ***** Test Step 21 : Factory Reset the second accessory\n");
-            err = TestFactoryResetTheSecondAccessory_21();
+            ChipLogProgress(chipTool, " ***** Test Step 21 : Factory Reset the default accessory\n");
+            err = TestFactoryResetTheDefaultAccessory_21();
+            break;
+        case 22:
+            ChipLogProgress(chipTool, " ***** Test Step 22 : Factory Reset the default accessory by key\n");
+            err = TestFactoryResetTheDefaultAccessoryByKey_22();
+            break;
+        case 23:
+            ChipLogProgress(chipTool, " ***** Test Step 23 : Factory Reset the second accessory\n");
+            err = TestFactoryResetTheSecondAccessory_23();
+            break;
+        case 24:
+            ChipLogProgress(chipTool, " ***** Test Step 24 : Commission the now-reset second accessory from alpha\n");
+            err = TestCommissionTheNowResetSecondAccessoryFromAlpha_24();
+            break;
+        case 25:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 25 : Wait for the second commissioned device (after reset) to be retrieved for alpha\n");
+            err = TestWaitForTheSecondCommissionedDeviceAfterResetToBeRetrievedForAlpha_25();
             break;
         }
 
@@ -147014,6 +147033,18 @@ public:
         case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -147027,12 +147058,13 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 22;
+    const uint16_t mTestCount = 26;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<chip::CharSpan> mPayload;
+    chip::Optional<uint64_t> mSecondNodeId;
     chip::Optional<uint16_t> mTimeout;
 
     CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
@@ -147152,7 +147184,7 @@ private:
     {
 
         chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-        value.nodeId = 3735928559ULL;
+        value.nodeId = mSecondNodeId.HasValue() ? mSecondNodeId.Value() : 3735928559ULL;
         value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0IX4122-.548G00", 22);
         return PairWithCode("alpha", value);
     }
@@ -147161,7 +147193,7 @@ private:
     {
 
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-        value.nodeId = 3735928559ULL;
+        value.nodeId = mSecondNodeId.HasValue() ? mSecondNodeId.Value() : 3735928559ULL;
         return WaitForCommissionee("alpha", value);
     }
 
@@ -147189,14 +147221,31 @@ private:
         return Start("alpha", value);
     }
 
-    CHIP_ERROR TestRebootTheDefaultAccessory_16()
+    CHIP_ERROR TestCommissionSecondAccessoryWithNewKvsFromAlpha_16()
+    {
+
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mSecondNodeId.HasValue() ? mSecondNodeId.Value() : 3735928559ULL;
+        value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0IX4122-.548G00", 22);
+        return PairWithCode("alpha", value);
+    }
+
+    CHIP_ERROR TestWaitForTheSecondCommissionedDeviceWithNewKvsToBeRetrievedForAlpha_17()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mSecondNodeId.HasValue() ? mSecondNodeId.Value() : 3735928559ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestRebootTheDefaultAccessory_18()
     {
 
         chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
         return Reboot("alpha", value);
     }
 
-    CHIP_ERROR TestRebootTheDefaultAccessoryByKey_17()
+    CHIP_ERROR TestRebootTheDefaultAccessoryByKey_19()
     {
 
         chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
@@ -147205,7 +147254,7 @@ private:
         return Reboot("alpha", value);
     }
 
-    CHIP_ERROR TestRebootTheSecondAccessory_18()
+    CHIP_ERROR TestRebootTheSecondAccessory_20()
     {
 
         chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
@@ -147214,14 +147263,14 @@ private:
         return Reboot("alpha", value);
     }
 
-    CHIP_ERROR TestFactoryResetTheDefaultAccessory_19()
+    CHIP_ERROR TestFactoryResetTheDefaultAccessory_21()
     {
 
         chip::app::Clusters::SystemCommands::Commands::FactoryReset::Type value;
         return FactoryReset("alpha", value);
     }
 
-    CHIP_ERROR TestFactoryResetTheDefaultAccessoryByKey_20()
+    CHIP_ERROR TestFactoryResetTheDefaultAccessoryByKey_22()
     {
 
         chip::app::Clusters::SystemCommands::Commands::FactoryReset::Type value;
@@ -147230,13 +147279,30 @@ private:
         return FactoryReset("alpha", value);
     }
 
-    CHIP_ERROR TestFactoryResetTheSecondAccessory_21()
+    CHIP_ERROR TestFactoryResetTheSecondAccessory_23()
     {
 
         chip::app::Clusters::SystemCommands::Commands::FactoryReset::Type value;
         value.registerKey.Emplace();
         value.registerKey.Value() = chip::Span<const char>("chip-lock-appgarbage: not in length on purpose", 13);
         return FactoryReset("alpha", value);
+    }
+
+    CHIP_ERROR TestCommissionTheNowResetSecondAccessoryFromAlpha_24()
+    {
+
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mSecondNodeId.HasValue() ? mSecondNodeId.Value() : 3735928559ULL;
+        value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0IX4122-.548G00", 22);
+        return PairWithCode("alpha", value);
+    }
+
+    CHIP_ERROR TestWaitForTheSecondCommissionedDeviceAfterResetToBeRetrievedForAlpha_25()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mSecondNodeId.HasValue() ? mSecondNodeId.Value() : 3735928559ULL;
+        return WaitForCommissionee("alpha", value);
     }
 };
 
