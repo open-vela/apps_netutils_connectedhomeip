@@ -4881,16 +4881,16 @@ API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
     API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 
 - (void)readAttributeAverageWearCountWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
-    MTR_NEWLY_AVAILABLE;
+    MTR_PROVISIONALLY_AVAILABLE;
 - (void)subscribeAttributeAverageWearCountWithParams:(MTRSubscribeParams *)params
                              subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                        reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
-    MTR_NEWLY_AVAILABLE;
+    MTR_PROVISIONALLY_AVAILABLE;
 + (void)readAttributeAverageWearCountWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
                                                   endpoint:(NSNumber *)endpoint
                                                      queue:(dispatch_queue_t)queue
                                                 completion:(void (^)(NSNumber * _Nullable value,
-                                                               NSError * _Nullable error))completion MTR_NEWLY_AVAILABLE;
+                                                               NSError * _Nullable error))completion MTR_PROVISIONALLY_AVAILABLE;
 
 - (void)readAttributeGeneratedCommandListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
     API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
@@ -25627,16 +25627,21 @@ typedef NS_OPTIONS(uint8_t, MTRScenesCopyMode) {
 } API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 typedef NS_ENUM(uint8_t, MTROnOffDelayedAllOffEffectVariant) {
-    MTROnOffDelayedAllOffEffectVariantFadeToOffIn0p8Seconds API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x00,
+    MTROnOffDelayedAllOffEffectVariantDelayedOffFastFade MTR_NEWLY_AVAILABLE = 0x00,
+    MTROnOffDelayedAllOffEffectVariantFadeToOffIn0p8Seconds API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
+        MTR_NEWLY_DEPRECATED("Please use MTROnOffDelayedAllOffEffectVariantDelayedOffFastFade")
+    = 0x00,
     MTROnOffDelayedAllOffEffectVariantNoFade API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x01,
-    MTROnOffDelayedAllOffEffectVariant50PercentDimDownIn0p8SecondsThenFadeToOffIn12Seconds API_AVAILABLE(
-        ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
+    MTROnOffDelayedAllOffEffectVariantDelayedOffSlowFade MTR_NEWLY_AVAILABLE = 0x02,
+    MTROnOffDelayedAllOffEffectVariant50PercentDimDownIn0p8SecondsThenFadeToOffIn12Seconds API_AVAILABLE(ios(16.1), macos(13.0),
+        watchos(9.1), tvos(16.1)) MTR_NEWLY_DEPRECATED("Please use MTROnOffDelayedAllOffEffectVariantDelayedOffSlowFade")
     = 0x02,
 } API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 typedef NS_ENUM(uint8_t, MTROnOffDyingLightEffectVariant) {
-    MTROnOffDyingLightEffectVariant20PercenterDimUpIn0p5SecondsThenFadeToOffIn1Second API_AVAILABLE(
-        ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
+    MTROnOffDyingLightEffectVariantDyingLightFadeOff MTR_NEWLY_AVAILABLE = 0x00,
+    MTROnOffDyingLightEffectVariant20PercenterDimUpIn0p5SecondsThenFadeToOffIn1Second API_AVAILABLE(ios(16.1), macos(13.0),
+        watchos(9.1), tvos(16.1)) MTR_NEWLY_DEPRECATED("Please use MTROnOffDyingLightEffectVariantDyingLightFadeOff")
     = 0x00,
 } API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -25648,17 +25653,29 @@ typedef NS_ENUM(uint8_t, MTROnOffEffectIdentifier) {
 typedef NS_ENUM(uint8_t, MTROnOffStartUpOnOff) {
     MTROnOffStartUpOnOffOff API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x00,
     MTROnOffStartUpOnOffOn API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x01,
-    MTROnOffStartUpOnOffTogglePreviousOnOff API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x02,
+    MTROnOffStartUpOnOffToggle MTR_NEWLY_AVAILABLE = 0x02,
+    MTROnOffStartUpOnOffTogglePreviousOnOff API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
+        MTR_NEWLY_DEPRECATED("Please use MTROnOffStartUpOnOffToggle")
+    = 0x02,
 } API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 typedef NS_OPTIONS(uint32_t, MTROnOffFeature) {
     MTROnOffFeatureLighting API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x1,
-    MTROnOffFeatureDeadFront API_AVAILABLE(ios(17.1), macos(14.1), watchos(10.1), tvos(17.1)) = 0x2,
+    MTROnOffFeatureDeadFrontBehavior MTR_NEWLY_AVAILABLE = 0x2,
+    MTROnOffFeatureDeadFront API_AVAILABLE(ios(17.1), macos(14.1), watchos(10.1), tvos(17.1))
+        MTR_NEWLY_DEPRECATED("Please use MTROnOffFeatureDeadFrontBehavior")
+    = 0x2,
 } API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
+typedef NS_OPTIONS(uint8_t, MTROnOffControlBitmap) {
+    MTROnOffControlBitmapAcceptOnlyWhenOn MTR_NEWLY_AVAILABLE = 0x1,
+} MTR_NEWLY_AVAILABLE;
+
 typedef NS_OPTIONS(uint8_t, MTROnOffControl) {
-    MTROnOffControlAcceptOnlyWhenOn API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x1,
-} API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
+    MTROnOffControlAcceptOnlyWhenOn API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
+        MTR_NEWLY_DEPRECATED("Please use MTROnOffControlBitmapAcceptOnlyWhenOn")
+    = 0x1,
+} API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) MTR_NEWLY_DEPRECATED("Please use MTROnOffControlBitmap");
 
 typedef NS_ENUM(uint8_t, MTRLevelControlMoveMode) {
     MTRLevelControlMoveModeUp API_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1)) = 0x00,
