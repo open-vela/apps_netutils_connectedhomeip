@@ -29913,6 +29913,8 @@ public:
     }
 };
 
+#if MTR_ENABLE_PROVISIONAL
+
 /*
  * Attribute AverageWearCount
  */
@@ -29998,6 +30000,8 @@ public:
         return CHIP_NO_ERROR;
     }
 };
+
+#endif // MTR_ENABLE_PROVISIONAL
 
 /*
  * Attribute GeneratedCommandList
@@ -163567,8 +163571,10 @@ void registerClusterGeneralDiagnostics(Commands & commands)
               make_unique<SubscribeAttributeGeneralDiagnosticsActiveNetworkFaults>(), //
               make_unique<ReadGeneralDiagnosticsTestEventTriggersEnabled>(), //
               make_unique<SubscribeAttributeGeneralDiagnosticsTestEventTriggersEnabled>(), //
+#if MTR_ENABLE_PROVISIONAL
               make_unique<ReadGeneralDiagnosticsAverageWearCount>(), //
               make_unique<SubscribeAttributeGeneralDiagnosticsAverageWearCount>(), //
+#endif // MTR_ENABLE_PROVISIONAL
               make_unique<ReadGeneralDiagnosticsGeneratedCommandList>(), //
               make_unique<SubscribeAttributeGeneralDiagnosticsGeneratedCommandList>(), //
               make_unique<ReadGeneralDiagnosticsAcceptedCommandList>(), //

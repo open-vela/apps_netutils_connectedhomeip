@@ -3909,7 +3909,7 @@ using chip::System::Clock::Timeout;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = OnOff::Attributes::StartUpOnOff::TypeInfo;
-    return MTRReadAttribute<MTRNullableOnOffClusterOnOffStartUpOnOffAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+    return MTRReadAttribute<MTRNullableOnOffClusterStartUpOnOffEnumAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self.endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -3960,7 +3960,7 @@ using chip::System::Clock::Timeout;
                                    reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = OnOff::Attributes::StartUpOnOff::TypeInfo;
-    MTRSubscribeAttribute<MTRNullableOnOffClusterOnOffStartUpOnOffAttributeCallbackSubscriptionBridge, NSNumber,
+    MTRSubscribeAttribute<MTRNullableOnOffClusterStartUpOnOffEnumAttributeCallbackSubscriptionBridge, NSNumber,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self.endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -3970,9 +3970,9 @@ using chip::System::Clock::Timeout;
                                                  queue:(dispatch_queue_t)queue
                                             completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRNullableOnOffClusterOnOffStartUpOnOffAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRNullableOnOffClusterStartUpOnOffEnumAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(NullableOnOffClusterOnOffStartUpOnOffAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(NullableOnOffClusterStartUpOnOffEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = OnOff::Attributes::StartUpOnOff::TypeInfo;
