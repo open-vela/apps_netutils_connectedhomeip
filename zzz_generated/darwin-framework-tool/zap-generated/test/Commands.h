@@ -165417,18 +165417,34 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Create new user\n");
+            if (ShouldSkip("DRLK.S.F08 && DRLK.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestCreateNewUser_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Read the user back and verify its fields\n");
+            if (ShouldSkip("DRLK.S.F08 && DRLK.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheUserBackAndVerifyItsFields_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Create new PIN credential and lock/unlock user\n");
+            if (ShouldSkip("DRLK.S.F08 && DRLK.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestCreateNewPinCredentialAndLockUnlockUser_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Verify created PIN credential\n");
+            if (ShouldSkip("DRLK.S.F08 && DRLK.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestVerifyCreatedPinCredential_4();
             break;
         case 5:
@@ -165473,47 +165489,59 @@ public:
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : Step 2b: TH sends the Unlock with Timeout argument value as 60 seconds\n");
-            if (ShouldSkip("DRLK.S.C03.Rsp && PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip(" DRLK.S.F08 && DRLK.S.F00 && DRLK.S.C03.Rsp && PICS_SKIP_SAMPLE_APP ")) {
                 NextTest();
                 return;
             }
             err = TestStep2bThSendsTheUnlockWithTimeoutArgumentValueAs60Seconds_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Wait for AutoRelockTime Expires\n");
-            if (ShouldSkip("DRLK.S.C03.Rsp && PICS_SDK_CI_ONLY")) {
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Step 2b: TH sends the Unlock with Timeout argument value as 60 seconds\n");
+            if (ShouldSkip(" (!DRLK.S.F08 || !DRLK.S.F00) && DRLK.S.C03.Rsp && PICS_SKIP_SAMPLE_APP ")) {
                 NextTest();
                 return;
             }
-            err = TestWaitForAutoRelockTimeExpires_11();
+            err = TestStep2bThSendsTheUnlockWithTimeoutArgumentValueAs60Seconds_11();
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : Wait for AutoRelockTime Expires\n");
-            if (ShouldSkip("DRLK.S.C03.Rsp && PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("DRLK.S.C03.Rsp && PICS_SDK_CI_ONLY")) {
                 NextTest();
                 return;
             }
             err = TestWaitForAutoRelockTimeExpires_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Step 2c: TH reads LockState attribute\n");
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Wait for AutoRelockTime Expires\n");
+            if (ShouldSkip("DRLK.S.C03.Rsp && PICS_SKIP_SAMPLE_APP")) {
+                NextTest();
+                return;
+            }
+            err = TestWaitForAutoRelockTimeExpires_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Step 2c: TH reads LockState attribute\n");
             if (ShouldSkip("DRLK.S.A0000 && DRLK.S.C03.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestStep2cThReadsLockStateAttribute_13();
-            break;
-        case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : Cleanup the created user\n");
-            err = TestCleanupTheCreatedUser_14();
+            err = TestStep2cThReadsLockStateAttribute_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : Clean the created credential\n");
-            if (ShouldSkip("DRLK.S.C26.Rsp")) {
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Cleanup the created user\n");
+            if (ShouldSkip("DRLK.S.F08 && DRLK.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestCleanTheCreatedCredential_15();
+            err = TestCleanupTheCreatedUser_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Clean the created credential\n");
+            if (ShouldSkip("DRLK.S.F08 && DRLK.S.F00 && DRLK.S.C26.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestCleanTheCreatedCredential_16();
             break;
         }
 
@@ -165574,6 +165602,9 @@ public:
         case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -165584,7 +165615,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 16;
+    const uint16_t mTestCount = 17;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -165946,7 +165977,29 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWaitForAutoRelockTimeExpires_11()
+    CHIP_ERROR TestStep2bThSendsTheUnlockWithTimeoutArgumentValueAs60Seconds_11()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterUnlockWithTimeoutParams alloc] init];
+        params.timeout =
+            [NSNumber numberWithUnsignedShort:60U];
+        [cluster unlockWithTimeoutWithParams:params completion:
+                                                        ^(NSError * _Nullable err) {
+                                                            NSLog(@"Step 2b: TH sends the Unlock with Timeout argument value as 60 seconds Error: %@", err);
+
+                                                            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                            NextTest();
+                                                        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWaitForAutoRelockTimeExpires_12()
     {
 
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
@@ -165954,7 +166007,7 @@ private:
         return WaitForMs("alpha", value);
     }
 
-    CHIP_ERROR TestWaitForAutoRelockTimeExpires_12()
+    CHIP_ERROR TestWaitForAutoRelockTimeExpires_13()
     {
 
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
@@ -165962,7 +166015,7 @@ private:
         return WaitForMs("alpha", value);
     }
 
-    CHIP_ERROR TestStep2cThReadsLockStateAttribute_13()
+    CHIP_ERROR TestStep2cThReadsLockStateAttribute_14()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -165986,7 +166039,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCleanupTheCreatedUser_14()
+    CHIP_ERROR TestCleanupTheCreatedUser_15()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -166008,7 +166061,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCleanTheCreatedCredential_15()
+    CHIP_ERROR TestCleanTheCreatedCredential_16()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
