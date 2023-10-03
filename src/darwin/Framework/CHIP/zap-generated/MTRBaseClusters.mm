@@ -26,6 +26,8 @@
 #import "MTRCommandPayloadsObjc.h"
 #import "MTRDevice_Internal.h"
 #import "MTRStructsObjc.h"
+#import "NSDataSpanConversion.h"
+#import "NSStringSpanConversion.h"
 
 #include <controller/CHIPCluster.h>
 #include <lib/support/CHIPListUtils.h>
@@ -780,7 +782,7 @@ using chip::System::Clock::Timeout;
                 }
             }
             request.groupID = params.groupID.unsignedShortValue;
-            request.groupName = [self asCharSpan:params.groupName];
+            request.groupName = AsCharSpan(params.groupName);
 
             return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
         });
@@ -966,7 +968,7 @@ using chip::System::Clock::Timeout;
                 }
             }
             request.groupID = params.groupID.unsignedShortValue;
-            request.groupName = [self asCharSpan:params.groupName];
+            request.groupName = AsCharSpan(params.groupName);
 
             return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
         });
@@ -1550,7 +1552,7 @@ using chip::System::Clock::Timeout;
             request.groupID = params.groupID.unsignedShortValue;
             request.sceneID = params.sceneID.unsignedCharValue;
             request.transitionTime = params.transitionTime.unsignedShortValue;
-            request.sceneName = [self asCharSpan:params.sceneName];
+            request.sceneName = AsCharSpan(params.sceneName);
             {
                 using ListType_0 = std::remove_reference_t<decltype(request.extensionFieldSets)>;
                 using ListMemberType_0 = ListMemberTypeGetter<ListType_0>::Type;
@@ -1831,7 +1833,7 @@ using chip::System::Clock::Timeout;
             request.groupID = params.groupID.unsignedShortValue;
             request.sceneID = params.sceneID.unsignedCharValue;
             request.transitionTime = params.transitionTime.unsignedShortValue;
-            request.sceneName = [self asCharSpan:params.sceneName];
+            request.sceneName = AsCharSpan(params.sceneName);
             {
                 using ListType_0 = std::remove_reference_t<decltype(request.extensionFieldSets)>;
                 using ListMemberType_0 = ListMemberTypeGetter<ListType_0>::Type;
@@ -6992,7 +6994,7 @@ using chip::System::Clock::Timeout;
             ListFreer listFreer;
             using TypeInfo = BinaryInputBasic::Attributes::ActiveText::TypeInfo;
             TypeInfo::Type cppValue;
-            cppValue = [self asCharSpan:value];
+            cppValue = AsCharSpan(value);
 
             chip::Controller::ClusterBase cppCluster(exchangeManager, session, self.endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
@@ -7064,7 +7066,7 @@ using chip::System::Clock::Timeout;
             ListFreer listFreer;
             using TypeInfo = BinaryInputBasic::Attributes::Description::TypeInfo;
             TypeInfo::Type cppValue;
-            cppValue = [self asCharSpan:value];
+            cppValue = AsCharSpan(value);
 
             chip::Controller::ClusterBase cppCluster(exchangeManager, session, self.endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
@@ -7136,7 +7138,7 @@ using chip::System::Clock::Timeout;
             ListFreer listFreer;
             using TypeInfo = BinaryInputBasic::Attributes::InactiveText::TypeInfo;
             TypeInfo::Type cppValue;
-            cppValue = [self asCharSpan:value];
+            cppValue = AsCharSpan(value);
 
             chip::Controller::ClusterBase cppCluster(exchangeManager, session, self.endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
@@ -10098,7 +10100,7 @@ using chip::System::Clock::Timeout;
                             return CHIP_ERROR_INVALID_ARGUMENT;
                         }
                         auto element_0 = (MTRAccessControlClusterAccessControlExtensionStruct *) value[i_0];
-                        listHolder_0->mList[i_0].data = [self asByteSpan:element_0.data];
+                        listHolder_0->mList[i_0].data = AsByteSpan(element_0.data);
                         listHolder_0->mList[i_0].fabricIndex = element_0.fabricIndex.unsignedCharValue;
                     }
                     cppValue = ListType_0(listHolder_0->mList, value.count);
@@ -12310,7 +12312,7 @@ using chip::System::Clock::Timeout;
             ListFreer listFreer;
             using TypeInfo = BasicInformation::Attributes::NodeLabel::TypeInfo;
             TypeInfo::Type cppValue;
-            cppValue = [self asCharSpan:value];
+            cppValue = AsCharSpan(value);
 
             chip::Controller::ClusterBase cppCluster(exchangeManager, session, self.endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
@@ -12382,7 +12384,7 @@ using chip::System::Clock::Timeout;
             ListFreer listFreer;
             using TypeInfo = BasicInformation::Attributes::Location::TypeInfo;
             TypeInfo::Type cppValue;
-            cppValue = [self asCharSpan:value];
+            cppValue = AsCharSpan(value);
 
             chip::Controller::ClusterBase cppCluster(exchangeManager, session, self.endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
@@ -14207,7 +14209,7 @@ using chip::System::Clock::Timeout;
             }
             if (params.location != nil) {
                 auto & definedValue_0 = request.location.Emplace();
-                definedValue_0 = [self asCharSpan:params.location];
+                definedValue_0 = AsCharSpan(params.location);
             }
             if (params.requestorCanConsent != nil) {
                 auto & definedValue_0 = request.requestorCanConsent.Emplace();
@@ -14215,7 +14217,7 @@ using chip::System::Clock::Timeout;
             }
             if (params.metadataForProvider != nil) {
                 auto & definedValue_0 = request.metadataForProvider.Emplace();
-                definedValue_0 = [self asByteSpan:params.metadataForProvider];
+                definedValue_0 = AsByteSpan(params.metadataForProvider);
             }
 
             return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
@@ -14247,7 +14249,7 @@ using chip::System::Clock::Timeout;
                     invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
-            request.updateToken = [self asByteSpan:params.updateToken];
+            request.updateToken = AsByteSpan(params.updateToken);
             request.newVersion = params.newVersion.unsignedIntValue;
 
             return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
@@ -14282,7 +14284,7 @@ using chip::System::Clock::Timeout;
                     invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
-            request.updateToken = [self asByteSpan:params.updateToken];
+            request.updateToken = AsByteSpan(params.updateToken);
             request.softwareVersion = params.softwareVersion.unsignedIntValue;
 
             return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
@@ -14777,7 +14779,7 @@ using chip::System::Clock::Timeout;
             request.announcementReason = static_cast<std::remove_reference_t<decltype(request.announcementReason)>>(params.announcementReason.unsignedCharValue);
             if (params.metadataForNode != nil) {
                 auto & definedValue_0 = request.metadataForNode.Emplace();
-                definedValue_0 = [self asByteSpan:params.metadataForNode];
+                definedValue_0 = AsByteSpan(params.metadataForNode);
             }
             request.endpoint = params.endpoint.unsignedShortValue;
 
@@ -15617,7 +15619,7 @@ using chip::System::Clock::Timeout;
             ListFreer listFreer;
             using TypeInfo = LocalizationConfiguration::Attributes::ActiveLocale::TypeInfo;
             TypeInfo::Type cppValue;
-            cppValue = [self asCharSpan:value];
+            cppValue = AsCharSpan(value);
 
             chip::Controller::ClusterBase cppCluster(exchangeManager, session, self.endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
@@ -20769,7 +20771,7 @@ using chip::System::Clock::Timeout;
                 }
             }
             request.newRegulatoryConfig = static_cast<std::remove_reference_t<decltype(request.newRegulatoryConfig)>>(params.newRegulatoryConfig.unsignedCharValue);
-            request.countryCode = [self asCharSpan:params.countryCode];
+            request.countryCode = AsCharSpan(params.countryCode);
             request.breadcrumb = params.breadcrumb.unsignedLongLongValue;
 
             return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
@@ -21708,7 +21710,7 @@ using chip::System::Clock::Timeout;
                         definedValue_0.SetNull();
                     } else {
                         auto & nonNullValue_1 = definedValue_0.SetNonNull();
-                        nonNullValue_1 = [self asByteSpan:params.ssid];
+                        nonNullValue_1 = AsByteSpan(params.ssid);
                     }
                 }
                 if (params.breadcrumb != nil) {
@@ -21746,8 +21748,8 @@ using chip::System::Clock::Timeout;
                     invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
-            request.ssid = [self asByteSpan:params.ssid];
-            request.credentials = [self asByteSpan:params.credentials];
+            request.ssid = AsByteSpan(params.ssid);
+            request.credentials = AsByteSpan(params.credentials);
             if (params.breadcrumb != nil) {
                 auto & definedValue_0 = request.breadcrumb.Emplace();
                 definedValue_0 = params.breadcrumb.unsignedLongLongValue;
@@ -21782,7 +21784,7 @@ using chip::System::Clock::Timeout;
                     invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
-            request.operationalDataset = [self asByteSpan:params.operationalDataset];
+            request.operationalDataset = AsByteSpan(params.operationalDataset);
             if (params.breadcrumb != nil) {
                 auto & definedValue_0 = request.breadcrumb.Emplace();
                 definedValue_0 = params.breadcrumb.unsignedLongLongValue;
@@ -21817,7 +21819,7 @@ using chip::System::Clock::Timeout;
                     invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
-            request.networkID = [self asByteSpan:params.networkID];
+            request.networkID = AsByteSpan(params.networkID);
             if (params.breadcrumb != nil) {
                 auto & definedValue_0 = request.breadcrumb.Emplace();
                 definedValue_0 = params.breadcrumb.unsignedLongLongValue;
@@ -21852,7 +21854,7 @@ using chip::System::Clock::Timeout;
                     invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
-            request.networkID = [self asByteSpan:params.networkID];
+            request.networkID = AsByteSpan(params.networkID);
             if (params.breadcrumb != nil) {
                 auto & definedValue_0 = request.breadcrumb.Emplace();
                 definedValue_0 = params.breadcrumb.unsignedLongLongValue;
@@ -21887,7 +21889,7 @@ using chip::System::Clock::Timeout;
                     invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
-            request.networkID = [self asByteSpan:params.networkID];
+            request.networkID = AsByteSpan(params.networkID);
             request.networkIndex = params.networkIndex.unsignedCharValue;
             if (params.breadcrumb != nil) {
                 auto & definedValue_0 = request.breadcrumb.Emplace();
@@ -23032,7 +23034,7 @@ using chip::System::Clock::Timeout;
             request.requestedProtocol = static_cast<std::remove_reference_t<decltype(request.requestedProtocol)>>(params.requestedProtocol.unsignedCharValue);
             if (params.transferFileDesignator != nil) {
                 auto & definedValue_0 = request.transferFileDesignator.Emplace();
-                definedValue_0 = [self asCharSpan:params.transferFileDesignator];
+                definedValue_0 = AsCharSpan(params.transferFileDesignator);
             }
 
             return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
@@ -23506,7 +23508,7 @@ using chip::System::Clock::Timeout;
                     invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
-            request.enableKey = [self asByteSpan:params.enableKey];
+            request.enableKey = AsByteSpan(params.enableKey);
             request.eventTrigger = params.eventTrigger.unsignedLongLongValue;
 
             return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
@@ -33172,7 +33174,7 @@ using chip::System::Clock::Timeout;
                         listHolder_0->mList[i_0].validAt = element_0.validAt.unsignedLongLongValue;
                         if (element_0.name != nil) {
                             auto & definedValue_2 = listHolder_0->mList[i_0].name.Emplace();
-                            definedValue_2 = [self asCharSpan:element_0.name];
+                            definedValue_2 = AsCharSpan(element_0.name);
                         }
                     }
                     request.timeZone = ListType_0(listHolder_0->mList, params.timeZone.count);
@@ -33279,7 +33281,7 @@ using chip::System::Clock::Timeout;
                 request.defaultNTP.SetNull();
             } else {
                 auto & nonNullValue_0 = request.defaultNTP.SetNonNull();
-                nonNullValue_0 = [self asCharSpan:params.defaultNTP];
+                nonNullValue_0 = AsCharSpan(params.defaultNTP);
             }
 
             return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
@@ -34174,7 +34176,7 @@ using chip::System::Clock::Timeout;
             ListFreer listFreer;
             using TypeInfo = BridgedDeviceBasicInformation::Attributes::NodeLabel::TypeInfo;
             TypeInfo::Type cppValue;
-            cppValue = [self asCharSpan:value];
+            cppValue = AsCharSpan(value);
 
             chip::Controller::ClusterBase cppCluster(exchangeManager, session, self.endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
@@ -36313,10 +36315,10 @@ using chip::System::Clock::Timeout;
                 timedInvokeTimeoutMs.SetValue(10000);
             }
             request.commissioningTimeout = params.commissioningTimeout.unsignedShortValue;
-            request.PAKEPasscodeVerifier = [self asByteSpan:params.pakePasscodeVerifier];
+            request.PAKEPasscodeVerifier = AsByteSpan(params.pakePasscodeVerifier);
             request.discriminator = params.discriminator.unsignedShortValue;
             request.iterations = params.iterations.unsignedIntValue;
-            request.salt = [self asByteSpan:params.salt];
+            request.salt = AsByteSpan(params.salt);
 
             return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
         });
@@ -37093,7 +37095,7 @@ using chip::System::Clock::Timeout;
                     invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
-            request.attestationNonce = [self asByteSpan:params.attestationNonce];
+            request.attestationNonce = AsByteSpan(params.attestationNonce);
 
             return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
         });
@@ -37155,7 +37157,7 @@ using chip::System::Clock::Timeout;
                     invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
-            request.CSRNonce = [self asByteSpan:params.csrNonce];
+            request.CSRNonce = AsByteSpan(params.csrNonce);
             if (params.isForUpdateNOC != nil) {
                 auto & definedValue_0 = request.isForUpdateNOC.Emplace();
                 definedValue_0 = params.isForUpdateNOC.boolValue;
@@ -37190,12 +37192,12 @@ using chip::System::Clock::Timeout;
                     invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
-            request.NOCValue = [self asByteSpan:params.nocValue];
+            request.NOCValue = AsByteSpan(params.nocValue);
             if (params.icacValue != nil) {
                 auto & definedValue_0 = request.ICACValue.Emplace();
-                definedValue_0 = [self asByteSpan:params.icacValue];
+                definedValue_0 = AsByteSpan(params.icacValue);
             }
-            request.IPKValue = [self asByteSpan:params.ipkValue];
+            request.IPKValue = AsByteSpan(params.ipkValue);
             request.caseAdminSubject = params.caseAdminSubject.unsignedLongLongValue;
             request.adminVendorId = static_cast<std::remove_reference_t<decltype(request.adminVendorId)>>(params.adminVendorId.unsignedShortValue);
 
@@ -37228,10 +37230,10 @@ using chip::System::Clock::Timeout;
                     invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
-            request.NOCValue = [self asByteSpan:params.nocValue];
+            request.NOCValue = AsByteSpan(params.nocValue);
             if (params.icacValue != nil) {
                 auto & definedValue_0 = request.ICACValue.Emplace();
-                definedValue_0 = [self asByteSpan:params.icacValue];
+                definedValue_0 = AsByteSpan(params.icacValue);
             }
 
             return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
@@ -37263,7 +37265,7 @@ using chip::System::Clock::Timeout;
                     invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
-            request.label = [self asCharSpan:params.label];
+            request.label = AsCharSpan(params.label);
 
             return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
         });
@@ -37328,7 +37330,7 @@ using chip::System::Clock::Timeout;
                     invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
-            request.rootCACertificate = [self asByteSpan:params.rootCACertificate];
+            request.rootCACertificate = AsByteSpan(params.rootCACertificate);
 
             return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
         });
@@ -38298,7 +38300,7 @@ using chip::System::Clock::Timeout;
                 request.groupKeySet.epochKey0.SetNull();
             } else {
                 auto & nonNullValue_1 = request.groupKeySet.epochKey0.SetNonNull();
-                nonNullValue_1 = [self asByteSpan:params.groupKeySet.epochKey0];
+                nonNullValue_1 = AsByteSpan(params.groupKeySet.epochKey0);
             }
             if (params.groupKeySet.epochStartTime0 == nil) {
                 request.groupKeySet.epochStartTime0.SetNull();
@@ -38310,7 +38312,7 @@ using chip::System::Clock::Timeout;
                 request.groupKeySet.epochKey1.SetNull();
             } else {
                 auto & nonNullValue_1 = request.groupKeySet.epochKey1.SetNonNull();
-                nonNullValue_1 = [self asByteSpan:params.groupKeySet.epochKey1];
+                nonNullValue_1 = AsByteSpan(params.groupKeySet.epochKey1);
             }
             if (params.groupKeySet.epochStartTime1 == nil) {
                 request.groupKeySet.epochStartTime1.SetNull();
@@ -38322,7 +38324,7 @@ using chip::System::Clock::Timeout;
                 request.groupKeySet.epochKey2.SetNull();
             } else {
                 auto & nonNullValue_1 = request.groupKeySet.epochKey2.SetNonNull();
-                nonNullValue_1 = [self asByteSpan:params.groupKeySet.epochKey2];
+                nonNullValue_1 = AsByteSpan(params.groupKeySet.epochKey2);
             }
             if (params.groupKeySet.epochStartTime2 == nil) {
                 request.groupKeySet.epochStartTime2.SetNull();
@@ -39802,8 +39804,8 @@ using chip::System::Clock::Timeout;
                             return CHIP_ERROR_INVALID_ARGUMENT;
                         }
                         auto element_0 = (MTRUserLabelClusterLabelStruct *) value[i_0];
-                        listHolder_0->mList[i_0].label = [self asCharSpan:element_0.label];
-                        listHolder_0->mList[i_0].value = [self asCharSpan:element_0.value];
+                        listHolder_0->mList[i_0].label = AsCharSpan(element_0.label);
+                        listHolder_0->mList[i_0].value = AsCharSpan(element_0.value);
                     }
                     cppValue = ListType_0(listHolder_0->mList, value.count);
                 } else {
@@ -40848,10 +40850,10 @@ using chip::System::Clock::Timeout;
             }
             request.checkInNodeID = params.checkInNodeID.unsignedLongLongValue;
             request.monitoredSubject = params.monitoredSubject.unsignedLongLongValue;
-            request.key = [self asByteSpan:params.key];
+            request.key = AsByteSpan(params.key);
             if (params.verificationKey != nil) {
                 auto & definedValue_0 = request.verificationKey.Emplace();
-                definedValue_0 = [self asByteSpan:params.verificationKey];
+                definedValue_0 = AsByteSpan(params.verificationKey);
             }
 
             return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
@@ -40889,7 +40891,7 @@ using chip::System::Clock::Timeout;
             request.checkInNodeID = params.checkInNodeID.unsignedLongLongValue;
             if (params.verificationKey != nil) {
                 auto & definedValue_0 = request.verificationKey.Emplace();
-                definedValue_0 = [self asByteSpan:params.verificationKey];
+                definedValue_0 = AsByteSpan(params.verificationKey);
             }
 
             return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
@@ -50175,7 +50177,7 @@ using chip::System::Clock::Timeout;
             if (params != nil) {
                 if (params.pinCode != nil) {
                     auto & definedValue_0 = request.PINCode.Emplace();
-                    definedValue_0 = [self asByteSpan:params.pinCode];
+                    definedValue_0 = AsByteSpan(params.pinCode);
                 }
             }
 
@@ -50217,7 +50219,7 @@ using chip::System::Clock::Timeout;
             if (params != nil) {
                 if (params.pinCode != nil) {
                     auto & definedValue_0 = request.PINCode.Emplace();
-                    definedValue_0 = [self asByteSpan:params.pinCode];
+                    definedValue_0 = AsByteSpan(params.pinCode);
                 }
             }
 
@@ -50259,7 +50261,7 @@ using chip::System::Clock::Timeout;
             request.timeout = params.timeout.unsignedShortValue;
             if (params.pinCode != nil) {
                 auto & definedValue_0 = request.PINCode.Emplace();
-                definedValue_0 = [self asByteSpan:params.pinCode];
+                definedValue_0 = AsByteSpan(params.pinCode);
             }
 
             return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
@@ -50616,7 +50618,7 @@ using chip::System::Clock::Timeout;
                 request.userName.SetNull();
             } else {
                 auto & nonNullValue_0 = request.userName.SetNonNull();
-                nonNullValue_0 = [self asCharSpan:params.userName];
+                nonNullValue_0 = AsCharSpan(params.userName);
             }
             if (params.userUniqueID == nil) {
                 request.userUniqueID.SetNull();
@@ -50746,7 +50748,7 @@ using chip::System::Clock::Timeout;
             request.operationType = static_cast<std::remove_reference_t<decltype(request.operationType)>>(params.operationType.unsignedCharValue);
             request.credential.credentialType = static_cast<std::remove_reference_t<decltype(request.credential.credentialType)>>(params.credential.credentialType.unsignedCharValue);
             request.credential.credentialIndex = params.credential.credentialIndex.unsignedShortValue;
-            request.credentialData = [self asByteSpan:params.credentialData];
+            request.credentialData = AsByteSpan(params.credentialData);
             if (params.userIndex == nil) {
                 request.userIndex.SetNull();
             } else {
@@ -50879,7 +50881,7 @@ using chip::System::Clock::Timeout;
             if (params != nil) {
                 if (params.pinCode != nil) {
                     auto & definedValue_0 = request.PINCode.Emplace();
-                    definedValue_0 = [self asByteSpan:params.pinCode];
+                    definedValue_0 = AsByteSpan(params.pinCode);
                 }
             }
 
@@ -51747,7 +51749,7 @@ using chip::System::Clock::Timeout;
             ListFreer listFreer;
             using TypeInfo = DoorLock::Attributes::Language::TypeInfo;
             TypeInfo::Type cppValue;
-            cppValue = [self asCharSpan:value];
+            cppValue = AsCharSpan(value);
 
             chip::Controller::ClusterBase cppCluster(exchangeManager, session, self.endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
@@ -74802,7 +74804,7 @@ using chip::System::Clock::Timeout;
             ListFreer listFreer;
             using TypeInfo = BallastConfiguration::Attributes::LampType::TypeInfo;
             TypeInfo::Type cppValue;
-            cppValue = [self asCharSpan:value];
+            cppValue = AsCharSpan(value);
 
             chip::Controller::ClusterBase cppCluster(exchangeManager, session, self.endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
@@ -74874,7 +74876,7 @@ using chip::System::Clock::Timeout;
             ListFreer listFreer;
             using TypeInfo = BallastConfiguration::Attributes::LampManufacturer::TypeInfo;
             TypeInfo::Type cppValue;
-            cppValue = [self asCharSpan:value];
+            cppValue = AsCharSpan(value);
 
             chip::Controller::ClusterBase cppCluster(exchangeManager, session, self.endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
@@ -89096,7 +89098,7 @@ using chip::System::Clock::Timeout;
                     invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
-            request.match = [self asCharSpan:params.match];
+            request.match = AsCharSpan(params.match);
 
             return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
         });
@@ -89867,7 +89869,7 @@ using chip::System::Clock::Timeout;
             request.target = params.target.unsignedCharValue;
             if (params.data != nil) {
                 auto & definedValue_0 = request.data.Emplace();
-                definedValue_0 = [self asCharSpan:params.data];
+                definedValue_0 = AsCharSpan(params.data);
             }
 
             return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
@@ -92023,7 +92025,7 @@ using chip::System::Clock::Timeout;
                 }
             }
             request.index = params.index.unsignedCharValue;
-            request.name = [self asCharSpan:params.name];
+            request.name = AsCharSpan(params.name);
 
             return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
         });
@@ -93622,7 +93624,7 @@ using chip::System::Clock::Timeout;
                         }
                         auto element_1 = (MTRContentLauncherClusterParameterStruct *) params.search.parameterList[i_1];
                         listHolder_1->mList[i_1].type = static_cast<std::remove_reference_t<decltype(listHolder_1->mList[i_1].type)>>(element_1.type.unsignedCharValue);
-                        listHolder_1->mList[i_1].value = [self asCharSpan:element_1.value];
+                        listHolder_1->mList[i_1].value = AsCharSpan(element_1.value);
                         if (element_1.externalIDList != nil) {
                             auto & definedValue_3 = listHolder_1->mList[i_1].externalIDList.Emplace();
                             {
@@ -93640,8 +93642,8 @@ using chip::System::Clock::Timeout;
                                             return CHIP_ERROR_INVALID_ARGUMENT;
                                         }
                                         auto element_4 = (MTRContentLauncherClusterAdditionalInfoStruct *) element_1.externalIDList[i_4];
-                                        listHolder_4->mList[i_4].name = [self asCharSpan:element_4.name];
-                                        listHolder_4->mList[i_4].value = [self asCharSpan:element_4.value];
+                                        listHolder_4->mList[i_4].name = AsCharSpan(element_4.name);
+                                        listHolder_4->mList[i_4].value = AsCharSpan(element_4.value);
                                     }
                                     definedValue_3 = ListType_4(listHolder_4->mList, element_1.externalIDList.count);
                                 } else {
@@ -93658,7 +93660,7 @@ using chip::System::Clock::Timeout;
             request.autoPlay = params.autoPlay.boolValue;
             if (params.data != nil) {
                 auto & definedValue_0 = request.data.Emplace();
-                definedValue_0 = [self asCharSpan:params.data];
+                definedValue_0 = AsCharSpan(params.data);
             }
 
             return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
@@ -93690,23 +93692,23 @@ using chip::System::Clock::Timeout;
                     invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
-            request.contentURL = [self asCharSpan:params.contentURL];
+            request.contentURL = AsCharSpan(params.contentURL);
             if (params.displayString != nil) {
                 auto & definedValue_0 = request.displayString.Emplace();
-                definedValue_0 = [self asCharSpan:params.displayString];
+                definedValue_0 = AsCharSpan(params.displayString);
             }
             if (params.brandingInformation != nil) {
                 auto & definedValue_0 = request.brandingInformation.Emplace();
-                definedValue_0.providerName = [self asCharSpan:params.brandingInformation.providerName];
+                definedValue_0.providerName = AsCharSpan(params.brandingInformation.providerName);
                 if (params.brandingInformation.background != nil) {
                     auto & definedValue_2 = definedValue_0.background.Emplace();
                     if (params.brandingInformation.background.imageURL != nil) {
                         auto & definedValue_4 = definedValue_2.imageURL.Emplace();
-                        definedValue_4 = [self asCharSpan:params.brandingInformation.background.imageURL];
+                        definedValue_4 = AsCharSpan(params.brandingInformation.background.imageURL);
                     }
                     if (params.brandingInformation.background.color != nil) {
                         auto & definedValue_4 = definedValue_2.color.Emplace();
-                        definedValue_4 = [self asCharSpan:params.brandingInformation.background.color];
+                        definedValue_4 = AsCharSpan(params.brandingInformation.background.color);
                     }
                     if (params.brandingInformation.background.size != nil) {
                         auto & definedValue_4 = definedValue_2.size.Emplace();
@@ -93719,11 +93721,11 @@ using chip::System::Clock::Timeout;
                     auto & definedValue_2 = definedValue_0.logo.Emplace();
                     if (params.brandingInformation.logo.imageURL != nil) {
                         auto & definedValue_4 = definedValue_2.imageURL.Emplace();
-                        definedValue_4 = [self asCharSpan:params.brandingInformation.logo.imageURL];
+                        definedValue_4 = AsCharSpan(params.brandingInformation.logo.imageURL);
                     }
                     if (params.brandingInformation.logo.color != nil) {
                         auto & definedValue_4 = definedValue_2.color.Emplace();
-                        definedValue_4 = [self asCharSpan:params.brandingInformation.logo.color];
+                        definedValue_4 = AsCharSpan(params.brandingInformation.logo.color);
                     }
                     if (params.brandingInformation.logo.size != nil) {
                         auto & definedValue_4 = definedValue_2.size.Emplace();
@@ -93736,11 +93738,11 @@ using chip::System::Clock::Timeout;
                     auto & definedValue_2 = definedValue_0.progressBar.Emplace();
                     if (params.brandingInformation.progressBar.imageURL != nil) {
                         auto & definedValue_4 = definedValue_2.imageURL.Emplace();
-                        definedValue_4 = [self asCharSpan:params.brandingInformation.progressBar.imageURL];
+                        definedValue_4 = AsCharSpan(params.brandingInformation.progressBar.imageURL);
                     }
                     if (params.brandingInformation.progressBar.color != nil) {
                         auto & definedValue_4 = definedValue_2.color.Emplace();
-                        definedValue_4 = [self asCharSpan:params.brandingInformation.progressBar.color];
+                        definedValue_4 = AsCharSpan(params.brandingInformation.progressBar.color);
                     }
                     if (params.brandingInformation.progressBar.size != nil) {
                         auto & definedValue_4 = definedValue_2.size.Emplace();
@@ -93753,11 +93755,11 @@ using chip::System::Clock::Timeout;
                     auto & definedValue_2 = definedValue_0.splash.Emplace();
                     if (params.brandingInformation.splash.imageURL != nil) {
                         auto & definedValue_4 = definedValue_2.imageURL.Emplace();
-                        definedValue_4 = [self asCharSpan:params.brandingInformation.splash.imageURL];
+                        definedValue_4 = AsCharSpan(params.brandingInformation.splash.imageURL);
                     }
                     if (params.brandingInformation.splash.color != nil) {
                         auto & definedValue_4 = definedValue_2.color.Emplace();
-                        definedValue_4 = [self asCharSpan:params.brandingInformation.splash.color];
+                        definedValue_4 = AsCharSpan(params.brandingInformation.splash.color);
                     }
                     if (params.brandingInformation.splash.size != nil) {
                         auto & definedValue_4 = definedValue_2.size.Emplace();
@@ -93770,11 +93772,11 @@ using chip::System::Clock::Timeout;
                     auto & definedValue_2 = definedValue_0.waterMark.Emplace();
                     if (params.brandingInformation.waterMark.imageURL != nil) {
                         auto & definedValue_4 = definedValue_2.imageURL.Emplace();
-                        definedValue_4 = [self asCharSpan:params.brandingInformation.waterMark.imageURL];
+                        definedValue_4 = AsCharSpan(params.brandingInformation.waterMark.imageURL);
                     }
                     if (params.brandingInformation.waterMark.color != nil) {
                         auto & definedValue_4 = definedValue_2.color.Emplace();
-                        definedValue_4 = [self asCharSpan:params.brandingInformation.waterMark.color];
+                        definedValue_4 = AsCharSpan(params.brandingInformation.waterMark.color);
                     }
                     if (params.brandingInformation.waterMark.size != nil) {
                         auto & definedValue_4 = definedValue_2.size.Emplace();
@@ -94487,7 +94489,7 @@ using chip::System::Clock::Timeout;
                 }
             }
             request.index = params.index.unsignedCharValue;
-            request.name = [self asCharSpan:params.name];
+            request.name = AsCharSpan(params.name);
 
             return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
         });
@@ -95109,11 +95111,11 @@ using chip::System::Clock::Timeout;
                 if (params.application != nil) {
                     auto & definedValue_0 = request.application.Emplace();
                     definedValue_0.catalogVendorID = params.application.catalogVendorID.unsignedShortValue;
-                    definedValue_0.applicationID = [self asCharSpan:params.application.applicationID];
+                    definedValue_0.applicationID = AsCharSpan(params.application.applicationID);
                 }
                 if (params.data != nil) {
                     auto & definedValue_0 = request.data.Emplace();
-                    definedValue_0 = [self asByteSpan:params.data];
+                    definedValue_0 = AsByteSpan(params.data);
                 }
             }
 
@@ -95150,7 +95152,7 @@ using chip::System::Clock::Timeout;
                 if (params.application != nil) {
                     auto & definedValue_0 = request.application.Emplace();
                     definedValue_0.catalogVendorID = params.application.catalogVendorID.unsignedShortValue;
-                    definedValue_0.applicationID = [self asCharSpan:params.application.applicationID];
+                    definedValue_0.applicationID = AsCharSpan(params.application.applicationID);
                 }
             }
 
@@ -95187,7 +95189,7 @@ using chip::System::Clock::Timeout;
                 if (params.application != nil) {
                     auto & definedValue_0 = request.application.Emplace();
                     definedValue_0.catalogVendorID = params.application.catalogVendorID.unsignedShortValue;
-                    definedValue_0.applicationID = [self asCharSpan:params.application.applicationID];
+                    definedValue_0.applicationID = AsCharSpan(params.application.applicationID);
                 }
             }
 
@@ -95274,7 +95276,7 @@ using chip::System::Clock::Timeout;
             } else {
                 auto & nonNullValue_0 = cppValue.SetNonNull();
                 nonNullValue_0.application.catalogVendorID = value.application.catalogVendorID.unsignedShortValue;
-                nonNullValue_0.application.applicationID = [self asCharSpan:value.application.applicationID];
+                nonNullValue_0.application.applicationID = AsCharSpan(value.application.applicationID);
                 if (value.endpoint != nil) {
                     auto & definedValue_2 = nonNullValue_0.endpoint.Emplace();
                     definedValue_2 = value.endpoint.unsignedShortValue;
@@ -96890,7 +96892,7 @@ using chip::System::Clock::Timeout;
             if (!timedInvokeTimeoutMs.HasValue()) {
                 timedInvokeTimeoutMs.SetValue(10000);
             }
-            request.tempAccountIdentifier = [self asCharSpan:params.tempAccountIdentifier];
+            request.tempAccountIdentifier = AsCharSpan(params.tempAccountIdentifier);
 
             return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
         });
@@ -96927,8 +96929,8 @@ using chip::System::Clock::Timeout;
             if (!timedInvokeTimeoutMs.HasValue()) {
                 timedInvokeTimeoutMs.SetValue(10000);
             }
-            request.tempAccountIdentifier = [self asCharSpan:params.tempAccountIdentifier];
-            request.setupPIN = [self asCharSpan:params.setupPIN];
+            request.tempAccountIdentifier = AsCharSpan(params.tempAccountIdentifier);
+            request.setupPIN = AsCharSpan(params.setupPIN);
 
             return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
         });
@@ -107878,8 +107880,8 @@ using chip::System::Clock::Timeout;
                         listHolder_0->mList[i_0].c.a = element_0.c.a.unsignedCharValue;
                         listHolder_0->mList[i_0].c.b = element_0.c.b.boolValue;
                         listHolder_0->mList[i_0].c.c = static_cast<std::remove_reference_t<decltype(listHolder_0->mList[i_0].c.c)>>(element_0.c.c.unsignedCharValue);
-                        listHolder_0->mList[i_0].c.d = [self asByteSpan:element_0.c.d];
-                        listHolder_0->mList[i_0].c.e = [self asCharSpan:element_0.c.e];
+                        listHolder_0->mList[i_0].c.d = AsByteSpan(element_0.c.d);
+                        listHolder_0->mList[i_0].c.e = AsCharSpan(element_0.c.e);
                         listHolder_0->mList[i_0].c.f = static_cast<std::remove_reference_t<decltype(listHolder_0->mList[i_0].c.f)>>(element_0.c.f.unsignedCharValue);
                         listHolder_0->mList[i_0].c.g = element_0.c.g.floatValue;
                         listHolder_0->mList[i_0].c.h = element_0.c.h.doubleValue;
@@ -107901,8 +107903,8 @@ using chip::System::Clock::Timeout;
                                     listHolder_2->mList[i_2].a = element_2.a.unsignedCharValue;
                                     listHolder_2->mList[i_2].b = element_2.b.boolValue;
                                     listHolder_2->mList[i_2].c = static_cast<std::remove_reference_t<decltype(listHolder_2->mList[i_2].c)>>(element_2.c.unsignedCharValue);
-                                    listHolder_2->mList[i_2].d = [self asByteSpan:element_2.d];
-                                    listHolder_2->mList[i_2].e = [self asCharSpan:element_2.e];
+                                    listHolder_2->mList[i_2].d = AsByteSpan(element_2.d);
+                                    listHolder_2->mList[i_2].e = AsCharSpan(element_2.e);
                                     listHolder_2->mList[i_2].f = static_cast<std::remove_reference_t<decltype(listHolder_2->mList[i_2].f)>>(element_2.f.unsignedCharValue);
                                     listHolder_2->mList[i_2].g = element_2.g.floatValue;
                                     listHolder_2->mList[i_2].h = element_2.h.doubleValue;
@@ -107949,7 +107951,7 @@ using chip::System::Clock::Timeout;
                                         return CHIP_ERROR_INVALID_ARGUMENT;
                                     }
                                     auto element_2 = (NSData *) element_0.f[i_2];
-                                    listHolder_2->mList[i_2] = [self asByteSpan:element_2];
+                                    listHolder_2->mList[i_2] = AsByteSpan(element_2);
                                 }
                                 listHolder_0->mList[i_0].f = ListType_2(listHolder_2->mList, element_0.f.count);
                             } else {
@@ -108002,8 +108004,8 @@ using chip::System::Clock::Timeout;
                         listHolder_0->mList[i_0].a = element_0.a.unsignedCharValue;
                         listHolder_0->mList[i_0].b = element_0.b.boolValue;
                         listHolder_0->mList[i_0].c = static_cast<std::remove_reference_t<decltype(listHolder_0->mList[i_0].c)>>(element_0.c.unsignedCharValue);
-                        listHolder_0->mList[i_0].d = [self asByteSpan:element_0.d];
-                        listHolder_0->mList[i_0].e = [self asCharSpan:element_0.e];
+                        listHolder_0->mList[i_0].d = AsByteSpan(element_0.d);
+                        listHolder_0->mList[i_0].e = AsCharSpan(element_0.e);
                         listHolder_0->mList[i_0].f = static_cast<std::remove_reference_t<decltype(listHolder_0->mList[i_0].f)>>(element_0.f.unsignedCharValue);
                         listHolder_0->mList[i_0].g = element_0.g.floatValue;
                         listHolder_0->mList[i_0].h = element_0.h.doubleValue;
@@ -108092,8 +108094,8 @@ using chip::System::Clock::Timeout;
             request.arg1.a = params.arg1.a.unsignedCharValue;
             request.arg1.b = params.arg1.b.boolValue;
             request.arg1.c = static_cast<std::remove_reference_t<decltype(request.arg1.c)>>(params.arg1.c.unsignedCharValue);
-            request.arg1.d = [self asByteSpan:params.arg1.d];
-            request.arg1.e = [self asCharSpan:params.arg1.e];
+            request.arg1.d = AsByteSpan(params.arg1.d);
+            request.arg1.e = AsCharSpan(params.arg1.e);
             request.arg1.f = static_cast<std::remove_reference_t<decltype(request.arg1.f)>>(params.arg1.f.unsignedCharValue);
             request.arg1.g = params.arg1.g.floatValue;
             request.arg1.h = params.arg1.h.doubleValue;
@@ -108132,8 +108134,8 @@ using chip::System::Clock::Timeout;
             request.arg1.c.a = params.arg1.c.a.unsignedCharValue;
             request.arg1.c.b = params.arg1.c.b.boolValue;
             request.arg1.c.c = static_cast<std::remove_reference_t<decltype(request.arg1.c.c)>>(params.arg1.c.c.unsignedCharValue);
-            request.arg1.c.d = [self asByteSpan:params.arg1.c.d];
-            request.arg1.c.e = [self asCharSpan:params.arg1.c.e];
+            request.arg1.c.d = AsByteSpan(params.arg1.c.d);
+            request.arg1.c.e = AsCharSpan(params.arg1.c.e);
             request.arg1.c.f = static_cast<std::remove_reference_t<decltype(request.arg1.c.f)>>(params.arg1.c.f.unsignedCharValue);
             request.arg1.c.g = params.arg1.c.g.floatValue;
             request.arg1.c.h = params.arg1.c.h.doubleValue;
@@ -108185,8 +108187,8 @@ using chip::System::Clock::Timeout;
                         listHolder_0->mList[i_0].a = element_0.a.unsignedCharValue;
                         listHolder_0->mList[i_0].b = element_0.b.boolValue;
                         listHolder_0->mList[i_0].c = static_cast<std::remove_reference_t<decltype(listHolder_0->mList[i_0].c)>>(element_0.c.unsignedCharValue);
-                        listHolder_0->mList[i_0].d = [self asByteSpan:element_0.d];
-                        listHolder_0->mList[i_0].e = [self asCharSpan:element_0.e];
+                        listHolder_0->mList[i_0].d = AsByteSpan(element_0.d);
+                        listHolder_0->mList[i_0].e = AsCharSpan(element_0.e);
                         listHolder_0->mList[i_0].f = static_cast<std::remove_reference_t<decltype(listHolder_0->mList[i_0].f)>>(element_0.f.unsignedCharValue);
                         listHolder_0->mList[i_0].g = element_0.g.floatValue;
                         listHolder_0->mList[i_0].h = element_0.h.doubleValue;
@@ -108283,8 +108285,8 @@ using chip::System::Clock::Timeout;
             request.arg1.c.a = params.arg1.c.a.unsignedCharValue;
             request.arg1.c.b = params.arg1.c.b.boolValue;
             request.arg1.c.c = static_cast<std::remove_reference_t<decltype(request.arg1.c.c)>>(params.arg1.c.c.unsignedCharValue);
-            request.arg1.c.d = [self asByteSpan:params.arg1.c.d];
-            request.arg1.c.e = [self asCharSpan:params.arg1.c.e];
+            request.arg1.c.d = AsByteSpan(params.arg1.c.d);
+            request.arg1.c.e = AsCharSpan(params.arg1.c.e);
             request.arg1.c.f = static_cast<std::remove_reference_t<decltype(request.arg1.c.f)>>(params.arg1.c.f.unsignedCharValue);
             request.arg1.c.g = params.arg1.c.g.floatValue;
             request.arg1.c.h = params.arg1.c.h.doubleValue;
@@ -108306,8 +108308,8 @@ using chip::System::Clock::Timeout;
                         listHolder_1->mList[i_1].a = element_1.a.unsignedCharValue;
                         listHolder_1->mList[i_1].b = element_1.b.boolValue;
                         listHolder_1->mList[i_1].c = static_cast<std::remove_reference_t<decltype(listHolder_1->mList[i_1].c)>>(element_1.c.unsignedCharValue);
-                        listHolder_1->mList[i_1].d = [self asByteSpan:element_1.d];
-                        listHolder_1->mList[i_1].e = [self asCharSpan:element_1.e];
+                        listHolder_1->mList[i_1].d = AsByteSpan(element_1.d);
+                        listHolder_1->mList[i_1].e = AsCharSpan(element_1.e);
                         listHolder_1->mList[i_1].f = static_cast<std::remove_reference_t<decltype(listHolder_1->mList[i_1].f)>>(element_1.f.unsignedCharValue);
                         listHolder_1->mList[i_1].g = element_1.g.floatValue;
                         listHolder_1->mList[i_1].h = element_1.h.doubleValue;
@@ -108354,7 +108356,7 @@ using chip::System::Clock::Timeout;
                             return CHIP_ERROR_INVALID_ARGUMENT;
                         }
                         auto element_1 = (NSData *) params.arg1.f[i_1];
-                        listHolder_1->mList[i_1] = [self asByteSpan:element_1];
+                        listHolder_1->mList[i_1] = AsByteSpan(element_1);
                     }
                     request.arg1.f = ListType_1(listHolder_1->mList, params.arg1.f.count);
                 } else {
@@ -108433,8 +108435,8 @@ using chip::System::Clock::Timeout;
                         listHolder_0->mList[i_0].c.a = element_0.c.a.unsignedCharValue;
                         listHolder_0->mList[i_0].c.b = element_0.c.b.boolValue;
                         listHolder_0->mList[i_0].c.c = static_cast<std::remove_reference_t<decltype(listHolder_0->mList[i_0].c.c)>>(element_0.c.c.unsignedCharValue);
-                        listHolder_0->mList[i_0].c.d = [self asByteSpan:element_0.c.d];
-                        listHolder_0->mList[i_0].c.e = [self asCharSpan:element_0.c.e];
+                        listHolder_0->mList[i_0].c.d = AsByteSpan(element_0.c.d);
+                        listHolder_0->mList[i_0].c.e = AsCharSpan(element_0.c.e);
                         listHolder_0->mList[i_0].c.f = static_cast<std::remove_reference_t<decltype(listHolder_0->mList[i_0].c.f)>>(element_0.c.f.unsignedCharValue);
                         listHolder_0->mList[i_0].c.g = element_0.c.g.floatValue;
                         listHolder_0->mList[i_0].c.h = element_0.c.h.doubleValue;
@@ -108456,8 +108458,8 @@ using chip::System::Clock::Timeout;
                                     listHolder_2->mList[i_2].a = element_2.a.unsignedCharValue;
                                     listHolder_2->mList[i_2].b = element_2.b.boolValue;
                                     listHolder_2->mList[i_2].c = static_cast<std::remove_reference_t<decltype(listHolder_2->mList[i_2].c)>>(element_2.c.unsignedCharValue);
-                                    listHolder_2->mList[i_2].d = [self asByteSpan:element_2.d];
-                                    listHolder_2->mList[i_2].e = [self asCharSpan:element_2.e];
+                                    listHolder_2->mList[i_2].d = AsByteSpan(element_2.d);
+                                    listHolder_2->mList[i_2].e = AsCharSpan(element_2.e);
                                     listHolder_2->mList[i_2].f = static_cast<std::remove_reference_t<decltype(listHolder_2->mList[i_2].f)>>(element_2.f.unsignedCharValue);
                                     listHolder_2->mList[i_2].g = element_2.g.floatValue;
                                     listHolder_2->mList[i_2].h = element_2.h.doubleValue;
@@ -108504,7 +108506,7 @@ using chip::System::Clock::Timeout;
                                         return CHIP_ERROR_INVALID_ARGUMENT;
                                     }
                                     auto element_2 = (NSData *) element_0.f[i_2];
-                                    listHolder_2->mList[i_2] = [self asByteSpan:element_2];
+                                    listHolder_2->mList[i_2] = AsByteSpan(element_2);
                                 }
                                 listHolder_0->mList[i_0].f = ListType_2(listHolder_2->mList, element_0.f.count);
                             } else {
@@ -108717,11 +108719,11 @@ using chip::System::Clock::Timeout;
                 request.nullableString.SetNull();
             } else {
                 auto & nonNullValue_0 = request.nullableString.SetNonNull();
-                nonNullValue_0 = [self asCharSpan:params.nullableString];
+                nonNullValue_0 = AsCharSpan(params.nullableString);
             }
             if (params.optionalString != nil) {
                 auto & definedValue_0 = request.optionalString.Emplace();
-                definedValue_0 = [self asCharSpan:params.optionalString];
+                definedValue_0 = AsCharSpan(params.optionalString);
             }
             if (params.nullableOptionalString != nil) {
                 auto & definedValue_0 = request.nullableOptionalString.Emplace();
@@ -108729,7 +108731,7 @@ using chip::System::Clock::Timeout;
                     definedValue_0.SetNull();
                 } else {
                     auto & nonNullValue_1 = definedValue_0.SetNonNull();
-                    nonNullValue_1 = [self asCharSpan:params.nullableOptionalString];
+                    nonNullValue_1 = AsCharSpan(params.nullableOptionalString);
                 }
             }
             if (params.nullableStruct == nil) {
@@ -108739,8 +108741,8 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0.a = params.nullableStruct.a.unsignedCharValue;
                 nonNullValue_0.b = params.nullableStruct.b.boolValue;
                 nonNullValue_0.c = static_cast<std::remove_reference_t<decltype(nonNullValue_0.c)>>(params.nullableStruct.c.unsignedCharValue);
-                nonNullValue_0.d = [self asByteSpan:params.nullableStruct.d];
-                nonNullValue_0.e = [self asCharSpan:params.nullableStruct.e];
+                nonNullValue_0.d = AsByteSpan(params.nullableStruct.d);
+                nonNullValue_0.e = AsCharSpan(params.nullableStruct.e);
                 nonNullValue_0.f = static_cast<std::remove_reference_t<decltype(nonNullValue_0.f)>>(params.nullableStruct.f.unsignedCharValue);
                 nonNullValue_0.g = params.nullableStruct.g.floatValue;
                 nonNullValue_0.h = params.nullableStruct.h.doubleValue;
@@ -108750,8 +108752,8 @@ using chip::System::Clock::Timeout;
                 definedValue_0.a = params.optionalStruct.a.unsignedCharValue;
                 definedValue_0.b = params.optionalStruct.b.boolValue;
                 definedValue_0.c = static_cast<std::remove_reference_t<decltype(definedValue_0.c)>>(params.optionalStruct.c.unsignedCharValue);
-                definedValue_0.d = [self asByteSpan:params.optionalStruct.d];
-                definedValue_0.e = [self asCharSpan:params.optionalStruct.e];
+                definedValue_0.d = AsByteSpan(params.optionalStruct.d);
+                definedValue_0.e = AsCharSpan(params.optionalStruct.e);
                 definedValue_0.f = static_cast<std::remove_reference_t<decltype(definedValue_0.f)>>(params.optionalStruct.f.unsignedCharValue);
                 definedValue_0.g = params.optionalStruct.g.floatValue;
                 definedValue_0.h = params.optionalStruct.h.doubleValue;
@@ -108765,8 +108767,8 @@ using chip::System::Clock::Timeout;
                     nonNullValue_1.a = params.nullableOptionalStruct.a.unsignedCharValue;
                     nonNullValue_1.b = params.nullableOptionalStruct.b.boolValue;
                     nonNullValue_1.c = static_cast<std::remove_reference_t<decltype(nonNullValue_1.c)>>(params.nullableOptionalStruct.c.unsignedCharValue);
-                    nonNullValue_1.d = [self asByteSpan:params.nullableOptionalStruct.d];
-                    nonNullValue_1.e = [self asCharSpan:params.nullableOptionalStruct.e];
+                    nonNullValue_1.d = AsByteSpan(params.nullableOptionalStruct.d);
+                    nonNullValue_1.e = AsCharSpan(params.nullableOptionalStruct.e);
                     nonNullValue_1.f = static_cast<std::remove_reference_t<decltype(nonNullValue_1.f)>>(params.nullableOptionalStruct.f.unsignedCharValue);
                     nonNullValue_1.g = params.nullableOptionalStruct.g.floatValue;
                     nonNullValue_1.h = params.nullableOptionalStruct.h.doubleValue;
@@ -108887,8 +108889,8 @@ using chip::System::Clock::Timeout;
             request.arg1.a = params.arg1.a.unsignedCharValue;
             request.arg1.b = params.arg1.b.boolValue;
             request.arg1.c = static_cast<std::remove_reference_t<decltype(request.arg1.c)>>(params.arg1.c.unsignedCharValue);
-            request.arg1.d = [self asByteSpan:params.arg1.d];
-            request.arg1.e = [self asCharSpan:params.arg1.e];
+            request.arg1.d = AsByteSpan(params.arg1.d);
+            request.arg1.e = AsCharSpan(params.arg1.e);
             request.arg1.f = static_cast<std::remove_reference_t<decltype(request.arg1.f)>>(params.arg1.f.unsignedCharValue);
             request.arg1.g = params.arg1.g.floatValue;
             request.arg1.h = params.arg1.h.doubleValue;
@@ -110876,7 +110878,7 @@ using chip::System::Clock::Timeout;
             ListFreer listFreer;
             using TypeInfo = UnitTesting::Attributes::OctetString::TypeInfo;
             TypeInfo::Type cppValue;
-            cppValue = [self asByteSpan:value];
+            cppValue = AsByteSpan(value);
 
             chip::Controller::ClusterBase cppCluster(exchangeManager, session, self.endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
@@ -111056,7 +111058,7 @@ using chip::System::Clock::Timeout;
                             return CHIP_ERROR_INVALID_ARGUMENT;
                         }
                         auto element_0 = (NSData *) value[i_0];
-                        listHolder_0->mList[i_0] = [self asByteSpan:element_0];
+                        listHolder_0->mList[i_0] = AsByteSpan(element_0);
                     }
                     cppValue = ListType_0(listHolder_0->mList, value.count);
                 } else {
@@ -111150,7 +111152,7 @@ using chip::System::Clock::Timeout;
                         }
                         auto element_0 = (MTRUnitTestingClusterTestListStructOctet *) value[i_0];
                         listHolder_0->mList[i_0].member1 = element_0.member1.unsignedLongLongValue;
-                        listHolder_0->mList[i_0].member2 = [self asByteSpan:element_0.member2];
+                        listHolder_0->mList[i_0].member2 = AsByteSpan(element_0.member2);
                     }
                     cppValue = ListType_0(listHolder_0->mList, value.count);
                 } else {
@@ -111228,7 +111230,7 @@ using chip::System::Clock::Timeout;
             ListFreer listFreer;
             using TypeInfo = UnitTesting::Attributes::LongOctetString::TypeInfo;
             TypeInfo::Type cppValue;
-            cppValue = [self asByteSpan:value];
+            cppValue = AsByteSpan(value);
 
             chip::Controller::ClusterBase cppCluster(exchangeManager, session, self.endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
@@ -111300,7 +111302,7 @@ using chip::System::Clock::Timeout;
             ListFreer listFreer;
             using TypeInfo = UnitTesting::Attributes::CharString::TypeInfo;
             TypeInfo::Type cppValue;
-            cppValue = [self asCharSpan:value];
+            cppValue = AsCharSpan(value);
 
             chip::Controller::ClusterBase cppCluster(exchangeManager, session, self.endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
@@ -111372,7 +111374,7 @@ using chip::System::Clock::Timeout;
             ListFreer listFreer;
             using TypeInfo = UnitTesting::Attributes::LongCharString::TypeInfo;
             TypeInfo::Type cppValue;
-            cppValue = [self asCharSpan:value];
+            cppValue = AsCharSpan(value);
 
             chip::Controller::ClusterBase cppCluster(exchangeManager, session, self.endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
@@ -111698,11 +111700,11 @@ using chip::System::Clock::Timeout;
                             listHolder_0->mList[i_0].nullableString.SetNull();
                         } else {
                             auto & nonNullValue_2 = listHolder_0->mList[i_0].nullableString.SetNonNull();
-                            nonNullValue_2 = [self asCharSpan:element_0.nullableString];
+                            nonNullValue_2 = AsCharSpan(element_0.nullableString);
                         }
                         if (element_0.optionalString != nil) {
                             auto & definedValue_2 = listHolder_0->mList[i_0].optionalString.Emplace();
-                            definedValue_2 = [self asCharSpan:element_0.optionalString];
+                            definedValue_2 = AsCharSpan(element_0.optionalString);
                         }
                         if (element_0.nullableOptionalString != nil) {
                             auto & definedValue_2 = listHolder_0->mList[i_0].nullableOptionalString.Emplace();
@@ -111710,7 +111712,7 @@ using chip::System::Clock::Timeout;
                                 definedValue_2.SetNull();
                             } else {
                                 auto & nonNullValue_3 = definedValue_2.SetNonNull();
-                                nonNullValue_3 = [self asCharSpan:element_0.nullableOptionalString];
+                                nonNullValue_3 = AsCharSpan(element_0.nullableOptionalString);
                             }
                         }
                         if (element_0.nullableStruct == nil) {
@@ -111720,8 +111722,8 @@ using chip::System::Clock::Timeout;
                             nonNullValue_2.a = element_0.nullableStruct.a.unsignedCharValue;
                             nonNullValue_2.b = element_0.nullableStruct.b.boolValue;
                             nonNullValue_2.c = static_cast<std::remove_reference_t<decltype(nonNullValue_2.c)>>(element_0.nullableStruct.c.unsignedCharValue);
-                            nonNullValue_2.d = [self asByteSpan:element_0.nullableStruct.d];
-                            nonNullValue_2.e = [self asCharSpan:element_0.nullableStruct.e];
+                            nonNullValue_2.d = AsByteSpan(element_0.nullableStruct.d);
+                            nonNullValue_2.e = AsCharSpan(element_0.nullableStruct.e);
                             nonNullValue_2.f = static_cast<std::remove_reference_t<decltype(nonNullValue_2.f)>>(element_0.nullableStruct.f.unsignedCharValue);
                             nonNullValue_2.g = element_0.nullableStruct.g.floatValue;
                             nonNullValue_2.h = element_0.nullableStruct.h.doubleValue;
@@ -111731,8 +111733,8 @@ using chip::System::Clock::Timeout;
                             definedValue_2.a = element_0.optionalStruct.a.unsignedCharValue;
                             definedValue_2.b = element_0.optionalStruct.b.boolValue;
                             definedValue_2.c = static_cast<std::remove_reference_t<decltype(definedValue_2.c)>>(element_0.optionalStruct.c.unsignedCharValue);
-                            definedValue_2.d = [self asByteSpan:element_0.optionalStruct.d];
-                            definedValue_2.e = [self asCharSpan:element_0.optionalStruct.e];
+                            definedValue_2.d = AsByteSpan(element_0.optionalStruct.d);
+                            definedValue_2.e = AsCharSpan(element_0.optionalStruct.e);
                             definedValue_2.f = static_cast<std::remove_reference_t<decltype(definedValue_2.f)>>(element_0.optionalStruct.f.unsignedCharValue);
                             definedValue_2.g = element_0.optionalStruct.g.floatValue;
                             definedValue_2.h = element_0.optionalStruct.h.doubleValue;
@@ -111746,8 +111748,8 @@ using chip::System::Clock::Timeout;
                                 nonNullValue_3.a = element_0.nullableOptionalStruct.a.unsignedCharValue;
                                 nonNullValue_3.b = element_0.nullableOptionalStruct.b.boolValue;
                                 nonNullValue_3.c = static_cast<std::remove_reference_t<decltype(nonNullValue_3.c)>>(element_0.nullableOptionalStruct.c.unsignedCharValue);
-                                nonNullValue_3.d = [self asByteSpan:element_0.nullableOptionalStruct.d];
-                                nonNullValue_3.e = [self asCharSpan:element_0.nullableOptionalStruct.e];
+                                nonNullValue_3.d = AsByteSpan(element_0.nullableOptionalStruct.d);
+                                nonNullValue_3.e = AsCharSpan(element_0.nullableOptionalStruct.e);
                                 nonNullValue_3.f = static_cast<std::remove_reference_t<decltype(nonNullValue_3.f)>>(element_0.nullableOptionalStruct.f.unsignedCharValue);
                                 nonNullValue_3.g = element_0.nullableOptionalStruct.g.floatValue;
                                 nonNullValue_3.h = element_0.nullableOptionalStruct.h.doubleValue;
@@ -111987,8 +111989,8 @@ using chip::System::Clock::Timeout;
             cppValue.a = value.a.unsignedCharValue;
             cppValue.b = value.b.boolValue;
             cppValue.c = static_cast<std::remove_reference_t<decltype(cppValue.c)>>(value.c.unsignedCharValue);
-            cppValue.d = [self asByteSpan:value.d];
-            cppValue.e = [self asCharSpan:value.e];
+            cppValue.d = AsByteSpan(value.d);
+            cppValue.e = AsCharSpan(value.e);
             cppValue.f = static_cast<std::remove_reference_t<decltype(cppValue.f)>>(value.f.unsignedCharValue);
             cppValue.g = value.g.floatValue;
             cppValue.h = value.h.doubleValue;
@@ -112366,7 +112368,7 @@ using chip::System::Clock::Timeout;
                             return CHIP_ERROR_INVALID_ARGUMENT;
                         }
                         auto element_0 = (NSData *) value[i_0];
-                        listHolder_0->mList[i_0] = [self asByteSpan:element_0];
+                        listHolder_0->mList[i_0] = AsByteSpan(element_0);
                     }
                     cppValue = ListType_0(listHolder_0->mList, value.count);
                 } else {
@@ -112479,12 +112481,12 @@ using chip::System::Clock::Timeout;
                                 nonNullValue_3 = element_0.nullableOptionalFabricSensitiveInt8u.unsignedCharValue;
                             }
                         }
-                        listHolder_0->mList[i_0].fabricSensitiveCharString = [self asCharSpan:element_0.fabricSensitiveCharString];
+                        listHolder_0->mList[i_0].fabricSensitiveCharString = AsCharSpan(element_0.fabricSensitiveCharString);
                         listHolder_0->mList[i_0].fabricSensitiveStruct.a = element_0.fabricSensitiveStruct.a.unsignedCharValue;
                         listHolder_0->mList[i_0].fabricSensitiveStruct.b = element_0.fabricSensitiveStruct.b.boolValue;
                         listHolder_0->mList[i_0].fabricSensitiveStruct.c = static_cast<std::remove_reference_t<decltype(listHolder_0->mList[i_0].fabricSensitiveStruct.c)>>(element_0.fabricSensitiveStruct.c.unsignedCharValue);
-                        listHolder_0->mList[i_0].fabricSensitiveStruct.d = [self asByteSpan:element_0.fabricSensitiveStruct.d];
-                        listHolder_0->mList[i_0].fabricSensitiveStruct.e = [self asCharSpan:element_0.fabricSensitiveStruct.e];
+                        listHolder_0->mList[i_0].fabricSensitiveStruct.d = AsByteSpan(element_0.fabricSensitiveStruct.d);
+                        listHolder_0->mList[i_0].fabricSensitiveStruct.e = AsCharSpan(element_0.fabricSensitiveStruct.e);
                         listHolder_0->mList[i_0].fabricSensitiveStruct.f = static_cast<std::remove_reference_t<decltype(listHolder_0->mList[i_0].fabricSensitiveStruct.f)>>(element_0.fabricSensitiveStruct.f.unsignedCharValue);
                         listHolder_0->mList[i_0].fabricSensitiveStruct.g = element_0.fabricSensitiveStruct.g.floatValue;
                         listHolder_0->mList[i_0].fabricSensitiveStruct.h = element_0.fabricSensitiveStruct.h.doubleValue;
@@ -114805,7 +114807,7 @@ using chip::System::Clock::Timeout;
                 cppValue.SetNull();
             } else {
                 auto & nonNullValue_0 = cppValue.SetNonNull();
-                nonNullValue_0 = [self asByteSpan:value];
+                nonNullValue_0 = AsByteSpan(value);
             }
 
             chip::Controller::ClusterBase cppCluster(exchangeManager, session, self.endpoint);
@@ -114882,7 +114884,7 @@ using chip::System::Clock::Timeout;
                 cppValue.SetNull();
             } else {
                 auto & nonNullValue_0 = cppValue.SetNonNull();
-                nonNullValue_0 = [self asCharSpan:value];
+                nonNullValue_0 = AsCharSpan(value);
             }
 
             chip::Controller::ClusterBase cppCluster(exchangeManager, session, self.endpoint);
@@ -115039,8 +115041,8 @@ using chip::System::Clock::Timeout;
                 nonNullValue_0.a = value.a.unsignedCharValue;
                 nonNullValue_0.b = value.b.boolValue;
                 nonNullValue_0.c = static_cast<std::remove_reference_t<decltype(nonNullValue_0.c)>>(value.c.unsignedCharValue);
-                nonNullValue_0.d = [self asByteSpan:value.d];
-                nonNullValue_0.e = [self asCharSpan:value.e];
+                nonNullValue_0.d = AsByteSpan(value.d);
+                nonNullValue_0.e = AsCharSpan(value.e);
                 nonNullValue_0.f = static_cast<std::remove_reference_t<decltype(nonNullValue_0.f)>>(value.f.unsignedCharValue);
                 nonNullValue_0.g = value.g.floatValue;
                 nonNullValue_0.h = value.h.doubleValue;
