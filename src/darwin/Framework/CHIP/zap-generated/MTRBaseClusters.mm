@@ -29,6 +29,7 @@
 #import "NSDataSpanConversion.h"
 #import "NSStringSpanConversion.h"
 
+#include <app-common/zap-generated/cluster-objects.h>
 #include <controller/CHIPCluster.h>
 #include <lib/support/CHIPListUtils.h>
 #include <platform/CHIPDeviceLayer.h>
@@ -61,71 +62,51 @@ using chip::System::Clock::Timeout;
 
 - (void)identifyWithParams:(MTRIdentifyClusterIdentifyParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Identify::Commands::Identify::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.identifyTime = params.identifyTime.unsignedShortValue;
+    if (params == nil) {
+        params = [[MTRIdentifyClusterIdentifyParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Identify::Commands::Identify::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)triggerEffectWithParams:(MTRIdentifyClusterTriggerEffectParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Identify::Commands::TriggerEffect::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.effectIdentifier = static_cast<std::remove_reference_t<decltype(request.effectIdentifier)>>(params.effectIdentifier.unsignedCharValue);
-            request.effectVariant = static_cast<std::remove_reference_t<decltype(request.effectVariant)>>(params.effectVariant.unsignedCharValue);
+    if (params == nil) {
+        params = [[MTRIdentifyClusterTriggerEffectParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Identify::Commands::TriggerEffect::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeIdentifyTimeWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
@@ -759,220 +740,151 @@ using chip::System::Clock::Timeout;
 
 - (void)addGroupWithParams:(MTRGroupsClusterAddGroupParams *)params completion:(void (^)(MTRGroupsClusterAddGroupResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRGroupsClusterAddGroupResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, GroupsClusterAddGroupResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRGroupsClusterAddGroupResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Groups::Commands::AddGroup::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.groupID = params.groupID.unsignedShortValue;
-            request.groupName = AsCharSpan(params.groupName);
+    if (params == nil) {
+        params = [[MTRGroupsClusterAddGroupParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Groups::Commands::AddGroup::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRGroupsClusterAddGroupResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)viewGroupWithParams:(MTRGroupsClusterViewGroupParams *)params completion:(void (^)(MTRGroupsClusterViewGroupResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRGroupsClusterViewGroupResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, GroupsClusterViewGroupResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRGroupsClusterViewGroupResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Groups::Commands::ViewGroup::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.groupID = params.groupID.unsignedShortValue;
+    if (params == nil) {
+        params = [[MTRGroupsClusterViewGroupParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Groups::Commands::ViewGroup::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRGroupsClusterViewGroupResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)getGroupMembershipWithParams:(MTRGroupsClusterGetGroupMembershipParams *)params completion:(void (^)(MTRGroupsClusterGetGroupMembershipResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRGroupsClusterGetGroupMembershipResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, GroupsClusterGetGroupMembershipResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRGroupsClusterGetGroupMembershipResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Groups::Commands::GetGroupMembership::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            {
-                using ListType_0 = std::remove_reference_t<decltype(request.groupList)>;
-                using ListMemberType_0 = ListMemberTypeGetter<ListType_0>::Type;
-                if (params.groupList.count != 0) {
-                    auto * listHolder_0 = new ListHolder<ListMemberType_0>(params.groupList.count);
-                    if (listHolder_0 == nullptr || listHolder_0->mList == nullptr) {
-                        return CHIP_ERROR_INVALID_ARGUMENT;
-                    }
-                    listFreer.add(listHolder_0);
-                    for (size_t i_0 = 0; i_0 < params.groupList.count; ++i_0) {
-                        if (![params.groupList[i_0] isKindOfClass:[NSNumber class]]) {
-                            // Wrong kind of value.
-                            return CHIP_ERROR_INVALID_ARGUMENT;
-                        }
-                        auto element_0 = (NSNumber *) params.groupList[i_0];
-                        listHolder_0->mList[i_0] = element_0.unsignedShortValue;
-                    }
-                    request.groupList = ListType_0(listHolder_0->mList, params.groupList.count);
-                } else {
-                    request.groupList = ListType_0();
-                }
-            }
+    if (params == nil) {
+        params = [[MTRGroupsClusterGetGroupMembershipParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Groups::Commands::GetGroupMembership::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRGroupsClusterGetGroupMembershipResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)removeGroupWithParams:(MTRGroupsClusterRemoveGroupParams *)params completion:(void (^)(MTRGroupsClusterRemoveGroupResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRGroupsClusterRemoveGroupResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, GroupsClusterRemoveGroupResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRGroupsClusterRemoveGroupResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Groups::Commands::RemoveGroup::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.groupID = params.groupID.unsignedShortValue;
+    if (params == nil) {
+        params = [[MTRGroupsClusterRemoveGroupParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Groups::Commands::RemoveGroup::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRGroupsClusterRemoveGroupResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)removeAllGroupsWithCompletion:(MTRStatusCompletion)completion
 {
     [self removeAllGroupsWithParams:nil completion:completion];
 }
 - (void)removeAllGroupsWithParams:(MTRGroupsClusterRemoveAllGroupsParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Groups::Commands::RemoveAllGroups::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRGroupsClusterRemoveAllGroupsParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Groups::Commands::RemoveAllGroups::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)addGroupIfIdentifyingWithParams:(MTRGroupsClusterAddGroupIfIdentifyingParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Groups::Commands::AddGroupIfIdentifying::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.groupID = params.groupID.unsignedShortValue;
-            request.groupName = AsCharSpan(params.groupName);
+    if (params == nil) {
+        params = [[MTRGroupsClusterAddGroupIfIdentifyingParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Groups::Commands::AddGroupIfIdentifying::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeNameSupportWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
@@ -1527,429 +1439,243 @@ using chip::System::Clock::Timeout;
 
 - (void)addSceneWithParams:(MTRScenesClusterAddSceneParams *)params completion:(void (^)(MTRScenesClusterAddSceneResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRScenesClusterAddSceneResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, ScenesClusterAddSceneResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRScenesClusterAddSceneResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Scenes::Commands::AddScene::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.groupID = params.groupID.unsignedShortValue;
-            request.sceneID = params.sceneID.unsignedCharValue;
-            request.transitionTime = params.transitionTime.unsignedShortValue;
-            request.sceneName = AsCharSpan(params.sceneName);
-            {
-                using ListType_0 = std::remove_reference_t<decltype(request.extensionFieldSets)>;
-                using ListMemberType_0 = ListMemberTypeGetter<ListType_0>::Type;
-                if (params.extensionFieldSets.count != 0) {
-                    auto * listHolder_0 = new ListHolder<ListMemberType_0>(params.extensionFieldSets.count);
-                    if (listHolder_0 == nullptr || listHolder_0->mList == nullptr) {
-                        return CHIP_ERROR_INVALID_ARGUMENT;
-                    }
-                    listFreer.add(listHolder_0);
-                    for (size_t i_0 = 0; i_0 < params.extensionFieldSets.count; ++i_0) {
-                        if (![params.extensionFieldSets[i_0] isKindOfClass:[MTRScenesClusterExtensionFieldSet class]]) {
-                            // Wrong kind of value.
-                            return CHIP_ERROR_INVALID_ARGUMENT;
-                        }
-                        auto element_0 = (MTRScenesClusterExtensionFieldSet *) params.extensionFieldSets[i_0];
-                        listHolder_0->mList[i_0].clusterID = element_0.clusterID.unsignedIntValue;
-                        {
-                            using ListType_2 = std::remove_reference_t<decltype(listHolder_0->mList[i_0].attributeValueList)>;
-                            using ListMemberType_2 = ListMemberTypeGetter<ListType_2>::Type;
-                            if (element_0.attributeValueList.count != 0) {
-                                auto * listHolder_2 = new ListHolder<ListMemberType_2>(element_0.attributeValueList.count);
-                                if (listHolder_2 == nullptr || listHolder_2->mList == nullptr) {
-                                    return CHIP_ERROR_INVALID_ARGUMENT;
-                                }
-                                listFreer.add(listHolder_2);
-                                for (size_t i_2 = 0; i_2 < element_0.attributeValueList.count; ++i_2) {
-                                    if (![element_0.attributeValueList[i_2] isKindOfClass:[MTRScenesClusterAttributeValuePair class]]) {
-                                        // Wrong kind of value.
-                                        return CHIP_ERROR_INVALID_ARGUMENT;
-                                    }
-                                    auto element_2 = (MTRScenesClusterAttributeValuePair *) element_0.attributeValueList[i_2];
-                                    listHolder_2->mList[i_2].attributeID = element_2.attributeID.unsignedIntValue;
-                                    listHolder_2->mList[i_2].attributeValue = element_2.attributeValue.unsignedIntValue;
-                                }
-                                listHolder_0->mList[i_0].attributeValueList = ListType_2(listHolder_2->mList, element_0.attributeValueList.count);
-                            } else {
-                                listHolder_0->mList[i_0].attributeValueList = ListType_2();
-                            }
-                        }
-                    }
-                    request.extensionFieldSets = ListType_0(listHolder_0->mList, params.extensionFieldSets.count);
-                } else {
-                    request.extensionFieldSets = ListType_0();
-                }
-            }
+    if (params == nil) {
+        params = [[MTRScenesClusterAddSceneParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Scenes::Commands::AddScene::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRScenesClusterAddSceneResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)viewSceneWithParams:(MTRScenesClusterViewSceneParams *)params completion:(void (^)(MTRScenesClusterViewSceneResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRScenesClusterViewSceneResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, ScenesClusterViewSceneResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRScenesClusterViewSceneResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Scenes::Commands::ViewScene::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.groupID = params.groupID.unsignedShortValue;
-            request.sceneID = params.sceneID.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRScenesClusterViewSceneParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Scenes::Commands::ViewScene::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRScenesClusterViewSceneResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)removeSceneWithParams:(MTRScenesClusterRemoveSceneParams *)params completion:(void (^)(MTRScenesClusterRemoveSceneResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRScenesClusterRemoveSceneResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, ScenesClusterRemoveSceneResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRScenesClusterRemoveSceneResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Scenes::Commands::RemoveScene::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.groupID = params.groupID.unsignedShortValue;
-            request.sceneID = params.sceneID.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRScenesClusterRemoveSceneParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Scenes::Commands::RemoveScene::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRScenesClusterRemoveSceneResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)removeAllScenesWithParams:(MTRScenesClusterRemoveAllScenesParams *)params completion:(void (^)(MTRScenesClusterRemoveAllScenesResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRScenesClusterRemoveAllScenesResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, ScenesClusterRemoveAllScenesResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRScenesClusterRemoveAllScenesResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Scenes::Commands::RemoveAllScenes::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.groupID = params.groupID.unsignedShortValue;
+    if (params == nil) {
+        params = [[MTRScenesClusterRemoveAllScenesParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Scenes::Commands::RemoveAllScenes::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRScenesClusterRemoveAllScenesResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)storeSceneWithParams:(MTRScenesClusterStoreSceneParams *)params completion:(void (^)(MTRScenesClusterStoreSceneResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRScenesClusterStoreSceneResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, ScenesClusterStoreSceneResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRScenesClusterStoreSceneResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Scenes::Commands::StoreScene::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.groupID = params.groupID.unsignedShortValue;
-            request.sceneID = params.sceneID.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRScenesClusterStoreSceneParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Scenes::Commands::StoreScene::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRScenesClusterStoreSceneResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)recallSceneWithParams:(MTRScenesClusterRecallSceneParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Scenes::Commands::RecallScene::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.groupID = params.groupID.unsignedShortValue;
-            request.sceneID = params.sceneID.unsignedCharValue;
-            if (params.transitionTime != nil) {
-                auto & definedValue_0 = request.transitionTime.Emplace();
-                if (params.transitionTime == nil) {
-                    definedValue_0.SetNull();
-                } else {
-                    auto & nonNullValue_1 = definedValue_0.SetNonNull();
-                    nonNullValue_1 = params.transitionTime.unsignedShortValue;
-                }
-            }
+    if (params == nil) {
+        params = [[MTRScenesClusterRecallSceneParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Scenes::Commands::RecallScene::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)getSceneMembershipWithParams:(MTRScenesClusterGetSceneMembershipParams *)params completion:(void (^)(MTRScenesClusterGetSceneMembershipResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRScenesClusterGetSceneMembershipResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, ScenesClusterGetSceneMembershipResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRScenesClusterGetSceneMembershipResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Scenes::Commands::GetSceneMembership::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.groupID = params.groupID.unsignedShortValue;
+    if (params == nil) {
+        params = [[MTRScenesClusterGetSceneMembershipParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Scenes::Commands::GetSceneMembership::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRScenesClusterGetSceneMembershipResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)enhancedAddSceneWithParams:(MTRScenesClusterEnhancedAddSceneParams *)params completion:(void (^)(MTRScenesClusterEnhancedAddSceneResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRScenesClusterEnhancedAddSceneResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, ScenesClusterEnhancedAddSceneResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRScenesClusterEnhancedAddSceneResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Scenes::Commands::EnhancedAddScene::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.groupID = params.groupID.unsignedShortValue;
-            request.sceneID = params.sceneID.unsignedCharValue;
-            request.transitionTime = params.transitionTime.unsignedShortValue;
-            request.sceneName = AsCharSpan(params.sceneName);
-            {
-                using ListType_0 = std::remove_reference_t<decltype(request.extensionFieldSets)>;
-                using ListMemberType_0 = ListMemberTypeGetter<ListType_0>::Type;
-                if (params.extensionFieldSets.count != 0) {
-                    auto * listHolder_0 = new ListHolder<ListMemberType_0>(params.extensionFieldSets.count);
-                    if (listHolder_0 == nullptr || listHolder_0->mList == nullptr) {
-                        return CHIP_ERROR_INVALID_ARGUMENT;
-                    }
-                    listFreer.add(listHolder_0);
-                    for (size_t i_0 = 0; i_0 < params.extensionFieldSets.count; ++i_0) {
-                        if (![params.extensionFieldSets[i_0] isKindOfClass:[MTRScenesClusterExtensionFieldSet class]]) {
-                            // Wrong kind of value.
-                            return CHIP_ERROR_INVALID_ARGUMENT;
-                        }
-                        auto element_0 = (MTRScenesClusterExtensionFieldSet *) params.extensionFieldSets[i_0];
-                        listHolder_0->mList[i_0].clusterID = element_0.clusterID.unsignedIntValue;
-                        {
-                            using ListType_2 = std::remove_reference_t<decltype(listHolder_0->mList[i_0].attributeValueList)>;
-                            using ListMemberType_2 = ListMemberTypeGetter<ListType_2>::Type;
-                            if (element_0.attributeValueList.count != 0) {
-                                auto * listHolder_2 = new ListHolder<ListMemberType_2>(element_0.attributeValueList.count);
-                                if (listHolder_2 == nullptr || listHolder_2->mList == nullptr) {
-                                    return CHIP_ERROR_INVALID_ARGUMENT;
-                                }
-                                listFreer.add(listHolder_2);
-                                for (size_t i_2 = 0; i_2 < element_0.attributeValueList.count; ++i_2) {
-                                    if (![element_0.attributeValueList[i_2] isKindOfClass:[MTRScenesClusterAttributeValuePair class]]) {
-                                        // Wrong kind of value.
-                                        return CHIP_ERROR_INVALID_ARGUMENT;
-                                    }
-                                    auto element_2 = (MTRScenesClusterAttributeValuePair *) element_0.attributeValueList[i_2];
-                                    listHolder_2->mList[i_2].attributeID = element_2.attributeID.unsignedIntValue;
-                                    listHolder_2->mList[i_2].attributeValue = element_2.attributeValue.unsignedIntValue;
-                                }
-                                listHolder_0->mList[i_0].attributeValueList = ListType_2(listHolder_2->mList, element_0.attributeValueList.count);
-                            } else {
-                                listHolder_0->mList[i_0].attributeValueList = ListType_2();
-                            }
-                        }
-                    }
-                    request.extensionFieldSets = ListType_0(listHolder_0->mList, params.extensionFieldSets.count);
-                } else {
-                    request.extensionFieldSets = ListType_0();
-                }
-            }
+    if (params == nil) {
+        params = [[MTRScenesClusterEnhancedAddSceneParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Scenes::Commands::EnhancedAddScene::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRScenesClusterEnhancedAddSceneResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)enhancedViewSceneWithParams:(MTRScenesClusterEnhancedViewSceneParams *)params completion:(void (^)(MTRScenesClusterEnhancedViewSceneResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRScenesClusterEnhancedViewSceneResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, ScenesClusterEnhancedViewSceneResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRScenesClusterEnhancedViewSceneResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Scenes::Commands::EnhancedViewScene::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.groupID = params.groupID.unsignedShortValue;
-            request.sceneID = params.sceneID.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRScenesClusterEnhancedViewSceneParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Scenes::Commands::EnhancedViewScene::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRScenesClusterEnhancedViewSceneResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)copySceneWithParams:(MTRScenesClusterCopySceneParams *)params completion:(void (^)(MTRScenesClusterCopySceneResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRScenesClusterCopySceneResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, ScenesClusterCopySceneResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRScenesClusterCopySceneResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Scenes::Commands::CopyScene::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.mode = static_cast<std::remove_reference_t<decltype(request.mode)>>(params.mode.unsignedCharValue);
-            request.groupIdentifierFrom = params.groupIdentifierFrom.unsignedShortValue;
-            request.sceneIdentifierFrom = params.sceneIdentifierFrom.unsignedCharValue;
-            request.groupIdentifierTo = params.groupIdentifierTo.unsignedShortValue;
-            request.sceneIdentifierTo = params.sceneIdentifierTo.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRScenesClusterCopySceneParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Scenes::Commands::CopyScene::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRScenesClusterCopySceneResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeSceneCountWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
@@ -2980,217 +2706,159 @@ using chip::System::Clock::Timeout;
 }
 - (void)offWithParams:(MTROnOffClusterOffParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            OnOff::Commands::Off::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTROnOffClusterOffParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = OnOff::Commands::Off::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)onWithCompletion:(MTRStatusCompletion)completion
 {
     [self onWithParams:nil completion:completion];
 }
 - (void)onWithParams:(MTROnOffClusterOnParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            OnOff::Commands::On::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTROnOffClusterOnParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = OnOff::Commands::On::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)toggleWithCompletion:(MTRStatusCompletion)completion
 {
     [self toggleWithParams:nil completion:completion];
 }
 - (void)toggleWithParams:(MTROnOffClusterToggleParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            OnOff::Commands::Toggle::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTROnOffClusterToggleParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = OnOff::Commands::Toggle::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)offWithEffectWithParams:(MTROnOffClusterOffWithEffectParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            OnOff::Commands::OffWithEffect::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.effectIdentifier = static_cast<std::remove_reference_t<decltype(request.effectIdentifier)>>(params.effectIdentifier.unsignedCharValue);
-            request.effectVariant = params.effectVariant.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTROnOffClusterOffWithEffectParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = OnOff::Commands::OffWithEffect::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)onWithRecallGlobalSceneWithCompletion:(MTRStatusCompletion)completion
 {
     [self onWithRecallGlobalSceneWithParams:nil completion:completion];
 }
 - (void)onWithRecallGlobalSceneWithParams:(MTROnOffClusterOnWithRecallGlobalSceneParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            OnOff::Commands::OnWithRecallGlobalScene::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTROnOffClusterOnWithRecallGlobalSceneParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = OnOff::Commands::OnWithRecallGlobalScene::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)onWithTimedOffWithParams:(MTROnOffClusterOnWithTimedOffParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            OnOff::Commands::OnWithTimedOff::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.onOffControl = static_cast<std::remove_reference_t<decltype(request.onOffControl)>>(params.onOffControl.unsignedCharValue);
-            request.onTime = params.onTime.unsignedShortValue;
-            request.offWaitTime = params.offWaitTime.unsignedShortValue;
+    if (params == nil) {
+        params = [[MTROnOffClusterOnWithTimedOffParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = OnOff::Commands::OnWithTimedOff::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeOnOffWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
@@ -4786,360 +4454,219 @@ using chip::System::Clock::Timeout;
 
 - (void)moveToLevelWithParams:(MTRLevelControlClusterMoveToLevelParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            LevelControl::Commands::MoveToLevel::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.level = params.level.unsignedCharValue;
-            if (params.transitionTime == nil) {
-                request.transitionTime.SetNull();
-            } else {
-                auto & nonNullValue_0 = request.transitionTime.SetNonNull();
-                nonNullValue_0 = params.transitionTime.unsignedShortValue;
-            }
-            request.optionsMask = static_cast<std::remove_reference_t<decltype(request.optionsMask)>>(params.optionsMask.unsignedCharValue);
-            request.optionsOverride = static_cast<std::remove_reference_t<decltype(request.optionsOverride)>>(params.optionsOverride.unsignedCharValue);
+    if (params == nil) {
+        params = [[MTRLevelControlClusterMoveToLevelParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = LevelControl::Commands::MoveToLevel::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)moveWithParams:(MTRLevelControlClusterMoveParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            LevelControl::Commands::Move::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.moveMode = static_cast<std::remove_reference_t<decltype(request.moveMode)>>(params.moveMode.unsignedCharValue);
-            if (params.rate == nil) {
-                request.rate.SetNull();
-            } else {
-                auto & nonNullValue_0 = request.rate.SetNonNull();
-                nonNullValue_0 = params.rate.unsignedCharValue;
-            }
-            request.optionsMask = static_cast<std::remove_reference_t<decltype(request.optionsMask)>>(params.optionsMask.unsignedCharValue);
-            request.optionsOverride = static_cast<std::remove_reference_t<decltype(request.optionsOverride)>>(params.optionsOverride.unsignedCharValue);
+    if (params == nil) {
+        params = [[MTRLevelControlClusterMoveParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = LevelControl::Commands::Move::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)stepWithParams:(MTRLevelControlClusterStepParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            LevelControl::Commands::Step::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.stepMode = static_cast<std::remove_reference_t<decltype(request.stepMode)>>(params.stepMode.unsignedCharValue);
-            request.stepSize = params.stepSize.unsignedCharValue;
-            if (params.transitionTime == nil) {
-                request.transitionTime.SetNull();
-            } else {
-                auto & nonNullValue_0 = request.transitionTime.SetNonNull();
-                nonNullValue_0 = params.transitionTime.unsignedShortValue;
-            }
-            request.optionsMask = static_cast<std::remove_reference_t<decltype(request.optionsMask)>>(params.optionsMask.unsignedCharValue);
-            request.optionsOverride = static_cast<std::remove_reference_t<decltype(request.optionsOverride)>>(params.optionsOverride.unsignedCharValue);
+    if (params == nil) {
+        params = [[MTRLevelControlClusterStepParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = LevelControl::Commands::Step::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)stopWithParams:(MTRLevelControlClusterStopParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            LevelControl::Commands::Stop::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.optionsMask = static_cast<std::remove_reference_t<decltype(request.optionsMask)>>(params.optionsMask.unsignedCharValue);
-            request.optionsOverride = static_cast<std::remove_reference_t<decltype(request.optionsOverride)>>(params.optionsOverride.unsignedCharValue);
+    if (params == nil) {
+        params = [[MTRLevelControlClusterStopParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = LevelControl::Commands::Stop::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)moveToLevelWithOnOffWithParams:(MTRLevelControlClusterMoveToLevelWithOnOffParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            LevelControl::Commands::MoveToLevelWithOnOff::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.level = params.level.unsignedCharValue;
-            if (params.transitionTime == nil) {
-                request.transitionTime.SetNull();
-            } else {
-                auto & nonNullValue_0 = request.transitionTime.SetNonNull();
-                nonNullValue_0 = params.transitionTime.unsignedShortValue;
-            }
-            request.optionsMask = static_cast<std::remove_reference_t<decltype(request.optionsMask)>>(params.optionsMask.unsignedCharValue);
-            request.optionsOverride = static_cast<std::remove_reference_t<decltype(request.optionsOverride)>>(params.optionsOverride.unsignedCharValue);
+    if (params == nil) {
+        params = [[MTRLevelControlClusterMoveToLevelWithOnOffParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = LevelControl::Commands::MoveToLevelWithOnOff::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)moveWithOnOffWithParams:(MTRLevelControlClusterMoveWithOnOffParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            LevelControl::Commands::MoveWithOnOff::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.moveMode = static_cast<std::remove_reference_t<decltype(request.moveMode)>>(params.moveMode.unsignedCharValue);
-            if (params.rate == nil) {
-                request.rate.SetNull();
-            } else {
-                auto & nonNullValue_0 = request.rate.SetNonNull();
-                nonNullValue_0 = params.rate.unsignedCharValue;
-            }
-            request.optionsMask = static_cast<std::remove_reference_t<decltype(request.optionsMask)>>(params.optionsMask.unsignedCharValue);
-            request.optionsOverride = static_cast<std::remove_reference_t<decltype(request.optionsOverride)>>(params.optionsOverride.unsignedCharValue);
+    if (params == nil) {
+        params = [[MTRLevelControlClusterMoveWithOnOffParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = LevelControl::Commands::MoveWithOnOff::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)stepWithOnOffWithParams:(MTRLevelControlClusterStepWithOnOffParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            LevelControl::Commands::StepWithOnOff::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.stepMode = static_cast<std::remove_reference_t<decltype(request.stepMode)>>(params.stepMode.unsignedCharValue);
-            request.stepSize = params.stepSize.unsignedCharValue;
-            if (params.transitionTime == nil) {
-                request.transitionTime.SetNull();
-            } else {
-                auto & nonNullValue_0 = request.transitionTime.SetNonNull();
-                nonNullValue_0 = params.transitionTime.unsignedShortValue;
-            }
-            request.optionsMask = static_cast<std::remove_reference_t<decltype(request.optionsMask)>>(params.optionsMask.unsignedCharValue);
-            request.optionsOverride = static_cast<std::remove_reference_t<decltype(request.optionsOverride)>>(params.optionsOverride.unsignedCharValue);
+    if (params == nil) {
+        params = [[MTRLevelControlClusterStepWithOnOffParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = LevelControl::Commands::StepWithOnOff::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)stopWithOnOffWithParams:(MTRLevelControlClusterStopWithOnOffParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            LevelControl::Commands::StopWithOnOff::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.optionsMask = static_cast<std::remove_reference_t<decltype(request.optionsMask)>>(params.optionsMask.unsignedCharValue);
-            request.optionsOverride = static_cast<std::remove_reference_t<decltype(request.optionsOverride)>>(params.optionsOverride.unsignedCharValue);
+    if (params == nil) {
+        params = [[MTRLevelControlClusterStopWithOnOffParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = LevelControl::Commands::StopWithOnOff::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)moveToClosestFrequencyWithParams:(MTRLevelControlClusterMoveToClosestFrequencyParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            LevelControl::Commands::MoveToClosestFrequency::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.frequency = params.frequency.unsignedShortValue;
+    if (params == nil) {
+        params = [[MTRLevelControlClusterMoveToClosestFrequencyParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = LevelControl::Commands::MoveToClosestFrequency::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeCurrentLevelWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
@@ -10881,463 +10408,291 @@ using chip::System::Clock::Timeout;
 
 - (void)instantActionWithParams:(MTRActionsClusterInstantActionParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Actions::Commands::InstantAction::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.actionID = params.actionID.unsignedShortValue;
-            if (params.invokeID != nil) {
-                auto & definedValue_0 = request.invokeID.Emplace();
-                definedValue_0 = params.invokeID.unsignedIntValue;
-            }
+    if (params == nil) {
+        params = [[MTRActionsClusterInstantActionParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Actions::Commands::InstantAction::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)instantActionWithTransitionWithParams:(MTRActionsClusterInstantActionWithTransitionParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Actions::Commands::InstantActionWithTransition::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.actionID = params.actionID.unsignedShortValue;
-            if (params.invokeID != nil) {
-                auto & definedValue_0 = request.invokeID.Emplace();
-                definedValue_0 = params.invokeID.unsignedIntValue;
-            }
-            request.transitionTime = params.transitionTime.unsignedShortValue;
+    if (params == nil) {
+        params = [[MTRActionsClusterInstantActionWithTransitionParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Actions::Commands::InstantActionWithTransition::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)startActionWithParams:(MTRActionsClusterStartActionParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Actions::Commands::StartAction::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.actionID = params.actionID.unsignedShortValue;
-            if (params.invokeID != nil) {
-                auto & definedValue_0 = request.invokeID.Emplace();
-                definedValue_0 = params.invokeID.unsignedIntValue;
-            }
+    if (params == nil) {
+        params = [[MTRActionsClusterStartActionParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Actions::Commands::StartAction::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)startActionWithDurationWithParams:(MTRActionsClusterStartActionWithDurationParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Actions::Commands::StartActionWithDuration::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.actionID = params.actionID.unsignedShortValue;
-            if (params.invokeID != nil) {
-                auto & definedValue_0 = request.invokeID.Emplace();
-                definedValue_0 = params.invokeID.unsignedIntValue;
-            }
-            request.duration = params.duration.unsignedIntValue;
+    if (params == nil) {
+        params = [[MTRActionsClusterStartActionWithDurationParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Actions::Commands::StartActionWithDuration::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)stopActionWithParams:(MTRActionsClusterStopActionParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Actions::Commands::StopAction::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.actionID = params.actionID.unsignedShortValue;
-            if (params.invokeID != nil) {
-                auto & definedValue_0 = request.invokeID.Emplace();
-                definedValue_0 = params.invokeID.unsignedIntValue;
-            }
+    if (params == nil) {
+        params = [[MTRActionsClusterStopActionParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Actions::Commands::StopAction::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)pauseActionWithParams:(MTRActionsClusterPauseActionParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Actions::Commands::PauseAction::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.actionID = params.actionID.unsignedShortValue;
-            if (params.invokeID != nil) {
-                auto & definedValue_0 = request.invokeID.Emplace();
-                definedValue_0 = params.invokeID.unsignedIntValue;
-            }
+    if (params == nil) {
+        params = [[MTRActionsClusterPauseActionParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Actions::Commands::PauseAction::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)pauseActionWithDurationWithParams:(MTRActionsClusterPauseActionWithDurationParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Actions::Commands::PauseActionWithDuration::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.actionID = params.actionID.unsignedShortValue;
-            if (params.invokeID != nil) {
-                auto & definedValue_0 = request.invokeID.Emplace();
-                definedValue_0 = params.invokeID.unsignedIntValue;
-            }
-            request.duration = params.duration.unsignedIntValue;
+    if (params == nil) {
+        params = [[MTRActionsClusterPauseActionWithDurationParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Actions::Commands::PauseActionWithDuration::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)resumeActionWithParams:(MTRActionsClusterResumeActionParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Actions::Commands::ResumeAction::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.actionID = params.actionID.unsignedShortValue;
-            if (params.invokeID != nil) {
-                auto & definedValue_0 = request.invokeID.Emplace();
-                definedValue_0 = params.invokeID.unsignedIntValue;
-            }
+    if (params == nil) {
+        params = [[MTRActionsClusterResumeActionParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Actions::Commands::ResumeAction::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)enableActionWithParams:(MTRActionsClusterEnableActionParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Actions::Commands::EnableAction::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.actionID = params.actionID.unsignedShortValue;
-            if (params.invokeID != nil) {
-                auto & definedValue_0 = request.invokeID.Emplace();
-                definedValue_0 = params.invokeID.unsignedIntValue;
-            }
+    if (params == nil) {
+        params = [[MTRActionsClusterEnableActionParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Actions::Commands::EnableAction::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)enableActionWithDurationWithParams:(MTRActionsClusterEnableActionWithDurationParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Actions::Commands::EnableActionWithDuration::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.actionID = params.actionID.unsignedShortValue;
-            if (params.invokeID != nil) {
-                auto & definedValue_0 = request.invokeID.Emplace();
-                definedValue_0 = params.invokeID.unsignedIntValue;
-            }
-            request.duration = params.duration.unsignedIntValue;
+    if (params == nil) {
+        params = [[MTRActionsClusterEnableActionWithDurationParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Actions::Commands::EnableActionWithDuration::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)disableActionWithParams:(MTRActionsClusterDisableActionParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Actions::Commands::DisableAction::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.actionID = params.actionID.unsignedShortValue;
-            if (params.invokeID != nil) {
-                auto & definedValue_0 = request.invokeID.Emplace();
-                definedValue_0 = params.invokeID.unsignedIntValue;
-            }
+    if (params == nil) {
+        params = [[MTRActionsClusterDisableActionParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Actions::Commands::DisableAction::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)disableActionWithDurationWithParams:(MTRActionsClusterDisableActionWithDurationParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Actions::Commands::DisableActionWithDuration::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.actionID = params.actionID.unsignedShortValue;
-            if (params.invokeID != nil) {
-                auto & definedValue_0 = request.invokeID.Emplace();
-                definedValue_0 = params.invokeID.unsignedIntValue;
-            }
-            request.duration = params.duration.unsignedIntValue;
+    if (params == nil) {
+        params = [[MTRActionsClusterDisableActionWithDurationParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Actions::Commands::DisableActionWithDuration::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeActionListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
@@ -12056,35 +11411,27 @@ using chip::System::Clock::Timeout;
 }
 - (void)mfgSpecificPingWithParams:(MTRBasicClusterMfgSpecificPingParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            BasicInformation::Commands::MfgSpecificPing::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRBasicClusterMfgSpecificPingParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = BasicInformation::Commands::MfgSpecificPing::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeDataModelRevisionWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
@@ -14156,140 +13503,75 @@ using chip::System::Clock::Timeout;
 
 - (void)queryImageWithParams:(MTROTASoftwareUpdateProviderClusterQueryImageParams *)params completion:(void (^)(MTROTASoftwareUpdateProviderClusterQueryImageResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTROTASoftwareUpdateProviderClusterQueryImageResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, OTASoftwareUpdateProviderClusterQueryImageResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTROTASoftwareUpdateProviderClusterQueryImageResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            OtaSoftwareUpdateProvider::Commands::QueryImage::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.vendorID = static_cast<std::remove_reference_t<decltype(request.vendorID)>>(params.vendorID.unsignedShortValue);
-            request.productID = params.productID.unsignedShortValue;
-            request.softwareVersion = params.softwareVersion.unsignedIntValue;
-            {
-                using ListType_0 = std::remove_reference_t<decltype(request.protocolsSupported)>;
-                using ListMemberType_0 = ListMemberTypeGetter<ListType_0>::Type;
-                if (params.protocolsSupported.count != 0) {
-                    auto * listHolder_0 = new ListHolder<ListMemberType_0>(params.protocolsSupported.count);
-                    if (listHolder_0 == nullptr || listHolder_0->mList == nullptr) {
-                        return CHIP_ERROR_INVALID_ARGUMENT;
-                    }
-                    listFreer.add(listHolder_0);
-                    for (size_t i_0 = 0; i_0 < params.protocolsSupported.count; ++i_0) {
-                        if (![params.protocolsSupported[i_0] isKindOfClass:[NSNumber class]]) {
-                            // Wrong kind of value.
-                            return CHIP_ERROR_INVALID_ARGUMENT;
-                        }
-                        auto element_0 = (NSNumber *) params.protocolsSupported[i_0];
-                        listHolder_0->mList[i_0] = static_cast<std::remove_reference_t<decltype(listHolder_0->mList[i_0])>>(element_0.unsignedCharValue);
-                    }
-                    request.protocolsSupported = ListType_0(listHolder_0->mList, params.protocolsSupported.count);
-                } else {
-                    request.protocolsSupported = ListType_0();
-                }
-            }
-            if (params.hardwareVersion != nil) {
-                auto & definedValue_0 = request.hardwareVersion.Emplace();
-                definedValue_0 = params.hardwareVersion.unsignedShortValue;
-            }
-            if (params.location != nil) {
-                auto & definedValue_0 = request.location.Emplace();
-                definedValue_0 = AsCharSpan(params.location);
-            }
-            if (params.requestorCanConsent != nil) {
-                auto & definedValue_0 = request.requestorCanConsent.Emplace();
-                definedValue_0 = params.requestorCanConsent.boolValue;
-            }
-            if (params.metadataForProvider != nil) {
-                auto & definedValue_0 = request.metadataForProvider.Emplace();
-                definedValue_0 = AsByteSpan(params.metadataForProvider);
-            }
+    if (params == nil) {
+        params = [[MTROTASoftwareUpdateProviderClusterQueryImageParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = OtaSoftwareUpdateProvider::Commands::QueryImage::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTROTASoftwareUpdateProviderClusterQueryImageResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)applyUpdateRequestWithParams:(MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams *)params completion:(void (^)(MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTROTASoftwareUpdateProviderClusterApplyUpdateResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, OTASoftwareUpdateProviderClusterApplyUpdateResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTROTASoftwareUpdateProviderClusterApplyUpdateResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            OtaSoftwareUpdateProvider::Commands::ApplyUpdateRequest::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.updateToken = AsByteSpan(params.updateToken);
-            request.newVersion = params.newVersion.unsignedIntValue;
+    if (params == nil) {
+        params = [[MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = OtaSoftwareUpdateProvider::Commands::ApplyUpdateRequest::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)notifyUpdateAppliedWithParams:(MTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            OtaSoftwareUpdateProvider::Commands::NotifyUpdateApplied::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.updateToken = AsByteSpan(params.updateToken);
-            request.softwareVersion = params.softwareVersion.unsignedIntValue;
+    if (params == nil) {
+        params = [[MTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = OtaSoftwareUpdateProvider::Commands::NotifyUpdateApplied::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeGeneratedCommandListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
@@ -14749,43 +14031,27 @@ using chip::System::Clock::Timeout;
 
 - (void)announceOTAProviderWithParams:(MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            OtaSoftwareUpdateRequestor::Commands::AnnounceOTAProvider::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.providerNodeID = params.providerNodeID.unsignedLongLongValue;
-            request.vendorID = static_cast<std::remove_reference_t<decltype(request.vendorID)>>(params.vendorID.unsignedShortValue);
-            request.announcementReason = static_cast<std::remove_reference_t<decltype(request.announcementReason)>>(params.announcementReason.unsignedCharValue);
-            if (params.metadataForNode != nil) {
-                auto & definedValue_0 = request.metadataForNode.Emplace();
-                definedValue_0 = AsByteSpan(params.metadataForNode);
-            }
-            request.endpoint = params.endpoint.unsignedShortValue;
+    if (params == nil) {
+        params = [[MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = OtaSoftwareUpdateRequestor::Commands::AnnounceOTAProvider::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeDefaultOTAProvidersWithParams:(MTRReadParams * _Nullable)params completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
@@ -20716,101 +19982,79 @@ using chip::System::Clock::Timeout;
 
 - (void)armFailSafeWithParams:(MTRGeneralCommissioningClusterArmFailSafeParams *)params completion:(void (^)(MTRGeneralCommissioningClusterArmFailSafeResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRGeneralCommissioningClusterArmFailSafeResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, GeneralCommissioningClusterArmFailSafeResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRGeneralCommissioningClusterArmFailSafeResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            GeneralCommissioning::Commands::ArmFailSafe::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.expiryLengthSeconds = params.expiryLengthSeconds.unsignedShortValue;
-            request.breadcrumb = params.breadcrumb.unsignedLongLongValue;
+    if (params == nil) {
+        params = [[MTRGeneralCommissioningClusterArmFailSafeParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = GeneralCommissioning::Commands::ArmFailSafe::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRGeneralCommissioningClusterArmFailSafeResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)setRegulatoryConfigWithParams:(MTRGeneralCommissioningClusterSetRegulatoryConfigParams *)params completion:(void (^)(MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRGeneralCommissioningClusterSetRegulatoryConfigResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, GeneralCommissioningClusterSetRegulatoryConfigResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRGeneralCommissioningClusterSetRegulatoryConfigResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            GeneralCommissioning::Commands::SetRegulatoryConfig::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.newRegulatoryConfig = static_cast<std::remove_reference_t<decltype(request.newRegulatoryConfig)>>(params.newRegulatoryConfig.unsignedCharValue);
-            request.countryCode = AsCharSpan(params.countryCode);
-            request.breadcrumb = params.breadcrumb.unsignedLongLongValue;
+    if (params == nil) {
+        params = [[MTRGeneralCommissioningClusterSetRegulatoryConfigParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = GeneralCommissioning::Commands::SetRegulatoryConfig::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)commissioningCompleteWithCompletion:(void (^)(MTRGeneralCommissioningClusterCommissioningCompleteResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
     [self commissioningCompleteWithParams:nil completion:completion];
 }
 - (void)commissioningCompleteWithParams:(MTRGeneralCommissioningClusterCommissioningCompleteParams * _Nullable)params completion:(void (^)(MTRGeneralCommissioningClusterCommissioningCompleteResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRGeneralCommissioningClusterCommissioningCompleteResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, GeneralCommissioningClusterCommissioningCompleteResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRGeneralCommissioningClusterCommissioningCompleteResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            GeneralCommissioning::Commands::CommissioningComplete::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRGeneralCommissioningClusterCommissioningCompleteParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = GeneralCommissioning::Commands::CommissioningComplete::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRGeneralCommissioningClusterCommissioningCompleteResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeBreadcrumbWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
@@ -21681,224 +20925,147 @@ using chip::System::Clock::Timeout;
 
 - (void)scanNetworksWithParams:(MTRNetworkCommissioningClusterScanNetworksParams * _Nullable)params completion:(void (^)(MTRNetworkCommissioningClusterScanNetworksResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRNetworkCommissioningClusterScanNetworksResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, NetworkCommissioningClusterScanNetworksResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRNetworkCommissioningClusterScanNetworksResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            NetworkCommissioning::Commands::ScanNetworks::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            if (params != nil) {
-                if (params.ssid != nil) {
-                    auto & definedValue_0 = request.ssid.Emplace();
-                    if (params.ssid == nil) {
-                        definedValue_0.SetNull();
-                    } else {
-                        auto & nonNullValue_1 = definedValue_0.SetNonNull();
-                        nonNullValue_1 = AsByteSpan(params.ssid);
-                    }
-                }
-                if (params.breadcrumb != nil) {
-                    auto & definedValue_0 = request.breadcrumb.Emplace();
-                    definedValue_0 = params.breadcrumb.unsignedLongLongValue;
-                }
-            }
+    if (params == nil) {
+        params = [[MTRNetworkCommissioningClusterScanNetworksParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = NetworkCommissioning::Commands::ScanNetworks::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRNetworkCommissioningClusterScanNetworksResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)addOrUpdateWiFiNetworkWithParams:(MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams *)params completion:(void (^)(MTRNetworkCommissioningClusterNetworkConfigResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRNetworkCommissioningClusterNetworkConfigResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, NetworkCommissioningClusterNetworkConfigResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRNetworkCommissioningClusterNetworkConfigResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            NetworkCommissioning::Commands::AddOrUpdateWiFiNetwork::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.ssid = AsByteSpan(params.ssid);
-            request.credentials = AsByteSpan(params.credentials);
-            if (params.breadcrumb != nil) {
-                auto & definedValue_0 = request.breadcrumb.Emplace();
-                definedValue_0 = params.breadcrumb.unsignedLongLongValue;
-            }
+    if (params == nil) {
+        params = [[MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = NetworkCommissioning::Commands::AddOrUpdateWiFiNetwork::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRNetworkCommissioningClusterNetworkConfigResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)addOrUpdateThreadNetworkWithParams:(MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams *)params completion:(void (^)(MTRNetworkCommissioningClusterNetworkConfigResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRNetworkCommissioningClusterNetworkConfigResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, NetworkCommissioningClusterNetworkConfigResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRNetworkCommissioningClusterNetworkConfigResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            NetworkCommissioning::Commands::AddOrUpdateThreadNetwork::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.operationalDataset = AsByteSpan(params.operationalDataset);
-            if (params.breadcrumb != nil) {
-                auto & definedValue_0 = request.breadcrumb.Emplace();
-                definedValue_0 = params.breadcrumb.unsignedLongLongValue;
-            }
+    if (params == nil) {
+        params = [[MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = NetworkCommissioning::Commands::AddOrUpdateThreadNetwork::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRNetworkCommissioningClusterNetworkConfigResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)removeNetworkWithParams:(MTRNetworkCommissioningClusterRemoveNetworkParams *)params completion:(void (^)(MTRNetworkCommissioningClusterNetworkConfigResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRNetworkCommissioningClusterNetworkConfigResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, NetworkCommissioningClusterNetworkConfigResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRNetworkCommissioningClusterNetworkConfigResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            NetworkCommissioning::Commands::RemoveNetwork::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.networkID = AsByteSpan(params.networkID);
-            if (params.breadcrumb != nil) {
-                auto & definedValue_0 = request.breadcrumb.Emplace();
-                definedValue_0 = params.breadcrumb.unsignedLongLongValue;
-            }
+    if (params == nil) {
+        params = [[MTRNetworkCommissioningClusterRemoveNetworkParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = NetworkCommissioning::Commands::RemoveNetwork::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRNetworkCommissioningClusterNetworkConfigResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)connectNetworkWithParams:(MTRNetworkCommissioningClusterConnectNetworkParams *)params completion:(void (^)(MTRNetworkCommissioningClusterConnectNetworkResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRNetworkCommissioningClusterConnectNetworkResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, NetworkCommissioningClusterConnectNetworkResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRNetworkCommissioningClusterConnectNetworkResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            NetworkCommissioning::Commands::ConnectNetwork::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.networkID = AsByteSpan(params.networkID);
-            if (params.breadcrumb != nil) {
-                auto & definedValue_0 = request.breadcrumb.Emplace();
-                definedValue_0 = params.breadcrumb.unsignedLongLongValue;
-            }
+    if (params == nil) {
+        params = [[MTRNetworkCommissioningClusterConnectNetworkParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = NetworkCommissioning::Commands::ConnectNetwork::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRNetworkCommissioningClusterConnectNetworkResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)reorderNetworkWithParams:(MTRNetworkCommissioningClusterReorderNetworkParams *)params completion:(void (^)(MTRNetworkCommissioningClusterNetworkConfigResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRNetworkCommissioningClusterNetworkConfigResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, NetworkCommissioningClusterNetworkConfigResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRNetworkCommissioningClusterNetworkConfigResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            NetworkCommissioning::Commands::ReorderNetwork::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.networkID = AsByteSpan(params.networkID);
-            request.networkIndex = params.networkIndex.unsignedCharValue;
-            if (params.breadcrumb != nil) {
-                auto & definedValue_0 = request.breadcrumb.Emplace();
-                definedValue_0 = params.breadcrumb.unsignedLongLongValue;
-            }
+    if (params == nil) {
+        params = [[MTRNetworkCommissioningClusterReorderNetworkParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = NetworkCommissioning::Commands::ReorderNetwork::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRNetworkCommissioningClusterNetworkConfigResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeMaxNetworksWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
@@ -23008,38 +22175,27 @@ using chip::System::Clock::Timeout;
 
 - (void)retrieveLogsRequestWithParams:(MTRDiagnosticLogsClusterRetrieveLogsRequestParams *)params completion:(void (^)(MTRDiagnosticLogsClusterRetrieveLogsResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRDiagnosticLogsClusterRetrieveLogsResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, DiagnosticLogsClusterRetrieveLogsResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRDiagnosticLogsClusterRetrieveLogsResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            DiagnosticLogs::Commands::RetrieveLogsRequest::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.intent = static_cast<std::remove_reference_t<decltype(request.intent)>>(params.intent.unsignedCharValue);
-            request.requestedProtocol = static_cast<std::remove_reference_t<decltype(request.requestedProtocol)>>(params.requestedProtocol.unsignedCharValue);
-            if (params.transferFileDesignator != nil) {
-                auto & definedValue_0 = request.transferFileDesignator.Emplace();
-                definedValue_0 = AsCharSpan(params.transferFileDesignator);
-            }
+    if (params == nil) {
+        params = [[MTRDiagnosticLogsClusterRetrieveLogsRequestParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = DiagnosticLogs::Commands::RetrieveLogsRequest::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRDiagnosticLogsClusterRetrieveLogsResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeGeneratedCommandListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
@@ -23483,37 +22639,27 @@ using chip::System::Clock::Timeout;
 
 - (void)testEventTriggerWithParams:(MTRGeneralDiagnosticsClusterTestEventTriggerParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            GeneralDiagnostics::Commands::TestEventTrigger::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.enableKey = AsByteSpan(params.enableKey);
-            request.eventTrigger = params.eventTrigger.unsignedLongLongValue;
+    if (params == nil) {
+        params = [[MTRGeneralDiagnosticsClusterTestEventTriggerParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = GeneralDiagnostics::Commands::TestEventTrigger::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeNetworkInterfacesWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
@@ -24653,35 +23799,27 @@ using chip::System::Clock::Timeout;
 }
 - (void)resetWatermarksWithParams:(MTRSoftwareDiagnosticsClusterResetWatermarksParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            SoftwareDiagnostics::Commands::ResetWatermarks::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRSoftwareDiagnosticsClusterResetWatermarksParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = SoftwareDiagnostics::Commands::ResetWatermarks::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeThreadMetricsWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
@@ -25422,35 +24560,27 @@ using chip::System::Clock::Timeout;
 }
 - (void)resetCountsWithParams:(MTRThreadNetworkDiagnosticsClusterResetCountsParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            ThreadNetworkDiagnostics::Commands::ResetCounts::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRThreadNetworkDiagnosticsClusterResetCountsParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = ThreadNetworkDiagnostics::Commands::ResetCounts::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeChannelWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
@@ -30498,35 +29628,27 @@ using chip::System::Clock::Timeout;
 }
 - (void)resetCountsWithParams:(MTRWiFiNetworkDiagnosticsClusterResetCountsParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            WiFiNetworkDiagnostics::Commands::ResetCounts::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRWiFiNetworkDiagnosticsClusterResetCountsParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = WiFiNetworkDiagnostics::Commands::ResetCounts::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeBSSIDWithCompletion:(void (^)(NSData * _Nullable value, NSError * _Nullable error))completion
@@ -31924,35 +31046,27 @@ using chip::System::Clock::Timeout;
 }
 - (void)resetCountsWithParams:(MTREthernetNetworkDiagnosticsClusterResetCountsParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            EthernetNetworkDiagnostics::Commands::ResetCounts::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTREthernetNetworkDiagnosticsClusterResetCountsParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = EthernetNetworkDiagnostics::Commands::ResetCounts::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributePHYRateWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
@@ -33054,239 +32168,123 @@ using chip::System::Clock::Timeout;
 
 - (void)setUTCTimeWithParams:(MTRTimeSynchronizationClusterSetUTCTimeParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            TimeSynchronization::Commands::SetUTCTime::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.UTCTime = params.utcTime.unsignedLongLongValue;
-            request.granularity = static_cast<std::remove_reference_t<decltype(request.granularity)>>(params.granularity.unsignedCharValue);
-            if (params.timeSource != nil) {
-                auto & definedValue_0 = request.timeSource.Emplace();
-                definedValue_0 = static_cast<std::remove_reference_t<decltype(definedValue_0)>>(params.timeSource.unsignedCharValue);
-            }
+    if (params == nil) {
+        params = [[MTRTimeSynchronizationClusterSetUTCTimeParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = TimeSynchronization::Commands::SetUTCTime::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)setTrustedTimeSourceWithParams:(MTRTimeSynchronizationClusterSetTrustedTimeSourceParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            TimeSynchronization::Commands::SetTrustedTimeSource::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            if (params.trustedTimeSource == nil) {
-                request.trustedTimeSource.SetNull();
-            } else {
-                auto & nonNullValue_0 = request.trustedTimeSource.SetNonNull();
-                nonNullValue_0.nodeID = params.trustedTimeSource.nodeID.unsignedLongLongValue;
-                nonNullValue_0.endpoint = params.trustedTimeSource.endpoint.unsignedShortValue;
-            }
+    if (params == nil) {
+        params = [[MTRTimeSynchronizationClusterSetTrustedTimeSourceParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = TimeSynchronization::Commands::SetTrustedTimeSource::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)setTimeZoneWithParams:(MTRTimeSynchronizationClusterSetTimeZoneParams *)params completion:(void (^)(MTRTimeSynchronizationClusterSetTimeZoneResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRTimeSynchronizationClusterSetTimeZoneResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, TimeSynchronizationClusterSetTimeZoneResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRTimeSynchronizationClusterSetTimeZoneResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            TimeSynchronization::Commands::SetTimeZone::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            {
-                using ListType_0 = std::remove_reference_t<decltype(request.timeZone)>;
-                using ListMemberType_0 = ListMemberTypeGetter<ListType_0>::Type;
-                if (params.timeZone.count != 0) {
-                    auto * listHolder_0 = new ListHolder<ListMemberType_0>(params.timeZone.count);
-                    if (listHolder_0 == nullptr || listHolder_0->mList == nullptr) {
-                        return CHIP_ERROR_INVALID_ARGUMENT;
-                    }
-                    listFreer.add(listHolder_0);
-                    for (size_t i_0 = 0; i_0 < params.timeZone.count; ++i_0) {
-                        if (![params.timeZone[i_0] isKindOfClass:[MTRTimeSynchronizationClusterTimeZoneStruct class]]) {
-                            // Wrong kind of value.
-                            return CHIP_ERROR_INVALID_ARGUMENT;
-                        }
-                        auto element_0 = (MTRTimeSynchronizationClusterTimeZoneStruct *) params.timeZone[i_0];
-                        listHolder_0->mList[i_0].offset = element_0.offset.intValue;
-                        listHolder_0->mList[i_0].validAt = element_0.validAt.unsignedLongLongValue;
-                        if (element_0.name != nil) {
-                            auto & definedValue_2 = listHolder_0->mList[i_0].name.Emplace();
-                            definedValue_2 = AsCharSpan(element_0.name);
-                        }
-                    }
-                    request.timeZone = ListType_0(listHolder_0->mList, params.timeZone.count);
-                } else {
-                    request.timeZone = ListType_0();
-                }
-            }
+    if (params == nil) {
+        params = [[MTRTimeSynchronizationClusterSetTimeZoneParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = TimeSynchronization::Commands::SetTimeZone::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRTimeSynchronizationClusterSetTimeZoneResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)setDSTOffsetWithParams:(MTRTimeSynchronizationClusterSetDSTOffsetParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            TimeSynchronization::Commands::SetDSTOffset::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            {
-                using ListType_0 = std::remove_reference_t<decltype(request.DSTOffset)>;
-                using ListMemberType_0 = ListMemberTypeGetter<ListType_0>::Type;
-                if (params.dstOffset.count != 0) {
-                    auto * listHolder_0 = new ListHolder<ListMemberType_0>(params.dstOffset.count);
-                    if (listHolder_0 == nullptr || listHolder_0->mList == nullptr) {
-                        return CHIP_ERROR_INVALID_ARGUMENT;
-                    }
-                    listFreer.add(listHolder_0);
-                    for (size_t i_0 = 0; i_0 < params.dstOffset.count; ++i_0) {
-                        if (![params.dstOffset[i_0] isKindOfClass:[MTRTimeSynchronizationClusterDSTOffsetStruct class]]) {
-                            // Wrong kind of value.
-                            return CHIP_ERROR_INVALID_ARGUMENT;
-                        }
-                        auto element_0 = (MTRTimeSynchronizationClusterDSTOffsetStruct *) params.dstOffset[i_0];
-                        listHolder_0->mList[i_0].offset = element_0.offset.intValue;
-                        listHolder_0->mList[i_0].validStarting = element_0.validStarting.unsignedLongLongValue;
-                        if (element_0.validUntil == nil) {
-                            listHolder_0->mList[i_0].validUntil.SetNull();
-                        } else {
-                            auto & nonNullValue_2 = listHolder_0->mList[i_0].validUntil.SetNonNull();
-                            nonNullValue_2 = element_0.validUntil.unsignedLongLongValue;
-                        }
-                    }
-                    request.DSTOffset = ListType_0(listHolder_0->mList, params.dstOffset.count);
-                } else {
-                    request.DSTOffset = ListType_0();
-                }
-            }
+    if (params == nil) {
+        params = [[MTRTimeSynchronizationClusterSetDSTOffsetParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = TimeSynchronization::Commands::SetDSTOffset::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)setDefaultNTPWithParams:(MTRTimeSynchronizationClusterSetDefaultNTPParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            TimeSynchronization::Commands::SetDefaultNTP::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            if (params.defaultNTP == nil) {
-                request.defaultNTP.SetNull();
-            } else {
-                auto & nonNullValue_0 = request.defaultNTP.SetNonNull();
-                nonNullValue_0 = AsCharSpan(params.defaultNTP);
-            }
+    if (params == nil) {
+        params = [[MTRTimeSynchronizationClusterSetDefaultNTPParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = TimeSynchronization::Commands::SetDefaultNTP::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeUTCTimeWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
@@ -36286,120 +35284,88 @@ using chip::System::Clock::Timeout;
 
 - (void)openCommissioningWindowWithParams:(MTRAdministratorCommissioningClusterOpenCommissioningWindowParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            AdministratorCommissioning::Commands::OpenCommissioningWindow::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            if (!timedInvokeTimeoutMs.HasValue()) {
-                timedInvokeTimeoutMs.SetValue(10000);
-            }
-            request.commissioningTimeout = params.commissioningTimeout.unsignedShortValue;
-            request.PAKEPasscodeVerifier = AsByteSpan(params.pakePasscodeVerifier);
-            request.discriminator = params.discriminator.unsignedShortValue;
-            request.iterations = params.iterations.unsignedIntValue;
-            request.salt = AsByteSpan(params.salt);
+    if (params == nil) {
+        params = [[MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+    if (timedInvokeTimeoutMs == nil) {
+        timedInvokeTimeoutMs = @(10000);
+    }
+
+    using RequestType = AdministratorCommissioning::Commands::OpenCommissioningWindow::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)openBasicCommissioningWindowWithParams:(MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            if (!timedInvokeTimeoutMs.HasValue()) {
-                timedInvokeTimeoutMs.SetValue(10000);
-            }
-            request.commissioningTimeout = params.commissioningTimeout.unsignedShortValue;
+    if (params == nil) {
+        params = [[MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+    if (timedInvokeTimeoutMs == nil) {
+        timedInvokeTimeoutMs = @(10000);
+    }
+
+    using RequestType = AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)revokeCommissioningWithCompletion:(MTRStatusCompletion)completion
 {
     [self revokeCommissioningWithParams:nil completion:completion];
 }
 - (void)revokeCommissioningWithParams:(MTRAdministratorCommissioningClusterRevokeCommissioningParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            AdministratorCommissioning::Commands::RevokeCommissioning::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            if (!timedInvokeTimeoutMs.HasValue()) {
-                timedInvokeTimeoutMs.SetValue(10000);
-            }
+    if (params == nil) {
+        params = [[MTRAdministratorCommissioningClusterRevokeCommissioningParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+    if (timedInvokeTimeoutMs == nil) {
+        timedInvokeTimeoutMs = @(10000);
+    }
+
+    using RequestType = AdministratorCommissioning::Commands::RevokeCommissioning::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeWindowStatusWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
@@ -37073,268 +36039,195 @@ using chip::System::Clock::Timeout;
 
 - (void)attestationRequestWithParams:(MTROperationalCredentialsClusterAttestationRequestParams *)params completion:(void (^)(MTROperationalCredentialsClusterAttestationResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTROperationalCredentialsClusterAttestationResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, OperationalCredentialsClusterAttestationResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTROperationalCredentialsClusterAttestationResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            OperationalCredentials::Commands::AttestationRequest::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.attestationNonce = AsByteSpan(params.attestationNonce);
+    if (params == nil) {
+        params = [[MTROperationalCredentialsClusterAttestationRequestParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = OperationalCredentials::Commands::AttestationRequest::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTROperationalCredentialsClusterAttestationResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)certificateChainRequestWithParams:(MTROperationalCredentialsClusterCertificateChainRequestParams *)params completion:(void (^)(MTROperationalCredentialsClusterCertificateChainResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTROperationalCredentialsClusterCertificateChainResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, OperationalCredentialsClusterCertificateChainResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTROperationalCredentialsClusterCertificateChainResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            OperationalCredentials::Commands::CertificateChainRequest::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.certificateType = static_cast<std::remove_reference_t<decltype(request.certificateType)>>(params.certificateType.unsignedCharValue);
+    if (params == nil) {
+        params = [[MTROperationalCredentialsClusterCertificateChainRequestParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = OperationalCredentials::Commands::CertificateChainRequest::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTROperationalCredentialsClusterCertificateChainResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)CSRRequestWithParams:(MTROperationalCredentialsClusterCSRRequestParams *)params completion:(void (^)(MTROperationalCredentialsClusterCSRResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTROperationalCredentialsClusterCSRResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, OperationalCredentialsClusterCSRResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTROperationalCredentialsClusterCSRResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            OperationalCredentials::Commands::CSRRequest::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.CSRNonce = AsByteSpan(params.csrNonce);
-            if (params.isForUpdateNOC != nil) {
-                auto & definedValue_0 = request.isForUpdateNOC.Emplace();
-                definedValue_0 = params.isForUpdateNOC.boolValue;
-            }
+    if (params == nil) {
+        params = [[MTROperationalCredentialsClusterCSRRequestParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = OperationalCredentials::Commands::CSRRequest::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTROperationalCredentialsClusterCSRResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)addNOCWithParams:(MTROperationalCredentialsClusterAddNOCParams *)params completion:(void (^)(MTROperationalCredentialsClusterNOCResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTROperationalCredentialsClusterNOCResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, OperationalCredentialsClusterNOCResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTROperationalCredentialsClusterNOCResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            OperationalCredentials::Commands::AddNOC::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.NOCValue = AsByteSpan(params.nocValue);
-            if (params.icacValue != nil) {
-                auto & definedValue_0 = request.ICACValue.Emplace();
-                definedValue_0 = AsByteSpan(params.icacValue);
-            }
-            request.IPKValue = AsByteSpan(params.ipkValue);
-            request.caseAdminSubject = params.caseAdminSubject.unsignedLongLongValue;
-            request.adminVendorId = static_cast<std::remove_reference_t<decltype(request.adminVendorId)>>(params.adminVendorId.unsignedShortValue);
+    if (params == nil) {
+        params = [[MTROperationalCredentialsClusterAddNOCParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = OperationalCredentials::Commands::AddNOC::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTROperationalCredentialsClusterNOCResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)updateNOCWithParams:(MTROperationalCredentialsClusterUpdateNOCParams *)params completion:(void (^)(MTROperationalCredentialsClusterNOCResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTROperationalCredentialsClusterNOCResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, OperationalCredentialsClusterNOCResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTROperationalCredentialsClusterNOCResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            OperationalCredentials::Commands::UpdateNOC::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.NOCValue = AsByteSpan(params.nocValue);
-            if (params.icacValue != nil) {
-                auto & definedValue_0 = request.ICACValue.Emplace();
-                definedValue_0 = AsByteSpan(params.icacValue);
-            }
+    if (params == nil) {
+        params = [[MTROperationalCredentialsClusterUpdateNOCParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = OperationalCredentials::Commands::UpdateNOC::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTROperationalCredentialsClusterNOCResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)updateFabricLabelWithParams:(MTROperationalCredentialsClusterUpdateFabricLabelParams *)params completion:(void (^)(MTROperationalCredentialsClusterNOCResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTROperationalCredentialsClusterNOCResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, OperationalCredentialsClusterNOCResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTROperationalCredentialsClusterNOCResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            OperationalCredentials::Commands::UpdateFabricLabel::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.label = AsCharSpan(params.label);
+    if (params == nil) {
+        params = [[MTROperationalCredentialsClusterUpdateFabricLabelParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = OperationalCredentials::Commands::UpdateFabricLabel::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTROperationalCredentialsClusterNOCResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)removeFabricWithParams:(MTROperationalCredentialsClusterRemoveFabricParams *)params completion:(void (^)(MTROperationalCredentialsClusterNOCResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTROperationalCredentialsClusterNOCResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, OperationalCredentialsClusterNOCResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTROperationalCredentialsClusterNOCResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            OperationalCredentials::Commands::RemoveFabric::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.fabricIndex = params.fabricIndex.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTROperationalCredentialsClusterRemoveFabricParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = OperationalCredentials::Commands::RemoveFabric::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTROperationalCredentialsClusterNOCResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)addTrustedRootCertificateWithParams:(MTROperationalCredentialsClusterAddTrustedRootCertificateParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            OperationalCredentials::Commands::AddTrustedRootCertificate::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.rootCACertificate = AsByteSpan(params.rootCACertificate);
+    if (params == nil) {
+        params = [[MTROperationalCredentialsClusterAddTrustedRootCertificateParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = OperationalCredentials::Commands::AddTrustedRootCertificate::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeNOCsWithParams:(MTRReadParams * _Nullable)params completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
@@ -38269,172 +37162,103 @@ using chip::System::Clock::Timeout;
 
 - (void)keySetWriteWithParams:(MTRGroupKeyManagementClusterKeySetWriteParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            GroupKeyManagement::Commands::KeySetWrite::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.groupKeySet.groupKeySetID = params.groupKeySet.groupKeySetID.unsignedShortValue;
-            request.groupKeySet.groupKeySecurityPolicy = static_cast<std::remove_reference_t<decltype(request.groupKeySet.groupKeySecurityPolicy)>>(params.groupKeySet.groupKeySecurityPolicy.unsignedCharValue);
-            if (params.groupKeySet.epochKey0 == nil) {
-                request.groupKeySet.epochKey0.SetNull();
-            } else {
-                auto & nonNullValue_1 = request.groupKeySet.epochKey0.SetNonNull();
-                nonNullValue_1 = AsByteSpan(params.groupKeySet.epochKey0);
-            }
-            if (params.groupKeySet.epochStartTime0 == nil) {
-                request.groupKeySet.epochStartTime0.SetNull();
-            } else {
-                auto & nonNullValue_1 = request.groupKeySet.epochStartTime0.SetNonNull();
-                nonNullValue_1 = params.groupKeySet.epochStartTime0.unsignedLongLongValue;
-            }
-            if (params.groupKeySet.epochKey1 == nil) {
-                request.groupKeySet.epochKey1.SetNull();
-            } else {
-                auto & nonNullValue_1 = request.groupKeySet.epochKey1.SetNonNull();
-                nonNullValue_1 = AsByteSpan(params.groupKeySet.epochKey1);
-            }
-            if (params.groupKeySet.epochStartTime1 == nil) {
-                request.groupKeySet.epochStartTime1.SetNull();
-            } else {
-                auto & nonNullValue_1 = request.groupKeySet.epochStartTime1.SetNonNull();
-                nonNullValue_1 = params.groupKeySet.epochStartTime1.unsignedLongLongValue;
-            }
-            if (params.groupKeySet.epochKey2 == nil) {
-                request.groupKeySet.epochKey2.SetNull();
-            } else {
-                auto & nonNullValue_1 = request.groupKeySet.epochKey2.SetNonNull();
-                nonNullValue_1 = AsByteSpan(params.groupKeySet.epochKey2);
-            }
-            if (params.groupKeySet.epochStartTime2 == nil) {
-                request.groupKeySet.epochStartTime2.SetNull();
-            } else {
-                auto & nonNullValue_1 = request.groupKeySet.epochStartTime2.SetNonNull();
-                nonNullValue_1 = params.groupKeySet.epochStartTime2.unsignedLongLongValue;
-            }
+    if (params == nil) {
+        params = [[MTRGroupKeyManagementClusterKeySetWriteParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = GroupKeyManagement::Commands::KeySetWrite::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)keySetReadWithParams:(MTRGroupKeyManagementClusterKeySetReadParams *)params completion:(void (^)(MTRGroupKeyManagementClusterKeySetReadResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRGroupKeyManagementClusterKeySetReadResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, GroupKeyManagementClusterKeySetReadResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRGroupKeyManagementClusterKeySetReadResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            GroupKeyManagement::Commands::KeySetRead::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.groupKeySetID = params.groupKeySetID.unsignedShortValue;
+    if (params == nil) {
+        params = [[MTRGroupKeyManagementClusterKeySetReadParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = GroupKeyManagement::Commands::KeySetRead::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRGroupKeyManagementClusterKeySetReadResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)keySetRemoveWithParams:(MTRGroupKeyManagementClusterKeySetRemoveParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            GroupKeyManagement::Commands::KeySetRemove::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.groupKeySetID = params.groupKeySetID.unsignedShortValue;
+    if (params == nil) {
+        params = [[MTRGroupKeyManagementClusterKeySetRemoveParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = GroupKeyManagement::Commands::KeySetRemove::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)keySetReadAllIndicesWithCompletion:(void (^)(MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
     [self keySetReadAllIndicesWithParams:nil completion:completion];
 }
 - (void)keySetReadAllIndicesWithParams:(MTRGroupKeyManagementClusterKeySetReadAllIndicesParams * _Nullable)params completion:(void (^)(MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, GroupKeyManagementClusterKeySetReadAllIndicesResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            GroupKeyManagement::Commands::KeySetReadAllIndices::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRGroupKeyManagementClusterKeySetReadAllIndicesParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = GroupKeyManagement::Commands::KeySetReadAllIndices::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeGroupKeyMapWithParams:(MTRReadParams * _Nullable)params completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
@@ -40826,114 +39650,79 @@ using chip::System::Clock::Timeout;
 
 - (void)registerClientWithParams:(MTRICDManagementClusterRegisterClientParams *)params completion:(void (^)(MTRICDManagementClusterRegisterClientResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRICDManagementClusterRegisterClientResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, ICDManagementClusterRegisterClientResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRICDManagementClusterRegisterClientResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            IcdManagement::Commands::RegisterClient::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.checkInNodeID = params.checkInNodeID.unsignedLongLongValue;
-            request.monitoredSubject = params.monitoredSubject.unsignedLongLongValue;
-            request.key = AsByteSpan(params.key);
-            if (params.verificationKey != nil) {
-                auto & definedValue_0 = request.verificationKey.Emplace();
-                definedValue_0 = AsByteSpan(params.verificationKey);
-            }
+    if (params == nil) {
+        params = [[MTRICDManagementClusterRegisterClientParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = IcdManagement::Commands::RegisterClient::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRICDManagementClusterRegisterClientResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)unregisterClientWithParams:(MTRICDManagementClusterUnregisterClientParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            IcdManagement::Commands::UnregisterClient::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.checkInNodeID = params.checkInNodeID.unsignedLongLongValue;
-            if (params.verificationKey != nil) {
-                auto & definedValue_0 = request.verificationKey.Emplace();
-                definedValue_0 = AsByteSpan(params.verificationKey);
-            }
+    if (params == nil) {
+        params = [[MTRICDManagementClusterUnregisterClientParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = IcdManagement::Commands::UnregisterClient::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)stayActiveRequestWithCompletion:(MTRStatusCompletion)completion
 {
     [self stayActiveRequestWithParams:nil completion:completion];
 }
 - (void)stayActiveRequestWithParams:(MTRICDManagementClusterStayActiveRequestParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            IcdManagement::Commands::StayActiveRequest::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRICDManagementClusterStayActiveRequestParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = IcdManagement::Commands::StayActiveRequest::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeIdleModeIntervalWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
@@ -41410,36 +40199,27 @@ using chip::System::Clock::Timeout;
 
 - (void)changeToModeWithParams:(MTRModeSelectClusterChangeToModeParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            ModeSelect::Commands::ChangeToMode::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.newMode = params.newMode.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRModeSelectClusterChangeToModeParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = ModeSelect::Commands::ChangeToMode::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeDescriptionWithCompletion:(void (^)(NSString * _Nullable value, NSError * _Nullable error))completion
@@ -42412,33 +41192,27 @@ using chip::System::Clock::Timeout;
 
 - (void)changeToModeWithParams:(MTRLaundryWasherModeClusterChangeToModeParams *)params completion:(void (^)(MTRLaundryWasherModeClusterChangeToModeResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRLaundryWasherModeClusterChangeToModeResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, LaundryWasherModeClusterChangeToModeResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRLaundryWasherModeClusterChangeToModeResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            LaundryWasherMode::Commands::ChangeToMode::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.newMode = params.newMode.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRLaundryWasherModeClusterChangeToModeParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = LaundryWasherMode::Commands::ChangeToMode::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRLaundryWasherModeClusterChangeToModeResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeSupportedModesWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
@@ -42917,33 +41691,27 @@ using chip::System::Clock::Timeout;
 
 - (void)changeToModeWithParams:(MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams *)params completion:(void (^)(MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, RefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            RefrigeratorAndTemperatureControlledCabinetMode::Commands::ChangeToMode::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.newMode = params.newMode.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = RefrigeratorAndTemperatureControlledCabinetMode::Commands::ChangeToMode::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeSupportedModesWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
@@ -43891,33 +42659,27 @@ using chip::System::Clock::Timeout;
 
 - (void)changeToModeWithParams:(MTRRVCRunModeClusterChangeToModeParams *)params completion:(void (^)(MTRRVCRunModeClusterChangeToModeResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRRVCRunModeClusterChangeToModeResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, RVCRunModeClusterChangeToModeResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRRVCRunModeClusterChangeToModeResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            RvcRunMode::Commands::ChangeToMode::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.newMode = params.newMode.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRRVCRunModeClusterChangeToModeParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = RvcRunMode::Commands::ChangeToMode::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRRVCRunModeClusterChangeToModeResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeSupportedModesWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
@@ -44396,33 +43158,27 @@ using chip::System::Clock::Timeout;
 
 - (void)changeToModeWithParams:(MTRRVCCleanModeClusterChangeToModeParams *)params completion:(void (^)(MTRRVCCleanModeClusterChangeToModeResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRRVCCleanModeClusterChangeToModeResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, RVCCleanModeClusterChangeToModeResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRRVCCleanModeClusterChangeToModeResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            RvcCleanMode::Commands::ChangeToMode::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.newMode = params.newMode.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRRVCCleanModeClusterChangeToModeParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = RvcCleanMode::Commands::ChangeToMode::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRRVCCleanModeClusterChangeToModeResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeSupportedModesWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
@@ -44901,45 +43657,27 @@ using chip::System::Clock::Timeout;
 
 - (void)setTemperatureWithParams:(MTRTemperatureControlClusterSetTemperatureParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            TemperatureControl::Commands::SetTemperature::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            if (params != nil) {
-                if (params.targetTemperature != nil) {
-                    auto & definedValue_0 = request.targetTemperature.Emplace();
-                    definedValue_0 = params.targetTemperature.shortValue;
-                }
-                if (params.targetTemperatureLevel != nil) {
-                    auto & definedValue_0 = request.targetTemperatureLevel.Emplace();
-                    definedValue_0 = params.targetTemperatureLevel.unsignedCharValue;
-                }
-            }
+    if (params == nil) {
+        params = [[MTRTemperatureControlClusterSetTemperatureParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = TemperatureControl::Commands::SetTemperature::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeTemperatureSetpointWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
@@ -45774,33 +44512,27 @@ using chip::System::Clock::Timeout;
 
 - (void)changeToModeWithParams:(MTRDishwasherModeClusterChangeToModeParams *)params completion:(void (^)(MTRDishwasherModeClusterChangeToModeResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRDishwasherModeClusterChangeToModeResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, DishwasherModeClusterChangeToModeResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRDishwasherModeClusterChangeToModeResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            DishwasherMode::Commands::ChangeToMode::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.newMode = params.newMode.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRDishwasherModeClusterChangeToModeParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = DishwasherMode::Commands::ChangeToMode::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRDishwasherModeClusterChangeToModeResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeSupportedModesWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
@@ -46565,35 +45297,27 @@ using chip::System::Clock::Timeout;
 }
 - (void)selfTestRequestWithParams:(MTRSmokeCOAlarmClusterSelfTestRequestParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            SmokeCoAlarm::Commands::SelfTestRequest::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRSmokeCOAlarmClusterSelfTestRequestParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = SmokeCoAlarm::Commands::SelfTestRequest::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeExpressedStateWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
@@ -47370,70 +46094,51 @@ using chip::System::Clock::Timeout;
 
 - (void)resetWithParams:(MTRDishwasherAlarmClusterResetParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            DishwasherAlarm::Commands::Reset::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.alarms = static_cast<std::remove_reference_t<decltype(request.alarms)>>(params.alarms.unsignedIntValue);
+    if (params == nil) {
+        params = [[MTRDishwasherAlarmClusterResetParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = DishwasherAlarm::Commands::Reset::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)modifyEnabledAlarmsWithParams:(MTRDishwasherAlarmClusterModifyEnabledAlarmsParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            DishwasherAlarm::Commands::ModifyEnabledAlarms::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.mask = static_cast<std::remove_reference_t<decltype(request.mask)>>(params.mask.unsignedIntValue);
+    if (params == nil) {
+        params = [[MTRDishwasherAlarmClusterModifyEnabledAlarmsParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = DishwasherAlarm::Commands::ModifyEnabledAlarms::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeMaskWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
@@ -47838,134 +46543,111 @@ using chip::System::Clock::Timeout;
 }
 - (void)pauseWithParams:(MTROperationalStateClusterPauseParams * _Nullable)params completion:(void (^)(MTROperationalStateClusterOperationalCommandResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTROperationalStateClusterOperationalCommandResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, OperationalStateClusterOperationalCommandResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTROperationalStateClusterOperationalCommandResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            OperationalState::Commands::Pause::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTROperationalStateClusterPauseParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = OperationalState::Commands::Pause::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTROperationalStateClusterOperationalCommandResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)stopWithCompletion:(void (^)(MTROperationalStateClusterOperationalCommandResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
     [self stopWithParams:nil completion:completion];
 }
 - (void)stopWithParams:(MTROperationalStateClusterStopParams * _Nullable)params completion:(void (^)(MTROperationalStateClusterOperationalCommandResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTROperationalStateClusterOperationalCommandResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, OperationalStateClusterOperationalCommandResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTROperationalStateClusterOperationalCommandResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            OperationalState::Commands::Stop::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTROperationalStateClusterStopParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = OperationalState::Commands::Stop::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTROperationalStateClusterOperationalCommandResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)startWithCompletion:(void (^)(MTROperationalStateClusterOperationalCommandResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
     [self startWithParams:nil completion:completion];
 }
 - (void)startWithParams:(MTROperationalStateClusterStartParams * _Nullable)params completion:(void (^)(MTROperationalStateClusterOperationalCommandResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTROperationalStateClusterOperationalCommandResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, OperationalStateClusterOperationalCommandResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTROperationalStateClusterOperationalCommandResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            OperationalState::Commands::Start::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTROperationalStateClusterStartParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = OperationalState::Commands::Start::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTROperationalStateClusterOperationalCommandResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)resumeWithCompletion:(void (^)(MTROperationalStateClusterOperationalCommandResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
     [self resumeWithParams:nil completion:completion];
 }
 - (void)resumeWithParams:(MTROperationalStateClusterResumeParams * _Nullable)params completion:(void (^)(MTROperationalStateClusterOperationalCommandResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTROperationalStateClusterOperationalCommandResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, OperationalStateClusterOperationalCommandResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTROperationalStateClusterOperationalCommandResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            OperationalState::Commands::Resume::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTROperationalStateClusterResumeParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = OperationalState::Commands::Resume::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTROperationalStateClusterOperationalCommandResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributePhaseListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
@@ -48446,134 +47128,111 @@ using chip::System::Clock::Timeout;
 }
 - (void)pauseWithParams:(MTRRVCOperationalStateClusterPauseParams * _Nullable)params completion:(void (^)(MTRRVCOperationalStateClusterOperationalCommandResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRRVCOperationalStateClusterOperationalCommandResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, RVCOperationalStateClusterOperationalCommandResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRRVCOperationalStateClusterOperationalCommandResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            RvcOperationalState::Commands::Pause::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRRVCOperationalStateClusterPauseParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = RvcOperationalState::Commands::Pause::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRRVCOperationalStateClusterOperationalCommandResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)stopWithCompletion:(void (^)(MTRRVCOperationalStateClusterOperationalCommandResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
     [self stopWithParams:nil completion:completion];
 }
 - (void)stopWithParams:(MTRRVCOperationalStateClusterStopParams * _Nullable)params completion:(void (^)(MTRRVCOperationalStateClusterOperationalCommandResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRRVCOperationalStateClusterOperationalCommandResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, RVCOperationalStateClusterOperationalCommandResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRRVCOperationalStateClusterOperationalCommandResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            RvcOperationalState::Commands::Stop::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRRVCOperationalStateClusterStopParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = RvcOperationalState::Commands::Stop::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRRVCOperationalStateClusterOperationalCommandResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)startWithCompletion:(void (^)(MTRRVCOperationalStateClusterOperationalCommandResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
     [self startWithParams:nil completion:completion];
 }
 - (void)startWithParams:(MTRRVCOperationalStateClusterStartParams * _Nullable)params completion:(void (^)(MTRRVCOperationalStateClusterOperationalCommandResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRRVCOperationalStateClusterOperationalCommandResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, RVCOperationalStateClusterOperationalCommandResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRRVCOperationalStateClusterOperationalCommandResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            RvcOperationalState::Commands::Start::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRRVCOperationalStateClusterStartParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = RvcOperationalState::Commands::Start::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRRVCOperationalStateClusterOperationalCommandResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)resumeWithCompletion:(void (^)(MTRRVCOperationalStateClusterOperationalCommandResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
     [self resumeWithParams:nil completion:completion];
 }
 - (void)resumeWithParams:(MTRRVCOperationalStateClusterResumeParams * _Nullable)params completion:(void (^)(MTRRVCOperationalStateClusterOperationalCommandResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRRVCOperationalStateClusterOperationalCommandResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, RVCOperationalStateClusterOperationalCommandResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRRVCOperationalStateClusterOperationalCommandResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            RvcOperationalState::Commands::Resume::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRRVCOperationalStateClusterResumeParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = RvcOperationalState::Commands::Resume::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRRVCOperationalStateClusterOperationalCommandResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributePhaseListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
@@ -49054,35 +47713,27 @@ using chip::System::Clock::Timeout;
 }
 - (void)resetConditionWithParams:(MTRHEPAFilterMonitoringClusterResetConditionParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            HepaFilterMonitoring::Commands::ResetCondition::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRHEPAFilterMonitoringClusterResetConditionParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = HepaFilterMonitoring::Commands::ResetCondition::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeConditionWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
@@ -49602,35 +48253,27 @@ using chip::System::Clock::Timeout;
 }
 - (void)resetConditionWithParams:(MTRActivatedCarbonFilterMonitoringClusterResetConditionParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            ActivatedCarbonFilterMonitoring::Commands::ResetCondition::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRActivatedCarbonFilterMonitoringClusterResetConditionParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = ActivatedCarbonFilterMonitoring::Commands::ResetCondition::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeConditionWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
@@ -50146,748 +48789,483 @@ using chip::System::Clock::Timeout;
 
 - (void)lockDoorWithParams:(MTRDoorLockClusterLockDoorParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            DoorLock::Commands::LockDoor::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            if (!timedInvokeTimeoutMs.HasValue()) {
-                timedInvokeTimeoutMs.SetValue(10000);
-            }
-            if (params != nil) {
-                if (params.pinCode != nil) {
-                    auto & definedValue_0 = request.PINCode.Emplace();
-                    definedValue_0 = AsByteSpan(params.pinCode);
-                }
-            }
+    if (params == nil) {
+        params = [[MTRDoorLockClusterLockDoorParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+    if (timedInvokeTimeoutMs == nil) {
+        timedInvokeTimeoutMs = @(10000);
+    }
+
+    using RequestType = DoorLock::Commands::LockDoor::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)unlockDoorWithParams:(MTRDoorLockClusterUnlockDoorParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            DoorLock::Commands::UnlockDoor::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            if (!timedInvokeTimeoutMs.HasValue()) {
-                timedInvokeTimeoutMs.SetValue(10000);
-            }
-            if (params != nil) {
-                if (params.pinCode != nil) {
-                    auto & definedValue_0 = request.PINCode.Emplace();
-                    definedValue_0 = AsByteSpan(params.pinCode);
-                }
-            }
+    if (params == nil) {
+        params = [[MTRDoorLockClusterUnlockDoorParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+    if (timedInvokeTimeoutMs == nil) {
+        timedInvokeTimeoutMs = @(10000);
+    }
+
+    using RequestType = DoorLock::Commands::UnlockDoor::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)unlockWithTimeoutWithParams:(MTRDoorLockClusterUnlockWithTimeoutParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            DoorLock::Commands::UnlockWithTimeout::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            if (!timedInvokeTimeoutMs.HasValue()) {
-                timedInvokeTimeoutMs.SetValue(10000);
-            }
-            request.timeout = params.timeout.unsignedShortValue;
-            if (params.pinCode != nil) {
-                auto & definedValue_0 = request.PINCode.Emplace();
-                definedValue_0 = AsByteSpan(params.pinCode);
-            }
+    if (params == nil) {
+        params = [[MTRDoorLockClusterUnlockWithTimeoutParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+    if (timedInvokeTimeoutMs == nil) {
+        timedInvokeTimeoutMs = @(10000);
+    }
+
+    using RequestType = DoorLock::Commands::UnlockWithTimeout::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)setWeekDayScheduleWithParams:(MTRDoorLockClusterSetWeekDayScheduleParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            DoorLock::Commands::SetWeekDaySchedule::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.weekDayIndex = params.weekDayIndex.unsignedCharValue;
-            request.userIndex = params.userIndex.unsignedShortValue;
-            request.daysMask = static_cast<std::remove_reference_t<decltype(request.daysMask)>>(params.daysMask.unsignedCharValue);
-            request.startHour = params.startHour.unsignedCharValue;
-            request.startMinute = params.startMinute.unsignedCharValue;
-            request.endHour = params.endHour.unsignedCharValue;
-            request.endMinute = params.endMinute.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRDoorLockClusterSetWeekDayScheduleParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = DoorLock::Commands::SetWeekDaySchedule::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)getWeekDayScheduleWithParams:(MTRDoorLockClusterGetWeekDayScheduleParams *)params completion:(void (^)(MTRDoorLockClusterGetWeekDayScheduleResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRDoorLockClusterGetWeekDayScheduleResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, DoorLockClusterGetWeekDayScheduleResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRDoorLockClusterGetWeekDayScheduleResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            DoorLock::Commands::GetWeekDaySchedule::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.weekDayIndex = params.weekDayIndex.unsignedCharValue;
-            request.userIndex = params.userIndex.unsignedShortValue;
+    if (params == nil) {
+        params = [[MTRDoorLockClusterGetWeekDayScheduleParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = DoorLock::Commands::GetWeekDaySchedule::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRDoorLockClusterGetWeekDayScheduleResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)clearWeekDayScheduleWithParams:(MTRDoorLockClusterClearWeekDayScheduleParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            DoorLock::Commands::ClearWeekDaySchedule::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.weekDayIndex = params.weekDayIndex.unsignedCharValue;
-            request.userIndex = params.userIndex.unsignedShortValue;
+    if (params == nil) {
+        params = [[MTRDoorLockClusterClearWeekDayScheduleParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = DoorLock::Commands::ClearWeekDaySchedule::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)setYearDayScheduleWithParams:(MTRDoorLockClusterSetYearDayScheduleParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            DoorLock::Commands::SetYearDaySchedule::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.yearDayIndex = params.yearDayIndex.unsignedCharValue;
-            request.userIndex = params.userIndex.unsignedShortValue;
-            request.localStartTime = params.localStartTime.unsignedIntValue;
-            request.localEndTime = params.localEndTime.unsignedIntValue;
+    if (params == nil) {
+        params = [[MTRDoorLockClusterSetYearDayScheduleParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = DoorLock::Commands::SetYearDaySchedule::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)getYearDayScheduleWithParams:(MTRDoorLockClusterGetYearDayScheduleParams *)params completion:(void (^)(MTRDoorLockClusterGetYearDayScheduleResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRDoorLockClusterGetYearDayScheduleResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, DoorLockClusterGetYearDayScheduleResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRDoorLockClusterGetYearDayScheduleResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            DoorLock::Commands::GetYearDaySchedule::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.yearDayIndex = params.yearDayIndex.unsignedCharValue;
-            request.userIndex = params.userIndex.unsignedShortValue;
+    if (params == nil) {
+        params = [[MTRDoorLockClusterGetYearDayScheduleParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = DoorLock::Commands::GetYearDaySchedule::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRDoorLockClusterGetYearDayScheduleResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)clearYearDayScheduleWithParams:(MTRDoorLockClusterClearYearDayScheduleParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            DoorLock::Commands::ClearYearDaySchedule::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.yearDayIndex = params.yearDayIndex.unsignedCharValue;
-            request.userIndex = params.userIndex.unsignedShortValue;
+    if (params == nil) {
+        params = [[MTRDoorLockClusterClearYearDayScheduleParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = DoorLock::Commands::ClearYearDaySchedule::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)setHolidayScheduleWithParams:(MTRDoorLockClusterSetHolidayScheduleParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            DoorLock::Commands::SetHolidaySchedule::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.holidayIndex = params.holidayIndex.unsignedCharValue;
-            request.localStartTime = params.localStartTime.unsignedIntValue;
-            request.localEndTime = params.localEndTime.unsignedIntValue;
-            request.operatingMode = static_cast<std::remove_reference_t<decltype(request.operatingMode)>>(params.operatingMode.unsignedCharValue);
+    if (params == nil) {
+        params = [[MTRDoorLockClusterSetHolidayScheduleParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = DoorLock::Commands::SetHolidaySchedule::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)getHolidayScheduleWithParams:(MTRDoorLockClusterGetHolidayScheduleParams *)params completion:(void (^)(MTRDoorLockClusterGetHolidayScheduleResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRDoorLockClusterGetHolidayScheduleResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, DoorLockClusterGetHolidayScheduleResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRDoorLockClusterGetHolidayScheduleResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            DoorLock::Commands::GetHolidaySchedule::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.holidayIndex = params.holidayIndex.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRDoorLockClusterGetHolidayScheduleParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = DoorLock::Commands::GetHolidaySchedule::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRDoorLockClusterGetHolidayScheduleResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)clearHolidayScheduleWithParams:(MTRDoorLockClusterClearHolidayScheduleParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            DoorLock::Commands::ClearHolidaySchedule::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.holidayIndex = params.holidayIndex.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRDoorLockClusterClearHolidayScheduleParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = DoorLock::Commands::ClearHolidaySchedule::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)setUserWithParams:(MTRDoorLockClusterSetUserParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            DoorLock::Commands::SetUser::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            if (!timedInvokeTimeoutMs.HasValue()) {
-                timedInvokeTimeoutMs.SetValue(10000);
-            }
-            request.operationType = static_cast<std::remove_reference_t<decltype(request.operationType)>>(params.operationType.unsignedCharValue);
-            request.userIndex = params.userIndex.unsignedShortValue;
-            if (params.userName == nil) {
-                request.userName.SetNull();
-            } else {
-                auto & nonNullValue_0 = request.userName.SetNonNull();
-                nonNullValue_0 = AsCharSpan(params.userName);
-            }
-            if (params.userUniqueID == nil) {
-                request.userUniqueID.SetNull();
-            } else {
-                auto & nonNullValue_0 = request.userUniqueID.SetNonNull();
-                nonNullValue_0 = params.userUniqueID.unsignedIntValue;
-            }
-            if (params.userStatus == nil) {
-                request.userStatus.SetNull();
-            } else {
-                auto & nonNullValue_0 = request.userStatus.SetNonNull();
-                nonNullValue_0 = static_cast<std::remove_reference_t<decltype(nonNullValue_0)>>(params.userStatus.unsignedCharValue);
-            }
-            if (params.userType == nil) {
-                request.userType.SetNull();
-            } else {
-                auto & nonNullValue_0 = request.userType.SetNonNull();
-                nonNullValue_0 = static_cast<std::remove_reference_t<decltype(nonNullValue_0)>>(params.userType.unsignedCharValue);
-            }
-            if (params.credentialRule == nil) {
-                request.credentialRule.SetNull();
-            } else {
-                auto & nonNullValue_0 = request.credentialRule.SetNonNull();
-                nonNullValue_0 = static_cast<std::remove_reference_t<decltype(nonNullValue_0)>>(params.credentialRule.unsignedCharValue);
-            }
+    if (params == nil) {
+        params = [[MTRDoorLockClusterSetUserParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+    if (timedInvokeTimeoutMs == nil) {
+        timedInvokeTimeoutMs = @(10000);
+    }
+
+    using RequestType = DoorLock::Commands::SetUser::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)getUserWithParams:(MTRDoorLockClusterGetUserParams *)params completion:(void (^)(MTRDoorLockClusterGetUserResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRDoorLockClusterGetUserResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, DoorLockClusterGetUserResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRDoorLockClusterGetUserResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            DoorLock::Commands::GetUser::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.userIndex = params.userIndex.unsignedShortValue;
+    if (params == nil) {
+        params = [[MTRDoorLockClusterGetUserParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = DoorLock::Commands::GetUser::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRDoorLockClusterGetUserResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)clearUserWithParams:(MTRDoorLockClusterClearUserParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            DoorLock::Commands::ClearUser::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            if (!timedInvokeTimeoutMs.HasValue()) {
-                timedInvokeTimeoutMs.SetValue(10000);
-            }
-            request.userIndex = params.userIndex.unsignedShortValue;
+    if (params == nil) {
+        params = [[MTRDoorLockClusterClearUserParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+    if (timedInvokeTimeoutMs == nil) {
+        timedInvokeTimeoutMs = @(10000);
+    }
+
+    using RequestType = DoorLock::Commands::ClearUser::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)setCredentialWithParams:(MTRDoorLockClusterSetCredentialParams *)params completion:(void (^)(MTRDoorLockClusterSetCredentialResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRDoorLockClusterSetCredentialResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, DoorLockClusterSetCredentialResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRDoorLockClusterSetCredentialResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            DoorLock::Commands::SetCredential::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            if (!timedInvokeTimeoutMs.HasValue()) {
-                timedInvokeTimeoutMs.SetValue(10000);
-            }
-            request.operationType = static_cast<std::remove_reference_t<decltype(request.operationType)>>(params.operationType.unsignedCharValue);
-            request.credential.credentialType = static_cast<std::remove_reference_t<decltype(request.credential.credentialType)>>(params.credential.credentialType.unsignedCharValue);
-            request.credential.credentialIndex = params.credential.credentialIndex.unsignedShortValue;
-            request.credentialData = AsByteSpan(params.credentialData);
-            if (params.userIndex == nil) {
-                request.userIndex.SetNull();
-            } else {
-                auto & nonNullValue_0 = request.userIndex.SetNonNull();
-                nonNullValue_0 = params.userIndex.unsignedShortValue;
-            }
-            if (params.userStatus == nil) {
-                request.userStatus.SetNull();
-            } else {
-                auto & nonNullValue_0 = request.userStatus.SetNonNull();
-                nonNullValue_0 = static_cast<std::remove_reference_t<decltype(nonNullValue_0)>>(params.userStatus.unsignedCharValue);
-            }
-            if (params.userType == nil) {
-                request.userType.SetNull();
-            } else {
-                auto & nonNullValue_0 = request.userType.SetNonNull();
-                nonNullValue_0 = static_cast<std::remove_reference_t<decltype(nonNullValue_0)>>(params.userType.unsignedCharValue);
-            }
+    if (params == nil) {
+        params = [[MTRDoorLockClusterSetCredentialParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+    if (timedInvokeTimeoutMs == nil) {
+        timedInvokeTimeoutMs = @(10000);
+    }
+
+    using RequestType = DoorLock::Commands::SetCredential::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRDoorLockClusterSetCredentialResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)getCredentialStatusWithParams:(MTRDoorLockClusterGetCredentialStatusParams *)params completion:(void (^)(MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRDoorLockClusterGetCredentialStatusResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, DoorLockClusterGetCredentialStatusResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRDoorLockClusterGetCredentialStatusResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            DoorLock::Commands::GetCredentialStatus::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.credential.credentialType = static_cast<std::remove_reference_t<decltype(request.credential.credentialType)>>(params.credential.credentialType.unsignedCharValue);
-            request.credential.credentialIndex = params.credential.credentialIndex.unsignedShortValue;
+    if (params == nil) {
+        params = [[MTRDoorLockClusterGetCredentialStatusParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = DoorLock::Commands::GetCredentialStatus::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRDoorLockClusterGetCredentialStatusResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)clearCredentialWithParams:(MTRDoorLockClusterClearCredentialParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            DoorLock::Commands::ClearCredential::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            if (!timedInvokeTimeoutMs.HasValue()) {
-                timedInvokeTimeoutMs.SetValue(10000);
-            }
-            if (params.credential == nil) {
-                request.credential.SetNull();
-            } else {
-                auto & nonNullValue_0 = request.credential.SetNonNull();
-                nonNullValue_0.credentialType = static_cast<std::remove_reference_t<decltype(nonNullValue_0.credentialType)>>(params.credential.credentialType.unsignedCharValue);
-                nonNullValue_0.credentialIndex = params.credential.credentialIndex.unsignedShortValue;
-            }
+    if (params == nil) {
+        params = [[MTRDoorLockClusterClearCredentialParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+    if (timedInvokeTimeoutMs == nil) {
+        timedInvokeTimeoutMs = @(10000);
+    }
+
+    using RequestType = DoorLock::Commands::ClearCredential::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)unboltDoorWithParams:(MTRDoorLockClusterUnboltDoorParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            DoorLock::Commands::UnboltDoor::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            if (!timedInvokeTimeoutMs.HasValue()) {
-                timedInvokeTimeoutMs.SetValue(10000);
-            }
-            if (params != nil) {
-                if (params.pinCode != nil) {
-                    auto & definedValue_0 = request.PINCode.Emplace();
-                    definedValue_0 = AsByteSpan(params.pinCode);
-                }
-            }
+    if (params == nil) {
+        params = [[MTRDoorLockClusterUnboltDoorParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+    if (timedInvokeTimeoutMs == nil) {
+        timedInvokeTimeoutMs = @(10000);
+    }
+
+    using RequestType = DoorLock::Commands::UnboltDoor::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeLockStateWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
@@ -54819,245 +53197,179 @@ using chip::System::Clock::Timeout;
 }
 - (void)upOrOpenWithParams:(MTRWindowCoveringClusterUpOrOpenParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            WindowCovering::Commands::UpOrOpen::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRWindowCoveringClusterUpOrOpenParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = WindowCovering::Commands::UpOrOpen::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)downOrCloseWithCompletion:(MTRStatusCompletion)completion
 {
     [self downOrCloseWithParams:nil completion:completion];
 }
 - (void)downOrCloseWithParams:(MTRWindowCoveringClusterDownOrCloseParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            WindowCovering::Commands::DownOrClose::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRWindowCoveringClusterDownOrCloseParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = WindowCovering::Commands::DownOrClose::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)stopMotionWithCompletion:(MTRStatusCompletion)completion
 {
     [self stopMotionWithParams:nil completion:completion];
 }
 - (void)stopMotionWithParams:(MTRWindowCoveringClusterStopMotionParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            WindowCovering::Commands::StopMotion::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRWindowCoveringClusterStopMotionParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = WindowCovering::Commands::StopMotion::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)goToLiftValueWithParams:(MTRWindowCoveringClusterGoToLiftValueParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            WindowCovering::Commands::GoToLiftValue::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.liftValue = params.liftValue.unsignedShortValue;
+    if (params == nil) {
+        params = [[MTRWindowCoveringClusterGoToLiftValueParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = WindowCovering::Commands::GoToLiftValue::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)goToLiftPercentageWithParams:(MTRWindowCoveringClusterGoToLiftPercentageParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            WindowCovering::Commands::GoToLiftPercentage::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.liftPercent100thsValue = params.liftPercent100thsValue.unsignedShortValue;
+    if (params == nil) {
+        params = [[MTRWindowCoveringClusterGoToLiftPercentageParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = WindowCovering::Commands::GoToLiftPercentage::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)goToTiltValueWithParams:(MTRWindowCoveringClusterGoToTiltValueParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            WindowCovering::Commands::GoToTiltValue::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.tiltValue = params.tiltValue.unsignedShortValue;
+    if (params == nil) {
+        params = [[MTRWindowCoveringClusterGoToTiltValueParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = WindowCovering::Commands::GoToTiltValue::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)goToTiltPercentageWithParams:(MTRWindowCoveringClusterGoToTiltPercentageParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            WindowCovering::Commands::GoToTiltPercentage::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.tiltPercent100thsValue = params.tiltPercent100thsValue.unsignedShortValue;
+    if (params == nil) {
+        params = [[MTRWindowCoveringClusterGoToTiltPercentageParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = WindowCovering::Commands::GoToTiltPercentage::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeTypeWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
@@ -57188,73 +55500,55 @@ using chip::System::Clock::Timeout;
 
 - (void)barrierControlGoToPercentWithParams:(MTRBarrierControlClusterBarrierControlGoToPercentParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            BarrierControl::Commands::BarrierControlGoToPercent::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.percentOpen = params.percentOpen.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRBarrierControlClusterBarrierControlGoToPercentParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = BarrierControl::Commands::BarrierControlGoToPercent::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)barrierControlStopWithCompletion:(MTRStatusCompletion)completion
 {
     [self barrierControlStopWithParams:nil completion:completion];
 }
 - (void)barrierControlStopWithParams:(MTRBarrierControlClusterBarrierControlStopParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            BarrierControl::Commands::BarrierControlStop::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRBarrierControlClusterBarrierControlStopParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = BarrierControl::Commands::BarrierControlStop::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeBarrierMovingStateWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
@@ -60973,176 +59267,103 @@ using chip::System::Clock::Timeout;
 
 - (void)setpointRaiseLowerWithParams:(MTRThermostatClusterSetpointRaiseLowerParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Thermostat::Commands::SetpointRaiseLower::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.mode = static_cast<std::remove_reference_t<decltype(request.mode)>>(params.mode.unsignedCharValue);
-            request.amount = params.amount.charValue;
+    if (params == nil) {
+        params = [[MTRThermostatClusterSetpointRaiseLowerParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Thermostat::Commands::SetpointRaiseLower::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)setWeeklyScheduleWithParams:(MTRThermostatClusterSetWeeklyScheduleParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Thermostat::Commands::SetWeeklySchedule::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.numberOfTransitionsForSequence = params.numberOfTransitionsForSequence.unsignedCharValue;
-            request.dayOfWeekForSequence = static_cast<std::remove_reference_t<decltype(request.dayOfWeekForSequence)>>(params.dayOfWeekForSequence.unsignedCharValue);
-            request.modeForSequence = static_cast<std::remove_reference_t<decltype(request.modeForSequence)>>(params.modeForSequence.unsignedCharValue);
-            {
-                using ListType_0 = std::remove_reference_t<decltype(request.transitions)>;
-                using ListMemberType_0 = ListMemberTypeGetter<ListType_0>::Type;
-                if (params.transitions.count != 0) {
-                    auto * listHolder_0 = new ListHolder<ListMemberType_0>(params.transitions.count);
-                    if (listHolder_0 == nullptr || listHolder_0->mList == nullptr) {
-                        return CHIP_ERROR_INVALID_ARGUMENT;
-                    }
-                    listFreer.add(listHolder_0);
-                    for (size_t i_0 = 0; i_0 < params.transitions.count; ++i_0) {
-                        if (![params.transitions[i_0] isKindOfClass:[MTRThermostatClusterThermostatScheduleTransition class]]) {
-                            // Wrong kind of value.
-                            return CHIP_ERROR_INVALID_ARGUMENT;
-                        }
-                        auto element_0 = (MTRThermostatClusterThermostatScheduleTransition *) params.transitions[i_0];
-                        listHolder_0->mList[i_0].transitionTime = element_0.transitionTime.unsignedShortValue;
-                        if (element_0.heatSetpoint == nil) {
-                            listHolder_0->mList[i_0].heatSetpoint.SetNull();
-                        } else {
-                            auto & nonNullValue_2 = listHolder_0->mList[i_0].heatSetpoint.SetNonNull();
-                            nonNullValue_2 = element_0.heatSetpoint.shortValue;
-                        }
-                        if (element_0.coolSetpoint == nil) {
-                            listHolder_0->mList[i_0].coolSetpoint.SetNull();
-                        } else {
-                            auto & nonNullValue_2 = listHolder_0->mList[i_0].coolSetpoint.SetNonNull();
-                            nonNullValue_2 = element_0.coolSetpoint.shortValue;
-                        }
-                    }
-                    request.transitions = ListType_0(listHolder_0->mList, params.transitions.count);
-                } else {
-                    request.transitions = ListType_0();
-                }
-            }
+    if (params == nil) {
+        params = [[MTRThermostatClusterSetWeeklyScheduleParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Thermostat::Commands::SetWeeklySchedule::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)getWeeklyScheduleWithParams:(MTRThermostatClusterGetWeeklyScheduleParams *)params completion:(void (^)(MTRThermostatClusterGetWeeklyScheduleResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRThermostatClusterGetWeeklyScheduleResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, ThermostatClusterGetWeeklyScheduleResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRThermostatClusterGetWeeklyScheduleResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Thermostat::Commands::GetWeeklySchedule::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.daysToReturn = static_cast<std::remove_reference_t<decltype(request.daysToReturn)>>(params.daysToReturn.unsignedCharValue);
-            request.modeToReturn = static_cast<std::remove_reference_t<decltype(request.modeToReturn)>>(params.modeToReturn.unsignedCharValue);
+    if (params == nil) {
+        params = [[MTRThermostatClusterGetWeeklyScheduleParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Thermostat::Commands::GetWeeklySchedule::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRThermostatClusterGetWeeklyScheduleResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)clearWeeklyScheduleWithCompletion:(MTRStatusCompletion)completion
 {
     [self clearWeeklyScheduleWithParams:nil completion:completion];
 }
 - (void)clearWeeklyScheduleWithParams:(MTRThermostatClusterClearWeeklyScheduleParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Thermostat::Commands::ClearWeeklySchedule::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRThermostatClusterClearWeeklyScheduleParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Thermostat::Commands::ClearWeeklySchedule::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeLocalTemperatureWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
@@ -66331,44 +64552,27 @@ using chip::System::Clock::Timeout;
 
 - (void)stepWithParams:(MTRFanControlClusterStepParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            FanControl::Commands::Step::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.direction = static_cast<std::remove_reference_t<decltype(request.direction)>>(params.direction.unsignedCharValue);
-            if (params.wrap != nil) {
-                auto & definedValue_0 = request.wrap.Emplace();
-                definedValue_0 = params.wrap.boolValue;
-            }
-            if (params.lowestOff != nil) {
-                auto & definedValue_0 = request.lowestOff.Emplace();
-                definedValue_0 = params.lowestOff.boolValue;
-            }
+    if (params == nil) {
+        params = [[MTRFanControlClusterStepParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = FanControl::Commands::Step::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeFanModeWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
@@ -68715,720 +66919,459 @@ using chip::System::Clock::Timeout;
 
 - (void)moveToHueWithParams:(MTRColorControlClusterMoveToHueParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            ColorControl::Commands::MoveToHue::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.hue = params.hue.unsignedCharValue;
-            request.direction = static_cast<std::remove_reference_t<decltype(request.direction)>>(params.direction.unsignedCharValue);
-            request.transitionTime = params.transitionTime.unsignedShortValue;
-            request.optionsMask = params.optionsMask.unsignedCharValue;
-            request.optionsOverride = params.optionsOverride.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRColorControlClusterMoveToHueParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = ColorControl::Commands::MoveToHue::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)moveHueWithParams:(MTRColorControlClusterMoveHueParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            ColorControl::Commands::MoveHue::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.moveMode = static_cast<std::remove_reference_t<decltype(request.moveMode)>>(params.moveMode.unsignedCharValue);
-            request.rate = params.rate.unsignedCharValue;
-            request.optionsMask = params.optionsMask.unsignedCharValue;
-            request.optionsOverride = params.optionsOverride.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRColorControlClusterMoveHueParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = ColorControl::Commands::MoveHue::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)stepHueWithParams:(MTRColorControlClusterStepHueParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            ColorControl::Commands::StepHue::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.stepMode = static_cast<std::remove_reference_t<decltype(request.stepMode)>>(params.stepMode.unsignedCharValue);
-            request.stepSize = params.stepSize.unsignedCharValue;
-            request.transitionTime = params.transitionTime.unsignedCharValue;
-            request.optionsMask = params.optionsMask.unsignedCharValue;
-            request.optionsOverride = params.optionsOverride.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRColorControlClusterStepHueParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = ColorControl::Commands::StepHue::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)moveToSaturationWithParams:(MTRColorControlClusterMoveToSaturationParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            ColorControl::Commands::MoveToSaturation::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.saturation = params.saturation.unsignedCharValue;
-            request.transitionTime = params.transitionTime.unsignedShortValue;
-            request.optionsMask = params.optionsMask.unsignedCharValue;
-            request.optionsOverride = params.optionsOverride.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRColorControlClusterMoveToSaturationParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = ColorControl::Commands::MoveToSaturation::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)moveSaturationWithParams:(MTRColorControlClusterMoveSaturationParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            ColorControl::Commands::MoveSaturation::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.moveMode = static_cast<std::remove_reference_t<decltype(request.moveMode)>>(params.moveMode.unsignedCharValue);
-            request.rate = params.rate.unsignedCharValue;
-            request.optionsMask = params.optionsMask.unsignedCharValue;
-            request.optionsOverride = params.optionsOverride.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRColorControlClusterMoveSaturationParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = ColorControl::Commands::MoveSaturation::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)stepSaturationWithParams:(MTRColorControlClusterStepSaturationParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            ColorControl::Commands::StepSaturation::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.stepMode = static_cast<std::remove_reference_t<decltype(request.stepMode)>>(params.stepMode.unsignedCharValue);
-            request.stepSize = params.stepSize.unsignedCharValue;
-            request.transitionTime = params.transitionTime.unsignedCharValue;
-            request.optionsMask = params.optionsMask.unsignedCharValue;
-            request.optionsOverride = params.optionsOverride.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRColorControlClusterStepSaturationParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = ColorControl::Commands::StepSaturation::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)moveToHueAndSaturationWithParams:(MTRColorControlClusterMoveToHueAndSaturationParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            ColorControl::Commands::MoveToHueAndSaturation::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.hue = params.hue.unsignedCharValue;
-            request.saturation = params.saturation.unsignedCharValue;
-            request.transitionTime = params.transitionTime.unsignedShortValue;
-            request.optionsMask = params.optionsMask.unsignedCharValue;
-            request.optionsOverride = params.optionsOverride.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRColorControlClusterMoveToHueAndSaturationParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = ColorControl::Commands::MoveToHueAndSaturation::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)moveToColorWithParams:(MTRColorControlClusterMoveToColorParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            ColorControl::Commands::MoveToColor::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.colorX = params.colorX.unsignedShortValue;
-            request.colorY = params.colorY.unsignedShortValue;
-            request.transitionTime = params.transitionTime.unsignedShortValue;
-            request.optionsMask = params.optionsMask.unsignedCharValue;
-            request.optionsOverride = params.optionsOverride.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRColorControlClusterMoveToColorParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = ColorControl::Commands::MoveToColor::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)moveColorWithParams:(MTRColorControlClusterMoveColorParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            ColorControl::Commands::MoveColor::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.rateX = params.rateX.shortValue;
-            request.rateY = params.rateY.shortValue;
-            request.optionsMask = params.optionsMask.unsignedCharValue;
-            request.optionsOverride = params.optionsOverride.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRColorControlClusterMoveColorParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = ColorControl::Commands::MoveColor::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)stepColorWithParams:(MTRColorControlClusterStepColorParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            ColorControl::Commands::StepColor::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.stepX = params.stepX.shortValue;
-            request.stepY = params.stepY.shortValue;
-            request.transitionTime = params.transitionTime.unsignedShortValue;
-            request.optionsMask = params.optionsMask.unsignedCharValue;
-            request.optionsOverride = params.optionsOverride.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRColorControlClusterStepColorParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = ColorControl::Commands::StepColor::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)moveToColorTemperatureWithParams:(MTRColorControlClusterMoveToColorTemperatureParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            ColorControl::Commands::MoveToColorTemperature::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.colorTemperatureMireds = params.colorTemperatureMireds.unsignedShortValue;
-            request.transitionTime = params.transitionTime.unsignedShortValue;
-            request.optionsMask = params.optionsMask.unsignedCharValue;
-            request.optionsOverride = params.optionsOverride.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRColorControlClusterMoveToColorTemperatureParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = ColorControl::Commands::MoveToColorTemperature::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)enhancedMoveToHueWithParams:(MTRColorControlClusterEnhancedMoveToHueParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            ColorControl::Commands::EnhancedMoveToHue::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.enhancedHue = params.enhancedHue.unsignedShortValue;
-            request.direction = static_cast<std::remove_reference_t<decltype(request.direction)>>(params.direction.unsignedCharValue);
-            request.transitionTime = params.transitionTime.unsignedShortValue;
-            request.optionsMask = params.optionsMask.unsignedCharValue;
-            request.optionsOverride = params.optionsOverride.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRColorControlClusterEnhancedMoveToHueParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = ColorControl::Commands::EnhancedMoveToHue::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)enhancedMoveHueWithParams:(MTRColorControlClusterEnhancedMoveHueParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            ColorControl::Commands::EnhancedMoveHue::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.moveMode = static_cast<std::remove_reference_t<decltype(request.moveMode)>>(params.moveMode.unsignedCharValue);
-            request.rate = params.rate.unsignedShortValue;
-            request.optionsMask = params.optionsMask.unsignedCharValue;
-            request.optionsOverride = params.optionsOverride.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRColorControlClusterEnhancedMoveHueParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = ColorControl::Commands::EnhancedMoveHue::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)enhancedStepHueWithParams:(MTRColorControlClusterEnhancedStepHueParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            ColorControl::Commands::EnhancedStepHue::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.stepMode = static_cast<std::remove_reference_t<decltype(request.stepMode)>>(params.stepMode.unsignedCharValue);
-            request.stepSize = params.stepSize.unsignedShortValue;
-            request.transitionTime = params.transitionTime.unsignedShortValue;
-            request.optionsMask = params.optionsMask.unsignedCharValue;
-            request.optionsOverride = params.optionsOverride.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRColorControlClusterEnhancedStepHueParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = ColorControl::Commands::EnhancedStepHue::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)enhancedMoveToHueAndSaturationWithParams:(MTRColorControlClusterEnhancedMoveToHueAndSaturationParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            ColorControl::Commands::EnhancedMoveToHueAndSaturation::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.enhancedHue = params.enhancedHue.unsignedShortValue;
-            request.saturation = params.saturation.unsignedCharValue;
-            request.transitionTime = params.transitionTime.unsignedShortValue;
-            request.optionsMask = params.optionsMask.unsignedCharValue;
-            request.optionsOverride = params.optionsOverride.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRColorControlClusterEnhancedMoveToHueAndSaturationParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = ColorControl::Commands::EnhancedMoveToHueAndSaturation::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)colorLoopSetWithParams:(MTRColorControlClusterColorLoopSetParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            ColorControl::Commands::ColorLoopSet::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.updateFlags = static_cast<std::remove_reference_t<decltype(request.updateFlags)>>(params.updateFlags.unsignedCharValue);
-            request.action = static_cast<std::remove_reference_t<decltype(request.action)>>(params.action.unsignedCharValue);
-            request.direction = static_cast<std::remove_reference_t<decltype(request.direction)>>(params.direction.unsignedCharValue);
-            request.time = params.time.unsignedShortValue;
-            request.startHue = params.startHue.unsignedShortValue;
-            request.optionsMask = params.optionsMask.unsignedCharValue;
-            request.optionsOverride = params.optionsOverride.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRColorControlClusterColorLoopSetParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = ColorControl::Commands::ColorLoopSet::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)stopMoveStepWithParams:(MTRColorControlClusterStopMoveStepParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            ColorControl::Commands::StopMoveStep::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.optionsMask = params.optionsMask.unsignedCharValue;
-            request.optionsOverride = params.optionsOverride.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRColorControlClusterStopMoveStepParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = ColorControl::Commands::StopMoveStep::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)moveColorTemperatureWithParams:(MTRColorControlClusterMoveColorTemperatureParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            ColorControl::Commands::MoveColorTemperature::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.moveMode = static_cast<std::remove_reference_t<decltype(request.moveMode)>>(params.moveMode.unsignedCharValue);
-            request.rate = params.rate.unsignedShortValue;
-            request.colorTemperatureMinimumMireds = params.colorTemperatureMinimumMireds.unsignedShortValue;
-            request.colorTemperatureMaximumMireds = params.colorTemperatureMaximumMireds.unsignedShortValue;
-            request.optionsMask = params.optionsMask.unsignedCharValue;
-            request.optionsOverride = params.optionsOverride.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRColorControlClusterMoveColorTemperatureParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = ColorControl::Commands::MoveColorTemperature::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)stepColorTemperatureWithParams:(MTRColorControlClusterStepColorTemperatureParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            ColorControl::Commands::StepColorTemperature::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.stepMode = static_cast<std::remove_reference_t<decltype(request.stepMode)>>(params.stepMode.unsignedCharValue);
-            request.stepSize = params.stepSize.unsignedShortValue;
-            request.transitionTime = params.transitionTime.unsignedShortValue;
-            request.colorTemperatureMinimumMireds = params.colorTemperatureMinimumMireds.unsignedShortValue;
-            request.colorTemperatureMaximumMireds = params.colorTemperatureMaximumMireds.unsignedShortValue;
-            request.optionsMask = params.optionsMask.unsignedCharValue;
-            request.optionsOverride = params.optionsOverride.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRColorControlClusterStepColorTemperatureParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = ColorControl::Commands::StepColorTemperature::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeCurrentHueWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
@@ -89076,102 +87019,75 @@ using chip::System::Clock::Timeout;
 
 - (void)changeChannelWithParams:(MTRChannelClusterChangeChannelParams *)params completion:(void (^)(MTRChannelClusterChangeChannelResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRChannelClusterChangeChannelResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, ChannelClusterChangeChannelResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRChannelClusterChangeChannelResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Channel::Commands::ChangeChannel::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.match = AsCharSpan(params.match);
+    if (params == nil) {
+        params = [[MTRChannelClusterChangeChannelParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Channel::Commands::ChangeChannel::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRChannelClusterChangeChannelResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)changeChannelByNumberWithParams:(MTRChannelClusterChangeChannelByNumberParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Channel::Commands::ChangeChannelByNumber::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.majorNumber = params.majorNumber.unsignedShortValue;
-            request.minorNumber = params.minorNumber.unsignedShortValue;
+    if (params == nil) {
+        params = [[MTRChannelClusterChangeChannelByNumberParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Channel::Commands::ChangeChannelByNumber::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)skipChannelWithParams:(MTRChannelClusterSkipChannelParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            Channel::Commands::SkipChannel::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.count = params.count.shortValue;
+    if (params == nil) {
+        params = [[MTRChannelClusterSkipChannelParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = Channel::Commands::SkipChannel::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeChannelListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
@@ -89844,37 +87760,27 @@ using chip::System::Clock::Timeout;
 
 - (void)navigateTargetWithParams:(MTRTargetNavigatorClusterNavigateTargetParams *)params completion:(void (^)(MTRTargetNavigatorClusterNavigateTargetResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRTargetNavigatorClusterNavigateTargetResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, TargetNavigatorClusterNavigateTargetResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRTargetNavigatorClusterNavigateTargetResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            TargetNavigator::Commands::NavigateTarget::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.target = params.target.unsignedCharValue;
-            if (params.data != nil) {
-                auto & definedValue_0 = request.data.Emplace();
-                definedValue_0 = AsCharSpan(params.data);
-            }
+    if (params == nil) {
+        params = [[MTRTargetNavigatorClusterNavigateTargetParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = TargetNavigator::Commands::NavigateTarget::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRTargetNavigatorClusterNavigateTargetResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeTargetListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
@@ -90468,363 +88374,295 @@ using chip::System::Clock::Timeout;
 }
 - (void)playWithParams:(MTRMediaPlaybackClusterPlayParams * _Nullable)params completion:(void (^)(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRMediaPlaybackClusterPlaybackResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, MediaPlaybackClusterPlaybackResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRMediaPlaybackClusterPlaybackResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            MediaPlayback::Commands::Play::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRMediaPlaybackClusterPlayParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = MediaPlayback::Commands::Play::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRMediaPlaybackClusterPlaybackResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)pauseWithCompletion:(void (^)(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
     [self pauseWithParams:nil completion:completion];
 }
 - (void)pauseWithParams:(MTRMediaPlaybackClusterPauseParams * _Nullable)params completion:(void (^)(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRMediaPlaybackClusterPlaybackResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, MediaPlaybackClusterPlaybackResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRMediaPlaybackClusterPlaybackResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            MediaPlayback::Commands::Pause::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRMediaPlaybackClusterPauseParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = MediaPlayback::Commands::Pause::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRMediaPlaybackClusterPlaybackResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)stopWithCompletion:(void (^)(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
     [self stopWithParams:nil completion:completion];
 }
 - (void)stopWithParams:(MTRMediaPlaybackClusterStopParams * _Nullable)params completion:(void (^)(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRMediaPlaybackClusterPlaybackResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, MediaPlaybackClusterPlaybackResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRMediaPlaybackClusterPlaybackResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            MediaPlayback::Commands::Stop::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRMediaPlaybackClusterStopParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = MediaPlayback::Commands::Stop::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRMediaPlaybackClusterPlaybackResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)startOverWithCompletion:(void (^)(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
     [self startOverWithParams:nil completion:completion];
 }
 - (void)startOverWithParams:(MTRMediaPlaybackClusterStartOverParams * _Nullable)params completion:(void (^)(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRMediaPlaybackClusterPlaybackResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, MediaPlaybackClusterPlaybackResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRMediaPlaybackClusterPlaybackResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            MediaPlayback::Commands::StartOver::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRMediaPlaybackClusterStartOverParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = MediaPlayback::Commands::StartOver::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRMediaPlaybackClusterPlaybackResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)previousWithCompletion:(void (^)(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
     [self previousWithParams:nil completion:completion];
 }
 - (void)previousWithParams:(MTRMediaPlaybackClusterPreviousParams * _Nullable)params completion:(void (^)(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRMediaPlaybackClusterPlaybackResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, MediaPlaybackClusterPlaybackResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRMediaPlaybackClusterPlaybackResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            MediaPlayback::Commands::Previous::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRMediaPlaybackClusterPreviousParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = MediaPlayback::Commands::Previous::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRMediaPlaybackClusterPlaybackResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)nextWithCompletion:(void (^)(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
     [self nextWithParams:nil completion:completion];
 }
 - (void)nextWithParams:(MTRMediaPlaybackClusterNextParams * _Nullable)params completion:(void (^)(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRMediaPlaybackClusterPlaybackResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, MediaPlaybackClusterPlaybackResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRMediaPlaybackClusterPlaybackResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            MediaPlayback::Commands::Next::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRMediaPlaybackClusterNextParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = MediaPlayback::Commands::Next::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRMediaPlaybackClusterPlaybackResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)rewindWithCompletion:(void (^)(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
     [self rewindWithParams:nil completion:completion];
 }
 - (void)rewindWithParams:(MTRMediaPlaybackClusterRewindParams * _Nullable)params completion:(void (^)(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRMediaPlaybackClusterPlaybackResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, MediaPlaybackClusterPlaybackResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRMediaPlaybackClusterPlaybackResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            MediaPlayback::Commands::Rewind::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRMediaPlaybackClusterRewindParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = MediaPlayback::Commands::Rewind::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRMediaPlaybackClusterPlaybackResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)fastForwardWithCompletion:(void (^)(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
     [self fastForwardWithParams:nil completion:completion];
 }
 - (void)fastForwardWithParams:(MTRMediaPlaybackClusterFastForwardParams * _Nullable)params completion:(void (^)(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRMediaPlaybackClusterPlaybackResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, MediaPlaybackClusterPlaybackResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRMediaPlaybackClusterPlaybackResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            MediaPlayback::Commands::FastForward::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRMediaPlaybackClusterFastForwardParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = MediaPlayback::Commands::FastForward::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRMediaPlaybackClusterPlaybackResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)skipForwardWithParams:(MTRMediaPlaybackClusterSkipForwardParams *)params completion:(void (^)(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRMediaPlaybackClusterPlaybackResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, MediaPlaybackClusterPlaybackResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRMediaPlaybackClusterPlaybackResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            MediaPlayback::Commands::SkipForward::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.deltaPositionMilliseconds = params.deltaPositionMilliseconds.unsignedLongLongValue;
+    if (params == nil) {
+        params = [[MTRMediaPlaybackClusterSkipForwardParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = MediaPlayback::Commands::SkipForward::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRMediaPlaybackClusterPlaybackResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)skipBackwardWithParams:(MTRMediaPlaybackClusterSkipBackwardParams *)params completion:(void (^)(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRMediaPlaybackClusterPlaybackResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, MediaPlaybackClusterPlaybackResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRMediaPlaybackClusterPlaybackResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            MediaPlayback::Commands::SkipBackward::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.deltaPositionMilliseconds = params.deltaPositionMilliseconds.unsignedLongLongValue;
+    if (params == nil) {
+        params = [[MTRMediaPlaybackClusterSkipBackwardParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = MediaPlayback::Commands::SkipBackward::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRMediaPlaybackClusterPlaybackResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)seekWithParams:(MTRMediaPlaybackClusterSeekParams *)params completion:(void (^)(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRMediaPlaybackClusterPlaybackResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, MediaPlaybackClusterPlaybackResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRMediaPlaybackClusterPlaybackResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            MediaPlayback::Commands::Seek::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.position = params.position.unsignedLongLongValue;
+    if (params == nil) {
+        params = [[MTRMediaPlaybackClusterSeekParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = MediaPlayback::Commands::Seek::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRMediaPlaybackClusterPlaybackResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeCurrentStateWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
@@ -91891,145 +89729,107 @@ using chip::System::Clock::Timeout;
 
 - (void)selectInputWithParams:(MTRMediaInputClusterSelectInputParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            MediaInput::Commands::SelectInput::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.index = params.index.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRMediaInputClusterSelectInputParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = MediaInput::Commands::SelectInput::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)showInputStatusWithCompletion:(MTRStatusCompletion)completion
 {
     [self showInputStatusWithParams:nil completion:completion];
 }
 - (void)showInputStatusWithParams:(MTRMediaInputClusterShowInputStatusParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            MediaInput::Commands::ShowInputStatus::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRMediaInputClusterShowInputStatusParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = MediaInput::Commands::ShowInputStatus::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)hideInputStatusWithCompletion:(MTRStatusCompletion)completion
 {
     [self hideInputStatusWithParams:nil completion:completion];
 }
 - (void)hideInputStatusWithParams:(MTRMediaInputClusterHideInputStatusParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            MediaInput::Commands::HideInputStatus::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRMediaInputClusterHideInputStatusParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = MediaInput::Commands::HideInputStatus::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)renameInputWithParams:(MTRMediaInputClusterRenameInputParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            MediaInput::Commands::RenameInput::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.index = params.index.unsignedCharValue;
-            request.name = AsCharSpan(params.name);
+    if (params == nil) {
+        params = [[MTRMediaInputClusterRenameInputParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = MediaInput::Commands::RenameInput::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeInputListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
@@ -92643,35 +90443,27 @@ using chip::System::Clock::Timeout;
 }
 - (void)sleepWithParams:(MTRLowPowerClusterSleepParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            LowPower::Commands::Sleep::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRLowPowerClusterSleepParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = LowPower::Commands::Sleep::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeGeneratedCommandListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
@@ -93116,33 +90908,27 @@ using chip::System::Clock::Timeout;
 
 - (void)sendKeyWithParams:(MTRKeypadInputClusterSendKeyParams *)params completion:(void (^)(MTRKeypadInputClusterSendKeyResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRKeypadInputClusterSendKeyResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, KeypadInputClusterSendKeyResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRKeypadInputClusterSendKeyResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            KeypadInput::Commands::SendKey::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.keyCode = static_cast<std::remove_reference_t<decltype(request.keyCode)>>(params.keyCode.unsignedCharValue);
+    if (params == nil) {
+        params = [[MTRKeypadInputClusterSendKeyParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = KeypadInput::Commands::SendKey::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRKeypadInputClusterSendKeyResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeGeneratedCommandListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
@@ -93586,210 +91372,51 @@ using chip::System::Clock::Timeout;
 
 - (void)launchContentWithParams:(MTRContentLauncherClusterLaunchContentParams *)params completion:(void (^)(MTRContentLauncherClusterLauncherResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRContentLauncherClusterLauncherResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, ContentLauncherClusterLauncherResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRContentLauncherClusterLauncherResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            ContentLauncher::Commands::LaunchContent::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            {
-                using ListType_1 = std::remove_reference_t<decltype(request.search.parameterList)>;
-                using ListMemberType_1 = ListMemberTypeGetter<ListType_1>::Type;
-                if (params.search.parameterList.count != 0) {
-                    auto * listHolder_1 = new ListHolder<ListMemberType_1>(params.search.parameterList.count);
-                    if (listHolder_1 == nullptr || listHolder_1->mList == nullptr) {
-                        return CHIP_ERROR_INVALID_ARGUMENT;
-                    }
-                    listFreer.add(listHolder_1);
-                    for (size_t i_1 = 0; i_1 < params.search.parameterList.count; ++i_1) {
-                        if (![params.search.parameterList[i_1] isKindOfClass:[MTRContentLauncherClusterParameterStruct class]]) {
-                            // Wrong kind of value.
-                            return CHIP_ERROR_INVALID_ARGUMENT;
-                        }
-                        auto element_1 = (MTRContentLauncherClusterParameterStruct *) params.search.parameterList[i_1];
-                        listHolder_1->mList[i_1].type = static_cast<std::remove_reference_t<decltype(listHolder_1->mList[i_1].type)>>(element_1.type.unsignedCharValue);
-                        listHolder_1->mList[i_1].value = AsCharSpan(element_1.value);
-                        if (element_1.externalIDList != nil) {
-                            auto & definedValue_3 = listHolder_1->mList[i_1].externalIDList.Emplace();
-                            {
-                                using ListType_4 = std::remove_reference_t<decltype(definedValue_3)>;
-                                using ListMemberType_4 = ListMemberTypeGetter<ListType_4>::Type;
-                                if (element_1.externalIDList.count != 0) {
-                                    auto * listHolder_4 = new ListHolder<ListMemberType_4>(element_1.externalIDList.count);
-                                    if (listHolder_4 == nullptr || listHolder_4->mList == nullptr) {
-                                        return CHIP_ERROR_INVALID_ARGUMENT;
-                                    }
-                                    listFreer.add(listHolder_4);
-                                    for (size_t i_4 = 0; i_4 < element_1.externalIDList.count; ++i_4) {
-                                        if (![element_1.externalIDList[i_4] isKindOfClass:[MTRContentLauncherClusterAdditionalInfoStruct class]]) {
-                                            // Wrong kind of value.
-                                            return CHIP_ERROR_INVALID_ARGUMENT;
-                                        }
-                                        auto element_4 = (MTRContentLauncherClusterAdditionalInfoStruct *) element_1.externalIDList[i_4];
-                                        listHolder_4->mList[i_4].name = AsCharSpan(element_4.name);
-                                        listHolder_4->mList[i_4].value = AsCharSpan(element_4.value);
-                                    }
-                                    definedValue_3 = ListType_4(listHolder_4->mList, element_1.externalIDList.count);
-                                } else {
-                                    definedValue_3 = ListType_4();
-                                }
-                            }
-                        }
-                    }
-                    request.search.parameterList = ListType_1(listHolder_1->mList, params.search.parameterList.count);
-                } else {
-                    request.search.parameterList = ListType_1();
-                }
-            }
-            request.autoPlay = params.autoPlay.boolValue;
-            if (params.data != nil) {
-                auto & definedValue_0 = request.data.Emplace();
-                definedValue_0 = AsCharSpan(params.data);
-            }
+    if (params == nil) {
+        params = [[MTRContentLauncherClusterLaunchContentParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = ContentLauncher::Commands::LaunchContent::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRContentLauncherClusterLauncherResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)launchURLWithParams:(MTRContentLauncherClusterLaunchURLParams *)params completion:(void (^)(MTRContentLauncherClusterLauncherResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRContentLauncherClusterLauncherResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, ContentLauncherClusterLauncherResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRContentLauncherClusterLauncherResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            ContentLauncher::Commands::LaunchURL::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.contentURL = AsCharSpan(params.contentURL);
-            if (params.displayString != nil) {
-                auto & definedValue_0 = request.displayString.Emplace();
-                definedValue_0 = AsCharSpan(params.displayString);
-            }
-            if (params.brandingInformation != nil) {
-                auto & definedValue_0 = request.brandingInformation.Emplace();
-                definedValue_0.providerName = AsCharSpan(params.brandingInformation.providerName);
-                if (params.brandingInformation.background != nil) {
-                    auto & definedValue_2 = definedValue_0.background.Emplace();
-                    if (params.brandingInformation.background.imageURL != nil) {
-                        auto & definedValue_4 = definedValue_2.imageURL.Emplace();
-                        definedValue_4 = AsCharSpan(params.brandingInformation.background.imageURL);
-                    }
-                    if (params.brandingInformation.background.color != nil) {
-                        auto & definedValue_4 = definedValue_2.color.Emplace();
-                        definedValue_4 = AsCharSpan(params.brandingInformation.background.color);
-                    }
-                    if (params.brandingInformation.background.size != nil) {
-                        auto & definedValue_4 = definedValue_2.size.Emplace();
-                        definedValue_4.width = params.brandingInformation.background.size.width.doubleValue;
-                        definedValue_4.height = params.brandingInformation.background.size.height.doubleValue;
-                        definedValue_4.metric = static_cast<std::remove_reference_t<decltype(definedValue_4.metric)>>(params.brandingInformation.background.size.metric.unsignedCharValue);
-                    }
-                }
-                if (params.brandingInformation.logo != nil) {
-                    auto & definedValue_2 = definedValue_0.logo.Emplace();
-                    if (params.brandingInformation.logo.imageURL != nil) {
-                        auto & definedValue_4 = definedValue_2.imageURL.Emplace();
-                        definedValue_4 = AsCharSpan(params.brandingInformation.logo.imageURL);
-                    }
-                    if (params.brandingInformation.logo.color != nil) {
-                        auto & definedValue_4 = definedValue_2.color.Emplace();
-                        definedValue_4 = AsCharSpan(params.brandingInformation.logo.color);
-                    }
-                    if (params.brandingInformation.logo.size != nil) {
-                        auto & definedValue_4 = definedValue_2.size.Emplace();
-                        definedValue_4.width = params.brandingInformation.logo.size.width.doubleValue;
-                        definedValue_4.height = params.brandingInformation.logo.size.height.doubleValue;
-                        definedValue_4.metric = static_cast<std::remove_reference_t<decltype(definedValue_4.metric)>>(params.brandingInformation.logo.size.metric.unsignedCharValue);
-                    }
-                }
-                if (params.brandingInformation.progressBar != nil) {
-                    auto & definedValue_2 = definedValue_0.progressBar.Emplace();
-                    if (params.brandingInformation.progressBar.imageURL != nil) {
-                        auto & definedValue_4 = definedValue_2.imageURL.Emplace();
-                        definedValue_4 = AsCharSpan(params.brandingInformation.progressBar.imageURL);
-                    }
-                    if (params.brandingInformation.progressBar.color != nil) {
-                        auto & definedValue_4 = definedValue_2.color.Emplace();
-                        definedValue_4 = AsCharSpan(params.brandingInformation.progressBar.color);
-                    }
-                    if (params.brandingInformation.progressBar.size != nil) {
-                        auto & definedValue_4 = definedValue_2.size.Emplace();
-                        definedValue_4.width = params.brandingInformation.progressBar.size.width.doubleValue;
-                        definedValue_4.height = params.brandingInformation.progressBar.size.height.doubleValue;
-                        definedValue_4.metric = static_cast<std::remove_reference_t<decltype(definedValue_4.metric)>>(params.brandingInformation.progressBar.size.metric.unsignedCharValue);
-                    }
-                }
-                if (params.brandingInformation.splash != nil) {
-                    auto & definedValue_2 = definedValue_0.splash.Emplace();
-                    if (params.brandingInformation.splash.imageURL != nil) {
-                        auto & definedValue_4 = definedValue_2.imageURL.Emplace();
-                        definedValue_4 = AsCharSpan(params.brandingInformation.splash.imageURL);
-                    }
-                    if (params.brandingInformation.splash.color != nil) {
-                        auto & definedValue_4 = definedValue_2.color.Emplace();
-                        definedValue_4 = AsCharSpan(params.brandingInformation.splash.color);
-                    }
-                    if (params.brandingInformation.splash.size != nil) {
-                        auto & definedValue_4 = definedValue_2.size.Emplace();
-                        definedValue_4.width = params.brandingInformation.splash.size.width.doubleValue;
-                        definedValue_4.height = params.brandingInformation.splash.size.height.doubleValue;
-                        definedValue_4.metric = static_cast<std::remove_reference_t<decltype(definedValue_4.metric)>>(params.brandingInformation.splash.size.metric.unsignedCharValue);
-                    }
-                }
-                if (params.brandingInformation.waterMark != nil) {
-                    auto & definedValue_2 = definedValue_0.waterMark.Emplace();
-                    if (params.brandingInformation.waterMark.imageURL != nil) {
-                        auto & definedValue_4 = definedValue_2.imageURL.Emplace();
-                        definedValue_4 = AsCharSpan(params.brandingInformation.waterMark.imageURL);
-                    }
-                    if (params.brandingInformation.waterMark.color != nil) {
-                        auto & definedValue_4 = definedValue_2.color.Emplace();
-                        definedValue_4 = AsCharSpan(params.brandingInformation.waterMark.color);
-                    }
-                    if (params.brandingInformation.waterMark.size != nil) {
-                        auto & definedValue_4 = definedValue_2.size.Emplace();
-                        definedValue_4.width = params.brandingInformation.waterMark.size.width.doubleValue;
-                        definedValue_4.height = params.brandingInformation.waterMark.size.height.doubleValue;
-                        definedValue_4.metric = static_cast<std::remove_reference_t<decltype(definedValue_4.metric)>>(params.brandingInformation.waterMark.size.metric.unsignedCharValue);
-                    }
-                }
-            }
+    if (params == nil) {
+        params = [[MTRContentLauncherClusterLaunchURLParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = ContentLauncher::Commands::LaunchURL::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRContentLauncherClusterLauncherResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeAcceptHeaderWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
@@ -94429,71 +92056,51 @@ using chip::System::Clock::Timeout;
 
 - (void)selectOutputWithParams:(MTRAudioOutputClusterSelectOutputParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            AudioOutput::Commands::SelectOutput::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.index = params.index.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRAudioOutputClusterSelectOutputParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = AudioOutput::Commands::SelectOutput::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)renameOutputWithParams:(MTRAudioOutputClusterRenameOutputParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            AudioOutput::Commands::RenameOutput::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.index = params.index.unsignedCharValue;
-            request.name = AsCharSpan(params.name);
+    if (params == nil) {
+        params = [[MTRAudioOutputClusterRenameOutputParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = AudioOutput::Commands::RenameOutput::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeOutputListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
@@ -95085,117 +92692,75 @@ using chip::System::Clock::Timeout;
 
 - (void)launchAppWithParams:(MTRApplicationLauncherClusterLaunchAppParams * _Nullable)params completion:(void (^)(MTRApplicationLauncherClusterLauncherResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRApplicationLauncherClusterLauncherResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, ApplicationLauncherClusterLauncherResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRApplicationLauncherClusterLauncherResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            ApplicationLauncher::Commands::LaunchApp::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            if (params != nil) {
-                if (params.application != nil) {
-                    auto & definedValue_0 = request.application.Emplace();
-                    definedValue_0.catalogVendorID = params.application.catalogVendorID.unsignedShortValue;
-                    definedValue_0.applicationID = AsCharSpan(params.application.applicationID);
-                }
-                if (params.data != nil) {
-                    auto & definedValue_0 = request.data.Emplace();
-                    definedValue_0 = AsByteSpan(params.data);
-                }
-            }
+    if (params == nil) {
+        params = [[MTRApplicationLauncherClusterLaunchAppParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = ApplicationLauncher::Commands::LaunchApp::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRApplicationLauncherClusterLauncherResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)stopAppWithParams:(MTRApplicationLauncherClusterStopAppParams * _Nullable)params completion:(void (^)(MTRApplicationLauncherClusterLauncherResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRApplicationLauncherClusterLauncherResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, ApplicationLauncherClusterLauncherResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRApplicationLauncherClusterLauncherResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            ApplicationLauncher::Commands::StopApp::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            if (params != nil) {
-                if (params.application != nil) {
-                    auto & definedValue_0 = request.application.Emplace();
-                    definedValue_0.catalogVendorID = params.application.catalogVendorID.unsignedShortValue;
-                    definedValue_0.applicationID = AsCharSpan(params.application.applicationID);
-                }
-            }
+    if (params == nil) {
+        params = [[MTRApplicationLauncherClusterStopAppParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = ApplicationLauncher::Commands::StopApp::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRApplicationLauncherClusterLauncherResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)hideAppWithParams:(MTRApplicationLauncherClusterHideAppParams * _Nullable)params completion:(void (^)(MTRApplicationLauncherClusterLauncherResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRApplicationLauncherClusterLauncherResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, ApplicationLauncherClusterLauncherResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRApplicationLauncherClusterLauncherResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            ApplicationLauncher::Commands::HideApp::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            if (params != nil) {
-                if (params.application != nil) {
-                    auto & definedValue_0 = request.application.Emplace();
-                    definedValue_0.catalogVendorID = params.application.catalogVendorID.unsignedShortValue;
-                    definedValue_0.applicationID = AsCharSpan(params.application.applicationID);
-                }
-            }
+    if (params == nil) {
+        params = [[MTRApplicationLauncherClusterHideAppParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = ApplicationLauncher::Commands::HideApp::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRApplicationLauncherClusterLauncherResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeCatalogListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
@@ -96867,114 +94432,88 @@ using chip::System::Clock::Timeout;
 
 - (void)getSetupPINWithParams:(MTRAccountLoginClusterGetSetupPINParams *)params completion:(void (^)(MTRAccountLoginClusterGetSetupPINResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRAccountLoginClusterGetSetupPINResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, AccountLoginClusterGetSetupPINResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRAccountLoginClusterGetSetupPINResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            AccountLogin::Commands::GetSetupPIN::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            if (!timedInvokeTimeoutMs.HasValue()) {
-                timedInvokeTimeoutMs.SetValue(10000);
-            }
-            request.tempAccountIdentifier = AsCharSpan(params.tempAccountIdentifier);
+    if (params == nil) {
+        params = [[MTRAccountLoginClusterGetSetupPINParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+    if (timedInvokeTimeoutMs == nil) {
+        timedInvokeTimeoutMs = @(10000);
+    }
+
+    using RequestType = AccountLogin::Commands::GetSetupPIN::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRAccountLoginClusterGetSetupPINResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)loginWithParams:(MTRAccountLoginClusterLoginParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            AccountLogin::Commands::Login::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            if (!timedInvokeTimeoutMs.HasValue()) {
-                timedInvokeTimeoutMs.SetValue(10000);
-            }
-            request.tempAccountIdentifier = AsCharSpan(params.tempAccountIdentifier);
-            request.setupPIN = AsCharSpan(params.setupPIN);
+    if (params == nil) {
+        params = [[MTRAccountLoginClusterLoginParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+    if (timedInvokeTimeoutMs == nil) {
+        timedInvokeTimeoutMs = @(10000);
+    }
+
+    using RequestType = AccountLogin::Commands::Login::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)logoutWithCompletion:(MTRStatusCompletion)completion
 {
     [self logoutWithParams:nil completion:completion];
 }
 - (void)logoutWithParams:(MTRAccountLoginClusterLogoutParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            AccountLogin::Commands::Logout::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            if (!timedInvokeTimeoutMs.HasValue()) {
-                timedInvokeTimeoutMs.SetValue(10000);
-            }
+    if (params == nil) {
+        params = [[MTRAccountLoginClusterLogoutParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+    if (timedInvokeTimeoutMs == nil) {
+        timedInvokeTimeoutMs = @(10000);
+    }
+
+    using RequestType = AccountLogin::Commands::Logout::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeGeneratedCommandListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
@@ -97436,71 +94975,51 @@ using chip::System::Clock::Timeout;
 }
 - (void)getProfileInfoCommandWithParams:(MTRElectricalMeasurementClusterGetProfileInfoCommandParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            ElectricalMeasurement::Commands::GetProfileInfoCommand::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRElectricalMeasurementClusterGetProfileInfoCommandParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = ElectricalMeasurement::Commands::GetProfileInfoCommand::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)getMeasurementProfileCommandWithParams:(MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams *)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            ElectricalMeasurement::Commands::GetMeasurementProfileCommand::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.attributeId = params.attributeId.unsignedShortValue;
-            request.startTime = params.startTime.unsignedIntValue;
-            request.numberOfIntervals = params.numberOfIntervals.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = ElectricalMeasurement::Commands::GetMeasurementProfileCommand::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeMeasurementTypeWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
@@ -107634,1413 +105153,550 @@ using chip::System::Clock::Timeout;
 }
 - (void)testWithParams:(MTRUnitTestingClusterTestParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            UnitTesting::Commands::Test::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRUnitTestingClusterTestParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = UnitTesting::Commands::Test::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)testNotHandledWithCompletion:(MTRStatusCompletion)completion
 {
     [self testNotHandledWithParams:nil completion:completion];
 }
 - (void)testNotHandledWithParams:(MTRUnitTestingClusterTestNotHandledParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            UnitTesting::Commands::TestNotHandled::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRUnitTestingClusterTestNotHandledParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = UnitTesting::Commands::TestNotHandled::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)testSpecificWithCompletion:(void (^)(MTRUnitTestingClusterTestSpecificResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
     [self testSpecificWithParams:nil completion:completion];
 }
 - (void)testSpecificWithParams:(MTRUnitTestingClusterTestSpecificParams * _Nullable)params completion:(void (^)(MTRUnitTestingClusterTestSpecificResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRUnitTestingClusterTestSpecificResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterTestSpecificResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRUnitTestingClusterTestSpecificResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            UnitTesting::Commands::TestSpecific::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRUnitTestingClusterTestSpecificParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = UnitTesting::Commands::TestSpecific::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRUnitTestingClusterTestSpecificResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)testUnknownCommandWithCompletion:(MTRStatusCompletion)completion
 {
     [self testUnknownCommandWithParams:nil completion:completion];
 }
 - (void)testUnknownCommandWithParams:(MTRUnitTestingClusterTestUnknownCommandParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            UnitTesting::Commands::TestUnknownCommand::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRUnitTestingClusterTestUnknownCommandParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = UnitTesting::Commands::TestUnknownCommand::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)testAddArgumentsWithParams:(MTRUnitTestingClusterTestAddArgumentsParams *)params completion:(void (^)(MTRUnitTestingClusterTestAddArgumentsResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRUnitTestingClusterTestAddArgumentsResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterTestAddArgumentsResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRUnitTestingClusterTestAddArgumentsResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            UnitTesting::Commands::TestAddArguments::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.arg1 = params.arg1.unsignedCharValue;
-            request.arg2 = params.arg2.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRUnitTestingClusterTestAddArgumentsParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = UnitTesting::Commands::TestAddArguments::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRUnitTestingClusterTestAddArgumentsResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)testSimpleArgumentRequestWithParams:(MTRUnitTestingClusterTestSimpleArgumentRequestParams *)params completion:(void (^)(MTRUnitTestingClusterTestSimpleArgumentResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRUnitTestingClusterTestSimpleArgumentResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterTestSimpleArgumentResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRUnitTestingClusterTestSimpleArgumentResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            UnitTesting::Commands::TestSimpleArgumentRequest::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.arg1 = params.arg1.boolValue;
+    if (params == nil) {
+        params = [[MTRUnitTestingClusterTestSimpleArgumentRequestParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = UnitTesting::Commands::TestSimpleArgumentRequest::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRUnitTestingClusterTestSimpleArgumentResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)testStructArrayArgumentRequestWithParams:(MTRUnitTestingClusterTestStructArrayArgumentRequestParams *)params completion:(void (^)(MTRUnitTestingClusterTestStructArrayArgumentResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRUnitTestingClusterTestStructArrayArgumentResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterTestStructArrayArgumentResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRUnitTestingClusterTestStructArrayArgumentResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            UnitTesting::Commands::TestStructArrayArgumentRequest::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            {
-                using ListType_0 = std::remove_reference_t<decltype(request.arg1)>;
-                using ListMemberType_0 = ListMemberTypeGetter<ListType_0>::Type;
-                if (params.arg1.count != 0) {
-                    auto * listHolder_0 = new ListHolder<ListMemberType_0>(params.arg1.count);
-                    if (listHolder_0 == nullptr || listHolder_0->mList == nullptr) {
-                        return CHIP_ERROR_INVALID_ARGUMENT;
-                    }
-                    listFreer.add(listHolder_0);
-                    for (size_t i_0 = 0; i_0 < params.arg1.count; ++i_0) {
-                        if (![params.arg1[i_0] isKindOfClass:[MTRUnitTestingClusterNestedStructList class]]) {
-                            // Wrong kind of value.
-                            return CHIP_ERROR_INVALID_ARGUMENT;
-                        }
-                        auto element_0 = (MTRUnitTestingClusterNestedStructList *) params.arg1[i_0];
-                        listHolder_0->mList[i_0].a = element_0.a.unsignedCharValue;
-                        listHolder_0->mList[i_0].b = element_0.b.boolValue;
-                        listHolder_0->mList[i_0].c.a = element_0.c.a.unsignedCharValue;
-                        listHolder_0->mList[i_0].c.b = element_0.c.b.boolValue;
-                        listHolder_0->mList[i_0].c.c = static_cast<std::remove_reference_t<decltype(listHolder_0->mList[i_0].c.c)>>(element_0.c.c.unsignedCharValue);
-                        listHolder_0->mList[i_0].c.d = AsByteSpan(element_0.c.d);
-                        listHolder_0->mList[i_0].c.e = AsCharSpan(element_0.c.e);
-                        listHolder_0->mList[i_0].c.f = static_cast<std::remove_reference_t<decltype(listHolder_0->mList[i_0].c.f)>>(element_0.c.f.unsignedCharValue);
-                        listHolder_0->mList[i_0].c.g = element_0.c.g.floatValue;
-                        listHolder_0->mList[i_0].c.h = element_0.c.h.doubleValue;
-                        {
-                            using ListType_2 = std::remove_reference_t<decltype(listHolder_0->mList[i_0].d)>;
-                            using ListMemberType_2 = ListMemberTypeGetter<ListType_2>::Type;
-                            if (element_0.d.count != 0) {
-                                auto * listHolder_2 = new ListHolder<ListMemberType_2>(element_0.d.count);
-                                if (listHolder_2 == nullptr || listHolder_2->mList == nullptr) {
-                                    return CHIP_ERROR_INVALID_ARGUMENT;
-                                }
-                                listFreer.add(listHolder_2);
-                                for (size_t i_2 = 0; i_2 < element_0.d.count; ++i_2) {
-                                    if (![element_0.d[i_2] isKindOfClass:[MTRUnitTestingClusterSimpleStruct class]]) {
-                                        // Wrong kind of value.
-                                        return CHIP_ERROR_INVALID_ARGUMENT;
-                                    }
-                                    auto element_2 = (MTRUnitTestingClusterSimpleStruct *) element_0.d[i_2];
-                                    listHolder_2->mList[i_2].a = element_2.a.unsignedCharValue;
-                                    listHolder_2->mList[i_2].b = element_2.b.boolValue;
-                                    listHolder_2->mList[i_2].c = static_cast<std::remove_reference_t<decltype(listHolder_2->mList[i_2].c)>>(element_2.c.unsignedCharValue);
-                                    listHolder_2->mList[i_2].d = AsByteSpan(element_2.d);
-                                    listHolder_2->mList[i_2].e = AsCharSpan(element_2.e);
-                                    listHolder_2->mList[i_2].f = static_cast<std::remove_reference_t<decltype(listHolder_2->mList[i_2].f)>>(element_2.f.unsignedCharValue);
-                                    listHolder_2->mList[i_2].g = element_2.g.floatValue;
-                                    listHolder_2->mList[i_2].h = element_2.h.doubleValue;
-                                }
-                                listHolder_0->mList[i_0].d = ListType_2(listHolder_2->mList, element_0.d.count);
-                            } else {
-                                listHolder_0->mList[i_0].d = ListType_2();
-                            }
-                        }
-                        {
-                            using ListType_2 = std::remove_reference_t<decltype(listHolder_0->mList[i_0].e)>;
-                            using ListMemberType_2 = ListMemberTypeGetter<ListType_2>::Type;
-                            if (element_0.e.count != 0) {
-                                auto * listHolder_2 = new ListHolder<ListMemberType_2>(element_0.e.count);
-                                if (listHolder_2 == nullptr || listHolder_2->mList == nullptr) {
-                                    return CHIP_ERROR_INVALID_ARGUMENT;
-                                }
-                                listFreer.add(listHolder_2);
-                                for (size_t i_2 = 0; i_2 < element_0.e.count; ++i_2) {
-                                    if (![element_0.e[i_2] isKindOfClass:[NSNumber class]]) {
-                                        // Wrong kind of value.
-                                        return CHIP_ERROR_INVALID_ARGUMENT;
-                                    }
-                                    auto element_2 = (NSNumber *) element_0.e[i_2];
-                                    listHolder_2->mList[i_2] = element_2.unsignedIntValue;
-                                }
-                                listHolder_0->mList[i_0].e = ListType_2(listHolder_2->mList, element_0.e.count);
-                            } else {
-                                listHolder_0->mList[i_0].e = ListType_2();
-                            }
-                        }
-                        {
-                            using ListType_2 = std::remove_reference_t<decltype(listHolder_0->mList[i_0].f)>;
-                            using ListMemberType_2 = ListMemberTypeGetter<ListType_2>::Type;
-                            if (element_0.f.count != 0) {
-                                auto * listHolder_2 = new ListHolder<ListMemberType_2>(element_0.f.count);
-                                if (listHolder_2 == nullptr || listHolder_2->mList == nullptr) {
-                                    return CHIP_ERROR_INVALID_ARGUMENT;
-                                }
-                                listFreer.add(listHolder_2);
-                                for (size_t i_2 = 0; i_2 < element_0.f.count; ++i_2) {
-                                    if (![element_0.f[i_2] isKindOfClass:[NSData class]]) {
-                                        // Wrong kind of value.
-                                        return CHIP_ERROR_INVALID_ARGUMENT;
-                                    }
-                                    auto element_2 = (NSData *) element_0.f[i_2];
-                                    listHolder_2->mList[i_2] = AsByteSpan(element_2);
-                                }
-                                listHolder_0->mList[i_0].f = ListType_2(listHolder_2->mList, element_0.f.count);
-                            } else {
-                                listHolder_0->mList[i_0].f = ListType_2();
-                            }
-                        }
-                        {
-                            using ListType_2 = std::remove_reference_t<decltype(listHolder_0->mList[i_0].g)>;
-                            using ListMemberType_2 = ListMemberTypeGetter<ListType_2>::Type;
-                            if (element_0.g.count != 0) {
-                                auto * listHolder_2 = new ListHolder<ListMemberType_2>(element_0.g.count);
-                                if (listHolder_2 == nullptr || listHolder_2->mList == nullptr) {
-                                    return CHIP_ERROR_INVALID_ARGUMENT;
-                                }
-                                listFreer.add(listHolder_2);
-                                for (size_t i_2 = 0; i_2 < element_0.g.count; ++i_2) {
-                                    if (![element_0.g[i_2] isKindOfClass:[NSNumber class]]) {
-                                        // Wrong kind of value.
-                                        return CHIP_ERROR_INVALID_ARGUMENT;
-                                    }
-                                    auto element_2 = (NSNumber *) element_0.g[i_2];
-                                    listHolder_2->mList[i_2] = element_2.unsignedCharValue;
-                                }
-                                listHolder_0->mList[i_0].g = ListType_2(listHolder_2->mList, element_0.g.count);
-                            } else {
-                                listHolder_0->mList[i_0].g = ListType_2();
-                            }
-                        }
-                    }
-                    request.arg1 = ListType_0(listHolder_0->mList, params.arg1.count);
-                } else {
-                    request.arg1 = ListType_0();
-                }
-            }
-            {
-                using ListType_0 = std::remove_reference_t<decltype(request.arg2)>;
-                using ListMemberType_0 = ListMemberTypeGetter<ListType_0>::Type;
-                if (params.arg2.count != 0) {
-                    auto * listHolder_0 = new ListHolder<ListMemberType_0>(params.arg2.count);
-                    if (listHolder_0 == nullptr || listHolder_0->mList == nullptr) {
-                        return CHIP_ERROR_INVALID_ARGUMENT;
-                    }
-                    listFreer.add(listHolder_0);
-                    for (size_t i_0 = 0; i_0 < params.arg2.count; ++i_0) {
-                        if (![params.arg2[i_0] isKindOfClass:[MTRUnitTestingClusterSimpleStruct class]]) {
-                            // Wrong kind of value.
-                            return CHIP_ERROR_INVALID_ARGUMENT;
-                        }
-                        auto element_0 = (MTRUnitTestingClusterSimpleStruct *) params.arg2[i_0];
-                        listHolder_0->mList[i_0].a = element_0.a.unsignedCharValue;
-                        listHolder_0->mList[i_0].b = element_0.b.boolValue;
-                        listHolder_0->mList[i_0].c = static_cast<std::remove_reference_t<decltype(listHolder_0->mList[i_0].c)>>(element_0.c.unsignedCharValue);
-                        listHolder_0->mList[i_0].d = AsByteSpan(element_0.d);
-                        listHolder_0->mList[i_0].e = AsCharSpan(element_0.e);
-                        listHolder_0->mList[i_0].f = static_cast<std::remove_reference_t<decltype(listHolder_0->mList[i_0].f)>>(element_0.f.unsignedCharValue);
-                        listHolder_0->mList[i_0].g = element_0.g.floatValue;
-                        listHolder_0->mList[i_0].h = element_0.h.doubleValue;
-                    }
-                    request.arg2 = ListType_0(listHolder_0->mList, params.arg2.count);
-                } else {
-                    request.arg2 = ListType_0();
-                }
-            }
-            {
-                using ListType_0 = std::remove_reference_t<decltype(request.arg3)>;
-                using ListMemberType_0 = ListMemberTypeGetter<ListType_0>::Type;
-                if (params.arg3.count != 0) {
-                    auto * listHolder_0 = new ListHolder<ListMemberType_0>(params.arg3.count);
-                    if (listHolder_0 == nullptr || listHolder_0->mList == nullptr) {
-                        return CHIP_ERROR_INVALID_ARGUMENT;
-                    }
-                    listFreer.add(listHolder_0);
-                    for (size_t i_0 = 0; i_0 < params.arg3.count; ++i_0) {
-                        if (![params.arg3[i_0] isKindOfClass:[NSNumber class]]) {
-                            // Wrong kind of value.
-                            return CHIP_ERROR_INVALID_ARGUMENT;
-                        }
-                        auto element_0 = (NSNumber *) params.arg3[i_0];
-                        listHolder_0->mList[i_0] = static_cast<std::remove_reference_t<decltype(listHolder_0->mList[i_0])>>(element_0.unsignedCharValue);
-                    }
-                    request.arg3 = ListType_0(listHolder_0->mList, params.arg3.count);
-                } else {
-                    request.arg3 = ListType_0();
-                }
-            }
-            {
-                using ListType_0 = std::remove_reference_t<decltype(request.arg4)>;
-                using ListMemberType_0 = ListMemberTypeGetter<ListType_0>::Type;
-                if (params.arg4.count != 0) {
-                    auto * listHolder_0 = new ListHolder<ListMemberType_0>(params.arg4.count);
-                    if (listHolder_0 == nullptr || listHolder_0->mList == nullptr) {
-                        return CHIP_ERROR_INVALID_ARGUMENT;
-                    }
-                    listFreer.add(listHolder_0);
-                    for (size_t i_0 = 0; i_0 < params.arg4.count; ++i_0) {
-                        if (![params.arg4[i_0] isKindOfClass:[NSNumber class]]) {
-                            // Wrong kind of value.
-                            return CHIP_ERROR_INVALID_ARGUMENT;
-                        }
-                        auto element_0 = (NSNumber *) params.arg4[i_0];
-                        listHolder_0->mList[i_0] = element_0.boolValue;
-                    }
-                    request.arg4 = ListType_0(listHolder_0->mList, params.arg4.count);
-                } else {
-                    request.arg4 = ListType_0();
-                }
-            }
-            request.arg5 = static_cast<std::remove_reference_t<decltype(request.arg5)>>(params.arg5.unsignedCharValue);
-            request.arg6 = params.arg6.boolValue;
+    if (params == nil) {
+        params = [[MTRUnitTestingClusterTestStructArrayArgumentRequestParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = UnitTesting::Commands::TestStructArrayArgumentRequest::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRUnitTestingClusterTestStructArrayArgumentResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)testStructArgumentRequestWithParams:(MTRUnitTestingClusterTestStructArgumentRequestParams *)params completion:(void (^)(MTRUnitTestingClusterBooleanResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRUnitTestingClusterBooleanResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterBooleanResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRUnitTestingClusterBooleanResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            UnitTesting::Commands::TestStructArgumentRequest::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.arg1.a = params.arg1.a.unsignedCharValue;
-            request.arg1.b = params.arg1.b.boolValue;
-            request.arg1.c = static_cast<std::remove_reference_t<decltype(request.arg1.c)>>(params.arg1.c.unsignedCharValue);
-            request.arg1.d = AsByteSpan(params.arg1.d);
-            request.arg1.e = AsCharSpan(params.arg1.e);
-            request.arg1.f = static_cast<std::remove_reference_t<decltype(request.arg1.f)>>(params.arg1.f.unsignedCharValue);
-            request.arg1.g = params.arg1.g.floatValue;
-            request.arg1.h = params.arg1.h.doubleValue;
+    if (params == nil) {
+        params = [[MTRUnitTestingClusterTestStructArgumentRequestParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = UnitTesting::Commands::TestStructArgumentRequest::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRUnitTestingClusterBooleanResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)testNestedStructArgumentRequestWithParams:(MTRUnitTestingClusterTestNestedStructArgumentRequestParams *)params completion:(void (^)(MTRUnitTestingClusterBooleanResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRUnitTestingClusterBooleanResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterBooleanResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRUnitTestingClusterBooleanResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            UnitTesting::Commands::TestNestedStructArgumentRequest::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.arg1.a = params.arg1.a.unsignedCharValue;
-            request.arg1.b = params.arg1.b.boolValue;
-            request.arg1.c.a = params.arg1.c.a.unsignedCharValue;
-            request.arg1.c.b = params.arg1.c.b.boolValue;
-            request.arg1.c.c = static_cast<std::remove_reference_t<decltype(request.arg1.c.c)>>(params.arg1.c.c.unsignedCharValue);
-            request.arg1.c.d = AsByteSpan(params.arg1.c.d);
-            request.arg1.c.e = AsCharSpan(params.arg1.c.e);
-            request.arg1.c.f = static_cast<std::remove_reference_t<decltype(request.arg1.c.f)>>(params.arg1.c.f.unsignedCharValue);
-            request.arg1.c.g = params.arg1.c.g.floatValue;
-            request.arg1.c.h = params.arg1.c.h.doubleValue;
+    if (params == nil) {
+        params = [[MTRUnitTestingClusterTestNestedStructArgumentRequestParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = UnitTesting::Commands::TestNestedStructArgumentRequest::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRUnitTestingClusterBooleanResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)testListStructArgumentRequestWithParams:(MTRUnitTestingClusterTestListStructArgumentRequestParams *)params completion:(void (^)(MTRUnitTestingClusterBooleanResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRUnitTestingClusterBooleanResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterBooleanResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRUnitTestingClusterBooleanResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            UnitTesting::Commands::TestListStructArgumentRequest::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            {
-                using ListType_0 = std::remove_reference_t<decltype(request.arg1)>;
-                using ListMemberType_0 = ListMemberTypeGetter<ListType_0>::Type;
-                if (params.arg1.count != 0) {
-                    auto * listHolder_0 = new ListHolder<ListMemberType_0>(params.arg1.count);
-                    if (listHolder_0 == nullptr || listHolder_0->mList == nullptr) {
-                        return CHIP_ERROR_INVALID_ARGUMENT;
-                    }
-                    listFreer.add(listHolder_0);
-                    for (size_t i_0 = 0; i_0 < params.arg1.count; ++i_0) {
-                        if (![params.arg1[i_0] isKindOfClass:[MTRUnitTestingClusterSimpleStruct class]]) {
-                            // Wrong kind of value.
-                            return CHIP_ERROR_INVALID_ARGUMENT;
-                        }
-                        auto element_0 = (MTRUnitTestingClusterSimpleStruct *) params.arg1[i_0];
-                        listHolder_0->mList[i_0].a = element_0.a.unsignedCharValue;
-                        listHolder_0->mList[i_0].b = element_0.b.boolValue;
-                        listHolder_0->mList[i_0].c = static_cast<std::remove_reference_t<decltype(listHolder_0->mList[i_0].c)>>(element_0.c.unsignedCharValue);
-                        listHolder_0->mList[i_0].d = AsByteSpan(element_0.d);
-                        listHolder_0->mList[i_0].e = AsCharSpan(element_0.e);
-                        listHolder_0->mList[i_0].f = static_cast<std::remove_reference_t<decltype(listHolder_0->mList[i_0].f)>>(element_0.f.unsignedCharValue);
-                        listHolder_0->mList[i_0].g = element_0.g.floatValue;
-                        listHolder_0->mList[i_0].h = element_0.h.doubleValue;
-                    }
-                    request.arg1 = ListType_0(listHolder_0->mList, params.arg1.count);
-                } else {
-                    request.arg1 = ListType_0();
-                }
-            }
+    if (params == nil) {
+        params = [[MTRUnitTestingClusterTestListStructArgumentRequestParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = UnitTesting::Commands::TestListStructArgumentRequest::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRUnitTestingClusterBooleanResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)testListInt8UArgumentRequestWithParams:(MTRUnitTestingClusterTestListInt8UArgumentRequestParams *)params completion:(void (^)(MTRUnitTestingClusterBooleanResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRUnitTestingClusterBooleanResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterBooleanResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRUnitTestingClusterBooleanResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            UnitTesting::Commands::TestListInt8UArgumentRequest::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            {
-                using ListType_0 = std::remove_reference_t<decltype(request.arg1)>;
-                using ListMemberType_0 = ListMemberTypeGetter<ListType_0>::Type;
-                if (params.arg1.count != 0) {
-                    auto * listHolder_0 = new ListHolder<ListMemberType_0>(params.arg1.count);
-                    if (listHolder_0 == nullptr || listHolder_0->mList == nullptr) {
-                        return CHIP_ERROR_INVALID_ARGUMENT;
-                    }
-                    listFreer.add(listHolder_0);
-                    for (size_t i_0 = 0; i_0 < params.arg1.count; ++i_0) {
-                        if (![params.arg1[i_0] isKindOfClass:[NSNumber class]]) {
-                            // Wrong kind of value.
-                            return CHIP_ERROR_INVALID_ARGUMENT;
-                        }
-                        auto element_0 = (NSNumber *) params.arg1[i_0];
-                        listHolder_0->mList[i_0] = element_0.unsignedCharValue;
-                    }
-                    request.arg1 = ListType_0(listHolder_0->mList, params.arg1.count);
-                } else {
-                    request.arg1 = ListType_0();
-                }
-            }
+    if (params == nil) {
+        params = [[MTRUnitTestingClusterTestListInt8UArgumentRequestParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = UnitTesting::Commands::TestListInt8UArgumentRequest::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRUnitTestingClusterBooleanResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)testNestedStructListArgumentRequestWithParams:(MTRUnitTestingClusterTestNestedStructListArgumentRequestParams *)params completion:(void (^)(MTRUnitTestingClusterBooleanResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRUnitTestingClusterBooleanResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterBooleanResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRUnitTestingClusterBooleanResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            UnitTesting::Commands::TestNestedStructListArgumentRequest::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.arg1.a = params.arg1.a.unsignedCharValue;
-            request.arg1.b = params.arg1.b.boolValue;
-            request.arg1.c.a = params.arg1.c.a.unsignedCharValue;
-            request.arg1.c.b = params.arg1.c.b.boolValue;
-            request.arg1.c.c = static_cast<std::remove_reference_t<decltype(request.arg1.c.c)>>(params.arg1.c.c.unsignedCharValue);
-            request.arg1.c.d = AsByteSpan(params.arg1.c.d);
-            request.arg1.c.e = AsCharSpan(params.arg1.c.e);
-            request.arg1.c.f = static_cast<std::remove_reference_t<decltype(request.arg1.c.f)>>(params.arg1.c.f.unsignedCharValue);
-            request.arg1.c.g = params.arg1.c.g.floatValue;
-            request.arg1.c.h = params.arg1.c.h.doubleValue;
-            {
-                using ListType_1 = std::remove_reference_t<decltype(request.arg1.d)>;
-                using ListMemberType_1 = ListMemberTypeGetter<ListType_1>::Type;
-                if (params.arg1.d.count != 0) {
-                    auto * listHolder_1 = new ListHolder<ListMemberType_1>(params.arg1.d.count);
-                    if (listHolder_1 == nullptr || listHolder_1->mList == nullptr) {
-                        return CHIP_ERROR_INVALID_ARGUMENT;
-                    }
-                    listFreer.add(listHolder_1);
-                    for (size_t i_1 = 0; i_1 < params.arg1.d.count; ++i_1) {
-                        if (![params.arg1.d[i_1] isKindOfClass:[MTRUnitTestingClusterSimpleStruct class]]) {
-                            // Wrong kind of value.
-                            return CHIP_ERROR_INVALID_ARGUMENT;
-                        }
-                        auto element_1 = (MTRUnitTestingClusterSimpleStruct *) params.arg1.d[i_1];
-                        listHolder_1->mList[i_1].a = element_1.a.unsignedCharValue;
-                        listHolder_1->mList[i_1].b = element_1.b.boolValue;
-                        listHolder_1->mList[i_1].c = static_cast<std::remove_reference_t<decltype(listHolder_1->mList[i_1].c)>>(element_1.c.unsignedCharValue);
-                        listHolder_1->mList[i_1].d = AsByteSpan(element_1.d);
-                        listHolder_1->mList[i_1].e = AsCharSpan(element_1.e);
-                        listHolder_1->mList[i_1].f = static_cast<std::remove_reference_t<decltype(listHolder_1->mList[i_1].f)>>(element_1.f.unsignedCharValue);
-                        listHolder_1->mList[i_1].g = element_1.g.floatValue;
-                        listHolder_1->mList[i_1].h = element_1.h.doubleValue;
-                    }
-                    request.arg1.d = ListType_1(listHolder_1->mList, params.arg1.d.count);
-                } else {
-                    request.arg1.d = ListType_1();
-                }
-            }
-            {
-                using ListType_1 = std::remove_reference_t<decltype(request.arg1.e)>;
-                using ListMemberType_1 = ListMemberTypeGetter<ListType_1>::Type;
-                if (params.arg1.e.count != 0) {
-                    auto * listHolder_1 = new ListHolder<ListMemberType_1>(params.arg1.e.count);
-                    if (listHolder_1 == nullptr || listHolder_1->mList == nullptr) {
-                        return CHIP_ERROR_INVALID_ARGUMENT;
-                    }
-                    listFreer.add(listHolder_1);
-                    for (size_t i_1 = 0; i_1 < params.arg1.e.count; ++i_1) {
-                        if (![params.arg1.e[i_1] isKindOfClass:[NSNumber class]]) {
-                            // Wrong kind of value.
-                            return CHIP_ERROR_INVALID_ARGUMENT;
-                        }
-                        auto element_1 = (NSNumber *) params.arg1.e[i_1];
-                        listHolder_1->mList[i_1] = element_1.unsignedIntValue;
-                    }
-                    request.arg1.e = ListType_1(listHolder_1->mList, params.arg1.e.count);
-                } else {
-                    request.arg1.e = ListType_1();
-                }
-            }
-            {
-                using ListType_1 = std::remove_reference_t<decltype(request.arg1.f)>;
-                using ListMemberType_1 = ListMemberTypeGetter<ListType_1>::Type;
-                if (params.arg1.f.count != 0) {
-                    auto * listHolder_1 = new ListHolder<ListMemberType_1>(params.arg1.f.count);
-                    if (listHolder_1 == nullptr || listHolder_1->mList == nullptr) {
-                        return CHIP_ERROR_INVALID_ARGUMENT;
-                    }
-                    listFreer.add(listHolder_1);
-                    for (size_t i_1 = 0; i_1 < params.arg1.f.count; ++i_1) {
-                        if (![params.arg1.f[i_1] isKindOfClass:[NSData class]]) {
-                            // Wrong kind of value.
-                            return CHIP_ERROR_INVALID_ARGUMENT;
-                        }
-                        auto element_1 = (NSData *) params.arg1.f[i_1];
-                        listHolder_1->mList[i_1] = AsByteSpan(element_1);
-                    }
-                    request.arg1.f = ListType_1(listHolder_1->mList, params.arg1.f.count);
-                } else {
-                    request.arg1.f = ListType_1();
-                }
-            }
-            {
-                using ListType_1 = std::remove_reference_t<decltype(request.arg1.g)>;
-                using ListMemberType_1 = ListMemberTypeGetter<ListType_1>::Type;
-                if (params.arg1.g.count != 0) {
-                    auto * listHolder_1 = new ListHolder<ListMemberType_1>(params.arg1.g.count);
-                    if (listHolder_1 == nullptr || listHolder_1->mList == nullptr) {
-                        return CHIP_ERROR_INVALID_ARGUMENT;
-                    }
-                    listFreer.add(listHolder_1);
-                    for (size_t i_1 = 0; i_1 < params.arg1.g.count; ++i_1) {
-                        if (![params.arg1.g[i_1] isKindOfClass:[NSNumber class]]) {
-                            // Wrong kind of value.
-                            return CHIP_ERROR_INVALID_ARGUMENT;
-                        }
-                        auto element_1 = (NSNumber *) params.arg1.g[i_1];
-                        listHolder_1->mList[i_1] = element_1.unsignedCharValue;
-                    }
-                    request.arg1.g = ListType_1(listHolder_1->mList, params.arg1.g.count);
-                } else {
-                    request.arg1.g = ListType_1();
-                }
-            }
+    if (params == nil) {
+        params = [[MTRUnitTestingClusterTestNestedStructListArgumentRequestParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = UnitTesting::Commands::TestNestedStructListArgumentRequest::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRUnitTestingClusterBooleanResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)testListNestedStructListArgumentRequestWithParams:(MTRUnitTestingClusterTestListNestedStructListArgumentRequestParams *)params completion:(void (^)(MTRUnitTestingClusterBooleanResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRUnitTestingClusterBooleanResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterBooleanResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRUnitTestingClusterBooleanResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            UnitTesting::Commands::TestListNestedStructListArgumentRequest::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            {
-                using ListType_0 = std::remove_reference_t<decltype(request.arg1)>;
-                using ListMemberType_0 = ListMemberTypeGetter<ListType_0>::Type;
-                if (params.arg1.count != 0) {
-                    auto * listHolder_0 = new ListHolder<ListMemberType_0>(params.arg1.count);
-                    if (listHolder_0 == nullptr || listHolder_0->mList == nullptr) {
-                        return CHIP_ERROR_INVALID_ARGUMENT;
-                    }
-                    listFreer.add(listHolder_0);
-                    for (size_t i_0 = 0; i_0 < params.arg1.count; ++i_0) {
-                        if (![params.arg1[i_0] isKindOfClass:[MTRUnitTestingClusterNestedStructList class]]) {
-                            // Wrong kind of value.
-                            return CHIP_ERROR_INVALID_ARGUMENT;
-                        }
-                        auto element_0 = (MTRUnitTestingClusterNestedStructList *) params.arg1[i_0];
-                        listHolder_0->mList[i_0].a = element_0.a.unsignedCharValue;
-                        listHolder_0->mList[i_0].b = element_0.b.boolValue;
-                        listHolder_0->mList[i_0].c.a = element_0.c.a.unsignedCharValue;
-                        listHolder_0->mList[i_0].c.b = element_0.c.b.boolValue;
-                        listHolder_0->mList[i_0].c.c = static_cast<std::remove_reference_t<decltype(listHolder_0->mList[i_0].c.c)>>(element_0.c.c.unsignedCharValue);
-                        listHolder_0->mList[i_0].c.d = AsByteSpan(element_0.c.d);
-                        listHolder_0->mList[i_0].c.e = AsCharSpan(element_0.c.e);
-                        listHolder_0->mList[i_0].c.f = static_cast<std::remove_reference_t<decltype(listHolder_0->mList[i_0].c.f)>>(element_0.c.f.unsignedCharValue);
-                        listHolder_0->mList[i_0].c.g = element_0.c.g.floatValue;
-                        listHolder_0->mList[i_0].c.h = element_0.c.h.doubleValue;
-                        {
-                            using ListType_2 = std::remove_reference_t<decltype(listHolder_0->mList[i_0].d)>;
-                            using ListMemberType_2 = ListMemberTypeGetter<ListType_2>::Type;
-                            if (element_0.d.count != 0) {
-                                auto * listHolder_2 = new ListHolder<ListMemberType_2>(element_0.d.count);
-                                if (listHolder_2 == nullptr || listHolder_2->mList == nullptr) {
-                                    return CHIP_ERROR_INVALID_ARGUMENT;
-                                }
-                                listFreer.add(listHolder_2);
-                                for (size_t i_2 = 0; i_2 < element_0.d.count; ++i_2) {
-                                    if (![element_0.d[i_2] isKindOfClass:[MTRUnitTestingClusterSimpleStruct class]]) {
-                                        // Wrong kind of value.
-                                        return CHIP_ERROR_INVALID_ARGUMENT;
-                                    }
-                                    auto element_2 = (MTRUnitTestingClusterSimpleStruct *) element_0.d[i_2];
-                                    listHolder_2->mList[i_2].a = element_2.a.unsignedCharValue;
-                                    listHolder_2->mList[i_2].b = element_2.b.boolValue;
-                                    listHolder_2->mList[i_2].c = static_cast<std::remove_reference_t<decltype(listHolder_2->mList[i_2].c)>>(element_2.c.unsignedCharValue);
-                                    listHolder_2->mList[i_2].d = AsByteSpan(element_2.d);
-                                    listHolder_2->mList[i_2].e = AsCharSpan(element_2.e);
-                                    listHolder_2->mList[i_2].f = static_cast<std::remove_reference_t<decltype(listHolder_2->mList[i_2].f)>>(element_2.f.unsignedCharValue);
-                                    listHolder_2->mList[i_2].g = element_2.g.floatValue;
-                                    listHolder_2->mList[i_2].h = element_2.h.doubleValue;
-                                }
-                                listHolder_0->mList[i_0].d = ListType_2(listHolder_2->mList, element_0.d.count);
-                            } else {
-                                listHolder_0->mList[i_0].d = ListType_2();
-                            }
-                        }
-                        {
-                            using ListType_2 = std::remove_reference_t<decltype(listHolder_0->mList[i_0].e)>;
-                            using ListMemberType_2 = ListMemberTypeGetter<ListType_2>::Type;
-                            if (element_0.e.count != 0) {
-                                auto * listHolder_2 = new ListHolder<ListMemberType_2>(element_0.e.count);
-                                if (listHolder_2 == nullptr || listHolder_2->mList == nullptr) {
-                                    return CHIP_ERROR_INVALID_ARGUMENT;
-                                }
-                                listFreer.add(listHolder_2);
-                                for (size_t i_2 = 0; i_2 < element_0.e.count; ++i_2) {
-                                    if (![element_0.e[i_2] isKindOfClass:[NSNumber class]]) {
-                                        // Wrong kind of value.
-                                        return CHIP_ERROR_INVALID_ARGUMENT;
-                                    }
-                                    auto element_2 = (NSNumber *) element_0.e[i_2];
-                                    listHolder_2->mList[i_2] = element_2.unsignedIntValue;
-                                }
-                                listHolder_0->mList[i_0].e = ListType_2(listHolder_2->mList, element_0.e.count);
-                            } else {
-                                listHolder_0->mList[i_0].e = ListType_2();
-                            }
-                        }
-                        {
-                            using ListType_2 = std::remove_reference_t<decltype(listHolder_0->mList[i_0].f)>;
-                            using ListMemberType_2 = ListMemberTypeGetter<ListType_2>::Type;
-                            if (element_0.f.count != 0) {
-                                auto * listHolder_2 = new ListHolder<ListMemberType_2>(element_0.f.count);
-                                if (listHolder_2 == nullptr || listHolder_2->mList == nullptr) {
-                                    return CHIP_ERROR_INVALID_ARGUMENT;
-                                }
-                                listFreer.add(listHolder_2);
-                                for (size_t i_2 = 0; i_2 < element_0.f.count; ++i_2) {
-                                    if (![element_0.f[i_2] isKindOfClass:[NSData class]]) {
-                                        // Wrong kind of value.
-                                        return CHIP_ERROR_INVALID_ARGUMENT;
-                                    }
-                                    auto element_2 = (NSData *) element_0.f[i_2];
-                                    listHolder_2->mList[i_2] = AsByteSpan(element_2);
-                                }
-                                listHolder_0->mList[i_0].f = ListType_2(listHolder_2->mList, element_0.f.count);
-                            } else {
-                                listHolder_0->mList[i_0].f = ListType_2();
-                            }
-                        }
-                        {
-                            using ListType_2 = std::remove_reference_t<decltype(listHolder_0->mList[i_0].g)>;
-                            using ListMemberType_2 = ListMemberTypeGetter<ListType_2>::Type;
-                            if (element_0.g.count != 0) {
-                                auto * listHolder_2 = new ListHolder<ListMemberType_2>(element_0.g.count);
-                                if (listHolder_2 == nullptr || listHolder_2->mList == nullptr) {
-                                    return CHIP_ERROR_INVALID_ARGUMENT;
-                                }
-                                listFreer.add(listHolder_2);
-                                for (size_t i_2 = 0; i_2 < element_0.g.count; ++i_2) {
-                                    if (![element_0.g[i_2] isKindOfClass:[NSNumber class]]) {
-                                        // Wrong kind of value.
-                                        return CHIP_ERROR_INVALID_ARGUMENT;
-                                    }
-                                    auto element_2 = (NSNumber *) element_0.g[i_2];
-                                    listHolder_2->mList[i_2] = element_2.unsignedCharValue;
-                                }
-                                listHolder_0->mList[i_0].g = ListType_2(listHolder_2->mList, element_0.g.count);
-                            } else {
-                                listHolder_0->mList[i_0].g = ListType_2();
-                            }
-                        }
-                    }
-                    request.arg1 = ListType_0(listHolder_0->mList, params.arg1.count);
-                } else {
-                    request.arg1 = ListType_0();
-                }
-            }
+    if (params == nil) {
+        params = [[MTRUnitTestingClusterTestListNestedStructListArgumentRequestParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = UnitTesting::Commands::TestListNestedStructListArgumentRequest::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRUnitTestingClusterBooleanResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)testListInt8UReverseRequestWithParams:(MTRUnitTestingClusterTestListInt8UReverseRequestParams *)params completion:(void (^)(MTRUnitTestingClusterTestListInt8UReverseResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRUnitTestingClusterTestListInt8UReverseResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterTestListInt8UReverseResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRUnitTestingClusterTestListInt8UReverseResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            UnitTesting::Commands::TestListInt8UReverseRequest::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            {
-                using ListType_0 = std::remove_reference_t<decltype(request.arg1)>;
-                using ListMemberType_0 = ListMemberTypeGetter<ListType_0>::Type;
-                if (params.arg1.count != 0) {
-                    auto * listHolder_0 = new ListHolder<ListMemberType_0>(params.arg1.count);
-                    if (listHolder_0 == nullptr || listHolder_0->mList == nullptr) {
-                        return CHIP_ERROR_INVALID_ARGUMENT;
-                    }
-                    listFreer.add(listHolder_0);
-                    for (size_t i_0 = 0; i_0 < params.arg1.count; ++i_0) {
-                        if (![params.arg1[i_0] isKindOfClass:[NSNumber class]]) {
-                            // Wrong kind of value.
-                            return CHIP_ERROR_INVALID_ARGUMENT;
-                        }
-                        auto element_0 = (NSNumber *) params.arg1[i_0];
-                        listHolder_0->mList[i_0] = element_0.unsignedCharValue;
-                    }
-                    request.arg1 = ListType_0(listHolder_0->mList, params.arg1.count);
-                } else {
-                    request.arg1 = ListType_0();
-                }
-            }
+    if (params == nil) {
+        params = [[MTRUnitTestingClusterTestListInt8UReverseRequestParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = UnitTesting::Commands::TestListInt8UReverseRequest::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRUnitTestingClusterTestListInt8UReverseResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)testEnumsRequestWithParams:(MTRUnitTestingClusterTestEnumsRequestParams *)params completion:(void (^)(MTRUnitTestingClusterTestEnumsResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRUnitTestingClusterTestEnumsResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterTestEnumsResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRUnitTestingClusterTestEnumsResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            UnitTesting::Commands::TestEnumsRequest::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.arg1 = static_cast<std::remove_reference_t<decltype(request.arg1)>>(params.arg1.unsignedShortValue);
-            request.arg2 = static_cast<std::remove_reference_t<decltype(request.arg2)>>(params.arg2.unsignedCharValue);
+    if (params == nil) {
+        params = [[MTRUnitTestingClusterTestEnumsRequestParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = UnitTesting::Commands::TestEnumsRequest::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRUnitTestingClusterTestEnumsResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)testNullableOptionalRequestWithParams:(MTRUnitTestingClusterTestNullableOptionalRequestParams * _Nullable)params completion:(void (^)(MTRUnitTestingClusterTestNullableOptionalResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRUnitTestingClusterTestNullableOptionalResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterTestNullableOptionalResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRUnitTestingClusterTestNullableOptionalResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            UnitTesting::Commands::TestNullableOptionalRequest::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            if (params != nil) {
-                if (params.arg1 != nil) {
-                    auto & definedValue_0 = request.arg1.Emplace();
-                    if (params.arg1 == nil) {
-                        definedValue_0.SetNull();
-                    } else {
-                        auto & nonNullValue_1 = definedValue_0.SetNonNull();
-                        nonNullValue_1 = params.arg1.unsignedCharValue;
-                    }
-                }
-            }
+    if (params == nil) {
+        params = [[MTRUnitTestingClusterTestNullableOptionalRequestParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = UnitTesting::Commands::TestNullableOptionalRequest::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRUnitTestingClusterTestNullableOptionalResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)testComplexNullableOptionalRequestWithParams:(MTRUnitTestingClusterTestComplexNullableOptionalRequestParams *)params completion:(void (^)(MTRUnitTestingClusterTestComplexNullableOptionalResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRUnitTestingClusterTestComplexNullableOptionalResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterTestComplexNullableOptionalResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRUnitTestingClusterTestComplexNullableOptionalResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            UnitTesting::Commands::TestComplexNullableOptionalRequest::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            if (params.nullableInt == nil) {
-                request.nullableInt.SetNull();
-            } else {
-                auto & nonNullValue_0 = request.nullableInt.SetNonNull();
-                nonNullValue_0 = params.nullableInt.unsignedShortValue;
-            }
-            if (params.optionalInt != nil) {
-                auto & definedValue_0 = request.optionalInt.Emplace();
-                definedValue_0 = params.optionalInt.unsignedShortValue;
-            }
-            if (params.nullableOptionalInt != nil) {
-                auto & definedValue_0 = request.nullableOptionalInt.Emplace();
-                if (params.nullableOptionalInt == nil) {
-                    definedValue_0.SetNull();
-                } else {
-                    auto & nonNullValue_1 = definedValue_0.SetNonNull();
-                    nonNullValue_1 = params.nullableOptionalInt.unsignedShortValue;
-                }
-            }
-            if (params.nullableString == nil) {
-                request.nullableString.SetNull();
-            } else {
-                auto & nonNullValue_0 = request.nullableString.SetNonNull();
-                nonNullValue_0 = AsCharSpan(params.nullableString);
-            }
-            if (params.optionalString != nil) {
-                auto & definedValue_0 = request.optionalString.Emplace();
-                definedValue_0 = AsCharSpan(params.optionalString);
-            }
-            if (params.nullableOptionalString != nil) {
-                auto & definedValue_0 = request.nullableOptionalString.Emplace();
-                if (params.nullableOptionalString == nil) {
-                    definedValue_0.SetNull();
-                } else {
-                    auto & nonNullValue_1 = definedValue_0.SetNonNull();
-                    nonNullValue_1 = AsCharSpan(params.nullableOptionalString);
-                }
-            }
-            if (params.nullableStruct == nil) {
-                request.nullableStruct.SetNull();
-            } else {
-                auto & nonNullValue_0 = request.nullableStruct.SetNonNull();
-                nonNullValue_0.a = params.nullableStruct.a.unsignedCharValue;
-                nonNullValue_0.b = params.nullableStruct.b.boolValue;
-                nonNullValue_0.c = static_cast<std::remove_reference_t<decltype(nonNullValue_0.c)>>(params.nullableStruct.c.unsignedCharValue);
-                nonNullValue_0.d = AsByteSpan(params.nullableStruct.d);
-                nonNullValue_0.e = AsCharSpan(params.nullableStruct.e);
-                nonNullValue_0.f = static_cast<std::remove_reference_t<decltype(nonNullValue_0.f)>>(params.nullableStruct.f.unsignedCharValue);
-                nonNullValue_0.g = params.nullableStruct.g.floatValue;
-                nonNullValue_0.h = params.nullableStruct.h.doubleValue;
-            }
-            if (params.optionalStruct != nil) {
-                auto & definedValue_0 = request.optionalStruct.Emplace();
-                definedValue_0.a = params.optionalStruct.a.unsignedCharValue;
-                definedValue_0.b = params.optionalStruct.b.boolValue;
-                definedValue_0.c = static_cast<std::remove_reference_t<decltype(definedValue_0.c)>>(params.optionalStruct.c.unsignedCharValue);
-                definedValue_0.d = AsByteSpan(params.optionalStruct.d);
-                definedValue_0.e = AsCharSpan(params.optionalStruct.e);
-                definedValue_0.f = static_cast<std::remove_reference_t<decltype(definedValue_0.f)>>(params.optionalStruct.f.unsignedCharValue);
-                definedValue_0.g = params.optionalStruct.g.floatValue;
-                definedValue_0.h = params.optionalStruct.h.doubleValue;
-            }
-            if (params.nullableOptionalStruct != nil) {
-                auto & definedValue_0 = request.nullableOptionalStruct.Emplace();
-                if (params.nullableOptionalStruct == nil) {
-                    definedValue_0.SetNull();
-                } else {
-                    auto & nonNullValue_1 = definedValue_0.SetNonNull();
-                    nonNullValue_1.a = params.nullableOptionalStruct.a.unsignedCharValue;
-                    nonNullValue_1.b = params.nullableOptionalStruct.b.boolValue;
-                    nonNullValue_1.c = static_cast<std::remove_reference_t<decltype(nonNullValue_1.c)>>(params.nullableOptionalStruct.c.unsignedCharValue);
-                    nonNullValue_1.d = AsByteSpan(params.nullableOptionalStruct.d);
-                    nonNullValue_1.e = AsCharSpan(params.nullableOptionalStruct.e);
-                    nonNullValue_1.f = static_cast<std::remove_reference_t<decltype(nonNullValue_1.f)>>(params.nullableOptionalStruct.f.unsignedCharValue);
-                    nonNullValue_1.g = params.nullableOptionalStruct.g.floatValue;
-                    nonNullValue_1.h = params.nullableOptionalStruct.h.doubleValue;
-                }
-            }
-            if (params.nullableList == nil) {
-                request.nullableList.SetNull();
-            } else {
-                auto & nonNullValue_0 = request.nullableList.SetNonNull();
-                {
-                    using ListType_1 = std::remove_reference_t<decltype(nonNullValue_0)>;
-                    using ListMemberType_1 = ListMemberTypeGetter<ListType_1>::Type;
-                    if (params.nullableList.count != 0) {
-                        auto * listHolder_1 = new ListHolder<ListMemberType_1>(params.nullableList.count);
-                        if (listHolder_1 == nullptr || listHolder_1->mList == nullptr) {
-                            return CHIP_ERROR_INVALID_ARGUMENT;
-                        }
-                        listFreer.add(listHolder_1);
-                        for (size_t i_1 = 0; i_1 < params.nullableList.count; ++i_1) {
-                            if (![params.nullableList[i_1] isKindOfClass:[NSNumber class]]) {
-                                // Wrong kind of value.
-                                return CHIP_ERROR_INVALID_ARGUMENT;
-                            }
-                            auto element_1 = (NSNumber *) params.nullableList[i_1];
-                            listHolder_1->mList[i_1] = static_cast<std::remove_reference_t<decltype(listHolder_1->mList[i_1])>>(element_1.unsignedCharValue);
-                        }
-                        nonNullValue_0 = ListType_1(listHolder_1->mList, params.nullableList.count);
-                    } else {
-                        nonNullValue_0 = ListType_1();
-                    }
-                }
-            }
-            if (params.optionalList != nil) {
-                auto & definedValue_0 = request.optionalList.Emplace();
-                {
-                    using ListType_1 = std::remove_reference_t<decltype(definedValue_0)>;
-                    using ListMemberType_1 = ListMemberTypeGetter<ListType_1>::Type;
-                    if (params.optionalList.count != 0) {
-                        auto * listHolder_1 = new ListHolder<ListMemberType_1>(params.optionalList.count);
-                        if (listHolder_1 == nullptr || listHolder_1->mList == nullptr) {
-                            return CHIP_ERROR_INVALID_ARGUMENT;
-                        }
-                        listFreer.add(listHolder_1);
-                        for (size_t i_1 = 0; i_1 < params.optionalList.count; ++i_1) {
-                            if (![params.optionalList[i_1] isKindOfClass:[NSNumber class]]) {
-                                // Wrong kind of value.
-                                return CHIP_ERROR_INVALID_ARGUMENT;
-                            }
-                            auto element_1 = (NSNumber *) params.optionalList[i_1];
-                            listHolder_1->mList[i_1] = static_cast<std::remove_reference_t<decltype(listHolder_1->mList[i_1])>>(element_1.unsignedCharValue);
-                        }
-                        definedValue_0 = ListType_1(listHolder_1->mList, params.optionalList.count);
-                    } else {
-                        definedValue_0 = ListType_1();
-                    }
-                }
-            }
-            if (params.nullableOptionalList != nil) {
-                auto & definedValue_0 = request.nullableOptionalList.Emplace();
-                if (params.nullableOptionalList == nil) {
-                    definedValue_0.SetNull();
-                } else {
-                    auto & nonNullValue_1 = definedValue_0.SetNonNull();
-                    {
-                        using ListType_2 = std::remove_reference_t<decltype(nonNullValue_1)>;
-                        using ListMemberType_2 = ListMemberTypeGetter<ListType_2>::Type;
-                        if (params.nullableOptionalList.count != 0) {
-                            auto * listHolder_2 = new ListHolder<ListMemberType_2>(params.nullableOptionalList.count);
-                            if (listHolder_2 == nullptr || listHolder_2->mList == nullptr) {
-                                return CHIP_ERROR_INVALID_ARGUMENT;
-                            }
-                            listFreer.add(listHolder_2);
-                            for (size_t i_2 = 0; i_2 < params.nullableOptionalList.count; ++i_2) {
-                                if (![params.nullableOptionalList[i_2] isKindOfClass:[NSNumber class]]) {
-                                    // Wrong kind of value.
-                                    return CHIP_ERROR_INVALID_ARGUMENT;
-                                }
-                                auto element_2 = (NSNumber *) params.nullableOptionalList[i_2];
-                                listHolder_2->mList[i_2] = static_cast<std::remove_reference_t<decltype(listHolder_2->mList[i_2])>>(element_2.unsignedCharValue);
-                            }
-                            nonNullValue_1 = ListType_2(listHolder_2->mList, params.nullableOptionalList.count);
-                        } else {
-                            nonNullValue_1 = ListType_2();
-                        }
-                    }
-                }
-            }
+    if (params == nil) {
+        params = [[MTRUnitTestingClusterTestComplexNullableOptionalRequestParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = UnitTesting::Commands::TestComplexNullableOptionalRequest::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRUnitTestingClusterTestComplexNullableOptionalResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)simpleStructEchoRequestWithParams:(MTRUnitTestingClusterSimpleStructEchoRequestParams *)params completion:(void (^)(MTRUnitTestingClusterSimpleStructResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRUnitTestingClusterSimpleStructResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterSimpleStructResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRUnitTestingClusterSimpleStructResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            UnitTesting::Commands::SimpleStructEchoRequest::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.arg1.a = params.arg1.a.unsignedCharValue;
-            request.arg1.b = params.arg1.b.boolValue;
-            request.arg1.c = static_cast<std::remove_reference_t<decltype(request.arg1.c)>>(params.arg1.c.unsignedCharValue);
-            request.arg1.d = AsByteSpan(params.arg1.d);
-            request.arg1.e = AsCharSpan(params.arg1.e);
-            request.arg1.f = static_cast<std::remove_reference_t<decltype(request.arg1.f)>>(params.arg1.f.unsignedCharValue);
-            request.arg1.g = params.arg1.g.floatValue;
-            request.arg1.h = params.arg1.h.doubleValue;
+    if (params == nil) {
+        params = [[MTRUnitTestingClusterSimpleStructEchoRequestParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = UnitTesting::Commands::SimpleStructEchoRequest::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRUnitTestingClusterSimpleStructResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)timedInvokeRequestWithCompletion:(MTRStatusCompletion)completion
 {
     [self timedInvokeRequestWithParams:nil completion:completion];
 }
 - (void)timedInvokeRequestWithParams:(MTRUnitTestingClusterTimedInvokeRequestParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            UnitTesting::Commands::TimedInvokeRequest::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            if (!timedInvokeTimeoutMs.HasValue()) {
-                timedInvokeTimeoutMs.SetValue(10000);
-            }
+    if (params == nil) {
+        params = [[MTRUnitTestingClusterTimedInvokeRequestParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+    if (timedInvokeTimeoutMs == nil) {
+        timedInvokeTimeoutMs = @(10000);
+    }
+
+    using RequestType = UnitTesting::Commands::TimedInvokeRequest::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)testSimpleOptionalArgumentRequestWithParams:(MTRUnitTestingClusterTestSimpleOptionalArgumentRequestParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            UnitTesting::Commands::TestSimpleOptionalArgumentRequest::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            if (params != nil) {
-                if (params.arg1 != nil) {
-                    auto & definedValue_0 = request.arg1.Emplace();
-                    definedValue_0 = params.arg1.boolValue;
-                }
-            }
+    if (params == nil) {
+        params = [[MTRUnitTestingClusterTestSimpleOptionalArgumentRequestParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = UnitTesting::Commands::TestSimpleOptionalArgumentRequest::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)testEmitTestEventRequestWithParams:(MTRUnitTestingClusterTestEmitTestEventRequestParams *)params completion:(void (^)(MTRUnitTestingClusterTestEmitTestEventResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRUnitTestingClusterTestEmitTestEventResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterTestEmitTestEventResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRUnitTestingClusterTestEmitTestEventResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            UnitTesting::Commands::TestEmitTestEventRequest::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.arg1 = params.arg1.unsignedCharValue;
-            request.arg2 = static_cast<std::remove_reference_t<decltype(request.arg2)>>(params.arg2.unsignedCharValue);
-            request.arg3 = params.arg3.boolValue;
+    if (params == nil) {
+        params = [[MTRUnitTestingClusterTestEmitTestEventRequestParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = UnitTesting::Commands::TestEmitTestEventRequest::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRUnitTestingClusterTestEmitTestEventResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)testEmitTestFabricScopedEventRequestWithParams:(MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams *)params completion:(void (^)(MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterTestEmitTestFabricScopedEventResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            UnitTesting::Commands::TestEmitTestFabricScopedEventRequest::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.arg1 = params.arg1.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = UnitTesting::Commands::TestEmitTestFabricScopedEventRequest::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeBooleanWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
@@ -119610,67 +116266,51 @@ using chip::System::Clock::Timeout;
 }
 - (void)pingWithParams:(MTRSampleMEIClusterPingParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRCommandSuccessCallbackBridge(
-        self.callbackQueue,
-        ^(id _Nullable value, NSError * _Nullable error) {
-            completion(error);
-        },
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            SampleMei::Commands::Ping::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
+    if (params == nil) {
+        params = [[MTRSampleMEIClusterPingParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = SampleMei::Commands::Ping::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:nil
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
-
 - (void)addArgumentsWithParams:(MTRSampleMEIClusterAddArgumentsParams *)params completion:(void (^)(MTRSampleMEIClusterAddArgumentsResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    // Make a copy of params before we go async.
-    params = [params copy];
-    auto * bridge = new MTRSampleMEIClusterAddArgumentsResponseCallbackBridge(self.callbackQueue,
-        completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, SampleMEIClusterAddArgumentsResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRSampleMEIClusterAddArgumentsResponseCallbackBridge *>(bridge);
-            Optional<uint16_t> timedInvokeTimeoutMs;
-            Optional<Timeout> invokeTimeout;
-            ListFreer listFreer;
-            SampleMei::Commands::AddArguments::Type request;
-            if (params != nil) {
-                if (params.timedInvokeTimeoutMs != nil) {
-                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
-                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
-                }
-                if (params.serverSideProcessingTimeout != nil) {
-                    // Clamp to a number of seconds that will not overflow 32-bit
-                    // int when converted to ms.
-                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
-                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
-                }
-            }
-            request.arg1 = params.arg1.unsignedCharValue;
-            request.arg2 = params.arg2.unsignedCharValue;
+    if (params == nil) {
+        params = [[MTRSampleMEIClusterAddArgumentsParams
+            alloc] init];
+    }
 
-            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self.endpoint, timedInvokeTimeoutMs, invokeTimeout);
-        });
-    std::move(*bridge).DispatchAction(self.device);
+    auto responseHandler = ^(id _Nullable response, NSError * _Nullable error) {
+        completion(response, error);
+    };
+
+    auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
+
+    using RequestType = SampleMei::Commands::AddArguments::Type;
+    [self.device _invokeKnownCommandWithEndpointID:@(self.endpoint)
+                                         clusterID:@(RequestType::GetClusterId())
+                                         commandID:@(RequestType::GetCommandId())
+                                    commandPayload:params
+                                timedInvokeTimeout:timedInvokeTimeoutMs
+                       serverSideProcessingTimeout:params.serverSideProcessingTimeout
+                                     responseClass:MTRSampleMEIClusterAddArgumentsResponseParams.class
+                                             queue:self.callbackQueue
+                                        completion:responseHandler];
 }
 
 - (void)readAttributeFlipFlopWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
