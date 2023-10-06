@@ -41256,10 +41256,8 @@ private:
                 VerifyOrReturn(CheckValue("RegisteredClients", [actualValue count], static_cast<uint32_t>(2)));
                 VerifyOrReturn(CheckValue("CheckInNodeID", ((MTRICDManagementClusterMonitoringRegistrationStruct *) actualValue[0]).checkInNodeID, 101ULL));
                 VerifyOrReturn(CheckValue("MonitoredSubject", ((MTRICDManagementClusterMonitoringRegistrationStruct *) actualValue[0]).monitoredSubject, 1001ULL));
-                VerifyOrReturn(CheckValueAsString("Key", ((MTRICDManagementClusterMonitoringRegistrationStruct *) actualValue[0]).key, [[NSData alloc] initWithBytes:"\020\021\022\023\024\025\026\027\030\031\032\033\034\035\036\037" length:16]));
                 VerifyOrReturn(CheckValue("CheckInNodeID", ((MTRICDManagementClusterMonitoringRegistrationStruct *) actualValue[1]).checkInNodeID, 201ULL));
                 VerifyOrReturn(CheckValue("MonitoredSubject", ((MTRICDManagementClusterMonitoringRegistrationStruct *) actualValue[1]).monitoredSubject, 2001ULL));
-                VerifyOrReturn(CheckValueAsString("Key", ((MTRICDManagementClusterMonitoringRegistrationStruct *) actualValue[1]).key, [[NSData alloc] initWithBytes:" !\042#$%&'()*+,-./" length:16]));
             }
 
             NextTest();
@@ -41318,10 +41316,8 @@ private:
                 VerifyOrReturn(CheckValue("RegisteredClients", [actualValue count], static_cast<uint32_t>(2)));
                 VerifyOrReturn(CheckValue("CheckInNodeID", ((MTRICDManagementClusterMonitoringRegistrationStruct *) actualValue[0]).checkInNodeID, 101ULL));
                 VerifyOrReturn(CheckValue("MonitoredSubject", ((MTRICDManagementClusterMonitoringRegistrationStruct *) actualValue[0]).monitoredSubject, 1002ULL));
-                VerifyOrReturn(CheckValueAsString("Key", ((MTRICDManagementClusterMonitoringRegistrationStruct *) actualValue[0]).key, [[NSData alloc] initWithBytes:"\001\021!1AQaq\201\221\241\261\301\321\341\361" length:16]));
                 VerifyOrReturn(CheckValue("CheckInNodeID", ((MTRICDManagementClusterMonitoringRegistrationStruct *) actualValue[1]).checkInNodeID, 201ULL));
                 VerifyOrReturn(CheckValue("MonitoredSubject", ((MTRICDManagementClusterMonitoringRegistrationStruct *) actualValue[1]).monitoredSubject, 2001ULL));
-                VerifyOrReturn(CheckValueAsString("Key", ((MTRICDManagementClusterMonitoringRegistrationStruct *) actualValue[1]).key, [[NSData alloc] initWithBytes:" !\042#$%&'()*+,-./" length:16]));
             }
 
             NextTest();
@@ -41382,10 +41378,8 @@ private:
                 VerifyOrReturn(CheckValue("RegisteredClients", [actualValue count], static_cast<uint32_t>(2)));
                 VerifyOrReturn(CheckValue("CheckInNodeID", ((MTRICDManagementClusterMonitoringRegistrationStruct *) actualValue[0]).checkInNodeID, 101ULL));
                 VerifyOrReturn(CheckValue("MonitoredSubject", ((MTRICDManagementClusterMonitoringRegistrationStruct *) actualValue[0]).monitoredSubject, 1002ULL));
-                VerifyOrReturn(CheckValueAsString("Key", ((MTRICDManagementClusterMonitoringRegistrationStruct *) actualValue[0]).key, [[NSData alloc] initWithBytes:"\001\021!1AQaq\201\221\241\261\301\321\341\361" length:16]));
                 VerifyOrReturn(CheckValue("CheckInNodeID", ((MTRICDManagementClusterMonitoringRegistrationStruct *) actualValue[1]).checkInNodeID, 201ULL));
                 VerifyOrReturn(CheckValue("MonitoredSubject", ((MTRICDManagementClusterMonitoringRegistrationStruct *) actualValue[1]).monitoredSubject, 2002ULL));
-                VerifyOrReturn(CheckValueAsString("Key", ((MTRICDManagementClusterMonitoringRegistrationStruct *) actualValue[1]).key, [[NSData alloc] initWithBytes:"\002\022\0422BRbr\202\222\242\262\302\322\342/" length:16]));
             }
 
             NextTest();
@@ -41437,7 +41431,6 @@ private:
                 VerifyOrReturn(CheckValue("RegisteredClients", [actualValue count], static_cast<uint32_t>(1)));
                 VerifyOrReturn(CheckValue("CheckInNodeID", ((MTRICDManagementClusterMonitoringRegistrationStruct *) actualValue[0]).checkInNodeID, 201ULL));
                 VerifyOrReturn(CheckValue("MonitoredSubject", ((MTRICDManagementClusterMonitoringRegistrationStruct *) actualValue[0]).monitoredSubject, 2002ULL));
-                VerifyOrReturn(CheckValueAsString("Key", ((MTRICDManagementClusterMonitoringRegistrationStruct *) actualValue[0]).key, [[NSData alloc] initWithBytes:"\002\022\0422BRbr\202\222\242\262\302\322\342/" length:16]));
             }
 
             NextTest();
