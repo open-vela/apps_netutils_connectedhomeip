@@ -169956,88 +169956,92 @@ public:
             err = TestWriteGroupKeys_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Add First Group (new)\n");
-            err = TestAddFirstGroupNew_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Add First Group (name too long)\n");
+            err = TestAddFirstGroupNameTooLong_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : View First Group (new)\n");
-            err = TestViewFirstGroupNew_7();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Add First Group (new)\n");
+            err = TestAddFirstGroupNew_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : View Second Group (not found)\n");
-            err = TestViewSecondGroupNotFound_8();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : View First Group (new)\n");
+            err = TestViewFirstGroupNew_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Get Group Membership 1 (all)\n");
-            err = TestGetGroupMembership1All_9();
+            ChipLogProgress(chipTool, " ***** Test Step 9 : View Second Group (not found)\n");
+            err = TestViewSecondGroupNotFound_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Add Second Group (new)\n");
-            err = TestAddSecondGroupNew_10();
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Get Group Membership 1 (all)\n");
+            err = TestGetGroupMembership1All_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : View Second Group (new)\n");
-            err = TestViewSecondGroupNew_11();
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Add Second Group (new)\n");
+            err = TestAddSecondGroupNew_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : View Group 3 (not found)\n");
-            err = TestViewGroup3NotFound_12();
+            ChipLogProgress(chipTool, " ***** Test Step 12 : View Second Group (new)\n");
+            err = TestViewSecondGroupNew_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : View First Group (existing)\n");
-            err = TestViewFirstGroupExisting_13();
+            ChipLogProgress(chipTool, " ***** Test Step 13 : View Group 3 (not found)\n");
+            err = TestViewGroup3NotFound_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : View Second Group (existing)\n");
-            err = TestViewSecondGroupExisting_14();
+            ChipLogProgress(chipTool, " ***** Test Step 14 : View First Group (existing)\n");
+            err = TestViewFirstGroupExisting_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : Get Group Membership 2\n");
-            err = TestGetGroupMembership2_15();
+            ChipLogProgress(chipTool, " ***** Test Step 15 : View Second Group (existing)\n");
+            err = TestViewSecondGroupExisting_15();
             break;
         case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : Remove Group 0 (invalid)\n");
-            err = TestRemoveGroup0Invalid_16();
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Get Group Membership 2\n");
+            err = TestGetGroupMembership2_16();
             break;
         case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : Remove Group 4 (not found)\n");
-            err = TestRemoveGroup4NotFound_17();
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Remove Group 0 (invalid)\n");
+            err = TestRemoveGroup0Invalid_17();
             break;
         case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : Remove Second Group (existing)\n");
-            err = TestRemoveSecondGroupExisting_18();
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Remove Group 4 (not found)\n");
+            err = TestRemoveGroup4NotFound_18();
             break;
         case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : View First Group (not removed)\n");
-            err = TestViewFirstGroupNotRemoved_19();
+            ChipLogProgress(chipTool, " ***** Test Step 19 : Remove Second Group (existing)\n");
+            err = TestRemoveSecondGroupExisting_19();
             break;
         case 20:
-            ChipLogProgress(chipTool, " ***** Test Step 20 : View Second Group (removed)\n");
-            err = TestViewSecondGroupRemoved_20();
+            ChipLogProgress(chipTool, " ***** Test Step 20 : View First Group (not removed)\n");
+            err = TestViewFirstGroupNotRemoved_20();
             break;
         case 21:
-            ChipLogProgress(chipTool, " ***** Test Step 21 : Get Group Membership 3\n");
-            err = TestGetGroupMembership3_21();
+            ChipLogProgress(chipTool, " ***** Test Step 21 : View Second Group (removed)\n");
+            err = TestViewSecondGroupRemoved_21();
             break;
         case 22:
-            ChipLogProgress(chipTool, " ***** Test Step 22 : Remove All\n");
-            err = TestRemoveAll_22();
+            ChipLogProgress(chipTool, " ***** Test Step 22 : Get Group Membership 3\n");
+            err = TestGetGroupMembership3_22();
             break;
         case 23:
-            ChipLogProgress(chipTool, " ***** Test Step 23 : View First Group (removed)\n");
-            err = TestViewFirstGroupRemoved_23();
+            ChipLogProgress(chipTool, " ***** Test Step 23 : Remove All\n");
+            err = TestRemoveAll_23();
             break;
         case 24:
-            ChipLogProgress(chipTool, " ***** Test Step 24 : View Second Group (still removed)\n");
-            err = TestViewSecondGroupStillRemoved_24();
+            ChipLogProgress(chipTool, " ***** Test Step 24 : View First Group (removed)\n");
+            err = TestViewFirstGroupRemoved_24();
             break;
         case 25:
-            ChipLogProgress(chipTool, " ***** Test Step 25 : View Group 3 (removed)\n");
-            err = TestViewGroup3Removed_25();
+            ChipLogProgress(chipTool, " ***** Test Step 25 : View Second Group (still removed)\n");
+            err = TestViewSecondGroupStillRemoved_25();
             break;
         case 26:
-            ChipLogProgress(chipTool, " ***** Test Step 26 : Get Group Membership 4\n");
-            err = TestGetGroupMembership4_26();
+            ChipLogProgress(chipTool, " ***** Test Step 26 : View Group 3 (removed)\n");
+            err = TestViewGroup3Removed_26();
+            break;
+        case 27:
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Get Group Membership 4\n");
+            err = TestGetGroupMembership4_27();
             break;
         }
 
@@ -170131,6 +170135,9 @@ public:
         case 26:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -170141,7 +170148,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 27;
+    const uint16_t mTestCount = 28;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -170330,7 +170337,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestAddFirstGroupNew_6()
+    CHIP_ERROR TestAddFirstGroupNameTooLong_6()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -170340,7 +170347,40 @@ private:
         __auto_type * params = [[MTRGroupsClusterAddGroupParams alloc] init];
         params.groupID =
             [NSNumber numberWithUnsignedShort:257U];
-        params.groupName = @"Group #1";
+        params.groupName = @"12345678901234567";
+        [cluster addGroupWithParams:params completion:
+                                               ^(MTRGroupsClusterAddGroupResponseParams * _Nullable values, NSError * _Nullable err) {
+                                                   NSLog(@"Add First Group (name too long) Error: %@", err);
+
+                                                   VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                   {
+                                                       id actualValue = values.status;
+                                                       VerifyOrReturn(CheckValue("Status", actualValue, 135U));
+                                                   }
+
+                                                   {
+                                                       id actualValue = values.groupID;
+                                                       VerifyOrReturn(CheckValue("GroupID", actualValue, 257U));
+                                                   }
+
+                                                   NextTest();
+                                               }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestAddFirstGroupNew_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupsClusterAddGroupParams alloc] init];
+        params.groupID =
+            [NSNumber numberWithUnsignedShort:257U];
+        params.groupName = @"Group #101234567";
         [cluster addGroupWithParams:params completion:
                                                ^(MTRGroupsClusterAddGroupResponseParams * _Nullable values, NSError * _Nullable err) {
                                                    NSLog(@"Add First Group (new) Error: %@", err);
@@ -170363,7 +170403,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestViewFirstGroupNew_7()
+    CHIP_ERROR TestViewFirstGroupNew_8()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -170391,7 +170431,7 @@ private:
 
                                                     {
                                                         id actualValue = values.groupName;
-                                                        VerifyOrReturn(CheckValueAsString("GroupName", actualValue, @"Group #1"));
+                                                        VerifyOrReturn(CheckValueAsString("GroupName", actualValue, @"Group #101234567"));
                                                     }
 
                                                     NextTest();
@@ -170400,7 +170440,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestViewSecondGroupNotFound_8()
+    CHIP_ERROR TestViewSecondGroupNotFound_9()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -170432,7 +170472,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestGetGroupMembership1All_9()
+    CHIP_ERROR TestGetGroupMembership1All_10()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -170467,7 +170507,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestAddSecondGroupNew_10()
+    CHIP_ERROR TestAddSecondGroupNew_11()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -170500,7 +170540,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestViewSecondGroupNew_11()
+    CHIP_ERROR TestViewSecondGroupNew_12()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -170537,7 +170577,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestViewGroup3NotFound_12()
+    CHIP_ERROR TestViewGroup3NotFound_13()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -170569,7 +170609,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestViewFirstGroupExisting_13()
+    CHIP_ERROR TestViewFirstGroupExisting_14()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -170597,7 +170637,7 @@ private:
 
                                                     {
                                                         id actualValue = values.groupName;
-                                                        VerifyOrReturn(CheckValueAsString("GroupName", actualValue, @"Group #1"));
+                                                        VerifyOrReturn(CheckValueAsString("GroupName", actualValue, @"Group #101234567"));
                                                     }
 
                                                     NextTest();
@@ -170606,7 +170646,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestViewSecondGroupExisting_14()
+    CHIP_ERROR TestViewSecondGroupExisting_15()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -170643,7 +170683,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestGetGroupMembership2_15()
+    CHIP_ERROR TestGetGroupMembership2_16()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -170684,7 +170724,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestRemoveGroup0Invalid_16()
+    CHIP_ERROR TestRemoveGroup0Invalid_17()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -170716,7 +170756,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestRemoveGroup4NotFound_17()
+    CHIP_ERROR TestRemoveGroup4NotFound_18()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -170748,7 +170788,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestRemoveSecondGroupExisting_18()
+    CHIP_ERROR TestRemoveSecondGroupExisting_19()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -170780,7 +170820,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestViewFirstGroupNotRemoved_19()
+    CHIP_ERROR TestViewFirstGroupNotRemoved_20()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -170808,7 +170848,7 @@ private:
 
                                                     {
                                                         id actualValue = values.groupName;
-                                                        VerifyOrReturn(CheckValueAsString("GroupName", actualValue, @"Group #1"));
+                                                        VerifyOrReturn(CheckValueAsString("GroupName", actualValue, @"Group #101234567"));
                                                     }
 
                                                     NextTest();
@@ -170817,7 +170857,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestViewSecondGroupRemoved_20()
+    CHIP_ERROR TestViewSecondGroupRemoved_21()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -170849,7 +170889,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestGetGroupMembership3_21()
+    CHIP_ERROR TestGetGroupMembership3_22()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -170892,7 +170932,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestRemoveAll_22()
+    CHIP_ERROR TestRemoveAll_23()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -170911,7 +170951,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestViewFirstGroupRemoved_23()
+    CHIP_ERROR TestViewFirstGroupRemoved_24()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -170943,7 +170983,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestViewSecondGroupStillRemoved_24()
+    CHIP_ERROR TestViewSecondGroupStillRemoved_25()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -170975,7 +171015,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestViewGroup3Removed_25()
+    CHIP_ERROR TestViewGroup3Removed_26()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -171007,7 +171047,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestGetGroupMembership4_26()
+    CHIP_ERROR TestGetGroupMembership4_27()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
