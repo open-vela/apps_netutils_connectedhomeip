@@ -72342,7 +72342,7 @@ using chip::System::Clock::Timeout;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = BallastConfiguration::Attributes::BallastStatus::TypeInfo;
-    return MTRReadAttribute<MTRInt8uAttributeCallbackBridge,
+    return MTRReadAttribute<MTRBallastConfigurationBallastStatusAttributeCallbackBridge,
         NSNumber,
         TypeInfo::DecodableType>(params, completion, self.callbackQueue, self.device, self.endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -72352,13 +72352,13 @@ using chip::System::Clock::Timeout;
                                     reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = BallastConfiguration::Attributes::BallastStatus::TypeInfo;
-    MTRSubscribeAttribute<MTRInt8uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self.endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+    MTRSubscribeAttribute<MTRBallastConfigurationBallastStatusAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self.endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
 + (void)readAttributeBallastStatusWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer endpoint:(NSNumber *)endpoint queue:(dispatch_queue_t)queue completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRInt8uAttributeCallbackBridge(queue, completion);
-    std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice, ^(Int8uAttributeCallback successCb, MTRErrorCallback failureCb) {
+    auto * bridge = new MTRBallastConfigurationBallastStatusAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice, ^(BallastConfigurationBallastStatusAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (clusterStateCacheContainer.cppClusterStateCache) {
             chip::app::ConcreteAttributePath path;
             using TypeInfo = BallastConfiguration::Attributes::BallastStatus::TypeInfo;
@@ -73014,7 +73014,7 @@ using chip::System::Clock::Timeout;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = BallastConfiguration::Attributes::LampAlarmMode::TypeInfo;
-    return MTRReadAttribute<MTRInt8uAttributeCallbackBridge,
+    return MTRReadAttribute<MTRBallastConfigurationLampAlarmModeAttributeCallbackBridge,
         NSNumber,
         TypeInfo::DecodableType>(params, completion, self.callbackQueue, self.device, self.endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -73045,7 +73045,7 @@ using chip::System::Clock::Timeout;
             ListFreer listFreer;
             using TypeInfo = BallastConfiguration::Attributes::LampAlarmMode::TypeInfo;
             TypeInfo::Type cppValue;
-            cppValue = value.unsignedCharValue;
+            cppValue = static_cast<std::remove_reference_t<decltype(cppValue)>>(value.unsignedCharValue);
 
             chip::Controller::ClusterBase cppCluster(exchangeManager, session, self.endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
@@ -73058,13 +73058,13 @@ using chip::System::Clock::Timeout;
                                     reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = BallastConfiguration::Attributes::LampAlarmMode::TypeInfo;
-    MTRSubscribeAttribute<MTRInt8uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self.endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+    MTRSubscribeAttribute<MTRBallastConfigurationLampAlarmModeAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self.endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
 + (void)readAttributeLampAlarmModeWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer endpoint:(NSNumber *)endpoint queue:(dispatch_queue_t)queue completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRInt8uAttributeCallbackBridge(queue, completion);
-    std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice, ^(Int8uAttributeCallback successCb, MTRErrorCallback failureCb) {
+    auto * bridge = new MTRBallastConfigurationLampAlarmModeAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice, ^(BallastConfigurationLampAlarmModeAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (clusterStateCacheContainer.cppClusterStateCache) {
             chip::app::ConcreteAttributePath path;
             using TypeInfo = BallastConfiguration::Attributes::LampAlarmMode::TypeInfo;
