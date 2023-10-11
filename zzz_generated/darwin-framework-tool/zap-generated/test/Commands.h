@@ -66735,7 +66735,7 @@ private:
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 65530UL));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
-            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
 
             NextTest();
@@ -66760,7 +66760,7 @@ private:
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
-            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
 
             NextTest();
