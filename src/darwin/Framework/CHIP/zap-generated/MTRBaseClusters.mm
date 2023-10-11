@@ -14191,7 +14191,7 @@ using chip::System::Clock::Timeout;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::UpdateState::TypeInfo;
-    return MTRReadAttribute<MTROTASoftwareUpdateRequestorClusterOTAUpdateStateEnumAttributeCallbackBridge,
+    return MTRReadAttribute<MTROTASoftwareUpdateRequestorClusterUpdateStateEnumAttributeCallbackBridge,
         NSNumber,
         TypeInfo::DecodableType>(params, completion, self.callbackQueue, self.device, self.endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -14201,13 +14201,13 @@ using chip::System::Clock::Timeout;
                                   reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::UpdateState::TypeInfo;
-    MTRSubscribeAttribute<MTROTASoftwareUpdateRequestorClusterOTAUpdateStateEnumAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self.endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+    MTRSubscribeAttribute<MTROTASoftwareUpdateRequestorClusterUpdateStateEnumAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self.endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
 + (void)readAttributeUpdateStateWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer endpoint:(NSNumber *)endpoint queue:(dispatch_queue_t)queue completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTROTASoftwareUpdateRequestorClusterOTAUpdateStateEnumAttributeCallbackBridge(queue, completion);
-    std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice, ^(OTASoftwareUpdateRequestorClusterOTAUpdateStateEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
+    auto * bridge = new MTROTASoftwareUpdateRequestorClusterUpdateStateEnumAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice, ^(OTASoftwareUpdateRequestorClusterUpdateStateEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (clusterStateCacheContainer.cppClusterStateCache) {
             chip::app::ConcreteAttributePath path;
             using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::UpdateState::TypeInfo;
