@@ -40744,8 +40744,8 @@ public:
             err = TestReadRegisteredClients_15();
             break;
         case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : Register 1.1\n");
-            err = TestRegister11_16();
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Register 1.1 (update)\n");
+            err = TestRegister11Update_16();
             break;
         case 17:
             ChipLogProgress(chipTool, " ***** Test Step 17 : Read RegisteredClients\n");
@@ -41266,7 +41266,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestRegister11_16()
+    CHIP_ERROR TestRegister11Update_16()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -41282,7 +41282,7 @@ private:
             [[NSData alloc] initWithBytes:"\001\021!1AQaq\201\221\241\261\301\321\341\361" length:16];
         [cluster registerClientWithParams:params completion:
                                                      ^(MTRICDManagementClusterRegisterClientResponseParams * _Nullable values, NSError * _Nullable err) {
-                                                         NSLog(@"Register 1.1 Error: %@", err);
+                                                         NSLog(@"Register 1.1 (update) Error: %@", err);
 
                                                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
