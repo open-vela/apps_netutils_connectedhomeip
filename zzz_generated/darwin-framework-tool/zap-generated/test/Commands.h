@@ -47135,7 +47135,7 @@ private:
 
             if (value != nil) {
 
-                VerifyOrReturn(CheckConstraintType("percentSetting", "Percent", "Percent"));
+                VerifyOrReturn(CheckConstraintType("percentSetting", "percent", "percent"));
                 VerifyOrReturn(CheckConstraintMinValue<chip::Percent>("percentSetting", [value unsignedCharValue], 0U));
                 VerifyOrReturn(CheckConstraintMaxValue<chip::Percent>("percentSetting", [value unsignedCharValue], 100U));
             }
@@ -47158,7 +47158,7 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("percentCurrent", "Percent", "Percent"));
+            VerifyOrReturn(CheckConstraintType("percentCurrent", "percent", "percent"));
             VerifyOrReturn(CheckConstraintMinValue<chip::Percent>("percentCurrent", [value unsignedCharValue], 0U));
             VerifyOrReturn(CheckConstraintMaxValue<chip::Percent>("percentCurrent", [value unsignedCharValue], 100U));
 
@@ -102978,7 +102978,7 @@ private:
 
             if (value != nil) {
 
-                VerifyOrReturn(CheckConstraintType("targetPositionLiftPercent100ths", "Percent100ths", "Percent100ths"));
+                VerifyOrReturn(CheckConstraintType("targetPositionLiftPercent100ths", "percent100ths", "percent100ths"));
                 VerifyOrReturn(CheckConstraintMinValue<chip::Percent100ths>("targetPositionLiftPercent100ths", [value unsignedShortValue], 0U));
                 VerifyOrReturn(CheckConstraintMaxValue<chip::Percent100ths>("targetPositionLiftPercent100ths", [value unsignedShortValue], 10000U));
             }
@@ -103003,7 +103003,7 @@ private:
 
             if (value != nil) {
 
-                VerifyOrReturn(CheckConstraintType("targetPositionTiltPercent100ths", "Percent100ths", "Percent100ths"));
+                VerifyOrReturn(CheckConstraintType("targetPositionTiltPercent100ths", "percent100ths", "percent100ths"));
                 VerifyOrReturn(CheckConstraintMinValue<chip::Percent100ths>("targetPositionTiltPercent100ths", [value unsignedShortValue], 0U));
                 VerifyOrReturn(CheckConstraintMaxValue<chip::Percent100ths>("targetPositionTiltPercent100ths", [value unsignedShortValue], 10000U));
             }
@@ -103028,7 +103028,7 @@ private:
 
             if (value != nil) {
 
-                VerifyOrReturn(CheckConstraintType("currentPositionLiftPercent100ths", "Percent100ths", "Percent100ths"));
+                VerifyOrReturn(CheckConstraintType("currentPositionLiftPercent100ths", "percent100ths", "percent100ths"));
                 VerifyOrReturn(CheckConstraintMinValue<chip::Percent100ths>("currentPositionLiftPercent100ths", [value unsignedShortValue], 0U));
                 VerifyOrReturn(CheckConstraintMaxValue<chip::Percent100ths>("currentPositionLiftPercent100ths", [value unsignedShortValue], 10000U));
             }
@@ -103053,7 +103053,7 @@ private:
 
             if (value != nil) {
 
-                VerifyOrReturn(CheckConstraintType("currentPositionTiltPercent100ths", "Percent100ths", "Percent100ths"));
+                VerifyOrReturn(CheckConstraintType("currentPositionTiltPercent100ths", "percent100ths", "percent100ths"));
                 VerifyOrReturn(CheckConstraintMinValue<chip::Percent100ths>("currentPositionTiltPercent100ths", [value unsignedShortValue], 0U));
                 VerifyOrReturn(CheckConstraintMaxValue<chip::Percent100ths>("currentPositionTiltPercent100ths", [value unsignedShortValue], 10000U));
             }
@@ -103392,7 +103392,7 @@ private:
 
             if (value != nil) {
 
-                VerifyOrReturn(CheckConstraintType("currentPositionLiftPercentage", "Percent", "Percent"));
+                VerifyOrReturn(CheckConstraintType("currentPositionLiftPercentage", "percent", "percent"));
                 VerifyOrReturn(CheckConstraintMinValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 0U));
                 VerifyOrReturn(CheckConstraintMaxValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 100U));
             }
@@ -103417,7 +103417,7 @@ private:
 
             if (value != nil) {
 
-                VerifyOrReturn(CheckConstraintType("currentPositionTiltPercentage", "Percent", "Percent"));
+                VerifyOrReturn(CheckConstraintType("currentPositionTiltPercentage", "percent", "percent"));
                 VerifyOrReturn(CheckConstraintMinValue<chip::Percent>("currentPositionTiltPercentage", [value unsignedCharValue], 0U));
                 VerifyOrReturn(CheckConstraintMaxValue<chip::Percent>("currentPositionTiltPercentage", [value unsignedCharValue], 100U));
             }
@@ -104824,7 +104824,7 @@ private:
 
             if (value != nil) {
 
-                VerifyOrReturn(CheckConstraintType("currentPositionLiftPercent100ths", "Percent100ths", "Percent100ths"));
+                VerifyOrReturn(CheckConstraintType("currentPositionLiftPercent100ths", "percent100ths", "percent100ths"));
                 VerifyOrReturn(CheckConstraintMinValue<chip::Percent100ths>("currentPositionLiftPercent100ths", [value unsignedShortValue], 1U));
                 VerifyOrReturn(CheckConstraintMaxValue<chip::Percent100ths>("currentPositionLiftPercent100ths", [value unsignedShortValue], 10000U));
             }
@@ -104849,7 +104849,7 @@ private:
 
             if (value != nil) {
 
-                VerifyOrReturn(CheckConstraintType("currentPositionLiftPercentage", "Percent", "Percent"));
+                VerifyOrReturn(CheckConstraintType("currentPositionLiftPercentage", "percent", "percent"));
                 VerifyOrReturn(CheckConstraintMinValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 1U));
                 VerifyOrReturn(CheckConstraintMaxValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 100U));
             }
@@ -104874,7 +104874,7 @@ private:
 
             if (value != nil) {
 
-                VerifyOrReturn(CheckConstraintType("currentPositionTiltPercent100ths", "Percent100ths", "Percent100ths"));
+                VerifyOrReturn(CheckConstraintType("currentPositionTiltPercent100ths", "percent100ths", "percent100ths"));
                 VerifyOrReturn(CheckConstraintMinValue<chip::Percent100ths>("currentPositionTiltPercent100ths", [value unsignedShortValue], 1U));
                 VerifyOrReturn(CheckConstraintMaxValue<chip::Percent100ths>("currentPositionTiltPercent100ths", [value unsignedShortValue], 10000U));
             }
@@ -104899,7 +104899,7 @@ private:
 
             if (value != nil) {
 
-                VerifyOrReturn(CheckConstraintType("currentPositionTiltPercentage", "Percent", "Percent"));
+                VerifyOrReturn(CheckConstraintType("currentPositionTiltPercentage", "percent", "percent"));
                 VerifyOrReturn(CheckConstraintMinValue<chip::Percent>("currentPositionTiltPercentage", [value unsignedCharValue], 1U));
                 VerifyOrReturn(CheckConstraintMaxValue<chip::Percent>("currentPositionTiltPercentage", [value unsignedCharValue], 100U));
             }
@@ -105156,7 +105156,7 @@ private:
 
             if (value != nil) {
 
-                VerifyOrReturn(CheckConstraintType("currentPositionLiftPercent100ths", "Percent100ths", "Percent100ths"));
+                VerifyOrReturn(CheckConstraintType("currentPositionLiftPercent100ths", "percent100ths", "percent100ths"));
                 VerifyOrReturn(CheckConstraintMinValue<chip::Percent100ths>("currentPositionLiftPercent100ths", [value unsignedShortValue], 0U));
                 VerifyOrReturn(CheckConstraintMaxValue<chip::Percent100ths>("currentPositionLiftPercent100ths", [value unsignedShortValue], 9999U));
             }
@@ -105181,7 +105181,7 @@ private:
 
             if (value != nil) {
 
-                VerifyOrReturn(CheckConstraintType("currentPositionLiftPercentage", "Percent", "Percent"));
+                VerifyOrReturn(CheckConstraintType("currentPositionLiftPercentage", "percent", "percent"));
                 VerifyOrReturn(CheckConstraintMinValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 0U));
                 VerifyOrReturn(CheckConstraintMaxValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 99U));
             }
@@ -105206,7 +105206,7 @@ private:
 
             if (value != nil) {
 
-                VerifyOrReturn(CheckConstraintType("currentPositionTiltPercent100ths", "Percent100ths", "Percent100ths"));
+                VerifyOrReturn(CheckConstraintType("currentPositionTiltPercent100ths", "percent100ths", "percent100ths"));
                 VerifyOrReturn(CheckConstraintMinValue<chip::Percent100ths>("currentPositionTiltPercent100ths", [value unsignedShortValue], 0U));
                 VerifyOrReturn(CheckConstraintMaxValue<chip::Percent100ths>("currentPositionTiltPercent100ths", [value unsignedShortValue], 9999U));
             }
@@ -105231,7 +105231,7 @@ private:
 
             if (value != nil) {
 
-                VerifyOrReturn(CheckConstraintType("currentPositionTiltPercentage", "Percent", "Percent"));
+                VerifyOrReturn(CheckConstraintType("currentPositionTiltPercentage", "percent", "percent"));
                 VerifyOrReturn(CheckConstraintMinValue<chip::Percent>("currentPositionTiltPercentage", [value unsignedCharValue], 0U));
                 VerifyOrReturn(CheckConstraintMaxValue<chip::Percent>("currentPositionTiltPercentage", [value unsignedCharValue], 99U));
             }
@@ -105314,7 +105314,7 @@ private:
 
             if (value != nil) {
 
-                VerifyOrReturn(CheckConstraintType("targetPositionLiftPercent100ths", "Percent100ths", "Percent100ths"));
+                VerifyOrReturn(CheckConstraintType("targetPositionLiftPercent100ths", "percent100ths", "percent100ths"));
                 VerifyOrReturn(CheckConstraintMinValue<chip::Percent100ths>("targetPositionLiftPercent100ths", [value unsignedShortValue], 0U));
                 VerifyOrReturn(CheckConstraintMaxValue<chip::Percent100ths>("targetPositionLiftPercent100ths", [value unsignedShortValue], 9999U));
             }
@@ -105339,7 +105339,7 @@ private:
 
             if (value != nil) {
 
-                VerifyOrReturn(CheckConstraintType("targetPositionTiltPercent100ths", "Percent100ths", "Percent100ths"));
+                VerifyOrReturn(CheckConstraintType("targetPositionTiltPercent100ths", "percent100ths", "percent100ths"));
                 VerifyOrReturn(CheckConstraintMinValue<chip::Percent100ths>("targetPositionTiltPercent100ths", [value unsignedShortValue], 0U));
                 VerifyOrReturn(CheckConstraintMaxValue<chip::Percent100ths>("targetPositionTiltPercent100ths", [value unsignedShortValue], 9999U));
             }
@@ -105769,7 +105769,7 @@ private:
 
             if (value != nil) {
 
-                VerifyOrReturn(CheckConstraintType("currentPositionLiftPercent100ths", "Percent100ths", "Percent100ths"));
+                VerifyOrReturn(CheckConstraintType("currentPositionLiftPercent100ths", "percent100ths", "percent100ths"));
                 VerifyOrReturn(CheckConstraintMinValue<chip::Percent100ths>("currentPositionLiftPercent100ths", [value unsignedShortValue], 0U));
                 VerifyOrReturn(CheckConstraintMaxValue<chip::Percent100ths>("currentPositionLiftPercent100ths", [value unsignedShortValue], 9999U));
             }
@@ -105794,7 +105794,7 @@ private:
 
             if (value != nil) {
 
-                VerifyOrReturn(CheckConstraintType("currentPositionLiftPercentage", "Percent", "Percent"));
+                VerifyOrReturn(CheckConstraintType("currentPositionLiftPercentage", "percent", "percent"));
                 VerifyOrReturn(CheckConstraintMinValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 0U));
                 VerifyOrReturn(CheckConstraintMaxValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 99U));
             }
@@ -105819,7 +105819,7 @@ private:
 
             if (value != nil) {
 
-                VerifyOrReturn(CheckConstraintType("currentPositionTiltPercent100ths", "Percent100ths", "Percent100ths"));
+                VerifyOrReturn(CheckConstraintType("currentPositionTiltPercent100ths", "percent100ths", "percent100ths"));
                 VerifyOrReturn(CheckConstraintMinValue<chip::Percent100ths>("currentPositionTiltPercent100ths", [value unsignedShortValue], 0U));
                 VerifyOrReturn(CheckConstraintMaxValue<chip::Percent100ths>("currentPositionTiltPercent100ths", [value unsignedShortValue], 9999U));
             }
@@ -105844,7 +105844,7 @@ private:
 
             if (value != nil) {
 
-                VerifyOrReturn(CheckConstraintType("currentPositionTiltPercentage", "Percent", "Percent"));
+                VerifyOrReturn(CheckConstraintType("currentPositionTiltPercentage", "percent", "percent"));
                 VerifyOrReturn(CheckConstraintMinValue<chip::Percent>("currentPositionTiltPercentage", [value unsignedCharValue], 0U));
                 VerifyOrReturn(CheckConstraintMaxValue<chip::Percent>("currentPositionTiltPercentage", [value unsignedCharValue], 99U));
             }
@@ -106101,7 +106101,7 @@ private:
 
             if (value != nil) {
 
-                VerifyOrReturn(CheckConstraintType("currentPositionLiftPercent100ths", "Percent100ths", "Percent100ths"));
+                VerifyOrReturn(CheckConstraintType("currentPositionLiftPercent100ths", "percent100ths", "percent100ths"));
                 VerifyOrReturn(CheckConstraintMinValue<chip::Percent100ths>("currentPositionLiftPercent100ths", [value unsignedShortValue], 1U));
                 VerifyOrReturn(CheckConstraintMaxValue<chip::Percent100ths>("currentPositionLiftPercent100ths", [value unsignedShortValue], 10000U));
             }
@@ -106126,7 +106126,7 @@ private:
 
             if (value != nil) {
 
-                VerifyOrReturn(CheckConstraintType("currentPositionLiftPercentage", "Percent", "Percent"));
+                VerifyOrReturn(CheckConstraintType("currentPositionLiftPercentage", "percent", "percent"));
                 VerifyOrReturn(CheckConstraintMinValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 1U));
                 VerifyOrReturn(CheckConstraintMaxValue<chip::Percent>("currentPositionLiftPercentage", [value unsignedCharValue], 100U));
             }
@@ -106151,7 +106151,7 @@ private:
 
             if (value != nil) {
 
-                VerifyOrReturn(CheckConstraintType("currentPositionTiltPercent100ths", "Percent100ths", "Percent100ths"));
+                VerifyOrReturn(CheckConstraintType("currentPositionTiltPercent100ths", "percent100ths", "percent100ths"));
                 VerifyOrReturn(CheckConstraintMinValue<chip::Percent100ths>("currentPositionTiltPercent100ths", [value unsignedShortValue], 1U));
                 VerifyOrReturn(CheckConstraintMaxValue<chip::Percent100ths>("currentPositionTiltPercent100ths", [value unsignedShortValue], 10000U));
             }
@@ -106176,7 +106176,7 @@ private:
 
             if (value != nil) {
 
-                VerifyOrReturn(CheckConstraintType("currentPositionTiltPercentage", "Percent", "Percent"));
+                VerifyOrReturn(CheckConstraintType("currentPositionTiltPercentage", "percent", "percent"));
                 VerifyOrReturn(CheckConstraintMinValue<chip::Percent>("currentPositionTiltPercentage", [value unsignedCharValue], 1U));
                 VerifyOrReturn(CheckConstraintMaxValue<chip::Percent>("currentPositionTiltPercentage", [value unsignedCharValue], 100U));
             }
@@ -106259,7 +106259,7 @@ private:
 
             if (value != nil) {
 
-                VerifyOrReturn(CheckConstraintType("targetPositionLiftPercent100ths", "Percent100ths", "Percent100ths"));
+                VerifyOrReturn(CheckConstraintType("targetPositionLiftPercent100ths", "percent100ths", "percent100ths"));
                 VerifyOrReturn(CheckConstraintMinValue<chip::Percent100ths>("targetPositionLiftPercent100ths", [value unsignedShortValue], 1U));
                 VerifyOrReturn(CheckConstraintMaxValue<chip::Percent100ths>("targetPositionLiftPercent100ths", [value unsignedShortValue], 10000U));
             }
@@ -106284,7 +106284,7 @@ private:
 
             if (value != nil) {
 
-                VerifyOrReturn(CheckConstraintType("targetPositionTiltPercent100ths", "Percent100ths", "Percent100ths"));
+                VerifyOrReturn(CheckConstraintType("targetPositionTiltPercent100ths", "percent100ths", "percent100ths"));
                 VerifyOrReturn(CheckConstraintMinValue<chip::Percent100ths>("targetPositionTiltPercent100ths", [value unsignedShortValue], 1U));
                 VerifyOrReturn(CheckConstraintMaxValue<chip::Percent100ths>("targetPositionTiltPercent100ths", [value unsignedShortValue], 10000U));
             }
