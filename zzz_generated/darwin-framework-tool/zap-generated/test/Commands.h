@@ -46417,72 +46417,80 @@ public:
             err = TestStep3gGivenFansf05dirEnsureFeaturemapHasTheCorrectBitSet_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Step 4: Read the global attribute: AttributeList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Step 4a: Read the global attribute: AttributeList\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep4ReadTheGlobalAttributeAttributeList_9();
+            err = TestStep4aReadTheGlobalAttributeAttributeList_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Step 4: Read the global attribute: AttributeList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Step 4a: Read the global attribute: AttributeList\n");
             if (ShouldSkip("!PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
-            err = TestStep4ReadTheGlobalAttributeAttributeList_10();
+            err = TestStep4aReadTheGlobalAttributeAttributeList_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Step 4: Read the feature dependent FAN.S.F00 (SPD) attribute in AttributeList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Step 4c: Read the feature dependent FAN.S.F00 (SPD) attribute in AttributeList\n");
             if (ShouldSkip("FAN.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestStep4ReadTheFeatureDependentFansf00SpdAttributeInAttributeList_11();
+            err = TestStep4cReadTheFeatureDependentFansf00SpdAttributeInAttributeList_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : Step 4: Read the feature dependent FAN.S.F02(RCK) attribute in AttributeList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Step 4d: Read the feature dependent FAN.S.F02(RCK) attribute in AttributeList\n");
             if (ShouldSkip("FAN.S.F02")) {
                 NextTest();
                 return;
             }
-            err = TestStep4ReadTheFeatureDependentFansf02rckAttributeInAttributeList_12();
+            err = TestStep4dReadTheFeatureDependentFansf02rckAttributeInAttributeList_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Step 4: Read the feature dependent FAN.S.F03(WND) attribute in AttributeList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Step 4e: Read the feature dependent FAN.S.F03(WND) attribute in AttributeList\n");
             if (ShouldSkip("FAN.S.F03")) {
                 NextTest();
                 return;
             }
-            err = TestStep4ReadTheFeatureDependentFansf03wndAttributeInAttributeList_13();
+            err = TestStep4eReadTheFeatureDependentFansf03wndAttributeInAttributeList_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : Step 4: Read the feature dependent FAN.S.F05(DIR) attribute in AttributeList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Step 4f: Read the feature dependent FAN.S.F05(DIR) attribute in AttributeList\n");
             if (ShouldSkip("FAN.S.F05")) {
                 NextTest();
                 return;
             }
-            err = TestStep4ReadTheFeatureDependentFansf05dirAttributeInAttributeList_14();
+            err = TestStep4fReadTheFeatureDependentFansf05dirAttributeInAttributeList_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : Step 6: Read the global attribute: AcceptedCommandList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Step 5: TH reads EventList attribute from DUT\n");
+            if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
+                NextTest();
+                return;
+            }
+            NextTest();
+            return;
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Step 6: Read the global attribute: AcceptedCommandList\n");
             if (ShouldSkip(" !FAN.S.C00.Rsp ")) {
                 NextTest();
                 return;
             }
-            err = TestStep6ReadTheGlobalAttributeAcceptedCommandList_15();
+            err = TestStep6ReadTheGlobalAttributeAcceptedCommandList_16();
             break;
-        case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : Step 6: Read the optional command (Step) in AcceptedCommandList\n");
+        case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Step 6: Read the optional command (Step) in AcceptedCommandList\n");
             if (ShouldSkip("FAN.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestStep6ReadTheOptionalCommandStepInAcceptedCommandList_16();
+            err = TestStep6ReadTheOptionalCommandStepInAcceptedCommandList_17();
             break;
-        case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : Step 7: Read the global attribute: GeneratedCommandList\n");
-            err = TestStep7ReadTheGlobalAttributeGeneratedCommandList_17();
+        case 18:
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Step 7: Read the global attribute: GeneratedCommandList\n");
+            err = TestStep7ReadTheGlobalAttributeGeneratedCommandList_18();
             break;
         }
 
@@ -46549,6 +46557,9 @@ public:
         case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -46559,7 +46570,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 18;
+    const uint16_t mTestCount = 19;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -46736,7 +46747,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4ReadTheGlobalAttributeAttributeList_9()
+    CHIP_ERROR TestStep4aReadTheGlobalAttributeAttributeList_9()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -46744,7 +46755,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 4: Read the global attribute: AttributeList Error: %@", err);
+            NSLog(@"Step 4a: Read the global attribute: AttributeList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -46766,7 +46777,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4ReadTheGlobalAttributeAttributeList_10()
+    CHIP_ERROR TestStep4aReadTheGlobalAttributeAttributeList_10()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -46774,7 +46785,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 4: Read the global attribute: AttributeList Error: %@", err);
+            NSLog(@"Step 4a: Read the global attribute: AttributeList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -46795,7 +46806,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4ReadTheFeatureDependentFansf00SpdAttributeInAttributeList_11()
+    CHIP_ERROR TestStep4cReadTheFeatureDependentFansf00SpdAttributeInAttributeList_11()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -46803,7 +46814,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 4: Read the feature dependent FAN.S.F00 (SPD) attribute in AttributeList Error: %@", err);
+            NSLog(@"Step 4c: Read the feature dependent FAN.S.F00 (SPD) attribute in AttributeList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -46818,7 +46829,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4ReadTheFeatureDependentFansf02rckAttributeInAttributeList_12()
+    CHIP_ERROR TestStep4dReadTheFeatureDependentFansf02rckAttributeInAttributeList_12()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -46826,7 +46837,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 4: Read the feature dependent FAN.S.F02(RCK) attribute in AttributeList Error: %@", err);
+            NSLog(@"Step 4d: Read the feature dependent FAN.S.F02(RCK) attribute in AttributeList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -46840,7 +46851,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4ReadTheFeatureDependentFansf03wndAttributeInAttributeList_13()
+    CHIP_ERROR TestStep4eReadTheFeatureDependentFansf03wndAttributeInAttributeList_13()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -46848,7 +46859,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 4: Read the feature dependent FAN.S.F03(WND) attribute in AttributeList Error: %@", err);
+            NSLog(@"Step 4e: Read the feature dependent FAN.S.F03(WND) attribute in AttributeList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -46862,7 +46873,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4ReadTheFeatureDependentFansf05dirAttributeInAttributeList_14()
+    CHIP_ERROR TestStep4fReadTheFeatureDependentFansf05dirAttributeInAttributeList_14()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -46870,7 +46881,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 4: Read the feature dependent FAN.S.F05(DIR) attribute in AttributeList Error: %@", err);
+            NSLog(@"Step 4f: Read the feature dependent FAN.S.F05(DIR) attribute in AttributeList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -46883,7 +46894,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep6ReadTheGlobalAttributeAcceptedCommandList_15()
+    CHIP_ERROR TestStep6ReadTheGlobalAttributeAcceptedCommandList_16()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -46907,7 +46918,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep6ReadTheOptionalCommandStepInAcceptedCommandList_16()
+    CHIP_ERROR TestStep6ReadTheOptionalCommandStepInAcceptedCommandList_17()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -46928,7 +46939,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep7ReadTheGlobalAttributeGeneratedCommandList_17()
+    CHIP_ERROR TestStep7ReadTheGlobalAttributeGeneratedCommandList_18()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -77444,12 +77455,8 @@ public:
             err = TestStep1WaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
         case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : Step 2: TH reads the ClusterRevision attribute from the DUT\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestStep2ThReadsTheClusterRevisionAttributeFromTheDut_1();
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Step 2: Read the global attribute: ClusterRevision\n");
+            err = TestStep2ReadTheGlobalAttributeClusterRevision_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Step 3: TH reads the FeatureMap attribute from the DUT\n");
@@ -77584,14 +77591,28 @@ private:
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestStep2ThReadsTheClusterRevisionAttributeFromTheDut_1()
+    CHIP_ERROR TestStep2ReadTheGlobalAttributeClusterRevision_1()
     {
 
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterModeSelect alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 2: Read the global attribute: ClusterRevision Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 2U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 
     CHIP_ERROR TestStep3ThReadsTheFeatureMapAttributeFromTheDut_2()
@@ -100463,57 +100484,57 @@ public:
             err = TestStep4dThReadsOptionalAttributeCurrentMaxRateInAttributeListFromDut_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Step 5a: TH reads AcceptedCommandList from DUT\n");
-            if (ShouldSkip(" !DGWIFI.S.F01 ")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5aThReadsAcceptedCommandListFromDut_10();
-            break;
-        case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Step 5b: TH reads Feature dependent(DGWIFI.S.F01) command in AcceptedCommandList from DUT\n");
-            if (ShouldSkip("DGWIFI.S.F01")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5bThReadsFeatureDependentDGWIFISF01CommandInAcceptedCommandListFromDut_11();
-            break;
-        case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : Step 6: TH reads GeneratedCommandList from DUT\n");
-            err = TestStep6ThReadsGeneratedCommandListFromDut_12();
-            break;
-        case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Step 7a: TH reads EventList from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Step 5a: TH reads EventList from DUT\n");
             if (ShouldSkip(" !DGWIFI.S.E00 && !DGWIFI.S.E01 && !DGWIFI.S.E02 && PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
-        case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : Step 7b: TH reads optional attribute (Disconnection) in EventList from DUT\n");
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Step 5b: TH reads optional attribute (Disconnection) in EventList from DUT\n");
             if (ShouldSkip("DGWIFI.S.E00 && PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
-        case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : Step 7c: TH reads optional attribute (AssociationFailure) in EventList from DUT\n");
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Step 5c: TH reads optional attribute (AssociationFailure) in EventList from DUT\n");
             if (ShouldSkip("DGWIFI.S.E01 && PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
-        case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : Step 7d: TH reads optional attribute (ConnectionStatus) in EventList from DUT\n");
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Step 5d: TH reads optional attribute (ConnectionStatus) in EventList from DUT\n");
             if (ShouldSkip("DGWIFI.S.E02 && PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Step 6a: TH reads AcceptedCommandList from DUT\n");
+            if (ShouldSkip(" !DGWIFI.S.F01 ")) {
+                NextTest();
+                return;
+            }
+            err = TestStep6aThReadsAcceptedCommandListFromDut_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Step 6b: TH reads Feature dependent(DGWIFI.S.F01) command in AcceptedCommandList from DUT\n");
+            if (ShouldSkip("DGWIFI.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestStep6bThReadsFeatureDependentDGWIFISF01CommandInAcceptedCommandListFromDut_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Step 7: TH reads GeneratedCommandList from DUT\n");
+            err = TestStep7ThReadsGeneratedCommandListFromDut_16();
+            break;
         }
 
         if (CHIP_NO_ERROR != err) {
@@ -100816,7 +100837,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep5aThReadsAcceptedCommandListFromDut_10()
+    CHIP_ERROR TestStep6aThReadsAcceptedCommandListFromDut_14()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -100824,7 +100845,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 5a: TH reads AcceptedCommandList from DUT Error: %@", err);
+            NSLog(@"Step 6a: TH reads AcceptedCommandList from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -100840,7 +100861,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep5bThReadsFeatureDependentDGWIFISF01CommandInAcceptedCommandListFromDut_11()
+    CHIP_ERROR TestStep6bThReadsFeatureDependentDGWIFISF01CommandInAcceptedCommandListFromDut_15()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -100848,7 +100869,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 5b: TH reads Feature dependent(DGWIFI.S.F01) command in AcceptedCommandList from DUT Error: %@", err);
+            NSLog(@"Step 6b: TH reads Feature dependent(DGWIFI.S.F01) command in AcceptedCommandList from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -100861,7 +100882,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep6ThReadsGeneratedCommandListFromDut_12()
+    CHIP_ERROR TestStep7ThReadsGeneratedCommandListFromDut_16()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -100869,7 +100890,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Step 6: TH reads GeneratedCommandList from DUT Error: %@", err);
+            NSLog(@"Step 7: TH reads GeneratedCommandList from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
