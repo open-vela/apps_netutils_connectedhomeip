@@ -297,7 +297,6 @@ public:
         printf("Test_TC_G_1_1\n");
         printf("Test_TC_S_1_1\n");
         printf("Test_TC_S_2_1\n");
-        printf("Test_TC_S_2_3\n");
         printf("Test_TC_S_2_4\n");
         printf("TestActivatedCarbonFilterMonitoring\n");
         printf("TestHepaFilterMonitoring\n");
@@ -171491,112 +171490,120 @@ public:
             err = TestStep3aReadFeatureMapGlobalAttribute65532_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Step 4: Read Mandatory attributes in AttributeList (global attribute 65531)\n");
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Step 3b: Read FeatureMap (global attribute 65532)\n");
+            err = TestStep3bReadFeatureMapGlobalAttribute65532_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Step 3c: Read FeatureMap (global attribute 65532)\n");
+            err = TestStep3cReadFeatureMapGlobalAttribute65532_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Step 4: Read Mandatory attributes in AttributeList (global attribute 65531)\n");
             if (ShouldSkip("S.S")) {
                 NextTest();
                 return;
             }
-            err = TestStep4ReadMandatoryAttributesInAttributeListGlobalAttribute65531_4();
+            err = TestStep4ReadMandatoryAttributesInAttributeListGlobalAttribute65531_6();
             break;
-        case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Step 4b: Read optional attributes(SceneCount, CurrentScene, CurrentGroup, SceneValid) in AttributeList (global attribute 65531)\n");
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Step 4b: Read optional attributes(SceneCount, CurrentScene, CurrentGroup, SceneValid) in AttributeList (global attribute 65531)\n");
             if (ShouldSkip("(!S.S.F03)")) {
                 NextTest();
                 return;
             }
-            err = TestStep4bReadOptionalAttributesSceneCountCurrentSceneCurrentGroupSceneValidInAttributeListGlobalAttribute65531_5();
+            err = TestStep4bReadOptionalAttributesSceneCountCurrentSceneCurrentGroupSceneValidInAttributeListGlobalAttribute65531_7();
             break;
-        case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Step 4c: Read optinnal attribute(LastConfiguredBy) in AttributeList (global attribute 65531)\n");
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Step 4c: Read optinnal attribute(LastConfiguredBy) in AttributeList (global attribute 65531)\n");
             if (ShouldSkip("S.S.A0005")) {
                 NextTest();
                 return;
             }
-            err = TestStep4cReadOptinnalAttributeLastConfiguredByInAttributeListGlobalAttribute65531_6();
+            err = TestStep4cReadOptinnalAttributeLastConfiguredByInAttributeListGlobalAttribute65531_8();
             break;
-        case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Step 4d: Read optionnal attribute(SceneTableSize) in AttributeList (global attribute 65531)\n");
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Step 4d: Read optionnal attribute(SceneTableSize) in AttributeList (global attribute 65531)\n");
             if (ShouldSkip("S.S.F02")) {
                 NextTest();
                 return;
             }
-            err = TestStep4dReadOptionnalAttributeSceneTableSizeInAttributeListGlobalAttribute65531_7();
+            err = TestStep4dReadOptionnalAttributeSceneTableSizeInAttributeListGlobalAttribute65531_9();
             break;
-        case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Step 4e: Read optional attribute(FabricSceneInfo) in AttributeList (global attribute 65531)\n");
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Step 4e: Read optional attribute(FabricSceneInfo) in AttributeList (global attribute 65531)\n");
             if (ShouldSkip("S.S.F03")) {
                 NextTest();
                 return;
             }
-            err = TestStep4eReadOptionalAttributeFabricSceneInfoInAttributeListGlobalAttribute65531_8();
+            err = TestStep4eReadOptionalAttributeFabricSceneInfoInAttributeListGlobalAttribute65531_10();
             break;
-        case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Step 5: Read EventList (global attribute 65530)\n");
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Step 5: Read EventList (global attribute 65530)\n");
             if (ShouldSkip("PICS_EVENT_LIST_ENABLED")) {
                 NextTest();
                 return;
             }
             NextTest();
             return;
-        case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Step 6a: Read Mandatory commands in AcceptedCommandList (global attribute 65529)\n");
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Step 6a: Read Mandatory commands in AcceptedCommandList (global attribute 65529)\n");
             if (ShouldSkip("S.S")) {
                 NextTest();
                 return;
             }
-            err = TestStep6aReadMandatoryCommandsInAcceptedCommandListGlobalAttribute65529_10();
-            break;
-        case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Step 6b: Read optional command(EnhancedAddSceneResponse) AcceptedCommandList (global attribute 65529)\n");
-            if (ShouldSkip("S.S.C40.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6bReadOptionalCommandEnhancedAddSceneResponseAcceptedCommandListGlobalAttribute65529_11();
-            break;
-        case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : Step 6c: Read optional command(EnhancedViewSceneResponse) AcceptedCommandList (global attribute 65529)\n");
-            if (ShouldSkip("S.S.C41.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6cReadOptionalCommandEnhancedViewSceneResponseAcceptedCommandListGlobalAttribute65529_12();
+            err = TestStep6aReadMandatoryCommandsInAcceptedCommandListGlobalAttribute65529_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Step 6d: Read optional command(CopySceneResponse) AcceptedCommandList (global attribute 65529)\n");
-            if (ShouldSkip("S.S.C42.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6dReadOptionalCommandCopySceneResponseAcceptedCommandListGlobalAttribute65529_13();
-            break;
-        case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : Step 7a: Read GeneratedCommandList (global attribute 65528)\n");
-            err = TestStep7aReadGeneratedCommandListGlobalAttribute65528_14();
-            break;
-        case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : Step 7b: Read optional command(EnhancedAddSceneResponse) in GeneratedCommandList (global attribute 65528)\n");
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Step 6b: Read optional command(EnhancedAddSceneResponse) AcceptedCommandList (global attribute 65529)\n");
             if (ShouldSkip("S.S.C40.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestStep7bReadOptionalCommandEnhancedAddSceneResponseInGeneratedCommandListGlobalAttribute65528_15();
+            err = TestStep6bReadOptionalCommandEnhancedAddSceneResponseAcceptedCommandListGlobalAttribute65529_13();
             break;
-        case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : Step 7c: Read optional command(EnhancedViewSceneResponse) in GeneratedCommandList (global attribute 65528)\n");
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Step 6c: Read optional command(EnhancedViewSceneResponse) AcceptedCommandList (global attribute 65529)\n");
             if (ShouldSkip("S.S.C41.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestStep7cReadOptionalCommandEnhancedViewSceneResponseInGeneratedCommandListGlobalAttribute65528_16();
+            err = TestStep6cReadOptionalCommandEnhancedViewSceneResponseAcceptedCommandListGlobalAttribute65529_14();
             break;
-        case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : Step 7d: Read optional command(CopySceneResponse) in GeneratedCommandList (global attribute 65528)\n");
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Step 6d: Read optional command(CopySceneResponse) AcceptedCommandList (global attribute 65529)\n");
             if (ShouldSkip("S.S.C42.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestStep7dReadOptionalCommandCopySceneResponseInGeneratedCommandListGlobalAttribute65528_17();
+            err = TestStep6dReadOptionalCommandCopySceneResponseAcceptedCommandListGlobalAttribute65529_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Step 7a: Read GeneratedCommandList (global attribute 65528)\n");
+            err = TestStep7aReadGeneratedCommandListGlobalAttribute65528_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Step 7b: Read optional command(EnhancedAddSceneResponse) in GeneratedCommandList (global attribute 65528)\n");
+            if (ShouldSkip("S.S.C40.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestStep7bReadOptionalCommandEnhancedAddSceneResponseInGeneratedCommandListGlobalAttribute65528_17();
+            break;
+        case 18:
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Step 7c: Read optional command(EnhancedViewSceneResponse) in GeneratedCommandList (global attribute 65528)\n");
+            if (ShouldSkip("S.S.C41.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestStep7cReadOptionalCommandEnhancedViewSceneResponseInGeneratedCommandListGlobalAttribute65528_18();
+            break;
+        case 19:
+            ChipLogProgress(chipTool, " ***** Test Step 19 : Step 7d: Read optional command(CopySceneResponse) in GeneratedCommandList (global attribute 65528)\n");
+            if (ShouldSkip("S.S.C42.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestStep7dReadOptionalCommandCopySceneResponseInGeneratedCommandListGlobalAttribute65528_19();
             break;
         }
 
@@ -171663,6 +171670,12 @@ public:
         case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -171673,7 +171686,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 18;
+    const uint16_t mTestCount = 20;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -171750,7 +171763,45 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4ReadMandatoryAttributesInAttributeListGlobalAttribute65531_4()
+    CHIP_ERROR TestStep3bReadFeatureMapGlobalAttribute65532_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterScenes alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 3b: Read FeatureMap (global attribute 65532) Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestStep3cReadFeatureMapGlobalAttribute65532_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterScenes alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Step 3c: Read FeatureMap (global attribute 65532) Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestStep4ReadMandatoryAttributesInAttributeListGlobalAttribute65531_6()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -171776,7 +171827,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4bReadOptionalAttributesSceneCountCurrentSceneCurrentGroupSceneValidInAttributeListGlobalAttribute65531_5()
+    CHIP_ERROR TestStep4bReadOptionalAttributesSceneCountCurrentSceneCurrentGroupSceneValidInAttributeListGlobalAttribute65531_7()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -171800,7 +171851,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4cReadOptinnalAttributeLastConfiguredByInAttributeListGlobalAttribute65531_6()
+    CHIP_ERROR TestStep4cReadOptinnalAttributeLastConfiguredByInAttributeListGlobalAttribute65531_8()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -171821,7 +171872,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4dReadOptionnalAttributeSceneTableSizeInAttributeListGlobalAttribute65531_7()
+    CHIP_ERROR TestStep4dReadOptionnalAttributeSceneTableSizeInAttributeListGlobalAttribute65531_9()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -171842,7 +171893,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep4eReadOptionalAttributeFabricSceneInfoInAttributeListGlobalAttribute65531_8()
+    CHIP_ERROR TestStep4eReadOptionalAttributeFabricSceneInfoInAttributeListGlobalAttribute65531_10()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -171863,7 +171914,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep6aReadMandatoryCommandsInAcceptedCommandListGlobalAttribute65529_10()
+    CHIP_ERROR TestStep6aReadMandatoryCommandsInAcceptedCommandListGlobalAttribute65529_12()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -171890,7 +171941,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep6bReadOptionalCommandEnhancedAddSceneResponseAcceptedCommandListGlobalAttribute65529_11()
+    CHIP_ERROR TestStep6bReadOptionalCommandEnhancedAddSceneResponseAcceptedCommandListGlobalAttribute65529_13()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -171911,7 +171962,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep6cReadOptionalCommandEnhancedViewSceneResponseAcceptedCommandListGlobalAttribute65529_12()
+    CHIP_ERROR TestStep6cReadOptionalCommandEnhancedViewSceneResponseAcceptedCommandListGlobalAttribute65529_14()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -171932,7 +171983,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep6dReadOptionalCommandCopySceneResponseAcceptedCommandListGlobalAttribute65529_13()
+    CHIP_ERROR TestStep6dReadOptionalCommandCopySceneResponseAcceptedCommandListGlobalAttribute65529_15()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -171953,7 +172004,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep7aReadGeneratedCommandListGlobalAttribute65528_14()
+    CHIP_ERROR TestStep7aReadGeneratedCommandListGlobalAttribute65528_16()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -171979,7 +172030,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep7bReadOptionalCommandEnhancedAddSceneResponseInGeneratedCommandListGlobalAttribute65528_15()
+    CHIP_ERROR TestStep7bReadOptionalCommandEnhancedAddSceneResponseInGeneratedCommandListGlobalAttribute65528_17()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -172000,7 +172051,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep7cReadOptionalCommandEnhancedViewSceneResponseInGeneratedCommandListGlobalAttribute65528_16()
+    CHIP_ERROR TestStep7cReadOptionalCommandEnhancedViewSceneResponseInGeneratedCommandListGlobalAttribute65528_18()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -172021,7 +172072,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestStep7dReadOptionalCommandCopySceneResponseInGeneratedCommandListGlobalAttribute65528_17()
+    CHIP_ERROR TestStep7dReadOptionalCommandCopySceneResponseInGeneratedCommandListGlobalAttribute65528_19()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -172406,1143 +172457,6 @@ private:
             VerifyOrReturn(CheckConstraintType("remainingCapacity", "int8u", "int8u"));
             NextTest();
         }];
-
-        return CHIP_NO_ERROR;
-    }
-};
-
-class Test_TC_S_2_3 : public TestCommandBridge {
-public:
-    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_S_2_3()
-        : TestCommandBridge("Test_TC_S_2_3")
-        , mTestIndex(0)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("G1", 0, UINT16_MAX, &mG1);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
-
-    ~Test_TC_S_2_3()
-    {
-    }
-
-    /////////// TestCommand Interface /////////
-    void NextTest() override
-    {
-        CHIP_ERROR err = CHIP_NO_ERROR;
-
-        if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_S_2_3\n");
-        }
-
-        if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_S_2_3\n");
-            SetCommandExitStatus(CHIP_NO_ERROR);
-            return;
-        }
-
-        Wait();
-
-        // Ensure we increment mTestIndex before we start running the relevant
-        // command.  That way if we lose the timeslice after we send the message
-        // but before our function call returns, we won't end up with an
-        // incorrect mTestIndex value observed when we get the response.
-        switch (mTestIndex++) {
-        case 0:
-            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
-            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
-            break;
-        case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads from the DUT the (0x0006) SceneTableSize attribute\n");
-            if (ShouldSkip("S.S.A0006")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsFromTheDutThe0x0006SceneTableSizeAttribute_1();
-            break;
-        case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Step 0a: preparation step for using commands from Groups cluster: Add KeySet\n");
-            err = TestStep0aPreparationStepForUsingCommandsFromGroupsClusterAddKeySet_2();
-            break;
-        case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Step 0b: Preparation step for using commands from Groups cluster: Write Group Keys\n");
-            err = TestStep0bPreparationStepForUsingCommandsFromGroupsClusterWriteGroupKeys_3();
-            break;
-        case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Step 1a: TH sends a AddGroup command to DUT with the GroupID field set to G1.\n");
-            if (ShouldSkip("G.S.C00.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestStep1aThSendsAAddGroupCommandToDutWithTheGroupIDFieldSetToG1_4();
-            break;
-        case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Install ACLs\n");
-            err = TestInstallACLs_5();
-            break;
-        case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Step 1b: TH sends a RemoveAllScenes command to DUT with the GroupID field set to G1.\n");
-            if (ShouldSkip("S.S.C03.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestStep1bThSendsARemoveAllScenesCommandToDutWithTheGroupIDFieldSetToG1_6();
-            break;
-        case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Step 1c: TH sends a GetSceneMembership command to DUT with the GroupID field set to G1.\n");
-            if (ShouldSkip("S.S.C06.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestStep1cThSendsAGetSceneMembershipCommandToDutWithTheGroupIDFieldSetToG1_7();
-            break;
-        case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Step 2a: TH sends a EnhancedAddScene command to DUT with the GroupID field set to G1, the SceneID field set to 0x01, the TransitionTime field set to 0x000a (1s) and a set of extension fields appropriate to AC1.\n");
-            if (ShouldSkip("S.S.C40.Rsp && PICS_SDK_CI_ONLY")) {
-                NextTest();
-                return;
-            }
-            err = TestStep2aThSendsAEnhancedAddSceneCommandToDutWithTheGroupIDFieldSetToG1TheSceneIDFieldSetTo0x01TheTransitionTimeFieldSetTo0x000a1sAndASetOfExtensionFieldsAppropriateToAc1_8();
-            break;
-        case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Step 2b: TH sends a AddScene command to DUT with the GroupID field set to G1, the SceneID field set to 0x01, the TransitionTime field set to 0x0001 (1s) and a set of extension fields appropriate to AC1.\n");
-            if (ShouldSkip("S.S.C00.Rsp && PICS_SDK_CI_ONLY")) {
-                NextTest();
-                return;
-            }
-            err = TestStep2bThSendsAAddSceneCommandToDutWithTheGroupIDFieldSetToG1TheSceneIDFieldSetTo0x01TheTransitionTimeFieldSetTo0x00011sAndASetOfExtensionFieldsAppropriateToAc1_9();
-            break;
-        case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Step 2a: TH sends a EnhancedAddScene command to DUT with the GroupID field set to G1, the SceneID field set to 0x01, the TransitionTime field set to 0x000a and a set of extension fields appropriate to AC1.\n");
-            if (ShouldSkip("S.S.C40.Rsp && PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
-            err = TestStep2aThSendsAEnhancedAddSceneCommandToDutWithTheGroupIDFieldSetToG1TheSceneIDFieldSetTo0x01TheTransitionTimeFieldSetTo0x000aAndASetOfExtensionFieldsAppropriateToAc1_10();
-            break;
-        case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Step 2b: TH sends a AddScene command to DUT with the GroupID field set to G1, the SceneID field set to 0x01, the TransitionTime field set to G1 and a set of extension fields appropriate to AC1.\n");
-            if (ShouldSkip("S.S.C00.Rsp && PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
-            err = TestStep2bThSendsAAddSceneCommandToDutWithTheGroupIDFieldSetToG1TheSceneIDFieldSetTo0x01TheTransitionTimeFieldSetToG1AndASetOfExtensionFieldsAppropriateToAc1_11();
-            break;
-        case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : Step 3a: TH sends a EnhancedViewScene command to DUT with the GroupID field set to G1 and the SceneID field set to 0x01.\n");
-            if (ShouldSkip("S.S.C41.Rsp && PICS_SDK_CI_ONLY")) {
-                NextTest();
-                return;
-            }
-            err = TestStep3aThSendsAEnhancedViewSceneCommandToDutWithTheGroupIDFieldSetToG1AndTheSceneIDFieldSetTo0x01_12();
-            break;
-        case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Step 3b: TH sends a ViewScene command to DUT with the GroupID field set to G1 and the SceneID field set to 0x01.\n");
-            if (ShouldSkip("S.S.C01.Rsp && PICS_SDK_CI_ONLY")) {
-                NextTest();
-                return;
-            }
-            err = TestStep3bThSendsAViewSceneCommandToDutWithTheGroupIDFieldSetToG1AndTheSceneIDFieldSetTo0x01_13();
-            break;
-        case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : Step 3a: TH sends a EnhancedViewScene command to DUT with the GroupID field set to G1 and the SceneID field set to 0x01.\n");
-            if (ShouldSkip("S.S.C41.Rsp && PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
-            err = TestStep3aThSendsAEnhancedViewSceneCommandToDutWithTheGroupIDFieldSetToG1AndTheSceneIDFieldSetTo0x01_14();
-            break;
-        case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : Step 3b: TH sends a ViewScene command to DUT with the GroupID field set to G1 and the SceneID field set to 0x01.\n");
-            if (ShouldSkip("S.S.C01.Rsp && PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
-            err = TestStep3bThSendsAViewSceneCommandToDutWithTheGroupIDFieldSetToG1AndTheSceneIDFieldSetTo0x01_15();
-            break;
-        case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : Step 4: TH sends a GetSceneMembership command to DUT with the GroupID field set to G1.\n");
-            if (ShouldSkip("S.S.C06.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestStep4ThSendsAGetSceneMembershipCommandToDutWithTheGroupIDFieldSetToG1_16();
-            break;
-        case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : Step 5a: TH configures AC2 on DUT for all implemented application clusters supporting scenes.\n");
-            if (ShouldSkip("PICS_SDK_CI_ONLY")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5aThConfiguresAc2OnDutForAllImplementedApplicationClustersSupportingScenes_17();
-            break;
-        case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : Step 5a: TH configures AC2 on DUT for all implemented application clusters supporting scenes.\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5aThConfiguresAc2OnDutForAllImplementedApplicationClustersSupportingScenes_18();
-            break;
-        case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : Step 5b: TH sends a RecallScene command to group G1 with the GroupID field set to G1 and the scene ID field set to 0x01.\n");
-            if (ShouldSkip("S.S.C05.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestStep5bThSendsARecallSceneCommandToGroupG1WithTheGroupIDFieldSetToG1AndTheSceneIdFieldSetTo0x01_19();
-            break;
-        case 20:
-            ChipLogProgress(chipTool, " ***** Test Step 20 : Wait 1s\n");
-            if (ShouldSkip("PICS_SDK_CI_ONLY")) {
-                NextTest();
-                return;
-            }
-            err = TestWait1s_20();
-            break;
-        case 21:
-            ChipLogProgress(chipTool, " ***** Test Step 21 : TH confirm the DUT reached AC1 (on level control cluster) after 1s\n");
-            if (ShouldSkip("PICS_SDK_CI_ONLY && S.S.C05.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThConfirmTheDutReachedAc1OnLevelControlClusterAfter1s_21();
-            break;
-        case 22:
-            ChipLogProgress(chipTool, " ***** Test Step 22 : Verify DUT returns to AC1.\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP")) {
-                NextTest();
-                return;
-            }
-            err = TestVerifyDutReturnsToAc1_22();
-            break;
-        case 23:
-            ChipLogProgress(chipTool, " ***** Test Step 23 : Step 6a: TH sends a CopyScene command to DUT with the mode field set to 0x00, the group identifier from field set to G1, the scene identifier from field set to 0x01, the group identifier to field set to G1 and the scene identifier to field set to 0x02.\n");
-            if (ShouldSkip("S.S.C42.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6aThSendsACopySceneCommandToDutWithTheModeFieldSetTo0x00TheGroupIdentifierFromFieldSetToG1TheSceneIdentifierFromFieldSetTo0x01TheGroupIdentifierToFieldSetToG1AndTheSceneIdentifierToFieldSetTo0x02_23();
-            break;
-        case 24:
-            ChipLogProgress(chipTool, " ***** Test Step 24 : Step 6b: TH sends a GetSceneMembership command to DUT with the GroupID field set to G1.\n");
-            if (ShouldSkip("S.S.C06.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestStep6bThSendsAGetSceneMembershipCommandToDutWithTheGroupIDFieldSetToG1_24();
-            break;
-        case 25:
-            ChipLogProgress(chipTool, " ***** Test Step 25 : Step 7: TH removes the Group key set that was added by sending a KeySetRemove command to the GroupKeyManagement cluster with the GroupKeySetID field set to 0x01a1\n");
-            err = TestStep7ThRemovesTheGroupKeySetThatWasAddedBySendingAKeySetRemoveCommandToTheGroupKeyManagementClusterWithTheGroupKeySetIDFieldSetTo0x01a1_25();
-            break;
-        }
-
-        if (CHIP_NO_ERROR != err) {
-            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
-            SetCommandExitStatus(err);
-        }
-    }
-
-    void OnStatusUpdate(const chip::app::StatusIB & status) override
-    {
-        switch (mTestIndex - 1) {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 3:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 4:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 10:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 18:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 19:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 20:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 21:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 22:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 23:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 24:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 25:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        }
-
-        // Go on to the next test.
-        ContinueOnChipMainThread(CHIP_NO_ERROR);
-    }
-
-    chip::System::Clock::Timeout GetWaitDuration() const override { return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds)); }
-
-private:
-    std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 26;
-
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<chip::GroupId> mG1;
-    chip::Optional<uint16_t> mTimeout;
-
-    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
-    {
-
-        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        return WaitForCommissionee("alpha", value);
-    }
-    NSNumber * _Nonnull maxScenes;
-
-    CHIP_ERROR TestThReadsFromTheDutThe0x0006SceneTableSizeAttribute_1()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterScenes alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeSceneTableSizeWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads from the DUT the (0x0006) SceneTableSize attribute Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                maxScenes = value;
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestStep0aPreparationStepForUsingCommandsFromGroupsClusterAddKeySet_2()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRGroupKeyManagementClusterKeySetWriteParams alloc] init];
-        params.groupKeySet = [[MTRGroupKeyManagementClusterGroupKeySetStruct alloc] init];
-        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySetID =
-            [NSNumber numberWithUnsignedShort:417U];
-        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySecurityPolicy =
-            [NSNumber numberWithUnsignedChar:0U];
-        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey0 =
-            [[NSData alloc] initWithBytes:"\240\241\242\243\244\245\246\247\250\251\252\253\254\255\256\257" length:16];
-        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime0 =
-            [NSNumber numberWithUnsignedLongLong:1110000ULL];
-        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey1 =
-            [[NSData alloc] initWithBytes:"\260\261\262\263\264\265\266\267\270\271\272\273\274\275\276\277" length:16];
-        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime1 =
-            [NSNumber numberWithUnsignedLongLong:1110001ULL];
-        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey2 =
-            [[NSData alloc] initWithBytes:"\300\301\302\303\304\305\306\307\310\311\312\313\314\315\316\317" length:16];
-        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime2 =
-            [NSNumber numberWithUnsignedLongLong:1110002ULL];
-
-        [cluster keySetWriteWithParams:params completion:
-                                                  ^(NSError * _Nullable err) {
-                                                      NSLog(@"Step 0a: preparation step for using commands from Groups cluster: Add KeySet Error: %@", err);
-
-                                                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                                      NextTest();
-                                                  }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestStep0bPreparationStepForUsingCommandsFromGroupsClusterWriteGroupKeys_3()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id groupKeyMapArgument;
-        {
-            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRGroupKeyManagementClusterGroupKeyMapStruct alloc] init];
-            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[0]).groupId = mG1.HasValue() ? [NSNumber numberWithUnsignedShort:mG1.Value()] : [NSNumber numberWithUnsignedShort:257U];
-            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[0]).groupKeySetID =
-                [NSNumber numberWithUnsignedShort:417U];
-            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[0]).fabricIndex =
-                [NSNumber numberWithUnsignedChar:1U];
-
-            groupKeyMapArgument = temp_0;
-        }
-        [cluster writeAttributeGroupKeyMapWithValue:groupKeyMapArgument completion:^(NSError * _Nullable err) {
-            NSLog(@"Step 0b: Preparation step for using commands from Groups cluster: Write Group Keys Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestStep1aThSendsAAddGroupCommandToDutWithTheGroupIDFieldSetToG1_4()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRGroupsClusterAddGroupParams alloc] init];
-        params.groupID = mG1.HasValue() ? [NSNumber numberWithUnsignedShort:mG1.Value()] : [NSNumber numberWithUnsignedShort:257U];
-        params.groupName = @"Group #1";
-        [cluster addGroupWithParams:params completion:
-                                               ^(MTRGroupsClusterAddGroupResponseParams * _Nullable values, NSError * _Nullable err) {
-                                                   NSLog(@"Step 1a: TH sends a AddGroup command to DUT with the GroupID field set to G1. Error: %@", err);
-
-                                                   VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                                   {
-                                                       id actualValue = values.status;
-                                                       VerifyOrReturn(CheckValue("Status", actualValue, 0U));
-                                                   }
-
-                                                   {
-                                                       id actualValue = values.groupID;
-                                                       VerifyOrReturn(CheckValue("GroupID", actualValue, mG1.HasValue() ? mG1.Value() : 257U));
-                                                   }
-
-                                                   NextTest();
-                                               }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestInstallACLs_5()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id aclArgument;
-        {
-            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
-            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).privilege =
-                [NSNumber numberWithUnsignedChar:5U];
-            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).authMode =
-                [NSNumber numberWithUnsignedChar:2U];
-            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).subjects = nil;
-            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).targets = nil;
-            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex =
-                [NSNumber numberWithUnsignedChar:0U];
-
-            temp_0[1] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
-            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).privilege =
-                [NSNumber numberWithUnsignedChar:4U];
-            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).authMode =
-                [NSNumber numberWithUnsignedChar:3U];
-            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).subjects = nil;
-            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).targets = nil;
-            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).fabricIndex =
-                [NSNumber numberWithUnsignedChar:0U];
-
-            aclArgument = temp_0;
-        }
-        [cluster writeAttributeACLWithValue:aclArgument completion:^(NSError * _Nullable err) {
-            NSLog(@"Install ACLs Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestStep1bThSendsARemoveAllScenesCommandToDutWithTheGroupIDFieldSetToG1_6()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterScenes alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRScenesClusterRemoveAllScenesParams alloc] init];
-        params.groupID = mG1.HasValue() ? [NSNumber numberWithUnsignedShort:mG1.Value()] : [NSNumber numberWithUnsignedShort:257U];
-        [cluster removeAllScenesWithParams:params completion:
-                                                      ^(MTRScenesClusterRemoveAllScenesResponseParams * _Nullable values, NSError * _Nullable err) {
-                                                          NSLog(@"Step 1b: TH sends a RemoveAllScenes command to DUT with the GroupID field set to G1. Error: %@", err);
-
-                                                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                                          {
-                                                              id actualValue = values.status;
-                                                              VerifyOrReturn(CheckValue("Status", actualValue, 0U));
-                                                          }
-
-                                                          {
-                                                              id actualValue = values.groupID;
-                                                              VerifyOrReturn(CheckValue("GroupID", actualValue, mG1.HasValue() ? mG1.Value() : 257U));
-                                                          }
-
-                                                          NextTest();
-                                                      }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestStep1cThSendsAGetSceneMembershipCommandToDutWithTheGroupIDFieldSetToG1_7()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterScenes alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRScenesClusterGetSceneMembershipParams alloc] init];
-        params.groupID = mG1.HasValue() ? [NSNumber numberWithUnsignedShort:mG1.Value()] : [NSNumber numberWithUnsignedShort:257U];
-        [cluster getSceneMembershipWithParams:params completion:
-                                                         ^(MTRScenesClusterGetSceneMembershipResponseParams * _Nullable values, NSError * _Nullable err) {
-                                                             NSLog(@"Step 1c: TH sends a GetSceneMembership command to DUT with the GroupID field set to G1. Error: %@", err);
-
-                                                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                                             {
-                                                                 id actualValue = values.status;
-                                                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
-                                                             }
-
-                                                             {
-                                                                 id actualValue = values.capacity;
-                                                                 VerifyOrReturn(CheckValueNonNull("Capacity", actualValue));
-                                                                 VerifyOrReturn(CheckValue("Capacity", actualValue, [maxScenes unsignedShortValue] / 2U));
-                                                             }
-
-                                                             {
-                                                                 id actualValue = values.groupID;
-                                                                 VerifyOrReturn(CheckValue("GroupID", actualValue, mG1.HasValue() ? mG1.Value() : 257U));
-                                                             }
-
-                                                             {
-                                                                 id actualValue = values.sceneList;
-                                                                 VerifyOrReturn(CheckValue("SceneList", [actualValue count], static_cast<uint32_t>(0)));
-                                                             }
-
-                                                             NextTest();
-                                                         }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestStep2aThSendsAEnhancedAddSceneCommandToDutWithTheGroupIDFieldSetToG1TheSceneIDFieldSetTo0x01TheTransitionTimeFieldSetTo0x000a1sAndASetOfExtensionFieldsAppropriateToAc1_8()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterScenes alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRScenesClusterEnhancedAddSceneParams alloc] init];
-        params.groupID = mG1.HasValue() ? [NSNumber numberWithUnsignedShort:mG1.Value()] : [NSNumber numberWithUnsignedShort:257U];
-        params.sceneID =
-            [NSNumber numberWithUnsignedChar:1U];
-        params.transitionTime =
-            [NSNumber numberWithUnsignedShort:10U];
-        params.sceneName = @"Scene1";
-        {
-            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRScenesClusterExtensionFieldSet alloc] init];
-            ((MTRScenesClusterExtensionFieldSet *) temp_0[0]).clusterID =
-                [NSNumber numberWithUnsignedInt:6UL];
-            {
-                NSMutableArray * temp_2 = [[NSMutableArray alloc] init];
-                temp_2[0] = [[MTRScenesClusterAttributeValuePair alloc] init];
-                ((MTRScenesClusterAttributeValuePair *) temp_2[0]).attributeID =
-                    [NSNumber numberWithUnsignedInt:0UL];
-                ((MTRScenesClusterAttributeValuePair *) temp_2[0]).attributeValue =
-                    [NSNumber numberWithUnsignedInt:1UL];
-
-                ((MTRScenesClusterExtensionFieldSet *) temp_0[0]).attributeValueList = temp_2;
-            }
-
-            temp_0[1] = [[MTRScenesClusterExtensionFieldSet alloc] init];
-            ((MTRScenesClusterExtensionFieldSet *) temp_0[1]).clusterID =
-                [NSNumber numberWithUnsignedInt:8UL];
-            {
-                NSMutableArray * temp_2 = [[NSMutableArray alloc] init];
-                temp_2[0] = [[MTRScenesClusterAttributeValuePair alloc] init];
-                ((MTRScenesClusterAttributeValuePair *) temp_2[0]).attributeID =
-                    [NSNumber numberWithUnsignedInt:0UL];
-                ((MTRScenesClusterAttributeValuePair *) temp_2[0]).attributeValue =
-                    [NSNumber numberWithUnsignedInt:100UL];
-
-                ((MTRScenesClusterExtensionFieldSet *) temp_0[1]).attributeValueList = temp_2;
-            }
-
-            params.extensionFieldSets = temp_0;
-        }
-        [cluster enhancedAddSceneWithParams:params completion:
-                                                       ^(MTRScenesClusterEnhancedAddSceneResponseParams * _Nullable values, NSError * _Nullable err) {
-                                                           NSLog(@"Step 2a: TH sends a EnhancedAddScene command to DUT with the GroupID field set to G1, the SceneID field set to 0x01, the TransitionTime field set to 0x000a (1s) and a set of extension fields appropriate to AC1. Error: %@", err);
-
-                                                           VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                                           {
-                                                               id actualValue = values.status;
-                                                               VerifyOrReturn(CheckValue("Status", actualValue, 0U));
-                                                           }
-
-                                                           {
-                                                               id actualValue = values.groupID;
-                                                               VerifyOrReturn(CheckValue("GroupID", actualValue, mG1.HasValue() ? mG1.Value() : 257U));
-                                                           }
-
-                                                           {
-                                                               id actualValue = values.sceneID;
-                                                               VerifyOrReturn(CheckValue("SceneID", actualValue, 1U));
-                                                           }
-
-                                                           NextTest();
-                                                       }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestStep2bThSendsAAddSceneCommandToDutWithTheGroupIDFieldSetToG1TheSceneIDFieldSetTo0x01TheTransitionTimeFieldSetTo0x00011sAndASetOfExtensionFieldsAppropriateToAc1_9()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterScenes alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRScenesClusterAddSceneParams alloc] init];
-        params.groupID = mG1.HasValue() ? [NSNumber numberWithUnsignedShort:mG1.Value()] : [NSNumber numberWithUnsignedShort:257U];
-        params.sceneID =
-            [NSNumber numberWithUnsignedChar:1U];
-        params.transitionTime =
-            [NSNumber numberWithUnsignedShort:1U];
-        params.sceneName = @"Scene1";
-        {
-            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRScenesClusterExtensionFieldSet alloc] init];
-            ((MTRScenesClusterExtensionFieldSet *) temp_0[0]).clusterID =
-                [NSNumber numberWithUnsignedInt:6UL];
-            {
-                NSMutableArray * temp_2 = [[NSMutableArray alloc] init];
-                temp_2[0] = [[MTRScenesClusterAttributeValuePair alloc] init];
-                ((MTRScenesClusterAttributeValuePair *) temp_2[0]).attributeID =
-                    [NSNumber numberWithUnsignedInt:0UL];
-                ((MTRScenesClusterAttributeValuePair *) temp_2[0]).attributeValue =
-                    [NSNumber numberWithUnsignedInt:1UL];
-
-                ((MTRScenesClusterExtensionFieldSet *) temp_0[0]).attributeValueList = temp_2;
-            }
-
-            temp_0[1] = [[MTRScenesClusterExtensionFieldSet alloc] init];
-            ((MTRScenesClusterExtensionFieldSet *) temp_0[1]).clusterID =
-                [NSNumber numberWithUnsignedInt:8UL];
-            {
-                NSMutableArray * temp_2 = [[NSMutableArray alloc] init];
-                temp_2[0] = [[MTRScenesClusterAttributeValuePair alloc] init];
-                ((MTRScenesClusterAttributeValuePair *) temp_2[0]).attributeID =
-                    [NSNumber numberWithUnsignedInt:0UL];
-                ((MTRScenesClusterAttributeValuePair *) temp_2[0]).attributeValue =
-                    [NSNumber numberWithUnsignedInt:100UL];
-
-                ((MTRScenesClusterExtensionFieldSet *) temp_0[1]).attributeValueList = temp_2;
-            }
-
-            params.extensionFieldSets = temp_0;
-        }
-        [cluster addSceneWithParams:params completion:
-                                               ^(MTRScenesClusterAddSceneResponseParams * _Nullable values, NSError * _Nullable err) {
-                                                   NSLog(@"Step 2b: TH sends a AddScene command to DUT with the GroupID field set to G1, the SceneID field set to 0x01, the TransitionTime field set to 0x0001 (1s) and a set of extension fields appropriate to AC1. Error: %@", err);
-
-                                                   VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                                   {
-                                                       id actualValue = values.status;
-                                                       VerifyOrReturn(CheckValue("Status", actualValue, 0U));
-                                                   }
-
-                                                   {
-                                                       id actualValue = values.groupID;
-                                                       VerifyOrReturn(CheckValue("GroupID", actualValue, mG1.HasValue() ? mG1.Value() : 257U));
-                                                   }
-
-                                                   {
-                                                       id actualValue = values.sceneID;
-                                                       VerifyOrReturn(CheckValue("SceneID", actualValue, 1U));
-                                                   }
-
-                                                   NextTest();
-                                               }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestStep2aThSendsAEnhancedAddSceneCommandToDutWithTheGroupIDFieldSetToG1TheSceneIDFieldSetTo0x01TheTransitionTimeFieldSetTo0x000aAndASetOfExtensionFieldsAppropriateToAc1_10()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please execute the enhanced add scene command with extensionfieldsets in accordance with AC1 on DUT and enter 'y' if the command is successfulgarbage: not in length on purpose", 142);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep2bThSendsAAddSceneCommandToDutWithTheGroupIDFieldSetToG1TheSceneIDFieldSetTo0x01TheTransitionTimeFieldSetToG1AndASetOfExtensionFieldsAppropriateToAc1_11()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please execute the add scene command with extensionfieldsets in accordance with AC1 on DUT and enter 'y' if the command is successfulgarbage: not in length on purpose", 133);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep3aThSendsAEnhancedViewSceneCommandToDutWithTheGroupIDFieldSetToG1AndTheSceneIDFieldSetTo0x01_12()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterScenes alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRScenesClusterEnhancedViewSceneParams alloc] init];
-        params.groupID = mG1.HasValue() ? [NSNumber numberWithUnsignedShort:mG1.Value()] : [NSNumber numberWithUnsignedShort:257U];
-        params.sceneID =
-            [NSNumber numberWithUnsignedChar:1U];
-        [cluster enhancedViewSceneWithParams:params completion:
-                                                        ^(MTRScenesClusterEnhancedViewSceneResponseParams * _Nullable values, NSError * _Nullable err) {
-                                                            NSLog(@"Step 3a: TH sends a EnhancedViewScene command to DUT with the GroupID field set to G1 and the SceneID field set to 0x01. Error: %@", err);
-
-                                                            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                                            {
-                                                                id actualValue = values.status;
-                                                                VerifyOrReturn(CheckValue("Status", actualValue, 0U));
-                                                            }
-
-                                                            {
-                                                                id actualValue = values.groupID;
-                                                                VerifyOrReturn(CheckValue("GroupID", actualValue, mG1.HasValue() ? mG1.Value() : 257U));
-                                                            }
-
-                                                            {
-                                                                id actualValue = values.sceneID;
-                                                                VerifyOrReturn(CheckValue("SceneID", actualValue, 1U));
-                                                            }
-
-                                                            {
-                                                                id actualValue = values.transitionTime;
-                                                                VerifyOrReturn(CheckValue("TransitionTime", actualValue, 10U));
-                                                            }
-
-                                                            {
-                                                                id actualValue = values.extensionFieldSets;
-                                                                VerifyOrReturn(CheckValue("ExtensionFieldSets", [actualValue count], static_cast<uint32_t>(2)));
-                                                                VerifyOrReturn(CheckValue("ClusterID", ((MTRScenesClusterExtensionFieldSet *) actualValue[0]).clusterID, 6UL));
-                                                                VerifyOrReturn(CheckValue("AttributeValueList", [((MTRScenesClusterExtensionFieldSet *) actualValue[0]).attributeValueList count], static_cast<uint32_t>(1)));
-                                                                VerifyOrReturn(CheckValue("AttributeID", ((MTRScenesClusterAttributeValuePair *) ((MTRScenesClusterExtensionFieldSet *) actualValue[0]).attributeValueList[0]).attributeID, 0UL));
-                                                                VerifyOrReturn(CheckValue("AttributeValue", ((MTRScenesClusterAttributeValuePair *) ((MTRScenesClusterExtensionFieldSet *) actualValue[0]).attributeValueList[0]).attributeValue, 1UL));
-                                                                VerifyOrReturn(CheckValue("ClusterID", ((MTRScenesClusterExtensionFieldSet *) actualValue[1]).clusterID, 8UL));
-                                                                VerifyOrReturn(CheckValue("AttributeValueList", [((MTRScenesClusterExtensionFieldSet *) actualValue[1]).attributeValueList count], static_cast<uint32_t>(1)));
-                                                                VerifyOrReturn(CheckValue("AttributeID", ((MTRScenesClusterAttributeValuePair *) ((MTRScenesClusterExtensionFieldSet *) actualValue[1]).attributeValueList[0]).attributeID, 0UL));
-                                                                VerifyOrReturn(CheckValue("AttributeValue", ((MTRScenesClusterAttributeValuePair *) ((MTRScenesClusterExtensionFieldSet *) actualValue[1]).attributeValueList[0]).attributeValue, 100UL));
-                                                            }
-
-                                                            NextTest();
-                                                        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestStep3bThSendsAViewSceneCommandToDutWithTheGroupIDFieldSetToG1AndTheSceneIDFieldSetTo0x01_13()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterScenes alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRScenesClusterViewSceneParams alloc] init];
-        params.groupID = mG1.HasValue() ? [NSNumber numberWithUnsignedShort:mG1.Value()] : [NSNumber numberWithUnsignedShort:257U];
-        params.sceneID =
-            [NSNumber numberWithUnsignedChar:1U];
-        [cluster viewSceneWithParams:params completion:
-                                                ^(MTRScenesClusterViewSceneResponseParams * _Nullable values, NSError * _Nullable err) {
-                                                    NSLog(@"Step 3b: TH sends a ViewScene command to DUT with the GroupID field set to G1 and the SceneID field set to 0x01. Error: %@", err);
-
-                                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                                    {
-                                                        id actualValue = values.status;
-                                                        VerifyOrReturn(CheckValue("Status", actualValue, 0U));
-                                                    }
-
-                                                    {
-                                                        id actualValue = values.groupID;
-                                                        VerifyOrReturn(CheckValue("GroupID", actualValue, mG1.HasValue() ? mG1.Value() : 257U));
-                                                    }
-
-                                                    {
-                                                        id actualValue = values.sceneID;
-                                                        VerifyOrReturn(CheckValue("SceneID", actualValue, 1U));
-                                                    }
-
-                                                    {
-                                                        id actualValue = values.transitionTime;
-                                                        VerifyOrReturn(CheckValue("TransitionTime", actualValue, 1U));
-                                                    }
-
-                                                    {
-                                                        id actualValue = values.extensionFieldSets;
-                                                        VerifyOrReturn(CheckValue("ExtensionFieldSets", [actualValue count], static_cast<uint32_t>(2)));
-                                                        VerifyOrReturn(CheckValue("ClusterID", ((MTRScenesClusterExtensionFieldSet *) actualValue[0]).clusterID, 6UL));
-                                                        VerifyOrReturn(CheckValue("AttributeValueList", [((MTRScenesClusterExtensionFieldSet *) actualValue[0]).attributeValueList count], static_cast<uint32_t>(1)));
-                                                        VerifyOrReturn(CheckValue("AttributeID", ((MTRScenesClusterAttributeValuePair *) ((MTRScenesClusterExtensionFieldSet *) actualValue[0]).attributeValueList[0]).attributeID, 0UL));
-                                                        VerifyOrReturn(CheckValue("AttributeValue", ((MTRScenesClusterAttributeValuePair *) ((MTRScenesClusterExtensionFieldSet *) actualValue[0]).attributeValueList[0]).attributeValue, 1UL));
-                                                        VerifyOrReturn(CheckValue("ClusterID", ((MTRScenesClusterExtensionFieldSet *) actualValue[1]).clusterID, 8UL));
-                                                        VerifyOrReturn(CheckValue("AttributeValueList", [((MTRScenesClusterExtensionFieldSet *) actualValue[1]).attributeValueList count], static_cast<uint32_t>(1)));
-                                                        VerifyOrReturn(CheckValue("AttributeID", ((MTRScenesClusterAttributeValuePair *) ((MTRScenesClusterExtensionFieldSet *) actualValue[1]).attributeValueList[0]).attributeID, 0UL));
-                                                        VerifyOrReturn(CheckValue("AttributeValue", ((MTRScenesClusterAttributeValuePair *) ((MTRScenesClusterExtensionFieldSet *) actualValue[1]).attributeValueList[0]).attributeValue, 100UL));
-                                                    }
-
-                                                    NextTest();
-                                                }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestStep3aThSendsAEnhancedViewSceneCommandToDutWithTheGroupIDFieldSetToG1AndTheSceneIDFieldSetTo0x01_14()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please execute the ehanced-view-scene command and verify that the extensionfieldsets, status, groupID and SceneID are in accordance with AC1 on DUT and enter 'y' if the command is successfulgarbage: not in length on purpose", 190);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep3bThSendsAViewSceneCommandToDutWithTheGroupIDFieldSetToG1AndTheSceneIDFieldSetTo0x01_15()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please execute the view-scene command and verify that the extensionfieldsets, status, groupID and SceneID are in accordance with AC1 on DUT and enter 'y' if the command is successfulgarbage: not in length on purpose", 182);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep4ThSendsAGetSceneMembershipCommandToDutWithTheGroupIDFieldSetToG1_16()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterScenes alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRScenesClusterGetSceneMembershipParams alloc] init];
-        params.groupID = mG1.HasValue() ? [NSNumber numberWithUnsignedShort:mG1.Value()] : [NSNumber numberWithUnsignedShort:257U];
-        [cluster getSceneMembershipWithParams:params completion:
-                                                         ^(MTRScenesClusterGetSceneMembershipResponseParams * _Nullable values, NSError * _Nullable err) {
-                                                             NSLog(@"Step 4: TH sends a GetSceneMembership command to DUT with the GroupID field set to G1. Error: %@", err);
-
-                                                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                                             {
-                                                                 id actualValue = values.status;
-                                                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
-                                                             }
-
-                                                             {
-                                                                 id actualValue = values.capacity;
-                                                                 VerifyOrReturn(CheckValueNonNull("Capacity", actualValue));
-                                                                 VerifyOrReturn(CheckValue("Capacity", actualValue, ([maxScenes unsignedShortValue] / 2U) - 1U));
-                                                             }
-
-                                                             {
-                                                                 id actualValue = values.groupID;
-                                                                 VerifyOrReturn(CheckValue("GroupID", actualValue, mG1.HasValue() ? mG1.Value() : 257U));
-                                                             }
-
-                                                             {
-                                                                 id actualValue = values.sceneList;
-                                                                 VerifyOrReturn(CheckValue("SceneList", [actualValue count], static_cast<uint32_t>(1)));
-                                                                 VerifyOrReturn(CheckValue("", actualValue[0], 1U));
-                                                             }
-
-                                                             NextTest();
-                                                         }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestStep5aThConfiguresAc2OnDutForAllImplementedApplicationClustersSupportingScenes_17()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRLevelControlClusterMoveToLevelWithOnOffParams alloc] init];
-        params.level =
-            [NSNumber numberWithUnsignedChar:200U];
-        params.transitionTime =
-            [NSNumber numberWithUnsignedShort:0U];
-        params.optionsMask =
-            [NSNumber numberWithUnsignedChar:0U];
-        params.optionsOverride =
-            [NSNumber numberWithUnsignedChar:0U];
-        [cluster moveToLevelWithOnOffWithParams:params completion:
-                                                           ^(NSError * _Nullable err) {
-                                                               NSLog(@"Step 5a: TH configures AC2 on DUT for all implemented application clusters supporting scenes. Error: %@", err);
-
-                                                               VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                                               NextTest();
-                                                           }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestStep5aThConfiguresAc2OnDutForAllImplementedApplicationClustersSupportingScenes_18()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please configure AC2 on DUT and enter 'y' after the configuration is completegarbage: not in length on purpose", 77);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep5bThSendsARecallSceneCommandToGroupG1WithTheGroupIDFieldSetToG1AndTheSceneIdFieldSetTo0x01_19()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterScenes alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRScenesClusterRecallSceneParams alloc] init];
-        params.groupID = mG1.HasValue() ? [NSNumber numberWithUnsignedShort:mG1.Value()] : [NSNumber numberWithUnsignedShort:257U];
-        params.sceneID =
-            [NSNumber numberWithUnsignedChar:1U];
-        [cluster recallSceneWithParams:params completion:
-                                                  ^(NSError * _Nullable err) {
-                                                      NSLog(@"Step 5b: TH sends a RecallScene command to group G1 with the GroupID field set to G1 and the scene ID field set to 0x01. Error: %@", err);
-
-                                                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                                      NextTest();
-                                                  }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestWait1s_20()
-    {
-
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 1050UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestThConfirmTheDutReachedAc1OnLevelControlClusterAfter1s_21()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeCurrentLevelWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH confirm the DUT reached AC1 (on level control cluster) after 1s Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
-                VerifyOrReturn(CheckValue("CurrentLevel", actualValue, 100U));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestVerifyDutReturnsToAc1_22()
-    {
-
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please confirm AC1 on DUT and enter 'y'.garbage: not in length on purpose", 40);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestStep6aThSendsACopySceneCommandToDutWithTheModeFieldSetTo0x00TheGroupIdentifierFromFieldSetToG1TheSceneIdentifierFromFieldSetTo0x01TheGroupIdentifierToFieldSetToG1AndTheSceneIdentifierToFieldSetTo0x02_23()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterScenes alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRScenesClusterCopySceneParams alloc] init];
-        params.mode =
-            [NSNumber numberWithUnsignedChar:0U];
-        params.groupIdentifierFrom = mG1.HasValue() ? [NSNumber numberWithUnsignedShort:mG1.Value()] : [NSNumber numberWithUnsignedShort:257U];
-        params.sceneIdentifierFrom =
-            [NSNumber numberWithUnsignedChar:1U];
-        params.groupIdentifierTo = mG1.HasValue() ? [NSNumber numberWithUnsignedShort:mG1.Value()] : [NSNumber numberWithUnsignedShort:257U];
-        params.sceneIdentifierTo =
-            [NSNumber numberWithUnsignedChar:2U];
-        [cluster copySceneWithParams:params completion:
-                                                ^(MTRScenesClusterCopySceneResponseParams * _Nullable values, NSError * _Nullable err) {
-                                                    NSLog(@"Step 6a: TH sends a CopyScene command to DUT with the mode field set to 0x00, the group identifier from field set to G1, the scene identifier from field set to 0x01, the group identifier to field set to G1 and the scene identifier to field set to 0x02. Error: %@", err);
-
-                                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                                    {
-                                                        id actualValue = values.status;
-                                                        VerifyOrReturn(CheckValue("Status", actualValue, 0U));
-                                                    }
-
-                                                    {
-                                                        id actualValue = values.groupIdentifierFrom;
-                                                        VerifyOrReturn(CheckValue("GroupIdentifierFrom", actualValue, mG1.HasValue() ? mG1.Value() : 257U));
-                                                    }
-
-                                                    {
-                                                        id actualValue = values.sceneIdentifierFrom;
-                                                        VerifyOrReturn(CheckValue("SceneIdentifierFrom", actualValue, 1U));
-                                                    }
-
-                                                    NextTest();
-                                                }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestStep6bThSendsAGetSceneMembershipCommandToDutWithTheGroupIDFieldSetToG1_24()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterScenes alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRScenesClusterGetSceneMembershipParams alloc] init];
-        params.groupID = mG1.HasValue() ? [NSNumber numberWithUnsignedShort:mG1.Value()] : [NSNumber numberWithUnsignedShort:257U];
-        [cluster getSceneMembershipWithParams:params completion:
-                                                         ^(MTRScenesClusterGetSceneMembershipResponseParams * _Nullable values, NSError * _Nullable err) {
-                                                             NSLog(@"Step 6b: TH sends a GetSceneMembership command to DUT with the GroupID field set to G1. Error: %@", err);
-
-                                                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                                             {
-                                                                 id actualValue = values.status;
-                                                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
-                                                             }
-
-                                                             {
-                                                                 id actualValue = values.capacity;
-                                                                 VerifyOrReturn(CheckValueNonNull("Capacity", actualValue));
-                                                                 VerifyOrReturn(CheckValue("Capacity", actualValue, ([maxScenes unsignedShortValue] / 2U) - 2U));
-                                                             }
-
-                                                             {
-                                                                 id actualValue = values.groupID;
-                                                                 VerifyOrReturn(CheckValue("GroupID", actualValue, mG1.HasValue() ? mG1.Value() : 257U));
-                                                             }
-
-                                                             {
-                                                                 id actualValue = values.sceneList;
-                                                                 VerifyOrReturn(CheckValue("SceneList", [actualValue count], static_cast<uint32_t>(2)));
-                                                                 VerifyOrReturn(CheckValue("", actualValue[0], 1U));
-                                                                 VerifyOrReturn(CheckValue("", actualValue[1], 2U));
-                                                             }
-
-                                                             NextTest();
-                                                         }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestStep7ThRemovesTheGroupKeySetThatWasAddedBySendingAKeySetRemoveCommandToTheGroupKeyManagementClusterWithTheGroupKeySetIDFieldSetTo0x01a1_25()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRGroupKeyManagementClusterKeySetRemoveParams alloc] init];
-        params.groupKeySetID =
-            [NSNumber numberWithUnsignedShort:417U];
-        [cluster keySetRemoveWithParams:params completion:
-                                                   ^(NSError * _Nullable err) {
-                                                       NSLog(@"Step 7: TH removes the Group key set that was added by sending a KeySetRemove command to the GroupKeyManagement cluster with the GroupKeySetID field set to 0x01a1 Error: %@", err);
-
-                                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                                       NextTest();
-                                                   }];
 
         return CHIP_NO_ERROR;
     }
@@ -176739,7 +175653,6 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_G_1_1>(),
         make_unique<Test_TC_S_1_1>(),
         make_unique<Test_TC_S_2_1>(),
-        make_unique<Test_TC_S_2_3>(),
         make_unique<Test_TC_S_2_4>(),
         make_unique<TestActivatedCarbonFilterMonitoring>(),
         make_unique<TestHepaFilterMonitoring>(),
