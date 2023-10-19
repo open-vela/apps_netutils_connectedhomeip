@@ -23,7 +23,6 @@
 #import "MTRClusterStateCacheContainer_Internal.h"
 #import "MTRCluster_Internal.h"
 #import "MTRCommandPayloadsObjc.h"
-#import "MTRDefines_Internal.h"
 #import "MTRDevice_Internal.h"
 #import "MTRStructsObjc.h"
 #import "NSDataSpanConversion.h"
@@ -34411,7 +34410,7 @@ public:
 
     auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
     if (timedInvokeTimeoutMs == nil) {
-        timedInvokeTimeoutMs = @(MTR_DEFAULT_TIMED_INTERACTION_TIMEOUT_MS);
+        timedInvokeTimeoutMs = @(10000);
     }
 
     using RequestType = AdministratorCommissioning::Commands::OpenCommissioningWindow::Type;
@@ -34438,7 +34437,7 @@ public:
 
     auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
     if (timedInvokeTimeoutMs == nil) {
-        timedInvokeTimeoutMs = @(MTR_DEFAULT_TIMED_INTERACTION_TIMEOUT_MS);
+        timedInvokeTimeoutMs = @(10000);
     }
 
     using RequestType = AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type;
@@ -34469,7 +34468,7 @@ public:
 
     auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
     if (timedInvokeTimeoutMs == nil) {
-        timedInvokeTimeoutMs = @(MTR_DEFAULT_TIMED_INTERACTION_TIMEOUT_MS);
+        timedInvokeTimeoutMs = @(10000);
     }
 
     using RequestType = AdministratorCommissioning::Commands::RevokeCommissioning::Type;
@@ -47434,7 +47433,7 @@ public:
 
     auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
     if (timedInvokeTimeoutMs == nil) {
-        timedInvokeTimeoutMs = @(MTR_DEFAULT_TIMED_INTERACTION_TIMEOUT_MS);
+        timedInvokeTimeoutMs = @(10000);
     }
 
     using RequestType = DoorLock::Commands::LockDoor::Type;
@@ -47461,7 +47460,7 @@ public:
 
     auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
     if (timedInvokeTimeoutMs == nil) {
-        timedInvokeTimeoutMs = @(MTR_DEFAULT_TIMED_INTERACTION_TIMEOUT_MS);
+        timedInvokeTimeoutMs = @(10000);
     }
 
     using RequestType = DoorLock::Commands::UnlockDoor::Type;
@@ -47488,7 +47487,7 @@ public:
 
     auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
     if (timedInvokeTimeoutMs == nil) {
-        timedInvokeTimeoutMs = @(MTR_DEFAULT_TIMED_INTERACTION_TIMEOUT_MS);
+        timedInvokeTimeoutMs = @(10000);
     }
 
     using RequestType = DoorLock::Commands::UnlockWithTimeout::Type;
@@ -47731,7 +47730,7 @@ public:
 
     auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
     if (timedInvokeTimeoutMs == nil) {
-        timedInvokeTimeoutMs = @(MTR_DEFAULT_TIMED_INTERACTION_TIMEOUT_MS);
+        timedInvokeTimeoutMs = @(10000);
     }
 
     using RequestType = DoorLock::Commands::SetUser::Type;
@@ -47782,7 +47781,7 @@ public:
 
     auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
     if (timedInvokeTimeoutMs == nil) {
-        timedInvokeTimeoutMs = @(MTR_DEFAULT_TIMED_INTERACTION_TIMEOUT_MS);
+        timedInvokeTimeoutMs = @(10000);
     }
 
     using RequestType = DoorLock::Commands::ClearUser::Type;
@@ -47809,7 +47808,7 @@ public:
 
     auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
     if (timedInvokeTimeoutMs == nil) {
-        timedInvokeTimeoutMs = @(MTR_DEFAULT_TIMED_INTERACTION_TIMEOUT_MS);
+        timedInvokeTimeoutMs = @(10000);
     }
 
     using RequestType = DoorLock::Commands::SetCredential::Type;
@@ -47860,7 +47859,7 @@ public:
 
     auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
     if (timedInvokeTimeoutMs == nil) {
-        timedInvokeTimeoutMs = @(MTR_DEFAULT_TIMED_INTERACTION_TIMEOUT_MS);
+        timedInvokeTimeoutMs = @(10000);
     }
 
     using RequestType = DoorLock::Commands::ClearCredential::Type;
@@ -47887,7 +47886,7 @@ public:
 
     auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
     if (timedInvokeTimeoutMs == nil) {
-        timedInvokeTimeoutMs = @(MTR_DEFAULT_TIMED_INTERACTION_TIMEOUT_MS);
+        timedInvokeTimeoutMs = @(10000);
     }
 
     using RequestType = DoorLock::Commands::UnboltDoor::Type;
@@ -91849,7 +91848,7 @@ public:
 
     auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
     if (timedInvokeTimeoutMs == nil) {
-        timedInvokeTimeoutMs = @(MTR_DEFAULT_TIMED_INTERACTION_TIMEOUT_MS);
+        timedInvokeTimeoutMs = @(10000);
     }
 
     using RequestType = AccountLogin::Commands::GetSetupPIN::Type;
@@ -91876,7 +91875,7 @@ public:
 
     auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
     if (timedInvokeTimeoutMs == nil) {
-        timedInvokeTimeoutMs = @(MTR_DEFAULT_TIMED_INTERACTION_TIMEOUT_MS);
+        timedInvokeTimeoutMs = @(10000);
     }
 
     using RequestType = AccountLogin::Commands::Login::Type;
@@ -91907,7 +91906,7 @@ public:
 
     auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
     if (timedInvokeTimeoutMs == nil) {
-        timedInvokeTimeoutMs = @(MTR_DEFAULT_TIMED_INTERACTION_TIMEOUT_MS);
+        timedInvokeTimeoutMs = @(10000);
     }
 
     using RequestType = AccountLogin::Commands::Logout::Type;
@@ -102738,7 +102737,7 @@ public:
 
     auto * timedInvokeTimeoutMs = params.timedInvokeTimeoutMs;
     if (timedInvokeTimeoutMs == nil) {
-        timedInvokeTimeoutMs = @(MTR_DEFAULT_TIMED_INTERACTION_TIMEOUT_MS);
+        timedInvokeTimeoutMs = @(10000);
     }
 
     using RequestType = UnitTesting::Commands::TimedInvokeRequest::Type;
@@ -106281,9 +106280,6 @@ public:
                 if (params.timedWriteTimeout != nil) {
                     timedWriteTimeout.SetValue(params.timedWriteTimeout.unsignedShortValue);
                 }
-            }
-            if (!timedWriteTimeout.HasValue()) {
-                timedWriteTimeout.SetValue(MTR_DEFAULT_TIMED_INTERACTION_TIMEOUT_MS);
             }
 
             ListFreer listFreer;
