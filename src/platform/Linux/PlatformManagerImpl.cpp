@@ -27,8 +27,12 @@
 #include <arpa/inet.h>
 #include <dirent.h>
 #include <errno.h>
+#ifdef __NuttX__
+#include <netpacket/netlink.h>
+#else
 #include <linux/netlink.h>
 #include <linux/rtnetlink.h>
+#endif
 #include <net/if.h>
 #include <netinet/in.h>
 #include <unistd.h>

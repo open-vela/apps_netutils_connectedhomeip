@@ -15,6 +15,7 @@
 
 import logging
 import sys
+sys.path.append('py_matter_idl')
 
 import click
 

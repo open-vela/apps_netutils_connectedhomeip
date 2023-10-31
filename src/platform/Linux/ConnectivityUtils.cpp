@@ -27,10 +27,15 @@
 
 #include <arpa/inet.h>
 #include <ifaddrs.h>
+#ifdef __NuttX__
+#include <nuttx/wireless/wireless.h>
+#include <nuttx/ethtool.h>
+#else
 #include <linux/ethtool.h>
 #include <linux/if_link.h>
 #include <linux/sockios.h>
 #include <linux/wireless.h>
+#endif
 #include <netdb.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -688,7 +693,7 @@ CHIP_ERROR ConnectivityUtils::GetEthPHYRate(const char * ifname, app::Clusters::
         pHYRate = EmberAfPHYRateEnum::EMBER_ZCL_PHY_RATE_ENUM_RATE400_G;
         break;
     default:
-        ChipLogError(DeviceLayer, "Undefined speed! (%d)\n", speed);
+        ChipLogError(DeviceLayer, "Undefined speed! (%" PRIu32 ")\n", speed);
         err = CHIP_ERROR_READ_FAILED;
         break;
     };
