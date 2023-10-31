@@ -198,7 +198,7 @@ CHIP_ERROR ChipLinuxStorage::WriteValue(const char * key, uint32_t val)
 {
     char buf[32];
 
-    snprintf(buf, sizeof(buf), "%d", val);
+    snprintf(buf, sizeof(buf), "%" PRIu32, val);
 
     return WriteValueStr(key, buf);
 }

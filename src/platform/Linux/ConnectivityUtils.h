@@ -26,8 +26,12 @@
 #include <platform/DiagnosticDataProvider.h>
 #include <platform/internal/CHIPDeviceLayerInternal.h>
 
+#ifdef __NuttX__
+#include <nuttx/wireless/wireless.h>
+#else
 #include <linux/types.h> /* for "caddr_t" et al      */
 #include <linux/wireless.h>
+#endif
 
 namespace chip {
 namespace DeviceLayer {
