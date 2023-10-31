@@ -49,7 +49,11 @@ void ENFORCE_FORMAT(3, 0) LogV(const char * module, uint8_t category, const char
     flockfile(stdout);
 
     printf("[%" PRIu64 ".%06" PRIu64 "][%lld:%lld] CHIP:%s: ", static_cast<uint64_t>(tv.tv_sec), static_cast<uint64_t>(tv.tv_usec),
+#ifdef __NuttX__
+           static_cast<long long>(getpid()), static_cast<long long>(gettid()), module);
+#else
            static_cast<long long>(syscall(SYS_getpid)), static_cast<long long>(syscall(SYS_gettid)), module);
+#endif
     vprintf(msg, v);
     printf("\n");
     fflush(stdout);

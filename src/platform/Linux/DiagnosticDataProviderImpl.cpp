@@ -35,10 +35,14 @@
 #include <arpa/inet.h>
 #include <dirent.h>
 #include <ifaddrs.h>
+#ifdef __NuttX__
+#include <netpacket/netlink.h>
+#else
 #include <linux/ethtool.h>
 #include <linux/if_link.h>
 #include <linux/netlink.h>
 #include <linux/rtnetlink.h>
+#endif
 #include <malloc.h>
 #include <net/if.h>
 #include <netinet/in.h>
