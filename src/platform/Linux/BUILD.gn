@@ -85,20 +85,30 @@ static_library("Linux") {
   }
 
   if (chip_enable_ble) {
-    sources += [
-      "BLEManagerImpl.cpp",
-      "BLEManagerImpl.h",
-      "BlePlatformConfig.h",
-      "bluez/AdapterIterator.cpp",
-      "bluez/AdapterIterator.h",
-      "bluez/BluezConnection.cpp",
-      "bluez/BluezConnection.h",
-      "bluez/BluezEndpoint.cpp",
-      "bluez/BluezEndpoint.h",
-      "bluez/ChipDeviceScanner.cpp",
-      "bluez/ChipDeviceScanner.h",
-      "bluez/Types.h",
-    ]
+    if (chip_device_platform == "nuttx") {
+      sources += [
+        "${chip_root}/src/platform/Zephyr/BLEManagerImpl.cpp",
+        "${chip_root}/src/platform/Zephyr/BLEManagerImpl.h",
+        "${chip_root}/src/platform/Zephyr/BLEAdvertisingArbiter.cpp",
+        "${chip_root}/src/platform/Zephyr/BLEAdvertisingArbiter.h",
+        "${chip_root}/src/platform/Zephyr/BlePlatformConfig.h",
+      ]
+    } else {
+      sources += [
+        "BLEManagerImpl.cpp",
+        "BLEManagerImpl.h",
+        "BlePlatformConfig.h",
+        "bluez/AdapterIterator.cpp",
+        "bluez/AdapterIterator.h",
+        "bluez/BluezConnection.cpp",
+        "bluez/BluezConnection.h",
+        "bluez/BluezEndpoint.cpp",
+        "bluez/BluezEndpoint.h",
+        "bluez/ChipDeviceScanner.cpp",
+        "bluez/ChipDeviceScanner.h",
+        "bluez/Types.h",
+      ]
+    }
   }
 
   public_deps = [
@@ -146,7 +156,7 @@ static_library("Linux") {
     public_deps += [ "dbus/wpa" ]
   }
 
-  if (chip_enable_ble) {
+  if (chip_enable_ble && chip_device_platform != "nuttx") {
     public_deps += [ "dbus/bluez" ]
   }
 }
