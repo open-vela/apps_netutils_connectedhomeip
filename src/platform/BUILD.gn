@@ -122,7 +122,7 @@ if (chip_device_platform != "none" && chip_device_platform != "external") {
         chip_device_platform == "tizen" || chip_device_platform == "android" ||
         chip_device_platform == "k32w0" || chip_device_platform == "webos" ||
         chip_device_platform == "bl602" || chip_device_platform == "bl702" ||
-        chip_device_platform == "bl702l") {
+        chip_device_platform == "bl702l"|| chip_device_platform == "nuttx") {
       defines += [ "CHIP_DEVICE_CONFIG_ENABLE_CHIPOBLE=${chip_enable_ble}" ]
     }
 
@@ -301,7 +301,10 @@ if (chip_device_platform != "none" && chip_device_platform != "external") {
       device_layer_target_define = "LINUX"
       defines += [
         "CHIP_DEVICE_LAYER_TARGET=Linux",
+        "CHIP_DEVICE_BLE_ADVERTISING_PRIORITY=0",
         "CHIP_DEVICE_CONFIG_ENABLE_WIFI=${chip_enable_wifi}",
+        "EXTERNAL_BLEMANAGERIMPL_HEADER=\"platform/Zephyr/BLEManagerImpl.h\"",
+        "EXTERNAL_CHIPDEVICEPLATFORMEVENT_HEADER=\"platform/Zephyr/CHIPDevicePlatformEvent.h\"",
       ]
     } else {
       device_layer_target_define = ""
