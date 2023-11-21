@@ -22,6 +22,7 @@
 #include "app/clusters/network-commissioning/network-commissioning.h"
 #include <app/server/OnboardingCodesUtil.h>
 #include <app/server/Server.h>
+#include <app/server/Dnssd.h>
 #include <app/util/endpoint-config-api.h>
 #include <crypto/CHIPCryptoPAL.h>
 #include <lib/core/CHIPError.h>
@@ -120,7 +121,11 @@ DeviceLayer::NetworkCommissioning::LinuxThreadDriver sThreadDriver;
 
 #if CHIP_DEVICE_CONFIG_ENABLE_WIFI
 #define CHIP_APP_MAIN_HAS_WIFI_DRIVER 1
+#ifdef __NuttX__
+DeviceLayer::NetworkCommissioning::NuttxWiFiDriver sWiFiDriver;
+#else
 DeviceLayer::NetworkCommissioning::LinuxWiFiDriver sWiFiDriver;
+#endif
 #endif // CHIP_DEVICE_CONFIG_ENABLE_WIFI
 
 #define CHIP_APP_MAIN_HAS_ETHERNET_DRIVER 1
@@ -264,6 +269,14 @@ void EventHandler(const DeviceLayer::ChipDeviceEvent * event, intptr_t arg)
     {
         ChipLogProgress(DeviceLayer, "Receive kCHIPoBLEConnectionEstablished");
     }
+
+#ifdef __NuttX__
+    if (event->Type == DeviceLayer::DeviceEventType::kWiFiConnectivityChange)
+    {
+        chip::app::DnssdServer::Instance().StartServer();
+    }
+#endif
+
 }
 
 void Cleanup()

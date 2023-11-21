@@ -152,8 +152,13 @@ static_library("Linux") {
 
   if (chip_enable_wifi) {
     sources += [ "NetworkCommissioningWiFiDriver.cpp" ]
+    if (chip_device_platform == "linux") {
+      public_deps += [ "dbus/wpa" ]
+    }
 
-    public_deps += [ "dbus/wpa" ]
+    if (chip_device_platform == "nuttx") {
+      sources += [ "NetworkCommissioningWiFiDriverNuttx.cpp" ]
+    }
   }
 
   if (chip_enable_ble && chip_device_platform != "nuttx") {

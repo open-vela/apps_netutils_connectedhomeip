@@ -108,7 +108,7 @@ gboolean WiFiIPChangeListener(GIOChannel * ch, GIOCondition /* condition */, voi
                         char name[IFNAMSIZ];
                         if (if_indextoname(addressMessage->ifa_index, name) == nullptr)
                         {
-                            ChipLogError(DeviceLayer, "Error %d when getting the interface name at index: %d", errno,
+                            ChipLogError(DeviceLayer, "Error %d when getting the interface name at index: %"  PRIi32, errno,
                                          addressMessage->ifa_index);
                             continue;
                         }

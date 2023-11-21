@@ -107,6 +107,68 @@ private:
 };
 #endif // CHIP_DEVICE_CONFIG_ENABLE_WPA
 
+#if CHIP_DEVICE_CONFIG_ENABLE_WIFI && defined(__NuttX__)
+namespace {
+inline constexpr uint8_t kMaxWiFiNetworks                  = 1;
+inline constexpr uint8_t kWiFiScanNetworksTimeOutSeconds   = 10;
+inline constexpr uint8_t kWiFiConnectNetworkTimeoutSeconds = 20;
+} // namespace
+
+class NuttxWiFiDriver final : public WiFiDriver
+{
+public:
+    class WiFiNetworkIterator final : public NetworkIterator
+    {
+    public:
+        WiFiNetworkIterator(NuttxWiFiDriver * aDriver) : driver(aDriver) {}
+        size_t Count() override;
+        bool Next(Network & item) override;
+        void Release() override { delete this; }
+        ~WiFiNetworkIterator() override = default;
+
+    private:
+        NuttxWiFiDriver * driver;
+        bool exhausted = false;
+    };
+
+    struct WiFiNetwork
+    {
+        uint8_t ssid[DeviceLayer::Internal::kMaxWiFiSSIDLength];
+        uint8_t ssidLen = 0;
+        uint8_t credentials[DeviceLayer::Internal::kMaxWiFiKeyLength];
+        uint8_t credentialsLen = 0;
+    };
+
+    // BaseDriver
+    NetworkIterator * GetNetworks() override { return new WiFiNetworkIterator(this); }
+    CHIP_ERROR Init(BaseDriver::NetworkStatusChangeCallback * networkStatusChangeCallback) override;
+    void Shutdown() override {};
+
+    // WirelessDriver
+    uint8_t GetMaxNetworks() override { return kMaxWiFiNetworks; }
+    uint8_t GetScanNetworkTimeoutSeconds() override { return kWiFiScanNetworksTimeOutSeconds; }
+    uint8_t GetConnectNetworkTimeoutSeconds() override { return kWiFiConnectNetworkTimeoutSeconds; }
+
+    CHIP_ERROR CommitConfiguration() override;
+    CHIP_ERROR RevertConfiguration() override;
+
+    Status RemoveNetwork(ByteSpan networkId, MutableCharSpan & outDebugText, uint8_t & outNetworkIndex) override;
+    Status ReorderNetwork(ByteSpan networkId, uint8_t index, MutableCharSpan & outDebugText) override;
+    void ConnectNetwork(ByteSpan networkId, ConnectCallback * callback) override;
+
+    // WiFiDriver
+    Status AddOrUpdateNetwork(ByteSpan ssid, ByteSpan credentials, MutableCharSpan & outDebugText,
+                              uint8_t & outNetworkIndex) override;
+    void ScanNetworks(ByteSpan ssid, ScanCallback * callback) override;
+
+private:
+    bool NetworkMatch(const WiFiNetwork & network, ByteSpan networkId);
+
+    WiFiNetwork mSavedNetwork;
+    WiFiNetwork mStagingNetwork;
+};
+#endif // CHIP_DEVICE_CONFIG_ENABLE_WIFI
+
 #if CHIP_DEVICE_CONFIG_ENABLE_THREAD
 class LinuxThreadDriver final : public ThreadDriver
 {
