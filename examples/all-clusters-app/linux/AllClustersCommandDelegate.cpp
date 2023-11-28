@@ -203,7 +203,7 @@ void AllClustersAppCommandHandler::OnRebootSignalHandler(BootReasonType bootReas
     }
     else
     {
-        ChipLogError(NotSpecified, "Failed to store boot reason:%d", static_cast<uint32_t>(bootReason));
+        ChipLogError(NotSpecified, "Failed to store boot reason:%" PRId32, static_cast<uint32_t>(bootReason));
     }
 }
 
@@ -260,7 +260,7 @@ void AllClustersAppCommandHandler::OnGeneralFaultEventHandler(uint32_t eventId)
     }
     else
     {
-        ChipLogError(NotSpecified, "Unknow event ID:%d", eventId);
+        ChipLogError(NotSpecified, "Unknow event ID:%" PRId32, eventId);
     }
 }
 
@@ -436,7 +436,7 @@ void AllClustersAppCommandHandler::OnAirQualityChange(uint32_t aNewValue)
 
     if (status != Protocols::InteractionModel::Status::Success)
     {
-        ChipLogDetail(NotSpecified, "Invalid value: %u", aNewValue);
+        ChipLogDetail(NotSpecified, "Invalid value: %" PRIu32, aNewValue);
     }
 }
 
