@@ -20,8 +20,9 @@ import("${chip_root}/build/chip/tests.gni")
 assert(current_os == "nuttx")
 
 declare_args() {
-  chip_build_example_providers = false
-  chip_example_lighting = false
+  chip_build_example_providers  = false
+  chip_example_lighting         = false
+  chip_example_all_clusters_app = false
 }
 
 static_library("nuttx") {
@@ -44,6 +45,16 @@ static_library("nuttx") {
     public_deps += [
       "${chip_root}/examples/lighting-app/lighting-common",
       "${chip_root}/examples/lighting-app/lighting-common:lighting-manager",
+    ]
+  }
+
+  if (chip_example_all_clusters_app) {
+    public_deps += [
+      "${chip_root}/examples/all-clusters-app/linux:chip-all-clusters-common",
+    ]
+
+    include_dirs = [
+      "${chip_root}/examples/all-clusters-app/all-clusters-common/include"
     ]
   }
 

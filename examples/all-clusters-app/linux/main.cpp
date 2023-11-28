@@ -25,7 +25,7 @@ namespace {
 constexpr chip::EndpointId kNetworkCommissioningEndpointSecondary = 0xFFFE;
 } // anonymous namespace
 
-int main(int argc, char * argv[])
+extern "C" int main(int argc, char * argv[])
 {
     VerifyOrDie(
         ChipLinuxAppInit(argc, argv, AppOptions::GetOptions(), chip::MakeOptional(kNetworkCommissioningEndpointSecondary)) == 0);
