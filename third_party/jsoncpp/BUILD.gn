@@ -15,6 +15,10 @@
 import("//build_overrides/build.gni")
 import("//build_overrides/chip.gni")
 
+declare_args() {
+  chip_use_external_jsoncpp = false
+}
+
 config("jsoncpp_config") {
   include_dirs = [ "repo/include" ]
 }
@@ -35,11 +39,16 @@ source_set("jsoncpp") {
     "repo/include/json/value.h",
     "repo/include/json/version.h",
     "repo/include/json/writer.h",
-    "repo/src/lib_json/json_reader.cpp",
     "repo/src/lib_json/json_tool.h",
-    "repo/src/lib_json/json_value.cpp",
-    "repo/src/lib_json/json_writer.cpp",
   ]
+
+  if(chip_use_external_jsoncpp == false) {
+    sources += [
+      "repo/src/lib_json/json_reader.cpp",
+      "repo/src/lib_json/json_value.cpp",
+      "repo/src/lib_json/json_writer.cpp",
+    ]
+  }
 
   public_configs = [ ":jsoncpp_config" ]
 
