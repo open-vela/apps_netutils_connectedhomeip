@@ -35,6 +35,7 @@
 // Include system and language headers
 #include <errno.h>
 #include <fcntl.h>
+#include <sys/stat.h>
 #include <unistd.h>
 
 #if !CHIP_SYSTEM_CONFIG_USE_POSIX_PIPE
@@ -58,6 +59,8 @@ inline int SetNonBlockingMode(int fd)
 }
 } // anonymous namespace
 
+constexpr const char kChipEventFifoPath[] = "/var/wake_event_fifo";
+
 CHIP_ERROR WakeEvent::Open(LayerSockets & systemLayer)
 {
     enum
@@ -67,6 +70,26 @@ CHIP_ERROR WakeEvent::Open(LayerSockets & systemLayer)
     };
     int fds[2];
 
+#ifdef CHIP_SYSTEM_CONFIG_WAKE_EVENT_USE_FIFO
+    /* In order to support cross-thread and process event notifications */
+    VerifyOrReturnError(::mkfifo(kChipEventFifoPath, 0666) == 0 || errno == EEXIST, CHIP_ERROR_OPEN_FAILED);
+
+    fds[FD_READ] = ::open(kChipEventFifoPath, O_RDONLY | O_NONBLOCK);
+    if (fds[FD_READ] == -1)
+    {
+        ChipLogError(chipSystemLayer, "System wake event failed to open fifo: %" CHIP_ERROR_FORMAT,
+                     CHIP_ERROR_POSIX(errno).Format());
+        return CHIP_ERROR_POSIX(errno);
+    }
+
+    fds[FD_WRITE] = ::open(kChipEventFifoPath, O_WRONLY | O_NONBLOCK);
+    if (fds[FD_WRITE] == -1)
+    {
+        ChipLogError(chipSystemLayer, "System wake event failed to open fifo: %" CHIP_ERROR_FORMAT,
+                     CHIP_ERROR_POSIX(errno).Format());
+        return CHIP_ERROR_POSIX(errno);
+    }
+#else
     if (::pipe(fds) < 0)
         return CHIP_ERROR_POSIX(errno);
 
@@ -75,6 +98,7 @@ CHIP_ERROR WakeEvent::Open(LayerSockets & systemLayer)
 
     if (SetNonBlockingMode(fds[FD_WRITE]) < 0)
         return CHIP_ERROR_POSIX(errno);
+#endif
 
     mReadFD  = fds[FD_READ];
     mWriteFD = fds[FD_WRITE];
@@ -118,7 +142,26 @@ CHIP_ERROR WakeEvent::Notify() const
 
     if (::write(mWriteFD, &byte, 1) < 0 && errno != EAGAIN && errno != EWOULDBLOCK)
     {
+#ifdef CHIP_SYSTEM_CONFIG_WAKE_EVENT_USE_FIFO
+        int WriteFD = ::open(kChipEventFifoPath, O_WRONLY);
+        if (WriteFD == -1)
+        {
+            ChipLogError(chipSystemLayer, "Notify event failed to open fifo: %" CHIP_ERROR_FORMAT,
+                         CHIP_ERROR_POSIX(errno).Format());
+            return CHIP_ERROR_POSIX(errno);
+        }
+
+        if (::write(WriteFD, &byte, 1) < 0)
+        {
+            ::close(WriteFD);
+            ChipLogError(chipSystemLayer, "Failed to notify event by fifo: %" CHIP_ERROR_FORMAT, CHIP_ERROR_POSIX(errno).Format());
+            return CHIP_ERROR_POSIX(errno);
+        }
+
+        ::close(WriteFD);
+#else
         return CHIP_ERROR_POSIX(errno);
+#endif
     }
 
     return CHIP_NO_ERROR;

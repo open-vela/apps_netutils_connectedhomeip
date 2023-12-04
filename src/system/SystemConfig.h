@@ -771,3 +771,19 @@ struct LwIPEvent;
 #define CHIP_SYSTEM_CONFIG_USE_ZEPHYR_EVENTFD 0
 #endif
 #endif // CHIP_SYSTEM_CONFIG_USE_ZEPHYR_EVENTFD
+
+/**
+ *  @def CHIP_SYSTEM_CONFIG_WAKE_EVENT_USE_FIFO
+ *
+ *  @brief
+ *      Use POSIX FIFO API.
+ *
+ *  Defaults to enabled on nuttx platforms.
+ */
+#ifndef CHIP_SYSTEM_CONFIG_WAKE_EVENT_USE_FIFO
+#if defined(__NuttX__)
+#define CHIP_SYSTEM_CONFIG_WAKE_EVENT_USE_FIFO 1
+#else
+#define CHIP_SYSTEM_CONFIG_WAKE_EVENT_USE_FIFO 0
+#endif
+#endif // CHIP_SYSTEM_CONFIG_WAKE_EVENT_USE_FIFO
