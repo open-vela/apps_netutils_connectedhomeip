@@ -301,11 +301,16 @@ if (chip_device_platform != "none" && chip_device_platform != "external") {
       device_layer_target_define = "LINUX"
       defines += [
         "CHIP_DEVICE_LAYER_TARGET=Linux",
-        "CHIP_DEVICE_BLE_ADVERTISING_PRIORITY=0",
         "CHIP_DEVICE_CONFIG_ENABLE_WIFI=${chip_enable_wifi}",
-        "EXTERNAL_BLEMANAGERIMPL_HEADER=\"platform/Zephyr/BLEManagerImpl.h\"",
-        "EXTERNAL_CHIPDEVICEPLATFORMEVENT_HEADER=\"platform/Zephyr/CHIPDevicePlatformEvent.h\"",
       ]
+
+      if (chip_config_network_layer_ble) {
+        defines += [
+          "CHIP_DEVICE_BLE_ADVERTISING_PRIORITY=0",
+          "EXTERNAL_BLEMANAGERIMPL_HEADER=\"platform/Zephyr/BLEManagerImpl.h\"",
+          "EXTERNAL_CHIPDEVICEPLATFORMEVENT_HEADER=\"platform/Zephyr/CHIPDevicePlatformEvent.h\"",
+        ]
+      }
     } else {
       device_layer_target_define = ""
     }
