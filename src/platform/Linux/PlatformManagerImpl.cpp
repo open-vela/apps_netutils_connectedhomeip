@@ -72,7 +72,7 @@ void * GLibMainLoopThread(void * userData)
 }
 #endif
 
-#if CHIP_DEVICE_CONFIG_ENABLE_WIFI
+#if CHIP_DEVICE_CONFIG_ENABLE_WIFI && !defined(__NuttX__)
 
 gboolean WiFiIPChangeListener(GIOChannel * ch, GIOCondition /* condition */, void * /* userData */)
 {
@@ -195,7 +195,7 @@ CHIP_ERROR RunWiFiIPChangeListener()
     return CHIP_NO_ERROR;
 }
 
-#endif // #if CHIP_DEVICE_CONFIG_ENABLE_WIFI
+#endif // #if CHIP_DEVICE_CONFIG_ENABLE_WIFI && !defined(__NuttX__)
 
 } // namespace
 
@@ -235,7 +235,7 @@ CHIP_ERROR PlatformManagerImpl::_InitChipStack()
 
 #endif
 
-#if CHIP_DEVICE_CONFIG_ENABLE_WIFI
+#if CHIP_DEVICE_CONFIG_ENABLE_WIFI && !defined(__NuttX__)
     ReturnErrorOnFailure(RunWiFiIPChangeListener());
 #endif
 
