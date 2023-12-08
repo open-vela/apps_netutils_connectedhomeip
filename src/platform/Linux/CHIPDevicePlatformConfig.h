@@ -43,7 +43,8 @@
 
 // Start GLib main event loop if BLE, Thread or WiFi is enabled. This is needed
 // to handle D-Bus communication with BlueZ or wpa_supplicant.
-#if CHIP_DEVICE_CONFIG_ENABLE_CHIPOBLE || CHIP_DEVICE_CONFIG_ENABLE_THREAD || CHIP_DEVICE_CONFIG_ENABLE_WIFI
+#if (CHIP_DEVICE_CONFIG_ENABLE_CHIPOBLE || CHIP_DEVICE_CONFIG_ENABLE_THREAD ||  \
+    CHIP_DEVICE_CONFIG_ENABLE_WIFI) && !defined(__NuttX__)
 #define CHIP_DEVICE_CONFIG_WITH_GLIB_MAIN_LOOP 1
 #else
 #define CHIP_DEVICE_CONFIG_WITH_GLIB_MAIN_LOOP 0
