@@ -168,8 +168,11 @@ static CHIP_ERROR ConnectWiFiNetwork(uint8_t * ssid, uint8_t ssidLen, uint8_t * 
     ret = wpa_driver_wext_associate(&conf);
     VerifyOrExit(ret >= 0, ChipLogError(DeviceLayer, "Failed to connect to wifi network, ret: %d", ret));
 
-    ret = netlib_icmpv6_autoconfiguration(wifi_name);
-    ChipLogProgress(DeviceLayer, "Ipv6 auto-configuration failed, ret: %d", ret);
+    ret = netlib_obtain_ipv6addr(wifi_name);
+    if (ret)
+    {
+        ChipLogError(DeviceLayer, "DHCPv6 failed to obtain address, ret: %d", ret);
+    }
 
     return CHIP_NO_ERROR;
 
