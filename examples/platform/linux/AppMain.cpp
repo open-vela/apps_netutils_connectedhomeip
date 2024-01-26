@@ -328,6 +328,35 @@ static bool EnsureWiFiIsStarted()
 }
 #endif
 
+#ifdef __NuttX__
+constexpr auto k_timeout_seconds = 300;
+class AppFabricTableDelegate : public FabricTable::Delegate
+{
+    void OnFabricRemoved(const FabricTable & fabricTable, FabricIndex fabricIndex)
+    {
+        if (chip::Server::GetInstance().GetFabricTable().FabricCount() == 0)
+        {
+            ChipLogProgress(DeviceLayer, "Fabric removed successfully");
+
+            chip::CommissioningWindowManager & commissionMgr = chip::Server::GetInstance().GetCommissioningWindowManager();
+            constexpr auto kTimeoutSeconds                   = chip::System::Clock::Seconds16(k_timeout_seconds);
+            if (!commissionMgr.IsCommissioningWindowOpen())
+            {
+                /* After removing last fabric, this example does not remove the Wi-Fi credentials
+                 * and still has IP connectivity so, only advertising on DNS-SD.
+                 */
+                CHIP_ERROR err =
+                    commissionMgr.OpenBasicCommissioningWindow(kTimeoutSeconds, chip::CommissioningWindowAdvertisement::kDnssdOnly);
+                if (err != CHIP_NO_ERROR)
+                {
+                    ChipLogError(DeviceLayer, "Failed to open commissioning window, err:%" CHIP_ERROR_FORMAT, err.Format());
+                }
+            }
+        }
+    }
+};
+#endif // __NuttX__
+
 class SampleTestEventTriggerDelegate : public TestEventTriggerDelegate
 {
 public:
@@ -585,6 +614,11 @@ void ChipLinuxAppMainLoop(AppMainLoopImplementation * impl)
 
     // Initialize device attestation config
     SetDeviceAttestationCredentialsProvider(LinuxDeviceOptions::GetInstance().dacProvider);
+
+#ifdef __NuttX__
+    static AppFabricTableDelegate sAppFabricDelegate;
+    Server::GetInstance().GetFabricTable().AddFabricDelegate(&sAppFabricDelegate);
+#endif // __NuttX__
 
 #if CHIP_DEVICE_CONFIG_ENABLE_BOTH_COMMISSIONER_AND_COMMISSIONEE
     ChipLogProgress(AppServer, "Starting commissioner");
