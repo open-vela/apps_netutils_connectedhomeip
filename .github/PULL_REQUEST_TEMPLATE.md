@@ -1,12 +1,20 @@
-> !!!!!!!!!! Please delete the instructions below and replace with PR description
->
-> If you have an issue number, please use a syntax of
-> `Fixes #12345` and a brief change description
->
-> If you do not have an issue number, please have a good description of
-> the problem and the fix. Help the reviewer understand what to expect.
->
-> Make sure you delete these instructions (to prove you have read them).
->
-> !!!!!!!!!! Instructions end
+*Note: Please adhere to [Contributing Guidelines](https://github.com/open-vela/docs/blob/dev/CONTRIBUTING.md).*
+
+## Summary
+
+*Update this section with information on why change is necessary,
+ what it exactly does and how, if new feature shows up, provide
+ references (dependencies, similar problems and solutions), etc.*
+
+## Impact
+
+*Update this section, where applicable, on how change affects users,
+ build process, hardware, documentation, security, compatibility, etc.*
+
+## Testing
+
+*Update this section with details on how did you verify the change,
+ what Host was used for build (OS, CPU, compiler, ..), what Target was
+ used for verification (arch, board:config, ..), etc. Providing build
+ and runtime logs from before and after change is highly appreciated.*
 
